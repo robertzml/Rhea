@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "关于";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    <h2>@ViewBag.Message</h2>
+</hgroup>
+
+<article>
+    <p>
+        <ul id="info"></ul>
+        使用此区域可提供附加信息。
+    </p>
+
+    <p>
+        使用此区域可提供附加信息。
+    </p>
+
+    <p>
+        使用此区域可提供附加信息。
+    </p>
+</article>
+
+<aside>
+    <h3>副标题</h3>
+    <p>
+        使用此区域可提供附加信息。
+    </p>
+    <ul>
+        <li>@Html.ActionLink("主页", "Index", "Home")</li>
+        <li>@Html.ActionLink("关于", "About", "Home")</li>
+        <li>@Html.ActionLink("联系方式", "Contact", "Home")</li>
+    </ul>
+</aside>
+
+@section scripts {
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.ajax({
+            type: "get",
+            url: "http://localhost:36231/api/products/",
+            dataType: "jsonp",
+            success: function (data) {
+                $.each(data, function (key, val) {
+
+                    // Format the text to display.
+                    var str = val.Name + ': $' + val.Price;
+
+                    // Add a list item for the product.
+                    $('<li/>', { text: str }).appendTo($('#info'));
+
+                });
+                alert('ok');
+            },
+            error: function (msg) {
+                alert(msg + ": error");
+            }
+        });
+
+    });
+</script>
+}
