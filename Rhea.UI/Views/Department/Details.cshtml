@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<div id="department">@ViewBag.Id</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var name = '@ViewBag.Id';
+            
+            $.ajax({
+                type: 'get',
+                url: 'http://localhost:11500/api/department',
+                data: { "id": name },
+                dataType: 'json',
+                success: function (response) {
+                    $('#department').append(response.Name + ", " + response.Type);
+                },
+                error: function (msg) {
+                    alert("error: " + msg);
+                }
+            });
+        });
+    </script>
+}
