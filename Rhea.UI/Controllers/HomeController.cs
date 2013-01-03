@@ -22,6 +22,11 @@ namespace Rhea.UI.Controllers
             return View();
         }
 
+        public ActionResult Test()
+        {
+            return View();
+        }
+
         public ActionResult Contact()
         {
             ViewBag.Message = "你的联系方式页。";
