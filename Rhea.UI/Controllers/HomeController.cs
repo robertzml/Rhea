@@ -22,6 +22,11 @@ namespace Rhea.UI.Controllers
             return View();
         }
 
+        public ActionResult Chrisma()
+        {
+            return View();
+        }
+
         public ActionResult Test()
         {
             return View();
