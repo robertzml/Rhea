@@ -16,6 +16,7 @@
                 padding: 9px 0;
             }
         </style>
+        @Styles.Render("~/Content/kendoui")
         <link href="/css/bootstrap-responsive.css" rel="stylesheet">
         <link href="/css/charisma-app.css" rel="stylesheet">
         <link href="/css/jquery-ui-1.8.21.custom.css" rel="stylesheet">
@@ -162,39 +163,43 @@
                     <!-- content starts -->
                     <div>
                         <ul class="breadcrumb">
-                            <li><a href="#">Home</a> <span class="divider">/</span> </li>
-                            <li><a href="#">Dashboard</a> </li>
+                            <li><a href="@Url.Action("Index", "Home")">主页</a> <span class="divider">/</span> </li>
+                            @RenderSection("breadcrumb", required: false)                            
                         </ul>
                     </div>
                     <div class="sortable row-fluid">
-                        <a data-rel="tooltip" title="6 new members." class="well span3 top-block" href="#"><span
-                            class="icon32 icon-red icon-user"></span>
+                        <a data-rel="tooltip" title="6 new members." class="well span3 top-block" href="#">
+                            <span class="icon32 icon-red icon-user"></span>
                             <div>
                                 Total Members</div>
                             <div>
                                 507</div>
-                            <span class="notification">6</span> </a><a data-rel="tooltip" title="4 new pro members."
-                                class="well span3 top-block" href="#"><span class="icon32 icon-color icon-star-on">
-                                </span>
-                                <div>
-                                    Pro Members</div>
-                                <div>
-                                    228</div>
-                                <span class="notification green">4</span> </a><a data-rel="tooltip" title="$34 new sales."
-                                    class="well span3 top-block" href="#"><span class="icon32 icon-color icon-cart">
-                                    </span>
-                                    <div>
-                                        Sales</div>
-                                    <div>
-                                        $13320</div>
-                                    <span class="notification yellow">$34</span> </a><a data-rel="tooltip" title="12 new messages."
-                                        class="well span3 top-block" href="#"><span class="icon32 icon-color icon-envelope-closed">
-                                        </span>
-                                        <div>
-                                            Messages</div>
-                                        <div>
-                                            25</div>
-                                        <span class="notification red">12</span> </a>
+                            <span class="notification">6</span> 
+                        </a>
+                        <a data-rel="tooltip" title="4 new pro members." class="well span3 top-block" href="#">
+                            <span class="icon32 icon-color icon-star-on"></span>
+                            <div>
+                                Pro Members</div>
+                            <div>
+                                228</div>
+                            <span class="notification green">4</span> 
+                        </a>
+                        <a data-rel="tooltip" title="$34 new sales." class="well span3 top-block" href="#">
+                            <span class="icon32 icon-color icon-cart"></span>
+                            <div>
+                                Sales</div>
+                            <div>
+                                $13320</div>
+                            <span class="notification yellow">$34</span> 
+                        </a>
+                        <a data-rel="tooltip" title="12 new messages." class="well span3 top-block" href="#">
+                            <span class="icon32 icon-color icon-envelope-closed"></span>
+                            <div>
+                                Messages</div>
+                            <div>
+                                25</div>
+                            <span class="notification red">12</span> 
+                        </a>
                     </div>                    
                     
                     @RenderBody()
@@ -233,8 +238,8 @@
         <!-- external javascript
 	================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
-        <!-- jQuery -->  
-        <script src="@Url.Content("~/Scripts/jquery-1.8.3.min.js")" type="text/javascript"></script>       
+        <!-- jQuery -->          
+        <script src="/js/jquery-1.7.2.min.js" type="text/javascript"></script>  
         <!-- jQuery UI -->
         <script src="/js/jquery-ui-1.8.21.custom.min.js" type="text/javascript"></script>
         <!-- transition / effect library -->
@@ -300,6 +305,7 @@
         <script src="/js/jquery.history.js" type="text/javascript"></script>
         <!-- application script for Charisma demo -->
         <script src="/js/charisma.js" type="text/javascript"></script>
+        @Scripts.Render("~/bundles/kendoui")
 
         @RenderSection("scripts", required: false)
     </body>
