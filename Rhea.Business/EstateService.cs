@@ -34,6 +34,25 @@ namespace Rhea.Business
         }
 
         /// <summary>
+        /// 获取楼群
+        /// </summary>
+        /// <param name="id">楼群ID</param>
+        /// <returns></returns>
+        public BuildingGroup GetBuildingGroup(int id)
+        {
+            ApiService api = new ApiService();
+            HttpResponseMessage response = api.Get("BuildingGroup?id=" + id.ToString());
+
+            if (response.IsSuccessStatusCode)
+            {
+                var buildingGroup = response.Content.ReadAsAsync<BuildingGroup>().Result;
+                return buildingGroup;
+            }
+            else
+                return null;
+        }
+
+        /// <summary>
         /// 获取楼宇列表
         /// </summary>
         /// <returns></returns>
@@ -51,6 +70,25 @@ namespace Rhea.Business
             {
                 return null;
             }
+        }
+
+        /// <summary>
+        /// 获取楼宇
+        /// </summary>
+        /// <param name="id">楼宇ID</param>
+        /// <returns></returns>
+        public Building GetBuilding(int id)
+        {
+            ApiService api = new ApiService();
+            HttpResponseMessage response = api.Get("Building?id=" + id.ToString());
+
+            if (response.IsSuccessStatusCode)
+            {
+                var building = response.Content.ReadAsAsync<Building>().Result;
+                return building;
+            }
+            else
+                return null;
         }
     }
 }

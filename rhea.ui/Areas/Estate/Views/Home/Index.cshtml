@@ -6,8 +6,11 @@
 @section breadcrumb {
     <li>@Html.ActionLink("房产管理", "Index", "Estate")</li>
 }
+
 <div class="row-fluid sortable">
+    
     <div class="box span9">
+        <div id="ajax-content1">        
         <div class="box-header well" data-original-title>
             <h2>
                 <i class="icon-font"></i>Typography</h2>
@@ -150,6 +153,7 @@
                 </div>
             </div>
         </div>
+        </div>
     </div>
     <!--/span-->
     <div class="box span3">
@@ -187,8 +191,11 @@
                 <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
             </div>
         </div>
-        <div class="box-content">
-            <ol>
+        <div class="box-content">            
+                <a class="btn" href="#"><i class="icon-pencil"></i>添加</a> 
+                <a class="btn" href="#"><i class="icon-edit"></i>编辑</a> 
+                <a class="btn" href="#"><i class="icon-remove"></i>删除</a>
+            <ul>
                 <li>Lorem ipsum dolor sit amet</li>
                 <li>Consectetur adipiscing elit</li>
                 <li>Integer molestie lorem at massa</li>
@@ -197,7 +204,7 @@
                 <li>Faucibus porta lacus fringilla vel</li>
                 <li>Aenean sit amet erat nunc</li>
                 <li>Eget porttitor lorem</li>
-            </ol>
+            </ul>
         </div>
     </div>
     <!--/span-->
@@ -241,6 +248,20 @@
             $("#treeview").kendoTreeView();
             });*/
             $("#treeview").kendoTreeView();
+
+            $('a.buildingGroup').click(function () {
+                var groupId = $(this).attr('ref');
+                var request = { id: groupId };
+                ajaxLoadPage("Details", "BuildingGroup", "Estate", request);
+                return false;
+            });
+
+            $('a.building').click(function () {
+                var buildingId = $(this).attr('ref');
+                var request = { id: buildingId };
+                ajaxLoadPage("Details", "Building", "Estate", request);
+                return false;
+            });
         });
     </script>
 }

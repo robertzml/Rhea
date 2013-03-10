@@ -267,6 +267,7 @@ function docReady(){
 			"sLengthMenu": "_MENU_ records per page"
 			}
 		} );
+		
 	$('.btn-close').click(function(e){
 		e.preventDefault();
 		$(this).parent().parent().parent().fadeOut();

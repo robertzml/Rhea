@@ -276,7 +276,9 @@
         <script src="/js/jquery.history.js" type="text/javascript"></script>
         <!-- application script for Charisma demo -->
         <script src="/js/charisma.js" type="text/javascript"></script>
+
         @Scripts.Render("~/bundles/kendoui")
+        <script src="@Url.Content("~/Scripts/function.js")" type="text/javascript"></script>
 
         @RenderSection("scripts", required: false)
     </body>
