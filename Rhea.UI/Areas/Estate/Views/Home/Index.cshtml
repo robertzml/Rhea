@@ -1,11 +1,11 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "房产管理";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @section breadcrumb {
     <li>@Html.ActionLink("房产管理", "Index", "Estate")</li>
 }
-
 <div class="row-fluid sortable">
     <div class="box span9">
         <div class="box-header well" data-original-title>
@@ -154,26 +154,27 @@
     <!--/span-->
     <div class="box span3">
         <div class="box-header well" data-original-title>
-            <h3>楼群列表</h3>
+            <h3>
+                楼群列表</h3>
             <div class="box-icon">
                 <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
             </div>
         </div>
-        <div class="box-content">
-            <ul id="demo1">
-                <li>Lorem ipsum dolor sit amet</li>
-                <li>Consectetur adipiscing elit</li>
-                <li>Integer molestie lorem at massa</li>
-                <li>Facilisis in pretium nisl aliquet</li>
-                <li>Nulla volutpat aliquam velit
-                    <ul>
-                        <li>Phasellus iaculis neque</li>
-                        <li>Purus sodales ultricies</li>
-                        <li>Vestibulum laoreet porttitor sem</li>
-                        <li>Ac tristique libero volutpat at</li>
-                    </ul>
-                </li>
-                
+        <div class="box-content k-content">
+            <ul id="treeview">
+                @{
+                    foreach (var item in ViewBag.BuildingGroups)
+                    {
+                    <li><a class="buildingGroup" ref="@item.Id"><span>@item.Name</span></a>
+                        <ul>
+                            @foreach (var building in item.Buildings)
+                            {
+                                <li><a class="building" ref="@building.Id"><span>@building.Name</span></a></li>
+                        }
+                        </ul>
+                    </li>
+                }                
+                }
             </ul>
         </div>
     </div>
@@ -227,20 +228,19 @@
     <!--/span-->
 </div>
 <!--/row-->
-
 @section scripts {
-<script type="text/javascript">
-    $(document).ready(function () {
+    <script type="text/javascript">
+        $(document).ready(function () {
 
-        $.getJSON("/Estate/GetBuildingGroupList", function (json) {
+            /*$.getJSON("/Estate/GetBuildingGroupList", function (json) {
 
             $.each(json, function (i, item) {
-                $("#demo1").append("<li>"+ item.Name +"</li>");
+            $("#treeview").append("<li>"+ item.Name +"</li>");
             });
 
-            $("#demo1").kendoTreeView();
+            $("#treeview").kendoTreeView();
+            });*/
+            $("#treeview").kendoTreeView();
         });
-        
-    });
-</script>
+    </script>
 }

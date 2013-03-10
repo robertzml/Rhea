@@ -8,34 +8,47 @@ using Rhea.Data.Entities;
 
 namespace Rhea.Business
 {
+    /// <summary>
+    /// 房产服务
+    /// </summary>
     public class EstateService
     {
-        private string host = "http://localhost:11500/";
-
+        /// <summary>
+        /// 获取楼群列表
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<BuildingGroup> GetBuildingGroupList()
         {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(host);
-
-            // Add an Accept header for JSON format.
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
-
-            // List all products.
-            HttpResponseMessage response = client.GetAsync("api/department").Result;  // Blocking call!
+            ApiService api = new ApiService();
+            HttpResponseMessage response = api.Get("buildinggroup");
+           
             if (response.IsSuccessStatusCode)
-            {
-                // Parse the response body. Blocking!                
-                var buildingGroups = response.Content.ReadAsAsync<IEnumerable<BuildingGroup>>().Result;
-                //foreach (var p in departments)
-                //{
-                //    Console.WriteLine("{0}:{1};{2}", p.Id, p.Name);
-                //}
+            {                           
+                var buildingGroups = response.Content.ReadAsAsync<IEnumerable<BuildingGroup>>().Result;           
                 return buildingGroups;
             }
             else
             {
-                //Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+                  return null;
+            }
+        }
+
+        /// <summary>
+        /// 获取楼宇列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Building> GetBuildingList()
+        {
+            ApiService api = new ApiService();
+            HttpResponseMessage response = api.Get("building");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var buildings = response.Content.ReadAsAsync<IEnumerable<Building>>().Result;
+                return buildings;
+            }
+            else
+            {
                 return null;
             }
         }

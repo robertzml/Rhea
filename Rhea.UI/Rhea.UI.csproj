@@ -161,9 +161,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Estate\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Estate\EstateAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
-    <Compile Include="Controllers\EstateController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -534,6 +535,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Estate\Models\" />
+    <Folder Include="Areas\Estate\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -551,9 +554,6 @@
     <Content Include="Views\Home\Chrisma.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Estate\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Rhea.Business\Rhea.Business.csproj">
       <Project>{918B8082-498E-4A1E-8A2D-6CCC570496A0}</Project>
       <Name>Rhea.Business</Name>
@@ -562,6 +562,12 @@
       <Project>{E655E9DF-D987-44EB-B9CF-A9B874C2A9EB}</Project>
       <Name>Rhea.Data</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Home\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

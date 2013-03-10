@@ -2,10 +2,10 @@
 <html lang="zh">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>       
-        <title>@ViewBag.Title - 我的 ASP.NET MVC 应用程序</title>
+        <title>@ViewBag.Title - 后勤管理综合平台</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
-        <link id="bs-css" href="/css/bootstrap-cerulean.css" rel="stylesheet">
+        <link id="bs-css" href="/css/bootstrap-classic.css" rel="stylesheet">
         <style type="text/css">
             body
             {
@@ -48,13 +48,13 @@
                     <a class="btn btn-navbar" data-toggle="collapse" data-target=".top-nav.nav-collapse,.sidebar-nav.nav-collapse">
                         <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="index.html">
+                    <a class="brand" href="@Url.Action("Index", "Home")">
                         <img alt="Charisma Logo" src="/img/logo20.png" /><span>Rhea</span>
                     </a>
                     <!-- theme selector starts -->
                     <div class="btn-group pull-right theme-container">
-                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-tint">
-                        </i><span class="hidden-phone">Change Theme / Skin</span> <span class="caret"></span>
+                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="icon-tint"></i><span class="hidden-phone">Change Theme / Skin</span> <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" id="themes">
                             <li><a data-value="classic" href="#"><i class="icon-blank"></i>Classic</a></li>
@@ -71,8 +71,9 @@
                     <!-- theme selector ends -->
                     <!-- user dropdown starts -->
                     <div class="btn-group pull-right">
-                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-user">
-                        </i><span class="hidden-phone">admin</span> <span class="caret"></span></a>
+                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="icon-user"></i><span class="hidden-phone">admin</span> <span class="caret"></span>
+                        </a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Profile</a></li>
                             <li class="divider"></li>
@@ -103,11 +104,15 @@
                     <div class="well nav-collapse sidebar-nav">
                         <ul class="nav nav-tabs nav-stacked main-menu">
                             <li class="nav-header hidden-tablet">Main</li>
-                            <li><a class="ajax-link" href="index.html"><i class="icon-home"></i><span class="hidden-tablet">
-                                Dashboard</span></a>
+                            <li>
+                                <a class="ajax-link" href="index.html"><i class="icon-home"></i>
+                                <span class="hidden-tablet">Dashboard</span>
+                                </a>
                             </li>
-                            <li><a class="ajax-link" href="ui.html"><i class="icon-eye-open"></i><span class="hidden-tablet">
-                                UI Features</span></a>
+                            <li>
+                                <a class="ajax-link" href="@Url.Action("Chrisma", "Home")"><i class="icon-eye-open"></i>
+                                <span class="hidden-tablet">展示页</span>
+                                </a>
                             </li>
                             <li><a class="ajax-link" href="form.html"><i class="icon-edit"></i><span class="hidden-tablet">
                                 Forms</span></a>
@@ -123,7 +128,7 @@
                             </li>
                             <li class="nav-header hidden-tablet">我的应用</li>
                             <li>
-                                <a class="ajax-link" href="@Url.Action("Index", "Estate")"><i class="icon-th-list"></i>
+                                <a class="ajax-link" href="@Url.Action("Index", new { controller = "Home", area = "Estate" })"><i class="icon-th-list"></i>
                                 <span class="hidden-tablet">房产管理</span></a>
                             </li>
                             <li><a class="ajax-link" href="table.html"><i class="icon-align-justify"></i><span
@@ -166,41 +171,7 @@
                             <li><a href="@Url.Action("Index", "Home")">主页</a> <span class="divider">/</span> </li>
                             @RenderSection("breadcrumb", required: false)                            
                         </ul>
-                    </div>
-                    <div class="sortable row-fluid">
-                        <a data-rel="tooltip" title="6 new members." class="well span3 top-block" href="#">
-                            <span class="icon32 icon-red icon-user"></span>
-                            <div>
-                                Total Members</div>
-                            <div>
-                                507</div>
-                            <span class="notification">6</span> 
-                        </a>
-                        <a data-rel="tooltip" title="4 new pro members." class="well span3 top-block" href="#">
-                            <span class="icon32 icon-color icon-star-on"></span>
-                            <div>
-                                Pro Members</div>
-                            <div>
-                                228</div>
-                            <span class="notification green">4</span> 
-                        </a>
-                        <a data-rel="tooltip" title="$34 new sales." class="well span3 top-block" href="#">
-                            <span class="icon32 icon-color icon-cart"></span>
-                            <div>
-                                Sales</div>
-                            <div>
-                                $13320</div>
-                            <span class="notification yellow">$34</span> 
-                        </a>
-                        <a data-rel="tooltip" title="12 new messages." class="well span3 top-block" href="#">
-                            <span class="icon32 icon-color icon-envelope-closed"></span>
-                            <div>
-                                Messages</div>
-                            <div>
-                                25</div>
-                            <span class="notification red">12</span> 
-                        </a>
-                    </div>                    
+                    </div>                           
                     
                     @RenderBody()
                     <!-- content ends -->
