@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiService.cs" />
+    <Compile Include="DepartmentService.cs" />
     <Compile Include="EstateService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -27,8 +27,12 @@ namespace Rhea.UI.Areas.Estate.Controllers
                 bg.Buildings = buildings.Where(r => r.BuildingGroupId == bg.Id).ToList();
             }
 
+            DepartmentService departmentService = new DepartmentService();
+            List<Department> departments = departmentService.GetDepartmentList().ToList();
+
             ViewBag.BuildingGroups = buildingGroups;
             ViewBag.Buildings = buildings;
+            ViewBag.Departments = departments;
 
             return View();
         }

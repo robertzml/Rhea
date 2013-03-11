@@ -28,15 +28,7 @@
                 ultricies, diam lorem lacinia risus, ac commodo orci erat eu massa. Sed sit amet
                 nulla ipsum. Donec felis mauris, vulputate sed tempor at, aliquam a ligula. Pellentesque
                 non pulvinar nisi.
-            </p>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
-                dolor, quis ullamcorper ligula sodales at. Nulla tellus elit, varius non commodo
-                eget, mattis vel eros. In sed ornare nulla. Donec consectetur, velit a pharetra
-                ultricies, diam lorem lacinia risus, ac commodo orci erat eu massa. Sed sit amet
-                nulla ipsum. Donec felis mauris, vulputate sed tempor at, aliquam a ligula. Pellentesque
-                non pulvinar nisi.
-            </p>
+            </p>           
         </div>
         <div class="span4">
             <h3>
@@ -70,28 +62,182 @@
     <!--/row -->
     <div class="row-fluid">
         <div class="span12">
-            <h3>
-                Example blockquotes</h3>
+            <h3>详细参数</h3>
             <div class="row-fluid">
                 <div class="span6">
-                    <p>
-                        Default blockquotes are styled as such:</p>
-                    <blockquote>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a
-                            ante venenatis.</p>
-                        <small>Someone famous in <cite title="">Body of work</cite></small>
-                    </blockquote>
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    属性
+                                </th>
+                                <th>
+                                    值
+                                </th>                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.Name)
+                                </td>
+                                <td>
+                                    @Model.Name
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.BuildingCount)
+                                </td>
+                                <td>
+                                    @Model.BuildingCount
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.AreaCoeffcient)
+                                </td>
+                                <td>
+                                    @Model.AreaCoeffcient
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.BuildArea)
+                                </td>
+                                <td>
+                                    @Model.BuildArea
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.UsableArea)
+                                </td>
+                                <td>
+                                    @Model.UsableArea
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.Floorage)
+                                </td>
+                                <td>
+                                    @Model.Floorage
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.BuildType)
+                                </td>
+                                <td>
+                                    @Model.BuildType
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.BuildStructure)
+                                </td>
+                                <td>
+                                    @Model.BuildStructure
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.BuildCost)
+                                </td>
+                                <td>
+                                    @Model.BuildCost
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 <div class="span6">
-                    <p>
-                        You can always float your blockquote to the right:</p>
-                    <blockquote class="pull-right">
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a
-                            ante venenatis.</p>
-                        <small>Someone famous in <cite title="">Body of work</cite></small>
-                    </blockquote>
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    属性
+                                </th>
+                                <th>
+                                    值
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.CurrentValue)
+                                </td>
+                                <td>
+                                    @Model.CurrentValue
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.Classified)
+                                </td>
+                                <td>
+                                    @Model.Classified
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.FundsSubject)
+                                </td>
+                                <td>
+                                    @Model.FundsSubject
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.EquityNumber)
+                                </td>
+                                <td>
+                                    @Model.EquityNumber
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.BuildDate)
+                                </td>
+                                <td>
+                                    @Model.BuildDate
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.FixedYear)
+                                </td>
+                                <td>
+                                    @Model.FixedYear
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.DesignCompany)
+                                </td>
+                                <td>
+                                    @Model.DesignCompany
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.ConstructCompany)
+                                </td>
+                                <td>
+                                    @Model.ConstructCompany
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.ManageType)
+                                </td>
+                                <td>
+                                    @Model.ManageType
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>  
                 </div>
             </div>
         </div>
@@ -125,45 +271,39 @@
     <div class="row-fluid">
         <div class="span12">
             <h2>
-                Example use of Tooltips</h2>
-            <p>
-                Hover over the links below to see tooltips:</p>
-            <div class="tooltip-demo well">
-                <p class="muted" style="margin-bottom: 0;">
-                    Tight pants next level keffiyeh <a href="#" data-rel="tooltip" data-original-title="first tooltip">
-                        you probably</a> haven't heard of them. Photo booth beard raw denim letterpress
-                    vegan messenger bag stumptown. Farm-to-table seitan, mcsweeney's fixie sustainable
-                    quinoa 8-bit american appadata-rel <a href="#" data-rel="tooltip" data-original-title="Another tooltip">
-                        have a</a> terry richardson vinyl chambray. Beard stumptown, cardigans banh
-                    mi lomo thundercats. Tofu biodiesel williamsburg marfa, four loko mcsweeney's cleanse
-                    vegan chambray. A <a href="#" data-rel="tooltip" data-original-title="Another one here too">
-                        really ironic</a> artisan whatever keytar, scenester farm-to-table banksy Austin
-                    <a href="#" data-rel="tooltip" data-original-title="The last tip!">twitter handle</a>
-                    freegan cred raw denim single-origin coffee viral.
-                </p>
-            </div>
+                操作</h2>     
+            <p>    
+                <a class="btn" id="edit" href="#"><i class="icon-edit"></i>编辑</a> 
+                <a class="btn" id="delete" href="#"><i class="icon-remove"></i>删除</a>
+            </p>
         </div>
     </div>
 </div>
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('.btn-close').click(function (e) {
-            e.preventDefault();
-            $(this).parent().parent().parent().fadeOut();
+    $('#ajax-content1').ready(function () {
+        $('a#edit').click(function () {
+            var request = { id: '@Model.Id' };
+            ajaxLoadPage("Edit", "BuildingGroup", "Estate", request);
+            return false;
+        });
+
+        /* $('.btn-close').click(function (e) {
+        e.preventDefault();
+        $(this).parent().parent().parent().fadeOut();
         });
 
         $('.btn-minimize').click(function (e) {
-            e.preventDefault();
-            var $target = $(this).parent().parent().next('.box-content');
-            if ($target.is(':visible')) $('i', $(this)).removeClass('icon-chevron-up').addClass('icon-chevron-down');
-            else $('i', $(this)).removeClass('icon-chevron-down').addClass('icon-chevron-up');
-            $target.slideToggle();
+        e.preventDefault();
+        var $target = $(this).parent().parent().next('.box-content');
+        if ($target.is(':visible')) $('i', $(this)).removeClass('icon-chevron-up').addClass('icon-chevron-down');
+        else $('i', $(this)).removeClass('icon-chevron-down').addClass('icon-chevron-up');
+        $target.slideToggle();
         });
 
         $('.btn-setting').click(function (e) {
-            e.preventDefault();
-            $('#myModal').modal('show');
-        });
+        e.preventDefault();
+        $('#myModal').modal('show');
+        });*/
     });
 </script>

@@ -9,7 +9,8 @@
 
 <div class="row-fluid sortable">
     
-    <div class="box span9">
+    <div class="span9">
+    <div class="box">
         <div id="ajax-content1">        
         <div class="box-header well" data-original-title>
             <h2>
@@ -155,60 +156,56 @@
         </div>
         </div>
     </div>
+    </div>
     <!--/span-->
-    <div class="box span3">
+
+    <div class="span3">    
+    <div class="box">
         <div class="box-header well" data-original-title>
             <h3>
                 楼群列表</h3>
             <div class="box-icon">
+                <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
                 <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
             </div>
         </div>
         <div class="box-content k-content">
             <ul id="treeview">
-                @{
-                    foreach (var item in ViewBag.BuildingGroups)
-                    {
-                    <li><a class="buildingGroup" ref="@item.Id"><span>@item.Name</span></a>
+                @foreach (var item in ViewBag.BuildingGroups)
+                {                    
+                    <li><a class="buildingGroup" href="#" ref="@item.Id"><span>@item.Name</span></a>
                         <ul>
                             @foreach (var building in item.Buildings)
                             {
                                 <li><a class="building" ref="@building.Id"><span>@building.Name</span></a></li>
-                        }
+                            }
                         </ul>
-                    </li>
-                }                
+                    </li>                               
                 }
             </ul>
         </div>
     </div>
-    <!--/span-->
-    <div class="box span3">
+    <!--/span-->    
+    <div class="box">
         <div class="box-header well" data-original-title>
             <h3>
-                Ordered List</h3>
+                部门列表</h3>
             <div class="box-icon">
+                <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
                 <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
             </div>
         </div>
-        <div class="box-content">            
-                <a class="btn" href="#"><i class="icon-pencil"></i>添加</a> 
-                <a class="btn" href="#"><i class="icon-edit"></i>编辑</a> 
-                <a class="btn" href="#"><i class="icon-remove"></i>删除</a>
-            <ul>
-                <li>Lorem ipsum dolor sit amet</li>
-                <li>Consectetur adipiscing elit</li>
-                <li>Integer molestie lorem at massa</li>
-                <li>Facilisis in pretium nisl aliquet</li>
-                <li>Nulla volutpat aliquam velit</li>
-                <li>Faucibus porta lacus fringilla vel</li>
-                <li>Aenean sit amet erat nunc</li>
-                <li>Eget porttitor lorem</li>
+        <div class="box-content">                
+            <ul class="nav nav-list">
+                @foreach (var item in ViewBag.Departments)
+                {
+                    <li><a class="department" href="#" ref="@item.Id"><span>@item.Name</span></a></li>
+                }                
             </ul>
         </div>
     </div>
     <!--/span-->
-    <div class="box span3">
+    <div class="box">
         <div class="box-header well" data-original-title>
             <h3>
                 Description List</h3>
@@ -217,6 +214,9 @@
             </div>
         </div>
         <div class="box-content">
+            <a class="btn" href="#"><i class="icon-pencil"></i>添加</a> 
+            <a class="btn" href="#"><i class="icon-edit"></i>编辑</a> 
+            <a class="btn" href="#"><i class="icon-remove"></i>删除</a>
             <dl>
                 <dt>Description lists</dt>
                 <dd>
@@ -233,6 +233,7 @@
         </div>
     </div>
     <!--/span-->
+    </div>
 </div>
 <!--/row-->
 @section scripts {
@@ -244,10 +245,8 @@
             $.each(json, function (i, item) {
             $("#treeview").append("<li>"+ item.Name +"</li>");
             });
-
-            $("#treeview").kendoTreeView();
             });*/
-            $("#treeview").kendoTreeView();
+            $("#treeview").kendoTreeView();          
 
             $('a.buildingGroup').click(function () {
                 var groupId = $(this).attr('ref');

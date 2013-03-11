@@ -13,9 +13,11 @@ namespace Rhea.UI.Areas.Estate.Controllers
     /// </summary>
     public class BuildingGroupController : Controller
     {
-        //
-        // GET: /Estate/BuildingGroup/
-
+        #region Action
+        /// <summary>
+        /// GET: /Estate/BuildingGroup/
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             return View();
@@ -34,5 +36,19 @@ namespace Rhea.UI.Areas.Estate.Controllers
 
             return View(data);
         }
+
+        /// <summary>
+        /// 编辑楼群
+        /// GET: /Estate/BuildingGroup/Edit/7
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Edit(int id)
+        {
+            EstateService service = new EstateService();
+            BuildingGroup data = service.GetBuildingGroup(id);
+            return View(data);
+        }
+        #endregion //Action
     }
 }
