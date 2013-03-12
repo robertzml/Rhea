@@ -22,6 +22,12 @@ namespace Rhea.UI.Controllers
             return View();
         }
 
+        [ChildActionOnly]
+        public PartialViewResult Menu()
+        {
+            return PartialView();
+        }
+
         public ActionResult Chrisma()
         {
             return View();

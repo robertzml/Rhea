@@ -33,6 +33,8 @@ namespace Rhea.UI.Areas.Estate.Controllers
         {
             EstateService service = new EstateService();
             BuildingGroup data = service.GetBuildingGroup(id);
+            if (!string.IsNullOrEmpty(data.ImageUrl))
+                data.ImageUrl = RheaConstant.ImageServer + data.ImageUrl;
 
             return View(data);
         }

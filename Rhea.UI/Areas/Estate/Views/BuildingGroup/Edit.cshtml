@@ -53,6 +53,15 @@
                         </tr>
                         <tr>
                             <td>
+                                @Html.DisplayNameFor(model => model.ImageUrl)
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model.ImageUrl)
+                                @Html.ValidationMessageFor(model => model.ImageUrl)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 @Html.DisplayNameFor(model => model.BuildingCount)
                             </td>
                             <td>

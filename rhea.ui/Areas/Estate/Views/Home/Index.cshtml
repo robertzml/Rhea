@@ -3,6 +3,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@Styles.Render("~/Content/kendoui")
+
 @section breadcrumb {
     <li>@Html.ActionLink("房产管理", "Index", "Estate")</li>
 }
@@ -236,7 +238,9 @@
     </div>
 </div>
 <!--/row-->
+
 @section scripts {
+    @Scripts.Render("~/bundles/kendoui")
     <script type="text/javascript">
         $(document).ready(function () {
 

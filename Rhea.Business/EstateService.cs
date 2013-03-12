@@ -25,7 +25,7 @@ namespace Rhea.Business
             if (response.IsSuccessStatusCode)
             {                           
                 var buildingGroups = response.Content.ReadAsAsync<IEnumerable<BuildingGroup>>().Result;           
-                return buildingGroups;
+                return buildingGroups.OrderBy(r => r.Id);
             }
             else
             {
@@ -45,7 +45,7 @@ namespace Rhea.Business
 
             if (response.IsSuccessStatusCode)
             {
-                var buildingGroup = response.Content.ReadAsAsync<BuildingGroup>().Result;
+                var buildingGroup = response.Content.ReadAsAsync<BuildingGroup>().Result;                
                 return buildingGroup;
             }
             else
@@ -77,7 +77,7 @@ namespace Rhea.Business
             if (response.IsSuccessStatusCode)
             {
                 var buildings = response.Content.ReadAsAsync<IEnumerable<Building>>().Result;
-                return buildings;
+                return buildings.OrderBy(r => r.Id);
             }
             else
             {
