@@ -21,7 +21,7 @@ namespace Rhea.Business
 
         #region Method
         /// <summary>
-        /// 获取数据
+        /// GET数据
         /// </summary>
         /// <param name="queryString"></param>
         /// <returns></returns>
@@ -32,9 +32,26 @@ namespace Rhea.Business
 
             // Add an Accept header for JSON format.
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            // List all products.
+                        
             HttpResponseMessage response = client.GetAsync("api/" + queryString).Result;  // Blocking call!
+            return response;
+        }
+
+        /// <summary>
+        /// PUT数据
+        /// </summary>
+        /// <param name="queryString">Uri路径</param>
+        /// <param name="data">数据</param>
+        /// <returns></returns>
+        public HttpResponseMessage Put(string queryString, object data)
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(host);
+
+            // Add an Accept header for JSON format.
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            HttpResponseMessage response = client.PutAsJsonAsync("api/" + queryString, data).Result;
             return response;
         }
         #endregion //Method

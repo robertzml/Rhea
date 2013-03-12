@@ -49,6 +49,33 @@ namespace Rhea.UI.Areas.Estate.Controllers
             BuildingGroup data = service.GetBuildingGroup(id);
             return View(data);
         }
+
+        /// <summary>
+        /// 编辑楼群
+        /// POST: /Estate/BuildingGroup/Edit/
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Edit(BuildingGroup model)
+        {
+            if (ModelState.IsValid)
+            {
+                EstateService service = new EstateService();
+                bool result = service.UpdateBuildingGroup(model);
+
+                if (result)
+                {
+                    return RedirectToAction("Details", "BuildingGroup", new { area = "Estate", id = model.Id });
+                }
+                else
+                {
+                    ModelState.AddModelError("", "保存失败");
+                }
+            }
+
+            return View(model);
+        }
         #endregion //Action
     }
 }
