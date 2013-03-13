@@ -36,6 +36,8 @@ namespace Rhea.UI.Areas.Estate.Controllers
             if (!string.IsNullOrEmpty(data.ImageUrl))
                 data.ImageUrl = RheaConstant.ImageServer + data.ImageUrl;
 
+            data.Buildings = service.GetBuildingByGroup(id).OrderBy(r => r.Id).ToList();
+
             return View(data);
         }
 

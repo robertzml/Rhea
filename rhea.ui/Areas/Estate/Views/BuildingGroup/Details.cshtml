@@ -231,23 +231,25 @@
                             名称
                         </th>
                         <th>
-                            Date registered
+                            建筑面积
                         </th>
                         <th>
-                            Role
+                            地上楼层数
                         </th>
                         <th>
-                            Status
+                            地下楼层数
                         </th>
                     </tr>
                 </thead>
                 <tbody>
+                @foreach (var item in Model.Buildings)
+                {
                     <tr>
                         <td>
-                            Muhammad Usman
+                            @item.Name
                         </td>
                         <td class="center">
-                            2012/01/01
+                            @item.Id
                         </td>
                         <td class="center">
                             Member
@@ -256,70 +258,14 @@
                             <span class="label label-success">Active</span>
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            White Horse
-                        </td>
-                        <td class="center">
-                            2012/02/01
-                        </td>
-                        <td class="center">
-                            Staff
-                        </td>
-                        <td class="center">
-                            <span class="label label-important">Banned</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Sheikh Heera
-                        </td>
-                        <td class="center">
-                            2012/02/01
-                        </td>
-                        <td class="center">
-                            Admin
-                        </td>
-                        <td class="center">
-                            <span class="label">Inactive</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Saruar
-                        </td>
-                        <td class="center">
-                            2012/03/01
-                        </td>
-                        <td class="center">
-                            Member
-                        </td>
-                        <td class="center">
-                            <span class="label label-warning">Pending</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Sana Amrin
-                        </td>
-                        <td class="center">
-                            2012/01/21
-                        </td>
-                        <td class="center">
-                            Staff
-                        </td>
-                        <td class="center">
-                            <span class="label label-success">Active</span>
-                        </td>
-                    </tr>
+                }                    
                 </tbody>
             </table>
         </div>       
     </div>
     <div class="row-fluid">
         <div class="span12">
-            <h2>
-                操作</h2>     
+            <h2>操作</h2>     
             <p>    
                 <a class="btn" id="edit" href="#"><i class="icon-edit"></i>编辑</a> 
                 <a class="btn" id="delete" href="#"><i class="icon-remove"></i>删除</a>

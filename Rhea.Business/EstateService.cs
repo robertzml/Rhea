@@ -103,5 +103,24 @@ namespace Rhea.Business
             else
                 return null;
         }
+
+        /// <summary>
+        /// 获取楼宇
+        /// </summary>
+        /// <param name="buildingGroupId">所属楼群ID</param>
+        /// <returns></returns>
+        public IEnumerable<Building> GetBuildingByGroup(int buildingGroupId)
+        {
+            ApiService api = new ApiService();
+            HttpResponseMessage response = api.Get("Building?BuildingGroupId=" + buildingGroupId.ToString());
+
+            if (response.IsSuccessStatusCode)
+            {
+                var buildings = response.Content.ReadAsAsync<IEnumerable<Building>>().Result;
+                return buildings;
+            }
+            else
+                return null;
+        }
     }
 }
