@@ -37,7 +37,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
                 data.ImageUrl = RheaConstant.ImageServer + data.ImageUrl;
 
             data.Buildings = service.GetBuildingByGroup(id).OrderBy(r => r.Id).ToList();
-
+            
             return View(data);
         }
 
@@ -70,6 +70,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
 
                 if (result)
                 {
+                    TempData["Message"] = "编辑成功";
                     return RedirectToAction("Details", "BuildingGroup", new { area = "Estate", id = model.Id });
                 }
                 else

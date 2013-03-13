@@ -165,6 +165,7 @@
     <Compile Include="Areas\Estate\Controllers\BuildingGroupController.cs" />
     <Compile Include="Areas\Estate\Controllers\HomeController.cs" />
     <Compile Include="Areas\Estate\EstateAreaRegistration.cs" />
+    <Compile Include="Areas\Estate\Models\BuildingGroupEnum.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -271,8 +272,6 @@
     <Content Include="css\jquery-ui-1.8.21.custom.css" />
     <Content Include="css\jquery.cleditor.css" />
     <Content Include="css\jquery.iphone.toggle.css" />
-    <Content Include="css\jquery.noty.css" />
-    <Content Include="css\noty_theme_default.css" />
     <Content Include="css\opa-icons.css" />
     <Content Include="css\uniform.default.css" />
     <Content Include="css\uploadify.css" />
@@ -465,12 +464,12 @@
     <Content Include="js\jquery.history.js" />
     <Content Include="js\jquery.iphone.toggle.js" />
     <Content Include="js\jquery.js" />
-    <Content Include="js\jquery.noty.js" />
     <Content Include="js\jquery.raty.min.js" />
     <Content Include="js\jquery.uniform.min.js" />
     <Content Include="js\jquery.uploadify-3.1.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\function.js" />
     <Content Include="Scripts\highcharts.js" />
     <Content Include="Scripts\jquery-1.8.3-vsdoc.js" />
     <Content Include="Scripts\jquery-1.8.3.js" />
@@ -492,6 +491,22 @@
     <Content Include="Scripts\modules\canvas-tools.js" />
     <Content Include="Scripts\modules\data.js" />
     <Content Include="Scripts\modules\exporting.js" />
+    <Content Include="Scripts\noty\jquery.noty.js" />
+    <Content Include="Scripts\noty\layouts\bottom.js" />
+    <Content Include="Scripts\noty\layouts\bottomCenter.js" />
+    <Content Include="Scripts\noty\layouts\bottomLeft.js" />
+    <Content Include="Scripts\noty\layouts\bottomRight.js" />
+    <Content Include="Scripts\noty\layouts\center.js" />
+    <Content Include="Scripts\noty\layouts\centerLeft.js" />
+    <Content Include="Scripts\noty\layouts\centerRight.js" />
+    <Content Include="Scripts\noty\layouts\inline.js" />
+    <Content Include="Scripts\noty\layouts\top.js" />
+    <Content Include="Scripts\noty\layouts\topCenter.js" />
+    <Content Include="Scripts\noty\layouts\topLeft.js" />
+    <Content Include="Scripts\noty\layouts\topRight.js" />
+    <Content Include="Scripts\noty\promise.js" />
+    <Content Include="Scripts\noty\themes\default.js" />
+    <Content Include="Scripts\rhea.js" />
     <Content Include="Scripts\themes\dark-blue.js" />
     <Content Include="Scripts\themes\dark-green.js" />
     <Content Include="Scripts\themes\gray.js" />
@@ -539,8 +554,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Estate\Models\" />
-    <Folder Include="Areas\Estate\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -584,6 +597,21 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Menu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Shared\EditorTemplates\BuildType.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Shared\EditorTemplates\BuildStructure.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Shared\EditorTemplates\FundsSubject.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Shared\EditorTemplates\ManageType.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Building\Edit.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

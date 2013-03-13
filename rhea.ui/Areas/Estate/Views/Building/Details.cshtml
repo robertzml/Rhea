@@ -127,3 +127,16 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $('document').ready(function () {
+
+        $('a#main-pic').colorbox({ transition: "elastic", maxWidth: "95%", maxHeight: "95%" });
+
+        $('a#edit').click(function () {
+            var request = { id: '@Model.Id' };
+            ajaxLoadPage("Edit", "Building", "Estate", request);
+            return false;
+        });
+    });
+</script>

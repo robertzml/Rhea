@@ -1,3 +1,11 @@
+function showMessage(text) {
+	var n = noty({
+		text: text,
+		type: 'information',
+		timeout: 1000
+	});
+}
+
 function ajaxLoadPage(action, controller, area, request) {	
 	$.ajax({
 		url: "/" + area + "/" + controller + "/" + action,

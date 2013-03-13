@@ -29,7 +29,7 @@
         <div id="ajax-content1">        
         <div class="box-header well" data-original-title>
             <h2>
-                <i class="icon-font"></i>地图导航</h2>
+                <i class="icon-globe"></i>地图导航</h2>
             <div class="box-icon">
                 <a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
                 <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
@@ -52,79 +52,50 @@
     <!--/span-->
 
     <div class="span3">    
-    <div class="box">
-        <div class="box-header well" data-original-title>
-            <h3>
-                楼群列表</h3>
-            <div class="box-icon">
-                <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
-                <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+        <div class="box">
+            <div class="box-header well" data-original-title>
+                <h3>
+                    楼群列表</h3>
+                <div class="box-icon">
+                    <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                    <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+                </div>
+            </div>
+            <div class="box-content k-content">
+                <ul id="treeview">
+                    @foreach (var item in ViewBag.BuildingGroups)
+                    {                    
+                        <li><a class="buildingGroup" href="#" ref="@item.Id"><span>@item.Name</span></a>
+                            <ul>
+                                @foreach (var building in item.Buildings)
+                                {
+                                    <li><a class="building" ref="@building.Id"><span>@building.Name</span></a></li>
+                                }
+                            </ul>
+                        </li>                               
+                    }
+                </ul>
             </div>
         </div>
-        <div class="box-content k-content">
-            <ul id="treeview">
-                @foreach (var item in ViewBag.BuildingGroups)
-                {                    
-                    <li><a class="buildingGroup" href="#" ref="@item.Id"><span>@item.Name</span></a>
-                        <ul>
-                            @foreach (var building in item.Buildings)
-                            {
-                                <li><a class="building" ref="@building.Id"><span>@building.Name</span></a></li>
-                            }
-                        </ul>
-                    </li>                               
-                }
-            </ul>
-        </div>
-    </div>
-    <!--/span-->    
-    <div class="box">
-        <div class="box-header well" data-original-title>
-            <h3>
-                部门列表</h3>
-            <div class="box-icon">
-                <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
-                <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+        <!--/span-->    
+        <div class="box">
+            <div class="box-header well" data-original-title>
+                <h3>
+                    部门列表</h3>
+                <div class="box-icon">
+                    <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                    <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+                </div>
+            </div>
+            <div class="box-content">                
+                <ul class="nav nav-list">
+                    @foreach (var item in ViewBag.Departments)
+                    {
+                        <li><a class="department" href="#" ref="@item.Id"><span>@item.Name</span></a></li>
+                    }                
+                </ul>
             </div>
         </div>
-        <div class="box-content">                
-            <ul class="nav nav-list">
-                @foreach (var item in ViewBag.Departments)
-                {
-                    <li><a class="department" href="#" ref="@item.Id"><span>@item.Name</span></a></li>
-                }                
-            </ul>
-        </div>
-    </div>
-    <!--/span-->
-    <div class="box">
-        <div class="box-header well" data-original-title>
-            <h3>
-                Description List</h3>
-            <div class="box-icon">
-                <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
-            </div>
-        </div>
-        <div class="box-content">
-            <a class="btn" href="#"><i class="icon-pencil"></i>添加</a> 
-            <a class="btn" href="#"><i class="icon-edit"></i>编辑</a> 
-            <a class="btn" href="#"><i class="icon-remove"></i>删除</a>
-            <dl>
-                <dt>Description lists</dt>
-                <dd>
-                    A description list is perfect for defining terms.</dd>
-                <dt>Euismod</dt>
-                <dd>
-                    Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
-                <dd>
-                    Donec id elit non mi porta gravida at eget metus.</dd>
-                <dt>Malesuada porta</dt>
-                <dd>
-                    Etiam porta sem malesuada magna mollis euismod.</dd>
-            </dl>
-        </div>
-    </div>
-    <!--/span-->
     </div>
 </div>
 <!--/row-->

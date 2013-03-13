@@ -179,7 +179,10 @@
                                     @Html.DisplayNameFor(model => model.BuildDate)
                                 </td>
                                 <td>
-                                    @Model.BuildDate
+                                @if (Model.BuildDate != null)
+                                {                                    
+                                    @Convert.ToDateTime(Model.BuildDate).ToShortDateString();
+                                }                                
                                 </td>
                             </tr>
                             <tr>
@@ -249,13 +252,13 @@
                             @item.Name
                         </td>
                         <td class="center">
-                            @item.Id
+                            @item.BuildArea
                         </td>
                         <td class="center">
-                            Member
+                            @item.AboveGroundFloor
                         </td>
                         <td class="center">
-                            <span class="label label-success">Active</span>
+                            @item.UnderGroundFloor
                         </td>
                     </tr>
                 }                    

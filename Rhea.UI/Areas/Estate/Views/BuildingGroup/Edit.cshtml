@@ -236,6 +236,8 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        $('#BuildDate').datepicker();
+
         $('button#cancel').click(function () {
             ajaxLoadPage("Details", "BuildingGroup", "Estate", { id: '@Model.Id' });
             return false;

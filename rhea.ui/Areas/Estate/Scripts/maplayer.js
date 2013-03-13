@@ -32,14 +32,10 @@ function initMap() {
 	map.addLayer(layer2D);
 
 	markers = new OpenLayers.Layer.Markers("楼群");
-	//map.addLayer(markers);
+	map.addLayer(markers);
 
+	//getBuildingGroupsInfo();	
 
-	//addMarkers();
-	//getBuildingGroupsInfo();
-	
-	//map.addControl(new OpenLayers.Control.PanZoomBar());
-	//map.addControl(new OpenLayers.Control.KeyboardDefaults());
 	map.addControl(new OpenLayers.Control.LayerSwitcher({ 'ascending': false })); 	
 	map.addControl(new OpenLayers.Control.MousePosition()); 
 	map.setCenter(new OpenLayers.LonLat(0, 0), 1); 	
