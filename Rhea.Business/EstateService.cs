@@ -66,6 +66,19 @@ namespace Rhea.Business
         }
 
         /// <summary>
+        /// 添加楼群
+        /// </summary>
+        /// <param name="buildingGroup">楼群模型</param>
+        /// <returns></returns>
+        public bool CreateBuildingGroup(BuildingGroup buildingGroup)
+        {
+            ApiService api = new ApiService();
+            HttpResponseMessage response = api.Post("BuildingGroup", buildingGroup);
+
+            return response.IsSuccessStatusCode;
+        }
+
+        /// <summary>
         /// 获取楼宇列表
         /// </summary>
         /// <returns></returns>

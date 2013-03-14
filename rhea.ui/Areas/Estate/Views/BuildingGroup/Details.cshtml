@@ -242,6 +242,9 @@
                         <th>
                             地下楼层数
                         </th>
+                        <th>
+                            详细
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -259,6 +262,11 @@
                         </td>
                         <td class="center">
                             @item.UnderGroundFloor
+                        </td>
+                        <td>
+                            <a class="btn btn-success building-details" href="#" ref="@item.Id">
+                                <i class="icon-zoom-in icon-white"></i>详细
+                            </a>
                         </td>
                     </tr>
                 }                    
@@ -286,6 +294,12 @@
             var request = { id: '@Model.Id' };
             ajaxLoadPage("Edit", "BuildingGroup", "Estate", request);
             return false;
-        });  
+        });
+
+        $('a.building-details').click(function () {
+            var request = { id: $(this).attr('ref') };
+            ajaxLoadPage("Details", "Building", "Estate", request);
+            return false;
+        });
     });
 </script>

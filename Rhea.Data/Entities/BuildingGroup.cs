@@ -148,7 +148,13 @@ namespace Rhea.Data.Entities
         [StringLength(500)]
         [DataType(DataType.MultilineText)]
         [Display(Name = "备注")]
-        public string Remark { get; set; }        
+        public string Remark { get; set; }
+
+        /// <summary>
+        /// 状态
+        /// </summary>
+        [Display(Name = "状态" )]
+        public int Status { get; set; }
 
         /// <summary>
         /// 楼宇列表

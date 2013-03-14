@@ -54,6 +54,24 @@ namespace Rhea.Business
             HttpResponseMessage response = client.PutAsJsonAsync("api/" + queryString, data).Result;
             return response;
         }
+
+        /// <summary>
+        /// POST数据
+        /// </summary>
+        /// <param name="queryString">Uri路径</param>
+        /// <param name="data">数据</param>
+        /// <returns></returns>
+        public HttpResponseMessage Post(string queryString, object data)
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(host);
+
+            // Add an Accept header for JSON format.
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            HttpResponseMessage response = client.PostAsJsonAsync("api/" + queryString, data).Result;
+            return response;
+        }
         #endregion //Method
     }
 }

@@ -19,7 +19,7 @@
 </style>
 
 @section breadcrumb {
-    <li>@Html.ActionLink("房产管理", "Index", "Estate")</li>
+    <li>@Html.ActionLink("房产管理", "Index", new { controller = "Home", area = "Estate" })</li>
 }
 
 <div class="row-fluid sortable">
@@ -96,6 +96,24 @@
                 </ul>
             </div>
         </div>
+
+        <div class="box">
+            <div class="box-header well" data-original-title>
+                <h3>
+                    添加数据</h3>
+                <div class="box-icon">
+                    <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                    <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+                </div>
+            </div>
+            <div class="box-content">
+                <p>
+                    <button id="create-buildinggroup" class="btn btn-primary">添加楼群</button>               
+                    <button id="create-building" class="btn btn-primary">添加楼宇</button>
+                    <button id="create-room" class="btn btn-primary">添加房间</button>
+                </p>
+            </div>
+        </div>
     </div>
 </div>
 <!--/row-->
@@ -116,7 +134,7 @@
             $("#treeview").append("<li>"+ item.Name +"</li>");
             });
             });*/
-            $("#treeview").kendoTreeView();          
+            $("#treeview").kendoTreeView();
 
             $('a.buildingGroup').click(function () {
                 var groupId = $(this).attr('ref');
@@ -131,8 +149,13 @@
                 ajaxLoadPage("Details", "Building", "Estate", request);
                 return false;
             });
+
+            $('button#create-buildinggroup').click(function () {
+                ajaxLoadPage("Create", "BuildingGroup", "Estate", {});
+                return false;
+            });
         });
 
-        initMap();
+        //initMap();
     </script>
 }
