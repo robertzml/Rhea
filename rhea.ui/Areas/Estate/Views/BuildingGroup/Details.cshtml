@@ -16,16 +16,7 @@
         <div class="span7">
             <h3>
                 介绍</h3>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
-                dolor, quis ullamcorper ligula sodales at. Nulla tellus elit, varius non commodo
-                eget, mattis vel eros. In sed ornare nulla. Donec consectetur, velit a pharetra
-                ultricies, diam lorem lacinia risus, ac commodo orci erat eu massa. Sed sit amet
-                nulla ipsum. Donec felis mauris, vulputate sed tempor at, aliquam a ligula. Pellentesque
-                non pulvinar nisi.            
-                Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus
-                et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh
-                ultricies vehicula ut id elit.</p>
+            <p>@Model.Remark</p>
             <p>
                 Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis,
                 est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
@@ -293,6 +284,12 @@
         $('a#edit').click(function () {
             var request = { id: '@Model.Id' };
             ajaxLoadPage("Edit", "BuildingGroup", "Estate", request);
+            return false;
+        });
+
+        $('a#delete').click(function () {
+            var request = { id: '@Model.Id' };
+            ajaxLoadPage("Delete", "BuildingGroup", "Estate", request);
             return false;
         });
 

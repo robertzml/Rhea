@@ -118,6 +118,39 @@ namespace Rhea.UI.Areas.Estate.Controllers
 
             return View(model);
         }
+
+        /// <summary>
+        /// 删除楼群
+        /// </summary>
+        /// <param name="id">楼群ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            EstateService service = new EstateService();
+            var data = service.GetBuildingGroup(id);
+            return View(data);
+        }
+
+        /// <summary>
+        /// 删除楼群
+        /// POST: /Estate/BuilidngGroup/Delete/7
+        /// </summary>
+        /// <param name="id">楼群ID</param>
+        /// <returns></returns>
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            EstateService service = new EstateService();
+            bool result = service.DeleteBuildingGroup(id);
+
+            if (result)
+            {
+                return RedirectToAction("Index", "Home", new { area = "Estate" });
+            }
+            else
+                return View("Delete", id);
+        }
         #endregion //Action
     }
 }

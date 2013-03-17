@@ -43,7 +43,7 @@ namespace Rhea.Business
         /// <param name="queryString">Uri路径</param>
         /// <param name="data">数据</param>
         /// <returns></returns>
-        public HttpResponseMessage Put(string queryString, object data)
+        public HttpResponseMessage Put(string queryString, int id, object data)
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(host);
@@ -51,7 +51,7 @@ namespace Rhea.Business
             // Add an Accept header for JSON format.
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            HttpResponseMessage response = client.PutAsJsonAsync("api/" + queryString, data).Result;
+            HttpResponseMessage response = client.PutAsJsonAsync("api/" + queryString + "/" + id.ToString(), data).Result;
             return response;
         }
 
@@ -70,6 +70,24 @@ namespace Rhea.Business
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             HttpResponseMessage response = client.PostAsJsonAsync("api/" + queryString, data).Result;
+            return response;
+        }
+
+        /// <summary>
+        /// Delete数据
+        /// </summary>
+        /// <param name="queryString">Uri路径</param>
+        /// <param name="id">ID</param>
+        /// <returns></returns>
+        public HttpResponseMessage Delete(string queryString, int id)
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(host);
+
+            // Add an Accept header for JSON format.
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            HttpResponseMessage response = client.DeleteAsync("api/" + queryString + "/" + id.ToString()).Result;
             return response;
         }
         #endregion //Method

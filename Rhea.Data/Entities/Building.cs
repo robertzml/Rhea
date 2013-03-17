@@ -16,6 +16,7 @@ namespace Rhea.Data.Entities
         /// <summary>
         /// 名称
         /// </summary>
+        [Required]
         [Display(Name = "名称" )]
         public string Name { get; set; }
 
@@ -28,7 +29,9 @@ namespace Rhea.Data.Entities
         /// <summary>
         /// 所属楼群ID
         /// </summary>
-        [Display(Name = "所属楼群ID")]
+        [Required]
+        [Display(Name = "所属楼群")]
+        [UIHint("BuildingGroupDropDownList")]
         public int BuildingGroupId { get; set; }
 
 

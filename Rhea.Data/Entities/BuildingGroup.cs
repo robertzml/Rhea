@@ -20,6 +20,7 @@ namespace Rhea.Data.Entities
         /// <summary>
         /// 名称
         /// </summary>
+        [Required]
         [Display(Name = "名称")]
         public string Name { get; set; }
 

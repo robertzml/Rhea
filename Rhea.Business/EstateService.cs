@@ -13,6 +13,7 @@ namespace Rhea.Business
     /// </summary>
     public class EstateService
     {
+        #region BuildingGroupService
         /// <summary>
         /// 获取楼群列表
         /// </summary>
@@ -60,7 +61,7 @@ namespace Rhea.Business
         public bool UpdateBuildingGroup(BuildingGroup buildingGroup)
         {
             ApiService api = new ApiService();
-            HttpResponseMessage response = api.Put("BuildingGroup", buildingGroup);
+            HttpResponseMessage response = api.Put("BuildingGroup", buildingGroup.Id, buildingGroup);
 
             return response.IsSuccessStatusCode;
         }
@@ -78,6 +79,21 @@ namespace Rhea.Business
             return response.IsSuccessStatusCode;
         }
 
+        /// <summary>
+        /// 删除楼群
+        /// </summary>
+        /// <param name="id">楼群ID</param>
+        /// <returns></returns>
+        public bool DeleteBuildingGroup(int id)
+        {
+            ApiService api = new ApiService();
+            HttpResponseMessage response = api.Delete("BuildingGroup", id);
+
+            return response.IsSuccessStatusCode;
+        }
+        #endregion //BuildingGroupService
+
+        #region BuildingService
         /// <summary>
         /// 获取楼宇列表
         /// </summary>
@@ -135,5 +151,19 @@ namespace Rhea.Business
             else
                 return null;
         }
+
+        /// <summary>
+        /// 更新楼宇
+        /// </summary>
+        /// <param name="building">楼宇模型</param>
+        /// <returns></returns>
+        public bool UpdateBuilding(Building building)
+        {
+            ApiService api = new ApiService();
+            HttpResponseMessage response = api.Put("Building", building.Id, building);
+
+            return response.IsSuccessStatusCode;
+        }
+        #endregion //BuildingService
     }
 }
