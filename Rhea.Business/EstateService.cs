@@ -153,6 +153,19 @@ namespace Rhea.Business
         }
 
         /// <summary>
+        /// 添加楼宇
+        /// </summary>
+        /// <param name="building">楼宇模型</param>
+        /// <returns></returns>
+        public bool CreateBuilding(Building building)
+        {
+            ApiService api = new ApiService();
+            HttpResponseMessage response = api.Post("Building", building);
+
+            return response.IsSuccessStatusCode;
+        }
+
+        /// <summary>
         /// 更新楼宇
         /// </summary>
         /// <param name="building">楼宇模型</param>

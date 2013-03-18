@@ -6,6 +6,9 @@ using System.Text;
 
 namespace Rhea.Data.Entities
 {
+    /// <summary>
+    /// 楼宇模型
+    /// </summary>
     public class Building
     {
         /// <summary>
@@ -74,12 +77,49 @@ namespace Rhea.Data.Entities
         public List<Floor> Floors { get; set; }
     }
 
+    /// <summary>
+    /// 楼层模型
+    /// </summary>
     public class Floor
     {
+        /// <summary>
+        /// ID
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
+        /// 编号
+        /// </summary>
         public int Number { get; set; }
 
+        /// <summary>
+        /// 名称
+        /// </summary>
         public string Name { get; set; }
 
-        public double UsableArea { get; set; }
+        /// <summary>
+        /// 建筑面积
+        /// </summary>     
+        public double? BuildArea { get; set; }
+
+        /// <summary>
+        /// 使用面积
+        /// </summary>
+        public double? UsableArea { get; set; }
+
+        /// <summary>
+        /// 图片地址
+        /// </summary>
+        public string ImageUrl { get; set; }
+
+        /// <summary>
+        /// 备注
+        /// </summary>
+        public string Remark { get; set; }
+
+        /// <summary>
+        /// 状态
+        /// </summary>
+        public int Status { get; set; }
     }
 }

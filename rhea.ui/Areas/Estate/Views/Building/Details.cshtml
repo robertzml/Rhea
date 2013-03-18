@@ -118,6 +118,58 @@
 
     <div class="row-fluid">
         <div class="span12">
+            <h3>
+                楼层列表</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            名称
+                        </th>
+                        <th>
+                            编号
+                        </th>
+                        <th>
+                            建筑面积
+                        </th>
+                        <th>
+                            使用面积
+                        </th>
+                        <th>
+                            详细
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model.Floors)
+                {
+                    <tr>
+                        <td>
+                            @item.Name
+                        </td>
+                        <td>
+                            @item.Number
+                        </td>
+                        <td>
+                            @item.BuildArea
+                        </td>
+                        <td>
+                            @item.UsableArea
+                        </td>
+                        <td>
+                            <a class="btn btn-success building-details" href="#" ref="@item.Id">
+                                <i class="icon-zoom-in icon-white"></i>进入 
+                            </a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span12">
             <h2>
                 操作</h2>
             <p>

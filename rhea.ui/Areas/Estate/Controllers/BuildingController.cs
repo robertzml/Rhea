@@ -29,6 +29,42 @@ namespace Rhea.UI.Areas.Estate.Controllers
         }
 
         /// <summary>
+        /// 楼宇添加
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 楼宇添加
+        /// </summary>
+        /// <param name="model">楼宇模型</param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Create(Building model)
+        {
+            if (ModelState.IsValid)
+            {
+                EstateService service = new EstateService();
+                bool result = service.CreateBuilding(model);
+
+                if (result)
+                {
+                    return RedirectToAction("Details", "Building", new { area = "Estate", id = 200001 });
+                }
+                else
+                {
+                    ModelState.AddModelError("", "保存失败");
+                }
+            }
+
+            return View(model);
+        }
+
+        /// <summary>
         /// 楼宇编辑
         /// </summary>
         /// <param name="id">楼宇ID</param>

@@ -154,6 +154,11 @@
                 ajaxLoadPage("Create", "BuildingGroup", "Estate", {});
                 return false;
             });
+
+            $('button#create-building').click(function () {
+                ajaxLoadPage("Create", "Building", "Estate", {});
+                return false;
+            });
         });
 
         //initMap();
