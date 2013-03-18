@@ -128,12 +128,13 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-            /*$.getJSON("/Estate/GetBuildingGroupList", function (json) {
+            /*$.getJSON("/Estate/Home/GetBuildingGroupList", function (json) {
 
             $.each(json, function (i, item) {
             $("#treeview").append("<li>"+ item.Name +"</li>");
             });
             });*/
+
             $("#treeview").kendoTreeView();
 
             $('a.buildingGroup').click(function () {

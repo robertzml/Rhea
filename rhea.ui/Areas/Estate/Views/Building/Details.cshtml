@@ -1,8 +1,10 @@
 ﻿@model Rhea.Data.Entities.Building
 
 @{
+    ViewBag.Title = "楼宇信息";
     Layout = null;
 }
+
 <div class="box-header well" data-original-title>
     <h2><i class="icon-th-list"></i>楼宇信息</h2>    
 </div>
@@ -157,7 +159,7 @@
                             @item.UsableArea
                         </td>
                         <td>
-                            <a class="btn btn-success building-details" href="#" ref="@item.Id">
+                            <a class="btn btn-success floor-details" href="#" ref="@item.Id">
                                 <i class="icon-zoom-in icon-white"></i>进入 
                             </a>
                         </td>
@@ -188,6 +190,18 @@
         $('a#edit').click(function () {
             var request = { id: '@Model.Id' };
             ajaxLoadPage("Edit", "Building", "Estate", request);
+            return false;
+        });
+
+        $('a#delete').click(function () {
+            var request = { id: '@Model.Id' };
+            ajaxLoadPage("Delete", "Building", "Estate", request);
+            return false;
+        });
+
+        $('a.floor-details').click(function () {
+            var request = { id: '@Model.Id', floorId: $(this).attr('ref') };
+            ajaxLoadPage("Floor", "Building", "Estate", request);
             return false;
         });
     });

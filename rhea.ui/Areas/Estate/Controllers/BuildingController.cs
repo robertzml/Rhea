@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using Rhea.Business;
 using Rhea.Data.Entities;
 
@@ -102,6 +104,53 @@ namespace Rhea.UI.Areas.Estate.Controllers
             }
 
             return View(model);
+        }
+
+        /// <summary>
+        /// 楼宇删除
+        /// </summary>
+        /// <param name="id">楼宇ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            EstateService service = new EstateService();
+            var data = service.GetBuilding(id);
+            return View(data);
+        }
+
+        /// <summary>
+        /// 楼宇删除
+        /// POST: /Estate/Builidng/Delete/7
+        /// </summary>
+        /// <param name="id">楼宇ID</param>
+        /// <returns></returns>
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirm(int id)
+        {
+            EstateService service = new EstateService();
+            bool result = service.DeleteBuilding(id);
+
+            if (result)
+            {
+                return RedirectToAction("Index", "Home", new { area = "Estate" });
+            }
+            else
+                return View("Delete", id);
+        }
+
+        /// <summary>
+        /// 楼层信息
+        /// </summary>
+        /// <param name="id">楼宇ID</param>
+        /// <returns></returns>
+        public ActionResult Floor(int id, int floorId = 0)
+        {
+            EstateService service = new EstateService();
+            var data = service.GetBuilding(id);
+            ViewBag.FloorId = floorId;
+            ViewBag.Floors = JsonConvert.SerializeObject(data.Floors); 
+            return View(data);
         }
         #endregion //Action
     }

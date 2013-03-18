@@ -177,6 +177,19 @@ namespace Rhea.Business
 
             return response.IsSuccessStatusCode;
         }
+
+        /// <summary>
+        /// 删除楼宇
+        /// </summary>
+        /// <param name="id">楼宇ID</param>
+        /// <returns></returns>
+        public bool DeleteBuilding(int id)
+        {
+            ApiService api = new ApiService();
+            HttpResponseMessage response = api.Delete("Building", id);
+
+            return response.IsSuccessStatusCode;
+        }
         #endregion //BuildingService
     }
 }

@@ -178,6 +178,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Estate\Content\map.css" />
+    <Content Include="Areas\Estate\Scripts\floor-model.js" />
     <Content Include="Areas\Estate\Scripts\maplayer.js" />
     <Content Include="Content\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap-responsive.min.css" />
@@ -624,6 +625,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Estate\Views\Building\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Building\Delete.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Building\Floor.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
