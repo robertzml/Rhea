@@ -28,7 +28,7 @@ function FloorViewModel() {
 	};
 	
 	self.setFloor = function(f) {
-		self.chosenFloor = ko.observable(f);
+		self.chosenFloor(f);
 	};
 }
 
