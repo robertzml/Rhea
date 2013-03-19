@@ -9,12 +9,23 @@
 	self.remark = remark;
 }
 
+function Room(id, name, number, floor, property) {
+	var self = this;
+	self.id = id;
+	self.name = name;
+	self.number = number;
+	self.floor = floor;
+	self.property = property;
+}
+
 function FloorViewModel() {
 	var self = this;
 
 	self.floors = ko.observableArray();	
 	
 	self.chosenFloor = ko.observable();
+	
+	self.rooms = ko.observableArray();
 	
 	self.addFloor = function(id, number, name, buildArea, usableArea, imageUrl, remark) {  
 		self.floors.push(new Floor(id, number, name, buildArea, usableArea, imageUrl, remark));
@@ -30,48 +41,16 @@ function FloorViewModel() {
 	self.setFloor = function(f) {
 		self.chosenFloor(f);
 	};
+	
+	self.getRooms = function(buildingId) {
+		$.getJSON("/Estate/Room/List", { buildingId: buildingId }, function(data) {
+			//ko.mapping.fromJSON(data, self.rooms);			
+			$.each(data, function(i, item) {
+				self.rooms.push(new Room(item.Id, item.Name, item.Number, item.Floor, item.Function.Property));
+			});
+		});
+	};
 }
-
-
-/*
-function FloorViewModel() {
-	var self = this;
-	
-	self.chooseFloor = ko.observable(afloors[0])
-	
-	/*self.floors = ko.observableArray();	
-	self.currentFloor = {
-		id: ko.observable(300180),
-		number: ko.observable(),
-		name: ko.observable()
-	};		
-	
-	self.addFloor = function(id, number, name, buildArea, usableArea, imageUrl, remark) {
-        self.floors.push(new Floor(id, number, name, buildArea, usableArea, imageUrl, remark));
-    };
-	
-	ko.computed(function() {
-		var fid = self.currentFloor.id;
-		for (var i = 0; i < self.floors().length; i++) {
-			if (self.floors()[i].id == fid) {
-				self.currentFloor.number(self.floors()[i].number);
-				self.currentFloor.name(self.floors()[i].name);
-				break;
-			}
-		}		
-	}, this);*/
-	/*self.setFloor = function(floorId) {		
-		for (var i = 0; i < self.floors().length; i++) {
-			if (self.floors()[i].id == floorId) {
-				self.currentFloor.id = self.floors()[i].id;
-				self.currentFloor.number = self.floors()[i].number;
-				self.currentFloor.name = self.floors()[i].name;
-				break;
-			}
-		}
-	};*/
-//}
-
 
 /*floorModel.currentFloorId.subscribe(function(newValue) {
 	floorModel.setFloor(newValue);

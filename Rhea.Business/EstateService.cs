@@ -191,5 +191,26 @@ namespace Rhea.Business
             return response.IsSuccessStatusCode;
         }
         #endregion //BuildingService
+
+        #region RoomService
+        /// <summary>
+        /// 获取房间
+        /// </summary>
+        /// <param name="buildingId"></param>
+        /// <returns></returns>
+        public IEnumerable<Room> GetRoomByBuilding(int buildingId)
+        {
+            ApiService api = new ApiService();
+            HttpResponseMessage response = api.Get("Room?BuildingId=" + buildingId.ToString());
+
+            if (response.IsSuccessStatusCode)
+            {
+                var rooms = response.Content.ReadAsAsync<IEnumerable<Room>>().Result;
+                return rooms;
+            }
+            else
+                return null;
+        }
+        #endregion //RoomService
     }
 }
