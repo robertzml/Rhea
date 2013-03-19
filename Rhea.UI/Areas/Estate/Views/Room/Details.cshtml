@@ -1,0 +1,343 @@
+﻿@model Rhea.Data.Entities.Room
+
+@{
+    ViewBag.Title = "房间信息";
+    Layout = null;
+}
+
+<div class="box">
+    <div class="box-header well" data-original-title>
+        <h2>
+            <i class="icon-th-list"></i>房间信息</h2>
+    </div>
+
+    <div class="box-content">
+        <div class="page-header">
+            <h1>
+                @Model.Name <small>Id: @Model.Id</small></h1>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span12">
+                <ul class="nav nav-tabs" id="myTab">
+                    <li class="active"><a href="#info">基础信息</a></li>
+                    <li><a href="#additional">附加信息</a></li>                   
+                </ul>
+
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane active" id="info">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        属性
+                                    </th>
+                                    <th>
+                                        值
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Number)
+                                    </td>
+                                    <td>
+                                        @Model.Number
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Name)
+                                    </td>
+                                    <td>
+                                        @Model.Name
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Floor)
+                                    </td>
+                                    <td>
+                                        @Model.Floor
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Span)
+                                    </td>
+                                    <td>
+                                        @Model.Span
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Orientation)
+                                    </td>
+                                    <td>
+                                        @Model.Orientation
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.BuildArea)
+                                    </td>
+                                    <td>
+                                        @Model.BuildArea
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.UsableArea)
+                                    </td>
+                                    <td>
+                                        @Model.UsableArea
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Function)
+                                    </td>
+                                    <td>
+                                        @Model.Function.Property
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Building)
+                                    </td>
+                                    <td>
+                                        @Model.Building.Name
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Department)
+                                    </td>
+                                    <td>
+                                        @Model.Department.Name
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.StartDate)
+                                    </td>
+                                    <td>
+                                        @Model.StartDate
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.FixedYear)
+                                    </td>
+                                    <td>
+                                        @Model.FixedYear
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Manager)
+                                    </td>
+                                    <td>
+                                        @Model.Manager
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.RoomStatus)
+                                    </td>
+                                    <td>
+                                        @Model.RoomStatus
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>               
+                    </div>
+                    <div class="tab-pane" id="additional">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        属性
+                                    </th>
+                                    <th>
+                                        值
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Heating)
+                                    </td>
+                                    <td>
+                                        @Model.Heating
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.FireControl)
+                                    </td>
+                                    <td>
+                                        @Model.FireControl
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Height)
+                                    </td>
+                                    <td>
+                                        @Model.Height
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.EWWidth)
+                                    </td>
+                                    <td>
+                                        @Model.EWWidth
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.SNWidth)
+                                    </td>
+                                    <td>
+                                        @Model.SNWidth
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.InternationalId)
+                                    </td>
+                                    <td>
+                                        @Model.InternationalId
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.EducationId)
+                                    </td>
+                                    <td>
+                                        @Model.EducationId
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.PowerSupply)
+                                    </td>
+                                    <td>
+                                        @Model.PowerSupply
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.AirCondition)
+                                    </td>
+                                    <td>
+                                        @Model.AirCondition
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.HasSecurity)
+                                    </td>
+                                    <td>
+                                        @Model.HasSecurity
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.HasChemical)
+                                    </td>
+                                    <td>
+                                        @Model.HasChemical
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.HasTrash)
+                                    </td>
+                                    <td>
+                                        @Model.HasTrash
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.HasSecurityCheck)
+                                    </td>
+                                    <td>
+                                        @Model.HasSecurityCheck
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.PressureContainer)
+                                    </td>
+                                    <td>
+                                        @Model.PressureContainer
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Cylinder)
+                                    </td>
+                                    <td>
+                                        @Model.Cylinder
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.HeatingInAeration)
+                                    </td>
+                                    <td>
+                                        @Model.HeatingInAeration
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.HasTestBed)
+                                    </td>
+                                    <td>
+                                        @Model.HasTestBed
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.UsageCharge)
+                                    </td>
+                                    <td>
+                                        @Model.UsageCharge
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>            
+                </div>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span12">
+                <h3>
+                    操作</h3>
+                <p>
+                    <a class="btn" id="return" href="#"><i class="icon-edit"></i>返回</a> 
+                    <a class="btn" id="edit" href="#"><i class="icon-edit"></i>编辑</a> 
+                    <a class="btn" id="delete" href="#"><i class="icon-remove"></i>删除</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#myTab a:first').tab('show');
+        $('#myTab a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });       
+    });
+
+</script>

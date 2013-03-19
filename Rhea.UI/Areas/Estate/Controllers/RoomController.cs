@@ -15,6 +15,18 @@ namespace Rhea.UI.Areas.Estate.Controllers
     {
         #region Action
         /// <summary>
+        /// 房间信息
+        /// </summary>
+        /// <param name="id">房间ID</param>
+        /// <returns></returns>
+        public ActionResult Details(int id)
+        {
+            EstateService service = new EstateService();
+            var data = service.GetRoom(id);
+            return View(data);
+        }
+
+        /// <summary>
         /// 房间列表
         /// </summary>
         /// <param name="buildingId">楼宇ID</param>

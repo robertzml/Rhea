@@ -196,6 +196,25 @@ namespace Rhea.Business
         /// <summary>
         /// 获取房间
         /// </summary>
+        /// <param name="id">房间ID</param>
+        /// <returns></returns>
+        public Room GetRoom(int id)
+        {
+            ApiService api = new ApiService();
+            HttpResponseMessage response = api.Get("Room?Id=" + id.ToString());
+
+            if (response.IsSuccessStatusCode)
+            {
+                var room = response.Content.ReadAsAsync<Room>().Result;
+                return room;
+            }
+            else
+                return null;
+        }
+
+        /// <summary>
+        /// 获取房间
+        /// </summary>
         /// <param name="buildingId"></param>
         /// <returns></returns>
         public IEnumerable<Room> GetRoomByBuilding(int buildingId)
