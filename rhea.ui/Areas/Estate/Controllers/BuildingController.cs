@@ -26,6 +26,8 @@ namespace Rhea.UI.Areas.Estate.Controllers
         {
             EstateService service = new EstateService();
             Building data = service.GetBuilding(id);
+            if (!string.IsNullOrEmpty(data.ImageUrl))
+                data.ImageUrl = RheaConstant.ImageServer + data.ImageUrl;  
 
             return View(data);
         }

@@ -15,15 +15,6 @@ namespace Rhea.UI.Areas.Estate.Controllers
     {
         #region Action
         /// <summary>
-        /// GET: /Estate/BuildingGroup/
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        /// <summary>
         /// 楼群详细
         /// GET: /Estate/BuildingGroup/Details/7
         /// </summary>
@@ -34,7 +25,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
             EstateService service = new EstateService();
             BuildingGroup data = service.GetBuildingGroup(id);
             if (!string.IsNullOrEmpty(data.ImageUrl))
-                data.ImageUrl = RheaConstant.ImageServer + data.ImageUrl;
+                data.ImageUrl = RheaConstant.ImageServer + data.ImageUrl;           
 
             data.Buildings = service.GetBuildingByGroup(id).OrderBy(r => r.Id).ToList();
             

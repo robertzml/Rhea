@@ -25,8 +25,6 @@
 	//disbaling some functions for Internet Explorer
 	if($.browser.msie)
 	{
-		$('#is-ajax').prop('checked',false);
-		$('#for-is-ajax').hide();
 		$('#toggle-fullscreen').hide();
 		$('.login-box').find('.input-large').removeClass('span10');		
 	}
@@ -38,32 +36,12 @@
 			$(this).parent().addClass('active');
 	});
 	
-	//establish history variables
-	var
-		History = window.History, // Note: We are using a capital H instead of a lower h
-		State = History.getState(),
-		$log = $('#log');
-
-	//bind to State Change
-	History.Adapter.bind(window,'statechange',function(){ // Note: We are using statechange instead of popstate
-		var State = History.getState(); // Note: We are using History.getState() instead of event.state
-		$.ajax({
-			url:State.url,
-			success:function(msg){
-				$('#content').html($(msg).find('#content').html());
-				$('#loading').remove();
-				$('#content').fadeIn();
-				docReady();
-			}
-		});
-	});
-	
 	//animating menus on hover
 	$('ul.main-menu li:not(.nav-header)').hover(function(){
-		$(this).animate({'margin-left':'+=5'},300);
-	},
-	function(){
-		$(this).animate({'margin-left':'-=5'},300);
+			$(this).animate({'margin-left':'+=5'},300);
+		},
+		function(){
+			$(this).animate({'margin-left':'-=5'},300);
 	});
 	
 	//other things to do on document ready, seperated for ajax calls
@@ -74,13 +52,6 @@ function docReady(){
 //prevent # links from moving to top
 	$('a[href="#"][data-top!=true]').click(function(e){
 		e.preventDefault();
-	});
-
-	//tabs
-	$('#myTab a:first').tab('show');
-	$('#myTab a').click(function (e) {
-		e.preventDefault();
-		$(this).tab('show');
 	});
 
 	//makes elements soratble, elements that sort need to have id attribute to save the result
