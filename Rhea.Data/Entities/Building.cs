@@ -99,31 +99,40 @@ namespace Rhea.Data.Entities
         /// <summary>
         /// 编号
         /// </summary>
+        [Required]
+        [Display(Name = "编号" )]
         public int Number { get; set; }
 
         /// <summary>
         /// 名称
         /// </summary>
+        [Required]
+        [Display(Name = "名称")]
         public string Name { get; set; }
 
         /// <summary>
         /// 建筑面积
         /// </summary>     
+        [Display(Name = "建筑面积")]
         public double? BuildArea { get; set; }
 
         /// <summary>
         /// 使用面积
         /// </summary>
+        [Display(Name = "使用面积")]
         public double? UsableArea { get; set; }
 
         /// <summary>
         /// 图片地址
         /// </summary>
+        [Display(Name = "图片")]
         public string ImageUrl { get; set; }
 
         /// <summary>
         /// 备注
         /// </summary>
+        [DataType(DataType.MultilineText)]
+        [Display(Name = "备注")]
         public string Remark { get; set; }
 
         /// <summary>

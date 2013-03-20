@@ -500,6 +500,13 @@ box-shadow: 0 0 10px #BDBDBD;
 min-height:297px;
 }
 
+.sorting { background: url('../img/sort_both.png') no-repeat center right; }
+.sorting_asc { background: url('../img/sort_asc.png') no-repeat center right; }
+.sorting_desc { background: url('../img/sort_desc.png') no-repeat center right; }
+
+.sorting_asc_disabled { background: url('../img/sort_asc_disabled.png') no-repeat center right; }
+.sorting_desc_disabled { background: url('../img/sort_desc_disabled.png') no-repeat center right; }
+
 .field-validation-error {
     color: #ff0000;
 }

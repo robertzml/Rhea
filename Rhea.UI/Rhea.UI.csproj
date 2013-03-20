@@ -163,6 +163,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Estate\Controllers\BuildingController.cs" />
     <Compile Include="Areas\Estate\Controllers\BuildingGroupController.cs" />
+    <Compile Include="Areas\Estate\Controllers\FloorController.cs" />
     <Compile Include="Areas\Estate\Controllers\HomeController.cs" />
     <Compile Include="Areas\Estate\Controllers\RoomController.cs" />
     <Compile Include="Areas\Estate\EstateAreaRegistration.cs" />
@@ -399,8 +400,6 @@
     <Content Include="img\opa-icons-white16.png" />
     <Content Include="img\opa-icons-white32.png" />
     <Content Include="img\progress.gif" />
-    <Content Include="img\qrcode.png" />
-    <Content Include="img\qrcode136.png" />
     <Content Include="img\quicklook-bg.png" />
     <Content Include="img\quicklook-icons.png" />
     <Content Include="img\resize.png" />
@@ -550,9 +549,6 @@
     <Content Include="Views\Home\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\Chrisma.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Rhea.Business\Rhea.Business.csproj">
       <Project>{918B8082-498E-4A1E-8A2D-6CCC570496A0}</Project>
       <Name>Rhea.Business</Name>
@@ -615,6 +611,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Estate\Views\Room\Details.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Nav.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Home\Map.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\BuildingGroup\List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Floor\Create.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

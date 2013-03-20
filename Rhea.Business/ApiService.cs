@@ -33,7 +33,7 @@ namespace Rhea.Business
             // Add an Accept header for JSON format.
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                         
-            HttpResponseMessage response = client.GetAsync("api/" + queryString).Result;  // Blocking call!
+            HttpResponseMessage response = client.GetAsync("api/" + queryString).Result;
             return response;
         }
 

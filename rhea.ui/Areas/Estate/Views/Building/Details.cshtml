@@ -167,9 +167,8 @@
             <div class="span12">
                 <p>
                     <a class="btn" id="edit" href="#"><i class="icon icon-edit"></i>编辑</a> 
-                    <a class="btn" id="delete" href="#"><i class="icon-remove"></i>删除</a>
-                    <span class="icon icon-color icon-treeview-vertical-line" />
-                    <a class="btn" id="floor-add" href="#"><i class="icon-plus"></i>添加楼层</a>
+                    <a class="btn" id="delete" href="#"><i class="icon-remove"></i>删除</a>                    
+                    <a class="btn" id="create-floor" href="#"><i class="icon-plus"></i>添加楼层</a>
                 </p>
             </div>
         </div>
@@ -190,6 +189,11 @@
         $('a#delete').click(function () {
             var request = { id: '@Model.Id' };
             ajaxLoadPage("Delete", "Building", "Estate", request);
+            return false;
+        });
+
+        $('a#create-floor').click(function () {
+            ajaxLoadPage("Create", "Floor", "Estate", { buildingId : @Model.Id});
             return false;
         });
 

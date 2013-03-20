@@ -1,0 +1,126 @@
+﻿@model Rhea.Data.Entities.Floor
+
+@{
+    ViewBag.Title = "楼层添加";
+    Layout = null;
+    AjaxOptions ajaxOpts = new AjaxOptions
+    {
+        UpdateTargetId = "ajax-content1",
+        Url = Url.Action("Create", "Floor", new { area = "Estate" })
+    };  
+}
+
+<style type="text/css">
+    .table tbody td
+    {
+        vertical-align: middle;
+    }
+</style>
+@Scripts.Render("~/bundles/jqueryval")
+
+<div class="box">
+    <div class="box-header well" data-original-title>
+        <h2>
+            <i class="icon-th-list"></i>楼层信息</h2>
+    </div>
+
+    <div class="box-content">
+        <div class="row-fluid">
+            <div class="span12">
+            @using (Ajax.BeginForm(ajaxOpts))
+            {
+                @Html.ValidationSummary(true)
+                <fieldset>
+                    <legend>楼层添加</legend>
+                </fieldset>
+                
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th style="width: 20%">
+                                属性
+                            </th>
+                            <th style="width: 80%">
+                                值
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Number)
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model.Number)
+                                @Html.ValidationMessageFor(model => model.Number)
+                            </td>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.Name)
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.Name)
+                                    @Html.ValidationMessageFor(model => model.Name)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.ImageUrl)
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.ImageUrl)
+                                    @Html.ValidationMessageFor(model => model.ImageUrl)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.BuildArea)
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.BuildArea)
+                                    @Html.ValidationMessageFor(model => model.BuildArea)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.UsableArea)
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.UsableArea)
+                                    @Html.ValidationMessageFor(model => model.UsableArea)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.Remark)
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.Remark)
+                                    @Html.ValidationMessageFor(model => model.Remark)
+                                </td>
+                            </tr>
+                        </tr>
+                    </tbody>
+                </table>
+                    
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        保存</button>
+                    <button id="cancel" class="btn">
+                        取消</button>
+                </div>
+            }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('button#cancel').click(function () {
+            ajaxLoadPage("List", "BuildingGroup", "Estate", {});
+            return false;
+        });
+    });
+</script>

@@ -4,19 +4,7 @@
 }
 
 @Styles.Render("~/Content/kendoui")
-<link href="@Url.Content("~/Areas/Estate/OpenLayers/theme/default/style.css")" rel="stylesheet" type="text/css" />
-<link href="@Url.Content("~/Areas/Estate/Content/map.css")" rel="stylesheet" type="text/css" />
-<style type="text/css">
-    #map
-    {
-        width: 100%;
-        height: 600px;
-    }
-    #map img 
-    {
-        max-width: none;
-    }
-</style>
+
 
 @section breadcrumb {
     <li>@Html.ActionLink("房产管理", "Index", new { controller = "Home", area = "Estate" })</li>
@@ -26,27 +14,8 @@
     
     <div class="span9">
         <div id="ajax-content1">
-            <div class="box">            
-                <div class="box-header well" data-original-title>
-                    <h2>
-                        <i class="icon-globe"></i>地图导航</h2>
-                    <div class="box-icon">
-                        <a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
-                        <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
-                        <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
-                    </div>
-                </div>
-                <div class="box-content">           
-           
-                    <div class="row-fluid">
-                        <div class="span12">
-                            <div id="map">
-                            </div>
-                        </div>
-                    </div>
-       
-                </div>
-            </div>
+            @*@Html.Action("Map", "Home", new { area = "Estate" })*@
+            @Html.Action("List", "BuildingGroup", new { area = "Estate" })
         </div>
     </div>
     <!--/span-->
@@ -55,7 +24,7 @@
         <div class="box">
             <div class="box-header well" data-original-title>
                 <h3>
-                    楼群列表</h3>
+                    楼群导航</h3>
                 <div class="box-icon">
                     <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
                     <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
@@ -81,7 +50,7 @@
         <div class="box">
             <div class="box-header well" data-original-title>
                 <h3>
-                    部门列表</h3>
+                    部门导航</h3>
                 <div class="box-icon">
                     <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
                     <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
@@ -95,35 +64,13 @@
                     }                
                 </ul>
             </div>
-        </div>
-
-        <div class="box">
-            <div class="box-header well" data-original-title>
-                <h3>
-                    添加数据</h3>
-                <div class="box-icon">
-                    <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
-                    <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
-                </div>
-            </div>
-            <div class="box-content">
-                <p>
-                    <button id="create-buildinggroup" class="btn btn-primary">添加楼群</button>               
-                    <button id="create-building" class="btn btn-primary">添加楼宇</button>
-                    <button id="create-room" class="btn btn-primary">添加房间</button>
-                </p>
-            </div>
-        </div>
+        </div>   
     </div>
 </div>
 <!--/row-->
 
 @section scripts {
-    @Scripts.Render("~/bundles/kendoui")
-
-
-    <script src="@Url.Content("~/Areas/Estate/OpenLayers/lib/OpenLayers.js")" type="text/javascript"></script>
-    <script src="@Url.Content("~/Areas/Estate/Scripts/maplayer.js")" type="text/javascript"></script>
+    @Scripts.Render("~/bundles/kendoui")    
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -161,7 +108,6 @@
                 return false;
             });
         });
-
-        //initMap();
+        
     </script>
 }

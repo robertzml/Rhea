@@ -33,6 +33,18 @@ namespace Rhea.UI.Areas.Estate.Controllers
         }
 
         /// <summary>
+        /// 楼群列表
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult List()
+        {
+            EstateService service = new EstateService();
+            List<BuildingGroup> data = service.GetBuildingGroupList().ToList();
+
+            return View(data);
+        }
+
+        /// <summary>
         /// 添加楼群
         /// </summary>
         /// <returns></returns>
@@ -58,7 +70,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
                 if (result)
                 {
                     TempData["Message"] = "编辑成功";
-                    return RedirectToAction("Details", "BuildingGroup", new { area = "Estate", id = 100001 });
+                    return RedirectToAction("List", "BuildingGroup", new { area = "Estate" });
                 }
                 else
                 {

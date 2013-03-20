@@ -13,9 +13,12 @@ namespace Rhea.UI.Areas.Estate.Controllers
     /// </summary>
     public class HomeController : Controller
     {
-        //
-        // GET: /Estate/Home/
-
+        #region Action
+        /// <summary>
+        /// 房产管理首页
+        /// GET: /Estate/Home/
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             EstateService estateService = new EstateService();
@@ -37,6 +40,16 @@ namespace Rhea.UI.Areas.Estate.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 地图导航
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Map()
+        {
+            return View();
+        }
+        #endregion //Action
+
         public JsonResult GetBuildingGroupList()
         {
             EstateService estateService = new EstateService();
@@ -44,5 +57,6 @@ namespace Rhea.UI.Areas.Estate.Controllers
 
             return Json(data, JsonRequestBehavior.AllowGet);
         }
+
     }
 }

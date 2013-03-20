@@ -53,11 +53,11 @@ namespace Rhea.UI.Areas.Estate.Controllers
             if (ModelState.IsValid)
             {
                 EstateService service = new EstateService();
-                bool result = service.CreateBuilding(model);
+                int result = service.CreateBuilding(model);
 
-                if (result)
+                if (result != 0)
                 {
-                    return RedirectToAction("Details", "Building", new { area = "Estate", id = 200001 });
+                    return RedirectToAction("Details", "Building", new { area = "Estate", id = result });
                 }
                 else
                 {

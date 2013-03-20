@@ -260,7 +260,7 @@
                                 </td>
                                 <td>
                                     <a class="btn btn-success building-details" href="#" ref="@item.Id"><i class="icon-zoom-in icon-white">
-                                    </i>详细 </a>
+                                    </i>查看</a>
                                 </td>
                             </tr>
                     }
@@ -282,6 +282,7 @@
                 <p>
                     <a class="btn" id="edit" href="#"><i class="icon-edit"></i>编辑</a> 
                     <a class="btn" id="delete" href="#"><i class="icon-remove"></i>删除</a>
+                    <a class="btn" id="create-building" href="#"><i class="icon-plus"></i>添加楼宇</a>
                 </p>
             </div>
         </div>
@@ -302,6 +303,11 @@
         $('a#delete').click(function () {
             var request = { id: '@Model.Id' };
             ajaxLoadPage("Delete", "BuildingGroup", "Estate", request);
+            return false;
+        });
+
+        $('a#create-building').click(function () {
+            ajaxLoadPage("Create", "Building", "Estate", {});
             return false;
         });
 
