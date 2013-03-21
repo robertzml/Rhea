@@ -196,6 +196,26 @@ namespace Rhea.Business
 
             return response.IsSuccessStatusCode;
         }
+
+        /// <summary>
+        /// 添加楼层
+        /// </summary>
+        /// <param name="buildingId">楼宇ID</param>
+        /// <param name="floor">楼层数据</param>
+        /// <returns></returns>
+        public int CreateFloor(int buildingId, Floor floor)
+        {
+            ApiService api = new ApiService();
+            HttpResponseMessage response = api.Post("Building?id=" + buildingId.ToString(), floor);
+
+            if (response.IsSuccessStatusCode)
+            {
+                int id = response.Content.ReadAsAsync<int>().Result;
+                return id;
+            }
+            else
+                return 0;
+        }
         #endregion //BuildingService
 
         #region RoomService

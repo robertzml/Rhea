@@ -30,6 +30,8 @@
             @using (Ajax.BeginForm(ajaxOpts))
             {
                 @Html.ValidationSummary(true)
+                @Html.Hidden("BuildingId")
+                
                 <fieldset>
                     <legend>楼层添加</legend>
                 </fieldset>

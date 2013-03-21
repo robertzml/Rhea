@@ -1,0 +1,131 @@
+﻿@model Rhea.Data.Entities.Floor
+
+@{
+    ViewBag.Title = "楼层信息";
+    Layout = null;
+}
+
+<div class="box">
+    <div class="box-header well" data-original-title>
+        <h2>
+            <i class="icon-th-list"></i>楼层信息</h2>
+    </div>
+    <div class="box-content">
+        <div class="page-header">
+            <h1>
+                @Model.Name <small>Id: @Model.Id</small>          
+            </h1>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span12">
+                <h3>
+                    详细参数</h3>
+                <div class="row-fluid" data-bind="with: chosenFloor">
+                    <div class="span4">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        属性
+                                    </th>
+                                    <th>
+                                        值
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        编号
+                                    </td>
+                                    <td data-bind="text: number">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        名称
+                                    </td>
+                                    <td data-bind="text: name">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="span4">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        属性
+                                    </th>
+                                    <th>
+                                        值
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        建筑面积
+                                    </td>
+                                    <td data-bind="text: buildArea">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        使用面积
+                                    </td>
+                                    <td data-bind="text: usableArea">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="span4">
+                        <div class="well" data-bind="text: remark">
+                            备注:
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span12">
+                <h3>
+                    操作</h3>
+                <p>
+                    <a class="btn" id="return" href="#"><i class="icon-arrow-left"></i>返回</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="box">
+    <div class="box-header well" data-original-title>
+        <h2>
+            <i class="icon-camera"></i>楼层平面图</h2>
+    </div>
+    <div class="box-content">
+        <div id="svg"></div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('a#return').click(function () {
+            ajaxLoadPage("Details", "Building", "Estate", { id : @ViewBag.BuildingId });
+            return false;
+        });
+
+        $('div#svg').load('/Images/test1.svg', function () {
+            svg = $(this).children('svg');
+
+            svg.attr('width', '800px');
+            svg.attr('height', '600px');
+        });
+    });
+</script>
