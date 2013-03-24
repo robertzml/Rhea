@@ -1,0 +1,47 @@
+﻿@model int
+@{
+    ViewBag.Title = "楼层主页";
+    Layout = null;
+}
+
+@Html.Action("Details", "Floor", new { area = "Estate", buildingId = ViewBag.BuildingId, floor = Model })
+@Html.Action("List", "Room", new { area = "Estate", buildingId = ViewBag.BuildingId, floor = Model })
+
+<div class="box">
+    <div class="box-header well" data-original-title>
+        <h2>
+            <i class="icon-user"></i>管理员操作</h2>
+    </div>
+    <div class="box-content">
+        <div class="row-fluid ">
+            <div class="span12">
+                <p>
+                    <a class="btn" id="edit" href="#"><i class="icon icon-edit"></i>编辑</a> 
+                    <a class="btn" id="delete" href="#"><i class="icon-remove"></i>删除</a> 
+                    <a class="btn" id="create-room" href="#"><i class="icon-plus"></i>添加房间</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('a#edit').click(function () {
+            var request = { buildingId: @ViewBag.BuildingId, floor: @Model };
+            ajaxLoadPage("Edit", "Floor", "Estate", request);
+            return false;
+        });
+
+        $('a#delete').click(function() {
+            var request = { buildingId: @ViewBag.BuildingId, floor: @Model };
+            ajaxLoadPage("Delete", "Floor", "Estate", request);
+            return false;
+        });
+
+        $('a#create-room').click(function() {
+            ajaxLoadPage("Create", "Room", "Estate", {});
+            return false;
+        });
+    });
+</script>

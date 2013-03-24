@@ -1,30 +1,41 @@
-﻿@model Rhea.Data.Entities.Building
+﻿@model Rhea.Data.Entities.Floor
 
 @{
-    ViewBag.Title = "楼宇删除";
+    ViewBag.Title = "楼层编辑";
     Layout = null;
     AjaxOptions ajaxOpts = new AjaxOptions
     {
         UpdateTargetId = "ajax-content1",
-        Url = Url.Action("Delete", "Building", new { area = "Estate" })
-    }; 
+        Url = Url.Action("Edit", "Floor", new { area = "Estate" })
+    };  
 }
+
+
+<style type="text/css">
+    .table tbody td
+    {
+        vertical-align: middle;
+    }
+</style>
+@Scripts.Render("~/bundles/jqueryval")
 
 <div class="box">
     <div class="box-header well" data-original-title>
         <h2>
-            <i class="icon-th-list"></i>楼宇信息</h2>
+            <i class="icon-th-list"></i>楼层信息</h2>
     </div>
-
     <div class="box-content">
-        <div class="page-header">
-            <h2>
-                确认是否删除该信息?</h2>
-        </div>
-
         <div class="row-fluid">
             <div class="span12">
+            @using (Ajax.BeginForm(ajaxOpts))
+            {
+                @Html.ValidationSummary(true)
+
                 <fieldset>
+                    <legend>楼层编辑</legend>
+                    @Html.HiddenFor(model => model.Id)
+                    @Html.Hidden("BuildingId")
+
                     <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
@@ -39,10 +50,29 @@
                         <tbody>
                             <tr>
                                 <td>
+                                    @Html.DisplayNameFor(model => model.Number)
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.Number)
+                                    @Html.ValidationMessageFor(model => model.Number)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
                                     @Html.DisplayNameFor(model => model.Name)
                                 </td>
                                 <td>
-                                    @Model.Name
+                                    @Html.EditorFor(model => model.Name)
+                                    @Html.ValidationMessageFor(model => model.Name)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.ImageUrl)
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.ImageUrl)
+                                    @Html.ValidationMessageFor(model => model.ImageUrl)
                                 </td>
                             </tr>
                             <tr>
@@ -50,7 +80,8 @@
                                     @Html.DisplayNameFor(model => model.BuildArea)
                                 </td>
                                 <td>
-                                    @Model.BuildArea
+                                    @Html.EditorFor(model => model.BuildArea)
+                                    @Html.ValidationMessageFor(model => model.BuildArea)
                                 </td>
                             </tr>
                             <tr>
@@ -58,23 +89,8 @@
                                     @Html.DisplayNameFor(model => model.UsableArea)
                                 </td>
                                 <td>
-                                    @Model.UsableArea
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    @Html.DisplayNameFor(model => model.AboveGroundFloor)
-                                </td>
-                                <td>
-                                    @Model.AboveGroundFloor
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    @Html.DisplayNameFor(model => model.UnderGroundFloor)
-                                </td>
-                                <td>
-                                    @Model.UnderGroundFloor
+                                    @Html.EditorFor(model => model.UsableArea)
+                                    @Html.ValidationMessageFor(model => model.UsableArea)
                                 </td>
                             </tr>
                             <tr>
@@ -82,23 +98,21 @@
                                     @Html.DisplayNameFor(model => model.Remark)
                                 </td>
                                 <td>
-                                    @Model.Remark
+                                    @Html.EditorFor(model => model.Remark)
+                                    @Html.ValidationMessageFor(model => model.Remark)
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                </fieldset>
 
-                @using (Ajax.BeginForm(ajaxOpts))
-                {
-                    @Html.HiddenFor(model => model.Id)
                     <div class="form-actions">
                         <button type="submit" class="btn btn-primary">
-                            删除</button>
+                            保存</button>
                         <button id="cancel" class="btn">
                             取消</button>
                     </div>
-                }
+                </fieldset>
+            }
             </div>
         </div>
     </div>
@@ -106,8 +120,9 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+
         $('button#cancel').click(function () {
-            ajaxLoadPage("Index", "Building", "Estate", { id: '@Model.Id' });
+            ajaxLoadPage("Index", "Floor", "Estate", { buildingId: @ViewBag.BuildingId, floor: @Model.Number });
             return false;
         });
     });

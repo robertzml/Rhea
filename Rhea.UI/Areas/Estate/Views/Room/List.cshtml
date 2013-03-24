@@ -61,7 +61,7 @@
     $(document).ready(function () {
         $('table a.room-details').click(function () {
             var request = { id: $(this).attr('ref') };
-            ajaxLoadPage("Details", "Room", "Estate", request);
+            ajaxLoadPage("Index", "Room", "Estate", request);
             return false;
         });
 

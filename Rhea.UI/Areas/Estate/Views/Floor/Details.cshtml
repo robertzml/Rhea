@@ -21,7 +21,7 @@
             <div class="span12">
                 <h3>
                     详细参数</h3>
-                <div class="row-fluid" data-bind="with: chosenFloor">
+                <div class="row-fluid">
                     <div class="span4">
                         <table class="table table-bordered table-striped">
                             <thead>
@@ -37,16 +37,18 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        编号
+                                        @Html.DisplayNameFor(model => model.Number)
                                     </td>
-                                    <td data-bind="text: number">
+                                    <td>
+                                        @Model.Number
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        名称
+                                        @Html.DisplayNameFor(model => model.Name)
                                     </td>
-                                    <td data-bind="text: name">
+                                    <td>
+                                        @Model.Name
                                     </td>
                                 </tr>
                             </tbody>
@@ -67,16 +69,18 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        建筑面积
+                                        @Html.DisplayNameFor(model => model.BuildArea)
                                     </td>
-                                    <td data-bind="text: buildArea">
+                                    <td>
+                                        @Model.BuildArea
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        使用面积
+                                        @Html.DisplayNameFor(model => model.UsableArea)
                                     </td>
-                                    <td data-bind="text: usableArea">
+                                    <td>
+                                        @Model.UsableArea
                                     </td>
                                 </tr>
                             </tbody>
@@ -84,7 +88,7 @@
                     </div>
                     <div class="span4">
                         <div class="well" data-bind="text: remark">
-                            备注:
+                            备注：@Model.Remark
                         </div>
                     </div>
                 </div>
@@ -115,25 +119,6 @@
     </div>
 </div>
 
-@Html.Action("List", "Room", new { area = "Estate", buildingId = ViewBag.BuildingId, floor = Model.Number })
-
-<div class="box">
-    <div class="box-header well" data-original-title>
-        <h2>
-            <i class="icon-user"></i>管理员操作</h2>
-    </div>
-    <div class="box-content">
-        <div class="row-fluid ">
-            <div class="span12">
-                <p>
-                    <a class="btn" id="edit" href="#"><i class="icon icon-edit"></i>编辑</a> 
-                    <a class="btn" id="delete" href="#"><i class="icon-remove"></i>删除</a> 
-                    <a class="btn" id="create-floor" href="#"><i class="icon-plus"></i>添加房间</a>
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
 
 <script type="text/javascript">
     $(document).ready(function () {

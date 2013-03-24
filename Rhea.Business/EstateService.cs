@@ -71,12 +71,18 @@ namespace Rhea.Business
         /// </summary>
         /// <param name="buildingGroup">楼群模型</param>
         /// <returns></returns>
-        public bool CreateBuildingGroup(BuildingGroup buildingGroup)
+        public int CreateBuildingGroup(BuildingGroup buildingGroup)
         {
             ApiService api = new ApiService();
             HttpResponseMessage response = api.Post("BuildingGroup", buildingGroup);
 
-            return response.IsSuccessStatusCode;
+            if (response.IsSuccessStatusCode)
+            {
+                int id = response.Content.ReadAsAsync<int>().Result;
+                return id;
+            }
+            else
+                return 0;
         }
 
         /// <summary>
@@ -215,6 +221,33 @@ namespace Rhea.Business
             }
             else
                 return 0;
+        }
+
+        /// <summary>
+        /// 更新楼层
+        /// </summary>
+        /// <param name="buildingId">楼宇ID</param>
+        /// <param name="floor">楼层数据</param>
+        /// <returns></returns>
+        public bool UpdateFloor(int buildingId, Floor floor)
+        {
+            ApiService api = new ApiService();
+            HttpResponseMessage response = api.Put("Building?id=" + buildingId.ToString() + "&floorId=" + floor.Id, floor);
+
+            return response.IsSuccessStatusCode;
+        }
+
+        /// <summary>
+        /// 删除楼层
+        /// </summary>
+        /// <param name="buildingId">楼宇ID</param>
+        /// <param name="floorId">楼层ID</param>
+        /// <returns></returns>
+        public bool DeleteFloor(int buildingId, int floorId)
+        {
+            ApiService api = new ApiService();
+            HttpResponseMessage response = api.Delete("Building?id=" + buildingId.ToString() + "&floorId=" + floorId);
+            return response.IsSuccessStatusCode;
         }
         #endregion //BuildingService
 

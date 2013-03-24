@@ -61,7 +61,7 @@
     $(document).ready(function () {
         $('a.building-details').click(function () {
             var request = { id: $(this).attr('ref') };
-            ajaxLoadPage("Details", "Building", "Estate", request);
+            ajaxLoadPage("Index", "Building", "Estate", request);
             return false;
         });
     });

@@ -246,7 +246,7 @@
         });
 
         $('button#cancel').click(function () {
-            ajaxLoadPage("Details", "BuildingGroup", "Estate", { id: '@Model.Id' });
+            ajaxLoadPage("Index", "BuildingGroup", "Estate", { id: '@Model.Id' });
             return false;
         });
     });

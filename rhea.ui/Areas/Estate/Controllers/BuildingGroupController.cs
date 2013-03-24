@@ -15,10 +15,20 @@ namespace Rhea.UI.Areas.Estate.Controllers
     {
         #region Action
         /// <summary>
+        /// 楼群主页
+        /// </summary>
+        /// <param name="id">楼群ID</param>
+        /// <returns></returns>
+        public ActionResult Index(int id)
+        {
+            return View(id);
+        }
+
+        /// <summary>
         /// 楼群详细
         /// GET: /Estate/BuildingGroup/Details/7
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">楼群ID</param>
         /// <returns></returns>
         public ActionResult Details(int id)
         {
@@ -65,12 +75,11 @@ namespace Rhea.UI.Areas.Estate.Controllers
             if (ModelState.IsValid)
             {
                 EstateService service = new EstateService();
-                bool result = service.CreateBuildingGroup(model);
+                int result = service.CreateBuildingGroup(model);
 
-                if (result)
-                {
-                    TempData["Message"] = "编辑成功";
-                    return RedirectToAction("List", "BuildingGroup", new { area = "Estate" });
+                if (result != 0)
+                {                    
+                    return RedirectToAction("Index", "BuildingGroup", new { area = "Estate", id = result });
                 }
                 else
                 {
@@ -111,7 +120,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
                 if (result)
                 {
                     TempData["Message"] = "编辑成功";
-                    return RedirectToAction("Details", "BuildingGroup", new { area = "Estate", id = model.Id });
+                    return RedirectToAction("Index", "BuildingGroup", new { area = "Estate", id = model.Id });
                 }
                 else
                 {
@@ -149,7 +158,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
 
             if (result)
             {
-                return RedirectToAction("Index", "Home", new { area = "Estate" });
+                return RedirectToAction("List", "BuildingGroup", new { area = "Estate" });
             }
             else
                 return View("Delete", id);

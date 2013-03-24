@@ -15,6 +15,16 @@ namespace Rhea.UI.Areas.Estate.Controllers
     {
         #region Action
         /// <summary>
+        /// 房间主页
+        /// </summary>
+        /// <param name="id">房间ID</param>
+        /// <returns></returns>
+        public ActionResult Index(int id)
+        {
+            return View(id);
+        }
+
+        /// <summary>
         /// 房间信息
         /// </summary>
         /// <param name="id">房间ID</param>
@@ -46,7 +56,17 @@ namespace Rhea.UI.Areas.Estate.Controllers
             }
 
             return View(data);
-        }       
+        }
+
+        /// <summary>
+        /// 房间添加
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
         #endregion //Action
     }
 }

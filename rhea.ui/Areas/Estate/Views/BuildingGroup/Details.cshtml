@@ -23,7 +23,7 @@
             </div>
             <div class="span5">
                 <div class="well">
-                    <a id="main-pic" title="@Model.Name" href="@Model.ImageUrl">
+                    <a id="building-group-pic" title="@Model.Name" href="@Model.ImageUrl">
                         <img src="@Model.ImageUrl" alt="图片"></a>
                 </div>
             </div>
@@ -216,46 +216,8 @@
     </div>
 </div>
 
-@Html.Action("List", "Building", new { area = "Estate", buildingGroupId = Model.Id })
-
-<div class="box">
-    <div class="box-header well" data-original-title>
-        <h2>
-            <i class="icon-user"></i>管理员操作</h2>
-    </div>
-    <div class="box-content">
-        <div class="row-fluid ">
-            <div class="span12">
-                <p>
-                    <a class="btn" id="edit" href="#"><i class="icon-edit"></i>编辑</a> 
-                    <a class="btn" id="delete" href="#"><i class="icon-remove"></i>删除</a>
-                    <a class="btn" id="create-building" href="#"><i class="icon-plus"></i>添加楼宇</a>
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
-
 <script type="text/javascript">
     $(document).ready(function () {
-
-        $('a#main-pic').colorbox({ transition: "elastic", maxWidth: "95%", maxHeight: "95%" });
-
-        $('a#edit').click(function () {
-            var request = { id: '@Model.Id' };
-            ajaxLoadPage("Edit", "BuildingGroup", "Estate", request);
-            return false;
-        });
-
-        $('a#delete').click(function () {
-            var request = { id: '@Model.Id' };
-            ajaxLoadPage("Delete", "BuildingGroup", "Estate", request);
-            return false;
-        });
-
-        $('a#create-building').click(function () {
-            ajaxLoadPage("Create", "Building", "Estate", {});
-            return false;
-        });        
+        $('a#building-group-pic').colorbox({ transition: "elastic", maxWidth: "95%", maxHeight: "95%" });        
     });
 </script>

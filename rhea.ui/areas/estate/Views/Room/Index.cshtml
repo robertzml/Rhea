@@ -1,0 +1,29 @@
+﻿@model int
+@{
+    ViewBag.Title = "房间主页";
+    Layout = null;
+}
+
+@Html.Action("Details", "Room", new { area = "Estate", id = Model })
+<div class="box">
+    <div class="box-header well" data-original-title>
+        <h2>
+            <i class="icon-user"></i>管理员操作</h2>
+    </div>
+    <div class="box-content">
+        <div class="row-fluid ">
+            <div class="span12">
+                <p>
+                    <a class="btn" id="edit" href="#"><i class="icon-edit"></i>编辑</a> 
+                    <a class="btn" id="delete" href="#"><i class="icon-remove"></i>删除</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+    });
+</script>

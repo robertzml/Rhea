@@ -33,7 +33,7 @@
             </div>       
             <div class="span5">
                 <div class="well">
-                    <a id="main-pic" title="@Model.Name" href="@Model.ImageUrl">
+                    <a id="building-pic" title="@Model.Name" href="@Model.ImageUrl">
                         <img src="@Model.ImageUrl" alt="图片"></a>
                 </div>
             </div>
@@ -167,54 +167,19 @@
     </div>
 </div>
 
-<div class="box">
-    <div class="box-header well" data-original-title>
-        <h2>
-            <i class="icon-user"></i>管理员操作</h2>
-    </div>
-    <div class="box-content">
-        <div class="row-fluid ">
-            <div class="span12">
-                <p>
-                    <a class="btn" id="edit" href="#"><i class="icon icon-edit"></i>编辑</a> 
-                    <a class="btn" id="delete" href="#"><i class="icon-remove"></i>删除</a>                    
-                    <a class="btn" id="create-floor" href="#"><i class="icon-plus"></i>添加楼层</a>
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
-
 <script type="text/javascript">
-    $('document').ready(function () {
+    $(document).ready(function () {
 
-        $('a#main-pic').colorbox({ transition: "elastic", maxWidth: "95%", maxHeight: "95%" });
+        $('a#building-pic').colorbox({ transition: "elastic", maxWidth: "95%", maxHeight: "95%" });
 
         $('a#return').click(function () {
-            ajaxLoadPage("Details", "BuildingGroup", "Estate", { id : @Model.BuildingGroupId });
+            ajaxLoadPage("Index", "BuildingGroup", "Estate", { id : @Model.BuildingGroupId });
             return false;
-        });
-
-        $('a#edit').click(function () {
-            var request = { id: '@Model.Id' };
-            ajaxLoadPage("Edit", "Building", "Estate", request);
-            return false;
-        });
-
-        $('a#delete').click(function () {
-            var request = { id: '@Model.Id' };
-            ajaxLoadPage("Delete", "Building", "Estate", request);
-            return false;
-        });
-
-        $('a#create-floor').click(function () {
-            ajaxLoadPage("Create", "Floor", "Estate", { buildingId : @Model.Id});
-            return false;
-        });
+        });        
 
         $('a.floor-details').click(function () {
             var request = { buildingId: '@Model.Id', floor: $(this).attr('ref') };
-            ajaxLoadPage("Details", "Floor", "Estate", request);
+            ajaxLoadPage("Index", "Floor", "Estate", request);
             return false;
         });
     });

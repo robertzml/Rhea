@@ -633,6 +633,27 @@
   <ItemGroup>
     <Content Include="Areas\Estate\Views\Building\List.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\BuildingGroup\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Building\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Floor\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Room\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Floor\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Floor\Delete.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Room\Create.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

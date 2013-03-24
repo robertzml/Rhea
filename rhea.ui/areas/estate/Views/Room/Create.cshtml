@@ -1,0 +1,228 @@
+﻿@model Rhea.Data.Entities.Room
+
+@{
+    ViewBag.Title = "房间添加";
+    Layout = null;
+    AjaxOptions ajaxOpts = new AjaxOptions
+    {
+        UpdateTargetId = "ajax-content1",
+        Url = Url.Action("Create", "Room", new { area = "Estate" })
+    };  
+}
+
+<style type="text/css">
+    .table tbody td
+    {
+        vertical-align: middle;
+    }
+</style>
+
+@Scripts.Render("~/bundles/jqueryval")
+
+<div class="box">
+    <div class="box-header well" data-original-title>
+        <h2>
+            <i class="icon-th-list"></i>房间信息</h2>
+    </div>
+
+    <div class="box-content">
+        <div class="row-fluid">
+            <div class="span12">
+            @using (Ajax.BeginForm(ajaxOpts))
+            {
+                @Html.ValidationSummary(true)
+                <fieldset>
+                    <legend>房间添加</legend>
+                </fieldset>
+                <ul class="nav nav-tabs" id="myTab">
+                    <li class="active"><a href="#info">基础信息</a></li>
+                    <li><a href="#additional">附加信息</a></li>
+                </ul>
+
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane active" id="info">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th style="width: 20%">
+                                        属性
+                                    </th>
+                                    <th style="width: 80%">
+                                        值
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Number)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.Number)
+                                        @Html.ValidationMessageFor(model => model.Number)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Name)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.Name)
+                                        @Html.ValidationMessageFor(model => model.Name)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Floor)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.Floor)
+                                        @Html.ValidationMessageFor(model => model.Floor)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Span)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.Span)
+                                        @Html.ValidationMessageFor(model => model.Span)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Orientation)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.Orientation)
+                                        @Html.ValidationMessageFor(model => model.Orientation)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.BuildArea)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.BuildArea)
+                                        @Html.ValidationMessageFor(model => model.BuildArea)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.UsableArea)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.UsableArea)
+                                        @Html.ValidationMessageFor(model => model.UsableArea)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Function)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.Function)
+                                        @Html.ValidationMessageFor(model => model.Function)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Building)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.Building)
+                                        @Html.ValidationMessageFor(model => model.Building)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Department)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.Department)
+                                        @Html.ValidationMessageFor(model => model.Department)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.StartDate)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.StartDate)
+                                        @Html.ValidationMessageFor(model => model.StartDate)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.FixedYear)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.FixedYear)
+                                        @Html.ValidationMessageFor(model => model.FixedYear)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Manager)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.Manager)
+                                        @Html.ValidationMessageFor(model => model.Manager)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.RoomStatus)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.RoomStatus)
+                                        @Html.ValidationMessageFor(model => model.RoomStatus)
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane" id="additional">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th style="width: 20%">
+                                        属性
+                                    </th>
+                                    <th style="width: 80%">
+                                        值
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        保存</button>
+                    <button id="cancel" class="btn">
+                        取消</button>
+                </div>
+            }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#myTab a:first').tab('show');
+        $('#myTab a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });    
+        
+        $('a#return').click(function () {
+            ajaxLoadPage("List", "BuildingGroup", "Estate", {});
+            return false;
+        });   
+    });
+</script>

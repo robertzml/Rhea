@@ -17,6 +17,16 @@ namespace Rhea.UI.Areas.Estate.Controllers
     {
         #region Action
         /// <summary>
+        /// 楼宇主页
+        /// </summary>
+        /// <param name="id">楼宇ID</param>
+        /// <returns></returns>
+        public ActionResult Index(int id)
+        {
+            return View(id);
+        }
+
+        /// <summary>
         /// 楼宇详细
         /// GET: /Estate/Building/Details/7
         /// </summary>
@@ -69,7 +79,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
 
                 if (result != 0)
                 {
-                    return RedirectToAction("Details", "Building", new { area = "Estate", id = result });
+                    return RedirectToAction("Index", "Building", new { area = "Estate", id = result });
                 }
                 else
                 {
@@ -109,7 +119,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
 
                 if (result)
                 {
-                    return RedirectToAction("Details", "Building", new { area = "Estate", id = model.Id });
+                    return RedirectToAction("Index", "Building", new { area = "Estate", id = model.Id });
                 }
                 else
                 {
@@ -147,7 +157,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
 
             if (result)
             {
-                return RedirectToAction("Index", "Home", new { area = "Estate" });
+                return RedirectToAction("List", "BuildingGroup", new { area = "Estate" });
             }
             else
                 return View("Delete", id);

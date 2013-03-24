@@ -1,13 +1,13 @@
-﻿@model Rhea.Data.Entities.Building
+﻿@model Rhea.Data.Entities.Floor
 
 @{
-    ViewBag.Title = "楼宇删除";
+    ViewBag.Title = "楼层删除";
     Layout = null;
     AjaxOptions ajaxOpts = new AjaxOptions
     {
         UpdateTargetId = "ajax-content1",
-        Url = Url.Action("Delete", "Building", new { area = "Estate" })
-    }; 
+        Url = Url.Action("Delete", "Floor", new { area = "Estate" })
+    };
 }
 
 <div class="box">
@@ -39,10 +39,26 @@
                         <tbody>
                             <tr>
                                 <td>
+                                    @Html.DisplayNameFor(model => model.Number)
+                                </td>
+                                <td>
+                                    @Model.Number
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
                                     @Html.DisplayNameFor(model => model.Name)
                                 </td>
                                 <td>
                                     @Model.Name
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.ImageUrl)
+                                </td>
+                                <td>
+                                    @Model.ImageUrl
                                 </td>
                             </tr>
                             <tr>
@@ -63,22 +79,6 @@
                             </tr>
                             <tr>
                                 <td>
-                                    @Html.DisplayNameFor(model => model.AboveGroundFloor)
-                                </td>
-                                <td>
-                                    @Model.AboveGroundFloor
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    @Html.DisplayNameFor(model => model.UnderGroundFloor)
-                                </td>
-                                <td>
-                                    @Model.UnderGroundFloor
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
                                     @Html.DisplayNameFor(model => model.Remark)
                                 </td>
                                 <td>
@@ -92,6 +92,7 @@
                 @using (Ajax.BeginForm(ajaxOpts))
                 {
                     @Html.HiddenFor(model => model.Id)
+                    @Html.Hidden("BuildingId")
                     <div class="form-actions">
                         <button type="submit" class="btn btn-primary">
                             删除</button>
@@ -107,7 +108,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('button#cancel').click(function () {
-            ajaxLoadPage("Index", "Building", "Estate", { id: '@Model.Id' });
+            ajaxLoadPage("Index", "Floor", "Estate", { buildingId: '@ViewBag.BuildingId', floor: '@Model.Number' });
             return false;
         });
     });

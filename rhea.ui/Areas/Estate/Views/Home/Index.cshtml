@@ -73,40 +73,23 @@
     @Scripts.Render("~/bundles/kendoui")    
 
     <script type="text/javascript">
-        $(document).ready(function () {
-
-            /*$.getJSON("/Estate/Home/GetBuildingGroupList", function (json) {
-
-            $.each(json, function (i, item) {
-            $("#treeview").append("<li>"+ item.Name +"</li>");
-            });
-            });*/
+        $(document).ready(function () {         
 
             $("#treeview").kendoTreeView();
 
             $('a.buildingGroup').click(function () {
                 var groupId = $(this).attr('ref');
                 var request = { id: groupId };
-                ajaxLoadPage("Details", "BuildingGroup", "Estate", request);
+                ajaxLoadPage("Index", "BuildingGroup", "Estate", request);
                 return false;
             });
 
             $('a.building').click(function () {
                 var buildingId = $(this).attr('ref');
                 var request = { id: buildingId };
-                ajaxLoadPage("Details", "Building", "Estate", request);
+                ajaxLoadPage("Index", "Building", "Estate", request);
                 return false;
-            });
-
-            $('button#create-buildinggroup').click(function () {
-                ajaxLoadPage("Create", "BuildingGroup", "Estate", {});
-                return false;
-            });
-
-            $('button#create-building').click(function () {
-                ajaxLoadPage("Create", "Building", "Estate", {});
-                return false;
-            });
+            });          
         });
         
     </script>
