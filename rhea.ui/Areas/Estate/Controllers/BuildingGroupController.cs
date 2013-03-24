@@ -39,7 +39,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         public ActionResult List()
         {
             EstateService service = new EstateService();
-            List<BuildingGroup> data = service.GetBuildingGroupList().ToList();
+            List<BuildingGroup> data = service.GetBuildingGroupList().OrderBy(r => r.Id).ToList();
 
             return View(data);
         }

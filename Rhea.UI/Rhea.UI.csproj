@@ -627,6 +627,12 @@
   <ItemGroup>
     <Content Include="Areas\Estate\Views\Floor\Details.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Room\List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Building\List.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

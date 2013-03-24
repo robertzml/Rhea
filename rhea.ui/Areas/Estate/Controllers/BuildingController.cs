@@ -33,6 +33,18 @@ namespace Rhea.UI.Areas.Estate.Controllers
         }
 
         /// <summary>
+        /// 楼宇列表
+        /// </summary>
+        /// <param name="buildingGroupId">楼群ID</param>
+        /// <returns></returns>
+        public ActionResult List(int buildingGroupId)
+        {
+            EstateService service = new EstateService();
+            var data = service.GetBuildingByGroup(buildingGroupId).OrderBy(r => r.Id);
+            return View(data);
+        }
+
+        /// <summary>
         /// 楼宇添加
         /// </summary>
         /// <returns></returns>

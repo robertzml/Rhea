@@ -22,7 +22,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         public ActionResult Details(int id)
         {
             EstateService service = new EstateService();
-            var data = service.GetRoom(id);
+            var data = service.GetRoom(id);            
             return View(data);
         }
 
@@ -30,13 +30,23 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// 房间列表
         /// </summary>
         /// <param name="buildingId">楼宇ID</param>
+        /// <param name="floor">楼层</param>
         /// <returns></returns>
-        public JsonResult List(int buildingId)
+        public ActionResult List(int buildingId, int floor = 0)
         {
             EstateService service = new EstateService();
-            var data = service.GetRoomByBuilding(buildingId);
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
+            List<Room> data;
+            if (floor == 0)
+            {
+                data = service.GetRoomByBuilding(buildingId).OrderBy(r => r.Id).ToList();
+            }
+            else
+            {
+                data = service.GetRoomByBuilding(buildingId, floor).OrderBy(r => r.Id).ToList();
+            }
+
+            return View(data);
+        }       
         #endregion //Action
     }
 }

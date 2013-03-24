@@ -19,11 +19,7 @@
             <div class="span7">
                 <h3>
                     介绍</h3>
-                <p>@Model.Remark</p>
-                <p>
-                    Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis,
-                    est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
-                    Donec sed odio dui.</p>
+                <p>@Model.Remark</p>             
             </div>
             <div class="span5">
                 <div class="well">
@@ -216,60 +212,11 @@
                     </table>
                 </div>
             </div>
-        </div>
-
-        <div class="row-fluid">            
-            <div class="span12">
-                <h3>
-                    楼宇列表</h3>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>
-                                名称
-                            </th>
-                            <th>
-                                建筑面积
-                            </th>
-                            <th>
-                                地上楼层数
-                            </th>
-                            <th>
-                                地下楼层数
-                            </th>
-                            <th>
-                                详细
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.Buildings)
-                        {
-                            <tr>
-                                <td>
-                                    @item.Name
-                                </td>
-                                <td class="center">
-                                    @item.BuildArea
-                                </td>
-                                <td class="center">
-                                    @item.AboveGroundFloor
-                                </td>
-                                <td class="center">
-                                    @item.UnderGroundFloor
-                                </td>
-                                <td>
-                                    <a class="btn btn-success building-details" href="#" ref="@item.Id"><i class="icon-zoom-in icon-white">
-                                    </i>查看</a>
-                                </td>
-                            </tr>
-                    }
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        </div>        
     </div>
 </div>
+
+@Html.Action("List", "Building", new { area = "Estate", buildingGroupId = Model.Id })
 
 <div class="box">
     <div class="box-header well" data-original-title>
@@ -309,12 +256,6 @@
         $('a#create-building').click(function () {
             ajaxLoadPage("Create", "Building", "Estate", {});
             return false;
-        });
-
-        $('a.building-details').click(function () {
-            var request = { id: $(this).attr('ref') };
-            ajaxLoadPage("Details", "Building", "Estate", request);
-            return false;
-        });
+        });        
     });
 </script>

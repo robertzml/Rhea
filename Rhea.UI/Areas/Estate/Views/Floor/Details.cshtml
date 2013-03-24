@@ -109,10 +109,31 @@
             <i class="icon-camera"></i>楼层平面图</h2>
     </div>
     <div class="box-content">
+        <object data="/Images/test1.svg" width="800px" height="600px" type="image/svg+xml">            
+        </object>
         <div id="svg"></div>
     </div>
 </div>
 
+@Html.Action("List", "Room", new { area = "Estate", buildingId = ViewBag.BuildingId, floor = Model.Number })
+
+<div class="box">
+    <div class="box-header well" data-original-title>
+        <h2>
+            <i class="icon-user"></i>管理员操作</h2>
+    </div>
+    <div class="box-content">
+        <div class="row-fluid ">
+            <div class="span12">
+                <p>
+                    <a class="btn" id="edit" href="#"><i class="icon icon-edit"></i>编辑</a> 
+                    <a class="btn" id="delete" href="#"><i class="icon-remove"></i>删除</a> 
+                    <a class="btn" id="create-floor" href="#"><i class="icon-plus"></i>添加房间</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -121,11 +142,11 @@
             return false;
         });
 
-        $('div#svg').load('/Images/test1.svg', function () {
+        /*$('div#svg').load('/Images/test1.svg', function () {
             svg = $(this).children('svg');
 
-            svg.attr('width', '800px');
-            svg.attr('height', '600px');
-        });
+            //svg.attr('width', '800px');
+            //svg.attr('height', '600px');
+        });*/     
     });
 </script>

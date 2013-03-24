@@ -322,9 +322,24 @@
                 <h3>
                     操作</h3>
                 <p>
-                    <a class="btn" id="return" href="#"><i class="icon-edit"></i>返回</a> 
+                    <a class="btn" id="return" href="#"><i class="icon-arrow-left"></i>返回</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="box">
+    <div class="box-header well" data-original-title>
+        <h2>
+            <i class="icon-user"></i>管理员操作</h2>
+    </div>
+    <div class="box-content">
+        <div class="row-fluid ">
+            <div class="span12">
+                <p>
                     <a class="btn" id="edit" href="#"><i class="icon-edit"></i>编辑</a> 
-                    <a class="btn" id="delete" href="#"><i class="icon-remove"></i>删除</a>
+                    <a class="btn" id="delete" href="#"><i class="icon-remove"></i>删除</a> 
                 </p>
             </div>
         </div>
@@ -337,7 +352,12 @@
         $('#myTab a').click(function (e) {
             e.preventDefault();
             $(this).tab('show');
-        });       
+        });    
+        
+        $('a#return').click(function () {
+            ajaxLoadPage("Details", "Floor", "Estate", { buildingId: @Model.Building.Id, floor: @Model.Floor });
+            return false;
+        });   
     });
 
 </script>

@@ -17,22 +17,23 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <summary>
         /// 楼层详细
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="buildingId">楼宇ID</param>
+        /// <param name="floor">楼层</param>
         /// <returns></returns>
-        public ActionResult Details(int buildingId, int floorId)
+        public ActionResult Details(int buildingId, int floor)
         {
             EstateService service = new EstateService();
             var building = service.GetBuilding(buildingId);
             ViewBag.BuildingId = buildingId;
 
-            var data = building.Floors.Find(r => r.Id == floorId);
+            var data = building.Floors.Find(r => r.Number == floor);
             return View(data);           
         }
 
         /// <summary>
         /// 添加楼层
         /// </summary>
-        /// <param name="buildingId">所属楼宇</param>
+        /// <param name="buildingId">楼宇ID</param>
         /// <returns></returns>
         [HttpGet]
         public ActionResult Create(int buildingId)

@@ -241,12 +241,32 @@ namespace Rhea.Business
         /// <summary>
         /// 获取房间
         /// </summary>
-        /// <param name="buildingId"></param>
+        /// <param name="buildingId">楼宇ID</param>
         /// <returns></returns>
         public IEnumerable<Room> GetRoomByBuilding(int buildingId)
         {
             ApiService api = new ApiService();
             HttpResponseMessage response = api.Get("Room?BuildingId=" + buildingId.ToString());
+
+            if (response.IsSuccessStatusCode)
+            {
+                var rooms = response.Content.ReadAsAsync<IEnumerable<Room>>().Result;
+                return rooms;
+            }
+            else
+                return null;
+        }
+
+        /// <summary>
+        /// 获取房间
+        /// </summary>
+        /// <param name="buildingId">楼宇ID</param>
+        /// <param name="floor">楼层</param>
+        /// <returns></returns>
+        public IEnumerable<Room> GetRoomByBuilding(int buildingId, int floor)
+        {
+            ApiService api = new ApiService();
+            HttpResponseMessage response = api.Get("Room?buildingId=" + buildingId.ToString() + "&floor=" + floor.ToString());
 
             if (response.IsSuccessStatusCode)
             {
