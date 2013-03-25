@@ -1,23 +1,14 @@
 ﻿@model Rhea.Data.Entities.Room
 
 @{
-    ViewBag.Title = "房间添加";
+    ViewBag.Title = "房间删除";
     Layout = null;
     AjaxOptions ajaxOpts = new AjaxOptions
     {
         UpdateTargetId = "ajax-content1",
-        Url = Url.Action("Create", "Room", new { area = "Estate" })
-    };  
+        Url = Url.Action("Delete", "Room", new { area = "Estate" })
+    }; 
 }
-
-<style type="text/css">
-    .table tbody td
-    {
-        vertical-align: middle;
-    }
-</style>
-
-@Scripts.Render("~/bundles/jqueryval")
 
 <div class="box">
     <div class="box-header well" data-original-title>
@@ -26,28 +17,27 @@
     </div>
 
     <div class="box-content">
+        <div class="page-header">
+            <h2>
+                确认是否删除该信息?</h2>
+        </div>
+
         <div class="row-fluid">
             <div class="span12">
-            @using (Ajax.BeginForm(ajaxOpts))
-            {
-                @Html.ValidationSummary(true)
                 <fieldset>
-                    <legend>房间添加</legend>
-                
                     <ul class="nav nav-tabs" id="myTab">
                         <li class="active"><a href="#info">基础信息</a></li>
                         <li><a href="#additional">附加信息</a></li>
                     </ul>
-
                     <div id="myTabContent" class="tab-content">
                         <div class="tab-pane active" id="info">
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th style="width: 20%">
+                                        <th>
                                             属性
                                         </th>
-                                        <th style="width: 80%">
+                                        <th>
                                             值
                                         </th>
                                     </tr>
@@ -58,8 +48,7 @@
                                             @Html.DisplayNameFor(model => model.Number)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.Number)
-                                            @Html.ValidationMessageFor(model => model.Number)
+                                            @Model.Number
                                         </td>
                                     </tr>
                                     <tr>
@@ -67,8 +56,7 @@
                                             @Html.DisplayNameFor(model => model.Name)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.Name)
-                                            @Html.ValidationMessageFor(model => model.Name)
+                                            @Model.Name
                                         </td>
                                     </tr>
                                     <tr>
@@ -76,8 +64,7 @@
                                             @Html.DisplayNameFor(model => model.Floor)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.Floor)
-                                            @Html.ValidationMessageFor(model => model.Floor)
+                                            @Model.Floor
                                         </td>
                                     </tr>
                                     <tr>
@@ -85,8 +72,7 @@
                                             @Html.DisplayNameFor(model => model.Span)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.Span)
-                                            @Html.ValidationMessageFor(model => model.Span)
+                                            @Model.Span
                                         </td>
                                     </tr>
                                     <tr>
@@ -94,8 +80,7 @@
                                             @Html.DisplayNameFor(model => model.Orientation)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.Orientation)
-                                            @Html.ValidationMessageFor(model => model.Orientation)
+                                            @Model.Orientation
                                         </td>
                                     </tr>
                                     <tr>
@@ -103,8 +88,7 @@
                                             @Html.DisplayNameFor(model => model.BuildArea)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.BuildArea)
-                                            @Html.ValidationMessageFor(model => model.BuildArea)
+                                            @Model.BuildArea
                                         </td>
                                     </tr>
                                     <tr>
@@ -112,8 +96,7 @@
                                             @Html.DisplayNameFor(model => model.UsableArea)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.UsableArea)
-                                            @Html.ValidationMessageFor(model => model.UsableArea)
+                                            @Model.UsableArea
                                         </td>
                                     </tr>
                                     <tr>
@@ -121,8 +104,7 @@
                                             @Html.DisplayNameFor(model => model.Function)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.Function)
-                                            @Html.ValidationMessageFor(model => model.Function)
+                                            @Model.Function.Property
                                         </td>
                                     </tr>
                                     <tr>
@@ -130,8 +112,7 @@
                                             @Html.DisplayNameFor(model => model.Building)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.Building)
-                                            @Html.ValidationMessageFor(model => model.Building)
+                                            @Model.Building.Name
                                         </td>
                                     </tr>
                                     <tr>
@@ -139,8 +120,7 @@
                                             @Html.DisplayNameFor(model => model.Department)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.Department)
-                                            @Html.ValidationMessageFor(model => model.Department)
+                                            @Model.Department.Name
                                         </td>
                                     </tr>
                                     <tr>
@@ -148,8 +128,7 @@
                                             @Html.DisplayNameFor(model => model.StartDate)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.StartDate)
-                                            @Html.ValidationMessageFor(model => model.StartDate)
+                                            @Model.StartDate
                                         </td>
                                     </tr>
                                     <tr>
@@ -157,8 +136,7 @@
                                             @Html.DisplayNameFor(model => model.FixedYear)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.FixedYear)
-                                            @Html.ValidationMessageFor(model => model.FixedYear)
+                                            @Model.FixedYear
                                         </td>
                                     </tr>
                                     <tr>
@@ -166,8 +144,7 @@
                                             @Html.DisplayNameFor(model => model.Manager)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.Manager)
-                                            @Html.ValidationMessageFor(model => model.Manager)
+                                            @Model.Manager
                                         </td>
                                     </tr>
                                     <tr>
@@ -175,8 +152,7 @@
                                             @Html.DisplayNameFor(model => model.RoomStatus)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.RoomStatus)
-                                            @Html.ValidationMessageFor(model => model.RoomStatus)
+                                            @Model.RoomStatus
                                         </td>
                                     </tr>
                                 </tbody>
@@ -186,10 +162,10 @@
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th style="width: 20%">
+                                        <th>
                                             属性
                                         </th>
-                                        <th style="width: 80%">
+                                        <th>
                                             值
                                         </th>
                                     </tr>
@@ -200,8 +176,7 @@
                                             @Html.DisplayNameFor(model => model.Heating)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.Heating)
-                                            @Html.ValidationMessageFor(model => model.Heating)
+                                            @Model.Heating
                                         </td>
                                     </tr>
                                     <tr>
@@ -209,8 +184,7 @@
                                             @Html.DisplayNameFor(model => model.FireControl)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.FireControl)
-                                            @Html.ValidationMessageFor(model => model.FireControl)
+                                            @Model.FireControl
                                         </td>
                                     </tr>
                                     <tr>
@@ -218,8 +192,7 @@
                                             @Html.DisplayNameFor(model => model.Height)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.Height)
-                                            @Html.ValidationMessageFor(model => model.Height)
+                                            @Model.Height
                                         </td>
                                     </tr>
                                     <tr>
@@ -227,8 +200,7 @@
                                             @Html.DisplayNameFor(model => model.EWWidth)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.EWWidth)
-                                            @Html.ValidationMessageFor(model => model.EWWidth)
+                                            @Model.EWWidth
                                         </td>
                                     </tr>
                                     <tr>
@@ -236,8 +208,7 @@
                                             @Html.DisplayNameFor(model => model.SNWidth)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.SNWidth)
-                                            @Html.ValidationMessageFor(model => model.SNWidth)
+                                            @Model.SNWidth
                                         </td>
                                     </tr>
                                     <tr>
@@ -245,8 +216,7 @@
                                             @Html.DisplayNameFor(model => model.InternationalId)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.InternationalId)
-                                            @Html.ValidationMessageFor(model => model.InternationalId)
+                                            @Model.InternationalId
                                         </td>
                                     </tr>
                                     <tr>
@@ -254,8 +224,7 @@
                                             @Html.DisplayNameFor(model => model.EducationId)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.EducationId)
-                                            @Html.ValidationMessageFor(model => model.EducationId)
+                                            @Model.EducationId
                                         </td>
                                     </tr>
                                     <tr>
@@ -263,8 +232,7 @@
                                             @Html.DisplayNameFor(model => model.PowerSupply)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.PowerSupply)
-                                            @Html.ValidationMessageFor(model => model.PowerSupply)
+                                            @Model.PowerSupply
                                         </td>
                                     </tr>
                                     <tr>
@@ -272,8 +240,7 @@
                                             @Html.DisplayNameFor(model => model.AirCondition)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.AirCondition)
-                                            @Html.ValidationMessageFor(model => model.AirCondition)
+                                            @Model.AirCondition
                                         </td>
                                     </tr>
                                     <tr>
@@ -281,8 +248,7 @@
                                             @Html.DisplayNameFor(model => model.HasSecurity)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.HasSecurity)
-                                            @Html.ValidationMessageFor(model => model.HasSecurity)
+                                            @Model.HasSecurity
                                         </td>
                                     </tr>
                                     <tr>
@@ -290,8 +256,7 @@
                                             @Html.DisplayNameFor(model => model.HasChemical)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.HasChemical)
-                                            @Html.ValidationMessageFor(model => model.HasChemical)
+                                            @Model.HasChemical
                                         </td>
                                     </tr>
                                     <tr>
@@ -299,8 +264,7 @@
                                             @Html.DisplayNameFor(model => model.HasTrash)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.HasTrash)
-                                            @Html.ValidationMessageFor(model => model.HasTrash)
+                                            @Model.HasTrash
                                         </td>
                                     </tr>
                                     <tr>
@@ -308,8 +272,7 @@
                                             @Html.DisplayNameFor(model => model.HasSecurityCheck)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.HasSecurityCheck)
-                                            @Html.ValidationMessageFor(model => model.HasSecurityCheck)
+                                            @Model.HasSecurityCheck
                                         </td>
                                     </tr>
                                     <tr>
@@ -317,8 +280,7 @@
                                             @Html.DisplayNameFor(model => model.PressureContainer)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.PressureContainer)
-                                            @Html.ValidationMessageFor(model => model.PressureContainer)
+                                            @Model.PressureContainer
                                         </td>
                                     </tr>
                                     <tr>
@@ -326,8 +288,7 @@
                                             @Html.DisplayNameFor(model => model.Cylinder)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.Cylinder)
-                                            @Html.ValidationMessageFor(model => model.Cylinder)
+                                            @Model.Cylinder
                                         </td>
                                     </tr>
                                     <tr>
@@ -335,8 +296,7 @@
                                             @Html.DisplayNameFor(model => model.HeatingInAeration)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.HeatingInAeration)
-                                            @Html.ValidationMessageFor(model => model.HeatingInAeration)
+                                            @Model.HeatingInAeration
                                         </td>
                                     </tr>
                                     <tr>
@@ -344,8 +304,7 @@
                                             @Html.DisplayNameFor(model => model.HasTestBed)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.HasTestBed)
-                                            @Html.ValidationMessageFor(model => model.HasTestBed)
+                                            @Model.HasTestBed
                                         </td>
                                     </tr>
                                     <tr>
@@ -353,23 +312,25 @@
                                             @Html.DisplayNameFor(model => model.UsageCharge)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.UsageCharge)
-                                            @Html.ValidationMessageFor(model => model.UsageCharge)
+                                            @Model.UsageCharge
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                
+                </fieldset>
+
+                @using (Ajax.BeginForm(ajaxOpts))
+                {
+                    @Html.HiddenFor(model => model.Id)
                     <div class="form-actions">
                         <button type="submit" class="btn btn-primary">
-                            保存</button>
+                            删除</button>
                         <button id="cancel" class="btn">
                             取消</button>
                     </div>
-                </fieldset>
-            }
+                }
             </div>
         </div>
     </div>
@@ -377,15 +338,9 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#myTab a:first').tab('show');
-        $('#myTab a').click(function (e) {
-            e.preventDefault();
-            $(this).tab('show');
-        });    
-        
-        $('a#return').click(function () {
-            ajaxLoadPage("List", "BuildingGroup", "Estate", {});
+        $('button#cancel').click(function () {
+            ajaxLoadPage("Index", "Room", "Estate", { id: '@Model.Id' });
             return false;
-        });   
+        });
     });
 </script>

@@ -67,6 +67,30 @@ namespace Rhea.UI.Areas.Estate.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// 房间编辑
+        /// </summary>
+        /// <param name="id">房间ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 房间删除
+        /// </summary>
+        /// <param name="id">房间ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            EstateService service = new EstateService();
+            var data = service.GetRoom(id);
+            return View(data);
+        }
         #endregion //Action
     }
 }
