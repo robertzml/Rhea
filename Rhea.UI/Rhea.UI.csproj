@@ -168,6 +168,7 @@
     <Compile Include="Areas\Estate\Controllers\RoomController.cs" />
     <Compile Include="Areas\Estate\EstateAreaRegistration.cs" />
     <Compile Include="Areas\Estate\Models\BuildingGroupEnum.cs" />
+    <Compile Include="Areas\Estate\Models\RoomEnum.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -553,6 +554,10 @@
       <Project>{918B8082-498E-4A1E-8A2D-6CCC570496A0}</Project>
       <Name>Rhea.Business</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Rhea.Common\Rhea.Common.csproj">
+      <Project>{C8BC6CF8-FA0A-4CE8-84DB-DE8FD3478756}</Project>
+      <Name>Rhea.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Rhea.Data\Rhea.Data.csproj">
       <Project>{E655E9DF-D987-44EB-B9CF-A9B874C2A9EB}</Project>
       <Name>Rhea.Data</Name>
@@ -656,6 +661,27 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Estate\Views\Room\Delete.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Shared\EditorTemplates\Boolean.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Shared\EditorTemplates\Orientation.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Shared\EditorTemplates\RoomStatus.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Shared\EditorTemplates\PowerSupply.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Shared\EditorTemplates\AirCondition.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Shared\EditorTemplates\FireControl.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Shared\EditorTemplates\TrashHandle.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

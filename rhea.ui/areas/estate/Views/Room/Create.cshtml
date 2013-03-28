@@ -381,9 +381,9 @@
         $('#myTab a').click(function (e) {
             e.preventDefault();
             $(this).tab('show');
-        });    
-        
-        $('a#return').click(function () {
+        });
+
+        $('button#cancel').click(function () {
             ajaxLoadPage("List", "BuildingGroup", "Estate", {});
             return false;
         });   

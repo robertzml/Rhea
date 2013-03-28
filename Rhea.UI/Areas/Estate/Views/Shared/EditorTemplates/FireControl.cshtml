@@ -1,0 +1,10 @@
+﻿@using Rhea.UI.Areas.Estate.Models
+@model string
+
+<select id="FireControl" name="FireControl">
+    <option value="">-- 请选择 --</option>
+    @foreach (FireControl o in Enum.GetValues(typeof(FireControl)))
+    {                      
+        <option value="@o" @(Model == o.ToString() ? "selected='selected'" : "")>@o</option>
+    }
+</select>
