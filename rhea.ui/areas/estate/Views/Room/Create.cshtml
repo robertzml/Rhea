@@ -1,4 +1,4 @@
-﻿@model Rhea.Data.Entities.Room
+﻿@model Rhea.UI.Areas.Estate.Models.RoomEditModel
 
 @{
     ViewBag.Title = "房间添加";
@@ -118,29 +118,29 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            @Html.DisplayNameFor(model => model.Function)
+                                            @Html.DisplayNameFor(model => model.FunctionId)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.Function)
-                                            @Html.ValidationMessageFor(model => model.Function)
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayNameFor(model => model.Building)
-                                        </td>
-                                        <td>
-                                            @Html.EditorFor(model => model.Building)
-                                            @Html.ValidationMessageFor(model => model.Building)
+                                            @Html.EditorFor(model => model.FunctionId)
+                                            @Html.ValidationMessageFor(model => model.FunctionId)
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            @Html.DisplayNameFor(model => model.Department)
+                                            @Html.DisplayNameFor(model => model.BuildingId)
+                                        </td>
+                                        <td>                             
+                                            @Html.EditorFor(model => model.BuildingId)
+                                            @Html.ValidationMessageFor(model => model.BuildingId)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.DepartmentId)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.Department)
-                                            @Html.ValidationMessageFor(model => model.Department)
+                                            @Html.EditorFor(model => model.DepartmentId)
+                                            @Html.ValidationMessageFor(model => model.DepartmentId)
                                         </td>
                                     </tr>
                                     <tr>

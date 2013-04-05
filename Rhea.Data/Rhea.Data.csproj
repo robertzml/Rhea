@@ -47,6 +47,7 @@
     <Compile Include="Entities\Building.cs" />
     <Compile Include="Entities\BuildingGroup.cs" />
     <Compile Include="Entities\Department.cs" />
+    <Compile Include="Entities\RoomFunctionCode.cs" />
     <Compile Include="Entities\Room.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -310,5 +310,25 @@ namespace Rhea.Business
                 return null;
         }
         #endregion //RoomService
+
+        #region General Service
+        /// <summary>
+        /// 获取房间属性列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<RoomFunctionCode> GetFunctionCodeList()
+        {
+            ApiService api = new ApiService();
+            HttpResponseMessage response = api.Get("GeneralProperty?name=RoomFunctionCode");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var data = response.Content.ReadAsAsync<IEnumerable<RoomFunctionCode>>().Result;
+                return data;
+            }
+            else
+                return null;
+        }
+        #endregion //General Service
     }
 }

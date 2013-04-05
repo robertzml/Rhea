@@ -169,6 +169,7 @@
     <Compile Include="Areas\Estate\EstateAreaRegistration.cs" />
     <Compile Include="Areas\Estate\Models\BuildingGroupEnum.cs" />
     <Compile Include="Areas\Estate\Models\RoomEnum.cs" />
+    <Compile Include="Areas\Estate\Models\RoomModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -682,6 +683,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Estate\Views\Shared\EditorTemplates\TrashHandle.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Shared\EditorTemplates\BuildingDropDownList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Shared\EditorTemplates\DepartmentDropDownList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Shared\EditorTemplates\FunctionCodeDropDownList.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

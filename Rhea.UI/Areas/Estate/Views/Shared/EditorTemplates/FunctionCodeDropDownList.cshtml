@@ -1,0 +1,18 @@
+﻿@using Rhea.Business
+@using Rhea.Data.Entities
+@model string
+
+<select id="FunctionCodeId" name="FunctionCodeId">
+    <option value="">-- 请选择 --</option>
+    @{
+        var service = new EstateService();
+        List<RoomFunctionCode> codes = service.GetFunctionCodeList().ToList();
+
+        foreach (var item in codes)
+        {
+        <option value="@item.CodeId" @(Model == item.CodeId ? "selected='selected'" : "")>
+            @item.CodeId - @item.FunctionProperty
+        </option>
+        }
+    }
+</select>
