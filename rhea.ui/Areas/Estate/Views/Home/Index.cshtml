@@ -1,0 +1,95 @@
+﻿@{
+    ViewBag.Title = "房产管理";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/kendoui")
+
+@section breadcrumb {
+    <li>@Html.ActionLink("房产管理", "Index", new { controller = "Home", area = "Estate" })</li>
+}
+
+<div class="row-fluid sortable">
+    
+    <div class="span9">
+        <div id="ajax-content1">
+            @*@Html.Action("Map", "Home", new { area = "Estate" })*@
+            @Html.Action("List", "BuildingGroup", new { area = "Estate" })
+        </div>
+    </div>
+    <!--/span-->
+
+    <div class="span3">    
+        <div class="box">
+            <div class="box-header well" data-original-title>
+                <h3>
+                    楼群导航</h3>
+                <div class="box-icon">
+                    <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                    <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+                </div>
+            </div>
+            <div class="box-content k-content">
+                <ul id="treeview">
+                    @foreach (var item in ViewBag.BuildingGroups)
+                    {                    
+                        <li><a class="buildingGroup" href="#" ref="@item.Id"><span>@item.Name</span></a>
+                            <ul>
+                                @foreach (var building in item.Buildings)
+                                {
+                                    <li><a class="building" ref="@building.Id"><span>@building.Name</span></a></li>
+                                }
+                            </ul>
+                        </li>                               
+                    }
+                </ul>
+            </div>
+        </div>
+        <!--/span-->    
+        <div class="box">
+            <div class="box-header well" data-original-title>
+                <h3>
+                    部门导航</h3>
+                <div class="box-icon">
+                    <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                    <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+                </div>
+            </div>
+            <div class="box-content">                
+                <ul class="nav nav-list">
+                    @foreach (var item in ViewBag.Departments)
+                    {
+                        <li><a class="department" href="#" ref="@item.Id"><span>@item.Name</span></a></li>
+                    }                
+                </ul>
+            </div>
+        </div>   
+    </div>
+</div>
+<!--/row-->
+
+@section scripts {
+    @Scripts.Render("~/bundles/kendoui")    
+
+    <script type="text/javascript">
+        $(document).ready(function () {         
+
+            $("#treeview").kendoTreeView();
+
+            $('a.buildingGroup').click(function () {
+                var groupId = $(this).attr('ref');
+                var request = { id: groupId };
+                ajaxLoadPage("Index", "BuildingGroup", "Estate", request);
+                return false;
+            });
+
+            $('a.building').click(function () {
+                var buildingId = $(this).attr('ref');
+                var request = { id: buildingId };
+                ajaxLoadPage("Index", "Building", "Estate", request);
+                return false;
+            });          
+        });
+        
+    </script>
+}

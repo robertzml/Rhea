@@ -1,0 +1,18 @@
+﻿@using Rhea.Business
+@using Rhea.Data.Entities
+@model int?
+
+<select id="BuildingGroupId" name="BuildingGroupId">
+    <option value="">-- 请选择 --</option>
+    @{
+        var service = new EstateService();
+        List<BuildingGroup> groups = service.GetBuildingGroupList().ToList();
+
+        foreach (var item in groups)
+        {
+        <option value="@item.Id" @(Model == item.Id ? "selected='selected'" : "")>
+            @item.Name
+        </option>
+        }
+    }
+</select>

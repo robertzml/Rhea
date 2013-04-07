@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Rhea.Data.Entities.Building>
+@{
+    ViewBag.Title = "楼宇列表";
+    Layout = null;
+}
+
+<div class="box">
+    <div class="box-header well" data-original-title>
+        <h2>
+            <i class="icon-align-left"></i>楼宇列表</h2>
+    </div>
+    <div class="box-content">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        名称
+                    </th>
+                    <th>
+                        建筑面积
+                    </th>
+                    <th>
+                        地上楼层数
+                    </th>
+                    <th>
+                        地下楼层数
+                    </th>
+                    <th>
+                        详细
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td class="center">
+                        @item.BuildArea
+                    </td>
+                    <td class="center">
+                        @item.AboveGroundFloor
+                    </td>
+                    <td class="center">
+                        @item.UnderGroundFloor
+                    </td>
+                    <td>
+                        <a class="btn btn-success building-details" href="#" ref="@item.Id"><i class="icon-zoom-in icon-white">
+                        </i>查看</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('a.building-details').click(function () {
+            var request = { id: $(this).attr('ref') };
+            ajaxLoadPage("Index", "Building", "Estate", request);
+            return false;
+        });
+    });
+</script>
