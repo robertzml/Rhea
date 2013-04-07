@@ -66,7 +66,7 @@ namespace Rhea.UI.Areas.Estate.Models
         [Required]
         [Display(Name = "功能编码")]
         [UIHint("FunctionCodeDropDownList")]
-        public string FunctionId { get; set; }
+        public string FunctionCodeId { get; set; }
 
         /// <summary>
         /// 楼宇ID

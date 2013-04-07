@@ -309,6 +309,25 @@ namespace Rhea.Business
             else
                 return null;
         }
+
+        /// <summary>
+        /// 添加房间
+        /// </summary>
+        /// <param name="room">房间数据</param>
+        /// <returns>房间ID，0:添加失败</returns>
+        public int CreateRoom(Room room)
+        {
+            ApiService api = new ApiService();
+            HttpResponseMessage response = api.Post("Room", room);
+
+            if (response.IsSuccessStatusCode)
+            {
+                int id = response.Content.ReadAsAsync<int>().Result;
+                return id;
+            }
+            else
+                return 0;
+        }
         #endregion //RoomService
 
         #region General Service

@@ -54,6 +54,30 @@ namespace Rhea.UI.Areas.Estate.Controllers
             room.HasTestBed = model.HasTestBed;
             room.UsageCharge = model.UsageCharge;
 
+            EstateService service = new EstateService();
+            Building building = service.GetBuilding(model.BuildingId);
+            room.Building = new Room.RoomBuilding
+            {
+                Id = building.Id,
+                Name = building.Name
+            };
+
+            RoomFunctionCode code = service.GetFunctionCodeList().First(r => r.CodeId == model.FunctionCodeId);
+            room.Function = new Room.RoomFunction
+            {
+                FirstCode = code.FirstCode,
+                SecondCode = code.SecondCode,
+                Property = code.FunctionProperty
+            };
+
+            DepartmentService dservice = new DepartmentService();
+            Department department = dservice.GetDepartment(model.DepartmentId);
+            room.Department = new Room.RoomDepartment
+            {
+                Id = department.Id,
+                Name = department.Name
+            };
+
             return room;
         }
         #endregion //Function
@@ -113,18 +137,29 @@ namespace Rhea.UI.Areas.Estate.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 房间添加
+        /// </summary>
+        /// <param name="model">房间模型</param>
+        /// <returns></returns>
         [HttpPost]
-        public ActionResult Create(Room model)
+        public ActionResult Create(RoomEditModel model)
         {           
             if (ModelState.IsValid)
             {
-                
-                ModelState.AddModelError("", "valid");
-            }
-            else
-            {
-                ModelState.AddModelError("", "error2");
-            }
+                Room room = ModelTranslate(model);
+                EstateService service = new EstateService();
+                int result = service.CreateRoom(room);
+
+                if (result != 0)
+                {
+                    return RedirectToAction("Index", "Room", new { area = "Estate", id = result });
+                }
+                else
+                {
+                    ModelState.AddModelError("", "保存失败");
+                }
+            }            
 
             return View(model);
         }

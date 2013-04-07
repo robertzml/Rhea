@@ -2,7 +2,7 @@
 @using Rhea.Common
 @model int?
 
-<select id="Status" name="Status">
+<select id="RoomStatus" name="RoomStatus">
     <option value="">-- 请选择 --</option>
     @foreach (RoomStatus o in Enum.GetValues(typeof(RoomStatus)))
     {                      
