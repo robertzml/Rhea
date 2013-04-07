@@ -34,10 +34,10 @@
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>
+                                        <th style="width: 20%">
                                             属性
                                         </th>
-                                        <th>
+                                        <th style="width: 80%">
                                             值
                                         </th>
                                     </tr>
@@ -162,10 +162,10 @@
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>
+                                        <th style="width: 20%">
                                             属性
                                         </th>
-                                        <th>
+                                        <th style="width: 80%">
                                             值
                                         </th>
                                     </tr>
@@ -176,7 +176,7 @@
                                             @Html.DisplayNameFor(model => model.Heating)
                                         </td>
                                         <td>
-                                            @Model.Heating
+                                            @Html.DisplayFor(model => model.Heating)
                                         </td>
                                     </tr>
                                     <tr>
@@ -184,7 +184,7 @@
                                             @Html.DisplayNameFor(model => model.FireControl)
                                         </td>
                                         <td>
-                                            @Model.FireControl
+                                            @Html.DisplayFor(model => model.FireControl)
                                         </td>
                                     </tr>
                                     <tr>
@@ -248,7 +248,7 @@
                                             @Html.DisplayNameFor(model => model.HasSecurity)
                                         </td>
                                         <td>
-                                            @Model.HasSecurity
+                                            @Html.DisplayFor(model => model.HasSecurity)
                                         </td>
                                     </tr>
                                     <tr>
@@ -256,7 +256,7 @@
                                             @Html.DisplayNameFor(model => model.HasChemical)
                                         </td>
                                         <td>
-                                            @Model.HasChemical
+                                            @Html.DisplayFor(model => model.HasChemical)
                                         </td>
                                     </tr>
                                     <tr>
@@ -264,7 +264,7 @@
                                             @Html.DisplayNameFor(model => model.HasTrash)
                                         </td>
                                         <td>
-                                            @Model.HasTrash
+                                            @Html.DisplayFor(model => model.HasTrash)
                                         </td>
                                     </tr>
                                     <tr>
@@ -272,7 +272,7 @@
                                             @Html.DisplayNameFor(model => model.HasSecurityCheck)
                                         </td>
                                         <td>
-                                            @Model.HasSecurityCheck
+                                            @Html.DisplayFor(model => model.HasSecurityCheck)
                                         </td>
                                     </tr>
                                     <tr>
@@ -296,7 +296,7 @@
                                             @Html.DisplayNameFor(model => model.HeatingInAeration)
                                         </td>
                                         <td>
-                                            @Model.HeatingInAeration
+                                            @Html.DisplayFor(model => model.HeatingInAeration)
                                         </td>
                                     </tr>
                                     <tr>
@@ -304,7 +304,7 @@
                                             @Html.DisplayNameFor(model => model.HasTestBed)
                                         </td>
                                         <td>
-                                            @Model.HasTestBed
+                                            @Html.DisplayFor(model => model.HasTestBed)
                                         </td>
                                     </tr>
                                     <tr>
@@ -338,6 +338,12 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        $('#myTab a:first').tab('show');
+        $('#myTab a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });    
+        
         $('button#cancel').click(function () {
             ajaxLoadPage("Index", "Room", "Estate", { id: '@Model.Id' });
             return false;

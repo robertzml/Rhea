@@ -15,19 +15,21 @@ namespace Rhea.UI.Areas.Estate.Controllers
     public class RoomController : Controller
     {
         #region Function
+        /// <summary>
+        /// 模型转换
+        /// </summary>
+        /// <param name="model">房间编辑模型</param>
+        /// <returns>房间模型</returns>
         private Room ModelTranslate(RoomEditModel model)
         {
-            Room room = new Room();
+            Room room = new Room();            
             room.Name = model.Name;
             room.Number = model.Number;
             room.Floor = model.Floor;
             room.Span = model.Span;
             room.Orientation = model.Orientation;
             room.BuildArea = model.BuildArea;
-            room.UsableArea = model.UsableArea;
-            //room.Function 
-            //room.Building
-            //room.Department
+            room.UsableArea = model.UsableArea;          
             room.StartDate = model.StartDate;
             room.FixedYear = model.FixedYear;
             room.Manager = model.Manager;
@@ -77,6 +79,54 @@ namespace Rhea.UI.Areas.Estate.Controllers
                 Id = department.Id,
                 Name = department.Name
             };
+
+            return room;
+        }
+
+        /// <summary>
+        /// 模型转换
+        /// </summary>
+        /// <param name="model">房间模型</param>
+        /// <returns>房间编辑模型</returns>
+        private RoomEditModel ModelTranslate(Room model)
+        {
+            RoomEditModel room = new RoomEditModel();
+            room.Id = model.Id;
+            room.Name = model.Name;
+            room.Number = model.Number;
+            room.Floor = model.Floor;
+            room.Span = model.Span;
+            room.Orientation = model.Orientation;
+            room.BuildArea = model.BuildArea;
+            room.UsableArea = model.UsableArea;
+            room.FunctionCodeId = model.Function.FirstCode.ToString() + "." + model.Function.SecondCode.ToString();
+            room.BuildingId = model.Building.Id;
+            room.DepartmentId = model.Department.Id;
+            room.StartDate = model.StartDate;
+            room.FixedYear = model.FixedYear;
+            room.Manager = model.Manager;
+            room.RoomStatus = model.RoomStatus;
+            room.Remark = model.Remark;
+            room.Status = 0;
+
+            room.Heating = model.Heating;
+            room.FireControl = model.FireControl;
+            room.Height = model.Height;
+            room.SNWidth = model.SNWidth;
+            room.EWWidth = model.EWWidth;
+            room.InternationalId = model.InternationalId;
+            room.EducationId = model.EducationId;
+            room.PowerSupply = model.PowerSupply;
+            room.AirCondition = model.AirCondition;
+            room.HasSecurity = model.HasSecurity;
+            room.HasChemical = model.HasChemical;
+            room.HasTrash = model.HasTrash;
+            room.HasSecurityCheck = model.HasSecurityCheck;
+            room.PressureContainer = model.PressureContainer;
+            room.Cylinder = model.Cylinder;
+            room.HeatingInAeration = model.HeatingInAeration;
+            room.HasTestBed = model.HasTestBed;
+            room.UsageCharge = model.UsageCharge;         
 
             return room;
         }
@@ -147,7 +197,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         {           
             if (ModelState.IsValid)
             {
-                Room room = ModelTranslate(model);
+                Room room = ModelTranslate(model);               
                 EstateService service = new EstateService();
                 int result = service.CreateRoom(room);
 
@@ -172,7 +222,38 @@ namespace Rhea.UI.Areas.Estate.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            return View();
+            EstateService service = new EstateService();
+            Room room = service.GetRoom(id);
+            
+            RoomEditModel model = ModelTranslate(room);
+            return View(model);
+        }
+
+        /// <summary>
+        /// 房间编辑
+        /// </summary>
+        /// <param name="model">房间模型</param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Edit(RoomEditModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Room room = ModelTranslate(model);
+                room.Id = model.Id;
+                EstateService service = new EstateService();
+                bool result = service.UpdateRoom(room);
+                if (result)
+                {
+                    return RedirectToAction("Index", "Room", new { area = "Estate", id = room.Id });
+                }
+                else
+                {
+                    ModelState.AddModelError("", "保存失败");
+                }
+            }
+
+            return View(model);
         }
 
         /// <summary>
@@ -186,6 +267,25 @@ namespace Rhea.UI.Areas.Estate.Controllers
             EstateService service = new EstateService();
             var data = service.GetRoom(id);
             return View(data);
+        }
+
+        /// <summary>
+        /// 删除房间
+        /// </summary>
+        /// <param name="id">房间ID</param>
+        /// <returns></returns>
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirm(int id)
+        {
+            EstateService service = new EstateService();
+            bool result = service.DeleteRoom(id);
+
+            if (result)
+            {
+                return RedirectToAction("List", "BuildingGroup", new { area = "Estate" });
+            }
+            else
+                return View("Delete", id);
         }
         #endregion //Action
     }

@@ -1,4 +1,6 @@
 ﻿@model Rhea.Data.Entities.Room
+@using Rhea.Common
+@using Rhea.UI.Areas.Estate.Models
 
 @{
     ViewBag.Title = "房间信息";
@@ -29,10 +31,10 @@
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>
+                                    <th style="width:20%">
                                         属性
                                     </th>
-                                    <th>
+                                    <th style="width:80%">
                                         值
                                     </th>
                                 </tr>
@@ -122,8 +124,11 @@
                                     <td>
                                         @Html.DisplayNameFor(model => model.StartDate)
                                     </td>
-                                    <td>
-                                        @Model.StartDate
+                                    <td>                                        
+                                        @if (Model.StartDate != null)
+                                        {                                    
+                                            @Convert.ToDateTime(Model.StartDate).ToShortDateString();
+                                        }
                                     </td>
                                 </tr>
                                 <tr>
@@ -147,7 +152,10 @@
                                         @Html.DisplayNameFor(model => model.RoomStatus)
                                     </td>
                                     <td>
-                                        @Model.RoomStatus
+                                    @{
+                                        RoomStatus s = (RoomStatus)Model.RoomStatus;
+                                        @s.DisplayName()
+                                    }                                     
                                     </td>
                                 </tr>
                             </tbody>
@@ -157,10 +165,10 @@
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>
+                                    <th style="width: 20%">
                                         属性
                                     </th>
-                                    <th>
+                                    <th style="width: 80%">
                                         值
                                     </th>
                                 </tr>
@@ -171,7 +179,7 @@
                                         @Html.DisplayNameFor(model => model.Heating)
                                     </td>
                                     <td>
-                                        @Model.Heating
+                                        @Html.DisplayFor(model => model.Heating)
                                     </td>
                                 </tr>
                                 <tr>
@@ -179,7 +187,7 @@
                                         @Html.DisplayNameFor(model => model.FireControl)
                                     </td>
                                     <td>
-                                        @Model.FireControl
+                                        @Html.DisplayFor(model => model.FireControl)
                                     </td>
                                 </tr>
                                 <tr>
@@ -243,7 +251,7 @@
                                         @Html.DisplayNameFor(model => model.HasSecurity)
                                     </td>
                                     <td>
-                                        @Model.HasSecurity
+                                        @Html.DisplayFor(model => model.HasSecurity)
                                     </td>
                                 </tr>
                                 <tr>
@@ -251,7 +259,7 @@
                                         @Html.DisplayNameFor(model => model.HasChemical)
                                     </td>
                                     <td>
-                                        @Model.HasChemical
+                                        @Html.DisplayFor(model => model.HasChemical)                                        
                                     </td>
                                 </tr>
                                 <tr>
@@ -259,7 +267,7 @@
                                         @Html.DisplayNameFor(model => model.HasTrash)
                                     </td>
                                     <td>
-                                        @Model.HasTrash
+                                        @Html.DisplayFor(model => model.HasTrash)                                        
                                     </td>
                                 </tr>
                                 <tr>
@@ -267,7 +275,7 @@
                                         @Html.DisplayNameFor(model => model.HasSecurityCheck)
                                     </td>
                                     <td>
-                                        @Model.HasSecurityCheck
+                                        @Html.DisplayFor(model => model.HasSecurityCheck)                                       
                                     </td>
                                 </tr>
                                 <tr>
@@ -291,7 +299,7 @@
                                         @Html.DisplayNameFor(model => model.HeatingInAeration)
                                     </td>
                                     <td>
-                                        @Model.HeatingInAeration
+                                        @Html.DisplayFor(model => model.HeatingInAeration)                                      
                                     </td>
                                 </tr>
                                 <tr>
@@ -299,7 +307,7 @@
                                         @Html.DisplayNameFor(model => model.HasTestBed)
                                     </td>
                                     <td>
-                                        @Model.HasTestBed
+                                        @Html.DisplayFor(model => model.HasTestBed)                                        
                                     </td>
                                 </tr>
                                 <tr>

@@ -328,6 +328,32 @@ namespace Rhea.Business
             else
                 return 0;
         }
+
+        /// <summary>
+        /// 编辑房间
+        /// </summary>
+        /// <param name="room">房间数据</param>
+        /// <returns></returns>
+        public bool UpdateRoom(Room room)
+        {
+            ApiService api = new ApiService();
+            HttpResponseMessage response = api.Put("Room", room.Id, room);
+
+            return response.IsSuccessStatusCode;
+        }
+
+        /// <summary>
+        /// 删除房间
+        /// </summary>
+        /// <param name="id">房间ID</param>
+        /// <returns></returns>
+        public bool DeleteRoom(int id)
+        {
+            ApiService api = new ApiService();
+            HttpResponseMessage response = api.Delete("Room", id);
+
+            return response.IsSuccessStatusCode;
+        }
         #endregion //RoomService
 
         #region General Service

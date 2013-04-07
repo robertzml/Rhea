@@ -24,6 +24,16 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        $('a#edit').click(function () {
+            var request = { id: '@Model' };
+            ajaxLoadPage("Edit", "Room", "Estate", request);
+            return false;
+        });
 
+        $('a#delete').click(function () {
+            var request = { id: '@Model' };
+            ajaxLoadPage("Delete", "Room", "Estate", request);
+            return false;
+        });
     });
 </script>
