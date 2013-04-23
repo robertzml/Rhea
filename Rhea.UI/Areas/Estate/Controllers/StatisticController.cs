@@ -31,6 +31,15 @@ namespace Rhea.UI.Areas.Estate.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// 学院楼宇用房统计
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult CollegeBuildingRoom()
+        {
+            return View();
+        }
         #endregion //Action
 
         #region JSON
@@ -41,7 +50,18 @@ namespace Rhea.UI.Areas.Estate.Controllers
         public JsonResult CollegeClassifyData()
         {
             EstateService service = new EstateService();
-            var data = service.GetStatisticArea<List<ClassifyAreaModel>>(1);
+            var data = service.GetStatisticArea<List<CollegeClassifyAreaModel>>(1);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 学院楼宇用房面积
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult CollegeBuildingData()
+        {
+            EstateService service = new EstateService();
+            var data = service.GetStatisticArea<List<CollegeBuildingAreaModel>>(2);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
         #endregion //JSON

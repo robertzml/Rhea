@@ -8,7 +8,7 @@ namespace Rhea.UI.Areas.Estate.Models
     /// <summary>
     /// 二级分类面积模型
     /// </summary>
-    public class SecondeClassifyArea
+    public class SecondClassifyAreaModel
     {
         /// <summary>
         /// 一级编码
@@ -34,7 +34,7 @@ namespace Rhea.UI.Areas.Estate.Models
     /// <summary>
     /// 学院分类用房面积模型
     /// </summary>
-    public class ClassifyAreaModel
+    public class CollegeClassifyAreaModel
     {
         /// <summary>
         /// 编号
@@ -54,7 +54,7 @@ namespace Rhea.UI.Areas.Estate.Models
         /// <summary>
         /// 办公二级分类面积
         /// </summary>
-        public List<SecondeClassifyArea> OfficeDetailArea { get; set; }
+        public List<SecondClassifyAreaModel> OfficeDetailArea { get; set; }
 
         /// <summary>
         /// 教学用房面积
@@ -64,7 +64,7 @@ namespace Rhea.UI.Areas.Estate.Models
         /// <summary>
         /// 教学二级分类面积
         /// </summary>
-        public List<SecondeClassifyArea> EducationDetailArea { get; set; }
+        public List<SecondClassifyAreaModel> EducationDetailArea { get; set; }
 
         /// <summary>
         /// 实验用房面积
@@ -74,7 +74,7 @@ namespace Rhea.UI.Areas.Estate.Models
         /// <summary>
         /// 实验二级用房面积
         /// </summary>
-        public List<SecondeClassifyArea> ExperimentDetailArea { get; set; }
+        public List<SecondClassifyAreaModel> ExperimentDetailArea { get; set; }
 
         /// <summary>
         /// 科研用房面积
@@ -84,11 +84,53 @@ namespace Rhea.UI.Areas.Estate.Models
         /// <summary>
         /// 科研二级用房面积
         /// </summary>
-        public List<SecondeClassifyArea> ResearchDetailArea { get; set; }
+        public List<SecondClassifyAreaModel> ResearchDetailArea { get; set; }
 
         /// <summary>
         /// 总计
         /// </summary>
         public double TotalArea { get; set; }
+    }
+
+    /// <summary>
+    /// 学院分大楼面积模型
+    /// </summary>
+    public class CollegeBuildingAreaModel
+    {
+        /// <summary>
+        /// 编号
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
+        /// 学院
+        /// </summary>
+        public string CollegeName { get; set; }
+
+        /// <summary>
+        /// 大楼面积
+        /// </summary>
+        public List<BuildingAreaModel> BuildingArea { get; set; }
+    }
+
+    /// <summary>
+    /// 楼宇面积模型
+    /// </summary>
+    public class BuildingAreaModel
+    {
+        /// <summary>
+        /// 楼宇编号
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
+        /// 楼宇名称
+        /// </summary>
+        public string BuildingName { get; set; }
+
+        /// <summary>
+        /// 面积
+        /// </summary>
+        public double Area { get; set; }
     }
 }
