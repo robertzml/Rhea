@@ -33,6 +33,15 @@ namespace Rhea.UI.Areas.Estate.Controllers
         }
 
         /// <summary>
+        /// 学院分类用房比较
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult CollegeRoomCompare()
+        {
+            return View();
+        }
+
+        /// <summary>
         /// 学院楼宇用房统计
         /// </summary>
         /// <returns></returns>

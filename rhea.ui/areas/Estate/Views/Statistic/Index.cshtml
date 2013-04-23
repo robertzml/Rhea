@@ -26,7 +26,8 @@
             </div>
             <div class="box-content">
                 <ul id="category-list" class="nav nav-list">
-                    <li><a id="college-room-statistic" href="#"><span>学院分类用房比例</span></a></li>
+                    <li><a id="college-room-statistic" href="#"><span>学院分类用房统计</span></a></li>
+                    <li><a id="college-room-compare" href="#"><span>学院分类用房比较</span></a></li>
                     <li><a id="college-building-room" href="#"><span>学院楼宇用房统计</span></a></li>
                 </ul>
             </div>
@@ -45,6 +46,13 @@
                 $('ul#category-list > li').removeClass('active');
                 $(this).parent().addClass('active');
                 ajaxLoadPage("CollegeRoomStatistic", "Statistic", "Estate", {});
+                return false;
+            });
+
+            $('a#college-room-compare').click(function () {
+                $('ul#category-list > li').removeClass('active');
+                $(this).parent().addClass('active');
+                ajaxLoadPage("CollegeRoomCompare", "Statistic", "Estate", {});
                 return false;
             });
 
