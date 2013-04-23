@@ -356,6 +356,28 @@ namespace Rhea.Business
         }
         #endregion //RoomService
 
+        #region Statistic Service
+        /// <summary>
+        /// 得到统计面积数据
+        /// </summary>
+        /// <param name="type">统计类型</param>
+        /// <remarks>type=1:学院分类用房面积</remarks>
+        /// <returns></returns>
+        public T GetStatisticArea<T>(int type)
+        {
+            ApiService api = new ApiService();
+            HttpResponseMessage response = api.Get("Statistic?type=" + type.ToString());
+
+            if (response.IsSuccessStatusCode)
+            {
+                var data = response.Content.ReadAsAsync<T>().Result;
+                return data;
+            }
+            else
+                return default(T);
+        }
+        #endregion //Statistic Service
+
         #region General Service
         /// <summary>
         /// 获取房间属性列表
