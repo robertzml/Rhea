@@ -6,7 +6,7 @@ using System.Web;
 namespace Rhea.UI.Areas.Estate.Models
 {
     /// <summary>
-    /// 分类面积模型
+    /// 二级分类面积模型
     /// </summary>
     public class SecondeClassifyArea
     {
@@ -32,7 +32,7 @@ namespace Rhea.UI.Areas.Estate.Models
     }
 
     /// <summary>
-    /// 分类用房面积
+    /// 学院分类用房面积模型
     /// </summary>
     public class ClassifyAreaModel
     {
