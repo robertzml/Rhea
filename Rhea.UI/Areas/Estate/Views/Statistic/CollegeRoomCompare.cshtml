@@ -1,0 +1,150 @@
+﻿@{
+    ViewBag.Title = "学院分类用房比较";
+    Layout = null;
+}
+
+<style type="text/css">
+    ul#check-list { list-style-type: none; padding:0; }
+    ul#check-list li { margin-bottom: 5px; }
+</style>
+
+<div class="box">
+    <div class="box-header well" data-original-title>
+        <h2>
+            <i class="icon-align-left"></i>@ViewBag.Title</h2>
+    </div>
+    <div class="box-content">       
+        <div class="row-fluid">
+            <div class="span10">
+                <div id="container1" style="width: 99%; height: 550px;">
+                </div>
+            </div>
+
+            <div class="span2">
+                <ul id="check-list" class="checkbox inline">
+                </ul>
+                <p>
+                    <button class="btn btn-small" id="select-all">
+                        全选</button>
+                    <button class="btn btn-small" id="select-none">
+                        反选</button>
+                </p>
+                <p>
+                    <button class="btn btn-success btn-large" id="compare">
+                        <i class="icon-hand-left"></i>
+                        比 较</button>
+                </p>
+            </div>
+        </div>       
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        var dataList;
+
+        $.getJSON('/Statistic/CollegeClassifyData', function (response) {
+            dataList = response;
+
+            initCheckList(response);
+            //setStackChart(response);
+        });
+
+        function initCheckList(data) {
+            $.each(data, function (i, item) {
+                $('#check-list').append("<li><input class='college' type='checkbox' value='" + item.Id + "' />" + item.CollegeName + "</li>");
+            });
+        }
+
+        $('button#select-all').click(function () {
+            $('#check-list input:checkbox').prop('checked', true);
+            return false;
+        });
+
+        $('button#select-none').click(function () {
+            $('#check-list input:checkbox').prop('checked', false);
+            return false;
+        });
+
+        $('button#compare').click(function () {
+            var sel = [];          
+            $.each(dataList, function (i, item) {
+                var id = dataList[i].Id;
+                var $input = $('#check-list input:checkbox[value=' + id.toString() + ']');
+                if ($input.prop('checked')) {
+                    sel.push(dataList[i]);
+                }
+            });
+
+            setStackChart(sel);
+            return false;
+        });
+
+        function setStackChart(data) {
+            var option = {
+                chart: {
+                    renderTo: 'container1',
+                    type: 'bar'
+                },
+                title: {
+                    text: '学院对比图'
+                },
+                credits: {
+                    enabled: false
+                },
+                xAxis: {
+                    categories: []
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: '总面积(m2)'
+                    },
+                    stackLabels: {
+                        enabled: true,
+                        style: {
+                            fontWeight: 'normal',
+                            color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                        }
+                    }
+                },
+                legend: {
+                    backgroundColor: '#FFFFFF',
+                    reversed: true
+                },
+                tooltip: {
+                    formatter: function () {
+                        return '' + this.series.name + ': ' + this.y + '';
+                    }
+                },
+                plotOptions: {
+                    series: {
+                        stacking: 'normal'
+                    }
+                }
+            };
+
+            option.xAxis.categories = [];
+            $.each(data, function (i, item) {
+                option.xAxis.categories.push(item.CollegeName);
+            });
+
+            option.series = [];
+            option.series[0] = { name: "办公用房", data: [] };
+            option.series[1] = { name: "教学用房", data: [] };
+            option.series[2] = { name: "实验用房", data: [] };
+            option.series[3] = { name: "科研用房", data: [] };
+
+            $.each(data, function (i, item) {
+                option.series[0].data.push({ name: item.CollegeName, y: parseFloat(item.OfficeArea) });
+                option.series[1].data.push({ name: item.CollegeName, y: parseFloat(item.EducationArea) });
+                option.series[2].data.push({ name: item.CollegeName, y: parseFloat(item.ExperimentArea) });
+                option.series[3].data.push({ name: item.CollegeName, y: parseFloat(item.ResearchArea) });
+            });
+
+            var chart4 = new Highcharts.Chart(option);
+        }
+    });
+
+</script>

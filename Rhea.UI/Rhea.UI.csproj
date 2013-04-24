@@ -166,10 +166,12 @@
     <Compile Include="Areas\Estate\Controllers\FloorController.cs" />
     <Compile Include="Areas\Estate\Controllers\HomeController.cs" />
     <Compile Include="Areas\Estate\Controllers\RoomController.cs" />
+    <Compile Include="Areas\Estate\Controllers\StatisticController.cs" />
     <Compile Include="Areas\Estate\EstateAreaRegistration.cs" />
     <Compile Include="Areas\Estate\Models\BuildingGroupEnum.cs" />
     <Compile Include="Areas\Estate\Models\RoomEnum.cs" />
     <Compile Include="Areas\Estate\Models\RoomModel.cs" />
+    <Compile Include="Areas\Estate\Models\StatisticModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -474,6 +476,7 @@
     <Content Include="Scripts\modules\canvas-tools.js" />
     <Content Include="Scripts\modules\data.js" />
     <Content Include="Scripts\modules\exporting.js" />
+    <Content Include="Scripts\modules\funnel.js" />
     <Content Include="Scripts\noty\jquery.noty.js" />
     <Content Include="Scripts\noty\layouts\bottom.js" />
     <Content Include="Scripts\noty\layouts\bottomCenter.js" />
@@ -698,6 +701,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Estate\Views\Shared\DisplayTemplates\Boolean.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Statistic\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Statistic\CollegeRoomStatistic.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Statistic\CollegeBuildingRoom.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Statistic\CollegeRoomCompare.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
