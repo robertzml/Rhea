@@ -4,7 +4,8 @@
 }
 
 <style type="text/css">
-    #check-list div { display:block; margin-top:5px; }
+    ul#check-list { list-style-type: none; padding:0; }
+    ul#check-list li { margin-bottom: 5px; }
 </style>
 
 <div class="box">
@@ -20,8 +21,19 @@
             </div>
 
             <div class="span2">
-                <div id="check-list" class="checkbox inline">
-                </div>
+                <ul id="check-list" class="checkbox inline">
+                </ul>
+                <p>
+                    <button class="btn btn-small" id="select-all">
+                        全选</button>
+                    <button class="btn btn-small" id="select-none">
+                        反选</button>
+                </p>
+                <p>
+                    <button class="btn btn-success btn-large" id="compare">
+                        <i class="icon-hand-left"></i>
+                        比 较</button>
+                </p>
             </div>
         </div>       
     </div>
@@ -36,23 +48,38 @@
             dataList = response;
 
             initCheckList(response);
-            setStackChart(response);
+            //setStackChart(response);
         });
 
         function initCheckList(data) {
             $.each(data, function (i, item) {
-                $('#check-list').append("<div><input class='college' type='checkbox' checked='checked' value='" + item.Id + "' />" + item.CollegeName + "</div>");
-            });
-
-            $('#check-list input:checkbox').click(function () {
-                alert('ok');
-                if ($(this).attr("checked") == "checked") {
-                    alert('1231'); //do some thing   
-                } else {
-                    alert('abc'); //do some thing   
-                }
+                $('#check-list').append("<li><input class='college' type='checkbox' value='" + item.Id + "' />" + item.CollegeName + "</li>");
             });
         }
+
+        $('button#select-all').click(function () {
+            $('#check-list input:checkbox').prop('checked', true);
+            return false;
+        });
+
+        $('button#select-none').click(function () {
+            $('#check-list input:checkbox').prop('checked', false);
+            return false;
+        });
+
+        $('button#compare').click(function () {
+            var sel = [];          
+            $.each(dataList, function (i, item) {
+                var id = dataList[i].Id;
+                var $input = $('#check-list input:checkbox[value=' + id.toString() + ']');
+                if ($input.prop('checked')) {
+                    sel.push(dataList[i]);
+                }
+            });
+
+            setStackChart(sel);
+            return false;
+        });
 
         function setStackChart(data) {
             var option = {

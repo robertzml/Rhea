@@ -20,6 +20,11 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
+            EstateService service = new EstateService();
+            
+            ViewBag.BuildingGroupCount = service.GetEntitySize(11);
+            ViewBag.RoomCount = service.GetEntitySize(12);
+
             return View();
         }
 

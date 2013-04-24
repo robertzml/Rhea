@@ -4,13 +4,30 @@
 }
 
 @section breadcrumb {
-    <li>@Html.ActionLink("房产统计", "Statistic", new { controller = "Home", area = "Estate" })</li>
+    <li>@Html.ActionLink("房产统计", "Index", new { controller = "Statistic", area = "Estate" })</li>
 }
 
 <div class="row-fluid sortable">
     <div class="span9">
         <div id="ajax-content1">
-         
+            <div class="box">
+                <div class="box-header well" data-original-title>
+                    <h2>
+                        <i class="icon-align-justify"></i>总数据</h2>
+                </div>
+                <div class="box-content">
+                    <div class="row-fluid">
+                        <div class="span7">
+                        <p>
+                            楼群数量：@ViewBag.BuildingGroupCount
+                        </p>
+                        <p>
+                            房间数量：@ViewBag.RoomCount
+                        </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     

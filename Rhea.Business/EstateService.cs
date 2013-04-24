@@ -376,6 +376,25 @@ namespace Rhea.Business
             else
                 return default(T);
         }
+
+        /// <summary>
+        /// 获取对象数量
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public int GetEntitySize(int type)
+        {
+            ApiService api = new ApiService();
+            HttpResponseMessage response = api.Get("Statistic?type=" + type.ToString());
+
+            if (response.IsSuccessStatusCode)
+            {
+                var data = response.Content.ReadAsAsync<int>().Result;
+                return data;
+            }
+            else
+                return 0;
+        }
         #endregion //Statistic Service
 
         #region General Service
