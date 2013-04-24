@@ -21,23 +21,20 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-            EstateService estateService = new EstateService();
-            List<BuildingGroup> buildingGroups = estateService.GetBuildingGroupList().ToList();
-            List<Building> buildings = estateService.GetBuildingList().ToList();
+            return View();
+        }
 
-            foreach (var bg in buildingGroups)
-            {
-                bg.Buildings = buildings.Where(r => r.BuildingGroupId == bg.Id).ToList();
-            }
-
+        /// <summary>
+        /// 部门导航列表
+        /// </summary>
+        /// <returns></returns>
+        [ChildActionOnly]
+        public ActionResult DepartmentNav()
+        {
             DepartmentService departmentService = new DepartmentService();
             List<Department> departments = departmentService.GetDepartmentList().ToList();
 
-            ViewBag.BuildingGroups = buildingGroups;
-            ViewBag.Buildings = buildings;
-            ViewBag.Departments = departments;
-
-            return View();
+            return View(departments);
         }
 
         /// <summary>
@@ -49,14 +46,5 @@ namespace Rhea.UI.Areas.Estate.Controllers
             return View();
         }
         #endregion //Action
-
-        public JsonResult GetBuildingGroupList()
-        {
-            EstateService estateService = new EstateService();
-            var data = estateService.GetBuildingGroupList();
-
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
-
     }
 }
