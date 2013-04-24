@@ -311,6 +311,25 @@ namespace Rhea.Business
         }
 
         /// <summary>
+        /// 获取房间
+        /// </summary>
+        /// <param name="departmentId">部门ID</param>
+        /// <returns></returns>
+        public IEnumerable<Room> GetRoomByDepartment(int departmentId)
+        {
+            ApiService api = new ApiService();
+            HttpResponseMessage response = api.Get("Room?DepartmentId=" + departmentId.ToString());
+
+            if (response.IsSuccessStatusCode)
+            {
+                var rooms = response.Content.ReadAsAsync<IEnumerable<Room>>().Result;
+                return rooms;
+            }
+            else
+                return null;
+        }
+
+        /// <summary>
         /// 添加房间
         /// </summary>
         /// <param name="room">房间数据</param>

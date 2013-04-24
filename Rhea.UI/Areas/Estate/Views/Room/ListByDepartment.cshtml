@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Rhea.Data.Entities.Room>
+
+@{
+    ViewBag.Title = "房间列表";
+    Layout = null;
+}
+
+<div class="box">
+    <div class="box-header well" data-original-title>
+        <h2>
+            <i class="icon-align-left"></i>房间列表</h2>
+    </div>
+    <div class="box-content">
+        <table id="room-list" class="table table-striped table-bordered bootstrap-datatable datatable">
+            <thead>
+                <tr>
+                    <th style="width: 10%">
+                        房间号
+                    </th>
+                    <th style="width: 30%">
+                        名称
+                    </th>
+                    <th style="width: 20%">
+                        楼宇
+                    </th>
+                    <th style="width: 10%">
+                        楼层
+                    </th>
+                    <th style="width: 20%">
+                        功能
+                    </th>
+                    <th style="width: 10%">
+                        操作
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.Number
+                        </td>
+                        <td>
+                            @item.Name
+                        </td>
+                        <td>
+                            @item.Building.Name
+                        </td>
+                        <td>
+                            @item.Floor
+                        </td>
+                        <td>
+                            @item.Function.Property
+                        </td>
+                        <td>
+                            <a class="btn btn-success room-details" href="#" ref="@item.Id"><i class="icon-zoom-in icon-white">
+                            </i>查看</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('table a.room-details').click(function () {
+            var request = { id: $(this).attr('ref') };
+            ajaxLoadPage("Index", "Room", "Estate", request);
+            return false;
+        });
+
+        $('table#room-list').dataTable({
+            "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span12'i><'span12 center'p>>",
+            "sPaginationType": "bootstrap",
+            "oLanguage": {
+                "sLengthMenu": "每页 _MENU_ 条记录",
+                "sInfo": "显示 _START_ 至 _END_ 共有 _TOTAL_ 条记录",
+                "sInfoEmpty": "记录为空",
+                "sInfoFiltered": " - 从 _MAX_ 条记录中",
+                "sZeroRecords": "结果为空",
+                "sSearch": "搜索:"
+            }
+        });
+    });
+</script>

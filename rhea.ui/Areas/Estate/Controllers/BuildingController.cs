@@ -162,20 +162,6 @@ namespace Rhea.UI.Areas.Estate.Controllers
             else
                 return View("Delete", id);
         }
-
-        /// <summary>
-        /// 楼层信息
-        /// </summary>
-        /// <param name="id">楼宇ID</param>
-        /// <returns></returns>
-        public ActionResult Floor(int id, int floorId = 0)
-        {
-            EstateService service = new EstateService();
-            var data = service.GetBuilding(id);
-            ViewBag.FloorId = floorId;
-            ViewBag.Floors = JsonConvert.SerializeObject(data.Floors); 
-            return View(data);
-        }
         #endregion //Action
     }
 }

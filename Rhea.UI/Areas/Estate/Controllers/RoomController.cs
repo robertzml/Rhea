@@ -178,6 +178,19 @@ namespace Rhea.UI.Areas.Estate.Controllers
         }
 
         /// <summary>
+        /// 房间列表
+        /// </summary>
+        /// <param name="departmentId">部门ID</param>
+        /// <returns></returns>
+        public ActionResult ListByDepartment(int departmentId)
+        {
+            EstateService service = new EstateService();
+            List<Room> data = service.GetRoomByDepartment(departmentId).ToList();
+
+            return View(data);
+        }
+
+        /// <summary>
         /// 房间添加
         /// </summary>
         /// <returns></returns>

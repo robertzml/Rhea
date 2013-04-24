@@ -112,8 +112,8 @@
                     text: '分类用房比例图'
                 },
                 tooltip: {
-                    pointFormat: '面积: <b>{point.y}m<sup>2</sup></b>',
-                    percentageDecimals: 1
+                    pointFormat: '{series.name}: <b>{point.percentage:.2f}</b>',
+                    percentageDecimals: 2
                 },            
                 plotOptions: {
                     pie: {
