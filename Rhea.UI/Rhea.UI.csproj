@@ -165,6 +165,7 @@
     <Compile Include="Areas\Estate\Controllers\BuildingGroupController.cs" />
     <Compile Include="Areas\Estate\Controllers\FloorController.cs" />
     <Compile Include="Areas\Estate\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Estate\Controllers\ManageController.cs" />
     <Compile Include="Areas\Estate\Controllers\RoomController.cs" />
     <Compile Include="Areas\Estate\Controllers\StatisticController.cs" />
     <Compile Include="Areas\Estate\EstateAreaRegistration.cs" />
@@ -730,6 +731,7 @@
     <Content Include="Areas\Estate\Views\Room\Summary.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Estate\Views\Manage\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea.pubxml" />
   </ItemGroup>
   <PropertyGroup>
