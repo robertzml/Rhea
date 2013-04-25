@@ -39,7 +39,12 @@ namespace Rhea.UI.Areas.Estate.Controllers
             ViewBag.BuildingId = buildingId;
 
             var data = building.Floors.Find(r => r.Number == floor);
-            return View(data);           
+            if (!string.IsNullOrEmpty(data.ImageUrl))
+                data.ImageUrl = "/Images/" + data.ImageUrl;
+            else
+                data.ImageUrl = "";
+
+            return View(data);
         }
 
         /// <summary>

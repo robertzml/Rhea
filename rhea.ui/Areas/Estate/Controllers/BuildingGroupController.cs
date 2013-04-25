@@ -25,6 +25,25 @@ namespace Rhea.UI.Areas.Estate.Controllers
         }
 
         /// <summary>
+        /// 楼群树形列表
+        /// </summary>
+        /// <returns></returns>
+        [ChildActionOnly]
+        public ActionResult Tree()
+        {
+            EstateService estateService = new EstateService();
+            List<BuildingGroup> buildingGroups = estateService.GetBuildingGroupList().ToList();
+            List<Building> buildings = estateService.GetBuildingList().ToList();
+
+            foreach (var bg in buildingGroups)
+            {
+                bg.Buildings = buildings.Where(r => r.BuildingGroupId == bg.Id).ToList();
+            }
+
+            return View(buildingGroups);
+        }
+
+        /// <summary>
         /// 楼群详细
         /// GET: /Estate/BuildingGroup/Details/7
         /// </summary>
@@ -35,7 +54,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
             EstateService service = new EstateService();
             BuildingGroup data = service.GetBuildingGroup(id);
             if (!string.IsNullOrEmpty(data.ImageUrl))
-                data.ImageUrl = RheaConstant.ImageServer + data.ImageUrl;           
+                data.ImageUrl = RheaConstant.ImageServerRoot + data.ImageUrl;           
 
             data.Buildings = service.GetBuildingByGroup(id).OrderBy(r => r.Id).ToList();
             

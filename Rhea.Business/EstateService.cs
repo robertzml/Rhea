@@ -311,6 +311,25 @@ namespace Rhea.Business
         }
 
         /// <summary>
+        /// 获取房间
+        /// </summary>
+        /// <param name="departmentId">部门ID</param>
+        /// <returns></returns>
+        public IEnumerable<Room> GetRoomByDepartment(int departmentId)
+        {
+            ApiService api = new ApiService();
+            HttpResponseMessage response = api.Get("Room?DepartmentId=" + departmentId.ToString());
+
+            if (response.IsSuccessStatusCode)
+            {
+                var rooms = response.Content.ReadAsAsync<IEnumerable<Room>>().Result;
+                return rooms;
+            }
+            else
+                return null;
+        }
+
+        /// <summary>
         /// 添加房间
         /// </summary>
         /// <param name="room">房间数据</param>
@@ -355,6 +374,47 @@ namespace Rhea.Business
             return response.IsSuccessStatusCode;
         }
         #endregion //RoomService
+
+        #region Statistic Service
+        /// <summary>
+        /// 得到统计面积数据
+        /// </summary>
+        /// <param name="type">统计类型</param>
+        /// <remarks>type=1:学院分类用房面积</remarks>
+        /// <returns></returns>
+        public T GetStatisticArea<T>(int type)
+        {
+            ApiService api = new ApiService();
+            HttpResponseMessage response = api.Get("Statistic?type=" + type.ToString());
+
+            if (response.IsSuccessStatusCode)
+            {
+                var data = response.Content.ReadAsAsync<T>().Result;
+                return data;
+            }
+            else
+                return default(T);
+        }
+
+        /// <summary>
+        /// 获取对象数量
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public int GetEntitySize(int type)
+        {
+            ApiService api = new ApiService();
+            HttpResponseMessage response = api.Get("Statistic?type=" + type.ToString());
+
+            if (response.IsSuccessStatusCode)
+            {
+                var data = response.Content.ReadAsAsync<int>().Result;
+                return data;
+            }
+            else
+                return 0;
+        }
+        #endregion //Statistic Service
 
         #region General Service
         /// <summary>

@@ -524,3 +524,11 @@ min-height:297px;
 .validation-summary-valid {
     display: none;
 }
+div#ajax-loader {
+	z-index:5000;
+	position:absolute;
+	margin-top:100px;	
+}
+div#ajax-loader img {
+	margin:0px auto;
+}

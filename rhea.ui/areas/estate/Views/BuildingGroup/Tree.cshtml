@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Rhea.Data.Entities.BuildingGroup>
+
+@{
+    ViewBag.Title = "楼群导航";
+    Layout = null;
+}
+
+<div class="box">
+    <div class="box-header well" data-original-title>
+        <h3>
+            楼群导航</h3>
+        <div class="box-icon">
+            <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+            <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+        </div>
+    </div>
+    <div class="box-content k-content">
+        <ul id="building-group-treeview">
+        @foreach (var item in Model)
+        {                    
+            <li><a class="buildingGroup" href="#" ref="@item.Id"><span>@item.Name</span></a>
+                <ul>
+                    @foreach (var building in item.Buildings)
+                    {
+                        <li><a class="building" ref="@building.Id"><span>@building.Name</span></a></li>
+                    }
+                </ul>
+            </li>                               
+        }
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#building-group-treeview").kendoTreeView();
+
+        $('a.buildingGroup').click(function () {
+            var groupId = $(this).attr('ref');
+            var request = { id: groupId };
+            ajaxLoadPage("Index", "BuildingGroup", "Estate", request);
+            return false;
+        });
+
+        $('a.building').click(function () {
+            var buildingId = $(this).attr('ref');
+            var request = { id: buildingId };
+            ajaxLoadPage("Index", "Building", "Estate", request);
+            return false;
+        });
+    });
+        
+</script>

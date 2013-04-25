@@ -156,6 +156,18 @@ namespace Rhea.UI.Areas.Estate.Controllers
         }
 
         /// <summary>
+        /// 房间摘要
+        /// </summary>
+        /// <param name="id">房间ID</param>
+        /// <returns></returns>
+        public ActionResult Summary(int id)
+        {
+            EstateService service = new EstateService();
+            var data = service.GetRoom(id);
+            return View(data);
+        }
+
+        /// <summary>
         /// 房间列表
         /// </summary>
         /// <param name="buildingId">楼宇ID</param>
@@ -173,6 +185,19 @@ namespace Rhea.UI.Areas.Estate.Controllers
             {
                 data = service.GetRoomByBuilding(buildingId, floor).OrderBy(r => r.Id).ToList();
             }
+
+            return View(data);
+        }
+
+        /// <summary>
+        /// 房间列表
+        /// </summary>
+        /// <param name="departmentId">部门ID</param>
+        /// <returns></returns>
+        public ActionResult ListByDepartment(int departmentId)
+        {
+            EstateService service = new EstateService();
+            List<Room> data = service.GetRoomByDepartment(departmentId).ToList();
 
             return View(data);
         }

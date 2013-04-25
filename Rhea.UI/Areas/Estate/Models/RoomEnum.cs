@@ -35,6 +35,9 @@ namespace Rhea.UI.Areas.Estate.Models
     /// </summary>
     public enum RoomStatus
     {
+        [Display(Name = "未知")]
+        Unknow = 0,
+
         /// <summary>
         /// 闲置
         /// </summary>
