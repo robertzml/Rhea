@@ -14,18 +14,32 @@
             <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
         </div>
     </div>
-    <div class="box-content">
-        <ul class="nav nav-list">
-        @foreach (var item in Model)
-        {
-            <li><a class="department" href="#" ref="@item.Id"><span>@item.Name</span></a></li>
-        }
+    <div class="box-content k-content">
+        <ul id="department-treeview">
+            <li><a><span>教学院系</span></a>
+                <ul>
+                @foreach (var item in Model.Where(r => r.Type == 1))
+                {
+                    <li><a class="department" href="#" ref="@item.Id"><span>@item.Name</span></a></li>
+                }
+                </ul>
+            </li>
+            <li><a><span>部门机构</span></a>
+                <ul>
+                @foreach (var item in Model.Where(r => r.Type != 1))
+                {
+                    <li><a class="department" href="#" ref="@item.Id"><span>@item.Name</span></a></li>
+                }
+                </ul>
+            </li>
         </ul>
     </div>
 </div>
 
 <script type="text/javascript">
     $(document).ready(function () {
+
+        $("#department-treeview").kendoTreeView();
 
         $('a.department').click(function () {
             var departmentId = $(this).attr('ref');
