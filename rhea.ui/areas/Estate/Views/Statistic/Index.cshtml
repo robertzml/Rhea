@@ -9,7 +9,11 @@
 
 <div class="row-fluid sortable">
     <div class="span9">
-        <div id="ajax-content1">
+        <div id="ajax-loader" style="display: none;">
+            <img src="/img/ajax-loaders/ajax-loader-7.gif" alt="loading..." title="loading..." />
+        </div>
+
+        <div id="ajax-content1">               
             <div class="box">
                 <div class="box-header well" data-original-title>
                     <h2>
@@ -59,6 +63,7 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
+           
             $('a#college-room-statistic').click(function () {
                 $('ul#category-list > li').removeClass('active');
                 $(this).parent().addClass('active');

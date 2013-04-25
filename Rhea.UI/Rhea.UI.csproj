@@ -407,6 +407,11 @@
     <Content Include="img\quicklook-bg.png" />
     <Content Include="img\quicklook-icons.png" />
     <Content Include="img\resize.png" />
+    <Content Include="img\sort_asc.png" />
+    <Content Include="img\sort_asc_disabled.png" />
+    <Content Include="img\sort_both.png" />
+    <Content Include="img\sort_desc.png" />
+    <Content Include="img\sort_desc_disabled.png" />
     <Content Include="img\spinner-mini.gif" />
     <Content Include="img\sprite.png" />
     <Content Include="img\star-half.png" />
@@ -459,6 +464,7 @@
     <Content Include="Scripts\jquery-ui-1.8.20.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.21.custom.min.js" />
+    <Content Include="Scripts\jquery.colorbox.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
@@ -722,6 +728,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Estate\Views\Room\Summary.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\Rhea.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -16,7 +16,7 @@ namespace Rhea.Business
         /// <summary>
         /// API服务器
         /// </summary>
-        private string host = "http://localhost:11500/";
+        private string host = RheaConstant.ApiHost;
         #endregion //Field
 
         #region Method

@@ -54,7 +54,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
             EstateService service = new EstateService();
             BuildingGroup data = service.GetBuildingGroup(id);
             if (!string.IsNullOrEmpty(data.ImageUrl))
-                data.ImageUrl = RheaConstant.ImageServer + data.ImageUrl;           
+                data.ImageUrl = RheaConstant.ImageServerRoot + data.ImageUrl;           
 
             data.Buildings = service.GetBuildingByGroup(id).OrderBy(r => r.Id).ToList();
             
