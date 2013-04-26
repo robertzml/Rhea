@@ -734,6 +734,7 @@
   <ItemGroup>
     <Content Include="Areas\Estate\Views\Admin\Index.cshtml" />
     <Content Include="Areas\Estate\Views\Admin\ManagerGroupList.cshtml" />
+    <Content Include="Areas\Estate\Views\Admin\CreateManagerGroup.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea.pubxml" />
   </ItemGroup>
   <PropertyGroup>

@@ -33,6 +33,12 @@ namespace Rhea.UI.Areas.Estate.Controllers
             var data = service.GetManagerGroupList();
             return View(data);
         }
+
+        [HttpGet]
+        public ActionResult CreateManagerGroup()
+        {
+            return View();
+        }
         #endregion //Action
     }
 }
