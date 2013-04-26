@@ -161,15 +161,16 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Estate\Controllers\AdminController.cs" />
     <Compile Include="Areas\Estate\Controllers\BuildingController.cs" />
     <Compile Include="Areas\Estate\Controllers\BuildingGroupController.cs" />
     <Compile Include="Areas\Estate\Controllers\FloorController.cs" />
     <Compile Include="Areas\Estate\Controllers\HomeController.cs" />
-    <Compile Include="Areas\Estate\Controllers\ManageController.cs" />
     <Compile Include="Areas\Estate\Controllers\RoomController.cs" />
     <Compile Include="Areas\Estate\Controllers\StatisticController.cs" />
     <Compile Include="Areas\Estate\EstateAreaRegistration.cs" />
     <Compile Include="Areas\Estate\Models\BuildingGroupEnum.cs" />
+    <Compile Include="Areas\Estate\Models\AdminModel.cs" />
     <Compile Include="Areas\Estate\Models\RoomEnum.cs" />
     <Compile Include="Areas\Estate\Models\RoomModel.cs" />
     <Compile Include="Areas\Estate\Models\StatisticModel.cs" />
@@ -731,7 +732,8 @@
     <Content Include="Areas\Estate\Views\Room\Summary.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Estate\Views\Manage\Index.cshtml" />
+    <Content Include="Areas\Estate\Views\Admin\Index.cshtml" />
+    <Content Include="Areas\Estate\Views\Admin\ManagerGroupList.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea.pubxml" />
   </ItemGroup>
   <PropertyGroup>

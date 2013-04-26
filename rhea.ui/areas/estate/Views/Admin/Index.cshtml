@@ -4,7 +4,7 @@
 }
 
 @section breadcrumb {
-    <li>@Html.ActionLink("系统管理", "Index", new { controller = "Statistic", area = "Estate" })</li>
+    <li>@Html.ActionLink("系统管理", "Index", new { controller = "Admin", area = "Estate" })</li>
 }
 
 <div class="row-fluid sortable">
@@ -13,12 +13,11 @@
             <div class="box">
                 <div class="box-header well" data-original-title>
                     <h2>
-                        <i class="icon-align-justify"></i>总数据</h2>
+                        <i class="icon-align-justify"></i>概要</h2>
                 </div>
                 <div class="box-content">
                     <div class="row-fluid">
                         <div class="span7">
-                        
                         </div>
                     </div>
                 </div>
@@ -36,26 +35,28 @@
                 </div>
             </div>
             <div class="box-content">
-                <ul id="group-nav" class="nav nav-list">
+                <ul id="admin-nav" class="nav nav-list">
                     <li class="nav-header">用户组</li>
                     <li><a id="manager-group" href="#"><span>管理组</span></a></li>
-                    <li><a id="user-group" href="#"><span>用户组</span></a></li>                  
-                </ul>
-                <ul id="user-nav" class="nav nav-list">
+                    <li><a id="user-group" href="#"><span>用户组</span></a></li>
                     <li class="nav-header">用户</li>
                     <li><a id="manager-list" href="#"><span>管理员列表</span></a></li>
-                    <li><a id="user-list" href="#"><span>用户列表</span></a></li>                   
+                    <li><a id="user-list" href="#"><span>用户列表</span></a></li>
                 </ul>
             </div>
         </div>
     </div>
 </div>
-<!--/row-->
-@section scripts {
 
+
+@section scripts {
     <script type="text/javascript">
         $(document).ready(function () {
-   
+            $('a#manager-group').click(function () {
+                $('ul#admin-nav > li').removeClass('active');
+                $(this).parent().addClass('active');
+                ajaxLoadPage("ManagerGroupList", "Admin", "Estate", {});
+            });
         });
     </script>
 }
