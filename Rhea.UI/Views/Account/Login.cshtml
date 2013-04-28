@@ -1,50 +1,105 @@
 ﻿@model Rhea.UI.Models.LoginModel
 
 @{
-    ViewBag.Title = "Log in";
+    ViewBag.Title = "用户登录";
+    Layout = null;
 }
 
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-</hgroup>
-
-<section id="loginForm">
-<h2>Use a local account to log in.</h2>
-@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-
-    <fieldset>
-        <legend>Log in Form</legend>
-        <ol>
-            <li>
-                @Html.LabelFor(m => m.UserName)
-                @Html.TextBoxFor(m => m.UserName)
-                @Html.ValidationMessageFor(m => m.UserName)
-            </li>
-            <li>
-                @Html.LabelFor(m => m.Password)
-                @Html.PasswordFor(m => m.Password)
-                @Html.ValidationMessageFor(m => m.Password)
-            </li>
-            <li>
-                @Html.CheckBoxFor(m => m.RememberMe)
-                @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
-            </li>
-        </ol>
-        <input type="submit" value="Log in" />
-    </fieldset>
-    <p>
-        @Html.ActionLink("Register", "Register") if you don't have an account.
-    </p>
-}
-</section>
-
-<section class="social" id="socialLoginForm">
-    <h2>Use another service to log in.</h2>
-    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
-</section>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>@ViewBag.Title - 后勤管理综合平台</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    <link id="bs-css" href="/css/bootstrap-classic.css" rel="stylesheet">
+    <style type="text/css">
+        body
+        {
+            padding-bottom: 0;
+        }
+        .sidebar-nav
+        {
+            padding: 9px 0;
+        }
+        .input-prepend .add-on { margin-right: -5px; }
+    </style>
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/css/charisma-app.css" rel="stylesheet">
+    <link href="/css/jquery-ui-1.8.21.custom.css" rel="stylesheet">
+    <link href='/css/uniform.default.css' rel='stylesheet'>  
+    <script src="@Url.Content("~/Scripts/jquery-1.7.2.min.js")" type="text/javascript"></script>
+    <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+	        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	    <![endif]-->
+    <!-- The fav icon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+</head>
+<body>   
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="row-fluid">
+                <div class="span12 center login-header">
+                    <h2>
+                        欢迎使用后勤管理综合平台</h2>
+                </div>              
+            </div>
+           
+            <div class="row-fluid">
+                <div class="well span5 center login-box">
+                    <div class="alert alert-info">
+                        请输入用户名和密码
+                    </div>
+                    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal" })) {
+                        <fieldset>
+                            <div class="input-prepend">
+                                <span class="add-on"><i class="icon-user"></i></span>
+                                @Html.TextBoxFor(m => m.UserName, new { autofocus = "true", @class = "input-large span10", type = "text" })
+                                <br />
+                                @Html.ValidationMessageFor(m => m.UserName)                              
+                            </div>
+                            <div class="clearfix">
+                            </div>
+                            <div class="input-prepend">
+                                <span class="add-on"><i class="icon-lock"></i></span>
+                                @Html.PasswordFor(m => m.Password, new { @class = "input-large span10", type = "password" })
+                                <br />
+                                @Html.ValidationMessageFor(m => m.Password)                            
+                            </div>
+                            <div class="clearfix">
+                            </div>
+                            <div class="input-prepend">
+                                <label class="remember" for="remember">                                    
+                                    @Html.CheckBoxFor(m => m.RememberMe)记住我</label>                               
+                            </div>
+                            <div class="clearfix">
+                            </div>
+                            <p class="center span5">
+                                <button type="submit" class="btn btn-primary">
+                                    登录</button>
+                            </p>
+                        </fieldset>
+                    }                    
+                </div>                
+            </div>            
+        </div>        
+    </div>
+    <!--/.fluid-container-->
+  
+    <!-- jquery ui-->
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.21.custom.min.js")" type="text/javascript"></script>
+    <!-- bootstrap -->
+    <script src="/js/bootstrap-transition.js" type="text/javascript"></script>
+    <script src="/js/bootstrap-button.js" type="text/javascript"></script>  
+    <!-- checkbox, radio, and file input styler -->
+    <script src="/js/jquery.uniform.min.js" type="text/javascript"></script>
+    @Scripts.Render("~/bundles/jqueryval") 
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("input:checkbox").not('[data-no-uniform="true"],#uniform-is-ajax').uniform();          
+        });
+    </script>
+</body>
+</html>
