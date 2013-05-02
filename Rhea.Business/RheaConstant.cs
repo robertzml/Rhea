@@ -20,6 +20,11 @@ namespace Rhea.Business
 
         #region Field
         /// <summary>
+        /// Cronus数据库
+        /// </summary>
+        public static readonly string CronusDatabase = "Cronus";
+
+        /// <summary>
         /// API服务器地址
         /// </summary>
         public static readonly string ApiHost;

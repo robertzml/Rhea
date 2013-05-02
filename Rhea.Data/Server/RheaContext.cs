@@ -11,7 +11,7 @@ namespace Rhea.Data.Server
     /// <summary>
     /// 房产系统数据库连接
     /// </summary>
-    public class EstateContext
+    public class RheaContext
     {
         #region Field
         /// <summary>
@@ -34,7 +34,7 @@ namespace Rhea.Data.Server
         /// <summary>
         /// 数据库连接
         /// </summary>
-        public EstateContext()
+        public RheaContext()
             : this("estate")
         {
         }
@@ -43,7 +43,7 @@ namespace Rhea.Data.Server
         /// 数据库连接
         /// </summary>
         /// <param name="databaseName">数据库</param>
-        public EstateContext(string databaseName)
+        public RheaContext(string databaseName)
         {
             this.databaseName = databaseName;
             this.Open();

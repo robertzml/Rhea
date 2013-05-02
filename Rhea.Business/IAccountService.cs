@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Rhea.Data.Entities;
 
-namespace Rhea.Business.Estate
+namespace Rhea.Business
 {
     public interface IAccountService
     {

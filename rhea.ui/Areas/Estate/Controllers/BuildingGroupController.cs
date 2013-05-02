@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using Rhea.Business;
+using Rhea.Business.Estate;
 using Rhea.Data.Entities;
 
 namespace Rhea.UI.Areas.Estate.Controllers
@@ -13,6 +15,22 @@ namespace Rhea.UI.Areas.Estate.Controllers
     /// </summary>
     public class BuildingGroupController : Controller
     {
+        #region Field
+        private IBuildingGroupService buildingGroupService;
+        #endregion //Field
+
+        #region Function
+        protected override void Initialize(RequestContext requestContext)
+        {
+            if (buildingGroupService == null)
+            {
+                buildingGroupService = new RemoteBuildingGroupService();
+            }
+
+            base.Initialize(requestContext);
+        }
+        #endregion //Function
+
         #region Action
         /// <summary>
         /// 楼群主页
@@ -32,7 +50,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         public ActionResult Tree()
         {
             EstateService estateService = new EstateService();
-            List<BuildingGroup> buildingGroups = estateService.GetBuildingGroupList().ToList();
+            List<BuildingGroup> buildingGroups = this.buildingGroupService.GetList();
             List<Building> buildings = estateService.GetBuildingList().ToList();
 
             foreach (var bg in buildingGroups)
@@ -50,14 +68,12 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <param name="id">楼群ID</param>
         /// <returns></returns>
         public ActionResult Details(int id)
-        {
-            EstateService service = new EstateService();
-            BuildingGroup data = service.GetBuildingGroup(id);
+        {           
+            BuildingGroup data = this.buildingGroupService.Get(id);
             if (!string.IsNullOrEmpty(data.ImageUrl))
-                data.ImageUrl = RheaConstant.ImagesRoot + data.ImageUrl;           
+                data.ImageUrl = RheaConstant.ImagesRoot + data.ImageUrl;
 
-            data.Buildings = service.GetBuildingByGroup(id).OrderBy(r => r.Id).ToList();
-            
+            data.Buildings = new List<Building>();            
             return View(data);
         }
 
@@ -66,10 +82,8 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// </summary>
         /// <returns></returns>
         public ActionResult List()
-        {
-            EstateService service = new EstateService();
-            List<BuildingGroup> data = service.GetBuildingGroupList().OrderBy(r => r.Id).ToList();
-
+        {            
+            List<BuildingGroup> data = this.buildingGroupService.GetList().OrderBy(r => r.Id).ToList();
             return View(data);
         }
 
@@ -92,9 +106,8 @@ namespace Rhea.UI.Areas.Estate.Controllers
         public ActionResult Create(BuildingGroup model)
         {
             if (ModelState.IsValid)
-            {
-                EstateService service = new EstateService();
-                int result = service.CreateBuildingGroup(model);
+            {                
+                int result = this.buildingGroupService.Create(model);
 
                 if (result != 0)
                 {                    
@@ -116,9 +129,8 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         public ActionResult Edit(int id)
-        {
-            EstateService service = new EstateService();
-            BuildingGroup data = service.GetBuildingGroup(id);
+        {   
+            BuildingGroup data = this.buildingGroupService.Get(id);
             return View(data);
         }
 
@@ -134,7 +146,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
             if (ModelState.IsValid)
             {
                 EstateService service = new EstateService();
-                bool result = service.UpdateBuildingGroup(model);
+                bool result = this.buildingGroupService.Update(model);
 
                 if (result)
                 {
@@ -157,9 +169,8 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         [HttpGet]
         public ActionResult Delete(int id)
-        {
-            EstateService service = new EstateService();
-            var data = service.GetBuildingGroup(id);
+        {           
+            var data = this.buildingGroupService.Get(id);
             return View(data);
         }
 
@@ -172,8 +183,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            EstateService service = new EstateService();
-            bool result = service.DeleteBuildingGroup(id);
+            bool result = this.buildingGroupService.Delete(id);
 
             if (result)
             {
@@ -191,9 +201,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         public JsonResult GetList()
         {
-            EstateService service = new EstateService();
-            List<BuildingGroup> bg = service.GetBuildingGroupList().ToList();
-
+            List<BuildingGroup> bg = this.buildingGroupService.GetList();
             return Json(bg, JsonRequestBehavior.AllowGet);
         }
         #endregion //JSON

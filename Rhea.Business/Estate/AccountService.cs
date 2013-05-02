@@ -14,7 +14,7 @@ namespace Rhea.Business.Estate
     {
         public User ValidateUser(string userName, string password)
         {
-            EstateContext context = new EstateContext();
+            RheaContext context = new RheaContext();
 
             BsonDocument doc = context.FindOne("user", "name", userName);
             if (doc != null)

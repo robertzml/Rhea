@@ -5,8 +5,8 @@
 <select id="BuildingGroupId" name="BuildingGroupId">
     <option value="">-- 请选择 --</option>
     @{
-        var service = new EstateService();
-        List<BuildingGroup> groups = service.GetBuildingGroupList().ToList();
+        IBuildingGroupService service = new BuildingGroupService();
+        List<BuildingGroup> groups = service.GetList();
 
         foreach (var item in groups)
         {
