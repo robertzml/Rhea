@@ -31,6 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MongoDB.Bson">
+      <HintPath>..\packages\mongocsharpdriver.1.8.1\lib\net35\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver">
+      <HintPath>..\packages\mongocsharpdriver.1.8.1\lib\net35\MongoDB.Driver.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -49,7 +55,11 @@
     <Compile Include="Entities\Department.cs" />
     <Compile Include="Entities\RoomFunctionCode.cs" />
     <Compile Include="Entities\Room.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="Estate\ManagerGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Server\EstateContext.cs" />
+    <Compile Include="Server\EstateServer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

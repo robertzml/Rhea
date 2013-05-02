@@ -30,18 +30,12 @@
                 </ul>
             </div>
             <!-- theme selector ends -->
+
             <!-- user dropdown starts -->
-            <div class="btn-group pull-right">
-                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="icon-user"></i><span class="hidden-phone">admin</span> <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Profile</a></li>
-                    <li class="divider"></li>
-                    <li><a href="login.html">Logout</a></li>
-                </ul>
-            </div>
+            @Html.Partial("_LoginPartial")
+            
             <!-- user dropdown ends -->
+
             <div class="top-nav nav-collapse">
                 <ul class="nav">
                     <li><a href="#">Visit Site</a></li>

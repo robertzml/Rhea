@@ -56,6 +56,7 @@ namespace Rhea.UI.Models
         public string ConfirmPassword { get; set; }
     }
 
+    /*
     public class LoginModel
     {
         [Required]
@@ -69,7 +70,7 @@ namespace Rhea.UI.Models
 
         [Display(Name = "记住我?")]
         public bool RememberMe { get; set; }
-    }
+    }*/
 
     public class RegisterModel
     {
