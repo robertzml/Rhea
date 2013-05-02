@@ -14,8 +14,7 @@ namespace Rhea.Business
         #region Constructor
         static RheaConstant()
         {           
-            RheaConstant.ApiHost = ConfigurationManager.AppSettings["ApiHost"];
-            RheaConstant.ImageServerRoot = ApiHost + "Images/";
+            RheaConstant.ApiHost = ConfigurationManager.AppSettings["ApiHost"];            
         }
         #endregion //Constructor
 
@@ -28,7 +27,12 @@ namespace Rhea.Business
         /// <summary>
         /// 图片根目录
         /// </summary>
-        public static readonly string ImageServerRoot;
+        public static readonly string ImagesRoot = "/Images/";
+
+        /// <summary>
+        /// SVG根目录
+        /// </summary>
+        public static readonly string SvgRoot = "/Images/svg/";
         #endregion //Field
     }
 }
