@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Rhea.UI.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         #region Action
@@ -14,7 +15,7 @@ namespace Rhea.UI.Controllers
             ViewBag.Message = "修改此模板以快速启动你的 ASP.NET MVC 应用程序。";
 
             return View();
-        }        
+        }
 
         /// <summary>
         /// 菜单

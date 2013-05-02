@@ -34,7 +34,7 @@ function initMap() {
 	markers = new OpenLayers.Layer.Markers("楼群");
 	map.addLayer(markers);
 
-	//getBuildingGroupsInfo();	
+	getBuildingGroupsInfo();	
 
 	map.addControl(new OpenLayers.Control.LayerSwitcher({ 'ascending': false })); 	
 	map.addControl(new OpenLayers.Control.MousePosition()); 
@@ -46,7 +46,7 @@ function addMarkers() {
 
 	var size = new OpenLayers.Size(24,24);
 	var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
-	icon = new OpenLayers.Icon('/Images/bubble.png',size,offset);
+	icon = new OpenLayers.Icon('/Areas/Estate/Images/bubble.png',size,offset);
 	
 	var AutoSizeAnchored = OpenLayers.Class(OpenLayers.Popup.Anchored, {
             'autoSize': true,
@@ -62,7 +62,7 @@ function addMarkers() {
 	//anchored popup small contents no autosize closebox
 	var ll = new OpenLayers.LonLat(5, 11);
 	popupClass = AutoSizeFramedCloud;
-	popupContentHTML = createHtml(infos[4]);
+	popupContentHTML = createHtml(infos[22]);
 	addMarker(ll, popupClass, popupContentHTML, true);	
 	
 	ll = new OpenLayers.LonLat(-14.3, -5.6);
@@ -114,11 +114,11 @@ function addMarker(ll, popupClass, popupContentHTML, closeBox, overflow) {
 
 function getBuildingGroupsInfo() {	
 	$.ajax({
-		url: "/Common/BuildingGroupsInfo",
+		url: "/Estate/BuildingGroup/GetList",
 		type: 'get',		
 		success: function (response) {
 			infos = response;
-			addMarkers();
+			addMarkers();			
 		},
 		error: function (response) {
 			alert('Loading data failed');
@@ -126,19 +126,22 @@ function getBuildingGroupsInfo() {
 	});
 }
 
+function loadBuildingGroup(id) {	
+	ajaxLoadPage("Index", "BuildingGroup", "Estate", {id: id});
+	return false;
+}
+
 function createHtml(info) {	
 	var ht = [];
-	ht.push("<div id='popinfo'><h3>" + info.Name + "<a href='/Home/Index?id=bg" + info.Id.toString() + "'>详细</a></h3>");
+	ht.push("<div id='popinfo'><h3>" + info.Name + "<a class='mapbuildinggroup' onclick='loadBuildingGroup(" + info.Id +")' href='#'>详细</a></h3>");
 	ht.push("<div id='infoleft'><ul>");
 	ht.push("<li>楼宇栋数: <span>" + info.BuildingCount + "</span></li>");
 	ht.push("<li>建筑面积: <span>" + info.BuildArea + "</span></li>");
 	ht.push("<li>使用面积: <span>" + info.UsableArea + "</span></li>");
 	ht.push("<li>占地面积: <span>" + info.Floorage + "</span></li>");
 	ht.push("<li>建筑结构: <span>" + info.BuildStructure + "</span></li>");
-	ht.push("<li>建成日期: <span>" + info.BuildDate + "</span></li>");
-	ht.push("<li>备注: <span>" + info.Remark + "</span></li>");	
 	ht.push("</ul></div><div id='inforight'>");
-	ht.push("<img src='" + info.ImageUrl + "' alt='image' />");
+	ht.push("<img src='/Images/" + info.ImageUrl + "' alt='image' />");
 	ht.push("</div><div class='clear'></div></div>");
 	ht = ht.join('');
 	return ht;

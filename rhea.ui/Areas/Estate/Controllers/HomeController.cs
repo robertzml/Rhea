@@ -11,6 +11,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
     /// <summary>
     /// 房产管理主控制器
     /// </summary>
+    [Authorize]
     public class HomeController : Controller
     {
         #region Action
@@ -42,6 +43,11 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// </summary>
         /// <returns></returns>
         public ActionResult Map()
+        {
+            return View();
+        }
+
+        public ActionResult Go(int bg)
         {
             return View();
         }

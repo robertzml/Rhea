@@ -54,7 +54,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
             EstateService service = new EstateService();
             BuildingGroup data = service.GetBuildingGroup(id);
             if (!string.IsNullOrEmpty(data.ImageUrl))
-                data.ImageUrl = RheaConstant.ImageServerRoot + data.ImageUrl;           
+                data.ImageUrl = RheaConstant.ImagesRoot + data.ImageUrl;           
 
             data.Buildings = service.GetBuildingByGroup(id).OrderBy(r => r.Id).ToList();
             
@@ -183,5 +183,19 @@ namespace Rhea.UI.Areas.Estate.Controllers
                 return View("Delete", id);
         }
         #endregion //Action
+
+        #region JSON
+        /// <summary>
+        /// 得到楼群信息
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult GetList()
+        {
+            EstateService service = new EstateService();
+            List<BuildingGroup> bg = service.GetBuildingGroupList().ToList();
+
+            return Json(bg, JsonRequestBehavior.AllowGet);
+        }
+        #endregion //JSON
     }
 }

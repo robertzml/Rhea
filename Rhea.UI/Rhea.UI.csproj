@@ -161,6 +161,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Estate\Controllers\AdminController.cs" />
     <Compile Include="Areas\Estate\Controllers\BuildingController.cs" />
     <Compile Include="Areas\Estate\Controllers\BuildingGroupController.cs" />
     <Compile Include="Areas\Estate\Controllers\FloorController.cs" />
@@ -169,6 +170,7 @@
     <Compile Include="Areas\Estate\Controllers\StatisticController.cs" />
     <Compile Include="Areas\Estate\EstateAreaRegistration.cs" />
     <Compile Include="Areas\Estate\Models\BuildingGroupEnum.cs" />
+    <Compile Include="Areas\Estate\Models\AdminModel.cs" />
     <Compile Include="Areas\Estate\Models\RoomEnum.cs" />
     <Compile Include="Areas\Estate\Models\RoomModel.cs" />
     <Compile Include="Areas\Estate\Models\StatisticModel.cs" />
@@ -179,11 +181,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\FormsAuthenticationService.cs" />
+    <Compile Include="Services\IFormsAuthenticationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Estate\Content\map.css" />
+    <Content Include="Areas\Estate\Images\bubble.png" />
     <Content Include="Areas\Estate\Scripts\floor-model.js" />
     <Content Include="Areas\Estate\Scripts\maplayer.js" />
     <Content Include="Content\bootstrap-responsive.css" />
@@ -527,15 +533,6 @@
     <Content Include="Images\orderedList8.png" />
     <Content Include="Images\orderedList9.png" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account\_RemoveExternalLoginsPartial.cshtml" />
-    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Manage.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -730,7 +727,11 @@
     <Content Include="Areas\Estate\Views\Room\Summary.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Estate\Views\Admin\Index.cshtml" />
+    <Content Include="Areas\Estate\Views\Admin\ManagerGroupList.cshtml" />
+    <Content Include="Areas\Estate\Views\Admin\CreateManagerGroup.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea.pubxml" />
+    <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

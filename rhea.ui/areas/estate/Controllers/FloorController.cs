@@ -40,7 +40,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
 
             var data = building.Floors.Find(r => r.Number == floor);
             if (!string.IsNullOrEmpty(data.ImageUrl))
-                data.ImageUrl = "/Images/" + data.ImageUrl;
+                data.ImageUrl = RheaConstant.SvgRoot + data.ImageUrl;
             else
                 data.ImageUrl = "";
 

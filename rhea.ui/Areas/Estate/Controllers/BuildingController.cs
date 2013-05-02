@@ -37,7 +37,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
             EstateService service = new EstateService();
             Building data = service.GetBuilding(id);
             if (!string.IsNullOrEmpty(data.ImageUrl))
-                data.ImageUrl = RheaConstant.ImageServerRoot + data.ImageUrl;  
+                data.ImageUrl = RheaConstant.ImagesRoot + data.ImageUrl;  
 
             return View(data);
         }
