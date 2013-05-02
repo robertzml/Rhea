@@ -51,7 +51,9 @@
                     <div class="alert alert-info">
                         请输入用户名和密码
                     </div>
-                    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal" })) {
+                    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
                         <fieldset>
                             <div class="input-prepend">
                                 <span class="add-on"><i class="icon-user"></i></span>
