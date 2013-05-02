@@ -63,7 +63,9 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-           
+
+            ajaxLoadPage("CollegeBuildingRoom", "Statistic", "Estate", {});
+
             $('a#college-room-statistic').click(function () {
                 $('ul#category-list > li').removeClass('active');
                 $(this).parent().addClass('active');
