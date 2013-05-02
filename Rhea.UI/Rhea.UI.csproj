@@ -189,6 +189,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Estate\Content\map.css" />
+    <Content Include="Areas\Estate\Images\bubble.png" />
     <Content Include="Areas\Estate\Scripts\floor-model.js" />
     <Content Include="Areas\Estate\Scripts\maplayer.js" />
     <Content Include="Content\bootstrap-responsive.css" />

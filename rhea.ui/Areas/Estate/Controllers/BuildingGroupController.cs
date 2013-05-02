@@ -183,5 +183,19 @@ namespace Rhea.UI.Areas.Estate.Controllers
                 return View("Delete", id);
         }
         #endregion //Action
+
+        #region JSON
+        /// <summary>
+        /// 得到楼群信息
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult GetList()
+        {
+            EstateService service = new EstateService();
+            List<BuildingGroup> bg = service.GetBuildingGroupList().ToList();
+
+            return Json(bg, JsonRequestBehavior.AllowGet);
+        }
+        #endregion //JSON
     }
 }

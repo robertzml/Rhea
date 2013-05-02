@@ -46,6 +46,11 @@ namespace Rhea.UI.Areas.Estate.Controllers
         {
             return View();
         }
+
+        public ActionResult Go(int bg)
+        {
+            return View();
+        }
         #endregion //Action
     }
 }
