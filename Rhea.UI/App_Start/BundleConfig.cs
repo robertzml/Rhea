@@ -8,6 +8,7 @@ namespace Rhea.UI
         // 有关 Bundling 的详细信息，请访问 http://go.microsoft.com/fwlink/?LinkId=254725
         public static void RegisterBundles(BundleCollection bundles)
         {
+            // For Javascript
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
@@ -33,6 +34,23 @@ namespace Rhea.UI
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap-custom").Include(
+                        "~/Scripts/bootstrap/bootstrap-alert.js",
+                        "~/Scripts/bootstrap/bootstrap-button.js",
+                        "~/Scripts/bootstrap/bootstrap-carousel.js",
+                        "~/Scripts/bootstrap/bootstrap-collapse.js",
+                        "~/Scripts/bootstrap/bootstrap-dropdown.js",
+                        "~/Scripts/bootstrap/bootstrap-modal.js",
+                        "~/Scripts/bootstrap/bootstrap-popover.js",
+                        "~/Scripts/bootstrap/bootstrap-scrollspy.js",
+                        "~/Scripts/bootstrap/bootstrap-tab.js",
+                        "~/Scripts/bootstrap/bootstrap-toggle.js",
+                        "~/Scripts/bootstrap/bootstrap-tooltip.js",
+                        "~/Scripts/bootstrap/bootstrap-tour.js",
+                        "~/Scripts/bootstrap/bootstrap-transition.js",
+                        "~/Scripts/bootstrap/bootstrap-typeahead.js"));
+
+            // For CSS
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
