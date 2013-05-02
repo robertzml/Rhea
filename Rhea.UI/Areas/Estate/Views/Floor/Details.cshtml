@@ -140,11 +140,11 @@
                 svg = $(this).children('svg');
                 svg.attr({ 'width': '100%', 'height': '500px' });
                
-                $('svg g').click(function() {
-                    var id = $(this).attr('id');
+                $("svg g[id^='g']").click(function() {
+                    var id = $(this).attr('id').toString().substring(1);
                     $("svg rect[class='room-select']").attr('class', 'fil0');
 
-                    $(this).children('rect').attr('class', 'room-select');
+                    $(this).children('[ref=bound]').attr('class', 'room-select');
 
                     $('#room-summary').load('/Estate/Room/Summary', { id: id });
                 });
