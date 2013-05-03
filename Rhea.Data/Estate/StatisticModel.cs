@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
 
-namespace Rhea.UI.Areas.Estate.Models
+namespace Rhea.Data.Estate
 {
     /// <summary>
     /// 二级分类面积模型

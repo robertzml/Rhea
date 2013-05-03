@@ -57,6 +57,7 @@
     <Compile Include="Entities\Room.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Estate\ManagerGroup.cs" />
+    <Compile Include="Estate\StatisticModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server\RheaMongoContext.cs" />
     <Compile Include="Server\EstateServer.cs" />
