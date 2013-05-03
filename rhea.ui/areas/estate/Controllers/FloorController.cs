@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using Rhea.Business;
 using Rhea.Data.Entities;
 
@@ -13,6 +14,25 @@ namespace Rhea.UI.Areas.Estate.Controllers
     /// </summary>
     public class FloorController : Controller
     {
+        #region Field
+        /// <summary>
+        /// 楼宇业务
+        /// </summary>
+        private IBuildingService buildingService;
+        #endregion //Field
+
+        #region Function
+        protected override void Initialize(RequestContext requestContext)
+        {
+            if (buildingService == null)
+            {
+                buildingService = new MongoBuildingService();
+            }
+
+            base.Initialize(requestContext);
+        }
+        #endregion //Function
+
         #region Action
         /// <summary>
         /// 楼层主页
@@ -33,9 +53,8 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <param name="floor">楼层</param>
         /// <returns></returns>
         public ActionResult Details(int buildingId, int floor)
-        {
-            EstateService service = new EstateService();
-            var building = service.GetBuilding(buildingId);
+        {           
+            var building = this.buildingService.Get(buildingId);
             ViewBag.BuildingId = buildingId;
 
             var data = building.Floors.Find(r => r.Number == floor);
@@ -69,9 +88,8 @@ namespace Rhea.UI.Areas.Estate.Controllers
         {
             int buildingId = Convert.ToInt32(Request.Form["BuildingId"]);
             if (ModelState.IsValid)
-            {
-                EstateService service = new EstateService();                
-                int result = service.CreateFloor(buildingId, model);
+            {                          
+                int result = this.buildingService.CreateFloor(buildingId, model);
 
                 if (result != 0)
                 {
@@ -95,9 +113,8 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <param name="floor">楼层</param>
         /// <returns></returns>        
         public ActionResult Edit(int buildingId, int floor)
-        {
-            EstateService service = new EstateService();
-            var building = service.GetBuilding(buildingId);
+        {           
+            var building = this.buildingService.Get(buildingId);
 
             ViewBag.BuildingId = buildingId;
             var data = building.Floors.Find(r => r.Number == floor);
@@ -114,9 +131,8 @@ namespace Rhea.UI.Areas.Estate.Controllers
         {
             int buildingId = Convert.ToInt32(Request.Form["BuildingId"]);
             if (ModelState.IsValid)
-            {
-                EstateService service = new EstateService();
-                bool result = service.UpdateFloor(buildingId, model);
+            {               
+                bool result = this.buildingService.EditFloor(buildingId, model);
 
                 if (result)
                 {
@@ -140,9 +156,8 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         [HttpGet]
         public ActionResult Delete(int buildingId, int floor)
-        {
-            EstateService service = new EstateService();
-            var building = service.GetBuilding(buildingId);
+        {            
+            var building = this.buildingService.Get(buildingId);
 
             ViewBag.BuildingId = buildingId;
             var data = building.Floors.Find(r => r.Number == floor);
@@ -157,9 +172,8 @@ namespace Rhea.UI.Areas.Estate.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirm(int id)
         {
-            int buildingId = Convert.ToInt32(Request.Form["BuildingId"]);
-            EstateService service = new EstateService();
-            bool result = service.DeleteFloor(buildingId, id);
+            int buildingId = Convert.ToInt32(Request.Form["BuildingId"]);           
+            bool result = this.buildingService.DeleteFloor(buildingId, id);
 
             if (result)
             {

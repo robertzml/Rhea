@@ -7,7 +7,7 @@ using Rhea.Data.Entities;
 namespace Rhea.Business
 {
     /// <summary>
-    /// 楼群
+    /// 楼群业务接口
     /// </summary>
     public interface IBuildingGroupService
     {
@@ -36,7 +36,7 @@ namespace Rhea.Business
         /// </summary>
         /// <param name="data">楼群数据</param>
         /// <returns></returns>
-        bool Update(BuildingGroup data);
+        bool Edit(BuildingGroup data);
 
         /// <summary>
         /// 删除楼群

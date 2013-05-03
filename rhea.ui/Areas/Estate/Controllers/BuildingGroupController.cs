@@ -16,6 +16,9 @@ namespace Rhea.UI.Areas.Estate.Controllers
     public class BuildingGroupController : Controller
     {
         #region Field
+        /// <summary>
+        /// 楼群业务
+        /// </summary>
         private IBuildingGroupService buildingGroupService;
         #endregion //Field
 
@@ -24,7 +27,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         {
             if (buildingGroupService == null)
             {
-                buildingGroupService = new RemoteBuildingGroupService();
+                buildingGroupService = new MongoBuildingGroupService();
             }
 
             base.Initialize(requestContext);
@@ -48,11 +51,11 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         [ChildActionOnly]
         public ActionResult Tree()
-        {
-            EstateService estateService = new EstateService();
-            List<BuildingGroup> buildingGroups = this.buildingGroupService.GetList();
-            List<Building> buildings = estateService.GetBuildingList().ToList();
+        {                      
+            IBuildingService buildingService = new MongoBuildingService();
+            List<Building> buildings = buildingService.GetList();
 
+            List<BuildingGroup> buildingGroups = this.buildingGroupService.GetList();
             foreach (var bg in buildingGroups)
             {
                 bg.Buildings = buildings.Where(r => r.BuildingGroupId == bg.Id).ToList();
@@ -146,7 +149,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
             if (ModelState.IsValid)
             {
                 EstateService service = new EstateService();
-                bool result = this.buildingGroupService.Update(model);
+                bool result = this.buildingGroupService.Edit(model);
 
                 if (result)
                 {

@@ -8,6 +8,9 @@ using Rhea.Data.Entities;
 
 namespace Rhea.Business.Estate
 {
+    /// <summary>
+    /// 楼群业务类
+    /// </summary>
     public class RemoteBuildingGroupService : IBuildingGroupService
     {
         #region Method
@@ -74,7 +77,7 @@ namespace Rhea.Business.Estate
         /// </summary>
         /// <param name="data">楼群数据</param>
         /// <returns></returns>
-        public bool Update(BuildingGroup data)
+        public bool Edit(BuildingGroup data)
         {
             ApiService api = new ApiService();
             HttpResponseMessage response = api.Put("BuildingGroup", data.Id, data);

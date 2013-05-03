@@ -5,8 +5,8 @@
 <select id="BuildingId" name="BuildingId">
     <option value="">-- 请选择 --</option>
     @{
-        var service = new EstateService();
-        List<Building> groups = service.GetBuildingList().ToList();
+        IBuildingService service = new MongoBuildingService();
+        List<Building> groups = service.GetList();
 
         foreach (var item in groups)
         {

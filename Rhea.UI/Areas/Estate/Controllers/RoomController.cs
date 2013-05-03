@@ -56,14 +56,15 @@ namespace Rhea.UI.Areas.Estate.Controllers
             room.HasTestBed = model.HasTestBed;
             room.UsageCharge = model.UsageCharge;
 
-            EstateService service = new EstateService();
-            Building building = service.GetBuilding(model.BuildingId);
+            IBuildingService buildingService = new MongoBuildingService();
+            Building building = buildingService.Get(model.BuildingId);
             room.Building = new Room.RoomBuilding
             {
                 Id = building.Id,
                 Name = building.Name
             };
 
+            EstateService service = new EstateService();
             RoomFunctionCode code = service.GetFunctionCodeList().First(r => r.CodeId == model.FunctionCodeId);
             room.Function = new Room.RoomFunction
             {
