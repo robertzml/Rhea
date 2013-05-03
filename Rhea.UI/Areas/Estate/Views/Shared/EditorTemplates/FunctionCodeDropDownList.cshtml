@@ -5,8 +5,8 @@
 <select id="FunctionCodeId" name="FunctionCodeId">
     <option value="">-- 请选择 --</option>
     @{
-        var service = new EstateService();
-        List<RoomFunctionCode> codes = service.GetFunctionCodeList().ToList();
+        IRoomService service = new MongoRoomService();
+        List<RoomFunctionCode> codes = service.GetFunctionCodeList();
 
         foreach (var item in codes)
         {

@@ -147,8 +147,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         public ActionResult Edit(BuildingGroup model)
         {
             if (ModelState.IsValid)
-            {
-                EstateService service = new EstateService();
+            {               
                 bool result = this.buildingGroupService.Edit(model);
 
                 if (result)

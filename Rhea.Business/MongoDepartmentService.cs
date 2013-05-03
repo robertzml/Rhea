@@ -1,0 +1,83 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using Rhea.Data.Entities;
+using Rhea.Data.Server;
+
+namespace Rhea.Business
+{
+    /// <summary>
+    /// 部门业务类
+    /// </summary>
+    public class MongoDepartmentService : IDepartmentService
+    {
+        #region Field
+        /// <summary>
+        /// 数据库连接
+        /// </summary>
+        private RheaMongoContext context = new RheaMongoContext(RheaConstant.CronusDatabase);
+
+        /// <summary>
+        /// Collection名称
+        /// </summary>
+        private readonly string collectionName = "department";
+        #endregion //Field
+
+        #region Function
+        /// <summary>
+        /// 模型绑定
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <returns></returns>
+        private Department ModelBind(BsonDocument doc)
+        {
+            Department department = new Department();
+            department.Id = doc["id"].AsInt32;
+            department.Name = doc["name"].AsString;
+            department.Type = doc["type"].AsInt32;
+
+            return department;
+        }
+        #endregion //Function
+
+        #region Method
+        /// <summary>
+        /// 获取部门列表
+        /// </summary>
+        /// <returns></returns>
+        public List<Department> GetList()
+        {
+            List<Department> departments = new List<Department>();
+            List<BsonDocument> doc = this.context.FindAll(collectionName);
+
+            foreach (var d in doc)
+            {
+                Department department = ModelBind(d);
+                departments.Add(department);
+            }
+
+            return departments;
+        }
+
+        /// <summary>
+        /// 获取部门
+        /// </summary>
+        /// <param name="id">部门ID</param>
+        /// <returns></returns>
+        public Department Get(int id)
+        {
+            BsonDocument doc = this.context.FindOne(collectionName, "id", id);
+            if (doc != null)
+            {
+                Department department = ModelBind(doc);
+                return department;
+            }
+            else
+                return null;
+        }
+        #endregion //Method
+    }
+}

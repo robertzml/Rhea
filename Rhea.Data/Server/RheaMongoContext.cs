@@ -9,9 +9,9 @@ using MongoDB.Driver.Builders;
 namespace Rhea.Data.Server
 {
     /// <summary>
-    /// 房产系统数据库连接
+    /// 系统数据库连接
     /// </summary>
-    public class RheaContext
+    public class RheaMongoContext
     {
         #region Field
         /// <summary>
@@ -34,7 +34,7 @@ namespace Rhea.Data.Server
         /// <summary>
         /// 数据库连接
         /// </summary>
-        public RheaContext()
+        public RheaMongoContext()
             : this("estate")
         {
         }
@@ -43,7 +43,7 @@ namespace Rhea.Data.Server
         /// 数据库连接
         /// </summary>
         /// <param name="databaseName">数据库</param>
-        public RheaContext(string databaseName)
+        public RheaMongoContext(string databaseName)
         {
             this.databaseName = databaseName;
             this.Open();

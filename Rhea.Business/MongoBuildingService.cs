@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using MongoDB.Driver.Builders;
 using Rhea.Data.Entities;
 using Rhea.Data.Server;
 
@@ -18,7 +19,7 @@ namespace Rhea.Business
         /// <summary>
         /// 数据库连接
         /// </summary>
-        private RheaContext context = new RheaContext(RheaConstant.CronusDatabase);
+        private RheaMongoContext context = new RheaMongoContext(RheaConstant.CronusDatabase);
 
         /// <summary>
         /// Collection名称
@@ -34,17 +35,17 @@ namespace Rhea.Business
         /// <returns></returns>
         private Building ModelBind(BsonDocument doc)
         {
-            Building building = new Building();           
+            Building building = new Building();
             building.Id = doc["id"].AsInt32;
             building.Name = doc["name"].AsString;
-            building.ImageUrl = doc["imageUrl", ""].AsString;
-            building.BuildingGroupId = doc["buildingGroupId"].AsInt32;
-            building.BuildArea = (double?)doc["buildArea", null];
-            building.UsableArea = (double?)doc["usableArea", null];
-            building.AboveGroundFloor = (int?)doc["aboveGroundFloor", null];
-            building.UnderGroundFloor = (int?)doc["underGroundFloor", null];
-            building.Remark = doc["remark", ""].AsString;
-            building.Status = doc["status", 0].AsInt32;
+            building.ImageUrl = doc.GetValue("imageUrl", "").AsString;
+            building.BuildingGroupId = doc.GetValue("buildingGroupId").AsInt32;
+            building.BuildArea = (double?)doc.GetValue("buildArea", null);
+            building.UsableArea = (double?)doc.GetValue("usableArea", null);
+            building.AboveGroundFloor = (int?)doc.GetValue("aboveGroundFloor", null);
+            building.UnderGroundFloor = (int?)doc.GetValue("underGroundFloor", null);
+            building.Remark = doc.GetValue("remark", "").AsString;
+            building.Status = doc.GetValue("status", 0).AsInt32;
 
             if (doc.Contains("floors"))
             {
@@ -52,7 +53,7 @@ namespace Rhea.Business
                 for (int i = 0; i < array.Count; i++)
                 {
                     BsonDocument d = array[i].AsBsonDocument;
-                    if (d["status", 0].AsInt32 == 1)
+                    if (d.GetValue("status", 0).AsInt32 == 1)
                         continue;
                     building.Floors.Add(
                         new Floor
@@ -60,11 +61,11 @@ namespace Rhea.Business
                             Id = d["id"].AsInt32,
                             Name = d["name"].AsString,
                             Number = d["number"].AsInt32,
-                            BuildArea = (double?)d["buildArea", null],
-                            UsableArea = (double?)d["usableArea", null],
-                            ImageUrl = d["imageUrl", ""].AsString,
-                            Remark = d["remark", ""].AsString,
-                            Status = d["status", 0].AsInt32
+                            BuildArea = (double?)d.GetValue("buildArea", null),
+                            UsableArea = (double?)d.GetValue("usableArea", null),
+                            ImageUrl = d.GetValue("imageUrl", "").AsString,
+                            Remark = d.GetValue("remark", "").AsString,
+                            Status = d.GetValue("status", 0).AsInt32
                         }
                     );
                 }
@@ -82,7 +83,7 @@ namespace Rhea.Business
         public List<Building> GetList()
         {
             List<Building> buildings = new List<Building>();
-            List<BsonDocument> docs = this.context.FindAll("building");
+            List<BsonDocument> docs = this.context.FindAll(this.collectionName);
 
             foreach (var doc in docs)
             {
@@ -95,44 +96,246 @@ namespace Rhea.Business
             return buildings;
         }
 
+        /// <summary>
+        /// 获取楼宇列表
+        /// </summary>
+        /// <param name="buildingGroupId">所属楼群ID</param>
+        /// <returns></returns>
         public List<Building> GetListByBuildingGroup(int buildingGroupId)
         {
-            throw new NotImplementedException();
+            List<BsonDocument> docs = this.context.Find(this.collectionName, "buildingGroupId", buildingGroupId);
+
+            List<Building> buildings = new List<Building>();
+            foreach (var doc in docs)
+            {
+                if (doc.GetValue("status", 0).AsInt32 == 1)
+                    continue;
+                Building building = ModelBind(doc);
+                buildings.Add(building);
+            }
+
+            return buildings;
         }
 
+        /// <summary>
+        /// 获取楼宇
+        /// </summary>
+        /// <param name="id">楼宇ID</param>
+        /// <returns></returns>
         public Building Get(int id)
         {
-            throw new NotImplementedException();
+            BsonDocument doc = this.context.FindOne(this.collectionName, "id", id);
+
+            if (doc != null)
+            {
+                Building building = ModelBind(doc);
+                if (building.Status == 1)
+                    return null;
+
+                return building;
+            }
+            else
+                return null;
         }
 
+        /// <summary>
+        /// 添加楼宇
+        /// </summary>
+        /// <param name="data">楼宇数据</param>
+        /// <returns>楼宇ID,0:添加失败</returns>
         public int Create(Building data)
         {
-            throw new NotImplementedException();
+            BsonDocument[] pipeline = {
+                new BsonDocument {
+                    { "$project", new BsonDocument {
+                        { "id", 1 }
+                    }}
+                },
+                new BsonDocument {
+                    { "$sort", new BsonDocument {
+                        { "id", -1 }
+                    }}
+                },
+                new BsonDocument {
+                    { "$limit", 1 }
+                }
+            };
+
+            AggregateResult max = this.context.Aggregate(this.collectionName, pipeline);
+            if (max.ResultDocuments.Count() == 0)
+                return 0;
+
+            int maxId = max.ResultDocuments.First()["id"].AsInt32;
+            data.Id = maxId + 1;
+
+            BsonDocument doc = new BsonDocument
+            {
+                { "id", data.Id },                
+                { "name" , data.Name },                
+                { "imageUrl", data.ImageUrl ?? "" },
+                { "buildingGroupId", data.BuildingGroupId },
+                { "buildArea", (BsonValue)data.BuildArea },
+                { "usableArea", (BsonValue)data.UsableArea },
+                { "aboveGroundFloor", (BsonValue)data.AboveGroundFloor },
+                { "underGroundFloor", (BsonValue)data.UnderGroundFloor },
+                { "remark", data.Remark ?? "" },
+                { "status", 0 }
+            };
+
+            WriteConcernResult result = this.context.Insert(this.collectionName, doc);
+
+            if (result.HasLastErrorMessage)
+                return 0;
+            else
+                return data.Id;
         }
 
+        /// <summary>
+        /// 编辑楼宇
+        /// </summary>
+        /// <param name="data">楼宇数据</param>
+        /// <returns></returns>
         public bool Edit(Building data)
         {
-            throw new NotImplementedException();
+            var query = Query.EQ("id", data.Id);
+
+            var update = Update.Set("name", data.Name)
+                .Set("imageUrl", data.ImageUrl ?? "")
+                .Set("buildingGroupId", data.BuildingGroupId)
+                .Set("buildArea", (BsonValue)data.BuildArea)
+                .Set("usableArea", (BsonValue)data.UsableArea)
+                .Set("aboveGroundFloor", (BsonValue)data.AboveGroundFloor)
+                .Set("underGroundFloor", (BsonValue)data.UnderGroundFloor)
+                .Set("remark", data.Remark ?? "");
+
+            WriteConcernResult result = this.context.Update(this.collectionName, query, update);
+
+            if (result.HasLastErrorMessage)
+                return false;
+            else
+                return true;
         }
 
+        /// <summary>
+        /// 删除楼宇
+        /// </summary>
+        /// <param name="id">楼宇ID</param>
+        /// <returns></returns>
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            var query = Query.EQ("id", id);
+            var update = Update.Set("status", 1);
+
+            WriteConcernResult result = this.context.Update(this.collectionName, query, update);
+
+            if (result.HasLastErrorMessage)
+                return false;
+            else
+                return true;
         }
 
+        /// <summary>
+        /// 添加楼层
+        /// </summary>
+        /// <param name="buildingId">楼宇ID</param>
+        /// <param name="floor">楼层数据</param>
+        /// <returns></returns>
         public int CreateFloor(int buildingId, Floor floor)
         {
-            throw new NotImplementedException();
+            BsonDocument[] pipeline = {
+                new BsonDocument {
+                    { "$project", new BsonDocument {
+                        { "id", 1 },
+                        { "name", 1 },
+                        { "floors", 1 }
+                    }}
+                },
+                new BsonDocument {
+                    { "$unwind", "$floors" }
+                },
+                new BsonDocument {
+                    { "$sort", new BsonDocument {
+                        { "floors.id", -1 }
+                    }}
+                },
+                new BsonDocument {
+                    { "$limit", 1 }
+                }
+            };
+
+            AggregateResult max = this.context.Aggregate(this.collectionName, pipeline);
+            if (max.ResultDocuments.Count() == 0)
+                return 0;
+
+            BsonDocument fd = max.ResultDocuments.First();
+            int maxId = fd["floors"].AsBsonDocument["id"].AsInt32;
+            floor.Id = maxId + 1;
+
+            BsonDocument doc = new BsonDocument
+            {
+                { "id", floor.Id },
+                { "number", floor.Number },
+                { "name", floor.Name },
+                { "buildArea", (BsonValue)floor.BuildArea },
+                { "usableArea", (BsonValue)floor.UsableArea },
+                { "imageUrl", floor.ImageUrl ?? "" },
+                { "remark", floor.Remark ?? "" }
+            };
+
+            var query = Query.EQ("id", buildingId);
+            var update = Update.Push("floors", doc);
+
+            WriteConcernResult result = this.context.Update(this.collectionName, query, update);
+            if (result.HasLastErrorMessage)
+                return 0;
+            else
+                return floor.Id;
         }
 
+        /// <summary>
+        /// 编辑楼层
+        /// </summary>
+        /// <param name="buildingId">楼宇ID</param>
+        /// <param name="floor">楼层数据</param>
+        /// <returns></returns>
         public bool EditFloor(int buildingId, Floor floor)
         {
-            throw new NotImplementedException();
+            var query = Query.And(Query.EQ("id", buildingId),
+               Query.EQ("floors.id", floor.Id));
+
+            var update = Update.Set("floors.$.number", floor.Number)
+                .Set("floors.$.name", floor.Name)
+                .Set("floors.$.buildArea", (BsonValue)floor.BuildArea)
+                .Set("floors.$.usableArea", (BsonValue)floor.UsableArea)
+                .Set("floors.$.imageUrl", floor.ImageUrl ?? "")
+                .Set("floors.$.remark", floor.Remark ?? "");
+
+            WriteConcernResult result = this.context.Update(this.collectionName, query, update);
+
+            if (result.HasLastErrorMessage)
+                return false;
+            else
+                return true;
         }
 
+        /// <summary>
+        /// 删除楼层
+        /// </summary>
+        /// <param name="buildingId">楼宇ID</param>
+        /// <param name="floorId">楼层ID</param>
+        /// <returns></returns>
         public bool DeleteFloor(int buildingId, int floorId)
         {
-            throw new NotImplementedException();
+            var query = Query.And(Query.EQ("id", buildingId),
+                Query.EQ("floors.id", floorId));
+
+            var update = Update.Set("floors.$.status", 1);
+            WriteConcernResult result = this.context.Update(this.collectionName, query, update);
+
+            if (result.HasLastErrorMessage)
+                return false;
+            else
+                return true;
         }
         #endregion //Method
     }

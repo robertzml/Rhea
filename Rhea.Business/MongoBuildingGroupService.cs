@@ -19,7 +19,7 @@ namespace Rhea.Business
         /// <summary>
         /// 数据库连接
         /// </summary>
-        private RheaContext context = new RheaContext(RheaConstant.CronusDatabase);
+        private RheaMongoContext context = new RheaMongoContext(RheaConstant.CronusDatabase);
 
         /// <summary>
         /// Collection名称

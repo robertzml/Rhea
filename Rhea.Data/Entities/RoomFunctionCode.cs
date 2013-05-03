@@ -29,5 +29,10 @@ namespace Rhea.Data.Entities
         /// 功能属性
         /// </summary>
         public string FunctionProperty { get; set; }
+
+        /// <summary>
+        /// 备注
+        /// </summary>
+        public string Remark { get; set; }
     }
 }

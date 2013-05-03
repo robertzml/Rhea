@@ -32,8 +32,8 @@ namespace Rhea.UI.Areas.Estate.Controllers
         [ChildActionOnly]
         public ActionResult DepartmentNav()
         {
-            DepartmentService departmentService = new DepartmentService();
-            List<Department> departments = departmentService.GetDepartmentList().ToList();
+            IDepartmentService departmentService = new MongoDepartmentService();
+            List<Department> departments = departmentService.GetList();
 
             return View(departments);
         }

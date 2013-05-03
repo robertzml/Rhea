@@ -5,8 +5,8 @@
 <select id="DepartmentId" name="DepartmentId">
     <option value="">-- 请选择 --</option>
     @{
-        var departmentService = new DepartmentService();
-        List<Department> departments = departmentService.GetDepartmentList().ToList();
+        IDepartmentService departmentService = new MongoDepartmentService();
+        List<Department> departments = departmentService.GetList();
 
         foreach (var item in departments)
         {

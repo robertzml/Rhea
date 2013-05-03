@@ -18,7 +18,7 @@ namespace Rhea.Business.Estate
         {
             List<ManagerGroup> data = new List<ManagerGroup>();
 
-            RheaContext context = new RheaContext();
+            RheaMongoContext context = new RheaMongoContext();
             List<BsonDocument> docs = context.Find("userGroup", "type", 1);
 
             foreach (BsonDocument doc in docs)

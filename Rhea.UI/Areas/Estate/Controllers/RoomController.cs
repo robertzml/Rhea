@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using Rhea.Business;
 using Rhea.Data.Entities;
 using Rhea.UI.Areas.Estate.Models;
@@ -14,7 +15,24 @@ namespace Rhea.UI.Areas.Estate.Controllers
     /// </summary>
     public class RoomController : Controller
     {
+        #region Field
+        /// <summary>
+        /// 房间业务
+        /// </summary>
+        private IRoomService roomService;
+        #endregion //Field
+
         #region Function
+        protected override void Initialize(RequestContext requestContext)
+        {
+            if (roomService == null)
+            {
+                roomService = new MongoRoomService();
+            }
+
+            base.Initialize(requestContext);
+        }
+
         /// <summary>
         /// 模型转换
         /// </summary>
@@ -63,9 +81,8 @@ namespace Rhea.UI.Areas.Estate.Controllers
                 Id = building.Id,
                 Name = building.Name
             };
-
-            EstateService service = new EstateService();
-            RoomFunctionCode code = service.GetFunctionCodeList().First(r => r.CodeId == model.FunctionCodeId);
+                        
+            RoomFunctionCode code = this.roomService.GetFunctionCodeList().First(r => r.CodeId == model.FunctionCodeId);
             room.Function = new Room.RoomFunction
             {
                 FirstCode = code.FirstCode,
@@ -73,8 +90,8 @@ namespace Rhea.UI.Areas.Estate.Controllers
                 Property = code.FunctionProperty
             };
 
-            DepartmentService dservice = new DepartmentService();
-            Department department = dservice.GetDepartment(model.DepartmentId);
+            IDepartmentService departmentService = new MongoDepartmentService();
+            Department department = departmentService.Get(model.DepartmentId);
             room.Department = new Room.RoomDepartment
             {
                 Id = department.Id,
@@ -150,9 +167,8 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <param name="id">房间ID</param>
         /// <returns></returns>
         public ActionResult Details(int id)
-        {
-            EstateService service = new EstateService();
-            var data = service.GetRoom(id);            
+        {           
+            var data = this.roomService.Get(id);            
             return View(data);
         }
 
@@ -162,9 +178,8 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <param name="id">房间ID</param>
         /// <returns></returns>
         public ActionResult Summary(int id)
-        {
-            EstateService service = new EstateService();
-            var data = service.GetRoom(id);
+        {            
+            var data = this.roomService.Get(id);
             return View(data);
         }
 
@@ -175,16 +190,15 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <param name="floor">楼层</param>
         /// <returns></returns>
         public ActionResult List(int buildingId, int floor = 0)
-        {
-            EstateService service = new EstateService();
+        {           
             List<Room> data;
             if (floor == 0)
             {
-                data = service.GetRoomByBuilding(buildingId).OrderBy(r => r.Id).ToList();
+                data = this.roomService.GetListByBuilding(buildingId).OrderBy(r => r.Id).ToList();
             }
             else
             {
-                data = service.GetRoomByBuilding(buildingId, floor).OrderBy(r => r.Id).ToList();
+                data = this.roomService.GetListByBuilding(buildingId, floor).OrderBy(r => r.Id).ToList();
             }
 
             return View(data);
@@ -196,9 +210,8 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <param name="departmentId">部门ID</param>
         /// <returns></returns>
         public ActionResult ListByDepartment(int departmentId)
-        {
-            EstateService service = new EstateService();
-            List<Room> data = service.GetRoomByDepartment(departmentId).ToList();
+        {            
+            List<Room> data = this.roomService.GetListByDepartment(departmentId).ToList();
 
             return View(data);
         }
@@ -223,9 +236,8 @@ namespace Rhea.UI.Areas.Estate.Controllers
         {           
             if (ModelState.IsValid)
             {
-                Room room = ModelTranslate(model);               
-                EstateService service = new EstateService();
-                int result = service.CreateRoom(room);
+                Room room = ModelTranslate(model);              
+                int result = this.roomService.Create(room);
 
                 if (result != 0)
                 {
@@ -247,9 +259,8 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         [HttpGet]
         public ActionResult Edit(int id)
-        {
-            EstateService service = new EstateService();
-            Room room = service.GetRoom(id);
+        {           
+            Room room = this.roomService.Get(id);
             
             RoomEditModel model = ModelTranslate(room);
             return View(model);
@@ -266,9 +277,8 @@ namespace Rhea.UI.Areas.Estate.Controllers
             if (ModelState.IsValid)
             {
                 Room room = ModelTranslate(model);
-                room.Id = model.Id;
-                EstateService service = new EstateService();
-                bool result = service.UpdateRoom(room);
+                room.Id = model.Id;               
+                bool result = this.roomService.Edit(room);
                 if (result)
                 {
                     return RedirectToAction("Index", "Room", new { area = "Estate", id = room.Id });
@@ -290,8 +300,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            EstateService service = new EstateService();
-            var data = service.GetRoom(id);
+            var data = this.roomService.Get(id);
             return View(data);
         }
 
@@ -302,9 +311,8 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirm(int id)
-        {
-            EstateService service = new EstateService();
-            bool result = service.DeleteRoom(id);
+        {           
+            bool result = this.roomService.Delete(id);
 
             if (result)
             {
