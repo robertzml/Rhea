@@ -11,6 +11,13 @@ namespace Rhea.Data.Entities
     /// </summary>
     public class Building
     {
+        #region Constructor
+        public Building()
+        {
+            this.Floors = new List<Floor>();
+        }
+        #endregion //Constructor
+
         /// <summary>
         /// ID
         /// </summary>

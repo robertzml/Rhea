@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Rhea.Data.Entities;
+using Rhea.Data.Estate;
 
 namespace Rhea.Business.Estate
 {
@@ -12,18 +13,33 @@ namespace Rhea.Business.Estate
     public interface IStatisticService
     {
         /// <summary>
-        /// 获取统计面积数据
+        /// 获取部门二级分类面积
         /// </summary>
-        /// <param name="type">统计类型</param>
-        /// <remarks>type=1:学院分类用房面积</remarks>
-        /// <returns></returns>
-        T GetStatisticArea<T>(int type);
+        /// <param name="departmentId">部门ID</param>
+        /// <param name="firstCode">一级编码</param>
+        /// <param name="functionCodes">功能编码列表</param>
+        List<SecondClassifyAreaModel> GetClassifyArea(int departmentId, int firstCode, List<RoomFunctionCode> functionCodes);
 
         /// <summary>
-        /// 获取对象数量
+        /// 得到部门分类面积
         /// </summary>
-        /// <param name="type">类型</param>
+        /// <param name="departmentId"></param>
         /// <returns></returns>
-        int GetEntitySize(int type);
+        CollegeClassifyAreaModel GetCollegeClassifyArea(int departmentId);
+
+        /// <summary>
+        /// 获取部门楼宇面积
+        /// </summary>
+        /// <param name="departmentId">部门ID</param>
+        /// <param name="buildingList">楼宇列表</param>
+        /// <returns></returns>
+        List<BuildingAreaModel> GetBuildingArea(int departmentId, List<Building> buildingList);
+
+        /// <summary>
+        /// 得到部门分楼宇面积
+        /// </summary>
+        /// <param name="departmentId">部门ID</param>
+        /// <returns></returns>
+        CollegeBuildingAreaModel GetCollegeBuildingArea(int departmentId);
     }
 }

@@ -13,6 +13,7 @@ namespace Rhea.Business.Estate
     /// </summary>
     public class RemoteStatisticService : IStatisticService
     {
+        #region Method
         /// <summary>
         /// 获取统计面积数据
         /// </summary>
@@ -54,5 +55,26 @@ namespace Rhea.Business.Estate
             else
                 return 0;
         }
+
+        public List<Data.Estate.SecondClassifyAreaModel> GetClassifyArea(int departmentId, int firstCode, List<RoomFunctionCode> functionCodes)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Data.Estate.CollegeClassifyAreaModel GetCollegeClassifyArea(int departmentId)
+        {
+            throw new NotImplementedException();
+        }      
+
+        public List<Data.Estate.BuildingAreaModel> GetBuildingArea(int departmentId, List<Building> buildingList)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Data.Estate.CollegeBuildingAreaModel GetCollegeBuildingArea(int departmentId)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion //Method
     }
 }

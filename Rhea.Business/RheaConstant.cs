@@ -22,7 +22,7 @@ namespace Rhea.Business
         /// <summary>
         /// Cronus数据库
         /// </summary>
-        public static readonly string CronusDatabase = "Cronus";
+        public static readonly string CronusDatabase = "cronus";
 
         /// <summary>
         /// API服务器地址

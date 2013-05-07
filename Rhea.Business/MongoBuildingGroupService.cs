@@ -83,6 +83,7 @@ namespace Rhea.Business
                 buildingGroups.Add(buildingGroup);
             }
 
+            buildingGroups = buildingGroups.OrderBy(r => r.Id).ToList();
             return buildingGroups;
         }
 

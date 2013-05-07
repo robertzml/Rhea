@@ -51,14 +51,14 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         [ChildActionOnly]
         public ActionResult Tree()
-        {                      
+        {
             IBuildingService buildingService = new MongoBuildingService();
             List<Building> buildings = buildingService.GetList();
 
             List<BuildingGroup> buildingGroups = this.buildingGroupService.GetList();
             foreach (var bg in buildingGroups)
             {
-                bg.Buildings = buildings.Where(r => r.BuildingGroupId == bg.Id).ToList();
+                bg.Buildings = buildings.Where(r => r.BuildingGroupId == bg.Id).OrderBy(r => r.Id).ToList();
             }
 
             return View(buildingGroups);

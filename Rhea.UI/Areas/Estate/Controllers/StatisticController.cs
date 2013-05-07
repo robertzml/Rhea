@@ -24,7 +24,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         {
             if (statisticService == null)
             {
-                statisticService = new RemoteStatisticService();
+                statisticService = new MongoStatisticService();
             }
 
             base.Initialize(requestContext);
@@ -38,8 +38,6 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-            //EstateService service = new EstateService();
-
             ViewBag.BuildingGroupCount = 0;// service.GetEntitySize(11);
             ViewBag.RoomCount = 0;// service.GetEntitySize(12);
 
@@ -80,8 +78,40 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// </summary>
         /// <returns></returns>
         public JsonResult CollegeClassifyData()
-        {           
-            var data = statisticService.GetStatisticArea<List<CollegeClassifyAreaModel>>(1);
+        {
+            //get departments
+            IDepartmentService departmentService = new MongoDepartmentService();
+            var departments = departmentService.GetList().Where(r => r.Type == 1);
+
+            //get codes
+            IRoomService roomService = new MongoRoomService();
+            var functionCodes = roomService.GetFunctionCodeList();
+
+            List<CollegeClassifyAreaModel> data = new List<CollegeClassifyAreaModel>();
+            //get area by department
+            foreach (var department in departments)
+            {
+                CollegeClassifyAreaModel c = new CollegeClassifyAreaModel
+                {
+                    Id = department.Id,
+                    CollegeName = department.Name
+                };
+
+                c.OfficeDetailArea = this.statisticService.GetClassifyArea(department.Id, 1, functionCodes);
+                c.OfficeArea = Math.Round(c.OfficeDetailArea.Sum(r => r.Area), 3);
+
+                c.EducationDetailArea = this.statisticService.GetClassifyArea(department.Id, 2, functionCodes);
+                c.EducationArea = Math.Round(c.EducationDetailArea.Sum(r => r.Area), 3);
+
+                c.ExperimentDetailArea = this.statisticService.GetClassifyArea(department.Id, 3, functionCodes);
+                c.ExperimentArea = Math.Round(c.ExperimentDetailArea.Sum(r => r.Area), 3);
+
+                c.ResearchDetailArea = this.statisticService.GetClassifyArea(department.Id, 4, functionCodes);
+                c.ResearchArea = Math.Round(c.ResearchDetailArea.Sum(r => r.Area), 3);
+
+                data.Add(c);
+            }
+
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
@@ -90,8 +120,32 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// </summary>
         /// <returns></returns>
         public JsonResult CollegeBuildingData()
-        {            
-            var data = statisticService.GetStatisticArea<List<CollegeBuildingAreaModel>>(2);
+        {
+            //get departments
+            IDepartmentService departmentService = new MongoDepartmentService();
+            var departments = departmentService.GetList().Where(r => r.Type == 1);
+
+            //get buildings        
+            IBuildingService buildingService = new MongoBuildingService();
+            var buildings = buildingService.GetList();
+
+            List<CollegeBuildingAreaModel> data = new List<CollegeBuildingAreaModel>();
+
+            //get area by department
+            foreach (var department in departments)
+            {
+                List<BuildingAreaModel> model = this.statisticService.GetBuildingArea(department.Id, buildings);
+
+                CollegeBuildingAreaModel c = new CollegeBuildingAreaModel
+                {
+                    Id = department.Id,
+                    CollegeName = department.Name,
+                    BuildingArea = model
+                };
+
+                data.Add(c);
+            }
+           
             return Json(data, JsonRequestBehavior.AllowGet);
         }
         #endregion //JSON
