@@ -79,5 +79,11 @@ namespace Rhea.Business
         /// </summary>
         /// <returns></returns>
         List<RoomFunctionCode> GetFunctionCodeList();
+
+        /// <summary>
+        /// 获取总数
+        /// </summary>
+        /// <returns></returns>
+        int Count();
     }
 }

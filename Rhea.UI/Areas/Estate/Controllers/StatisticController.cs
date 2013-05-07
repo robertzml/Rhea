@@ -16,6 +16,9 @@ namespace Rhea.UI.Areas.Estate.Controllers
     public class StatisticController : Controller
     {
         #region Field
+        /// <summary>
+        /// 统计业务
+        /// </summary>
         private IStatisticService statisticService;
         #endregion //Field
 

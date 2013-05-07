@@ -405,6 +405,16 @@ namespace Rhea.Business
 
             return data;
         }
+
+        /// <summary>
+        /// 获取总数
+        /// </summary>
+        /// <returns></returns>
+        public int Count()
+        {
+            long count = this.context.Count(this.collectionName);
+            return (int)count;
+        }
         #endregion //Method
     }
 }

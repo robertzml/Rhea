@@ -163,6 +163,11 @@ namespace Rhea.Business.Estate
             HttpResponseMessage response = api.Delete("Building?id=" + buildingId.ToString() + "&floorId=" + floorId);
             return response.IsSuccessStatusCode;
         }
-        #endregion //Method
+
+        public int Count()
+        {
+            throw new NotImplementedException();
+        }
+        #endregion //Method        
     }
 }

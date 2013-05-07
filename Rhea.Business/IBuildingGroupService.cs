@@ -44,5 +44,11 @@ namespace Rhea.Business
         /// <param name="id">楼群ID</param>
         /// <returns></returns>
         bool Delete(int id);
+
+        /// <summary>
+        /// 获取总数
+        /// </summary>
+        /// <returns></returns>
+        int Count();
     }
 }

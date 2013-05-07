@@ -183,6 +183,15 @@ namespace Rhea.Business.Estate
             else
                 return null;
         }
-        #endregion //Method
+
+        /// <summary>
+        /// 获取总数
+        /// </summary>
+        /// <returns></returns>
+        public int Count()
+        {
+            throw new NotImplementedException();
+        }
+        #endregion //Method        
     }
 }

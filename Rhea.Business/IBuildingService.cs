@@ -75,5 +75,11 @@ namespace Rhea.Business
         /// <param name="floorId">楼层ID</param>
         /// <returns></returns>
         bool DeleteFloor(int buildingId, int floorId);
+
+        /// <summary>
+        /// 获取总数
+        /// </summary>
+        /// <returns></returns>
+        int Count();
     }
 }

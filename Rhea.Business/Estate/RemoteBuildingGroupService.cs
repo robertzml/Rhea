@@ -97,6 +97,11 @@ namespace Rhea.Business.Estate
 
             return response.IsSuccessStatusCode;
         }
-        #endregion //Method
+
+        public int Count()
+        {
+            throw new NotImplementedException();
+        }
+        #endregion //Method        
     }
 }
