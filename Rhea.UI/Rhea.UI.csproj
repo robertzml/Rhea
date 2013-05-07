@@ -191,8 +191,18 @@
     <Content Include="Areas\Estate\Images\bubble.png" />
     <Content Include="Areas\Estate\Scripts\floor-model.js" />
     <Content Include="Areas\Estate\Scripts\maplayer.js" />
+    <Content Include="Content\bootstrap-cerulean.css" />
+    <Content Include="Content\bootstrap-classic.css" />
+    <Content Include="Content\bootstrap-classic.min.css" />
+    <Content Include="Content\bootstrap-cyborg.css" />
+    <Content Include="Content\bootstrap-journal.css" />
+    <Content Include="Content\bootstrap-redy.css" />
     <Content Include="Content\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap-responsive.min.css" />
+    <Content Include="Content\bootstrap-simplex.css" />
+    <Content Include="Content\bootstrap-slate.css" />
+    <Content Include="Content\bootstrap-spacelab.css" />
+    <Content Include="Content\bootstrap-united.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Bootstrap\editor.png" />
@@ -202,12 +212,17 @@
     <Content Include="Content\Bootstrap\slider-h.gif" />
     <Content Include="Content\Bootstrap\slider-v.gif" />
     <Content Include="Content\Bootstrap\sprite.png" />
+    <Content Include="Content\chosen.css" />
+    <Content Include="Content\colorbox.css" />
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
+    <Content Include="Content\jquery-ui-1.8.21.custom.css" />
     <Content Include="Content\kendo.bootstrap.css" />
     <Content Include="Content\kendo.bootstrap.min.css" />
     <Content Include="Content\kendo.common.css" />
     <Content Include="Content\kendo.common.min.css" />
+    <Content Include="Content\opa-icons.css" />
+    <Content Include="Content\rhea-app.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -262,6 +277,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\uniform.default.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="img\ajax-loaders\ajax-loader-1.gif" />
@@ -350,6 +366,20 @@
     <Content Include="img\uploadify-cancel.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap\bootstrap-alert.js" />
+    <Content Include="Scripts\bootstrap\bootstrap-button.js" />
+    <Content Include="Scripts\bootstrap\bootstrap-carousel.js" />
+    <Content Include="Scripts\bootstrap\bootstrap-collapse.js" />
+    <Content Include="Scripts\bootstrap\bootstrap-dropdown.js" />
+    <Content Include="Scripts\bootstrap\bootstrap-modal.js" />
+    <Content Include="Scripts\bootstrap\bootstrap-popover.js" />
+    <Content Include="Scripts\bootstrap\bootstrap-scrollspy.js" />
+    <Content Include="Scripts\bootstrap\bootstrap-tab.js" />
+    <Content Include="Scripts\bootstrap\bootstrap-toggle.js" />
+    <Content Include="Scripts\bootstrap\bootstrap-tooltip.js" />
+    <Content Include="Scripts\bootstrap\bootstrap-tour.js" />
+    <Content Include="Scripts\bootstrap\bootstrap-transition.js" />
+    <Content Include="Scripts\bootstrap\bootstrap-typeahead.js" />
     <Content Include="Scripts\function.js" />
     <Content Include="Scripts\highcharts.js" />
     <Content Include="Scripts\jquery-1.7.2.min.js" />
@@ -359,7 +389,11 @@
     <Content Include="Scripts\jquery-ui-1.8.20.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.21.custom.min.js" />
+    <Content Include="Scripts\jquery.chosen.min.js" />
     <Content Include="Scripts\jquery.colorbox.min.js" />
+    <Content Include="Scripts\jquery.cookie.js" />
+    <Content Include="Scripts\jquery.dataTables.min.js" />
+    <Content Include="Scripts\jquery.uniform.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
@@ -605,9 +639,6 @@
     <Content Include="Areas\Estate\Views\BuildingGroup\Tree.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Estate\Views\Home\DepartmentNav.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Areas\Estate\Views\Room\ListByDepartment.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -619,6 +650,7 @@
     <Content Include="Areas\Estate\Views\Admin\CreateManagerGroup.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea.pubxml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Department\Tree.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

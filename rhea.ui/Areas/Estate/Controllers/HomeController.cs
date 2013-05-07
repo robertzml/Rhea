@@ -23,31 +23,13 @@ namespace Rhea.UI.Areas.Estate.Controllers
         public ActionResult Index()
         {
             return View();
-        }
-
-        /// <summary>
-        /// 部门导航列表
-        /// </summary>
-        /// <returns></returns>
-        [ChildActionOnly]
-        public ActionResult DepartmentNav()
-        {
-            IDepartmentService departmentService = new MongoDepartmentService();
-            List<Department> departments = departmentService.GetList();
-
-            return View(departments);
-        }
+        }    
 
         /// <summary>
         /// 地图导航
         /// </summary>
         /// <returns></returns>
         public ActionResult Map()
-        {
-            return View();
-        }
-
-        public ActionResult Go(int bg)
         {
             return View();
         }

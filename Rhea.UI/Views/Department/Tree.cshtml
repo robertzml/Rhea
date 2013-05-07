@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<Rhea.Data.Entities.Department>
-
 @{
     ViewBag.Title = "部门导航";
     Layout = null;
@@ -18,17 +17,17 @@
         <ul id="department-treeview">
             <li><a><span>教学院系</span></a>
                 <ul>
-                @foreach (var item in Model.Where(r => r.Type == 1))
-                {
-                    <li><a class="department" href="#" ref="@item.Id"><span>@item.Name</span></a></li>
+                    @foreach (var item in Model.Where(r => r.Type == 1))
+                    {
+                        <li><a class="department" href="#" ref="@item.Id"><span>@item.Name</span></a></li>
                 }
                 </ul>
             </li>
             <li><a><span>部门机构</span></a>
                 <ul>
-                @foreach (var item in Model.Where(r => r.Type != 1))
-                {
-                    <li><a class="department" href="#" ref="@item.Id"><span>@item.Name</span></a></li>
+                    @foreach (var item in Model.Where(r => r.Type != 1))
+                    {
+                        <li><a class="department" href="#" ref="@item.Id"><span>@item.Name</span></a></li>
                 }
                 </ul>
             </li>
@@ -43,8 +42,8 @@
 
         $('a.department').click(function () {
             var departmentId = $(this).attr('ref');
-            var request = { departmentId: departmentId };
-            ajaxLoadPage("ListByDepartment", "Room", "Estate", request);
+            var request = { id: departmentId };
+            ajaxLoadPage2("Index", "Department", request);
             return false;
         });
 

@@ -22,3 +22,20 @@ function ajaxLoadPage(action, controller, area, request) {
 		}
 	});
 }
+
+function ajaxLoadPage2(action, controller, request) {		
+	$.ajax({
+		url: "/" + controller + "/" + action,
+		type: 'get',
+		data: request,
+		success: function (response) {			
+			$('#ajax-content1').html(response);			
+		},
+		error: function (response) {		
+			noty({
+				text: 'ajax error',
+				type: 'error'
+			});
+		}
+	});
+}

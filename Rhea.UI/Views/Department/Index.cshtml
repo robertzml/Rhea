@@ -1,31 +1,9 @@
-﻿@{
-    ViewBag.Title = "Index";
+﻿@model int
+@{
+    ViewBag.Title = "部门主页";
+    Layout = null;
 }
 
-<h2>Index</h2>
+@Html.Action("Details", "Department", new { area = "", id = Model })
 
-<ul id="data">
-</ul>
-
-@section scripts{
-<script type="text/javascript">
-    $(document).ready(function () {
-        $.ajax({
-            type: 'get',
-            url: 'http://localhost:11500/api/department/',
-            dataType: 'json',
-            success: function (response) {
-                $.each(response, function (i, item) {
-                    var text = "/Department/Details/" + item.Id;
-                    $('#data').append("<li><a href='" + text + "'>" + item.Name + "</a>"); 
-
-                    //$('<li/>', { text: item.Name }).appendTo($('#data'));
-                });
-            },
-            error: function (msg) {
-                alert("error: " + msg);
-            }
-        });
-    });
-</script>
-}
+@Html.Action("ListByDepartment", "Room", new { area = "Estate", departmentId = Model })

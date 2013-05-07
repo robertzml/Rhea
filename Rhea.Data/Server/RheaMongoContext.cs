@@ -35,7 +35,7 @@ namespace Rhea.Data.Server
         /// 数据库连接
         /// </summary>
         public RheaMongoContext()
-            : this("estate")
+            : this("rhea")
         {
         }
 
