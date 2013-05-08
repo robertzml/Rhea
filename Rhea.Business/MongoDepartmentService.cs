@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using MongoDB.Driver.Builders;
 using Rhea.Data.Entities;
 using Rhea.Data.Server;
 
@@ -38,6 +39,9 @@ namespace Rhea.Business
             department.Id = doc["id"].AsInt32;
             department.Name = doc["name"].AsString;
             department.Type = doc["type"].AsInt32;
+            department.Description = doc.GetValue("description", "").AsString;
+            department.ImageUrl = doc.GetValue("imageUrl", "").AsString;
+            department.Status = doc.GetValue("status", 0).AsInt32;
 
             return department;
         }
@@ -77,6 +81,26 @@ namespace Rhea.Business
             }
             else
                 return null;
+        }
+
+        /// <summary>
+        /// 编辑部门
+        /// </summary>
+        /// <param name="data">部门数据</param>
+        /// <returns></returns>
+        public bool Edit(Department data)
+        {
+            var query = Query.EQ("id", data.Id);
+            var update = Update.Set("name", data.Name)
+                .Set("description", data.Description)
+                .Set("imageUrl", data.ImageUrl);
+
+            WriteConcernResult result = this.context.Update(this.collectionName, query, update);
+
+            if (result.HasLastErrorMessage)
+                return false;
+            else
+                return true;
         }
         #endregion //Method
     }

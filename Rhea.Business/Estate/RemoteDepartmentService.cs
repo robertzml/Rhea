@@ -52,6 +52,11 @@ namespace Rhea.Business.Estate
             else
                 return null;
         }
-        #endregion //Method
+
+        public bool Edit(Department data)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion //Method        
     }
 }

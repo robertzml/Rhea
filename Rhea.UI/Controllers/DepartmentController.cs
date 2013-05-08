@@ -53,6 +53,8 @@ namespace Rhea.UI.Controllers
         public ActionResult Details(int id)
         {
             Department data = this.departmentService.Get(id);
+            if (!string.IsNullOrEmpty(data.ImageUrl))
+                data.ImageUrl = RheaConstant.ImagesRoot + data.ImageUrl;
             return View(data);
         }
 
@@ -65,6 +67,42 @@ namespace Rhea.UI.Controllers
         {
             List<Department> departments = departmentService.GetList();
             return View(departments);
+        }
+
+        /// <summary>
+        /// 部门编辑
+        /// </summary>
+        /// <param name="id">部门ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            Department data = this.departmentService.Get(id);
+            return View(data);
+        }
+
+        /// <summary>
+        /// 部门编辑
+        /// </summary>
+        /// <param name="model">部门数据</param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Edit(Department model)
+        {
+            if (ModelState.IsValid)
+            {
+                bool result = this.departmentService.Edit(model);
+
+                if (result)
+                {
+                    return RedirectToAction("Index", "Department", new { id = model.Id });
+                }
+                else
+                {
+                    ModelState.AddModelError("", "保存失败");
+                }
+            }
+            return View(model);
         }
         #endregion //Action
     }

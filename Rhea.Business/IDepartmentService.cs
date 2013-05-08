@@ -23,5 +23,12 @@ namespace Rhea.Business
         /// <param name="id">部门ID</param>
         /// <returns></returns>
         Department Get(int id);
+
+        /// <summary>
+        /// 编辑部门
+        /// </summary>
+        /// <param name="data">部门数据</param>
+        /// <returns></returns>
+        bool Edit(Department data);
     }
 }

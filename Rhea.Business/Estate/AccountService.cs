@@ -23,7 +23,7 @@ namespace Rhea.Business.Estate
         /// <returns></returns>
         public User ValidateUser(string userName, string password)
         {
-            RheaMongoContext context = new RheaMongoContext();
+            RheaMongoContext context = new RheaMongoContext(RheaConstant.RheaDatabase);
 
             BsonDocument doc = context.FindOne("user", "name", userName);
             if (doc != null)
