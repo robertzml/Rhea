@@ -129,8 +129,13 @@ namespace Rhea.Data.Estate
         public string BuildingName { get; set; }
 
         /// <summary>
-        /// 面积
+        /// 总使用面积
         /// </summary>
         public double Area { get; set; }
+
+        /// <summary>
+        /// 房间数量
+        /// </summary>
+        public int RoomCount { get; set; }
     }
 }

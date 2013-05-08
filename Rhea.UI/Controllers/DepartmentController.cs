@@ -5,7 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Rhea.Business;
+using Rhea.Business.Estate;
 using Rhea.Data.Entities;
+using Rhea.Data.Estate;
 
 namespace Rhea.UI.Controllers
 {
@@ -67,6 +69,21 @@ namespace Rhea.UI.Controllers
         {
             List<Department> departments = departmentService.GetList();
             return View(departments);
+        }
+
+        /// <summary>
+        /// 分楼宇用房面积
+        /// </summary>
+        /// <param name="id">部门ID</param>
+        /// <returns></returns>
+        public ActionResult BuildingArea(int id)
+        {
+            IStatisticService statisticService = new MongoStatisticService();
+            IBuildingService buildingService = new MongoBuildingService();
+            List<Building> buildings = buildingService.GetList();
+
+            List<BuildingAreaModel> data = statisticService.GetBuildingArea(id, buildings);
+            return View(data);
         }
 
         /// <summary>

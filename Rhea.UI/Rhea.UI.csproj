@@ -652,6 +652,7 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Department\Tree.cshtml" />
     <Content Include="Views\Department\Edit.cshtml" />
+    <Content Include="Views\Department\BuildingArea.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

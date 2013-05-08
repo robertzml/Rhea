@@ -128,6 +128,9 @@ namespace Rhea.Business.Estate
                         { "_id", "$building.id" },
                         { "area", new BsonDocument {
                             { "$sum", "$usableArea" }
+                        }},
+                        { "count", new BsonDocument {
+                            { "$sum", 1 }
                         }}
                     }
                 }}
@@ -144,7 +147,8 @@ namespace Rhea.Business.Estate
                 {
                     Id = building.Id,
                     BuildingName = building.Name,
-                    Area = Math.Round(doc["area"].AsDouble, 3)
+                    Area = Math.Round(doc["area"].AsDouble, 3),
+                    RoomCount = doc["count"].AsInt32
                 };
 
                 data.Add(model);
