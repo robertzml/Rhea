@@ -208,10 +208,19 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// 房间列表
         /// </summary>
         /// <param name="departmentId">部门ID</param>
+        /// <param name="buildingId">楼宇ID</param>
         /// <returns></returns>
-        public ActionResult ListByDepartment(int departmentId)
+        public ActionResult ListByDepartment(int departmentId, int buildingId = 0)
         {            
-            List<Room> data = this.roomService.GetListByDepartment(departmentId).ToList();
+            List<Room> data;
+            if (buildingId == 0)
+            {
+                data = this.roomService.GetListByDepartment(departmentId);
+            }
+            else
+            {
+                data = this.roomService.GetListByDepartment(departmentId, buildingId);
+            }
 
             return View(data);
         }

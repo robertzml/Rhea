@@ -192,6 +192,17 @@ namespace Rhea.Business.Estate
         {
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// 获取房间列表
+        /// </summary>
+        /// <param name="departmentId">部门ID</param>
+        /// <param name="buildingId">楼宇ID</param>
+        /// <returns></returns>
+        public List<Room> GetListByDepartment(int departmentId, int buildingId)
+        {
+            throw new NotImplementedException();
+        }
         #endregion //Method        
     }
 }

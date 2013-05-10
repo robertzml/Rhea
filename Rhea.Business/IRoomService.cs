@@ -47,6 +47,14 @@ namespace Rhea.Business
         List<Room> GetListByDepartment(int departmentId);
 
         /// <summary>
+        /// 获取房间列表
+        /// </summary>
+        /// <param name="departmentId">部门ID</param>
+        /// <param name="buildingId">楼宇ID</param>
+        /// <returns></returns>
+        List<Room> GetListByDepartment(int departmentId, int buildingId);
+
+        /// <summary>
         /// 获取房间
         /// </summary>
         /// <param name="id">房间ID</param>

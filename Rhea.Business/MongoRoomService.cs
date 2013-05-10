@@ -201,6 +201,33 @@ namespace Rhea.Business
         }
 
         /// <summary>
+        /// 获取房间列表
+        /// </summary>
+        /// <param name="departmentId">部门ID</param>
+        /// <param name="buildingId">楼宇ID</param>
+        /// <returns></returns>
+        public List<Room> GetListByDepartment(int departmentId, int buildingId)
+        {
+            BsonDocument[] pipeline = {
+                new BsonDocument {
+                    { "$match", new BsonDocument {
+                        { "department.id", departmentId },
+                        { "building.id", buildingId }
+                    }}}
+            };
+
+            AggregateResult result = this.context.Aggregate(this.collectionName, pipeline);
+            List<Room> data = new List<Room>();
+            foreach (var r in result.ResultDocuments)
+            {
+                Room room = ModelBind(r);
+                data.Add(room);
+            }
+
+            return data;
+        }
+
+        /// <summary>
         /// 获取房间
         /// </summary>
         /// <param name="id">房间ID</param>

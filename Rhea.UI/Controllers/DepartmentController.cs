@@ -83,6 +83,8 @@ namespace Rhea.UI.Controllers
             List<Building> buildings = buildingService.GetList();
 
             List<BuildingAreaModel> data = statisticService.GetBuildingArea(id, buildings);
+            ViewBag.DepartmentId = id;
+
             return View(data);
         }
 
