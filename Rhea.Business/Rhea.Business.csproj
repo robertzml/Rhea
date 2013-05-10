@@ -70,7 +70,7 @@
     <Compile Include="IDepartmentService.cs" />
     <Compile Include="IRoomService.cs" />
     <Compile Include="MongoBuildingGroupService.cs" />
-    <Compile Include="Estate\AccountService.cs" />
+    <Compile Include="Estate\MongoAccountService.cs" />
     <Compile Include="Estate\RemoteBuildingGroupService.cs" />
     <Compile Include="IAccountService.cs" />
     <Compile Include="Estate\AdminService.cs" />

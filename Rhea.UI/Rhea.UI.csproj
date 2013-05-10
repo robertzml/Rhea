@@ -176,7 +176,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -464,6 +463,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Filters\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -653,6 +653,7 @@
     <Content Include="Views\Department\Tree.cshtml" />
     <Content Include="Views\Department\Edit.cshtml" />
     <Content Include="Views\Department\BuildingArea.cshtml" />
+    <Content Include="Views\Account\Details.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

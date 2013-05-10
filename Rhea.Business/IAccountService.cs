@@ -12,11 +12,14 @@ namespace Rhea.Business
     public interface IAccountService
     {
         /// <summary>
-        /// 用户验证
+        /// 用户登录
         /// </summary>
         /// <param name="userName">用户名</param>
         /// <param name="password">密码</param>
         /// <returns></returns>
-        User ValidateUser(string userName, string password);
+        UserProfile Login(string userName, string password);
+
+
+        UserProfile Get(string userName);
     }
 }

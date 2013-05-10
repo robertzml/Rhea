@@ -23,12 +23,24 @@ namespace Rhea.UI.Controllers
         /// 认证服务
         /// </summary>
         private IFormsAuthenticationService formsService;
+
+        /// <summary>
+        /// 账户服务
+        /// </summary>
+        private IAccountService accountService;
         #endregion //Field
 
         #region Function
         protected override void Initialize(RequestContext requestContext)
         {
-            if (formsService == null) { formsService = new FormsAuthenticationService(); }
+            if (formsService == null) 
+            { 
+                formsService = new FormsAuthenticationService(); 
+            }
+            if (accountService == null)
+            {
+                accountService = new MongoAccountService();
+            }
 
             base.Initialize(requestContext);
         }
@@ -59,15 +71,13 @@ namespace Rhea.UI.Controllers
             if (ModelState.IsValid)
             {
                 formsService.SignOut();
-                HttpContext.Session.Clear();
+                HttpContext.Session.Clear();               
 
-                IAccountService accountService = new AccountService();
-
-                User user = accountService.ValidateUser(model.UserName, model.Password);
+                UserProfile user = accountService.Login(model.UserName, model.Password);
 
                 if (user != null)
                 {
-                    HttpCookie cookie = formsService.SignIn(user.Name, user.ManagerType + "," + user.UserType, true);
+                    HttpCookie cookie = formsService.SignIn(user.UserName, user.ManagerType + "," + user.UserType, true);
                     Response.Cookies.Add(cookie);
 
                     return RedirectToAction("Index", "Home");
@@ -91,6 +101,18 @@ namespace Rhea.UI.Controllers
             HttpContext.Session.Clear();
 
             return RedirectToAction("Index", "Home");
+        }
+
+        /// <summary>
+        /// 账户信息
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Details()
+        {
+            string userName = User.Identity.Name;         
+            UserProfile user = accountService.Get(userName);
+
+            return View(user);
         }
         #endregion //Action
     }
