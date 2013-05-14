@@ -475,9 +475,6 @@
     <Content Include="Views\Department\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\Test.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Rhea.Business\Rhea.Business.csproj">
       <Project>{918B8082-498E-4A1E-8A2D-6CCC570496A0}</Project>
       <Name>Rhea.Business</Name>
@@ -655,6 +652,8 @@
     <Content Include="Views\Admin\ManagerGroupList.cshtml" />
     <Content Include="Views\Admin\CreateManagerGroup.cshtml" />
     <Content Include="Views\Admin\UserGroupList.cshtml" />
+    <Content Include="Views\Shared\_LayoutPresent.cshtml" />
+    <Content Include="Views\Home\Test.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

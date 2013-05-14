@@ -1,0 +1,10 @@
+div#header .navbar-inner {
+	background-image: url("../Images/texture-darker.png");
+	background-repeat: repeat;
+	background-attachment: scroll;
+	background-position: 0 0;
+}
+
+div#main-content {
+	background: url("../images/texture.png") repeat scroll 0 0 transparent;
+}
