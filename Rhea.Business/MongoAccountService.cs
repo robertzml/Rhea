@@ -17,10 +17,6 @@ namespace Rhea.Business
     public class MongoAccountService : IAccountService
     {
         #region Field
-        /// <summary>
-        /// Collection名称
-        /// </summary>
-        private string collectionName = "user";
         #endregion //Field
 
         #region Function
@@ -38,7 +34,7 @@ namespace Rhea.Business
             var update = Update.Set("lastLoginTime", last)
                 .Set("currentLoginTime", current);
 
-            WriteConcernResult result = context.Update(this.collectionName, query, update);
+            WriteConcernResult result = context.Update(EstateCollection.User, query, update);
 
             return;
         }
@@ -55,7 +51,7 @@ namespace Rhea.Business
         {
             RheaMongoContext context = new RheaMongoContext(RheaConstant.EstateDatabase);
 
-            BsonDocument doc = context.FindOne(this.collectionName, "userName", userName);
+            BsonDocument doc = context.FindOne(EstateCollection.User, "userName", userName);
             if (doc != null)
             {
                 string pass = doc["password"].AsString;
@@ -65,10 +61,26 @@ namespace Rhea.Business
                 UserProfile user = new UserProfile();
                 user.Id = doc["id"].AsInt32;
                 user.UserName = userName;
-                user.UserType = doc["userType"].AsInt32;
-                user.ManagerType = doc["managerType"].AsInt32;
+                user.UserGroupId = doc["userGroupId"].AsInt32;
+                user.ManagerGroupId = doc["managerGroupId"].AsInt32;
                 user.LastLoginTime = doc.GetValue("currentLoginTime", DateTime.Now).ToLocalTime();
                 user.CurrentLoginTime = DateTime.Now;
+
+                IAdminService adminService = new MongoAdminService();
+                if (user.ManagerGroupId != 0)
+                {
+                    ManagerGroup mGroup = adminService.GetManagerGroup(user.ManagerGroupId);
+                    user.ManagerGroupName = mGroup.Name;
+                }
+                else
+                    user.ManagerGroupName = "Null";
+                if (user.UserGroupId != 0)
+                {
+                    UserGroup uGroup = adminService.GetUserGroup(user.UserGroupId);
+                    user.UserGroupName = uGroup.Name;
+                }
+                else
+                    user.UserGroupName = "Null";
 
                 UpdateLoginTime(user.Id, user.LastLoginTime, user.CurrentLoginTime);
 
@@ -87,14 +99,14 @@ namespace Rhea.Business
         {
             RheaMongoContext context = new RheaMongoContext(RheaConstant.EstateDatabase);
 
-            BsonDocument doc = context.FindOne(this.collectionName, "userName", userName);
+            BsonDocument doc = context.FindOne(EstateCollection.User, "userName", userName);
             if (doc != null)
             { 
                 UserProfile user = new UserProfile();
                 user.Id = doc["id"].AsInt32;
                 user.UserName = userName;
-                user.UserType = doc["userType"].AsInt32;
-                user.ManagerType = doc["managerType"].AsInt32;
+                user.UserGroupId = doc["userGroupId"].AsInt32;
+                user.ManagerGroupId = doc["managerGroupId"].AsInt32;
                 user.LastLoginTime = doc.GetValue("lastLoginTime", DateTime.Now).ToLocalTime();
                 user.CurrentLoginTime = doc.GetValue("currentLoginTime", DateTime.Now).ToLocalTime();
                 return user;

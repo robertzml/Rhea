@@ -24,7 +24,7 @@ namespace Rhea.Business
             RheaMongoContext context = new RheaMongoContext(RheaConstant.EstateDatabase);
 
             List<ManagerGroup> data = new List<ManagerGroup>();           
-            List<BsonDocument> docs = context.Find("userGroup", "type", 1);
+            List<BsonDocument> docs = context.Find(EstateCollection.UserGroup, "type", 1);
 
             foreach (BsonDocument doc in docs)
             {
@@ -51,6 +51,32 @@ namespace Rhea.Business
         }
 
         /// <summary>
+        /// 获取管理组
+        /// </summary>
+        /// <param name="managerGroupId">管理组ID</param>
+        /// <returns></returns>
+        public ManagerGroup GetManagerGroup(int managerGroupId)
+        {
+            RheaMongoContext context = new RheaMongoContext(RheaConstant.EstateDatabase);
+
+            BsonDocument doc = context.FindOne(EstateCollection.UserGroup, "id", managerGroupId);
+
+            if (doc != null)
+            {
+                ManagerGroup group = new ManagerGroup
+                {
+                    Id = doc["id"].AsInt32,
+                    Name = doc["name"].AsString,
+                    Rank = doc["rank"].AsInt32
+                };
+
+                return group;
+            }
+            else
+                return null;
+        }
+
+        /// <summary>
         /// 获取用户组列表
         /// </summary>
         /// <returns></returns>
@@ -59,7 +85,7 @@ namespace Rhea.Business
             RheaMongoContext context = new RheaMongoContext(RheaConstant.EstateDatabase);
 
             List<UserGroup> data = new List<UserGroup>();
-            List<BsonDocument> docs = context.Find("userGroup", "type", 2);
+            List<BsonDocument> docs = context.Find(EstateCollection.UserGroup, "type", 2);
 
             foreach (BsonDocument doc in docs)
             {
@@ -73,6 +99,32 @@ namespace Rhea.Business
             }
 
             return data.OrderBy(r => r.Id).ToList();
+        }
+
+        /// <summary>
+        /// 获取用户组
+        /// </summary>
+        /// <param name="userGroupId">用户组ID</param>
+        /// <returns></returns>
+        public UserGroup GetUserGroup(int userGroupId)
+        {
+            RheaMongoContext context = new RheaMongoContext(RheaConstant.EstateDatabase);
+
+            BsonDocument doc = context.FindOne(EstateCollection.UserGroup, "id", userGroupId);
+
+            if (doc != null)
+            {
+                UserGroup group = new UserGroup
+                {
+                    Id = doc["id"].AsInt32,
+                    Name = doc["name"].AsString,
+                    Rank = doc["rank"].AsInt32
+                };
+
+                return group;
+            }
+            else
+                return null;
         }
 
         /// <summary>
@@ -94,6 +146,6 @@ namespace Rhea.Business
         {
             throw new NotImplementedException();
         }
-        #endregion //Method
+        #endregion //Method        
     }
 }

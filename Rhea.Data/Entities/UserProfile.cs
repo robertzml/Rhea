@@ -26,14 +26,24 @@ namespace Rhea.Data.Entities
         public string Password { get; set; }
 
         /// <summary>
-        /// 管理组
+        /// 管理组ID
         /// </summary>
-        public int ManagerType { get; set; }
+        public int ManagerGroupId { get; set; }
 
         /// <summary>
-        /// 用户组
+        /// 管理组名称
         /// </summary>
-        public int UserType { get; set; }
+        public string ManagerGroupName { get; set; }
+
+        /// <summary>
+        /// 用户组ID
+        /// </summary>
+        public int UserGroupId { get; set; }
+
+        /// <summary>
+        /// 用户组名称
+        /// </summary>
+        public string UserGroupName { get; set; }
 
         /// <summary>
         /// 上次登录时间

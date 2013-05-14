@@ -76,7 +76,7 @@ namespace Rhea.UI.Controllers
 
                 if (user != null)
                 {
-                    HttpCookie cookie = formsService.SignIn(user.UserName, user.ManagerType + "," + user.UserType, true);
+                    HttpCookie cookie = formsService.SignIn(user.UserName, user.ManagerGroupName + "," + user.UserGroupName, true);
                     Response.Cookies.Add(cookie);
 
                     return RedirectToAction("Index", "Home");
