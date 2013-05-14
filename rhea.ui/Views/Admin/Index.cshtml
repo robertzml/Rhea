@@ -1,12 +1,10 @@
 ﻿@{
     ViewBag.Title = "系统管理";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @section breadcrumb {
-    <li>@Html.ActionLink("系统管理", "Index", new { controller = "Admin", area = "Estate" })</li>
+    <li>@Html.ActionLink("系统管理", "Index", new { controller = "Admin", area = "" })</li>
 }
-
 <div class="row-fluid sortable">
     <div class="span9">
         <div id="ajax-content1">
@@ -48,14 +46,13 @@
     </div>
 </div>
 
-
 @section scripts {
     <script type="text/javascript">
         $(document).ready(function () {
             $('a#manager-group').click(function () {
                 $('ul#admin-nav > li').removeClass('active');
                 $(this).parent().addClass('active');
-                ajaxLoadPage("ManagerGroupList", "Admin", "Estate", {});
+                ajaxLoadPage2("ManagerGroupList", "Admin", {});
             });
         });
     </script>

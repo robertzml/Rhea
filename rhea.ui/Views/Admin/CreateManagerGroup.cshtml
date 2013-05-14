@@ -1,4 +1,4 @@
-﻿@model Rhea.Data.Estate.ManagerGroup
+﻿@model Rhea.Data.Entities.ManagerGroup
 
 @{
     ViewBag.Title = "添加管理组";
@@ -6,10 +6,9 @@
     AjaxOptions ajaxOpts = new AjaxOptions
     {
         UpdateTargetId = "ajax-content1",
-        Url = Url.Action("CreateManagerGroup", "Admin", new { area = "Estate" })
+        Url = Url.Action("CreateManagerGroup", "Admin", new { area = "" })
     };  
 }
-
 
 <div class="box">
     <div class="box-header well" data-original-title>
@@ -44,7 +43,7 @@
                                         @Html.EditorFor(model => model.Name)
                                         @Html.ValidationMessageFor(model => model.Name)
                                     </td>
-                                </tr>                                
+                                </tr>
                             </tbody>
                         </table>
                         <div class="form-actions">
@@ -54,7 +53,7 @@
                                 取消</button>
                         </div>
                     </fieldset>
-            }
+                }
             </div>
         </div>
     </div>

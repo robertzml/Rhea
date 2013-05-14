@@ -19,7 +19,11 @@ namespace Rhea.Business
         /// <returns></returns>
         UserProfile Login(string userName, string password);
 
-
-        UserProfile Get(string userName);
+        /// <summary>
+        /// 获取用户信息
+        /// </summary>
+        /// <param name="userName">用户名</param>
+        /// <returns></returns>
+        UserProfile Get(string userName);        
     }
 }

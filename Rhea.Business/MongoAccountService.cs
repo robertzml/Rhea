@@ -9,7 +9,7 @@ using MongoDB.Driver.Builders;
 using Rhea.Data.Entities;
 using Rhea.Common;
 
-namespace Rhea.Business.Estate
+namespace Rhea.Business
 {
     /// <summary>
     /// 账户业务
@@ -78,6 +78,11 @@ namespace Rhea.Business.Estate
                 return null;
         }
 
+        /// <summary>
+        /// 获取用户信息
+        /// </summary>
+        /// <param name="userName">用户名</param>
+        /// <returns></returns>
         public UserProfile Get(string userName)
         {
             RheaMongoContext context = new RheaMongoContext(RheaConstant.EstateDatabase);
@@ -97,6 +102,6 @@ namespace Rhea.Business.Estate
             else
                 return null;
         }
-        #endregion //Method
+        #endregion //Method        
     }
 }
