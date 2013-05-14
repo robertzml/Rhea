@@ -54,6 +54,12 @@
                 $(this).parent().addClass('active');
                 ajaxLoadPage2("ManagerGroupList", "Admin", {});
             });
+
+            $('a#user-group').click(function() {
+                $('ul#admin-nav > li').removeClass('active');
+                $(this).parent().addClass('active');
+                ajaxLoadPage2("UserGroupList", "Admin", {});
+            });
         });
     </script>
 }

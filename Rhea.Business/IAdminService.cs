@@ -24,11 +24,24 @@ namespace Rhea.Business
         /// <returns></returns>
         bool CreateManagerGroup(ManagerGroup data);
 
-
         /// <summary>
         /// 获取用户组列表
         /// </summary>
         /// <returns></returns>
-        List<UserGroup> GetUserGroupList(); 
+        List<UserGroup> GetUserGroupList();
+
+        /// <summary>
+        /// 获取用户列表
+        /// </summary>
+        /// <returns></returns>
+        List<UserProfile> GetUserList();
+
+        /// <summary>
+        /// 获取用户列表
+        /// </summary>
+        /// <param name="groupId">组ID</param>
+        /// <param name="type">1:管理组，2:用户组</param>
+        /// <returns></returns>
+        List<UserProfile> GetUserList(int groupId, int type);
     }
 }

@@ -14,15 +14,16 @@ namespace Rhea.Business
     /// </summary>
     public class MongoAdminService : IAdminService
     {
+        #region Method
         /// <summary>
         /// 获取管理组列表
         /// </summary>
         /// <returns></returns>
         public List<ManagerGroup> GetManagerGroupList()
         {
-            List<ManagerGroup> data = new List<ManagerGroup>();
+            RheaMongoContext context = new RheaMongoContext(RheaConstant.EstateDatabase);
 
-            RheaMongoContext context = new RheaMongoContext();
+            List<ManagerGroup> data = new List<ManagerGroup>();           
             List<BsonDocument> docs = context.Find("userGroup", "type", 1);
 
             foreach (BsonDocument doc in docs)
@@ -30,12 +31,13 @@ namespace Rhea.Business
                 ManagerGroup g = new ManagerGroup
                 {
                     Id = doc["id"].AsInt32,
-                    Name = doc["name"].AsString
+                    Name = doc["name"].AsString,
+                    Rank = doc["rank"].AsInt32
                 };
                 data.Add(g);
             }
 
-            return data;
+            return data.OrderBy(r => r.Id).ToList();
         }
 
         /// <summary>
@@ -70,7 +72,28 @@ namespace Rhea.Business
                 data.Add(userGroup);
             }
 
-            return data;
+            return data.OrderBy(r => r.Id).ToList();
         }
+
+        /// <summary>
+        /// 获取用户列表
+        /// </summary>
+        /// <returns></returns>
+        public List<UserProfile> GetUserList()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// 获取用户列表
+        /// </summary>
+        /// <param name="groupId">组ID</param>
+        /// <param name="type">1:管理组，2:用户组</param>
+        /// <returns></returns>
+        public List<UserProfile> GetUserList(int groupId, int type)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion //Method
     }
 }

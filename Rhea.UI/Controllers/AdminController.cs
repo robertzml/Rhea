@@ -50,16 +50,6 @@ namespace Rhea.UI.Controllers
         }
 
         /// <summary>
-        /// 用户组列表
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult UserGroupList()
-        {
-            var data = this.adminService.GetUserGroupList();
-            return View(data);
-        }
-
-        /// <summary>
         /// 添加管理组
         /// </summary>
         /// <returns></returns>
@@ -68,6 +58,16 @@ namespace Rhea.UI.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// 用户组列表
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult UserGroupList()
+        {
+            var data = this.adminService.GetUserGroupList();
+            return View(data);
+        }        
         #endregion //Action
     }
 }
