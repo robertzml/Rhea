@@ -3,8 +3,27 @@ div#header .navbar-inner {
 	background-repeat: repeat;
 	background-attachment: scroll;
 	background-position: 0 0;
+	border-bottom:1px solid rgba(255, 255, 255, 0.2);
+	box-shadow:0 0 20px #000000;
 }
 
-div#main-content {
+body {
 	background: url("../images/texture.png") repeat scroll 0 0 transparent;
+}
+
+div#content-inner-wrap {
+	background: url("../images/texture-darker.png") repeat scroll 0 0 transparent;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	box-shadow:0 0 100px rgba(255, 255, 255, 0.1) inset, 0 0 10px rgba(0, 0, 0, 0.6);
+	padding:5px;
+}
+
+table {
+	color:#FFD200;
+	font-size:13px;
+}
+
+div#side-nav {
+	width:200px;
+	right:0;
 }
