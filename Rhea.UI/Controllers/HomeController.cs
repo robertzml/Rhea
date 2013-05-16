@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Rhea.Business;
 
 namespace Rhea.UI.Controllers
 {
@@ -42,12 +43,7 @@ namespace Rhea.UI.Controllers
             ViewBag.Message = "你的应用程序说明页。";
 
             return View();
-        }
-
-        public ActionResult Test()
-        {
-            return View();
-        }
+        }      
 
         public ActionResult Contact()
         {
@@ -55,6 +51,6 @@ namespace Rhea.UI.Controllers
 
             return View();
         }
-        #endregion //Action
+        #endregion //Action        
     }
 }
