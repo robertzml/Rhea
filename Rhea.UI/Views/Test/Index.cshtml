@@ -272,7 +272,7 @@
         <div class="span1">
         </div>
 
-        <div id="side-nav" class="well sidebar-nav affix">
+        <div id="side-nav" class="well sidebar-nav affix" style="display:none;">
             <ul class="nav nav-list">
                 <li class="nav-header">学院导航</li>
                 <li class="active"><a href="#">Link</a></li>
@@ -452,9 +452,9 @@
         }
 
         $('a#toggle-side').toggle(function () {
-            $('div#side-nav').hide('slow');
-        }, function () {
             $('div#side-nav').show('slow');
+        }, function () {
+            $('div#side-nav').hide('slow');
         });
     });
 </script>

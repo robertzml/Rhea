@@ -1,0 +1,108 @@
+﻿@model Rhea.Data.Entities.Room
+
+@{
+    Layout = null;
+}
+
+<table class="table table-condensed ">
+    <thead>
+        <tr>
+            <th>
+                属性
+            </th>
+            <th>
+                值
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="width: 30%">
+                编号
+            </td>
+            <td style="width: 70%">
+                @Model.Number
+            </td>
+        </tr>
+        <tr>
+            <td>
+                名称
+            </td>
+            <td>
+                @Model.Name
+            </td>
+        </tr>
+        <tr>
+            <td>
+                部门
+            </td>
+            <td>
+                @Model.Department.Name
+            </td>
+        </tr>
+        <tr>
+            <td>
+                功能
+            </td>
+            <td>
+                @Model.Function.Property
+            </td>
+        </tr>
+        <tr>
+            <td>
+                使用面积
+            </td>
+            <td>
+                @Model.UsableArea m<sup>2</sup>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Department)
+            </td>
+            <td>
+                @Model.Department.Name
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Span)
+            </td>
+            <td>
+                @Model.Span
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Orientation)
+            </td>
+            <td>
+                @Model.Orientation
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.BuildArea)
+            </td>
+            <td>
+                @Model.BuildArea
+            </td>
+        </tr>    
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Manager)
+            </td>
+            <td>
+                @Model.Manager
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.RoomStatus)
+            </td>
+            <td>
+               
+            </td>
+        </tr>    
+    </tbody>
+</table>

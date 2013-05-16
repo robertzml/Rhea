@@ -20,6 +20,20 @@ namespace Rhea.UI.Controllers
             var data = buildingGroupService.Get(100023);
             return View(data);
         }
+
+        public ActionResult Test2()
+        {
+            IBuildingService buildingService = new MongoBuildingService();
+            var data = buildingService.Get(200044);
+            return View(data);
+        }
+
+        public ActionResult Summary(int id)
+        {
+            IRoomService roomService = new MongoRoomService();
+            var data = roomService.Get(id);
+            return View(data);
+        }
         #endregion //Action
 
         #region Json
