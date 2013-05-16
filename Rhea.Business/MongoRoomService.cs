@@ -20,11 +20,6 @@ namespace Rhea.Business
         /// 数据库连接
         /// </summary>
         private RheaMongoContext context = new RheaMongoContext(RheaConstant.CronusDatabase);
-
-        /// <summary>
-        /// Collection名称
-        /// </summary>
-        private readonly string collectionName = "room";
         #endregion //Field
 
         #region Function
@@ -108,7 +103,7 @@ namespace Rhea.Business
         public List<Room> GetList()
         {
             List<Room> data = new List<Room>();
-            List<BsonDocument> doc = this.context.FindAll(this.collectionName);
+            List<BsonDocument> doc = this.context.FindAll(CronusCollection.Room);
 
             foreach (BsonDocument d in doc)
             {
@@ -126,7 +121,7 @@ namespace Rhea.Business
         /// <returns></returns>
         public List<Room> GetListByBuilding(int buildingId)
         {
-            List<BsonDocument> docs = this.context.Find(this.collectionName, "building.id", buildingId);
+            List<BsonDocument> docs = this.context.Find(CronusCollection.Room, "building.id", buildingId);
 
             List<Room> rooms = new List<Room>();
             foreach (var doc in docs)
@@ -154,7 +149,7 @@ namespace Rhea.Business
                     }}}
             };
 
-            AggregateResult result = this.context.Aggregate(this.collectionName, pipeline);
+            AggregateResult result = this.context.Aggregate(CronusCollection.Room, pipeline);
             List<Room> data = new List<Room>();
             foreach (var r in result.ResultDocuments)
             {
@@ -189,7 +184,7 @@ namespace Rhea.Business
                     }}}
             };
 
-            AggregateResult result = this.context.Aggregate(this.collectionName, pipeline);
+            AggregateResult result = this.context.Aggregate(CronusCollection.Room, pipeline);
             List<Room> data = new List<Room>();
             foreach (var r in result.ResultDocuments)
             {
@@ -216,7 +211,7 @@ namespace Rhea.Business
                     }}}
             };
 
-            AggregateResult result = this.context.Aggregate(this.collectionName, pipeline);
+            AggregateResult result = this.context.Aggregate(CronusCollection.Room, pipeline);
             List<Room> data = new List<Room>();
             foreach (var r in result.ResultDocuments)
             {
@@ -234,7 +229,7 @@ namespace Rhea.Business
         /// <returns></returns>
         public Room Get(int id)
         {
-            BsonDocument doc = this.context.FindOne(this.collectionName, "id", id);
+            BsonDocument doc = this.context.FindOne(CronusCollection.Room, "id", id);
 
             if (doc != null)
             {
@@ -268,7 +263,7 @@ namespace Rhea.Business
                 }
             };
 
-            AggregateResult max = this.context.Aggregate(this.collectionName, pipeline);
+            AggregateResult max = this.context.Aggregate(CronusCollection.Room, pipeline);
             if (max.ResultDocuments.Count() == 0)
                 return 0;
 
@@ -324,7 +319,7 @@ namespace Rhea.Business
                 { "usageCharge", (BsonValue)data.UsageCharge }
             };
 
-            WriteConcernResult result = this.context.Insert(this.collectionName, doc);
+            WriteConcernResult result = this.context.Insert(CronusCollection.Room, doc);
 
             if (result.HasLastErrorMessage)
                 return 0;
@@ -379,7 +374,7 @@ namespace Rhea.Business
                 .Set("hasTestBed", (BsonValue)data.HasTestBed)
                 .Set("usageCharge", (BsonValue)data.UsageCharge);
 
-            WriteConcernResult result = this.context.Update(this.collectionName, query, update);
+            WriteConcernResult result = this.context.Update(CronusCollection.Room, query, update);
 
             if (result.HasLastErrorMessage)
                 return false;
@@ -397,7 +392,7 @@ namespace Rhea.Business
             var query = Query.EQ("id", id);
             var update = Update.Set("status", 1);
 
-            WriteConcernResult result = this.context.Update(this.collectionName, query, update);
+            WriteConcernResult result = this.context.Update(CronusCollection.Room, query, update);
 
             if (result.HasLastErrorMessage)
                 return false;
@@ -439,7 +434,7 @@ namespace Rhea.Business
         /// <returns></returns>
         public int Count()
         {
-            long count = this.context.Count(this.collectionName);
+            long count = this.context.Count(CronusCollection.Room);
             return (int)count;
         }
         #endregion //Method

@@ -20,11 +20,6 @@ namespace Rhea.Business
         /// 数据库连接
         /// </summary>
         private RheaMongoContext context = new RheaMongoContext(RheaConstant.CronusDatabase);
-
-        /// <summary>
-        /// Collection名称
-        /// </summary>
-        private readonly string collectionName = "buildingGroup";
         #endregion //Field
 
         #region Function
@@ -73,7 +68,7 @@ namespace Rhea.Business
         public List<BuildingGroup> GetList()
         {
             List<BuildingGroup> buildingGroups = new List<BuildingGroup>();
-            List<BsonDocument> doc = this.context.FindAll(this.collectionName);
+            List<BsonDocument> doc = this.context.FindAll(CronusCollection.BuildingGroup);
 
             foreach (var d in doc)
             {
@@ -94,7 +89,7 @@ namespace Rhea.Business
         /// <returns></returns>
         public BuildingGroup Get(int id)
         {
-            BsonDocument doc = this.context.FindOne(this.collectionName, "id", id);
+            BsonDocument doc = this.context.FindOne(CronusCollection.BuildingGroup, "id", id);
             if (doc != null)
             {
                 BuildingGroup buildingGroup = ModelBind(doc);
@@ -130,7 +125,7 @@ namespace Rhea.Business
                 }
             };
 
-            AggregateResult max = this.context.Aggregate(this.collectionName, pipeline);
+            AggregateResult max = this.context.Aggregate(CronusCollection.BuildingGroup, pipeline);
             if (max.ResultDocuments.Count() == 0)
                 return 0;
 
@@ -163,7 +158,7 @@ namespace Rhea.Business
                 { "status", 0 }
             };
 
-            WriteConcernResult result = this.context.Insert(this.collectionName, doc);
+            WriteConcernResult result = this.context.Insert(CronusCollection.BuildingGroup, doc);
 
             if (result.HasLastErrorMessage)
                 return 0;
@@ -200,7 +195,7 @@ namespace Rhea.Business
                 .Set("manageType", data.ManageType ?? "")
                 .Set("remark", data.Remark ?? "");
 
-            WriteConcernResult result = this.context.Update(this.collectionName, query, update);
+            WriteConcernResult result = this.context.Update(CronusCollection.BuildingGroup, query, update);
 
             if (result.HasLastErrorMessage)
                 return false;
@@ -218,7 +213,7 @@ namespace Rhea.Business
             var query = Query.EQ("id", id);
             var update = Update.Set("status", 1);
 
-            WriteConcernResult result = this.context.Update(this.collectionName, query, update);
+            WriteConcernResult result = this.context.Update(CronusCollection.BuildingGroup, query, update);
 
             if (result.HasLastErrorMessage)
                 return false;
@@ -232,7 +227,7 @@ namespace Rhea.Business
         /// <returns></returns>
         public int Count()
         {
-            long count = this.context.Count(this.collectionName);
+            long count = this.context.Count(CronusCollection.BuildingGroup);
             return (int)count;
         }
         #endregion //Method

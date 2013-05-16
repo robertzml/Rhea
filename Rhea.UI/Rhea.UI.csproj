@@ -221,6 +221,7 @@
     <Content Include="Content\kendo.bootstrap.min.css" />
     <Content Include="Content\kendo.common.css" />
     <Content Include="Content\kendo.common.min.css" />
+    <Content Include="Content\layout-ui.css" />
     <Content Include="Content\opa-icons.css" />
     <Content Include="Content\rhea-app.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -280,6 +281,8 @@
     <Content Include="Content\uniform.default.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Images\texture-darker.png" />
+    <Content Include="Images\texture.png" />
     <Content Include="img\ajax-loaders\ajax-loader-1.gif" />
     <Content Include="img\ajax-loaders\ajax-loader-2.gif" />
     <Content Include="img\ajax-loaders\ajax-loader-3.gif" />

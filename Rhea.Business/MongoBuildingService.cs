@@ -20,11 +20,6 @@ namespace Rhea.Business
         /// 数据库连接
         /// </summary>
         private RheaMongoContext context = new RheaMongoContext(RheaConstant.CronusDatabase);
-
-        /// <summary>
-        /// Collection名称
-        /// </summary>
-        private readonly string collectionName = "building";
         #endregion //Field
 
         #region Function
@@ -83,7 +78,7 @@ namespace Rhea.Business
         public List<Building> GetList()
         {
             List<Building> buildings = new List<Building>();
-            List<BsonDocument> docs = this.context.FindAll(this.collectionName);
+            List<BsonDocument> docs = this.context.FindAll(CronusCollection.Building);
 
             foreach (var doc in docs)
             {
@@ -103,7 +98,7 @@ namespace Rhea.Business
         /// <returns></returns>
         public List<Building> GetListByBuildingGroup(int buildingGroupId)
         {
-            List<BsonDocument> docs = this.context.Find(this.collectionName, "buildingGroupId", buildingGroupId);
+            List<BsonDocument> docs = this.context.Find(CronusCollection.Building, "buildingGroupId", buildingGroupId);
 
             List<Building> buildings = new List<Building>();
             foreach (var doc in docs)
@@ -124,7 +119,7 @@ namespace Rhea.Business
         /// <returns></returns>
         public Building Get(int id)
         {
-            BsonDocument doc = this.context.FindOne(this.collectionName, "id", id);
+            BsonDocument doc = this.context.FindOne(CronusCollection.Building, "id", id);
 
             if (doc != null)
             {
@@ -161,7 +156,7 @@ namespace Rhea.Business
                 }
             };
 
-            AggregateResult max = this.context.Aggregate(this.collectionName, pipeline);
+            AggregateResult max = this.context.Aggregate(CronusCollection.Building, pipeline);
             if (max.ResultDocuments.Count() == 0)
                 return 0;
 
@@ -182,7 +177,7 @@ namespace Rhea.Business
                 { "status", 0 }
             };
 
-            WriteConcernResult result = this.context.Insert(this.collectionName, doc);
+            WriteConcernResult result = this.context.Insert(CronusCollection.Building, doc);
 
             if (result.HasLastErrorMessage)
                 return 0;
@@ -208,7 +203,7 @@ namespace Rhea.Business
                 .Set("underGroundFloor", (BsonValue)data.UnderGroundFloor)
                 .Set("remark", data.Remark ?? "");
 
-            WriteConcernResult result = this.context.Update(this.collectionName, query, update);
+            WriteConcernResult result = this.context.Update(CronusCollection.Building, query, update);
 
             if (result.HasLastErrorMessage)
                 return false;
@@ -226,7 +221,7 @@ namespace Rhea.Business
             var query = Query.EQ("id", id);
             var update = Update.Set("status", 1);
 
-            WriteConcernResult result = this.context.Update(this.collectionName, query, update);
+            WriteConcernResult result = this.context.Update(CronusCollection.Building, query, update);
 
             if (result.HasLastErrorMessage)
                 return false;
@@ -263,7 +258,7 @@ namespace Rhea.Business
                 }
             };
 
-            AggregateResult max = this.context.Aggregate(this.collectionName, pipeline);
+            AggregateResult max = this.context.Aggregate(CronusCollection.Building, pipeline);
             if (max.ResultDocuments.Count() == 0)
                 return 0;
 
@@ -285,7 +280,7 @@ namespace Rhea.Business
             var query = Query.EQ("id", buildingId);
             var update = Update.Push("floors", doc);
 
-            WriteConcernResult result = this.context.Update(this.collectionName, query, update);
+            WriteConcernResult result = this.context.Update(CronusCollection.Building, query, update);
             if (result.HasLastErrorMessage)
                 return 0;
             else
@@ -310,7 +305,7 @@ namespace Rhea.Business
                 .Set("floors.$.imageUrl", floor.ImageUrl ?? "")
                 .Set("floors.$.remark", floor.Remark ?? "");
 
-            WriteConcernResult result = this.context.Update(this.collectionName, query, update);
+            WriteConcernResult result = this.context.Update(CronusCollection.Building, query, update);
 
             if (result.HasLastErrorMessage)
                 return false;
@@ -330,7 +325,7 @@ namespace Rhea.Business
                 Query.EQ("floors.id", floorId));
 
             var update = Update.Set("floors.$.status", 1);
-            WriteConcernResult result = this.context.Update(this.collectionName, query, update);
+            WriteConcernResult result = this.context.Update(CronusCollection.Building, query, update);
 
             if (result.HasLastErrorMessage)
                 return false;
@@ -344,7 +339,7 @@ namespace Rhea.Business
         /// <returns></returns>
         public int Count()
         {
-            long count = this.context.Count(this.collectionName);
+            long count = this.context.Count(CronusCollection.Building);
             return (int)count;
         }
         #endregion //Method

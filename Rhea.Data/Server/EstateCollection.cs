@@ -10,7 +10,7 @@ namespace Rhea.Data.Server
     /// </summary>
     public static class EstateCollection
     {
-        #region Property
+        #region Field
         /// <summary>
         /// 用户组表
         /// userGroup
@@ -22,6 +22,6 @@ namespace Rhea.Data.Server
         /// user
         /// </summary>
         public static readonly string User = "user";
-        #endregion //Property
+        #endregion //Field
     }
 }
