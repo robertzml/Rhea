@@ -106,6 +106,15 @@
                     direction: 'right'
                 });
             });
+
+            $(window).resize(function () {
+                $('#mega-1').dcVerticalMegaMenu({
+                    rowItems: '3',
+                    speed: 'fast',
+                    effect: 'show',
+                    direction: 'right'
+                });
+            });
         </script>
         @RenderSection("scripts", required: false)
     </body>
