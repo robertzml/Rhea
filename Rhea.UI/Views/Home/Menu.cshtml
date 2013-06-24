@@ -66,75 +66,57 @@
         </li>
         <li><a href="@Url.Action("Index", new { controller = "Home", area = "Estate" })">学院房屋数据</a>
             <ul>
-                <li><a href="#">Sub-Header 1</a>
+                <li><a href="#">教学院系</a>
                     <ul>
-                        @foreach (var item in Model.Departments.Where(r => r.Type == 1))
-                        {
-                            <li><a class="department" href="#" ref="@item.Id"><span>@item.Name</span></a></li>
-                        }                        
+                    @foreach (var item in Model.Departments.Where(r => r.Type == 1))
+                    {
+                        <li><a class="department" href="#" ref="@item.Id"><span>@item.Name</span></a></li>
+                    }                        
                     </ul>
                 </li>
-                <li><a href="#">Sub-Header 2</a>
+                <li><a href="#">行政单位</a>
                     <ul>
-                        @foreach (var item in Model.Departments.Where(r => r.Type == 2 || r.Type == 3 || r.Type == 4))
-                        {
-                            <li><a class="department" href="#" ref="@item.Id"><span>@item.Name</span></a></li>
-                        }
+                    @foreach (var item in Model.Departments.Where(r => r.Type == 5))
+                    {
+                        <li><a class="department" href="#" ref="@item.Id"><span>@item.Name</span></a></li>
+                    }
                     </ul>
                 </li> 
-                <li><a href="#">Sub-Header 3</a>
+                <li><a href="#">机关部门</a>
                     <ul>
-                        @foreach (var item in Model.Departments.Where(r => r.Type > 4))
-                        {
-                            <li><a class="department" href="#" ref="@item.Id"><span>@item.Name</span></a></li>
-                        }
+                    @foreach (var item in Model.Departments.Where(r => r.Type != 1 && r.Type != 5))
+                    {
+                        <li><a class="department" href="#" ref="@item.Id"><span>@item.Name</span></a></li>
+                    }
                     </ul>
                 </li>
             </ul>
         </li>
-        <li><a href="#">楼宇房屋数据</a>
+        <li><a href="#">楼群房屋数据</a>
             <ul>
-                <li><a href="#">Sub-Header 1</a>
+                <li><a href="#">学院楼群</a>
                     <ul>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li></ul>
+                    @foreach (var item in Model.BuildingGroups.Where(r => r.Type == 1))
+                    {
+                        <li><a class="buildingGroup" href="#" ref="@item.Id"><span>@item.Name</span></a></li>
+                    }
+                    </ul>
                 </li>
-                <li><a href="#">Sub-Header 2</a>
+                <li><a href="#">办公教学</a>
                     <ul>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li></ul>
+                    @foreach (var item in Model.BuildingGroups.Where(r => r.Type == 2 || r.Type == 3 ))
+                    {
+                        <li><a class="buildingGroup" href="#" ref="@item.Id"><span>@item.Name</span></a></li>
+                    }
+                    </ul>
                 </li>
-                <li><a href="#">Sub-Header 3</a>
+                <li><a href="#">宿舍楼群</a>
                     <ul>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li></ul>
-                </li>
-                <li><a href="#">Sub-Header 4</a>
-                    <ul>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li></ul>
-                </li>
-                <li><a href="#">Sub-Header 5</a>
-                    <ul>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li></ul>
-                </li>
-                <li><a href="#">Sub-Header 6</a>
-                    <ul>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li></ul>
-                </li>
-                <li><a href="#">Sub-Header 7</a>
-                    <ul>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li></ul>
+                    @foreach (var item in Model.BuildingGroups.Where(r => r.Type > 3))
+                    {
+                        <li><a class="buildingGroup" href="#" ref="@item.Id"><span>@item.Name</span></a></li>
+                    }
+                    </ul>
                 </li>
             </ul>
         </li>

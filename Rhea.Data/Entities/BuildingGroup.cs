@@ -157,6 +157,15 @@ namespace Rhea.Data.Entities
         public int Status { get; set; }
 
         /// <summary>
+        /// 类型
+        /// </summary>
+        /// <remarks>
+        /// 1:学院楼宇,2:教学楼宇,3:行政办公楼宇,4:宿舍楼宇
+        /// </remarks>
+        [Display(Name = "类型" )]
+        public int Type { get; set; }
+
+        /// <summary>
         /// 楼宇列表
         /// </summary>
         public List<Building> Buildings { get; set; }

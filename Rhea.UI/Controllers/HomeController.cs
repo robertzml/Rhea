@@ -27,11 +27,22 @@ namespace Rhea.UI.Controllers
         [ChildActionOnly]
         public PartialViewResult Menu()
         {
-            IDepartmentService departmentService = new MongoDepartmentService();
-            List<Department> departments = departmentService.GetList();
-
             MenuModel data = new MenuModel();
+
+            IDepartmentService departmentService = new MongoDepartmentService();
+            List<Department> departments = departmentService.GetList();            
             data.Departments = departments;
+
+            IBuildingGroupService buildingGroupService = new MongoBuildingGroupService();
+            IBuildingService buildingService = new MongoBuildingService();
+            List<Building> buildings = buildingService.GetList();
+
+            List<BuildingGroup> buildingGroups = buildingGroupService.GetList();
+            foreach (var bg in buildingGroups)
+            {
+                bg.Buildings = buildings.Where(r => r.BuildingGroupId == bg.Id).OrderBy(r => r.Id).ToList();
+            }
+            data.BuildingGroups = buildingGroups;
 
             return PartialView(data);
         }

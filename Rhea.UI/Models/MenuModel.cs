@@ -9,5 +9,7 @@ namespace Rhea.UI.Models
     public class MenuModel
     {
         public List<Department> Departments { get; set; }
+
+        public List<BuildingGroup> BuildingGroups { get; set; }
     }
 }
