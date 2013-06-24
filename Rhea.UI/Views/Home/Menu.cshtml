@@ -1,73 +1,393 @@
-﻿@{
+﻿@model Rhea.UI.Models.MenuModel
+@{
     Layout = null;
 }
 
 <!-- left menu starts -->
-<div class="span2 main-menu-span">
-    <div class="well nav-collapse sidebar-nav">
-        <ul class="nav nav-tabs nav-stacked main-menu">
-            <li class="nav-header hidden-tablet">Main</li>
-            <li>
-                <a class="ajax-link" href="@Url.Action("Index", "Home", new { area = "" })"><i class="icon-home"></i>
-                <span class="hidden-tablet">我的主页</span></a>
-            </li>
-            <li>
-                <a class="ajax-link" href="@Url.Action("Chrisma", "Home", new { area = "" })"><i class="icon-eye-open"></i>
-                <span class="hidden-tablet">展示页</span></a>
-            </li>
-            <li>
-                <a class="ajax-link" href="form.html"><i class="icon-edit"></i>
-                <span class="hidden-tablet">通知</span></a> 
-            </li>
-            <li>
-                <a class="ajax-link" href="chart.html"><i class="icon-list-alt"></i>
-                <span class="hidden-tablet">动态</span></a> 
-            </li>
-            <li>
-                <a class="ajax-link" href="typography.html"><i class="icon-font"></i>
-                <span class="hidden-tablet">日志</span></a> 
-            </li>
-         
-            <li class="nav-header hidden-tablet">我的应用</li>
-            <li>
-                <a class="ajax-link" href="@Url.Action("Index", new { controller = "Home", area = "Estate" })">
-                <i class="icon-th-list"></i><span class="hidden-tablet">房产管理</span></a> 
-            </li>
-            <li>
-                <a class="ajax-link" href="@Url.Action("Index", new { controller = "Statistic", area = "Estate" })"><i class="icon-align-justify"></i>
-                <span class="hidden-tablet">房产统计</span></a>
-            </li>
-            <li>
-                <a class="ajax-link" href="@Url.Action("Index", new { controller = "Admin", area = "" })"><i class="icon-cog"></i>
-                <span class="hidden-tablet">系统管理</span></a>
-            </li>
-            <li>
-                <a class="ajax-link" href="grid.html"><i class="icon-th"></i>
-                <span class="hidden-tablet">系统3</span></a>
-            </li>
-            <li>
-                <a class="ajax-link" href="file-manager.html"><i class="icon-folder-open"></i>
-                <span class="hidden-tablet">系统4</span></a>
-            </li>
-            <li>
-                <a href="tour.html"><i class="icon-globe"></i>
-                <span class="hidden-tablet">系统5</span></a>
-            </li>
-            <li>
-                <a class="ajax-link" href="icon.html"><i class="icon-star"></i>
-                <span class="hidden-tablet">系统6</span></a>
-            </li>
-            <li>
-                <a href="error.html"><i class="icon-ban-circle"></i>
-                <span class="hidden-tablet">系统7</span></a>
-            </li>
-            <li>
-                <a href="login.html"><i class="icon-lock"></i>
-                <span class="hidden-tablet">系统8</span></a>
-            </li>
-        </ul>      
-    </div>
-    <!--/.well -->
+<div class="span2 main-menu-span">  
+    <ul id="mega-1" class="mega-menu">
+        <li><a href="#">学校总体建筑分类</a>
+            <ul>
+                <li><a href="#">Sub-Header 1</a>
+                    <ul>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Sub-Header 2</a>
+                    <ul>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Sub-Header 3</a>
+                    <ul>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Sub-Header 4</a>
+                    <ul>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li></ul>
+                </li>
+                <li><a href="#">Sub-Header 5</a>
+                    <ul>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li></ul>
+                </li>
+                <li><a href="#">Sub-Header 6</a>
+                    <ul>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li></ul>
+                </li>
+            </ul>
+        </li>
+        <li><a href="@Url.Action("Index", new { controller = "Home", area = "Estate" })">学院房屋数据</a>
+            <ul>
+                <li><a href="#">Sub-Header 1</a>
+                    <ul>
+                        @foreach (var item in Model.Departments.Where(r => r.Type == 1))
+                        {
+                            <li><a class="department" href="#" ref="@item.Id"><span>@item.Name</span></a></li>
+                        }                        
+                    </ul>
+                </li>
+                <li><a href="#">Sub-Header 2</a>
+                    <ul>
+                        @foreach (var item in Model.Departments.Where(r => r.Type == 2 || r.Type == 3 || r.Type == 4))
+                        {
+                            <li><a class="department" href="#" ref="@item.Id"><span>@item.Name</span></a></li>
+                        }
+                    </ul>
+                </li> 
+                <li><a href="#">Sub-Header 3</a>
+                    <ul>
+                        @foreach (var item in Model.Departments.Where(r => r.Type > 4))
+                        {
+                            <li><a class="department" href="#" ref="@item.Id"><span>@item.Name</span></a></li>
+                        }
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><a href="#">楼宇房屋数据</a>
+            <ul>
+                <li><a href="#">Sub-Header 1</a>
+                    <ul>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li></ul>
+                </li>
+                <li><a href="#">Sub-Header 2</a>
+                    <ul>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li></ul>
+                </li>
+                <li><a href="#">Sub-Header 3</a>
+                    <ul>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li></ul>
+                </li>
+                <li><a href="#">Sub-Header 4</a>
+                    <ul>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li></ul>
+                </li>
+                <li><a href="#">Sub-Header 5</a>
+                    <ul>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li></ul>
+                </li>
+                <li><a href="#">Sub-Header 6</a>
+                    <ul>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li></ul>
+                </li>
+                <li><a href="#">Sub-Header 7</a>
+                    <ul>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li></ul>
+                </li>
+            </ul>
+        </li>
+        <li><a href="#">3D地图</a>
+            <ul>
+                <li><a href="#">Sub-Header 1</a>
+                    <ul>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li></ul>
+                </li>
+                <li><a href="#">Sub-Header 2</a>
+                    <ul>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li></ul>
+                </li>
+                <li><a href="#">Sub-Header 3</a>
+                    <ul>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li></ul>
+                </li>
+                <li><a href="#">Sub-Header 4</a>
+                    <ul>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li></ul>
+                </li>
+                <li><a href="#">Sub-Header 5</a>
+                    <ul>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li></ul>
+                </li>
+                <li><a href="#">Sub-Header 6</a>
+                    <ul>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li></ul>
+                </li>
+            </ul>
+        </li>
+        <li><a href="#">统计汇总</a>
+            <ul>
+                <li><a href="#">Sub-Header 1</a>
+                    <ul>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li></ul>
+                </li>
+            </ul>
+        </li>
+        <li><a href="#">Menu Item F</a>
+            <ul>
+                <li><a href="#">Sub-Header 1</a>
+                    <ul>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li></ul>
+                </li>
+                <li><a href="#">Sub-Header 2</a>
+                    <ul>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li></ul>
+                </li>
+                <li><a href="#">Sub-Header 3</a>
+                    <ul>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li></ul>
+                </li>
+                <li><a href="#">Sub-Header 4</a>
+                    <ul>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li></ul>
+                </li>
+                <li><a href="#">Sub-Header 5</a>
+                    <ul>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li></ul>
+                </li>
+                <li><a href="#">Sub-Header 6</a>
+                    <ul>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li></ul>
+                </li>
+                <li><a href="#">Sub-Header 7</a>
+                    <ul>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li></ul>
+                </li>
+            </ul>
+        </li>
+        <li><a href="#">Menu Item G</a>
+            <ul>
+                <li><a href="#">Sub-Header 1</a>
+                    <ul>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li></ul>
+                </li>
+                <li><a href="#">Sub-Header 2</a>
+                    <ul>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li></ul>
+                </li>
+                <li><a href="#">Sub-Header 3</a>
+                    <ul>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li></ul>
+                </li>
+                <li><a href="#">Sub-Header 4</a>
+                    <ul>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li></ul>
+                </li>
+                <li><a href="#">Sub-Header 5</a>
+                    <ul>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li></ul>
+                </li>
+                <li><a href="#">Sub-Header 6</a>
+                    <ul>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li></ul>
+                </li>
+            </ul>
+        </li>
+        <li><a href="#">Menu Item H</a>
+            <ul>
+                <li><a href="#">Sub-Header 1</a>
+                    <ul>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li></ul>
+                </li>
+                <li><a href="#">Sub-Header 2</a>
+                    <ul>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li></ul>
+                </li>
+            </ul>
+        </li>
+        <li><a href="#">Menu Item I</a>
+            <ul>
+                <li><a href="#">Sub-Header 1</a>
+                    <ul>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li></ul>
+                </li>
+                <li><a href="#">Sub-Header 2</a>
+                    <ul>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li></ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
 </div>
 <!--/span-->
 <!-- left menu ends -->

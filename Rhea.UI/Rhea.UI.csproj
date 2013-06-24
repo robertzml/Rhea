@@ -182,6 +182,7 @@
     </Compile>
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\MenuModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\FormsAuthenticationService.cs" />
     <Compile Include="Services\IFormsAuthenticationService.cs" />

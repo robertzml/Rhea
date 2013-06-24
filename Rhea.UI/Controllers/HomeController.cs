@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Rhea.Business;
+using Rhea.Data.Entities;
+using Rhea.UI.Models;
 
 namespace Rhea.UI.Controllers
 {
@@ -25,7 +27,13 @@ namespace Rhea.UI.Controllers
         [ChildActionOnly]
         public PartialViewResult Menu()
         {
-            return PartialView();
+            IDepartmentService departmentService = new MongoDepartmentService();
+            List<Department> departments = departmentService.GetList();
+
+            MenuModel data = new MenuModel();
+            data.Departments = departments;
+
+            return PartialView(data);
         }
 
         /// <summary>
