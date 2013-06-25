@@ -651,6 +651,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Estate\Views\Home\Department.cshtml" />
+    <Content Include="Areas\Estate\Views\Shared\EditorTemplates\BuildingGroupType.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea.pubxml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Department\Tree.cshtml" />

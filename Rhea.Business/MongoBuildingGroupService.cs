@@ -155,6 +155,7 @@ namespace Rhea.Business
                 { "designCompany", data.DesignCompany },
                 { "constructCompany", data.ConstructCompany },
                 { "manageType", data.ManageType },
+                { "type", data.Type },
                 { "remark", data.Remark },
                 { "status", 0 }
             };
@@ -194,6 +195,7 @@ namespace Rhea.Business
                 .Set("designCompany", data.DesignCompany ?? "")
                 .Set("constructCompany", data.ConstructCompany ?? "")
                 .Set("manageType", data.ManageType ?? "")
+                .Set("type", data.Type)
                 .Set("remark", data.Remark ?? "");
 
             WriteConcernResult result = this.context.Update(CronusCollection.BuildingGroup, query, update);

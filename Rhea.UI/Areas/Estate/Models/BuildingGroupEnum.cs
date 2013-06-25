@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -83,5 +84,23 @@ namespace Rhea.UI.Areas.Estate.Models
         自管 = 1,
 
         代管
+    }
+
+    /// <summary>
+    /// 楼群类型
+    /// </summary>
+    public enum BuildingGroupType
+    {
+        [Display(Name = "学院楼群")]
+        College = 1,
+
+        [Display(Name = "教学楼群")]
+        Education,
+
+        [Display(Name = "行政办公")]
+        Office,
+
+        [Display(Name = "宿舍楼群")]
+        Dormitory
     }
 }

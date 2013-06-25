@@ -216,6 +216,15 @@
                             </tr>
                             <tr>
                                 <td>
+                                    @Html.DisplayNameFor(model => model.Type)
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.Type)
+                                    @Html.ValidationMessageFor(model => model.Type)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
                                     @Html.DisplayNameFor(model => model.Remark)
                                 </td>
                                 <td>
