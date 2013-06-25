@@ -5,15 +5,13 @@
 
 @Styles.Render("~/Content/kendoui")
 
-@section breadcrumb {
-    <li>@Html.ActionLink("房产管理", "Index", new { controller = "Home", area = "Estate" })</li>
-}
+
 
 <div class="row-fluid sortable">
     
     <div class="span9">       
         <div id="ajax-content1">
-            @Html.Action("Map", "Home", new { area = "Estate" })
+           @* @Html.Action("Map", "Home", new { area = "Estate" })*@
             @Html.Action("List", "BuildingGroup", new { area = "Estate" })
         </div>
     </div>

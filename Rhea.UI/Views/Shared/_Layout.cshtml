@@ -32,14 +32,7 @@
         <!-- The fav icon -->
         <link rel="shortcut icon" href="/img/favicon.ico">
     </head>
-    <body>
-        @if (TempData["Message"] != null && !String.IsNullOrEmpty(TempData["Message"].ToString()))
-        {
-            <script type="text/javascript">
-                showMessage('@TempData["Message"]');
-            </script>
-        }
-        
+    <body>        
         @Html.Action("Nav", "Home", new { area = "" })
 
         <div class="container-fluid">
@@ -117,12 +110,30 @@
                     ajaxLoadPage("Index", "BuildingGroup", "Estate", request);
                     return false;
                 });
+
+                $('.main-menu-span a.department').click(function () {
+                    var departmentId = $(this).attr('ref');
+                    var request = { id: departmentId };
+                    ajaxLoadPage2("Index", "Department", request);
+                    return false;
+                });
+
+                $('.main-menu-span a.map').click(function () {
+                    //ajaxLoadPage("Map", "Home", "Estate", {});
+                    //return false;
+                });
             });
 
             $(window).resize(function () {
                 initMenu();
             });
         </script>
+        @if (TempData["Message"] != null && !String.IsNullOrEmpty(TempData["Message"].ToString()))
+        {
+            <script type="text/javascript">
+                showMessage('@TempData["Message"]');
+            </script>
+        }
         @RenderSection("scripts", required: false)
     </body>
 </html>

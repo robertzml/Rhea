@@ -99,7 +99,7 @@
                     @foreach (var item in Model.BuildingGroups.Where(r => r.Type == 1))
                     {
                         <li>
-                            <a class="buildingGroup" href="@Url.Action("Index", new { controller = "BuildingGroup", area = "Estate", id = item.Id })" ref="@item.Id">
+                            <a class="buildingGroup" href="#" ref="@item.Id">
                             <span>@item.Name</span></a>
                         </li>
                     }
@@ -110,7 +110,7 @@
                     @foreach (var item in Model.BuildingGroups.Where(r => r.Type == 2 || r.Type == 3 ))
                     {
                         <li>
-                            <a class="buildingGroup" href="@Url.Action("Index", new { controller = "BuildingGroup", area = "Estate", id = item.Id })" ref="@item.Id">
+                            <a class="buildingGroup" href="#" ref="@item.Id">
                             <span>@item.Name</span></a> 
                         </li>
                     }
@@ -120,7 +120,7 @@
                     <ul>
                     @foreach (var item in Model.BuildingGroups.Where(r => r.Type > 3))
                     {
-                        <li><a class="buildingGroup" href="@Url.Action("Index", new { controller = "BuildingGroup", area = "Estate", id = item.Id })" ref="@item.Id">
+                        <li><a class="buildingGroup" href="#" ref="@item.Id">
                             <span>@item.Name</span></a> 
                         </li>
                     }
@@ -128,7 +128,7 @@
                 </li>
             </ul>
         </li>
-        <li><a href="#">3D地图</a>
+        <li><a class="map" href="@Url.Action("Map", new { controller = "Home", area = "Estate" })">3D地图</a>
             <ul>
                 <li><a href="#">Sub-Header 1</a>
                     <ul>
@@ -159,37 +159,7 @@
                         <li><a href="#">Menu Link</a></li>
                         <li><a href="#">Menu Link</a></li>
                         <li><a href="#">Menu Link</a></li></ul>
-                </li>
-                <li><a href="#">Sub-Header 4</a>
-                    <ul>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li></ul>
-                </li>
-                <li><a href="#">Sub-Header 5</a>
-                    <ul>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li></ul>
-                </li>
-                <li><a href="#">Sub-Header 6</a>
-                    <ul>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li></ul>
-                </li>
+                </li>               
             </ul>
         </li>
         <li><a href="@Url.Action("Index", new { controller = "Statistic", area = "Estate" })">统计汇总</a>
