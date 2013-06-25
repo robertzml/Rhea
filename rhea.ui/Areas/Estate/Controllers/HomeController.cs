@@ -23,7 +23,12 @@ namespace Rhea.UI.Areas.Estate.Controllers
         public ActionResult Index()
         {
             return View();
-        }    
+        }
+
+        public ActionResult Department()
+        {
+            return View();
+        }
 
         /// <summary>
         /// 地图导航

@@ -44,8 +44,9 @@
 
         <div class="container-fluid">
             <div class="row-fluid">
-                @Html.Action("Menu", "Home", new { area = "" })
-
+                <div class="span2">
+                    @Html.Action("Menu", "Home", new { area = "" })
+                </div>
                 <noscript>
                     <div class="alert alert-block span10">
                         <h4 class="alert-heading">
@@ -60,12 +61,14 @@
                     <!-- content starts -->
                     <div>
                         <ul class="breadcrumb">
-                            <li><a href="@Url.Action("Index", "Home", new { area = "" })">主页</a> <span class="divider">/</span> </li>
-                            @RenderSection("breadcrumb", required: false)                            
+                            <li><a href="@Url.Action("Index", "Home", new { area = "" })">主页</a> <span class="divider">/</span></li>
+                            <li><a href="#">房产管理</a></li>
                         </ul>
-                    </div>                           
-                    
-                    @RenderBody()
+                    </div>
+
+                    <div id="ajax-content1">                    
+                        @RenderBody()
+                    </div>
                     <!-- content ends -->
                 </div>              
             </div>
@@ -80,14 +83,12 @@
         <!--/.fluid-container-->
 
         
-        <!-- external javascript ================================================== -->      
-    
+        <!-- external javascript ================================================== -->    
         <script src="@Url.Content("~/Scripts/jquery-ui-1.8.21.custom.min.js")" type="text/javascript"></script>     
         @Scripts.Render("~/bundles/bootstrap")
         @Scripts.Render("~/bundles/jqueryval")
         <script src="@Url.Content("~/Scripts/jquery.hoverIntent.minified.js")" type="text/javascript"></script>
-        <script src="@Url.Content("~/Scripts/jquery.dcverticalmegamenu.1.3.js")" type="text/javascript"></script>
-        <script src="@Url.Content("~/Scripts/jquery.cookie.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery.dcverticalmegamenu.1.3.js")" type="text/javascript"></script>       
         <script src="@Url.Content("~/Scripts/jquery.dataTables.min.js")" type="text/javascript"></script>
         <script src="@Url.Content("~/Scripts/jquery.chosen.min.js")" type="text/javascript"></script>    
         <script src="@Url.Content("~/Scripts/jquery.uniform.min.js")" type="text/javascript"></script>
@@ -98,22 +99,28 @@
         <script src="@Url.Content("~/Scripts/rhea.js")" type="text/javascript"></script>        
         <script src="@Url.Content("~/Scripts/function.js")" type="text/javascript"></script>
         <script type="text/javascript">
-            $(document).ready(function () {
+            function initMenu() {
                 $('#mega-1').dcVerticalMegaMenu({
                     rowItems: '4',
                     speed: 'fast',
                     effect: 'show',
                     direction: 'right'
+                });
+            }
+
+            $(document).ready(function () {
+                initMenu();
+
+                $('.main-menu-span a.buildingGroup').click(function () {
+                    var groupId = $(this).attr('ref');
+                    var request = { id: groupId };
+                    ajaxLoadPage("Index", "BuildingGroup", "Estate", request);
+                    return false;
                 });
             });
 
             $(window).resize(function () {
-                $('#mega-1').dcVerticalMegaMenu({
-                    rowItems: '4',
-                    speed: 'fast',
-                    effect: 'show',
-                    direction: 'right'
-                });
+                initMenu();
             });
         </script>
         @RenderSection("scripts", required: false)

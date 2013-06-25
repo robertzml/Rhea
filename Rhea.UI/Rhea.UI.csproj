@@ -650,6 +650,7 @@
     <Content Include="Areas\Estate\Views\Room\Summary.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Estate\Views\Home\Department.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea.pubxml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Department\Tree.cshtml" />

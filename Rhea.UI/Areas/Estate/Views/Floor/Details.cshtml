@@ -100,7 +100,8 @@
                 <h3>
                     操作</h3>
                 <p>
-                    <a class="btn btn-primary" id="return" href="#"><i class="icon-arrow-left icon-white"></i>返回</a>
+                    <a class="btn btn-primary" id="return" href="@Url.Action("Index", new { controller = "Building", area = "Estate", id = ViewBag.BuildingId })">
+                    <i class="icon-arrow-left icon-white"></i>返回</a>
                 </p>
             </div>
         </div>
@@ -134,7 +135,7 @@
         $('a#return').click(function () {
             ajaxLoadPage("Details", "Building", "Estate", { id : @ViewBag.BuildingId });
             return false;
-        });      
+        });   
 
         var svgFile = '@Model.ImageUrl';
 

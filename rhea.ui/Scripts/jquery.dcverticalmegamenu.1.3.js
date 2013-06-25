@@ -123,7 +123,7 @@
 				$container.css({
 					height: subHeight+'px',
 					marginTop: -itemHeight+'px',
-					zIndex: '1000',
+					zIndex: '1500',
 					width: subWidth+'px'
 				}).hide();
 			});

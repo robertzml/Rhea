@@ -1,26 +1,4 @@
-﻿$(document).ready(function(){
-	//themes, change CSS with JS
-	//default theme(CSS) is classic, change it if needed
-	var current_theme = $.cookie('current_theme')==null ? 'classic' :$.cookie('current_theme');
-	switch_theme(current_theme);
-	
-	$('#themes a[data-value="'+current_theme+'"]').find('i').addClass('icon-ok');
-				 
-	$('#themes a').click(function(e){
-		e.preventDefault();
-		current_theme=$(this).attr('data-value');
-		$.cookie('current_theme',current_theme,{expires:365});
-		switch_theme(current_theme);
-		$('#themes i').removeClass('icon-ok');
-		$(this).find('i').addClass('icon-ok');
-	});
-	
-	
-	function switch_theme(theme_name)
-	{
-		$('#bs-css').attr('href','/Content/bootstrap-'+theme_name+'.css');
-	}
-	
+﻿$(document).ready(function(){	
 	
 	//disbaling some functions for Internet Explorer
 	if($.browser.msie)
@@ -28,21 +6,6 @@
 		$('#toggle-fullscreen').hide();
 		$('.login-box').find('.input-large').removeClass('span10');		
 	}
-	
-	
-	//highlight current / active link
-	$('ul.main-menu li a').each(function(){
-		if($($(this))[0].href==String(window.location))
-			$(this).parent().addClass('active');
-	});
-	
-	//animating menus on hover
-	$('ul.main-menu li:not(.nav-header)').hover(function(){
-			$(this).animate({'margin-left':'+=5'},300);
-		},
-		function(){
-			$(this).animate({'margin-left':'-=5'},300);
-	});
 	
 	//other things to do on document ready, seperated for ajax calls
 	docReady();
@@ -65,11 +28,6 @@ function docReady(){
 		else 					   $('i',$(this)).removeClass('icon-chevron-down').addClass('icon-chevron-up');
 		$target.slideToggle();
 	});
-	$('.btn-setting').click(function(e){
-		e.preventDefault();
-		$('#myModal').modal('show');
-	});
-
 }
 
 //additional functions for data table
