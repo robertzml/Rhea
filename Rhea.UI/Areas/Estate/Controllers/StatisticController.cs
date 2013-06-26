@@ -7,6 +7,8 @@ using System.Web.Routing;
 using Rhea.Business;
 using Rhea.Business.Estate;
 using Rhea.Data.Estate;
+using Rhea.UI.Areas.Estate.Models;
+using Rhea.Common;
 
 namespace Rhea.UI.Areas.Estate.Controllers
 {
@@ -70,6 +72,15 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// </summary>
         /// <returns></returns>
         public ActionResult CollegeBuildingRoom()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 学校总体建筑分类
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult BuildingType()
         {
             return View();
         }
@@ -150,6 +161,22 @@ namespace Rhea.UI.Areas.Estate.Controllers
             }
            
             return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult BuildingTypeData()
+        {
+            List<BuildTypeAreaModel> model = new List<BuildTypeAreaModel>();
+
+            for (int i = 1; i <= 4; i++)
+            {
+                BuildTypeAreaModel data = new BuildTypeAreaModel();
+                data.BuildArea = this.statisticService.GetBuildingAreaByType(i);
+                data.TypeName = ((BuildingGroupType)i).DisplayName();
+
+                model.Add(data);
+            }
+
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
         #endregion //JSON
     }

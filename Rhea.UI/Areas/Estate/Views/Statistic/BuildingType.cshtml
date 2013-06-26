@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = "学校总体建筑分类";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="box">
+    <div class="box-header well" data-original-title>
+        <h2>
+            <i class="icon-align-left"></i>@ViewBag.Title</h2>
+    </div>
+    <div class="box-content">       
+        <div class="row-fluid">
+            <div class="span12">
+                <div id="container1" style="width: 99%">
+                </div>
+            </div>
+        </div>       
+    </div>
+</div>
+
+<script src="@Url.Content("~/Scripts/highcharts.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/modules/exporting.js")" type="text/javascript"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $.getJSON('/Statistic/BuildingTypeData', function (response) {
+            setPieChart(response);
+        });
+
+        function setPieChart(data) {
+            var option = {
+                chart: {
+                    renderTo: 'container1',
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                credits: {
+                    enabled: false
+                },
+                title: {
+                    text: '学院分楼比例图'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.2f}%</b>',
+                    percentageDecimals: 2
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            color: '#000000',
+                            connectorColor: '#000000',
+                            formatter: function () {
+                                return '<b>' + this.point.name + '</b>: ' + this.percentage.toFixed(2) + ' %';
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: '比例',
+                    data: []
+                }]
+            };
+
+            $.each(data, function (i, item) {
+                option.series[0].data.push([item.TypeName, parseFloat(item.BuildArea)]);
+            });
+
+            var chart1 = new Highcharts.Chart(option);
+        }
+    });
+</script>

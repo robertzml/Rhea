@@ -167,6 +167,7 @@
     <Compile Include="Areas\Estate\Controllers\HomeController.cs" />
     <Compile Include="Areas\Estate\Controllers\RoomController.cs" />
     <Compile Include="Areas\Estate\Controllers\StatisticController.cs" />
+    <Compile Include="Areas\Estate\Models\StatisticModel.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Areas\Estate\EstateAreaRegistration.cs" />
     <Compile Include="Areas\Estate\Models\BuildingGroupEnum.cs" />
@@ -644,6 +645,7 @@
   <ItemGroup>
     <Content Include="Areas\Estate\Views\Home\Department.cshtml" />
     <Content Include="Areas\Estate\Views\Shared\EditorTemplates\BuildingGroupType.cshtml" />
+    <Content Include="Areas\Estate\Views\Statistic\BuildingType.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea.pubxml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Department\Tree.cshtml" />

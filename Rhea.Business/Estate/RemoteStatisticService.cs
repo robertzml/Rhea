@@ -75,6 +75,11 @@ namespace Rhea.Business.Estate
         {
             throw new NotImplementedException();
         }
-        #endregion //Method
+
+        public double GetBuildingAreaByType(int buildingType)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion //Method        
     }
 }

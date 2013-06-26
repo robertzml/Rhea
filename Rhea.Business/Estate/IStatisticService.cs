@@ -41,5 +41,7 @@ namespace Rhea.Business.Estate
         /// <param name="departmentId">部门ID</param>
         /// <returns></returns>
         CollegeBuildingAreaModel GetCollegeBuildingArea(int departmentId);
+
+        double GetBuildingAreaByType(int buildingType);
     }
 }

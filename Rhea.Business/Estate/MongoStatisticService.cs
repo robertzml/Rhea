@@ -182,6 +182,20 @@ namespace Rhea.Business.Estate
 
             return c;
         }
+
+        /// <summary>
+        /// 根据类别得到楼群建筑面积
+        /// </summary>
+        /// <param name="buildingType">楼群类型</param>
+        /// <returns></returns>
+        public double GetBuildingAreaByType(int buildingType)
+        {
+            IBuildingGroupService buildingGroupService = new MongoBuildingGroupService();
+            double result = Convert.ToDouble(buildingGroupService.GetList().Where(r => r.Type == buildingType).Sum(r => r.BuildArea));
+            result = Math.Round(result, 3);
+
+            return result;
+        }
         #endregion //Method
     }
 }
