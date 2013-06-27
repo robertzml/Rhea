@@ -6,63 +6,7 @@
 <!-- left menu starts -->
 <div class="main-menu-span">  
     <ul id="mega-1" class="mega-menu">
-        <li><a href="#">学校总体建筑分类</a>
-            <ul>
-                <li><a href="#">Sub-Header 1</a>
-                    <ul>
-                        <li><a href="@Url.Action("BuildingType", new { controller = "Statistic", area = "Estate" })">总体建筑面积分类</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Sub-Header 2</a>
-                    <ul>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Sub-Header 3</a>
-                    <ul>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Sub-Header 4</a>
-                    <ul>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li></ul>
-                </li>
-                <li><a href="#">Sub-Header 5</a>
-                    <ul>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li></ul>
-                </li>
-                <li><a href="#">Sub-Header 6</a>
-                    <ul>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li></ul>
-                </li>
-            </ul>
+        <li><a href="#">系统首页</a>         
         </li>
         <li><a href="@Url.Action("Department", new { controller = "Home", area = "Estate" })">学院房屋数据</a>
             <ul>
@@ -128,62 +72,20 @@
                 </li>
             </ul>
         </li>
-        <li><a class="map" href="@Url.Action("Map", new { controller = "Home", area = "Estate" })">3D地图</a>
-            <ul>
-                <li><a href="#">Sub-Header 1</a>
-                    <ul>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li></ul>
-                </li>
-                <li><a href="#">Sub-Header 2</a>
-                    <ul>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li></ul>
-                </li>
-                <li><a href="#">Sub-Header 3</a>
-                    <ul>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li></ul>
-                </li>               
-            </ul>
+        <li><a class="map" href="@Url.Action("Map", new { controller = "Home", area = "Estate" })">3D地图</a>            
         </li>
         <li><a href="@Url.Action("Index", new { controller = "Statistic", area = "Estate" })">统计汇总</a>
             <ul>
                 <li><a href="#">Sub-Header 1</a>
                     <ul>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li></ul>
+                        <li><a href="@Url.Action("CollegeRoomStatistic", new { controller = "Statistic", area = "Estate" })">学院分类用房统计</a></li>
+                        <li><a href="@Url.Action("CollegeRoomCompare", new { controller = "Statistic", area = "Estate" })">学院分类用房比较</a></li>
+                        <li><a href="@Url.Action("CollegeBuildingRoom", new { controller = "Statistic", area = "Estate" })">学院楼宇用房统计</a></li>
+                 </ul>
                 </li>
             </ul>
         </li>
-        <li><a href="#">Menu Item F</a>
+        <li><a href="#">部门申请</a>
             <ul>
                 <li><a href="#">Sub-Header 1</a>
                     <ul>
@@ -229,7 +131,7 @@
                 </li>
             </ul>
         </li>
-        <li><a href="#">Menu Item G</a>
+        <li><a href="#">有偿测算</a>
             <ul>
                 <li><a href="#">Sub-Header 1</a>
                     <ul>
@@ -293,7 +195,7 @@
                 </li>
             </ul>
         </li>
-        <li><a href="#">Menu Item H</a>
+        <li><a href="#">系统管理</a>
             <ul>
                 <li><a href="#">Sub-Header 1</a>
                     <ul>
@@ -302,10 +204,7 @@
                         <li><a href="#">Menu Link</a></li>
                         <li><a href="#">Menu Link</a></li>
                         <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>                        
                         <li><a href="#">Menu Link</a></li>
                         <li><a href="#">Menu Link</a></li>
                         <li><a href="#">Menu Link</a></li>
@@ -318,10 +217,7 @@
                         <li><a href="#">Menu Link</a></li>
                         <li><a href="#">Menu Link</a></li>
                         <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
+                        <li><a href="#">Menu Link</a></li>                        
                         <li><a href="#">Menu Link</a></li>
                         <li><a href="#">Menu Link</a></li>
                         <li><a href="#">Menu Link</a></li>
@@ -330,23 +226,7 @@
                         <li><a href="#">Menu Link</a></li></ul>
                 </li>
             </ul>
-        </li>
-        <li><a href="#">Menu Item I</a>
-            <ul>
-                <li><a href="#">Sub-Header 1</a>
-                    <ul>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li></ul>
-                </li>
-                <li><a href="#">Sub-Header 2</a>
-                    <ul>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li>
-                        <li><a href="#">Menu Link</a></li></ul>
-                </li>
-            </ul>
-        </li>
+        </li>        
     </ul>
 </div>
 <!--/span-->

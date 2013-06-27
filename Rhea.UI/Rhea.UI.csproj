@@ -646,6 +646,9 @@
     <Content Include="Areas\Estate\Views\Home\Department.cshtml" />
     <Content Include="Areas\Estate\Views\Shared\EditorTemplates\BuildingGroupType.cshtml" />
     <Content Include="Areas\Estate\Views\Statistic\BuildingType.cshtml" />
+    <Content Include="Areas\Estate\Views\Statistic\LandType.cshtml" />
+    <Content Include="Areas\Estate\Views\Statistic\CollegeRoomArea.cshtml" />
+    <Content Include="Areas\Estate\Views\Statistic\DepartmentRoomArea.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea.pubxml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Department\Tree.cshtml" />

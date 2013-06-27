@@ -84,6 +84,33 @@ namespace Rhea.UI.Areas.Estate.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// 土地类型
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult LandType()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 学院用房面积
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult CollegeRoomArea()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 部门用房面积
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult DepartmentRoomArea()
+        {
+            return View();
+        }
         #endregion //Action
 
         #region JSON
