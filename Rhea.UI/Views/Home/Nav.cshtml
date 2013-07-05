@@ -1,0 +1,33 @@
+﻿@{
+    Layout = null;
+    ViewBag.Title = "Nav";
+}
+
+ <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="#" class="brand">房产管理系统</a>
+            <div class="nav-collapse collapse">
+                <p class="navbar-text pull-right">
+                    Logged in as <a class="navbar-link" href="#">Username</a>
+                </p>
+                <ul class="nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">部门</a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <li>abc</li>
+                        </ul>
+                    </li>
+                    <li><a href="@Url.Action("About", "Home")">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
+</div>
