@@ -67,7 +67,7 @@
     <Compile Include="Estate\RemoteRoomService.cs" />
     <Compile Include="Estate\RemoteStatisticService.cs" />
     <Compile Include="IBuildingService.cs" />
-    <Compile Include="IDepartmentService.cs" />
+    <Compile Include="Personnel\IDepartmentService.cs" />
     <Compile Include="IRoomService.cs" />
     <Compile Include="MongoBuildingGroupService.cs" />
     <Compile Include="MongoAccountService.cs" />
@@ -77,7 +77,7 @@
     <Compile Include="IAdminService.cs" />
     <Compile Include="IBuildingGroupService.cs" />
     <Compile Include="MongoBuildingService.cs" />
-    <Compile Include="MongoDepartmentService.cs" />
+    <Compile Include="Personnel\MongoDepartmentService.cs" />
     <Compile Include="MongoRoomService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RheaConstant.cs" />
@@ -93,6 +93,10 @@
     <ProjectReference Include="..\Rhea.Data\Rhea.Data.csproj">
       <Project>{E655E9DF-D987-44EB-B9CF-A9B874C2A9EB}</Project>
       <Name>Rhea.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rhea.Model\Rhea.Model.csproj">
+      <Project>{D4F516FB-EA16-4695-BE71-EE496980D763}</Project>
+      <Name>Rhea.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

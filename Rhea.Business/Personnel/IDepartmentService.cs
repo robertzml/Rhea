@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Rhea.Data.Entities;
+using Rhea.Model.Personnel;
 
-namespace Rhea.Business
+namespace Rhea.Business.Personnel
 {
     /// <summary>
     /// 部门业务接口

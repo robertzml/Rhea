@@ -17,7 +17,7 @@ namespace Rhea.Data.Server
         /// <summary>
         /// 连接字符串
         /// </summary>
-        private string connectionString = "mongodb://localhost";
+        private string connectionString = "mongodb://210.28.24.171";
 
         /// <summary>
         /// 数据库名称

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Rhea.Business.Personnel;
+using Rhea.Model.Personnel;
 
 namespace Rhea.UI.Controllers
 {
@@ -24,7 +26,10 @@ namespace Rhea.UI.Controllers
 
         public ActionResult Nav()
         {
-            return View();
+            IDepartmentService departmentService = new MongoDepartmentService();
+            var data = departmentService.GetList();
+
+            return View(data);
         }
 
         public ActionResult Contact()

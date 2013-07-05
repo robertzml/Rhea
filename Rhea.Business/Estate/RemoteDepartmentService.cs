@@ -4,7 +4,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using Rhea.Data.Entities;
+using Rhea.Model.Personnel;
+using Rhea.Business.Personnel;
 
 namespace Rhea.Business.Estate
 {

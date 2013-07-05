@@ -81,7 +81,7 @@ namespace Rhea.Business.Estate
         /// <returns></returns>
         public CollegeClassifyAreaModel GetCollegeClassifyArea(int departmentId)
         {
-            IDepartmentService departmentService = new MongoDepartmentService();
+            /*IDepartmentService departmentService = new MongoDepartmentService();
             Department department = departmentService.Get(departmentId);
 
             //get codes
@@ -106,7 +106,8 @@ namespace Rhea.Business.Estate
             c.ResearchDetailArea = GetClassifyArea(department.Id, 4, functionCodes);
             c.ResearchArea = Math.Round(c.ResearchDetailArea.Sum(r => r.Area), 3);
 
-            return c;
+            return c;*/
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -164,7 +165,7 @@ namespace Rhea.Business.Estate
         /// <returns></returns>
         public CollegeBuildingAreaModel GetCollegeBuildingArea(int departmentId)
         {
-            IDepartmentService departmentService = new MongoDepartmentService();
+            /*IDepartmentService departmentService = new MongoDepartmentService();
             Department department = departmentService.Get(departmentId);
 
             //get buildings        
@@ -180,7 +181,8 @@ namespace Rhea.Business.Estate
                 BuildingArea = model
             };
 
-            return c;
+            return c;*/
+            throw new NotImplementedException();
         }
 
         /// <summary>

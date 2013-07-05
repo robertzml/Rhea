@@ -5,10 +5,10 @@ using System.Text;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
-using Rhea.Data.Entities;
 using Rhea.Data.Server;
+using Rhea.Model.Personnel;
 
-namespace Rhea.Business
+namespace Rhea.Business.Personnel
 {
     /// <summary>
     /// 部门业务类
@@ -19,7 +19,7 @@ namespace Rhea.Business
         /// <summary>
         /// 数据库连接
         /// </summary>
-        private RheaMongoContext context = new RheaMongoContext(RheaConstant.CronusDatabase);
+        private RheaMongoContext context = new RheaMongoContext("personnel");
 
         /// <summary>
         /// Collection名称
@@ -63,6 +63,7 @@ namespace Rhea.Business
                 departments.Add(department);
             }
 
+            departments = departments.OrderBy(r => r.Id).ToList();
             return departments;
         }
 

@@ -295,6 +295,16 @@
   <ItemGroup>
     <Content Include="Views\Home\Nav.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Rhea.Business\Rhea.Business.csproj">
+      <Project>{918B8082-498E-4A1E-8A2D-6CCC570496A0}</Project>
+      <Name>Rhea.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rhea.Model\Rhea.Model.csproj">
+      <Project>{D4F516FB-EA16-4695-BE71-EE496980D763}</Project>
+      <Name>Rhea.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
