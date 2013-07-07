@@ -5,8 +5,8 @@ using System.Text;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
-using Rhea.Data.Entities;
 using Rhea.Data.Server;
+using Rhea.Model.Estate;
 
 namespace Rhea.Business
 {
@@ -30,7 +30,8 @@ namespace Rhea.Business
         /// <returns></returns>
         private Room ModelBind(BsonDocument doc)
         {
-            Room room = new Room();
+            throw new NotImplementedException();
+            /*Room room = new Room();
             room.Id = doc["id"].AsInt32;
             room.Name = doc["name"].AsString;
             room.Number = doc["number"].AsString;
@@ -91,7 +92,7 @@ namespace Rhea.Business
 
             if (room.StartDate != null)
                 room.StartDate = ((DateTime)room.StartDate).ToLocalTime();
-            return room;
+            return room;*/
         }
         #endregion //Function
 
@@ -247,7 +248,9 @@ namespace Rhea.Business
         /// <returns>房间ID，0:添加失败</returns>
         public int Create(Room data)
         {
-            BsonDocument[] pipeline = {
+            throw new NotImplementedException();
+
+            /*BsonDocument[] pipeline = {
                 new BsonDocument {
                     { "$project", new BsonDocument {
                         { "id", 1 }
@@ -324,7 +327,7 @@ namespace Rhea.Business
             if (result.HasLastErrorMessage)
                 return 0;
             else
-                return data.Id;
+                return data.Id;*/
         }
 
         /// <summary>
@@ -334,7 +337,9 @@ namespace Rhea.Business
         /// <returns></returns>
         public bool Edit(Room data)
         {
-            var query = Query.EQ("id", data.Id);
+            throw new NotImplementedException();
+
+            /*var query = Query.EQ("id", data.Id);
 
             var update = Update.Set("name", data.Name)
                 .Set("number", data.Number)
@@ -379,7 +384,7 @@ namespace Rhea.Business
             if (result.HasLastErrorMessage)
                 return false;
             else
-                return true;
+                return true;*/
         }
 
         /// <summary>

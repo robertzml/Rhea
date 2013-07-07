@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using Rhea.Data.Entities;
 using Rhea.Data.Estate;
 using Rhea.Data.Server;
+using Rhea.Model.Estate;
 
 namespace Rhea.Business.Estate
 {
@@ -192,11 +192,12 @@ namespace Rhea.Business.Estate
         /// <returns></returns>
         public double GetBuildingAreaByType(int buildingType)
         {
-            IBuildingGroupService buildingGroupService = new MongoBuildingGroupService();
+            throw new NotImplementedException();
+            /*IBuildingGroupService buildingGroupService = new MongoBuildingGroupService();
             double result = Convert.ToDouble(buildingGroupService.GetList().Where(r => r.Type == buildingType).Sum(r => r.BuildArea));
             result = Math.Round(result, 3);
 
-            return result;
+            return result;*/
         }
         #endregion //Method
     }

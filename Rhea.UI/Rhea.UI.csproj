@@ -161,6 +161,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Estate\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Estate\EstateAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -286,6 +288,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Estate\Models\" />
+    <Folder Include="Areas\Estate\Views\Shared\" />
     <Folder Include="Filters\" />
     <Folder Include="Models\" />
   </ItemGroup>
@@ -304,6 +308,9 @@
       <Project>{D4F516FB-EA16-4695-BE71-EE496980D763}</Project>
       <Name>Rhea.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Web.config" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 
-namespace Rhea.Data.Entities
+namespace Rhea.Model.Estate
 {
     /// <summary>
     /// 楼宇模型
@@ -27,7 +27,7 @@ namespace Rhea.Data.Entities
         /// 名称
         /// </summary>
         [Required]
-        [Display(Name = "名称" )]
+        [Display(Name = "名称")]
         public string Name { get; set; }
 
         /// <summary>
@@ -72,6 +72,15 @@ namespace Rhea.Data.Entities
         [Range(0, int.MaxValue)]
         [Display(Name = "地下楼层数")]
         public int? UnderGroundFloor { get; set; }
+
+        /// <summary>
+        /// 使用类型
+        /// </summary>
+        /// <remarks>
+        /// 1:学院楼宇,2:教学楼宇,3:行政办公,4:宿舍楼宇
+        /// </remarks>
+        [Display(Name = "使用类型" )]
+        public int UseType { get; set; }
 
         /// <summary>
         /// 备注
@@ -130,9 +139,9 @@ namespace Rhea.Data.Entities
         public double? UsableArea { get; set; }
 
         /// <summary>
-        /// 图片地址
+        /// 楼层平面图
         /// </summary>
-        [Display(Name = "图片")]
+        [Display(Name = "楼层平面图")]
         public string ImageUrl { get; set; }
 
         /// <summary>

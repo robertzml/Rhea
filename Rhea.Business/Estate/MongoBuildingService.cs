@@ -5,8 +5,8 @@ using System.Text;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
-using Rhea.Data.Entities;
 using Rhea.Data.Server;
+using Rhea.Model.Estate;
 
 namespace Rhea.Business
 {

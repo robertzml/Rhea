@@ -24,6 +24,12 @@ namespace Rhea.Model.Personnel
         public string Name { get; set; }
 
         /// <summary>
+        /// 简称
+        /// </summary>
+        [Display(Name = "简称" )]
+        public string ShortName { get; set; }
+
+        /// <summary>
         /// 部门类型
         /// </summary>
         public int Type { get; set; }

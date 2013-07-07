@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Rhea.Data.Entities;
+using Rhea.Model.Estate;
 
-namespace Rhea.Business
+namespace Rhea.Business.Estate
 {
     /// <summary>
     /// 楼群业务接口

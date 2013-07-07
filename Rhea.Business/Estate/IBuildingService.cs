@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Rhea.Data.Entities;
+using Rhea.Model.Estate;
 
 namespace Rhea.Business
 {

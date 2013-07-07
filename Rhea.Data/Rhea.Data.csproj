@@ -50,11 +50,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Building.cs" />
-    <Compile Include="Entities\BuildingGroup.cs" />
-    <Compile Include="Entities\Department.cs" />
-    <Compile Include="Entities\RoomFunctionCode.cs" />
-    <Compile Include="Entities\Room.cs" />
     <Compile Include="Entities\UserGroup.cs" />
     <Compile Include="Entities\UserProfile.cs" />
     <Compile Include="Entities\ManagerGroup.cs" />

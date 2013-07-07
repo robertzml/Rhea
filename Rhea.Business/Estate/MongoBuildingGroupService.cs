@@ -5,10 +5,10 @@ using System.Text;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
-using Rhea.Data.Entities;
 using Rhea.Data.Server;
+using Rhea.Model.Estate;
 
-namespace Rhea.Business
+namespace Rhea.Business.Estate
 {
     /// <summary>
     /// MongoDB楼群业务
@@ -51,8 +51,7 @@ namespace Rhea.Business
             buildingGroup.DesignCompany = doc.GetValue("designCompany", "").AsString;
             buildingGroup.ConstructCompany = doc.GetValue("constructCompany", "").AsString;
             buildingGroup.ManageType = doc.GetValue("manageType", "").AsString;
-            buildingGroup.Remark = doc.GetValue("remark", "").AsString;
-            buildingGroup.Type = doc.GetValue("type").AsInt32;
+            buildingGroup.Remark = doc.GetValue("remark", "").AsString;            
             buildingGroup.Status = doc.GetValue("status", 0).AsInt32;
 
             if (buildingGroup.BuildDate != null)
@@ -154,8 +153,7 @@ namespace Rhea.Business
                 { "fixedYear", data.FixedYear },
                 { "designCompany", data.DesignCompany },
                 { "constructCompany", data.ConstructCompany },
-                { "manageType", data.ManageType },
-                { "type", data.Type },
+                { "manageType", data.ManageType },           
                 { "remark", data.Remark },
                 { "status", 0 }
             };
@@ -173,7 +171,7 @@ namespace Rhea.Business
         /// </summary>
         /// <param name="data">楼群数据</param>
         /// <returns></returns>
-        public bool Edit(Data.Entities.BuildingGroup data)
+        public bool Edit(BuildingGroup data)
         {
             var query = Query.EQ("id", data.Id);
             var update = Update.Set("name", data.Name)
@@ -194,8 +192,7 @@ namespace Rhea.Business
                 .Set("fixedYear", (BsonValue)data.FixedYear)
                 .Set("designCompany", data.DesignCompany ?? "")
                 .Set("constructCompany", data.ConstructCompany ?? "")
-                .Set("manageType", data.ManageType ?? "")
-                .Set("type", data.Type)
+                .Set("manageType", data.ManageType ?? "")               
                 .Set("remark", data.Remark ?? "");
 
             WriteConcernResult result = this.context.Update(CronusCollection.BuildingGroup, query, update);

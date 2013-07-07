@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 
-namespace Rhea.Data.Entities
+namespace Rhea.Model.Estate
 {
     /// <summary>
     /// 房间模型
@@ -14,9 +14,7 @@ namespace Rhea.Data.Entities
         #region Constructor
         public Room()
         {
-            this.Function = new RoomFunction();
-            this.Building = new RoomBuilding();
-            this.Department = new RoomDepartment();
+            this.Function = new RoomFunction();           
         }
         #endregion //Constructor
 
@@ -74,6 +72,12 @@ namespace Rhea.Data.Entities
         public double? UsableArea { get; set; }
 
         /// <summary>
+        /// 图片地址
+        /// </summary>
+        [Display(Name = "图片")]
+        public string ImageUrl { get; set; }
+
+        /// <summary>
         /// 功能编码
         /// </summary>
         [Required]
@@ -87,7 +91,7 @@ namespace Rhea.Data.Entities
         [Required]
         [Display(Name = "所属楼宇")]
         [UIHint("BuildingDropDownList")]
-        public RoomBuilding Building { get; set; }
+        public int BuildingId { get; set; }
 
         /// <summary>
         /// 部门ID
@@ -95,7 +99,7 @@ namespace Rhea.Data.Entities
         [Required]
         [Display(Name = "所属部门")]
         [UIHint("DepartmentDropDownList")]
-        public RoomDepartment Department { get; set; }
+        public int DepartmentId { get; set; }
 
         /// <summary>
         /// 开始使用日期
@@ -112,6 +116,12 @@ namespace Rhea.Data.Entities
         public int? FixedYear { get; set; }
 
         /// <summary>
+        /// 房间总人数
+        /// </summary>
+        [Display(Name = "房间总人数")]
+        public int? PersonNumber { get; set; }
+
+        /// <summary>
         /// 管理人
         /// </summary>
         [Display(Name = "管理人")]
@@ -120,6 +130,9 @@ namespace Rhea.Data.Entities
         /// <summary>
         /// 房间状态
         /// </summary>
+        /// <remarks>
+        /// 0:未知, 1:在用, 2:闲置, 3:报废, 4:有偿转让, 5:无偿调出, 6:出租, 7:其他
+        /// </remarks>
         [Display(Name = "房间状态")]
         [UIHint("RoomStatus")]
         public int RoomStatus { get; set; }
@@ -132,8 +145,11 @@ namespace Rhea.Data.Entities
         public string Remark { get; set; }
 
         /// <summary>
-        /// 状态 0:正常 1:已删除 2:已合并 3:已拆分
+        /// 状态
         /// </summary>
+        /// <remarks>
+        /// 0:正常 1:已删除 2:已合并 3:已拆分
+        /// </remarks>
         [Display(Name = "状态")]
         public int Status { get; set; }     
 
@@ -217,7 +233,7 @@ namespace Rhea.Data.Entities
         /// <summary>
         /// 是否有安全教育检查
         /// </summary>
-        [Display(Name = "是否有安全检查")]
+        [Display(Name = "是否有安全教育检查")]
         public bool? HasSecurityCheck { get; set; }
 
         /// <summary>
@@ -263,21 +279,7 @@ namespace Rhea.Data.Entities
             public int SecondCode { get; set; }
 
             public string Property { get; set; }
-        }
-
-        public class RoomBuilding
-        {
-            public int Id { get; set; }
-
-            public string Name { get; set; }
-        }
-
-        public class RoomDepartment
-        {
-            public int Id { get; set; }
-
-            public string Name { get; set; }
-        }
+        }      
         #endregion Inner Class
     }
 }
