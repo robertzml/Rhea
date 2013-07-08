@@ -50,9 +50,17 @@ namespace Rhea.UI.Areas.Estate.Controllers
         public ActionResult Details(int id)
         {
             Building data = this.buildingService.Get(id);
-            if (!string.IsNullOrEmpty(data.ImageUrl))
-                data.ImageUrl = RheaConstant.ImagesRoot + data.ImageUrl;
+            return View(data);
+        }
 
+        /// <summary>
+        /// 楼层信息
+        /// </summary>
+        /// <param name="id">楼宇ID</param>
+        /// <returns></returns>
+        public ActionResult Floors(int id)
+        {
+            Building data = this.buildingService.Get(id);
             return View(data);
         }
         #endregion //Action
