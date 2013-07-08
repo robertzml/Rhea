@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Rhea.Business;
 using Rhea.Business.Estate;
 using Rhea.Model.Estate;
 
@@ -30,12 +31,42 @@ namespace Rhea.UI.Areas.Estate.Controllers
         }
         #endregion //Function
 
-        //
-        // GET: /Estate/BuildingGroup/
-
-        public ActionResult Index()
+        #region Action
+        /// <summary>
+        /// 楼群主页
+        /// </summary>
+        /// <param name="id">楼群ID</param>
+        /// <returns></returns>
+        public ActionResult Index(int id)
         {
-            return View();
+            return View(id);
+        }
+
+        /// <summary>
+        /// 楼群概况
+        /// </summary>
+        /// <param name="id">楼群ID</param>
+        /// <returns></returns>
+        public ActionResult Summary(int id)
+        {
+            BuildingGroup data = this.buildingGroupService.Get(id);
+            if (!string.IsNullOrEmpty(data.ImageUrl))
+                data.ImageUrl = RheaConstant.ImagesRoot + data.ImageUrl;
+            if (!string.IsNullOrEmpty(data.PartMapUrl))
+                data.PartMapUrl = RheaConstant.ImagesRoot + data.PartMapUrl;  
+
+            return View(data);
+        }
+
+        /// <summary>
+        /// 楼群详细
+        /// </summary>
+        /// <param name="id">楼群ID</param>
+        /// <returns></returns>
+        public ActionResult Details(int id)
+        {
+            BuildingGroup data = this.buildingGroupService.Get(id);
+            return View(data);
         }
 
         /// <summary>
@@ -47,5 +78,6 @@ namespace Rhea.UI.Areas.Estate.Controllers
             List<BuildingGroup> data = this.buildingGroupService.GetList().OrderBy(r => r.Id).ToList();
             return View(data);
         }
+        #endregion //Action
     }
 }

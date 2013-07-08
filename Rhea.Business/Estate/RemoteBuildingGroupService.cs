@@ -98,6 +98,10 @@ namespace Rhea.Business.Estate
             return response.IsSuccessStatusCode;
         }
 
+        /// <summary>
+        /// 获取总数
+        /// </summary>
+        /// <returns></returns>
         public int Count()
         {
             throw new NotImplementedException();

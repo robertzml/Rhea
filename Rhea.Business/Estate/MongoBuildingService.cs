@@ -8,7 +8,7 @@ using MongoDB.Driver.Builders;
 using Rhea.Data.Server;
 using Rhea.Model.Estate;
 
-namespace Rhea.Business
+namespace Rhea.Business.Estate
 {
     /// <summary>
     /// 楼宇业务类
@@ -19,7 +19,7 @@ namespace Rhea.Business
         /// <summary>
         /// 数据库连接
         /// </summary>
-        private RheaMongoContext context = new RheaMongoContext(RheaConstant.CronusDatabase);
+        private RheaMongoContext context = new RheaMongoContext(RheaConstant.EstateDatabase);
         #endregion //Field
 
         #region Function
@@ -39,6 +39,7 @@ namespace Rhea.Business
             building.UsableArea = (double?)doc.GetValue("usableArea", null);
             building.AboveGroundFloor = (int?)doc.GetValue("aboveGroundFloor", null);
             building.UnderGroundFloor = (int?)doc.GetValue("underGroundFloor", null);
+            building.UseType = doc["useType"].AsInt32;
             building.Remark = doc.GetValue("remark", "").AsString;
             building.Status = doc.GetValue("status", 0).AsInt32;
 

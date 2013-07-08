@@ -19,7 +19,7 @@ namespace Rhea.Business.Estate
         /// <summary>
         /// 数据库连接
         /// </summary>
-        private RheaMongoContext context = new RheaMongoContext(RheaConstant.CronusDatabase);
+        private RheaMongoContext context = new RheaMongoContext(RheaConstant.EstateDatabase);
         #endregion //Field
 
         #region Function
@@ -34,6 +34,7 @@ namespace Rhea.Business.Estate
             buildingGroup.Id = doc["id"].AsInt32;
             buildingGroup.Name = doc["name"].AsString;
             buildingGroup.ImageUrl = doc.GetValue("imageUrl", "").AsString;
+            buildingGroup.PartMapUrl = doc.GetValue("partMapUrl", "").AsString;
             buildingGroup.BuildingCount = (int?)doc.GetValue("buildingCount", null);
             buildingGroup.AreaCoeffcient = doc.GetValue("areaCoeffcient", "").AsString;
             buildingGroup.BuildArea = (double?)doc.GetValue("buildArea", null);

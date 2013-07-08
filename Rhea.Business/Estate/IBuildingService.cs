@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Rhea.Model.Estate;
 
-namespace Rhea.Business
+namespace Rhea.Business.Estate
 {
     /// <summary>
     /// 楼宇业务接口

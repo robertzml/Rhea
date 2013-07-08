@@ -8,7 +8,7 @@ using MongoDB.Driver.Builders;
 using Rhea.Data.Server;
 using Rhea.Model.Estate;
 
-namespace Rhea.Business
+namespace Rhea.Business.Estate
 {
     /// <summary>
     /// 房间业务类

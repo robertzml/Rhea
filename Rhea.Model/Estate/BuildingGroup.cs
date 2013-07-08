@@ -30,6 +30,12 @@ namespace Rhea.Model.Estate
         public string ImageUrl { get; set; }
 
         /// <summary>
+        /// 局部平面图
+        /// </summary>
+        [Display(Name = "局部导航")]
+        public string PartMapUrl { get; set; }
+
+        /// <summary>
         /// 楼宇栋数
         /// </summary>        
         [Range(1, int.MaxValue)]
@@ -155,10 +161,5 @@ namespace Rhea.Model.Estate
         /// </summary>
         [Display(Name = "状态" )]
         public int Status { get; set; }
-
-        /// <summary>
-        /// 楼宇列表
-        /// </summary>
-        //public List<Building> Buildings { get; set; }
     }
 }

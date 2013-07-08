@@ -1,0 +1,57 @@
+﻿@model int
+@{    
+    ViewBag.Title = "楼群主页";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="span2">
+    <div class="well sidebar-nav">
+        <ul class="nav nav-list">
+            <li class="nav-header">导航</li>
+            <li class="active"><a href="#" id="building-group-summary">概况</a></li>
+            <li><a href="#" id="building-group-details">详细</a></li>
+            <li><a href="#">Link</a></li>
+            <li><a href="#">Link</a></li>
+            <li class="nav-header" id="building-list">楼宇列表</li>          
+            <li class="nav-header">Sidebar</li>
+            <li><a href="#">Link</a></li>
+            <li><a href="#">Link</a></li>
+            <li><a href="#">Link</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="span10">
+    <div id="ajax-content1">
+    @Html.Action("Summary", "BuildingGroup", new { area = "Estate", id = Model })
+    </div>
+</div>
+
+@section scripts {
+<script type="text/javascript">
+    $(function () {
+        $.getJSON('/Estate/Building/GetListByBuildingGroup', { buildingGroupId: @Model }, function (response) {
+            var text = [];
+            $.each(response, function(i, item) {
+                text.push("<li><a href='#'>" + item.Name + "</a></li>");
+            });
+            text = text.join('');
+            $('li#building-list').after(text);
+        });
+
+        $('a#building-group-summary').click(function() {
+            $('ul.nav').children().removeClass('active');
+            $(this).parent().addClass('active');
+            ajaxLoadPage("Summary", "BuildingGroup", "Estate", { id: @Model });
+            return false;
+        });
+
+        $('a#building-group-details').click(function() {
+            $('ul.nav').children().removeClass('active');
+            $(this).parent().addClass('active');
+            ajaxLoadPage("Details", "BuildingGroup", "Estate", { id: @Model });
+            return false;
+        });
+    });
+</script>
+}

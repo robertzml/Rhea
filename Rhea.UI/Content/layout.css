@@ -110,3 +110,10 @@ ul#department-menu2 li {
 .box-content{
 	padding:10px;
 }
+
+/***************************
+  data table
+****************************/
+table {
+	font-size:13px;
+}
