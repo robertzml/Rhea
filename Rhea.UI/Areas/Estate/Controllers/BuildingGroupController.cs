@@ -53,7 +53,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
             if (!string.IsNullOrEmpty(data.ImageUrl))
                 data.ImageUrl = RheaConstant.ImagesRoot + data.ImageUrl;
             if (!string.IsNullOrEmpty(data.PartMapUrl))
-                data.PartMapUrl = RheaConstant.ImagesRoot + data.PartMapUrl;  
+                data.PartMapUrl = RheaConstant.ImagesRoot + data.PartMapUrl;
 
             return View(data);
         }

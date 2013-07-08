@@ -33,10 +33,18 @@
         $.getJSON('/Estate/Building/GetListByBuildingGroup', { buildingGroupId: @Model }, function (response) {
             var text = [];
             $.each(response, function(i, item) {
-                text.push("<li><a href='#'>" + item.Name + "</a></li>");
+                text.push("<li><a href='#' class='building-index' ref='" + item.Id + "'>" + item.Name + "</a></li>");
             });
             text = text.join('');
             $('li#building-list').after(text);
+
+            $('a.building-index').click(function() {
+                $('ul.nav').children().removeClass('active');
+                $(this).parent().addClass('active');
+                var buildingId = $(this).attr('ref');
+                ajaxLoadPage("Index", "Building", "Estate", { id: buildingId });
+                return false;
+            });
         });
 
         $('a#building-group-summary').click(function() {

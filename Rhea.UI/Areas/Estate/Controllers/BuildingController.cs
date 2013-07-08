@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Rhea.Business;
 using Rhea.Business.Estate;
 using Rhea.Model.Estate;
 
@@ -34,10 +35,25 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <summary>
         /// 楼宇主页
         /// </summary>
+        /// <param name="id">楼宇ID</param>
         /// <returns></returns>
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
-            return View();
+            return View(id);
+        }
+
+        /// <summary>
+        /// 楼宇信息
+        /// </summary>
+        /// <param name="id">楼宇ID</param>
+        /// <returns></returns>
+        public ActionResult Details(int id)
+        {
+            Building data = this.buildingService.Get(id);
+            if (!string.IsNullOrEmpty(data.ImageUrl))
+                data.ImageUrl = RheaConstant.ImagesRoot + data.ImageUrl;
+
+            return View(data);
         }
         #endregion //Action
 
