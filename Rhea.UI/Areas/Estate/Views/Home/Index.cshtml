@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "房产概况";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="span2">
+    <div class="well sidebar-nav">
+        <ul class="nav nav-list">
+            <li class="nav-header">导航</li>
+            <li class="active"><a href="#">概况</a></li>
+            <li><a href="#">概况2</a></li>
+            <li><a href="#">Link</a></li>
+            <li><a href="#">Link</a></li>
+            <li class="nav-header">Sidebar</li>
+            <li><a href="#" id="building-group-list">楼群列表</a></li>
+            <li><a href="#">Link</a></li>
+            <li><a href="#">Link</a></li>
+            <li><a href="#">Link</a></li>
+            <li><a href="#">Link</a></li>
+            <li><a href="#">Link</a></li>
+            <li class="nav-header">Sidebar</li>
+            <li><a href="#">Link</a></li>
+            <li><a href="#">Link</a></li>
+            <li><a href="#">Link</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="span10">
+    <div id="ajax-content1">
+    </div>
+</div>
+
+@section scripts {
+<script type="text/javascript">
+    $(function () {
+        $('a#building-group-list').click(function() {
+            ajaxLoadPage("List", "BuildingGroup", "Estate", {});
+        });
+    });
+</script>
+}

@@ -12,13 +12,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="#" class="brand">房产管理系统</a>
+            <a href="@Url.Action("Index", "Home")" class="brand">房产管理系统</a>
             <div class="nav-collapse collapse">
                 <p class="navbar-text pull-right">
                     Logged in as <a class="navbar-link" href="#">Username</a>
                 </p>
                 <ul class="nav">
-                    <li class="active"><a href="#">概况</a></li>
+                    <li class="active"><a href="@Url.Action("Index", new { controller = "Home", area = "Estate" })">概况</a></li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">部门</a>
                         <div id="department-menu" class="dropdown-menu" role="menu" aria-labelledby="dLabel">                           
@@ -91,9 +91,9 @@
                                                      
                         </div>
                     </li>
-                    <li><a href="@Url.Action("About", "Home")">统计</a></li>
+                    <li><a href="#">统计</a></li>
                     <li>
-                        <a href="#">关于我们</a>                      
+                        <a href="@Url.Action("About", "Home")">关于我们</a>                      
                     </li>
                 </ul>
             </div><!--/.nav-collapse -->

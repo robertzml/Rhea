@@ -161,6 +161,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Estate\Controllers\BuildingGroupController.cs" />
     <Compile Include="Areas\Estate\Controllers\HomeController.cs" />
     <Compile Include="Areas\Estate\EstateAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -311,6 +312,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Estate\Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\BuildingGroup\List.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
