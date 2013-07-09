@@ -54,11 +54,22 @@ namespace Rhea.UI.Areas.Estate.Controllers
         }
 
         /// <summary>
-        /// 楼层信息
+        /// 楼层导航
         /// </summary>
         /// <param name="id">楼宇ID</param>
         /// <returns></returns>
         public ActionResult Floors(int id)
+        {
+            Building data = this.buildingService.Get(id);
+            return View(data);
+        }
+
+        /// <summary>
+        /// 楼层列表
+        /// </summary>
+        /// <param name="id">楼宇ID</param>
+        /// <returns></returns>
+        public ActionResult FloorList(int id)
         {
             Building data = this.buildingService.Get(id);
             return View(data);

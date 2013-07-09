@@ -168,6 +168,11 @@ namespace Rhea.Business.Estate
         {
             throw new NotImplementedException();
         }
-        #endregion //Method        
+
+        public Floor GetFloor(int id)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion //Method
     }
 }

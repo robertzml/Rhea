@@ -32,6 +32,13 @@ namespace Rhea.Business.Estate
         Building Get(int id);
 
         /// <summary>
+        /// 获取楼层
+        /// </summary>
+        /// <param name="id">楼层ID</param>
+        /// <returns></returns>
+        Floor GetFloor(int id);
+
+        /// <summary>
         /// 添加楼宇
         /// </summary>
         /// <param name="data">楼宇数据</param>

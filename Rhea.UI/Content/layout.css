@@ -62,7 +62,7 @@ ul#department-menu2 li {
 	border-radius:3px;
 	-webkit-border-radius:3px;
 	-moz-border-radius:3px;
-	margin-bottom: 15px;
+	margin-bottom: 10px;
 	box-shadow: 0 0 10px rgba(189, 189, 189, 0.4);
 	-webkit-box-shadow: 0 0 10px rgba(189, 189, 189, 0.4);
 	-moz-box-shadow: 0 0 10px rgba(189, 189, 189, 0.4);
@@ -116,4 +116,30 @@ ul#department-menu2 li {
 ****************************/
 table {
 	font-size:13px;
+}
+div.dataTables_length select {
+	width: 80px;
+}
+.dataTables_filter input, .dataTables_length select {
+	display: inline-block;
+	margin-bottom: 0;
+}
+
+div.center, p.center, img.center {
+	display: block;
+    float: none !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+	height: 30px;
+}
+
+.datatable td{
+	max-width:200px;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
 }

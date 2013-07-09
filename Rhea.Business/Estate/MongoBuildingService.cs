@@ -135,6 +135,27 @@ namespace Rhea.Business.Estate
         }
 
         /// <summary>
+        /// 获取楼层
+        /// </summary>
+        /// <param name="id">楼层ID</param>
+        /// <returns></returns>
+        public Floor GetFloor(int id)
+        {
+            BsonDocument doc = this.context.FindOne(CronusCollection.Building, "floors.id", id);
+
+            if (doc != null)
+            {
+                Building building = ModelBind(doc);
+                if (building.Status == 1)
+                    return null;
+
+                return building.Floors.Single(r => r.Id == id);
+            }
+            else
+                return null;
+        }
+
+        /// <summary>
         /// 添加楼宇
         /// </summary>
         /// <param name="data">楼宇数据</param>
