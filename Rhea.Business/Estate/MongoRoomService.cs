@@ -19,7 +19,7 @@ namespace Rhea.Business.Estate
         /// <summary>
         /// 数据库连接
         /// </summary>
-        private RheaMongoContext context = new RheaMongoContext(RheaConstant.CronusDatabase);
+        private RheaMongoContext context = new RheaMongoContext(RheaConstant.EstateDatabase);
         #endregion //Field
 
         #region Function
@@ -29,21 +29,22 @@ namespace Rhea.Business.Estate
         /// <param name="doc"></param>
         /// <returns></returns>
         private Room ModelBind(BsonDocument doc)
-        {
-            throw new NotImplementedException();
-            /*Room room = new Room();
+        {           
+            Room room = new Room();
             room.Id = doc["id"].AsInt32;
             room.Name = doc["name"].AsString;
             room.Number = doc["number"].AsString;
             room.Floor = doc["floor"].AsInt32;
             room.Span = (double?)doc.GetValue("span", null);
             room.Orientation = doc.GetValue("orientation", "").AsString;
+            room.BuildingId = doc["buildingId"].AsInt32;
+            room.DepartmentId = doc["departmentId"].AsInt32;
             room.BuildArea = (double?)doc.GetValue("buildArea", null);
             room.UsableArea = (double?)doc.GetValue("usableArea", null);
             room.StartDate = (DateTime?)doc.GetValue("startDate", null);
             room.FixedYear = (int?)doc.GetValue("fixedYear", null);
             room.Manager = doc.GetValue("manager", "").AsString;
-            room.RoomStatus = doc.GetValue("roomStatus", 0).AsInt32;
+            room.RoomStatus = doc.GetValue("roomStatus", "").AsString;
             room.Remark = doc.GetValue("remark", "").AsString;
             room.Status = doc.GetValue("status", 0).AsInt32;
 
@@ -74,25 +75,11 @@ namespace Rhea.Business.Estate
                 room.Function.Property = fun["property"].AsString;
             }
             else
-                room.Function = null;
-
-            if (doc.Contains("building"))
-            {
-                BsonDocument buil = doc["building"].AsBsonDocument;
-                room.Building.Id = buil["id"].AsInt32;
-                room.Building.Name = buil["name"].AsString;
-            }
-
-            if (doc.Contains("department"))
-            {
-                BsonDocument dep = doc["department"].AsBsonDocument;
-                room.Department.Id = dep["id"].AsInt32;
-                room.Department.Name = dep["name"].AsString;
-            }
+                room.Function = null;          
 
             if (room.StartDate != null)
                 room.StartDate = ((DateTime)room.StartDate).ToLocalTime();
-            return room;*/
+            return room;
         }
         #endregion //Function
 
@@ -122,7 +109,7 @@ namespace Rhea.Business.Estate
         /// <returns></returns>
         public List<Room> GetListByBuilding(int buildingId)
         {
-            List<BsonDocument> docs = this.context.Find(CronusCollection.Room, "building.id", buildingId);
+            List<BsonDocument> docs = this.context.Find(CronusCollection.Room, "buildingId", buildingId);
 
             List<Room> rooms = new List<Room>();
             foreach (var doc in docs)
@@ -145,7 +132,7 @@ namespace Rhea.Business.Estate
             BsonDocument[] pipeline = {
                 new BsonDocument {
                     { "$match", new BsonDocument {
-                        { "building.id", buildingId },
+                        { "buildingId", buildingId },
                         { "floor", floor }
                     }}}
             };
@@ -181,7 +168,7 @@ namespace Rhea.Business.Estate
             BsonDocument[] pipeline = {
                 new BsonDocument {
                     { "$match", new BsonDocument {
-                        { "department.id", departmentId }
+                        { "departmentId", departmentId }
                     }}}
             };
 

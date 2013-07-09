@@ -34,7 +34,8 @@ namespace Rhea.UI.Areas.Estate.Controllers
         #region Action
         public ActionResult Summary(int id)
         {
-            return View();
+            Room data = this.roomService.Get(id);
+            return View(data);
         }
         #endregion //Action
     }

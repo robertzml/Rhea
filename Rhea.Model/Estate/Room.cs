@@ -131,11 +131,11 @@ namespace Rhea.Model.Estate
         /// 房间状态
         /// </summary>
         /// <remarks>
-        /// 0:未知, 1:在用, 2:闲置, 3:报废, 4:有偿转让, 5:无偿调出, 6:出租, 7:其他
+        /// 0:未知, 1:在用, 2:闲置, 3:报废, 4:有偿转让, 5:无偿调出, 6:出租, 7:借出, 8:其他
         /// </remarks>
         [Display(Name = "房间状态")]
         [UIHint("RoomStatus")]
-        public int RoomStatus { get; set; }
+        public string RoomStatus { get; set; }
 
         /// <summary>
         /// 备注

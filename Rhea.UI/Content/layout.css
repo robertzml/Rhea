@@ -143,3 +143,12 @@ div.center, p.center, img.center {
 	overflow:hidden;
 	text-overflow:ellipsis;
 }
+
+div#svg {
+	height:500px;
+	width:100%;
+	overflow:scroll;
+	border:1px solid rgba(148,148,148,0.8);
+	margin:0;
+	padding:0;	
+}
