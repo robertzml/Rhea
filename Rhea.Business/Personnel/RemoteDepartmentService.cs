@@ -56,6 +56,11 @@ namespace Rhea.Business.Personnel
         public bool Edit(Department data)
         {
             throw new NotImplementedException();
+        }        
+
+        public string GetName(int id)
+        {
+            throw new NotImplementedException();
         }
         #endregion //Method
     }

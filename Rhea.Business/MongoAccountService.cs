@@ -28,7 +28,7 @@ namespace Rhea.Business
         /// <param name="current">本次登录时间</param>
         private void UpdateLoginTime(int userId, DateTime last, DateTime current)
         {
-            RheaMongoContext context = new RheaMongoContext(RheaConstant.EstateDatabase);
+            RheaMongoContext context = new RheaMongoContext(RheaServer.EstateDatabase);
 
             var query = Query.EQ("id", userId);
             var update = Update.Set("lastLoginTime", last)
@@ -49,7 +49,7 @@ namespace Rhea.Business
         /// <returns></returns>
         public UserProfile Login(string userName, string password)
         {
-            RheaMongoContext context = new RheaMongoContext(RheaConstant.EstateDatabase);
+            RheaMongoContext context = new RheaMongoContext(RheaServer.EstateDatabase);
 
             BsonDocument doc = context.FindOne(EstateCollection.User, "userName", userName);
             if (doc != null)
@@ -97,7 +97,7 @@ namespace Rhea.Business
         /// <returns></returns>
         public UserProfile Get(string userName)
         {
-            RheaMongoContext context = new RheaMongoContext(RheaConstant.EstateDatabase);
+            RheaMongoContext context = new RheaMongoContext(RheaServer.EstateDatabase);
 
             BsonDocument doc = context.FindOne(EstateCollection.User, "userName", userName);
             if (doc != null)

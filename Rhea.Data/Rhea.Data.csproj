@@ -56,9 +56,10 @@
     <Compile Include="Entities\ManagerGroup.cs" />
     <Compile Include="Estate\StatisticModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Server\CronusCollection.cs" />
     <Compile Include="Server\EstateCollection.cs" />
     <Compile Include="Server\EstateServer.cs" />
+    <Compile Include="Server\PersonnelCollection.cs" />
+    <Compile Include="Server\RheaServer.cs" />
     <Compile Include="Server\RheaMongoContext.cs" />
   </ItemGroup>
   <ItemGroup>

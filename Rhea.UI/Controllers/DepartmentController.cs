@@ -65,7 +65,6 @@ namespace Rhea.UI.Controllers
         /// <returns></returns>
         public ActionResult Building(int id, int buildingId)
         {
-
             return View();
         }
         #endregion //Action

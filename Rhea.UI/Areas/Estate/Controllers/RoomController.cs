@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Rhea.Business;
 using Rhea.Business.Estate;
+using Rhea.Business.Personnel;
 using Rhea.Model.Estate;
 
 namespace Rhea.UI.Areas.Estate.Controllers
@@ -51,6 +52,9 @@ namespace Rhea.UI.Areas.Estate.Controllers
         public ActionResult Summary(int id)
         {
             Room data = this.roomService.Get(id);
+            IDepartmentService departmentService = new MongoDepartmentService();
+            ViewBag.DepartmentName = departmentService.GetName(data.DepartmentId);
+
             return View(data);
         }
         #endregion //Action

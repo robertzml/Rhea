@@ -39,6 +39,13 @@ namespace Rhea.Business.Estate
         Building Get(int id);
 
         /// <summary>
+        /// 得到楼宇名称
+        /// </summary>
+        /// <param name="id">楼宇ID</param>
+        /// <returns></returns>
+        string GetName(int id);
+
+        /// <summary>
         /// 获取楼层
         /// </summary>
         /// <param name="id">楼层ID</param>

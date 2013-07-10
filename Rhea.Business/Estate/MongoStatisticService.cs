@@ -19,7 +19,7 @@ namespace Rhea.Business.Estate
         /// <summary>
         /// 数据库连接
         /// </summary>
-        private RheaMongoContext context = new RheaMongoContext(RheaConstant.CronusDatabase);       
+        private RheaMongoContext context = new RheaMongoContext(RheaServer.EstateDatabase);       
         #endregion //Field  
 
         #region Method

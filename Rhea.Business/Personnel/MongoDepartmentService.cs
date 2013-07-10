@@ -19,12 +19,7 @@ namespace Rhea.Business.Personnel
         /// <summary>
         /// 数据库连接
         /// </summary>
-        private RheaMongoContext context = new RheaMongoContext(RheaConstant.PersonnelDatabase);
-
-        /// <summary>
-        /// Collection名称
-        /// </summary>
-        private readonly string collectionName = "department";
+        private RheaMongoContext context = new RheaMongoContext(RheaServer.PersonnelDatabase);
         #endregion //Field
 
         #region Function
@@ -41,6 +36,8 @@ namespace Rhea.Business.Personnel
             department.Type = doc["type"].AsInt32;
             department.Description = doc.GetValue("description", "").AsString;
             department.ImageUrl = doc.GetValue("imageUrl", "").AsString;
+            department.LogoUrl = doc.GetValue("logoUrl", "").AsString;
+            department.ShortName = doc.GetValue("shortName", "").AsString;
             department.Status = doc.GetValue("status", 0).AsInt32;
 
             return department;
@@ -55,7 +52,7 @@ namespace Rhea.Business.Personnel
         public List<Department> GetList()
         {
             List<Department> departments = new List<Department>();
-            List<BsonDocument> doc = this.context.FindAll(collectionName);
+            List<BsonDocument> doc = this.context.FindAll(PersonnelCollection.Department);
 
             foreach (var d in doc)
             {
@@ -74,7 +71,7 @@ namespace Rhea.Business.Personnel
         /// <returns></returns>
         public Department Get(int id)
         {
-            BsonDocument doc = this.context.FindOne(collectionName, "id", id);
+            BsonDocument doc = this.context.FindOne(PersonnelCollection.Department, "id", id);
             if (doc != null)
             {
                 Department department = ModelBind(doc);
@@ -82,7 +79,22 @@ namespace Rhea.Business.Personnel
             }
             else
                 return null;
-        }        
+        }
+
+        /// <summary>
+        /// 得到部门名称
+        /// </summary>
+        /// <param name="id">部门ID</param>
+        /// <returns></returns>
+        public string GetName(int id)
+        {
+            BsonDocument doc = this.context.FindOne(PersonnelCollection.Department, "id", id);
+
+            if (doc != null)
+                return doc["name"].AsString;
+            else
+                return string.Empty;
+        }
 
         /// <summary>
         /// 编辑部门
@@ -96,7 +108,7 @@ namespace Rhea.Business.Personnel
                 .Set("description", data.Description)
                 .Set("imageUrl", data.ImageUrl);
 
-            WriteConcernResult result = this.context.Update(this.collectionName, query, update);
+            WriteConcernResult result = this.context.Update(PersonnelCollection.Department, query, update);
 
             if (result.HasLastErrorMessage)
                 return false;

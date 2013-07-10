@@ -21,7 +21,7 @@ namespace Rhea.Business
         /// <returns></returns>
         public List<ManagerGroup> GetManagerGroupList()
         {
-            RheaMongoContext context = new RheaMongoContext(RheaConstant.EstateDatabase);
+            RheaMongoContext context = new RheaMongoContext(RheaServer.EstateDatabase);
 
             List<ManagerGroup> data = new List<ManagerGroup>();           
             List<BsonDocument> docs = context.Find(EstateCollection.UserGroup, "type", 1);
@@ -57,7 +57,7 @@ namespace Rhea.Business
         /// <returns></returns>
         public ManagerGroup GetManagerGroup(int managerGroupId)
         {
-            RheaMongoContext context = new RheaMongoContext(RheaConstant.EstateDatabase);
+            RheaMongoContext context = new RheaMongoContext(RheaServer.EstateDatabase);
 
             BsonDocument doc = context.FindOne(EstateCollection.UserGroup, "id", managerGroupId);
 
@@ -82,7 +82,7 @@ namespace Rhea.Business
         /// <returns></returns>
         public List<UserGroup> GetUserGroupList()
         {
-            RheaMongoContext context = new RheaMongoContext(RheaConstant.EstateDatabase);
+            RheaMongoContext context = new RheaMongoContext(RheaServer.EstateDatabase);
 
             List<UserGroup> data = new List<UserGroup>();
             List<BsonDocument> docs = context.Find(EstateCollection.UserGroup, "type", 2);
@@ -108,7 +108,7 @@ namespace Rhea.Business
         /// <returns></returns>
         public UserGroup GetUserGroup(int userGroupId)
         {
-            RheaMongoContext context = new RheaMongoContext(RheaConstant.EstateDatabase);
+            RheaMongoContext context = new RheaMongoContext(RheaServer.EstateDatabase);
 
             BsonDocument doc = context.FindOne(EstateCollection.UserGroup, "id", userGroupId);
 

@@ -19,7 +19,7 @@ namespace Rhea.Business.Estate
         /// <summary>
         /// 数据库连接
         /// </summary>
-        private RheaMongoContext context = new RheaMongoContext(RheaConstant.EstateDatabase);
+        private RheaMongoContext context = new RheaMongoContext(RheaServer.EstateDatabase);
         #endregion //Field
 
         #region Function
@@ -91,7 +91,7 @@ namespace Rhea.Business.Estate
         public List<Room> GetList()
         {
             List<Room> data = new List<Room>();
-            List<BsonDocument> doc = this.context.FindAll(CronusCollection.Room);
+            List<BsonDocument> doc = this.context.FindAll(EstateCollection.Room);
 
             foreach (BsonDocument d in doc)
             {
@@ -109,7 +109,7 @@ namespace Rhea.Business.Estate
         /// <returns></returns>
         public List<Room> GetListByBuilding(int buildingId)
         {
-            List<BsonDocument> docs = this.context.Find(CronusCollection.Room, "buildingId", buildingId);
+            List<BsonDocument> docs = this.context.Find(EstateCollection.Room, "buildingId", buildingId);
 
             List<Room> rooms = new List<Room>();
             foreach (var doc in docs)
@@ -137,7 +137,7 @@ namespace Rhea.Business.Estate
                     }}}
             };
 
-            AggregateResult result = this.context.Aggregate(CronusCollection.Room, pipeline);
+            AggregateResult result = this.context.Aggregate(EstateCollection.Room, pipeline);
             List<Room> data = new List<Room>();
             foreach (var r in result.ResultDocuments)
             {
@@ -172,7 +172,7 @@ namespace Rhea.Business.Estate
                     }}}
             };
 
-            AggregateResult result = this.context.Aggregate(CronusCollection.Room, pipeline);
+            AggregateResult result = this.context.Aggregate(EstateCollection.Room, pipeline);
             List<Room> data = new List<Room>();
             foreach (var r in result.ResultDocuments)
             {
@@ -199,7 +199,7 @@ namespace Rhea.Business.Estate
                     }}}
             };
 
-            AggregateResult result = this.context.Aggregate(CronusCollection.Room, pipeline);
+            AggregateResult result = this.context.Aggregate(EstateCollection.Room, pipeline);
             List<Room> data = new List<Room>();
             foreach (var r in result.ResultDocuments)
             {
@@ -217,7 +217,7 @@ namespace Rhea.Business.Estate
         /// <returns></returns>
         public Room Get(int id)
         {
-            BsonDocument doc = this.context.FindOne(CronusCollection.Room, "id", id);
+            BsonDocument doc = this.context.FindOne(EstateCollection.Room, "id", id);
 
             if (doc != null)
             {
@@ -226,7 +226,7 @@ namespace Rhea.Business.Estate
             }
             else
                 return null;
-        }
+        }        
 
         /// <summary>
         /// 添加房间
@@ -384,7 +384,7 @@ namespace Rhea.Business.Estate
             var query = Query.EQ("id", id);
             var update = Update.Set("status", 1);
 
-            WriteConcernResult result = this.context.Update(CronusCollection.Room, query, update);
+            WriteConcernResult result = this.context.Update(EstateCollection.Room, query, update);
 
             if (result.HasLastErrorMessage)
                 return false;
@@ -426,7 +426,7 @@ namespace Rhea.Business.Estate
         /// <returns></returns>
         public int Count()
         {
-            long count = this.context.Count(CronusCollection.Room);
+            long count = this.context.Count(EstateCollection.Room);
             return (int)count;
         }
         #endregion //Method

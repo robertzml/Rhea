@@ -19,6 +19,10 @@ namespace Rhea.UI.Controllers
             return View();
         }       
 
+        /// <summary>
+        /// 导航栏
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Nav()
         {
             IDepartmentService departmentService = new MongoDepartmentService();

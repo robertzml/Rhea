@@ -25,6 +25,13 @@ namespace Rhea.Business.Personnel
         Department Get(int id);
 
         /// <summary>
+        /// 得到部门名称
+        /// </summary>
+        /// <param name="id">部门ID</param>
+        /// <returns></returns>
+        string GetName(int id);
+
+        /// <summary>
         /// 编辑部门
         /// </summary>
         /// <param name="data">部门数据</param>

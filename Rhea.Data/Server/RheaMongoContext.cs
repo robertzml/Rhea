@@ -117,7 +117,7 @@ namespace Rhea.Data.Server
         {
             MongoCollection<BsonDocument> collection = this.database.GetCollection<BsonDocument>(collectionName);
             var query = Query.EQ(key, value);
-
+            
             BsonDocument d = collection.FindOne(query);               
             return d;
         }
