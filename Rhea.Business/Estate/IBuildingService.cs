@@ -25,6 +25,13 @@ namespace Rhea.Business.Estate
         List<Building> GetListByBuildingGroup(int buildingGroupId);
 
         /// <summary>
+        /// 获取部门相关楼宇
+        /// </summary>
+        /// <param name="departmentId">部门ID</param>
+        /// <returns></returns>
+        List<Building> GetListByDepartment(int departmentId);
+
+        /// <summary>
         /// 获取楼宇
         /// </summary>
         /// <param name="id">楼宇ID</param>

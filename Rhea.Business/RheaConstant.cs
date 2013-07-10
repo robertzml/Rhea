@@ -35,6 +35,11 @@ namespace Rhea.Business
         public static readonly string EstateDatabase = "estate";
 
         /// <summary>
+        /// Personnel数据库
+        /// </summary>
+        public static readonly string PersonnelDatabase = "personnel";
+
+        /// <summary>
         /// API服务器地址
         /// </summary>
         public static readonly string ApiHost;
@@ -42,12 +47,12 @@ namespace Rhea.Business
         /// <summary>
         /// 图片根目录
         /// </summary>
-        public static readonly string ImagesRoot = "/Images/";
+        public static readonly string ImagesRoot = "/Attachment/";
 
         /// <summary>
         /// SVG根目录
         /// </summary>
-        public static readonly string SvgRoot = "/Images/svg/";
+        public static readonly string SvgRoot = "/Attachment/svg/";
         #endregion //Field
     }
 }

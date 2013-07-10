@@ -38,8 +38,8 @@
                 <tr>
                     <td>@item.Name</td>
                     <td>@item.BuildingCount</td>
-                    <td>@item.BuildArea</td>
-                    <td>@item.UsableArea</td>
+                    <td>@item.BuildArea m<sup>2</sup></td>
+                    <td>@item.UsableArea m<sup>2</sup></td>
                     <td>
                         <a class="btn btn-success buildinggroup-details" href="@Url.Action("Index", new { controller = "BuildingGroup", id = item.Id, area = "Estate" })" ref="@item.Id"><i class="icon-zoom-in icon-white"></i>查看</a>
                     </td>

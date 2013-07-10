@@ -32,6 +32,22 @@ namespace Rhea.UI.Areas.Estate.Controllers
         #endregion //Function
 
         #region Action
+        /// <summary>
+        /// 房间信息
+        /// </summary>
+        /// <param name="id">房间ID</param>
+        /// <returns></returns>
+        public ActionResult Details(int id)
+        {
+            var data = this.roomService.Get(id);
+            return View(data);
+        }
+
+        /// <summary>
+        /// 房间摘要
+        /// </summary>
+        /// <param name="id">房间ID</param>
+        /// <returns></returns>
         public ActionResult Summary(int id)
         {
             Room data = this.roomService.Get(id);

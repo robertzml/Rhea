@@ -5,6 +5,7 @@ using System.Text;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
+using System.Configuration;
 
 namespace Rhea.Data.Server
 {
@@ -17,7 +18,7 @@ namespace Rhea.Data.Server
         /// <summary>
         /// 连接字符串
         /// </summary>
-        private string connectionString = "mongodb://210.28.24.171";
+        private string connectionString;// = "mongodb://210.28.24.171";
 
         /// <summary>
         /// 数据库名称
@@ -46,6 +47,7 @@ namespace Rhea.Data.Server
         public RheaMongoContext(string databaseName)
         {
             this.databaseName = databaseName;
+            this.LoadConnectionString();
             this.Open();
         }
         #endregion //Constructor
@@ -59,6 +61,11 @@ namespace Rhea.Data.Server
             MongoClient client = new MongoClient(this.connectionString);
             MongoServer server = client.GetServer();
             this.database = server.GetDatabase(this.databaseName);
+        }
+
+        private void LoadConnectionString()
+        {
+            this.connectionString = ConfigurationManager.ConnectionStrings["mongoConnection"].ConnectionString;
         }
         #endregion //Function
 

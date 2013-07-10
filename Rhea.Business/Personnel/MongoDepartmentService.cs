@@ -19,7 +19,7 @@ namespace Rhea.Business.Personnel
         /// <summary>
         /// 数据库连接
         /// </summary>
-        private RheaMongoContext context = new RheaMongoContext("personnel");
+        private RheaMongoContext context = new RheaMongoContext(RheaConstant.PersonnelDatabase);
 
         /// <summary>
         /// Collection名称
@@ -82,7 +82,7 @@ namespace Rhea.Business.Personnel
             }
             else
                 return null;
-        }
+        }        
 
         /// <summary>
         /// 编辑部门

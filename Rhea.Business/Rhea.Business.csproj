@@ -63,7 +63,7 @@
     <Compile Include="Estate\IStatisticService.cs" />
     <Compile Include="Estate\MongoStatisticService.cs" />
     <Compile Include="Estate\RemoteBuildingService.cs" />
-    <Compile Include="Estate\RemoteDepartmentService.cs" />
+    <Compile Include="Personnel\RemoteDepartmentService.cs" />
     <Compile Include="Estate\RemoteRoomService.cs" />
     <Compile Include="Estate\RemoteStatisticService.cs" />
     <Compile Include="Estate\IBuildingService.cs" />

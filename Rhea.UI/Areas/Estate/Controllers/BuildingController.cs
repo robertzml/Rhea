@@ -87,6 +87,17 @@ namespace Rhea.UI.Areas.Estate.Controllers
             var data = buildingService.GetListByBuildingGroup(buildingGroupId);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
+
+        /// <summary>
+        /// 得到部门占用楼宇
+        /// </summary>
+        /// <param name="departmentId">部门ID</param>
+        /// <returns></returns>
+        public JsonResult GetListByDepartment(int departmentId)
+        {
+            var data = this.buildingService.GetListByDepartment(departmentId);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
         #endregion //Json
     }
 }

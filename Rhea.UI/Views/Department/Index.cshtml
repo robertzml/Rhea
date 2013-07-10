@@ -1,4 +1,5 @@
-﻿@{
+﻿@model int
+@{
     ViewBag.Title = "Index";
 }
 
@@ -6,17 +7,48 @@
     <div class="well sidebar-nav">
         <ul class="nav nav-list">
             <li class="nav-header">导航</li>
-            <li class="active"><a href="#" id="building-group-summary">概况</a></li>
+            <li class="active"><a href="#" id="department-summary">概况</a></li>
             <li><a href="#" id="building-group-details">详细</a></li>      
-            <li class="nav-header" id="building-list">楼宇列表</li>          
-            <li><a href="#">A</a></li>
-            <li><a href="#">B</a></li>
-            <li><a href="#">C</a></li>
+            <li class="nav-header" id="building-list">楼宇列表</li>      
         </ul>
     </div>
 </div>
 
 <div class="span10">
     <div id="ajax-content1">      
+    @Html.Action("Summary", "Department", new { area = "", id = Model })
     </div>
 </div>
+
+
+@section scripts {
+<script type="text/javascript">
+    $(function () {
+        $.getJSON('/Estate/Building/GetListByDepartment', { departmentId: @Model }, function (response) {
+            var text = [];
+            $.each(response, function(i, item) {
+                text.push("<li><a href='#' class='building-index' ref='" + item.Id + "'>" + item.Name + "</a></li>");
+            });
+            text = text.join('');
+            $('li#building-list').after(text);
+
+            $('a.building-index').click(function() {
+                $('ul.nav').children().removeClass('active');
+                $(this).parent().addClass('active');
+                var buildingId = $(this).attr('ref');
+                ajaxLoadPage("Index", "Building", "Estate", { id: buildingId });
+                return false;
+            });
+        });
+       
+        //$('a#building-group-pic').colorbox({ transition: "elastic", maxWidth: "95%", maxHeight: "95%" });
+
+        $('a#department-summary').click(function() {
+            $('ul.nav').children().removeClass('active');
+            $(this).parent().addClass('active');
+            ajaxLoadPage2("Summary", "Department", { id: @Model });
+            return false;
+        });
+    });
+</script>
+}

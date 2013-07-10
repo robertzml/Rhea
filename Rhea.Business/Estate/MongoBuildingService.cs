@@ -156,6 +156,46 @@ namespace Rhea.Business.Estate
         }
 
         /// <summary>
+        /// 获取部门相关楼宇
+        /// </summary>
+        /// <param name="id">部门ID</param>
+        /// <returns></returns>
+        public List<Building> GetListByDepartment(int departmentId)
+        {
+            BsonDocument[] pipeline = {
+                new BsonDocument {
+                    { "$match", new BsonDocument {
+                        { "departmentId", departmentId }
+                    }
+                }},
+                new BsonDocument {
+                    { "$group", new BsonDocument {
+                        { "_id", "$buildingId" }
+                    }
+                }},
+                new BsonDocument {
+                    { "$sort", new BsonDocument {
+                        { "_id", 1 }
+                    }
+                }}
+            };
+                        
+            AggregateResult result = this.context.Aggregate("room", pipeline);
+
+            List<Building> buildings = new List<Building>();           
+            foreach (var doc in result.ResultDocuments)
+            {
+                int bid = doc["_id"].AsInt32;
+                BsonDocument d = this.context.FindOne("building", "id", bid);
+                Building building = ModelBind(d);
+
+                buildings.Add(building);
+            }
+
+            return buildings;
+        }
+
+        /// <summary>
         /// 添加楼宇
         /// </summary>
         /// <param name="data">楼宇数据</param>

@@ -173,6 +173,11 @@ namespace Rhea.Business.Estate
         {
             throw new NotImplementedException();
         }
-        #endregion //Method
+
+        public List<Building> GetListByDepartment(int departmentId)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion //Method       
     }
 }

@@ -5,9 +5,8 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using Rhea.Model.Personnel;
-using Rhea.Business.Personnel;
 
-namespace Rhea.Business.Estate
+namespace Rhea.Business.Personnel
 {
     /// <summary>
     /// 部门业务类
@@ -58,6 +57,6 @@ namespace Rhea.Business.Estate
         {
             throw new NotImplementedException();
         }
-        #endregion //Method        
+        #endregion //Method
     }
 }
