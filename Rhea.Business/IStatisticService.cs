@@ -5,7 +5,7 @@ using System.Text;
 using Rhea.Data.Estate;
 using Rhea.Model.Estate;
 
-namespace Rhea.Business.Estate
+namespace Rhea.Business
 {
     /// <summary>
     /// 统计业务接口
@@ -42,6 +42,11 @@ namespace Rhea.Business.Estate
         /// <returns></returns>
         CollegeBuildingAreaModel GetCollegeBuildingArea(int departmentId);
 
+        /// <summary>
+        /// 根据类别得到楼群建筑面积
+        /// </summary>
+        /// <param name="useType">楼宇使用类型</param>
+        /// <returns></returns>
         double GetBuildingAreaByType(int buildingType);
     }
 }

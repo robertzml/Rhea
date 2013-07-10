@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using Rhea.Business.Estate;
 using Rhea.Data.Estate;
 using Rhea.Data.Server;
 using Rhea.Model.Estate;
 
-namespace Rhea.Business.Estate
+namespace Rhea.Business
 {
     /// <summary>
     /// 统计业务类
@@ -188,16 +189,15 @@ namespace Rhea.Business.Estate
         /// <summary>
         /// 根据类别得到楼群建筑面积
         /// </summary>
-        /// <param name="buildingType">楼群类型</param>
+        /// <param name="useType">楼宇使用类型</param>
         /// <returns></returns>
-        public double GetBuildingAreaByType(int buildingType)
-        {
-            throw new NotImplementedException();
-            /*IBuildingGroupService buildingGroupService = new MongoBuildingGroupService();
-            double result = Convert.ToDouble(buildingGroupService.GetList().Where(r => r.Type == buildingType).Sum(r => r.BuildArea));
+        public double GetBuildingAreaByType(int useType)
+        {            
+            IBuildingService buildingService = new MongoBuildingService();
+            double result = Convert.ToDouble(buildingService.GetList().Where(r => r.UseType == useType).Sum(r => r.BuildArea));
             result = Math.Round(result, 3);
 
-            return result;*/
+            return result;
         }
         #endregion //Method
     }

@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "学校总体建筑分类";
+    Layout = null;
+}
+
+<div class="box">
+    <div class="box-header well" data-original-title>
+        <h2>
+            <i class="icon-align-left"></i>@ViewBag.Title</h2>
+    </div>
+    <div class="box-content">       
+        <div class="row-fluid">
+            <div class="span12">
+                <div id="container-total-usetype-area" style="width: 100%; height:300px;">
+                </div>
+            </div>
+        </div>       
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $.getJSON('/Statistic/TotalUseTypeAreaData', function (response) {
+            setPieChart(response);
+        });
+
+        function setPieChart(data) {
+            var option = {
+                chart: {
+                    renderTo: 'container-total-usetype-area',
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                credits: {
+                    enabled: false
+                },
+                title: {
+                    text: null
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.y:.2f}m<sup>2</sup></b>',
+                    percentageDecimals: 2,
+                    style: {
+                        fontSize: '14px'
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: false,
+                            color: '#000000',
+                            connectorColor: '#000000',
+                            formatter: function () {
+                                return '<b>' + this.point.name + '</b>: ' + this.percentage.toFixed(2) + ' %';
+                            }
+                        },
+                        showInLegend: true
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: '建筑面积',
+                    data: [
+                        ['学院楼群', 4235.0],
+                        ['办公楼群', 3054.8],
+                        ['教学楼群', 2008.7],
+                        ['宿舍楼群', 4493.4]
+                    ]
+                }]
+            };
+
+            /*$.each(data, function (i, item) {
+            option.series[0].data.push([item.TypeName, parseFloat(item.BuildArea)]);
+            });*/
+
+            var chart1 = new Highcharts.Chart(option);
+        }
+    });
+</script>
+

@@ -17,5 +17,13 @@ namespace Rhea.UI.Areas.Estate.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 摘要
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Summary()
+        {
+            return View();
+        }
     }
 }

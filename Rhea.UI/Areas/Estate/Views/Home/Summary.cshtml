@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "摘要";
+}
+
+<div class="row-fluid">
+    <div class="span6">
+        @Html.Action("TotalUseTypeArea", new { controller = "Statistic", area = "" })
+    </div>
+
+    <div class="span6">
+        @Html.Action("LandType", new { controller = "Statistic", area = "" })
+    </div>
+</div>

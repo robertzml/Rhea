@@ -7,7 +7,7 @@
     <div class="well sidebar-nav">
         <ul class="nav nav-list">
             <li class="nav-header">导航</li>
-            <li class="active"><a href="#">概况</a></li>
+            <li class="active"><a href="#" id="summary">概况</a></li>
             <li><a href="#">概况2</a></li>
             <li><a href="#">Link</a></li>
             <li><a href="#">Link</a></li>
@@ -27,15 +27,26 @@
 </div>
 
 <div class="span10">
-    <div id="ajax-content1">    
+    <div id="ajax-content1">
+    @Html.Action("Summary", new { controller = "Home", area = "Estate" })
     </div>
 </div>
 
 @section scripts {
 <script type="text/javascript">
     $(function () {
+        $('a#summary').click(function() {
+            $('ul.nav').children().removeClass('active');
+            $(this).parent().addClass('active');
+            ajaxLoadPage("Summary", "Home", "Estate", {});
+            return false;
+        });
+
         $('a#building-group-list').click(function() {
+            $('ul.nav').children().removeClass('active');
+            $(this).parent().addClass('active');
             ajaxLoadPage("List", "BuildingGroup", "Estate", {});
+            return false;
         });
     });
 </script>

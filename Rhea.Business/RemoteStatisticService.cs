@@ -6,12 +6,12 @@ using System.Net.Http.Headers;
 using System.Text;
 using Rhea.Model.Estate;
 
-namespace Rhea.Business.Estate
+namespace Rhea.Business
 {
     /// <summary>
     /// 统计业务类
     /// </summary>
-    public class RemoteStatisticService : IStatisticService
+    public class RemoteStatisticService //: IStatisticService
     {
         #region Method
         /// <summary>

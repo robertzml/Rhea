@@ -60,12 +60,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiService.cs" />
-    <Compile Include="Estate\IStatisticService.cs" />
-    <Compile Include="Estate\MongoStatisticService.cs" />
+    <Compile Include="IStatisticService.cs" />
+    <Compile Include="MongoStatisticService.cs" />
     <Compile Include="Estate\RemoteBuildingService.cs" />
     <Compile Include="Personnel\RemoteDepartmentService.cs" />
     <Compile Include="Estate\RemoteRoomService.cs" />
-    <Compile Include="Estate\RemoteStatisticService.cs" />
+    <Compile Include="RemoteStatisticService.cs" />
     <Compile Include="Estate\IBuildingService.cs" />
     <Compile Include="Personnel\IDepartmentService.cs" />
     <Compile Include="Estate\IRoomService.cs" />
