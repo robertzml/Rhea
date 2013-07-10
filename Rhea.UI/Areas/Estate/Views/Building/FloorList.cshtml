@@ -79,26 +79,26 @@
         });
 
         function zoom2(zoomType) {
-            var viewBox = svg.attr('viewBox');
-            var viewBoxValues = viewBox.split(' ');
+            //var viewBox = svg.attr('viewBox');
+            //var viewBoxValues = viewBox.split(' ');
             var width = parseFloat(svg.attr('width'));
             var height = parseFloat(svg.attr('height'));
-            viewBoxValues[2] = parseFloat(viewBoxValues[2]);
-            viewBoxValues[3] = parseFloat(viewBoxValues[3]);
+            //viewBoxValues[2] = parseFloat(viewBoxValues[2]);
+            //viewBoxValues[3] = parseFloat(viewBoxValues[3]);
 
             if (zoomType == 'zoomIn') {
-                viewBoxValues[2] *= zoomRate; // Decrease the width and height attributes of the viewBox attribute to zoom in.
-                viewBoxValues[3] *= zoomRate;
+                //viewBoxValues[2] *= zoomRate; // Decrease the width and height attributes of the viewBox attribute to zoom in.
+                //viewBoxValues[3] *= zoomRate;
                 width *= zoomRate;
                 height *= zoomRate;
             }
             else if (zoomType == 'zoomOut') {
-                viewBoxValues[2] /= zoomRate; // Increase the width and height attributes of the viewBox attribute to zoom out.
-                viewBoxValues[3] /= zoomRate;
+                //viewBoxValues[2] /= zoomRate; // Increase the width and height attributes of the viewBox attribute to zoom out.
+                //viewBoxValues[3] /= zoomRate;
                 width /= zoomRate;
                 height /= zoomRate;
             }
-            svg.attr('viewBox', viewBoxValues.join(' '));
+            //svg.attr('viewBox', viewBoxValues.join(' '));
             svg.attr('width', width);
             svg.attr('height', height);
         }
@@ -111,7 +111,7 @@
                     svg = $(this).children('svg');
                     var s0 = svg[0];
                     var viewBox = s0.getAttribute('viewBox');
-                    svg.attr('viewBox', s0);                   
+                    //svg.attr('viewBox', viewBox);                   
 
                     $("svg g[id^='g']").click(function () {
                         var id = $(this).attr('id').toString().substring(1);

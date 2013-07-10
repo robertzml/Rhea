@@ -28,7 +28,7 @@
                                     <ul>
                                     @foreach (var item in Model.Where(r => r.Type == 1))
                                     {
-                                        <li><a href="#">@item.Name</a></li>
+                                        <li><a href="@Url.Action("Index", new { controller = "Department", area = "", id = item.Id })">@item.Name</a></li>
                                     }   
                                     </ul>
                                 </div>
@@ -37,14 +37,14 @@
                                     <ul>
                                     @foreach (var item in Model.Where(r => r.Type == 4))
                                     {
-                                        <li><a href="#">@item.Name</a></li>
+                                        <li><a href="@Url.Action("Index", new { controller = "Department", area = "", id = item.Id })">@item.Name</a></li>
                                     }   
                                     </ul>
                                     <h4>公共服务</h4>
                                     <ul>
                                     @foreach (var item in Model.Where(r => r.Type == 3))
                                     {
-                                        <li><a href="#">@item.Name</a></li>
+                                        <li><a href="@Url.Action("Index", new { controller = "Department", area = "", id = item.Id })">@item.Name</a></li>
                                     }   
                                     </ul>
                                 </div>
@@ -53,7 +53,7 @@
                                     <ul>
                                     @foreach (var item in Model.Where(r => r.Type == 5))
                                     {
-                                        <li><a href="#">@item.Name</a></li>
+                                        <li><a href="@Url.Action("Index", new { controller = "Department", area = "", id = item.Id })">@item.Name</a></li>
                                     }   
                                     </ul>
                                 </div>
@@ -62,28 +62,28 @@
                                     <ul>
                                     @foreach (var item in Model.Where(r => r.Type == 2))
                                     {
-                                        <li><a href="#">@item.Name</a></li>
+                                        <li><a href="@Url.Action("Index", new { controller = "Department", area = "", id = item.Id })">@item.Name</a></li>
                                     }   
                                     </ul>
                                     <h4>附（直）属单位</h4>
                                     <ul>
                                     @foreach (var item in Model.Where(r => r.Type == 6))
                                     {
-                                        <li><a href="#">@item.Name</a></li>
+                                        <li><a href="@Url.Action("Index", new { controller = "Department", area = "", id = item.Id })">@item.Name</a></li>
                                     }   
                                     </ul>
                                     <h4>后勤部门</h4>
                                     <ul>
                                     @foreach (var item in Model.Where(r => r.Type == 7))
                                     {
-                                        <li><a href="#">@item.Name</a></li>
+                                        <li><a href="@Url.Action("Index", new { controller = "Department", area = "", id = item.Id })">@item.Name</a></li>
                                     }   
                                     </ul>
                                     <h4>其它</h4>
                                     <ul>
                                     @foreach (var item in Model.Where(r => r.Type == 9))
                                     {
-                                        <li><a href="#">@item.Name</a></li>
+                                        <li><a href="@Url.Action("Index", new { controller = "Department", area = "", id = item.Id })">@item.Name</a></li>
                                     }   
                                     </ul>
                                 </div>
@@ -93,7 +93,7 @@
                     </li>
                     <li><a href="#">统计</a></li>
                     <li>
-                        <a href="@Url.Action("About", "Home")">关于我们</a>                      
+                        <a href="#">关于我们</a>                      
                     </li>
                 </ul>
             </div><!--/.nav-collapse -->
