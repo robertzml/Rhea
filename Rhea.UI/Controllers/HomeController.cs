@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Rhea.Business.Estate;
 using Rhea.Business.Personnel;
+using Rhea.Model.Estate;
 using Rhea.Model.Personnel;
+using Rhea.UI.Models;
 
 namespace Rhea.UI.Controllers
 {
@@ -25,8 +28,13 @@ namespace Rhea.UI.Controllers
         /// <returns></returns>
         public ActionResult Nav()
         {
+            NavModel data = new NavModel();
+            
             IDepartmentBusiness departmentBusiness = new MongoDepartmentBusiness();
-            var data = departmentBusiness.GetList();
+            data.Departments = departmentBusiness.GetList();
+
+            IBuildingGroupBusiness buildingGroupBusiness = new MongoBuildingGroupBusiness();
+            data.BuildingGroups = buildingGroupBusiness.GetList();
 
             return View(data);
         }

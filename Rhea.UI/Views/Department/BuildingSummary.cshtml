@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Rhea.UI.Areas.Estate.Models.BuildingGroupDepartmentModel>
+﻿@model IEnumerable<Rhea.UI.Models.DepartmentBuildingModel>
 
 @{
-    ViewBag.Title = "楼群入住部门";
+    ViewBag.Title = "部门分楼宇数据";
     Layout = null;
 }
 
@@ -17,7 +17,7 @@
                     <thead>
                         <tr>
                             <th>
-                                部门名称
+                                楼宇名称
                             </th>
                             <th>
                                 房间数量
@@ -32,7 +32,7 @@
                     {
                         <tr>
                             <td>
-                                @item.DepartmentName
+                                @item.BuildingName
                             </td>
                             <td>
                                 @item.RoomCount

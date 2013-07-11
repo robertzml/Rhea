@@ -194,8 +194,8 @@ namespace Rhea.Business.Estate
             BsonDocument[] pipeline = {
                 new BsonDocument {
                     { "$match", new BsonDocument {
-                        { "department.id", departmentId },
-                        { "building.id", buildingId }
+                        { "departmentId", departmentId },
+                        { "buildingId", buildingId }
                     }}}
             };
 

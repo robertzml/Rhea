@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<Rhea.Model.Estate.Room>
-
 @{
     ViewBag.Title = "房间列表";
     Layout = null;
@@ -22,11 +21,11 @@
                         名称
                     </th>
                     <th>
-                        楼层
+                        楼宇
                     </th>
                     <th>
-                        部门
-                    </th>
+                        楼层
+                    </th>                   
                     <th>
                         功能
                     </th>
@@ -46,11 +45,11 @@
                             @item.Name
                         </td>
                         <td>
-                            @item.Floor
+                            @item.BuildingName()
                         </td>
                         <td>
-                            @item.DepartmentName()
-                        </td>
+                            @item.Floor
+                        </td>                       
                         <td>
                             @item.Function.Property
                         </td>
@@ -79,7 +78,7 @@
 
 <script type="text/javascript">
     $(function () {
-        $('table a.room-details').click(function () {           
+        $('table a.room-details').click(function () {
             var url = "/Estate/Room/Details/" + $(this).attr('ref');
             $('.modal-body').load(url);
             $('#myModal').modal();

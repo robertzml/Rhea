@@ -7,26 +7,26 @@
 }
 
 /**************************
- the department menu
+ the nva dropdown menu
 **************************/
-#department-menu {
+#department-menu, #building-group-menu {
 	width:800px;	
 }
 
-#department-menu h4 {
+#department-menu h4, #building-group-menu  h4 {
 	margin-left:5px;
 }
 
-#department-menu ul{
+#department-menu ul, #building-group-menu ul{
 	list-style-type: none;
 	margin-left:10px;
 }
 
-#department-menu ul li{
+#department-menu ul li, #building-group-menu ul li{
 	margin-bottom:5px;
 }
 
-#department-menu ul li a {
+#department-menu ul li a, #building-group-menu ul li a {
   display: block;
   padding: 3px 5px;
   clear: both;
@@ -39,7 +39,9 @@
 }
 
 #department-menu ul li a:hover,
-#department-menu ul li a:focus {
+#department-menu ul li a:focus,
+#building-group-menu ul li a:hover,
+#building-group-menu ul li a:focus{
   color: #ffffff;
   text-decoration: none;
   background-color: #0081c2;
@@ -50,16 +52,6 @@
   background-image: linear-gradient(to bottom, #0088cc, #0077b3);
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0077b3', GradientType=0);
-}
-
-ul#department-menu2 {	
-	width:600px;
-}
-
-ul#department-menu2 li {
-	width:200px;
-	float:left;
-	overflow-x:hidden;
 }
 
 /***************************

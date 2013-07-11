@@ -9,6 +9,7 @@ using Rhea.Business.Estate;
 using Rhea.Business.Personnel;
 using Rhea.Model.Estate;
 using Rhea.Model.Personnel;
+using Rhea.UI.Models;
 
 namespace Rhea.UI.Controllers
 {
@@ -68,14 +69,51 @@ namespace Rhea.UI.Controllers
         }
 
         /// <summary>
-        /// 楼宇信息
+        /// 部门分楼宇信息
+        /// </summary>
+        /// <param name="id">部门ID</param>
+        /// <returns></returns>
+        public ActionResult BuildingSummary(int id)
+        {
+            Department department = this.departmentBusiness.Get(id);
+
+            IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
+            List<Building> buildings = buildingBusiness.GetListByDepartment(id);
+
+            IRoomBusiness roomBusiness = new MongoRoomBusiness();
+            List<DepartmentBuildingModel> data = new List<DepartmentBuildingModel>();
+
+            foreach (var building in buildings)
+            {
+                DepartmentBuildingModel model = new DepartmentBuildingModel();
+                var rooms = roomBusiness.GetListByDepartment(id, building.Id);
+
+                model.DepartmentId = id;
+                model.DepartmentName = department.Name;
+                model.BuildingId = building.Id;
+                model.BuildingName = building.Name;
+                model.RoomCount = rooms.Count();
+                model.TotalUsableArea = Convert.ToDouble(rooms.Sum(r => r.UsableArea));
+
+                data.Add(model);
+            }
+
+            return View(data);
+        }
+
+        /// <summary>
+        /// 部门相关楼宇
         /// </summary>
         /// <param name="id">部门ID</param>
         /// <param name="buildingId">楼宇ID</param>
         /// <returns></returns>
         public ActionResult Building(int id, int buildingId)
         {
-            return View();
+            Dictionary<string, int> data = new Dictionary<string, int>();
+            data.Add("DepartmentId", id);
+            data.Add("BuildingId", buildingId);
+
+            return View(data);
         }
         #endregion //Action
 

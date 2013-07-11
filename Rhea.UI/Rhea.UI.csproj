@@ -166,16 +166,17 @@
     <Compile Include="Areas\Estate\Controllers\HomeController.cs" />
     <Compile Include="Areas\Estate\Controllers\RoomController.cs" />
     <Compile Include="Areas\Estate\EstateAreaRegistration.cs" />
-    <Compile Include="Areas\Estate\Models\BuildingEnum.cs" />
-    <Compile Include="Areas\Estate\Models\BuildingGroupModel.cs" />
+    <Compile Include="Areas\Estate\Models\BuildingModels.cs" />
+    <Compile Include="Areas\Estate\Models\BuildingGroupModels.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StatisticController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\DepartmentModel.cs" />
-    <Compile Include="Models\StatisticModel.cs" />
+    <Compile Include="Models\DepartmentModels.cs" />
+    <Compile Include="Models\NavModel.cs" />
+    <Compile Include="Models\StatisticModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -316,7 +317,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Estate\Content\" />
     <Folder Include="Areas\Estate\Scripts\" />
-    <Folder Include="Areas\Estate\Service\" />
     <Folder Include="Filters\" />
   </ItemGroup>
   <ItemGroup>
@@ -398,6 +398,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Department\List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Department\BuildingSummary.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Room\ListByDepartment.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Department\Building.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Building\FloorListByDepartment.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

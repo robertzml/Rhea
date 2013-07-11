@@ -9,7 +9,9 @@
             <li class="nav-header">导航</li>
             <li class="active"><a href="#" id="department-summary">概况</a></li>
             <li><a href="#" id="building-group-details">详细</a></li>      
-            <li class="nav-header" id="building-list">楼宇列表</li>      
+            <li class="nav-header" id="building-list">楼宇列表</li> 
+            <li class="nav-header">房屋信息</li>
+            <li><a href="#" id="room-list">房间列表</a></li>
         </ul>
     </div>
 </div>
@@ -36,7 +38,7 @@
                 $('ul.nav').children().removeClass('active');
                 $(this).parent().addClass('active');
                 var buildingId = $(this).attr('ref');
-                ajaxLoadPage("Index", "Building", "Estate", { id: buildingId });
+                ajaxLoadPage2("Building", "Department", { id: @Model, buildingId: buildingId });
                 return false;
             });
         });
@@ -47,6 +49,13 @@
             $('ul.nav').children().removeClass('active');
             $(this).parent().addClass('active');
             ajaxLoadPage2("Summary", "Department", { id: @Model });
+            return false;
+        });
+
+        $('a#room-list').click(function() {
+            $('ul.nav').children().removeClass('active');
+            $(this).parent().addClass('active');
+            ajaxLoadPage("ListByDepartment", "Room", "Estate", { departmentId: @Model });
             return false;
         });
     });

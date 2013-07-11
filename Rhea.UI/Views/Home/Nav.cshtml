@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Rhea.Model.Personnel.Department>
+﻿@model Rhea.UI.Models.NavModel
 @{
     Layout = null;
     ViewBag.Title = "Nav";
@@ -20,13 +20,44 @@
                 <ul class="nav">
                     <li class="active"><a href="@Url.Action("Index", new { controller = "Home", area = "Estate" })">概况</a></li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">部门</a>
-                        <div id="department-menu" class="dropdown-menu" role="menu" aria-labelledby="dLabel">                           
+                        <a id="drop1" class="dropdown-toggle" data-toggle="dropdown" role="button" href="#">楼群</a>
+                        <div id="building-group-menu" class="dropdown-menu" role="menu" aria-labelledby="drop1">   
+                            <div class="row-fluid">
+                                <div class="span4">                                   
+                                    <ul>
+                                    @foreach (var item in Model.BuildingGroups.Take(10))
+                                    {
+                                        <li><a href="@Url.Action("Index", new { controller = "BuildingGroup", area = "Estate", id = item.Id })">@item.Name</a></li>
+                                    }   
+                                    </ul>
+                                </div>
+                                <div class="span4">                                   
+                                    <ul>
+                                    @foreach (var item in Model.BuildingGroups.Skip(10).Take(10))
+                                    {
+                                        <li><a href="@Url.Action("Index", new { controller = "BuildingGroup", area = "Estate", id = item.Id })">@item.Name</a></li>
+                                    }   
+                                    </ul>
+                                </div>
+                                <div class="span4">                                   
+                                    <ul>
+                                    @foreach (var item in Model.BuildingGroups.Skip(20))
+                                    {
+                                        <li><a href="@Url.Action("Index", new { controller = "BuildingGroup", area = "Estate", id = item.Id })">@item.Name</a></li>
+                                    }   
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a id="drop2" class="dropdown-toggle" data-toggle="dropdown"  role="button" href="#">部门</a>
+                        <div id="department-menu" class="dropdown-menu" role="menu" aria-labelledby="drop2">                           
                             <div class="row-fluid">
                                 <div class="span3">
                                     <h4>教学院系</h4>
                                     <ul>
-                                    @foreach (var item in Model.Where(r => r.Type == 1))
+                                    @foreach (var item in Model.Departments.Where(r => r.Type == 1))
                                     {
                                         <li><a href="@Url.Action("Index", new { controller = "Department", area = "", id = item.Id })">@item.Name</a></li>
                                     }   
@@ -35,14 +66,14 @@
                                 <div class="span3">
                                     <h4>党务部门</h4>
                                     <ul>
-                                    @foreach (var item in Model.Where(r => r.Type == 4))
+                                    @foreach (var item in Model.Departments.Where(r => r.Type == 4))
                                     {
                                         <li><a href="@Url.Action("Index", new { controller = "Department", area = "", id = item.Id })">@item.Name</a></li>
                                     }   
                                     </ul>
                                     <h4>公共服务</h4>
                                     <ul>
-                                    @foreach (var item in Model.Where(r => r.Type == 3))
+                                    @foreach (var item in Model.Departments.Where(r => r.Type == 3))
                                     {
                                         <li><a href="@Url.Action("Index", new { controller = "Department", area = "", id = item.Id })">@item.Name</a></li>
                                     }   
@@ -51,7 +82,7 @@
                                 <div class="span3">
                                     <h4>行政单位</h4>
                                     <ul>
-                                    @foreach (var item in Model.Where(r => r.Type == 5))
+                                    @foreach (var item in Model.Departments.Where(r => r.Type == 5))
                                     {
                                         <li><a href="@Url.Action("Index", new { controller = "Department", area = "", id = item.Id })">@item.Name</a></li>
                                     }   
@@ -60,28 +91,28 @@
                                 <div class="span3">
                                     <h4>科研机构</h4>
                                     <ul>
-                                    @foreach (var item in Model.Where(r => r.Type == 2))
+                                    @foreach (var item in Model.Departments.Where(r => r.Type == 2))
                                     {
                                         <li><a href="@Url.Action("Index", new { controller = "Department", area = "", id = item.Id })">@item.Name</a></li>
                                     }   
                                     </ul>
                                     <h4>附（直）属单位</h4>
                                     <ul>
-                                    @foreach (var item in Model.Where(r => r.Type == 6))
+                                    @foreach (var item in Model.Departments.Where(r => r.Type == 6))
                                     {
                                         <li><a href="@Url.Action("Index", new { controller = "Department", area = "", id = item.Id })">@item.Name</a></li>
                                     }   
                                     </ul>
                                     <h4>后勤部门</h4>
                                     <ul>
-                                    @foreach (var item in Model.Where(r => r.Type == 7))
+                                    @foreach (var item in Model.Departments.Where(r => r.Type == 7))
                                     {
                                         <li><a href="@Url.Action("Index", new { controller = "Department", area = "", id = item.Id })">@item.Name</a></li>
                                     }   
                                     </ul>
                                     <h4>其它</h4>
                                     <ul>
-                                    @foreach (var item in Model.Where(r => r.Type == 9))
+                                    @foreach (var item in Model.Departments.Where(r => r.Type == 9))
                                     {
                                         <li><a href="@Url.Action("Index", new { controller = "Department", area = "", id = item.Id })">@item.Name</a></li>
                                     }   

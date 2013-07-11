@@ -74,6 +74,25 @@ namespace Rhea.UI.Areas.Estate.Controllers
             Building data = this.buildingBusiness.Get(id);
             return View(data);
         }
+
+        /// <summary>
+        /// 楼层列表
+        /// </summary>
+        /// <param name="id">楼宇ID</param>
+        /// <param name="departmentId">部门ID</param>
+        /// <returns></returns>
+        public ActionResult FloorListByDepartment(int id, int departmentId)
+        {
+            Building data = this.buildingBusiness.Get(id);
+
+            IRoomBusiness roomBusiness = new MongoRoomBusiness();
+            var rooms = roomBusiness.GetListByDepartment(departmentId, id);
+            var floorNumbers = rooms.Select(r => r.Floor).Distinct();
+
+            data.Floors = data.Floors.Where(r => floorNumbers.Contains(r.Number)).ToList();
+
+            return View(data);
+        }
         #endregion //Action
 
         #region Json
