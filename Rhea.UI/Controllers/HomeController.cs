@@ -25,7 +25,7 @@ namespace Rhea.UI.Controllers
         /// <returns></returns>
         public ActionResult Nav()
         {
-            IDepartmentService departmentService = new MongoDepartmentService();
+            IDepartmentBusiness departmentService = new MongoDepartmentBusiness();
             var data = departmentService.GetList();
 
             return View(data);

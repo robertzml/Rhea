@@ -13,7 +13,7 @@ namespace Rhea.Business.Estate
     /// <summary>
     /// 楼宇业务类
     /// </summary>
-    public class MongoBuildingService : IBuildingService
+    public class MongoBuildingBusiness : IBuildingBusiness
     {
         #region Field
         /// <summary>

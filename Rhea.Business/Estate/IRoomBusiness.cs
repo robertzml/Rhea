@@ -9,13 +9,13 @@ namespace Rhea.Business.Estate
     /// <summary>
     /// 房间业务接口
     /// </summary>
-    public interface IRoomService
+    public interface IRoomBusiness
     {
         /// <summary>
         /// 获取房间列表
         /// </summary>
         /// <returns></returns>
-        List<Room> GetList();
+        List<Room> GetList();        
 
         /// <summary>
         /// 获取房间列表

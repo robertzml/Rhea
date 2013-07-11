@@ -13,8 +13,8 @@
             <li><a href="#">Link</a></li>
             <li><a href="#">Link</a></li>
             <li class="nav-header" id="building-list">楼宇列表</li>          
-            <li class="nav-header">Sidebar</li>
-            <li><a href="#">Link</a></li>
+            <li class="nav-header">房屋信息</li>
+            <li><a href="#" id="room-list">房间列表</a></li>
             <li><a href="#">Link</a></li>
             <li><a href="#">Link</a></li>
         </ul>
@@ -23,7 +23,7 @@
 
 <div class="span10">
     <div id="ajax-content1">
-    @Html.Action("Summary", "BuildingGroup", new { area = "Estate", id = Model })
+        @Html.Action("Summary", "BuildingGroup", new { area = "Estate", id = Model })
     </div>
 </div>
 
@@ -58,6 +58,13 @@
             $('ul.nav').children().removeClass('active');
             $(this).parent().addClass('active');
             ajaxLoadPage("Details", "BuildingGroup", "Estate", { id: @Model });
+            return false;
+        });
+
+        $('a#room-list').click(function() {
+            $('ul.nav').children().removeClass('active');
+            $(this).parent().addClass('active');
+            ajaxLoadPage("ListByBuildingGroup", "Room", "Estate", { buildingGroupId: @Model });
             return false;
         });
     });

@@ -9,7 +9,7 @@ namespace Rhea.Business.Personnel
     /// <summary>
     /// 部门业务接口
     /// </summary>
-    public interface IDepartmentService
+    public interface IDepartmentBusiness
     {
         /// <summary>
         /// 获取部门列表

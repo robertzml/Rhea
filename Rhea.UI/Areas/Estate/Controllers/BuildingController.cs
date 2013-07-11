@@ -16,15 +16,15 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <summary>
         /// 楼宇业务
         /// </summary>
-        private IBuildingService buildingService;
+        private IBuildingBusiness buildingBusiness;
         #endregion //Field
 
         #region Function
         protected override void Initialize(RequestContext requestContext)
         {
-            if (buildingService == null)
+            if (buildingBusiness == null)
             {
-                buildingService = new MongoBuildingService();
+                buildingBusiness = new MongoBuildingBusiness();
             }
 
             base.Initialize(requestContext);
@@ -49,7 +49,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         public ActionResult Details(int id)
         {
-            Building data = this.buildingService.Get(id);
+            Building data = this.buildingBusiness.Get(id);
             return View(data);
         }
 
@@ -60,7 +60,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         public ActionResult Floors(int id)
         {
-            Building data = this.buildingService.Get(id);
+            Building data = this.buildingBusiness.Get(id);
             return View(data);
         }
 
@@ -71,7 +71,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         public ActionResult FloorList(int id)
         {
-            Building data = this.buildingService.Get(id);
+            Building data = this.buildingBusiness.Get(id);
             return View(data);
         }
         #endregion //Action
@@ -84,7 +84,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         public JsonResult GetListByBuildingGroup(int buildingGroupId)
         {
-            var data = buildingService.GetListByBuildingGroup(buildingGroupId);
+            var data = buildingBusiness.GetListByBuildingGroup(buildingGroupId);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
@@ -95,7 +95,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         public JsonResult GetListByDepartment(int departmentId)
         {
-            var data = this.buildingService.GetListByDepartment(departmentId);
+            var data = this.buildingBusiness.GetListByDepartment(departmentId);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
         #endregion //Json

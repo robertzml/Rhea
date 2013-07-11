@@ -9,7 +9,7 @@ namespace Rhea.Business.Estate
     /// <summary>
     /// 楼群业务接口
     /// </summary>
-    public interface IBuildingGroupService
+    public interface IBuildingGroupBusiness
     {
         /// <summary>
         /// 获取楼群列表

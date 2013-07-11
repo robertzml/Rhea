@@ -18,7 +18,7 @@ namespace Rhea.UI.Controllers
         /// <summary>
         /// 部门业务
         /// </summary>
-        private IDepartmentService departmentService;
+        private IDepartmentBusiness departmentService;
         #endregion //Field
 
         #region Function
@@ -26,7 +26,7 @@ namespace Rhea.UI.Controllers
         {
             if (departmentService == null)
             {
-                departmentService = new MongoDepartmentService();
+                departmentService = new MongoDepartmentBusiness();
             }
 
             base.Initialize(requestContext);

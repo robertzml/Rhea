@@ -17,15 +17,15 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <summary>
         /// 房间业务
         /// </summary>
-        private IRoomService roomService;
+        private IRoomBusiness roomBusiness;
         #endregion //Field
 
         #region Function
         protected override void Initialize(RequestContext requestContext)
         {
-            if (roomService == null)
+            if (roomBusiness == null)
             {
-                roomService = new MongoRoomService();
+                roomBusiness = new MongoRoomBusiness();
             }
 
             base.Initialize(requestContext);
@@ -40,7 +40,14 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         public ActionResult Details(int id)
         {
-            var data = this.roomService.Get(id);
+            var data = this.roomBusiness.Get(id);
+
+            IDepartmentBusiness departmentBusiness = new MongoDepartmentBusiness();
+            ViewBag.DepartmentName = departmentBusiness.GetName(data.DepartmentId);
+
+            IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
+            ViewBag.BuildingName = buildingBusiness.GetName(data.BuildingId);
+
             return View(data);
         }
 
@@ -51,11 +58,33 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         public ActionResult Summary(int id)
         {
-            Room data = this.roomService.Get(id);
-            IDepartmentService departmentService = new MongoDepartmentService();
-            ViewBag.DepartmentName = departmentService.GetName(data.DepartmentId);
+            Room data = this.roomBusiness.Get(id);
+
+            IDepartmentBusiness departmentBusiness = new MongoDepartmentBusiness();
+            ViewBag.DepartmentName = departmentBusiness.GetName(data.DepartmentId);
 
             return View(data);
+        }
+
+        /// <summary>
+        /// 房间列表
+        /// </summary>
+        /// <param name="buildingGroupId">所属楼群ID</param>
+        /// <returns></returns>
+        public ActionResult ListByBuildingGroup(int buildingGroupId)
+        {
+            IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
+            var buildings = buildingBusiness.GetListByBuildingGroup(buildingGroupId);
+
+            List<Room> room = new List<Room>();
+
+            foreach (var building in buildings)
+            {
+                var r = this.roomBusiness.GetListByBuilding(building.Id);
+                room.AddRange(r);
+            }
+
+            return View(room);
         }
         #endregion //Action
     }

@@ -6,7 +6,9 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Rhea.Business;
 using Rhea.Business.Estate;
+using Rhea.Business.Personnel;
 using Rhea.Model.Estate;
+using Rhea.UI.Areas.Estate.Models;
 
 namespace Rhea.UI.Areas.Estate.Controllers
 {
@@ -16,15 +18,15 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <summary>
         /// 楼群业务
         /// </summary>
-        private IBuildingGroupService buildingGroupService;
+        private IBuildingGroupBusiness buildingGroupBusiness;
         #endregion //Field
 
         #region Function
         protected override void Initialize(RequestContext requestContext)
         {
-            if (buildingGroupService == null)
+            if (buildingGroupBusiness == null)
             {
-                buildingGroupService = new MongoBuildingGroupService();
+                buildingGroupBusiness = new MongoBuildingGroupBusiness();
             }
 
             base.Initialize(requestContext);
@@ -49,7 +51,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         public ActionResult Summary(int id)
         {
-            BuildingGroup data = this.buildingGroupService.Get(id);
+            BuildingGroup data = this.buildingGroupBusiness.Get(id);
             if (!string.IsNullOrEmpty(data.ImageUrl))
                 data.ImageUrl = RheaConstant.ImagesRoot + data.ImageUrl;
             if (!string.IsNullOrEmpty(data.PartMapUrl))
@@ -65,7 +67,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         public ActionResult Details(int id)
         {
-            BuildingGroup data = this.buildingGroupService.Get(id);
+            BuildingGroup data = this.buildingGroupBusiness.Get(id);
             return View(data);
         }
 
@@ -75,7 +77,55 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         public ActionResult List()
         {
-            List<BuildingGroup> data = this.buildingGroupService.GetList().OrderBy(r => r.Id).ToList();
+            List<BuildingGroup> data = this.buildingGroupBusiness.GetList().OrderBy(r => r.Id).ToList();
+            return View(data);
+        }
+
+        /// <summary>
+        /// 楼群入住部门
+        /// </summary>
+        /// <param name="id">楼群ID</param>
+        /// <returns></returns>
+        public ActionResult Department(int id)
+        {
+            List<BuildingGroupDepartmentModel> data = new List<BuildingGroupDepartmentModel>();
+
+            IDepartmentBusiness departmentBusiness = new MongoDepartmentBusiness();
+
+            IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
+            var buildings = buildingBusiness.GetListByBuildingGroup(id);
+
+            foreach (var building in buildings)
+            {
+                IRoomBusiness roomBusiness = new MongoRoomBusiness();
+                var roomList = roomBusiness.GetListByBuilding(building.Id);
+
+                // get departments in one building
+                var dList = roomList.GroupBy(r => r.DepartmentId).Select(s => new { s.Key, Count = s.Count(), Area = s.Sum(r => r.UsableArea) });
+
+                foreach (var d in dList)
+                {
+                    BuildingGroupDepartmentModel model = new BuildingGroupDepartmentModel
+                    {
+                        BuildingGroupId = id,
+                        DepartmentId = d.Key,
+                        RoomCount = d.Count,
+                        TotalUsableArea = Convert.ToDouble(d.Area)
+                    };
+
+                    model.DepartmentName = departmentBusiness.GetName(model.DepartmentId);
+
+                    var result = data.Find(r => r.DepartmentId == model.DepartmentId);
+                    if (result != null)
+                    {
+                        result.RoomCount += model.RoomCount;
+                        result.TotalUsableArea = model.TotalUsableArea;
+                    }
+                    else
+                        data.Add(model);
+                }
+            }
+
             return View(data);
         }
         #endregion //Action

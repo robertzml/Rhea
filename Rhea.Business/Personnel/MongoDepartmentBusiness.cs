@@ -13,7 +13,7 @@ namespace Rhea.Business.Personnel
     /// <summary>
     /// 部门业务类
     /// </summary>
-    public class MongoDepartmentService : IDepartmentService
+    public class MongoDepartmentBusiness : IDepartmentBusiness
     {
         #region Field
         /// <summary>

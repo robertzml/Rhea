@@ -167,6 +167,7 @@
     <Compile Include="Areas\Estate\Controllers\RoomController.cs" />
     <Compile Include="Areas\Estate\EstateAreaRegistration.cs" />
     <Compile Include="Areas\Estate\Models\BuildingEnum.cs" />
+    <Compile Include="Areas\Estate\Models\BuildingGroupModel.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StatisticController.cs" />
@@ -314,6 +315,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Estate\Content\" />
     <Folder Include="Areas\Estate\Scripts\" />
+    <Folder Include="Areas\Estate\Service\" />
     <Folder Include="Filters\" />
   </ItemGroup>
   <ItemGroup>
@@ -386,6 +388,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Statistic\LandType.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\BuildingGroup\Department.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Room\ListByBuildingGroup.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

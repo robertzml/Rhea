@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Rhea.UI.Areas.Estate.Models.BuildingGroupDepartmentModel>
+
+@{
+    ViewBag.Title = "楼群入住部门";
+    Layout = null;
+}
+
+<div class="box">
+    <div class="box-header well" data-original-title>
+        <h2><i class="icon-th-list"></i>@ViewBag.Title</h2>    
+    </div>
+
+    <div class="box-content">               
+        <div class="row-fluid">
+            <div class="span12">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                部门名称
+                            </th>                            
+                            <th>
+                                房间数量
+                            </th>
+                            <th>
+                                使用总面积
+                            </th>                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @item.DepartmentName
+                            </td>                           
+                            <td>
+                                @item.RoomCount
+                            </td>
+                            <td>
+                                @item.TotalUsableArea m<sup>2</sup>
+                            </td>                            
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

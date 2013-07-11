@@ -193,7 +193,7 @@ namespace Rhea.Business
         /// <returns></returns>
         public double GetBuildingAreaByType(int useType)
         {            
-            IBuildingService buildingService = new MongoBuildingService();
+            IBuildingBusiness buildingService = new MongoBuildingBusiness();
             double result = Convert.ToDouble(buildingService.GetList().Where(r => r.UseType == useType).Sum(r => r.BuildArea));
             result = Math.Round(result, 3);
 
