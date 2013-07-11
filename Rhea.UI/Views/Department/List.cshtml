@@ -1,8 +1,9 @@
-﻿@model IEnumerable<Rhea.Model.Estate.BuildingGroup>
+﻿@model IEnumerable<Rhea.Model.Personnel.Department>
+@using Rhea.Common;
 
 @{
+    ViewBag.Title = "部门列表";
     Layout = null;
-    ViewBag.Title = "楼群列表";   
 }
 
 <div class="box">
@@ -12,21 +13,18 @@
     </div>
 
     <div class="box-content">
-        <table id="building-group-list" class="table table-striped table-bordered bootstrap-datatable datatable">
+        <table id="department-list" class="table table-striped table-bordered bootstrap-datatable datatable">
             <thead>
                 <tr>
                     <th>
-                        楼群名称
+                        部门编号
                     </th>
                     <th>
-                        楼宇栋数
+                        部门名称
                     </th>
                     <th>
-                        建筑面积 (m<sup>2</sup>)
-                    </th>
-                    <th>
-                        使用面积 (m<sup>2</sup>)
-                    </th>
+                        部门类型
+                    </th>                    
                     <th>
                         操作
                     </th>
@@ -36,12 +34,15 @@
             @foreach (var item in Model)
             {
                 <tr>
+                    <td>@item.Id</td>
                     <td>@item.Name</td>
-                    <td>@item.BuildingCount</td>
-                    <td>@item.BuildArea</td>
-                    <td>@item.UsableArea</td>
+                    <td>@{
+                        DepartmentType t = (DepartmentType)item.Type;
+                        @t.DisplayName();
+                        }        
+                    </td>                 
                     <td>
-                        <a class="btn btn-success buildinggroup-details" href="@Url.Action("Index", new { controller = "BuildingGroup", id = item.Id, area = "Estate" })" ref="@item.Id"><i class="icon-zoom-in icon-white"></i>查看</a>
+                        <a class="btn btn-success department-details" href="@Url.Action("Index", new { controller = "Department", id = item.Id, area = "" })" ref="@item.Id"><i class="icon-zoom-in icon-white"></i>查看</a>
                     </td>
                 </tr>
             }
@@ -50,11 +51,10 @@
     </div>
 </div>
 
-
 <script type="text/javascript">
     $(function () {
-        $('table#building-group-list').dataTable({
-            "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span12'i><'span12 center'p>>",           
+        $('table#department-list').dataTable({
+            "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span12'i><'span12 center'p>>",
             "sPaginationType": "bootstrap",
             "oLanguage": {
                 "sLengthMenu": "每页 _MENU_ 条记录",
@@ -65,6 +65,6 @@
                 "sSearch": "搜索:"
             }
         });
-        
+
     });
 </script>

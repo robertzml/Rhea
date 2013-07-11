@@ -18,15 +18,15 @@ namespace Rhea.UI.Controllers
         /// <summary>
         /// 部门业务
         /// </summary>
-        private IDepartmentBusiness departmentService;
+        private IDepartmentBusiness departmentBusiness;
         #endregion //Field
 
         #region Function
         protected override void Initialize(RequestContext requestContext)
         {
-            if (departmentService == null)
+            if (departmentBusiness == null)
             {
-                departmentService = new MongoDepartmentBusiness();
+                departmentBusiness = new MongoDepartmentBusiness();
             }
 
             base.Initialize(requestContext);
@@ -51,9 +51,19 @@ namespace Rhea.UI.Controllers
         /// <returns></returns>
         public ActionResult Summary(int id)
         {
-            Department data = this.departmentService.Get(id);
+            Department data = this.departmentBusiness.Get(id);
             if (!string.IsNullOrEmpty(data.ImageUrl))
                 data.ImageUrl = RheaConstant.ImagesRoot + data.ImageUrl;
+            return View(data);
+        }
+
+        /// <summary>
+        /// 部门列表
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult List()
+        {
+            var data = this.departmentBusiness.GetList();
             return View(data);
         }
 
@@ -69,7 +79,7 @@ namespace Rhea.UI.Controllers
         }
         #endregion //Action
 
-        #region Json        
+        #region Json
         #endregion //Json
     }
 }

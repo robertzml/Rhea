@@ -13,12 +13,8 @@
             <li><a href="#">Link</a></li>
             <li class="nav-header">信息</li>
             <li><a href="#" id="building-group-list">楼群列表</a></li>
+            <li><a href="#" id="department-list">部门列表</a></li>
             <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li class="nav-header">Sidebar</li>
             <li><a href="#">Link</a></li>
             <li><a href="#">Link</a></li>
             <li><a href="#">Link</a></li>
@@ -46,6 +42,13 @@
             $('ul.nav').children().removeClass('active');
             $(this).parent().addClass('active');
             ajaxLoadPage("List", "BuildingGroup", "Estate", {});
+            return false;
+        });
+
+        $('a#department-list').click(function () {
+            $('ul.nav').children().removeClass('active');
+            $(this).parent().addClass('active');
+            ajaxLoadPage2("List", "Department", {});
             return false;
         });
     });

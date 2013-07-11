@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="ApiService.cs" />
     <Compile Include="IStatisticService.cs" />
+    <Compile Include="ModelExtension.cs" />
     <Compile Include="MongoStatisticService.cs" />
     <Compile Include="Estate\RemoteBuildingBusiness.cs" />
     <Compile Include="Personnel\RemoteDepartmentBusiness.cs" />

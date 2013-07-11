@@ -105,7 +105,7 @@
                                 @Html.DisplayNameFor(model => model.BuildingId)
                             </td>
                             <td>
-                                @ViewBag.BuildingName
+                                @Model.BuildingName()
                             </td>
                         </tr>
                         <tr>
@@ -113,7 +113,7 @@
                                 @Html.DisplayNameFor(model => model.DepartmentId)
                             </td>
                             <td>
-                                @ViewBag.DepartmentName
+                                @Model.DepartmentName()
                             </td>
                         </tr>
                         <tr>

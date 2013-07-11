@@ -68,7 +68,15 @@
                                         @Convert.ToDateTime(Model.BuildDate).ToShortDateString();
                                     }
                                 </td>
-                            </tr>                                                        
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.EquityNumber)
+                                </td>
+                                <td>
+                                    @Model.EquityNumber
+                                </td>
+                            </tr>                                                      
                         </tbody>
                     </table>
                 </div>
