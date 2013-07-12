@@ -1,0 +1,18 @@
+﻿@using Rhea.Business
+@using Rhea.Data.Entities
+@model int?
+
+<select id="DepartmentId" name="DepartmentId">
+    <option value="">-- 请选择 --</option>
+    @{
+        IDepartmentService departmentService = new MongoDepartmentService();
+        List<Department> departments = departmentService.GetList();
+
+        foreach (var item in departments)
+        {
+        <option value="@item.Id" @(Model == item.Id ? "selected='selected'" : "")>
+            @item.Name
+        </option>
+        }
+    }
+</select>

@@ -1,0 +1,9 @@
+﻿@model string
+
+<select id="BuildType" name="BuildType">
+    <option value="">-- 请选择 --</option>
+    @foreach (BuildType o in Enum.GetValues(typeof(BuildType)))
+    {                      
+        <option value="@o" @(Model == o.ToString() ? "selected='selected'" : "")>@o</option>
+    }
+</select>

@@ -1,14 +1,12 @@
-﻿@model IEnumerable<Rhea.Model.Estate.BuildingGroup>
-
-@{
-    Layout = null;
-    ViewBag.Title = "楼群列表";   
+﻿@{
+    ViewBag.Title = "楼群列表";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
 <div class="box">
     <div class="box-header well" data-original-title>
         <h2>
-            <i class="icon-align-left"></i>@ViewBag.Title</h2>
+            <i class="icon-tasks"></i>@ViewBag.Title</h2>
     </div>
 
     <div class="box-content">
@@ -41,7 +39,9 @@
                     <td>@item.BuildArea</td>
                     <td>@item.UsableArea</td>
                     <td>
-                        <a class="btn btn-success btn-small" href="@Url.Action("Index", new { controller = "BuildingGroup", id = item.Id, area = "Estate" })"><i class="icon-zoom-in icon-white"></i> 查看</a>
+                        <a class="btn btn-success btn-small" href="@Url.Action("Details", new { controller = "BuildingGroup", id = item.Id, area = "Admin" })"><i class="icon-zoom-in icon-white"></i>查看</a> 
+                        <a class="btn btn-warning btn-small" href="@Url.Action("Edit", new { controller = "BuildingGroup", id = item.Id, area = "Admin" })"><i class="icon-edit icon-white"></i>编辑</a> 
+                        <a class="btn btn-danger btn-small" href="@Url.Action("Delete", new { controller = "BuildingGroup", id = item.Id, area = "Admin" })"><i class="icon-remove icon-white"></i>删除</a>
                     </td>
                 </tr>
             }
@@ -50,10 +50,12 @@
     </div>
 </div>
 
-
 <script type="text/javascript">
-    $(function () { 
+    $(function () {
         var dom = $('table#building-group-list');
-        initDataTable(dom); 
+        initDataTable(dom);
+
+        var menu = $('a#building-group-manage');
+        menuNavActive(menu);
     });
 </script>

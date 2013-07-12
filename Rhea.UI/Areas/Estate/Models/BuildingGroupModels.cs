@@ -19,5 +19,5 @@ namespace Rhea.UI.Areas.Estate.Models
         public int RoomCount { get; set; }
 
         public double TotalUsableArea { get; set; }
-    }
+    }    
 }

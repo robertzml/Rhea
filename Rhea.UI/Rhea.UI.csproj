@@ -161,6 +161,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\BuildingGroupController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Estate\Controllers\BuildingController.cs" />
     <Compile Include="Areas\Estate\Controllers\BuildingGroupController.cs" />
     <Compile Include="Areas\Estate\Controllers\HomeController.cs" />
@@ -320,6 +323,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Estate\Content\" />
     <Folder Include="Areas\Estate\Scripts\" />
     <Folder Include="Filters\" />
@@ -338,6 +342,10 @@
     <ProjectReference Include="..\Rhea.Common\Rhea.Common.csproj">
       <Project>{C8BC6CF8-FA0A-4CE8-84DB-DE8FD3478756}</Project>
       <Name>Rhea.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rhea.Data\Rhea.Data.csproj">
+      <Project>{E655E9DF-D987-44EB-B9CF-A9B874C2A9EB}</Project>
+      <Name>Rhea.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\Rhea.Model\Rhea.Model.csproj">
       <Project>{D4F516FB-EA16-4695-BE71-EE496980D763}</Project>
@@ -418,6 +426,48 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Account\Login.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Home\Menu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\BuildingGroup\List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\BuildingGroup\Details.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\BuildingGroup\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\AirCondition.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Boolean.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\BuildingDropDownList.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\BuildingGroupDropDownList.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\BuildingGroupType.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\BuildStructure.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\BuildType.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\DepartmentDropDownList.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\FireControl.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\FunctionCodeDropDownList.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\FundsSubject.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\ManageType.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Orientation.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\PowerSupply.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\RoomStatus.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\TrashHandle.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\BuildingGroup\Delete.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

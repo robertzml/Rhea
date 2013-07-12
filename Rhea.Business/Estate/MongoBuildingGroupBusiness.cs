@@ -177,6 +177,7 @@ namespace Rhea.Business.Estate
             var query = Query.EQ("id", data.Id);
             var update = Update.Set("name", data.Name)
                 .Set("imageUrl", data.ImageUrl ?? "")
+                .Set("partMapUrl", data.PartMapUrl ?? "")
                 .Set("buildingCount", (BsonValue)data.BuildingCount)
                 .Set("areaCoeffcient", data.AreaCoeffcient ?? "")
                 .Set("buildArea", (BsonValue)data.BuildArea)
