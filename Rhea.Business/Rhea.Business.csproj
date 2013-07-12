@@ -71,9 +71,9 @@
     <Compile Include="Personnel\IDepartmentBusiness.cs" />
     <Compile Include="Estate\IRoomBusiness.cs" />
     <Compile Include="Estate\MongoBuildingGroupBusiness.cs" />
-    <Compile Include="MongoAccountService.cs" />
+    <Compile Include="Account\MongoAccountBusiness.cs" />
     <Compile Include="Estate\RemoteBuildingGroupBusiness.cs" />
-    <Compile Include="IAccountService.cs" />
+    <Compile Include="Account\IAccountBusiness.cs" />
     <Compile Include="MongoAdminService.cs" />
     <Compile Include="IAdminService.cs" />
     <Compile Include="Estate\IBuildingGroupBusiness.cs" />

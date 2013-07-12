@@ -10,7 +10,7 @@ namespace Rhea.Business
     /// 系统管理接口
     /// </summary>
     public interface IAdminService
-    {
+    {/*
         /// <summary>
         /// 获取管理组列表
         /// </summary>
@@ -57,5 +57,6 @@ namespace Rhea.Business
         /// <param name="type">1:管理组，2:用户组</param>
         /// <returns></returns>
         List<UserProfile> GetUserList(int groupId, int type);
+    */
     }
 }

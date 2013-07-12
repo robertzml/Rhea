@@ -13,7 +13,7 @@ namespace Rhea.Business
     /// 系统管理事务类
     /// </summary>
     public class MongoAdminService : IAdminService
-    {
+    {/*
         #region Method
         /// <summary>
         /// 获取管理组列表
@@ -147,5 +147,6 @@ namespace Rhea.Business
             throw new NotImplementedException();
         }
         #endregion //Method        
+      */
     }
 }

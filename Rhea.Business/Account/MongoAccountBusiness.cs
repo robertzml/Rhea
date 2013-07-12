@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Rhea.Data.Server;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
-using Rhea.Data.Entities;
 using Rhea.Common;
+using Rhea.Data.Server;
+using Rhea.Model.Account;
 
-namespace Rhea.Business
+namespace Rhea.Business.Account
 {
     /// <summary>
     /// 账户业务
     /// </summary>
-    public class MongoAccountService : IAccountService
+    public class MongoAccountBusiness : IAccountBusiness
     {
         #region Field
         #endregion //Field
@@ -23,18 +23,18 @@ namespace Rhea.Business
         /// <summary>
         /// 更新登录时间
         /// </summary>
-        /// <param name="userId">用户ID</param>
+        /// <param name="_id">用户系统ID</param>
         /// <param name="last">上次登录时间</param>
         /// <param name="current">本次登录时间</param>
-        private void UpdateLoginTime(int userId, DateTime last, DateTime current)
+        private void UpdateLoginTime(ObjectId _id, DateTime last, DateTime current)
         {
-            RheaMongoContext context = new RheaMongoContext(RheaServer.EstateDatabase);
+            RheaMongoContext context = new RheaMongoContext(RheaServer.RheaDatabase);
 
-            var query = Query.EQ("id", userId);
+            var query = Query.EQ("_id", _id);
             var update = Update.Set("lastLoginTime", last)
                 .Set("currentLoginTime", current);
 
-            WriteConcernResult result = context.Update(EstateCollection.User, query, update);
+            WriteConcernResult result = context.Update(RheaCollection.User, query, update);
 
             return;
         }
@@ -49,9 +49,9 @@ namespace Rhea.Business
         /// <returns></returns>
         public UserProfile Login(string userName, string password)
         {
-            RheaMongoContext context = new RheaMongoContext(RheaServer.EstateDatabase);
+            RheaMongoContext context = new RheaMongoContext(RheaServer.RheaDatabase);
 
-            BsonDocument doc = context.FindOne(EstateCollection.User, "userName", userName);
+            BsonDocument doc = context.FindOne(RheaCollection.User, "userName", userName);
             if (doc != null)
             {
                 string pass = doc["password"].AsString;
@@ -59,14 +59,15 @@ namespace Rhea.Business
                     return null;
 
                 UserProfile user = new UserProfile();
-                user.Id = doc["id"].AsInt32;
+                user._id = doc["_id"].AsObjectId;
                 user.UserName = userName;
-                user.UserGroupId = doc["userGroupId"].AsInt32;
-                user.ManagerGroupId = doc["managerGroupId"].AsInt32;
+                user.UserId = doc.GetValue("userId", "").AsString;
+                //user.UserGroupId = doc["userGroupId"].AsInt32;
+                //user.ManagerGroupId = doc["managerGroupId"].AsInt32;
                 user.LastLoginTime = doc.GetValue("currentLoginTime", DateTime.Now).ToLocalTime();
                 user.CurrentLoginTime = DateTime.Now;
 
-                IAdminService adminService = new MongoAdminService();
+                /*IAdminService adminService = new MongoAdminService();
                 if (user.ManagerGroupId != 0)
                 {
                     ManagerGroup mGroup = adminService.GetManagerGroup(user.ManagerGroupId);
@@ -80,9 +81,9 @@ namespace Rhea.Business
                     user.UserGroupName = uGroup.Name;
                 }
                 else
-                    user.UserGroupName = "Null";
+                    user.UserGroupName = "Null";*/
 
-                UpdateLoginTime(user.Id, user.LastLoginTime, user.CurrentLoginTime);
+                UpdateLoginTime(user._id, user.LastLoginTime, user.CurrentLoginTime);
 
                 return user;
             }
@@ -99,14 +100,15 @@ namespace Rhea.Business
         {
             RheaMongoContext context = new RheaMongoContext(RheaServer.EstateDatabase);
 
-            BsonDocument doc = context.FindOne(EstateCollection.User, "userName", userName);
+            BsonDocument doc = context.FindOne(RheaCollection.User, "userName", userName);
             if (doc != null)
-            { 
+            {
                 UserProfile user = new UserProfile();
-                user.Id = doc["id"].AsInt32;
+                user._id = doc["_id"].AsObjectId;
                 user.UserName = userName;
-                user.UserGroupId = doc["userGroupId"].AsInt32;
-                user.ManagerGroupId = doc["managerGroupId"].AsInt32;
+                user.UserId = doc.GetValue("userId", "").AsString;
+                //user.UserGroupId = doc["userGroupId"].AsInt32;
+                //user.ManagerGroupId = doc["managerGroupId"].AsInt32;
                 user.LastLoginTime = doc.GetValue("lastLoginTime", DateTime.Now).ToLocalTime();
                 user.CurrentLoginTime = doc.GetValue("currentLoginTime", DateTime.Now).ToLocalTime();
                 return user;
@@ -114,6 +116,6 @@ namespace Rhea.Business
             else
                 return null;
         }
-        #endregion //Method        
+        #endregion //Method
     }
 }

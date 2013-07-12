@@ -1,0 +1,82 @@
+﻿@model Rhea.UI.Models.LoginModel
+
+@{
+    ViewBag.Title = "登录";
+    Layout = null;
+}
+
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <title>房产管理系统 - 登录</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />  
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>   
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+        
+        <link href="@Url.Content("~/Content/bootstrap.css")" type="text/css" rel="stylesheet">
+        <style type="text/css">
+            body {
+                padding-top: 40px;
+                padding-bottom: 40px;
+                background-color: #f5f5f5;
+            }
+
+            .form-signin {
+                max-width: 300px;
+                padding: 19px 29px 29px;
+                margin: 0 auto 20px;
+                background-color: #fff;
+                border: 1px solid #e5e5e5;
+                -webkit-border-radius: 5px;
+                   -moz-border-radius: 5px;
+                        border-radius: 5px;
+                -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                   -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                        box-shadow: 0 1px 2px rgba(0,0,0,.05);
+            }
+            .form-signin .form-signin-heading,
+            .form-signin .checkbox {
+                margin-bottom: 10px;
+            }
+            .form-signin input[type="text"],
+            .form-signin input[type="password"] {
+                font-size: 16px;
+                height: auto;
+                margin-bottom: 15px;
+                padding: 7px 9px;
+            }
+        </style>
+        <link href="@Url.Content("~/Content/bootstrap-responsive.css")" type="text/css" rel="stylesheet">
+
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+            <script src="@Url.Content("~/Scripts/html5shiv.js")"></script>
+        <![endif]-->                                   
+        @Scripts.Render("~/bundles/jquery")
+    </head>
+
+    <body>
+        <div class="container">
+            @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-signin" }))
+            {
+                @Html.AntiForgeryToken()
+           
+                <h2 class="form-signin-heading">请登录</h2>
+                @Html.TextBoxFor(m => m.UserName, new { autofocus = "true", placeholder="用户名", @class = "input-block-level", type = "text" })
+                <br />
+                @Html.ValidationMessageFor(m => m.UserName) 
+                @Html.PasswordFor(m => m.Password, new { placeholder = "密码", @class = "input-block-level", type = "password" }) 
+                <br />
+                @Html.ValidationMessageFor(m => m.Password)
+                <label class="checkbox">
+                    @Html.CheckBoxFor(m => m.RememberMe) 记住我
+                </label>
+                <button type="submit" class="btn btn-large btn-primary">登录</button>
+            }
+        </div> <!-- /container --> 
+
+        @Scripts.Render("~/bundles/bootstrap")
+
+    </body>
+</html>

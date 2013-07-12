@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MongoDB.Bson;
 
-namespace Rhea.Data.Entities
+namespace Rhea.Model.Account
 {
     /// <summary>
     /// 用户模型
@@ -11,9 +12,15 @@ namespace Rhea.Data.Entities
     public class UserProfile
     {
         /// <summary>
-        /// 用户ID
+        /// 用户系统ID
         /// </summary>
-        public int Id { get; set; }
+        public ObjectId _id { get; set; }
+
+        /// <summary>
+        /// 登录ID
+        /// </summary>
+        /// <remarks>工号,学号</remarks>
+        public string UserId { get; set; }
 
         /// <summary>
         /// 登录名

@@ -12,18 +12,6 @@ namespace Rhea.Data.Server
     {
         #region Field
         /// <summary>
-        /// 用户组表
-        /// userGroup
-        /// </summary>
-        public static readonly string UserGroup = "userGroup";
-
-        /// <summary>
-        /// 用户表
-        /// user
-        /// </summary>
-        public static readonly string User = "user";
-
-        /// <summary>
         /// 楼群表
         /// buildingGroup
         /// </summary>
