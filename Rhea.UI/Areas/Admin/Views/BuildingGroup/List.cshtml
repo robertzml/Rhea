@@ -39,6 +39,7 @@
                     <td>@item.BuildArea</td>
                     <td>@item.UsableArea</td>
                     <td>
+                        <a class="btn btn-success btn-small" href="@Url.Action("List", new { controller = "Building", buildingGroupId = item.Id, area = "Admin" })"><i class="icon-chevron-right icon-white"></i>楼宇</a>
                         <a class="btn btn-success btn-small" href="@Url.Action("Details", new { controller = "BuildingGroup", id = item.Id, area = "Admin" })"><i class="icon-zoom-in icon-white"></i>查看</a> 
                         <a class="btn btn-warning btn-small" href="@Url.Action("Edit", new { controller = "BuildingGroup", id = item.Id, area = "Admin" })"><i class="icon-edit icon-white"></i>编辑</a> 
                         <a class="btn btn-danger btn-small" href="@Url.Action("Delete", new { controller = "BuildingGroup", id = item.Id, area = "Admin" })"><i class="icon-remove icon-white"></i>删除</a>
@@ -47,6 +48,10 @@
             }
             </tbody>
         </table>
+
+        <p>
+            <a class="btn btn-primary" href="@Url.Action("Create", new { controller = "BuildingGroup", area = "Admin" })"><i class="icon-plus icon-white"></i>添加楼群</a> 
+        </p>
     </div>
 </div>
 

@@ -53,6 +53,42 @@ namespace Rhea.UI.Areas.Admin.Controllers
         }
 
         /// <summary>
+        /// 添加楼群
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Create()
+        {
+            return View();
+        }
+       
+        /// <summary>
+        /// 添加楼群
+        /// POST: /Admin/BuildingGroup/Create/
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Create(BuildingGroup model)
+        {
+            if (ModelState.IsValid)
+            {
+                int result = this.buildingGroupBusiness.Create(model);
+
+                if (result != 0)
+                {
+                    TempData["Message"] = "添加成功";
+                    return RedirectToAction("Details", "BuildingGroup", new { area = "Admin", id = result });
+                }
+                else
+                {
+                    ModelState.AddModelError("", "保存失败");
+                }
+            }
+
+            return View(model);
+        }
+
+        /// <summary>
         /// 编辑楼群
         /// GET: /Admin/BuildingGroup/Edit/7
         /// </summary>

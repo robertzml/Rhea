@@ -257,6 +257,40 @@ namespace Rhea.Data.Server
             AggregateResult result = collection.Aggregate(pipeline); 
             return result;
         }
+
+        /// <summary>
+        /// 查找递增序列当前值
+        /// </summary>
+        /// <param name="collectionName">集合名称</param>
+        /// <returns></returns>
+        public int FindSequenceIndex(string collectionName)
+        {
+            BsonDocument[] pipeline = {
+                new BsonDocument {
+                    { "$project", new BsonDocument {
+                        { "id", 1 }
+                    }}
+                },
+                new BsonDocument {
+                    { "$sort", new BsonDocument {
+                        { "id", -1 }
+                    }}
+                },
+                new BsonDocument {
+                    { "$limit", 1 }
+                }
+            };
+
+            MongoCollection<BsonDocument> collection = this.database.GetCollection<BsonDocument>(collectionName);
+            AggregateResult max = collection.Aggregate(pipeline);
+            if (max.ResultDocuments.Count() == 0)
+                return 0;
+            else
+            {
+                int maxId = max.ResultDocuments.First()["id"].AsInt32;
+                return maxId;
+            }
+        }
         #endregion //Method
 
         #region Property

@@ -109,35 +109,15 @@ namespace Rhea.Business.Estate
         /// <param name="data">楼群数据</param>
         /// <returns>楼群ID</returns>
         public int Create(BuildingGroup data)
-        {
-            BsonDocument[] pipeline = {
-                new BsonDocument {
-                    { "$project", new BsonDocument {
-                        { "id", 1 }
-                    }}
-                },
-                new BsonDocument {
-                    { "$sort", new BsonDocument {
-                        { "id", -1 }
-                    }}
-                },
-                new BsonDocument {
-                    { "$limit", 1 }
-                }
-            };
-
-            AggregateResult max = this.context.Aggregate(EstateCollection.BuildingGroup, pipeline);
-            if (max.ResultDocuments.Count() == 0)
-                return 0;
-
-            int maxId = max.ResultDocuments.First()["id"].AsInt32;
-            data.Id = maxId + 1;
+        {            
+            data.Id = this.context.FindSequenceIndex(EstateCollection.BuildingGroup) + 1;
 
             BsonDocument doc = new BsonDocument
             {
                 { "id", data.Id },
                 { "name", data.Name },
                 { "imageUrl", data.ImageUrl },
+                { "partMapUrl", data.PartMapUrl },
                 { "buildingCount", data.BuildingCount },
                 { "areaCoeffcient", data.AreaCoeffcient },
                 { "buildArea", data.BuildArea },

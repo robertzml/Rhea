@@ -1,0 +1,137 @@
+﻿@model Rhea.Model.Estate.Building
+
+@{
+    ViewBag.Title = "楼宇编辑";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="box">
+    <div class="box-header well" data-original-title>
+        <h2>
+            <i class="icon-tasks"></i>楼宇信息</h2>
+    </div>
+    <div class="box-content">
+        <div class="row-fluid">
+            <div class="span12">
+            @using (Html.BeginForm())
+            {
+                @Html.ValidationSummary(true)
+                <fieldset>
+                    <legend>楼宇编辑</legend>
+
+                    @Html.HiddenFor(model => model.Id)
+
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th style="width: 20%">
+                                    属性
+                                </th>
+                                <th style="width: 80%">
+                                    值
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.Name)
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.Name)
+                                    @Html.ValidationMessageFor(model => model.Name)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.ImageUrl)
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.ImageUrl)
+                                    @Html.ValidationMessageFor(model => model.ImageUrl)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.BuildingGroupId)
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.BuildingGroupId)
+                                    @Html.ValidationMessageFor(model => model.BuildingGroupId)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.BuildArea)
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.BuildArea)
+                                    @Html.ValidationMessageFor(model => model.BuildArea)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.UsableArea)
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.UsableArea)
+                                    @Html.ValidationMessageFor(model => model.UsableArea)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.AboveGroundFloor)
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.AboveGroundFloor)
+                                    @Html.ValidationMessageFor(model => model.AboveGroundFloor)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.UnderGroundFloor)
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.UnderGroundFloor)
+                                    @Html.ValidationMessageFor(model => model.UnderGroundFloor)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.UseType)
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.UseType)
+                                    @Html.ValidationMessageFor(model => model.UseType)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.Remark)
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.Remark)
+                                    @Html.ValidationMessageFor(model => model.Remark)
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">保存</button>
+                        <a class="btn" href="@Url.Action("Details", new { controller = "Building", id = Model.Id, area = "Admin" })">取消</a> 
+                        <a class="btn" href="@Url.Action("List", new { controller = "Building", buildingGroupId = Model.BuildingGroupId, area = "Admin" })">回到列表</a>                     
+                    </div>
+                </fieldset>
+            }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        var menu = $('a#building-manage');
+        menuNavActive(menu);
+    });
+</script>

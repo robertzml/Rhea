@@ -278,6 +278,7 @@ namespace Rhea.Business.Estate
                 .Set("usableArea", (BsonValue)data.UsableArea)
                 .Set("aboveGroundFloor", (BsonValue)data.AboveGroundFloor)
                 .Set("underGroundFloor", (BsonValue)data.UnderGroundFloor)
+                .Set("useType", data.UseType)
                 .Set("remark", data.Remark ?? "");
 
             WriteConcernResult result = this.context.Update(EstateCollection.Building, query, update);

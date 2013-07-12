@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Rhea.Business;
 using Rhea.Business.Estate;
 using Rhea.Model.Estate;
 
@@ -103,7 +102,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         public JsonResult GetListByBuildingGroup(int buildingGroupId)
         {
-            var data = buildingBusiness.GetListByBuildingGroup(buildingGroupId);
+            var data = buildingBusiness.GetListByBuildingGroup(buildingGroupId).OrderBy(r => r.Name);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 

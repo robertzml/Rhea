@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Rhea.Business;
 using Rhea.Common;
-using Rhea.UI.Areas.Estate.Models;
+using Rhea.Data.Estate;
 using Rhea.UI.Models;
 
 namespace Rhea.UI.Controllers

@@ -25,6 +25,11 @@ namespace Rhea.UI
                         "~/Scripts/highcharts.js",
                         "~/Scripts/modules/exporting.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/noty").Include(
+                        "~/Scripts/noty/jquery.noty.js",
+                        "~/Scripts/noty/layouts/top.js",
+                        "~/Scripts/noty/themes/default.js"));
+
             // 使用 Modernizr 的开发版本进行开发和了解信息。然后，当你做好
             // 生产准备时，请使用 http://modernizr.com 上的生成工具来仅选择所需的测试。
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
