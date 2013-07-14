@@ -116,6 +116,51 @@ namespace Rhea.Business.Account
             else
                 return null;
         }
+
+        /// <summary>
+        /// 验证密码
+        /// </summary>
+        /// <param name="userName">用户名</param>
+        /// <param name="password">密码</param>
+        /// <returns></returns>
+        public bool ValidatePassword(string userName, string password)
+        {
+            RheaMongoContext context = new RheaMongoContext(RheaServer.RheaDatabase);
+
+            BsonDocument doc = context.FindOne(RheaCollection.User, "userName", userName);
+            if (doc != null)
+            {
+                string pass = doc["password"].AsString;
+                if (Hasher.MD5Encrypt(password) != pass)
+                    return false;
+                else
+                    return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// 修改密码
+        /// </summary>
+        /// <param name="userName">用户名</param>
+        /// <param name="oldPassword">原密码</param>
+        /// <param name="newPassword">新密码</param>
+        /// <returns></returns>
+        public bool ChangePassword(string userName, string oldPassword, string newPassword)
+        {
+            RheaMongoContext context = new RheaMongoContext(RheaServer.RheaDatabase);
+
+            var query = Query.EQ("userName", userName);
+            var update = Update.Set("password", Hasher.MD5Encrypt(newPassword));
+
+            WriteConcernResult result = context.Update(RheaCollection.User, query, update);
+
+            if (result.HasLastErrorMessage)
+                return false;
+            else
+                return true;
+        }
         #endregion //Method
     }
 }

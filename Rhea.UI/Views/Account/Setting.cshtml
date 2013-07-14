@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "用户设置";
+}
+
+<div class="span2">
+    <div class="well sidebar-nav">
+        <ul class="nav nav-list">
+            <li class="nav-header">功能</li>
+            <li class="active"><a href="#" id="">概况</a></li>
+            <li><a href="#" id="change-password">修改密码</a></li>      
+            <li class="nav-header">Link</li> 
+            <li class="nav-header">Nav Heaer</li>
+            <li><a href="#">Link</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="span10">
+    <div id="ajax-content1">      
+    
+    </div>
+</div>
+
+@section scripts {
+@Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+    $(function () {
+        $('a#change-password').click(function() {
+            menuNavActive($(this).parent());           
+            ajaxLoadPage2("ChangePassword", "Account", {});
+            return false;
+        });
+    });
+</script>
+}

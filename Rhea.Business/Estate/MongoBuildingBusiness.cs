@@ -217,28 +217,7 @@ namespace Rhea.Business.Estate
         /// <returns>楼宇ID,0:添加失败</returns>
         public int Create(Building data)
         {
-            BsonDocument[] pipeline = {
-                new BsonDocument {
-                    { "$project", new BsonDocument {
-                        { "id", 1 }
-                    }}
-                },
-                new BsonDocument {
-                    { "$sort", new BsonDocument {
-                        { "id", -1 }
-                    }}
-                },
-                new BsonDocument {
-                    { "$limit", 1 }
-                }
-            };
-
-            AggregateResult max = this.context.Aggregate(EstateCollection.Building, pipeline);
-            if (max.ResultDocuments.Count() == 0)
-                return 0;
-
-            int maxId = max.ResultDocuments.First()["id"].AsInt32;
-            data.Id = maxId + 1;
+            data.Id = this.context.FindSequenceIndex(EstateCollection.Building) + 1;           
 
             BsonDocument doc = new BsonDocument
             {
@@ -250,6 +229,7 @@ namespace Rhea.Business.Estate
                 { "usableArea", (BsonValue)data.UsableArea },
                 { "aboveGroundFloor", (BsonValue)data.AboveGroundFloor },
                 { "underGroundFloor", (BsonValue)data.UnderGroundFloor },
+                { "useType", data.UseType },
                 { "remark", data.Remark ?? "" },
                 { "status", 0 }
             };

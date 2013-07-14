@@ -97,6 +97,59 @@ namespace Rhea.UI.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        /// <summary>
+        /// 设置
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Setting()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 修改密码
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult ChangePassword(ChangePasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (model.NewPassword != model.ConfirmPassword)
+                {
+                    ModelState.AddModelError("", "两次输入密码不一致");
+                    return View(model);
+                }
+
+                string userName = User.Identity.Name;
+
+                bool result = this.accountBusiness.ValidatePassword(userName, model.OldPassword);
+                if (!result)
+                {
+                    ModelState.AddModelError("", "原密码错误");
+                    return View(model);
+                }
+
+                result = this.accountBusiness.ChangePassword(userName, model.OldPassword, model.NewPassword);
+                if (!result)
+                {
+                    ModelState.AddModelError("", "修改密码出错");
+                    return View(model);
+                }
+
+                return RedirectToAction("ShowMessage", "Home", new { area = "", msg = "修改密码成功" });
+            }
+
+            return View(model);
+        }
         #endregion //Action
     }
 }
