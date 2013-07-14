@@ -166,6 +166,126 @@ namespace Rhea.UI.Areas.Admin.Controllers
             else
                 return View("Delete", id);
         }
+
+        /// <summary>
+        /// 楼层添加
+        /// </summary>
+        /// <param name="buildingId">楼宇ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult CreateFloor(int buildingId)
+        {
+            ViewBag.BuildingId = buildingId;
+            return View();
+        }
+
+        /// <summary>
+        /// 楼层添加
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult CreateFloor(Floor model)
+        {
+            int buildingId = Convert.ToInt32(Request.Form["BuildingId"]);
+            if (ModelState.IsValid)
+            {
+                int result = this.buildingBusiness.CreateFloor(buildingId, model);
+
+                if (result != 0)
+                {
+                    TempData["Message"] = "添加成功";
+                    return RedirectToAction("Details", "Building", new { area = "Admin", id = buildingId });
+                }
+                else
+                {
+                    ModelState.AddModelError("", "保存失败");
+                }
+            }
+
+            ViewBag.BuildingId = buildingId;
+            return View(model);
+        }
+
+        /// <summary>
+        /// 楼层编辑
+        /// </summary>
+        /// <param name="buildingId">楼宇ID</param>
+        /// <param name="floorId">楼层ID</param>
+        /// <returns></returns>        
+        public ActionResult EditFloor(int buildingId, int floorId)
+        {
+            ViewBag.BuildingId = buildingId;
+            var data = this.buildingBusiness.GetFloor(floorId);
+
+            return View(data);
+        }
+
+        /// <summary>
+        /// 楼层编辑
+        /// </summary>
+        /// <param name="model">楼层数据</param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult EditFloor(Floor model)
+        {
+            int buildingId = Convert.ToInt32(Request.Form["BuildingId"]);
+            if (ModelState.IsValid)
+            {
+                bool result = this.buildingBusiness.EditFloor(buildingId, model);
+
+                if (result)
+                {
+                    TempData["Message"] = "编辑成功";
+                    return RedirectToAction("Details", "Building", new { area = "Admin", id = buildingId });
+                }
+                else
+                {
+                    ModelState.AddModelError("", "保存失败");
+                }
+            }
+
+            ViewBag.BuildingId = buildingId;
+            return View(model);
+        }
+
+        /// <summary>
+        /// 楼层删除
+        /// </summary>
+        /// <param name="buildingId">楼宇ID</param>
+        /// <param name="floorId">楼层ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult DeleteFloor(int buildingId, int floorId)
+        {
+            ViewBag.BuildingId = buildingId;
+            var data = this.buildingBusiness.GetFloor(floorId);
+           
+            return View(data);
+        }
+
+        /// <summary>
+        /// 楼层删除 
+        /// </summary>
+        /// <param name="id">楼宇ID</param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost, ActionName("DeleteFloor")]
+        public ActionResult DeleteFloorConfirm(int id)
+        {
+            int buildingId = Convert.ToInt32(Request.Form["BuildingId"]);
+            bool result = this.buildingBusiness.DeleteFloor(buildingId, id);
+
+            if (result)
+            {
+                TempData["Message"] = "删除成功";
+                return RedirectToAction("Details", "Building", new { area = "Admin", id = buildingId });
+            }
+            else
+                return View("Delete", id);
+        }
         #endregion //Action
     }
 }

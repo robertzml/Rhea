@@ -135,27 +135,6 @@ namespace Rhea.Business.Estate
         }
 
         /// <summary>
-        /// 获取楼层
-        /// </summary>
-        /// <param name="id">楼层ID</param>
-        /// <returns></returns>
-        public Floor GetFloor(int id)
-        {
-            BsonDocument doc = this.context.FindOne(EstateCollection.Building, "floors.id", id);
-
-            if (doc != null)
-            {
-                Building building = ModelBind(doc);
-                if (building.Status == 1)
-                    return null;
-
-                return building.Floors.Single(r => r.Id == id);
-            }
-            else
-                return null;
-        }
-
-        /// <summary>
         /// 得到楼宇名称
         /// </summary>
         /// <param name="id">楼宇ID</param>
@@ -287,6 +266,28 @@ namespace Rhea.Business.Estate
                 return true;
         }
 
+
+        /// <summary>
+        /// 获取楼层
+        /// </summary>
+        /// <param name="id">楼层ID</param>
+        /// <returns></returns>
+        public Floor GetFloor(int id)
+        {
+            BsonDocument doc = this.context.FindOne(EstateCollection.Building, "floors.id", id);
+
+            if (doc != null)
+            {
+                Building building = ModelBind(doc);
+                if (building.Status == 1)
+                    return null;
+
+                return building.Floors.Single(r => r.Id == id);
+            }
+            else
+                return null;
+        }
+
         /// <summary>
         /// 添加楼层
         /// </summary>
@@ -332,7 +333,8 @@ namespace Rhea.Business.Estate
                 { "buildArea", (BsonValue)floor.BuildArea },
                 { "usableArea", (BsonValue)floor.UsableArea },
                 { "imageUrl", floor.ImageUrl ?? "" },
-                { "remark", floor.Remark ?? "" }
+                { "remark", floor.Remark ?? "" },
+                { "status", 0 }
             };
 
             var query = Query.EQ("id", buildingId);

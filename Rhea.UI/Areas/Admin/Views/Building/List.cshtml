@@ -5,6 +5,13 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
+<style type="text/css">
+    .table td:last-child 
+    {
+        max-width: 300px;
+    }
+</style>
+
 <div class="box">
     <div class="box-header well" data-original-title>
         <h2>
@@ -16,19 +23,22 @@
             <thead>
                 <tr>
                     <th>
+                        ID
+                    </th>
+                    <th>
                         楼宇名称
-                    </th>                    
-                    <th>
-                        建筑面积 (m<sup>2</sup>)
                     </th>
                     <th>
-                        使用面积 (m<sup>2</sup>)
+                        建筑面积(m<sup>2</sup>)
                     </th>
                     <th>
-                        地上楼层数
+                        使用面积(m<sup>2</sup>)
                     </th>
                     <th>
-                        地下楼层数
+                        地上楼层
+                    </th>
+                    <th>
+                        地下楼层
                     </th>
                     <th>
                         操作
@@ -39,7 +49,8 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@item.Name</td>                  
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
                     <td>@item.BuildArea</td>
                     <td>@item.UsableArea</td>
                     <td>@item.AboveGroundFloor</td>
@@ -48,6 +59,7 @@
                         <a class="btn btn-success btn-small" href="@Url.Action("Details", new { controller = "Building", id = item.Id, area = "Admin" })"><i class="icon-zoom-in icon-white"></i>查看</a> 
                         <a class="btn btn-warning btn-small" href="@Url.Action("Edit", new { controller = "Building", id = item.Id, area = "Admin" })"><i class="icon-edit icon-white"></i>编辑</a> 
                         <a class="btn btn-danger btn-small" href="@Url.Action("Delete", new { controller = "Building", id = item.Id, area = "Admin" })"><i class="icon-remove icon-white"></i>删除</a>
+                        <a class="btn btn-info btn-small" href="@Url.Action("ListByBuilding", new { controller = "Room", buildingId = item.Id, area = "Admin" })"><i class="icon-th-large icon-white"></i>房间</a>
                     </td>
                 </tr>
             }

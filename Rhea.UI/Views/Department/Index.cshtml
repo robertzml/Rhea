@@ -17,7 +17,7 @@
 </div>
 
 <div class="span10">
-    <div id="ajax-content1">      
+    <div id="ajax-content1">
     @Html.Action("Summary", "Department", new { area = "", id = Model })
     </div>
 </div>
@@ -35,8 +35,7 @@
             $('li#building-list').after(text);
 
             $('a.building-index').click(function() {
-                $('ul.nav').children().removeClass('active');
-                $(this).parent().addClass('active');
+                menuNavActive($(this));
                 var buildingId = $(this).attr('ref');
                 ajaxLoadPage2("Building", "Department", { id: @Model, buildingId: buildingId });
                 return false;
@@ -46,15 +45,13 @@
         //$('a#building-group-pic').colorbox({ transition: "elastic", maxWidth: "95%", maxHeight: "95%" });
 
         $('a#department-summary').click(function() {
-            $('ul.nav').children().removeClass('active');
-            $(this).parent().addClass('active');
+            menuNavActive($(this));
             ajaxLoadPage2("Summary", "Department", { id: @Model });
             return false;
         });
 
         $('a#room-list').click(function() {
-            $('ul.nav').children().removeClass('active');
-            $(this).parent().addClass('active');
+            menuNavActive($(this));
             ajaxLoadPage("ListByDepartment", "Room", "Estate", { departmentId: @Model });
             return false;
         });

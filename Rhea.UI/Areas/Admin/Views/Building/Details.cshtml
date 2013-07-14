@@ -91,13 +91,83 @@
             <a class="btn btn-success" href="@Url.Action("List", new { controller = "Building", buildingGroupId = Model.BuildingGroupId, area = "Admin" })"><i class="icon-list icon-white"></i> 回到列表</a> 
             <a class="btn btn-warning" href="@Url.Action("Edit", new { controller = "Building", id = Model.Id, area = "Admin" })"><i class="icon-edit icon-white"></i> 编辑</a> 
             <a class="btn btn-danger" href="@Url.Action("Delete", new { controller = "Building", id = Model.Id, area = "Admin" })"><i class="icon-remove icon-white"></i> 删除</a>
+            <a class="btn btn-primary" href="@Url.Action("CreateFloor", new { controller = "Building", buildingId = Model.Id, area = "Admin" })"><i class="icon-plus icon-white"></i>添加楼层</a> 
         </p>
+    </div>
+</div>
+
+<div class="box">
+    <div class="box-header well" data-original-title>
+        <h2><i class="icon-list"></i>楼层列表</h2>    
+    </div>
+
+    <div class="box-content">    
+        <div class="row-fluid">
+            <div class="span12">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                ID
+                            </th>
+                            <th>
+                                名称
+                            </th>
+                            <th>
+                                编号
+                            </th>
+                            <th>
+                                建筑面积
+                            </th>
+                            <th>
+                                使用面积
+                            </th>
+                            <th>
+                                平面图
+                            </th>
+                            <th>
+                                操作
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model.Floors)
+                    {
+                        <tr>
+                            <td>
+                                @item.Id
+                            </td>
+                            <td>
+                                @item.Name
+                            </td>
+                            <td>
+                                @item.Number
+                            </td>
+                            <td>
+                                @item.BuildArea
+                            </td>
+                            <td>
+                                @item.UsableArea
+                            </td>
+                            <td>
+                                @item.ImageUrl
+                            </td>
+                            <td>
+                                <a class="btn btn-warning btn-small" href="@Url.Action("EditFloor", new { controller = "Building", buildingId = Model.Id, floorId = item.Id, area = "Admin" })"><i class="icon-edit icon-white"></i>编辑</a> 
+                                <a class="btn btn-danger btn-small" href="@Url.Action("DeleteFloor", new { controller = "Building", buildingId = Model.Id, floorId = item.Id, area = "Admin" })"><i class="icon-remove icon-white"></i>删除</a>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 
 <script type="text/javascript">
     $(function () {
-        var menu = $('a#building-group-manage');
+        var menu = $('a#building-manage');
         menuNavActive(menu);
     });
 </script>

@@ -1,16 +1,14 @@
-﻿@model Rhea.Model.Estate.Building
-@using Rhea.Common;
+﻿@model Rhea.Model.Estate.Floor
 
 @{
-    ViewBag.Title = "楼宇删除";
+    ViewBag.Title = "楼层删除";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-
 
 <div class="box">
     <div class="box-header well" data-original-title>
         <h2>
-            <i class="icon-th-list"></i>楼宇信息</h2>
+            <i class="icon-tasks"></i>楼层信息</h2>
     </div>
 
     <div class="box-content">
@@ -44,10 +42,26 @@
                             </tr>
                             <tr>
                                 <td>
+                                    @Html.DisplayNameFor(model => model.Number)
+                                </td>
+                                <td>
+                                    @Model.Number
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
                                     @Html.DisplayNameFor(model => model.Name)
                                 </td>
                                 <td>
                                     @Model.Name
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.ImageUrl)
+                                </td>
+                                <td>
+                                    @Model.ImageUrl
                                 </td>
                             </tr>
                             <tr>
@@ -68,33 +82,6 @@
                             </tr>
                             <tr>
                                 <td>
-                                    @Html.DisplayNameFor(model => model.AboveGroundFloor)
-                                </td>
-                                <td>
-                                    @Model.AboveGroundFloor
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    @Html.DisplayNameFor(model => model.UnderGroundFloor)
-                                </td>
-                                <td>
-                                    @Model.UnderGroundFloor
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    @Html.DisplayNameFor(model => model.UseType)
-                                </td>
-                                <td>
-                                @{
-                                    var type = (BuildingUseType)Model.UseType;
-                                    @type.DisplayName(); 
-                                }
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
                                     @Html.DisplayNameFor(model => model.Remark)
                                 </td>
                                 <td>
@@ -107,11 +94,12 @@
 
                 @using (Html.BeginForm())
                 {
-                    @Html.HiddenFor(model => model.Id)
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.Id)                   
+                    @Html.Hidden("BuildingId")
                     <div class="form-actions">
                         <button type="submit" class="btn btn-danger">删除</button>
-                        <a class="btn" href="@Url.Action("Details", new { controller = "Building", id = Model.Id, area = "Admin" })">取消</a> 
-                        <a class="btn" href="@Url.Action("List", new { controller = "Building", buildingGroupId = Model.BuildingGroupId, area = "Admin" })">回到列表</a>                     
+                        <a class="btn" href="@Url.Action("Details", new { controller = "Building", id = ViewBag.BuildingId, area = "Admin" })">取消</a>                         
                     </div>
                 }
             </div>

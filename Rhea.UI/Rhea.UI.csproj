@@ -165,6 +165,7 @@
     <Compile Include="Areas\Admin\Controllers\BuildingController.cs" />
     <Compile Include="Areas\Admin\Controllers\BuildingGroupController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RoomController.cs" />
     <Compile Include="Areas\Estate\Controllers\BuildingController.cs" />
     <Compile Include="Areas\Estate\Controllers\BuildingGroupController.cs" />
     <Compile Include="Areas\Estate\Controllers\HomeController.cs" />
@@ -514,6 +515,21 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\ShowMessage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Building\EditFloor.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Building\DeleteFloor.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Building\CreateFloor.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Room\List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Room\ListByBuilding.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
