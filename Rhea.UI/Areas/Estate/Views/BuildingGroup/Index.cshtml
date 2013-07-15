@@ -8,10 +8,10 @@
     <div class="well sidebar-nav">
         <ul class="nav nav-list">
             <li class="nav-header">导航</li>
-            <li class="active"><a href="#" id="building-group-summary">概况</a></li>
+            <li class="active"><a href="#" id="building-group-summary">摘要</a></li>
             <li><a href="#" id="building-group-details">详细</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
+            <li><a href="#" id="building-group-statistic">统计</a></li>
+            <li><a href="#">展示</a></li>
             <li class="nav-header" id="building-list">楼宇列表</li>          
             <li class="nav-header">房屋信息</li>
             <li><a href="#" id="room-list">房间列表</a></li>
@@ -39,8 +39,7 @@
             $('li#building-list').after(text);
 
             $('a.building-index').click(function() {
-                $('ul.nav').children().removeClass('active');
-                $(this).parent().addClass('active');
+                menuNavActive($(this));
                 var buildingId = $(this).attr('ref');
                 ajaxLoadPage("Index", "Building", "Estate", { id: buildingId });
                 return false;
@@ -48,22 +47,25 @@
         });
 
         $('a#building-group-summary').click(function() {
-            $('ul.nav').children().removeClass('active');
-            $(this).parent().addClass('active');
+            menuNavActive($(this));
             ajaxLoadPage("Summary", "BuildingGroup", "Estate", { id: @Model });
             return false;
         });
 
         $('a#building-group-details').click(function() {
-            $('ul.nav').children().removeClass('active');
-            $(this).parent().addClass('active');
+            menuNavActive($(this));
             ajaxLoadPage("Details", "BuildingGroup", "Estate", { id: @Model });
             return false;
         });
 
+        $('a#building-group-statistic').click(function() {
+            menuNavActive($(this));
+            ajaxLoadPage("Statistic", "BuildingGroup", "Estate", { id: @Model });
+            return false;
+        });
+
         $('a#room-list').click(function() {
-            $('ul.nav').children().removeClass('active');
-            $(this).parent().addClass('active');
+            menuNavActive($(this));
             ajaxLoadPage("ListByBuildingGroup", "Room", "Estate", { buildingGroupId: @Model });
             return false;
         });

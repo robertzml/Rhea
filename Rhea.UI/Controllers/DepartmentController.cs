@@ -7,6 +7,7 @@ using System.Web.Routing;
 using Rhea.Business;
 using Rhea.Business.Estate;
 using Rhea.Business.Personnel;
+using Rhea.Data.Estate;
 using Rhea.Model.Estate;
 using Rhea.Model.Personnel;
 using Rhea.UI.Models;
@@ -115,9 +116,31 @@ namespace Rhea.UI.Controllers
 
             return View(data);
         }
+
+        /// <summary>
+        /// 部门统计
+        /// </summary>
+        /// <param name="id">部门ID</param>
+        /// <returns></returns>
+        public ActionResult Statistic(int id)
+        {
+            Department data = this.departmentBusiness.Get(id);
+            return View(data);
+        }
         #endregion //Action
 
         #region Json
+        /// <summary>
+        /// 部门分类用房面积
+        /// </summary>
+        /// <param name="id">部门ID</param>
+        /// <returns></returns>
+        public JsonResult GetClassifyArea(int id)
+        {
+            IStatisticService statisticService = new MongoStatisticService();
+            CollegeClassifyAreaModel data = statisticService.GetCollegeClassifyArea(id);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
         #endregion //Json
     }
 }

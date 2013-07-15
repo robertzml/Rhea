@@ -128,6 +128,17 @@ namespace Rhea.UI.Areas.Estate.Controllers
 
             return View(data);
         }
+
+        /// <summary>
+        /// 统计
+        /// </summary>
+        /// <param name="id">楼群ID</param>
+        /// <returns></returns>
+        public ActionResult Statistic(int id)
+        {
+            BuildingGroup data = this.buildingGroupBusiness.Get(id);
+            return View(data);
+        }
         #endregion //Action
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using Rhea.Data.Estate;
 using Rhea.Model.Estate;
 
 namespace Rhea.Business
@@ -56,22 +57,22 @@ namespace Rhea.Business
                 return 0;
         }
 
-        public List<Data.Estate.SecondClassifyAreaModel> GetClassifyArea(int departmentId, int firstCode, List<RoomFunctionCode> functionCodes)
+        public List<CollegeSecondClassifyAreaModel> GetClassifyArea(int departmentId, int firstCode, List<RoomFunctionCode> functionCodes)
         {
             throw new NotImplementedException();
         }
 
-        public Data.Estate.CollegeClassifyAreaModel GetCollegeClassifyArea(int departmentId)
+        public CollegeClassifyAreaModel GetCollegeClassifyArea(int departmentId)
         {
             throw new NotImplementedException();
         }      
 
-        public List<Data.Estate.BuildingAreaModel> GetBuildingArea(int departmentId, List<Building> buildingList)
+        public List<BuildingAreaModel> GetBuildingArea(int departmentId, List<Building> buildingList)
         {
             throw new NotImplementedException();
         }
 
-        public Data.Estate.CollegeBuildingAreaModel GetCollegeBuildingArea(int departmentId)
+        public CollegeBuildingAreaModel GetCollegeBuildingArea(int departmentId)
         {
             throw new NotImplementedException();
         }

@@ -1,0 +1,166 @@
+﻿@model Rhea.Model.Personnel.Department
+
+@{
+    ViewBag.Title = "部门统计";
+    Layout = null;
+}
+
+<div class="row-fluid"> 
+    <div class="span12">
+        <div class="box">
+            <div class="box-header well" data-original-title>
+                <h2>
+                    <i class="icon-th-list"></i>部门分类用房面积</h2>
+            </div>
+            <div class="box-content">
+                <div id="container-classify-area" style="width: 100%; height:350px;">
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+        var chart1; 
+        var colors = Highcharts.getOptions().colors;
+        var categories = ['办公用房', '教学用房', '实验用房', '科研用房'];
+        var data = [];       
+
+        $.getJSON('/Department/GetClassifyArea', { id: @Model.Id }, function (response) {
+            setData(response);
+            setColumnChart(data);
+        });
+
+        function setData(response) {
+            var cate1 = [], data1 = [];           
+            $.each(response.OfficeDetailArea, function(i, item) {
+                cate1.push(item.FunctionProperty);
+                data1.push(item.Area);
+            });               
+            data.push({ name: '办公用房', y: parseFloat(response.OfficeArea), color: colors[0], 
+                drilldown : { name: '办公用房', color: colors[0], categories: cate1, data: data1 } 
+            });            
+
+            var cate2 = [], data2 = [];           
+            $.each(response.EducationDetailArea, function(i, item) {
+                cate2.push(item.FunctionProperty);
+                data2.push(item.Area);
+            });
+            data.push({ name: '教学用房', y: parseFloat(response.EducationArea), color: colors[1],
+                drilldown : { name: '教学用房', color: colors[1], categories: cate2, data: data2 } 
+            });
+
+            var cate3 = [], data3 = [];           
+            $.each(response.ExperimentDetailArea, function(i, item) {
+                cate3.push(item.FunctionProperty);
+                data3.push(item.Area);
+            });
+            data.push({ name: '实验用房', y: parseFloat(response.ExperimentArea), color: colors[2],
+                drilldown : { name: '实验用房', color: colors[2], categories: cate3, data: data3 } 
+            });
+
+            var cate4 = [], data4 = [];           
+            $.each(response.ResearchDetailArea, function(i, item) {
+                cate4.push(item.FunctionProperty);
+                data4.push(item.Area);
+            });
+            data.push({ name: '科研用房', y: parseFloat(response.ResearchArea), color: colors[3],
+                drilldown : { name: '科研用房', color: colors[3], categories: cate4, data: data4 } 
+            });
+        }
+
+        function setChart(name, categories, data, color) {
+			chart1.xAxis[0].setCategories(categories, false);
+			chart1.series[0].remove(false);
+			chart1.addSeries({
+				name: name,
+				data: data,
+				color: color || 'gray'
+			}, false);
+			chart1.redraw();
+        }
+
+        function pushData2(option, data) {
+            $.each(data, function (i, item) {
+                option.series[0].data.push([item.FunctionProperty, parseFloat(item.Area)]);
+                option.xAxis.categories.push(item.FunctionProperty);
+            });
+        }
+
+        function setColumnChart(data) {
+            var name = '面积';
+            var option = {
+                chart: {
+                    renderTo: 'container-classify-area',
+                    type: 'column'
+                },
+                title: {
+                    text: '分类用房面积图'
+                },               
+                credits: {
+                    enabled: false
+                },
+                xAxis: {
+                    categories: categories
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: '面积 (m2)'
+                    }
+                },
+                plotOptions: {
+                    column: {
+                        cursor: 'pointer',
+                        point: {
+                            events: {
+                                click: function () {
+                                    var drilldown = this.drilldown;
+                                    if (drilldown) { // drill down
+                                        setChart(drilldown.name, drilldown.categories, drilldown.data, drilldown.color);
+                                    } else { // restore
+                                        setChart(name, categories, data);
+                                    }
+                                }
+                            }
+                        },
+                        dataLabels: {
+                            enabled: true,
+                            color: colors[0],
+                            style: {
+                                fontWeight: 'bold'
+                            },
+                            formatter: function () {
+                                return this.y;
+                            }
+                        }
+                    }
+                },
+                tooltip: {
+                    formatter: function () {
+                        var point = this.point,
+                        s = this.x + ':<b>' + this.y + ' m<sup>2</sup></b><br/>';
+                        if (point.drilldown) {
+                            s += '点击显示 ' + point.category + ' 详细';
+                        } else {
+                            s += '点击回到上一级';
+                        }
+                        return s;
+                    }
+                },
+                series: [{
+                    name: name,
+                    data: data,
+                    color: 'gray'
+                }],
+                exporting: {
+                    enabled: true
+                }
+            };
+           
+            chart1 = new Highcharts.Chart(option);
+        };
+    });
+</script>

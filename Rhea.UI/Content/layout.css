@@ -5,6 +5,12 @@
 .modal-body {
 	max-height:500px;
 }
+.navbar-inverse .nav > li > a {
+	color:#FFFFFF;
+}
+.navbar-inverse .nav > li > a:hover {
+	color:#FBE733;
+}
 /**************************
  the nva dropdown menu
 **************************/

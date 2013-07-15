@@ -412,6 +412,18 @@ namespace Rhea.Business.Estate
             long count = this.context.Count(EstateCollection.Room);
             return (int)count;
         }
+
+        /// <summary>
+        /// 楼宇内房间数量
+        /// </summary>
+        /// <param name="buildingId">楼宇ID</param>
+        /// <returns></returns>
+        public int CountByBuilding(int buildingId)
+        {
+            var query = Query.EQ("buildingId", buildingId);
+            long count = this.context.Count(EstateCollection.Room, query);
+            return (int)count;
+        }
         #endregion //Method
     }
 }

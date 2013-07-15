@@ -27,6 +27,13 @@
                             </th>
                         </tr>
                     </thead>
+                    <tfoot>
+                        <tr>
+                            <td>合计</td>
+                            <td>@Model.Sum(r => r.RoomCount)</td>
+                            <td>@Model.Sum(r => r.TotalUsableArea)</td>
+                        </tr>
+                    </tfoot>
                     <tbody>
                     @foreach (var item in Model)
                     {
@@ -42,7 +49,7 @@
                             </td>
                         </tr>
                     }
-                    </tbody>
+                    </tbody>                    
                 </table>
             </div>
         </div>

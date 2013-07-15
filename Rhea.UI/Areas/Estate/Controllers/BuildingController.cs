@@ -48,6 +48,9 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         public ActionResult Details(int id)
         {
+            IRoomBusiness roomBusiness = new MongoRoomBusiness();
+            ViewBag.RoomCount = roomBusiness.CountByBuilding(id);
+
             Building data = this.buildingBusiness.Get(id);
             return View(data);
         }
@@ -115,6 +118,18 @@ namespace Rhea.UI.Areas.Estate.Controllers
         {
             var data = this.buildingBusiness.GetListByDepartment(departmentId);
             return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 得到房间数量
+        /// </summary>
+        /// <param name="buildingId">楼宇ID</param>
+        /// <returns></returns>
+        public JsonResult GetRoomCount(int buildingId)
+        {
+            IRoomBusiness roomBusiness = new MongoRoomBusiness();
+            int count = roomBusiness.CountByBuilding(buildingId);
+            return Json(count, JsonRequestBehavior.AllowGet);
         }
         #endregion //Json
     }

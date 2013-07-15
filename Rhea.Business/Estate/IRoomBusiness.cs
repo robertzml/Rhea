@@ -93,5 +93,12 @@ namespace Rhea.Business.Estate
         /// </summary>
         /// <returns></returns>
         int Count();
+
+        /// <summary>
+        /// 楼宇内房间数量
+        /// </summary>
+        /// <param name="buildingId">楼宇ID</param>
+        /// <returns></returns>
+        int CountByBuilding(int buildingId);
     }
 }

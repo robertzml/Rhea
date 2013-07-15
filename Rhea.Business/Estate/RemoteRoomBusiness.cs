@@ -203,6 +203,11 @@ namespace Rhea.Business.Estate
         {
             throw new NotImplementedException();
         }
+
+        public int CountByBuilding(int buildingId)
+        {
+            throw new NotImplementedException();
+        }
         #endregion //Method        
     }
 }

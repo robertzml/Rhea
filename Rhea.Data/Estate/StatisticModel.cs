@@ -6,9 +6,9 @@ using System.Text;
 namespace Rhea.Data.Estate
 {
     /// <summary>
-    /// 二级分类面积模型
+    /// 学院二级分类面积模型
     /// </summary>
-    public class SecondClassifyAreaModel
+    public class CollegeSecondClassifyAreaModel
     {
         /// <summary>
         /// 一级编码
@@ -29,6 +29,11 @@ namespace Rhea.Data.Estate
         /// 总面积
         /// </summary>
         public double Area { get; set; }
+
+        /// <summary>
+        /// 房间数量
+        /// </summary>
+        public int RoomCount { get; set; }
     }
 
     /// <summary>
@@ -37,9 +42,9 @@ namespace Rhea.Data.Estate
     public class CollegeClassifyAreaModel
     {
         /// <summary>
-        /// 编号
+        /// 部门编号
         /// </summary>
-        public int Id { get; set; }
+        public int DepartmentId { get; set; }
 
         /// <summary>
         /// 学院名称
@@ -52,9 +57,14 @@ namespace Rhea.Data.Estate
         public double OfficeArea { get; set; }
 
         /// <summary>
+        /// 办公用房数量
+        /// </summary>
+        public int OfficeRoomCount { get; set; }
+
+        /// <summary>
         /// 办公二级分类面积
         /// </summary>
-        public List<SecondClassifyAreaModel> OfficeDetailArea { get; set; }
+        public List<CollegeSecondClassifyAreaModel> OfficeDetailArea { get; set; }
 
         /// <summary>
         /// 教学用房面积
@@ -62,9 +72,14 @@ namespace Rhea.Data.Estate
         public double EducationArea { get; set; }
 
         /// <summary>
+        /// 教学用房数量
+        /// </summary>
+        public int EducationRoomCount { get; set; }
+
+        /// <summary>
         /// 教学二级分类面积
         /// </summary>
-        public List<SecondClassifyAreaModel> EducationDetailArea { get; set; }
+        public List<CollegeSecondClassifyAreaModel> EducationDetailArea { get; set; }
 
         /// <summary>
         /// 实验用房面积
@@ -72,9 +87,14 @@ namespace Rhea.Data.Estate
         public double ExperimentArea { get; set; }
 
         /// <summary>
+        /// 实验用房数量
+        /// </summary>
+        public int ExperimentRoomCount { get; set; }
+
+        /// <summary>
         /// 实验二级用房面积
         /// </summary>
-        public List<SecondClassifyAreaModel> ExperimentDetailArea { get; set; }
+        public List<CollegeSecondClassifyAreaModel> ExperimentDetailArea { get; set; }
 
         /// <summary>
         /// 科研用房面积
@@ -82,14 +102,24 @@ namespace Rhea.Data.Estate
         public double ResearchArea { get; set; }
 
         /// <summary>
+        /// 科研用房数量
+        /// </summary>
+        public int ResearchRoomCount { get; set; }
+
+        /// <summary>
         /// 科研二级用房面积
         /// </summary>
-        public List<SecondClassifyAreaModel> ResearchDetailArea { get; set; }
+        public List<CollegeSecondClassifyAreaModel> ResearchDetailArea { get; set; }
 
         /// <summary>
         /// 总计
         /// </summary>
         public double TotalArea { get; set; }
+
+        /// <summary>
+        /// 房间总数
+        /// </summary>
+        public int TotalRoomCount { get; set; }
     }
 
     /// <summary>

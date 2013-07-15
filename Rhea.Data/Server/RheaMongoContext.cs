@@ -191,6 +191,19 @@ namespace Rhea.Data.Server
         }
 
         /// <summary>
+        /// 计数
+        /// </summary>
+        /// <param name="collectionName">集合名称</param>
+        /// <param name="query">查询</param>
+        /// <returns></returns>
+        public long Count(string collectionName, IMongoQuery query)
+        {
+            MongoCollection<BsonDocument> collection = this.database.GetCollection<BsonDocument>(collectionName);
+            long result = collection.Count(query);
+            return result;
+        }
+
+        /// <summary>
         /// 保存数据
         /// </summary>
         /// <param name="collectionName">集合名称</param>
