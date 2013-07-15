@@ -1,12 +1,12 @@
-﻿@using Rhea.Business
-@using Rhea.Data.Entities
+﻿@using Rhea.Business.Estate
+@using Rhea.Model.Estate
 @model int?
 
 <select id="BuildingId" name="BuildingId">
     <option value="">-- 请选择 --</option>
     @{
-        IBuildingService service = new MongoBuildingService();
-        List<Building> groups = service.GetList();
+        IBuildingBusiness business = new MongoBuildingBusiness();
+        var groups = business.GetList().OrderBy(r => r.Id);
 
         foreach (var item in groups)
         {

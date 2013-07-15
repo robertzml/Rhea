@@ -1,0 +1,407 @@
+﻿@model Rhea.UI.Areas.Admin.Models.RoomEditModel
+
+@{
+    ViewBag.Title = "房间添加";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="box">
+    <div class="box-header well" data-original-title>
+        <h2>
+            <i class="icon-tasks"></i>房间信息</h2>
+    </div>
+
+    <div class="box-content">
+        <div class="row-fluid">
+            <div class="span12">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <fieldset>
+                    <legend>房间添加</legend>
+                
+                    <ul class="nav nav-tabs" id="myTab">
+                        <li class="active"><a href="#info">基础信息</a></li>
+                        <li><a href="#additional">附加信息</a></li>
+                    </ul>
+
+                    <div id="myTabContent" class="tab-content">
+                        <div class="tab-pane active" id="info">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 20%">
+                                            属性
+                                        </th>
+                                        <th style="width: 80%">
+                                            值
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.Number)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.Number)
+                                            @Html.ValidationMessageFor(model => model.Number)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.Name)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.Name)
+                                            @Html.ValidationMessageFor(model => model.Name)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.Floor)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.Floor)
+                                            @Html.ValidationMessageFor(model => model.Floor)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.Span)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.Span)
+                                            @Html.ValidationMessageFor(model => model.Span)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.Orientation)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.Orientation)
+                                            @Html.ValidationMessageFor(model => model.Orientation)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.BuildArea)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.BuildArea)
+                                            @Html.ValidationMessageFor(model => model.BuildArea)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.UsableArea)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.UsableArea)
+                                            @Html.ValidationMessageFor(model => model.UsableArea)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.ImageUrl)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.ImageUrl)
+                                            @Html.ValidationMessageFor(model => model.ImageUrl)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.FunctionCodeId)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.FunctionCodeId)
+                                            @Html.ValidationMessageFor(model => model.FunctionCodeId)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.BuildingId)
+                                        </td>
+                                        <td>                             
+                                            @Html.EditorFor(model => model.BuildingId)
+                                            @Html.ValidationMessageFor(model => model.BuildingId)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.DepartmentId)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.DepartmentId)
+                                            @Html.ValidationMessageFor(model => model.DepartmentId)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.StartDate)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.StartDate)
+                                            @Html.ValidationMessageFor(model => model.StartDate)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.FixedYear)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.FixedYear)
+                                            @Html.ValidationMessageFor(model => model.FixedYear)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.Manager)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.Manager)
+                                            @Html.ValidationMessageFor(model => model.Manager)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.PersonNumber)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.PersonNumber)
+                                            @Html.ValidationMessageFor(model => model.PersonNumber)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.RoomStatus)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.RoomStatus)
+                                            @Html.ValidationMessageFor(model => model.RoomStatus)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.Remark)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.Remark)
+                                            @Html.ValidationMessageFor(model => model.Remark)
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane" id="additional">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 20%">
+                                            属性
+                                        </th>
+                                        <th style="width: 80%">
+                                            值
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.Heating)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.Heating)
+                                            @Html.ValidationMessageFor(model => model.Heating)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.FireControl)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.FireControl)
+                                            @Html.ValidationMessageFor(model => model.FireControl)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.Height)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.Height)
+                                            @Html.ValidationMessageFor(model => model.Height)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.EWWidth)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.EWWidth)
+                                            @Html.ValidationMessageFor(model => model.EWWidth)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.SNWidth)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.SNWidth)
+                                            @Html.ValidationMessageFor(model => model.SNWidth)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.InternationalId)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.InternationalId)
+                                            @Html.ValidationMessageFor(model => model.InternationalId)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.EducationId)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.EducationId)
+                                            @Html.ValidationMessageFor(model => model.EducationId)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.PowerSupply)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.PowerSupply)
+                                            @Html.ValidationMessageFor(model => model.PowerSupply)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.AirCondition)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.AirCondition)
+                                            @Html.ValidationMessageFor(model => model.AirCondition)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.HasSecurity)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.HasSecurity)
+                                            @Html.ValidationMessageFor(model => model.HasSecurity)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.HasChemical)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.HasChemical)
+                                            @Html.ValidationMessageFor(model => model.HasChemical)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.HasTrash)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.HasTrash)
+                                            @Html.ValidationMessageFor(model => model.HasTrash)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.HasSecurityCheck)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.HasSecurityCheck)
+                                            @Html.ValidationMessageFor(model => model.HasSecurityCheck)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.PressureContainer)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.PressureContainer)
+                                            @Html.ValidationMessageFor(model => model.PressureContainer)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.Cylinder)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.Cylinder)
+                                            @Html.ValidationMessageFor(model => model.Cylinder)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.HeatingInAeration)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.HeatingInAeration)
+                                            @Html.ValidationMessageFor(model => model.HeatingInAeration)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.HasTestBed)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.HasTestBed)
+                                            @Html.ValidationMessageFor(model => model.HasTestBed)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.UsageCharge)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.UsageCharge)
+                                            @Html.ValidationMessageFor(model => model.UsageCharge)
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">保存</button>                       
+                        <a class="btn" href="@Url.Action("Index", new { controller = "Room", area = "Admin" })">回到列表</a> 
+                    </div>
+                </fieldset>
+            }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        var menu = $('a#room-manage');
+        menuNavActive(menu);
+
+        $('#myTab a:first').tab('show');
+        $('#myTab a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });
+
+        $('#StartDate').datepicker({
+            monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+            dayNamesMin: ["日", "一", "二", "三", "四", "五", "六"]
+        });
+    });
+</script>

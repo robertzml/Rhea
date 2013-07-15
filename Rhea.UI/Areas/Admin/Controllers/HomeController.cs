@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Rhea.UI.Areas.Admin.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class HomeController : Controller
     {
         #region Action

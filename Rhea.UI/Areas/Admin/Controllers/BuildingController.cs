@@ -76,6 +76,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// </summary>
         /// <param name="model">楼宇模型</param>
         /// <returns></returns>
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult Create(Building model)
         {
@@ -114,6 +115,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult Edit(Building model)
         {
@@ -153,6 +155,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// </summary>
         /// <param name="id">楼宇ID</param>
         /// <returns></returns>
+        [ValidateAntiForgeryToken]
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirm(int id)
         {

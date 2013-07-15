@@ -1,11 +1,10 @@
-﻿@using Rhea.UI.Areas.Estate.Models
-@using Rhea.Common
-@model int?
+﻿@using Rhea.Common
+@model string
 
 <select id="RoomStatus" name="RoomStatus">
     <option value="">-- 请选择 --</option>
     @foreach (RoomStatus o in Enum.GetValues(typeof(RoomStatus)))
     {                      
-        <option value="@Convert.ToInt32(o)" @(Model == (int)o ? "selected='selected'" : "")>@o.DisplayName()</option>
+        <option value="@o.DisplayName()" @(Model == o.DisplayName() ? "selected='selected'" : "")>@o.DisplayName()</option>
     }
 </select>

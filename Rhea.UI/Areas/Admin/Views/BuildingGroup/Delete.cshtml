@@ -200,6 +200,7 @@
 
                 @using (Html.BeginForm())
                 {
+                    @Html.AntiForgeryToken()
                     @Html.HiddenFor(model => model.Id)
                     <div class="form-actions">
                         <button type="submit" class="btn btn-danger">删除</button>

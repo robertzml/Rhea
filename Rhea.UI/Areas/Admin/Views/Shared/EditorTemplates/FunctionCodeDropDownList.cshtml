@@ -1,12 +1,12 @@
-﻿@using Rhea.Business
-@using Rhea.Data.Entities
+﻿@using Rhea.Business.Estate
+@using Rhea.Model.Estate
 @model string
 
 <select id="FunctionCodeId" name="FunctionCodeId">
     <option value="">-- 请选择 --</option>
     @{
-        IRoomService service = new MongoRoomService();
-        List<RoomFunctionCode> codes = service.GetFunctionCodeList();
+        IRoomBusiness business = new MongoRoomBusiness();
+        List<RoomFunctionCode> codes = business.GetFunctionCodeList();
 
         foreach (var item in codes)
         {

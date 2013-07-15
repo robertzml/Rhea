@@ -1,12 +1,12 @@
-﻿@using Rhea.Business
-@using Rhea.Data.Entities
+﻿@using Rhea.Business.Personnel
+@using Rhea.Model.Personnel
 @model int?
 
 <select id="DepartmentId" name="DepartmentId">
     <option value="">-- 请选择 --</option>
     @{
-        IDepartmentService departmentService = new MongoDepartmentService();
-        List<Department> departments = departmentService.GetList();
+        IDepartmentBusiness departmentBusiness = new MongoDepartmentBusiness();
+        var departments = departmentBusiness.GetList().OrderBy(r => r.Id);
 
         foreach (var item in departments)
         {

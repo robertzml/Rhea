@@ -15,6 +15,7 @@
             <div class="span12">
             @using (Html.BeginForm())
             {
+                @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
                 <fieldset>
                     <legend>楼宇编辑</legend>

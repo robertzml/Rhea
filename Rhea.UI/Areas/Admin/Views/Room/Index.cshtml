@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "房间管理";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="box">
+    <div class="box-header well" data-original-title>
+        <h2>
+            <i class="icon-tasks"></i>@ViewBag.Title</h2>
+    </div>
+
+    <div class="box-content">
+        <p>
+            <a class="btn btn-success" href="@Url.Action("List", new { controller = "Room", area = "Admin" })"><i class="icon-chevron-left icon-white"></i>所有房间</a> 
+            <a class="btn btn-primary" href="@Url.Action("Create", new { controller = "Room", area = "Admin" })"><i class="icon-plus icon-white"></i>添加房间</a> 
+        </p>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        var dom = $('table#room-list');
+        initDataTable(dom);
+
+        var menu = $('a#room-manage');
+        menuNavActive(menu);
+    });
+</script>

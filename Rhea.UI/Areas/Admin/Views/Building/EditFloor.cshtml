@@ -15,11 +15,11 @@
             <div class="span12">
             @using (Html.BeginForm())
             {
+                @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
 
                 <fieldset>
-                    <legend>楼层编辑</legend>
-                    @Html.AntiForgeryToken()
+                    <legend>楼层编辑</legend>                    
                     @Html.HiddenFor(model => model.Id)
                     @Html.Hidden("BuildingId")
 

@@ -29,7 +29,7 @@ namespace Rhea.Business.Estate
         /// <param name="doc"></param>
         /// <returns></returns>
         private Room ModelBind(BsonDocument doc)
-        {           
+        {
             Room room = new Room();
             room.Id = doc["id"].AsInt32;
             room.Name = doc["name"].AsString;
@@ -41,9 +41,11 @@ namespace Rhea.Business.Estate
             room.DepartmentId = doc["departmentId"].AsInt32;
             room.BuildArea = (double?)doc.GetValue("buildArea", null);
             room.UsableArea = (double?)doc.GetValue("usableArea", null);
+            room.ImageUrl = doc.GetValue("imageUrl", "").AsString;
             room.StartDate = (DateTime?)doc.GetValue("startDate", null);
             room.FixedYear = (int?)doc.GetValue("fixedYear", null);
-            room.Manager = doc.GetValue("manager", "").AsString;
+            //room.Manager = doc.GetValue("manager", "").AsString;
+            room.PersonNumber = (int?)doc.GetValue("personNumber", null);
             room.RoomStatus = doc.GetValue("roomStatus", "").AsString;
             room.Remark = doc.GetValue("remark", "").AsString;
             room.Status = doc.GetValue("status", 0).AsInt32;
@@ -75,7 +77,7 @@ namespace Rhea.Business.Estate
                 room.Function.Property = fun["property"].AsString;
             }
             else
-                room.Function = null;          
+                room.Function = null;
 
             if (room.StartDate != null)
                 room.StartDate = ((DateTime)room.StartDate).ToLocalTime();
@@ -91,11 +93,13 @@ namespace Rhea.Business.Estate
         public List<Room> GetList()
         {
             List<Room> data = new List<Room>();
-            List<BsonDocument> doc = this.context.FindAll(EstateCollection.Room);
+            List<BsonDocument> docs = this.context.FindAll(EstateCollection.Room);
 
-            foreach (BsonDocument d in doc)
+            foreach (BsonDocument doc in docs)
             {
-                Room room = ModelBind(d);
+                if (doc.GetValue("status", 0).AsInt32 == 1)
+                    continue;
+                Room room = ModelBind(doc);
                 data.Add(room);
             }
 
@@ -114,6 +118,8 @@ namespace Rhea.Business.Estate
             List<Room> rooms = new List<Room>();
             foreach (var doc in docs)
             {
+                if (doc.GetValue("status", 0).AsInt32 == 1)
+                    continue;
                 Room room = ModelBind(doc);
                 rooms.Add(room);
             }
@@ -141,6 +147,8 @@ namespace Rhea.Business.Estate
             List<Room> data = new List<Room>();
             foreach (var r in result.ResultDocuments)
             {
+                if (r.GetValue("status", 0).AsInt32 == 1)
+                    continue;
                 Room room = ModelBind(r);
                 data.Add(room);
             }
@@ -176,6 +184,8 @@ namespace Rhea.Business.Estate
             List<Room> data = new List<Room>();
             foreach (var r in result.ResultDocuments)
             {
+                if (r.GetValue("status", 0).AsInt32 == 1)
+                    continue;
                 Room room = ModelBind(r);
                 data.Add(room);
             }
@@ -203,6 +213,8 @@ namespace Rhea.Business.Estate
             List<Room> data = new List<Room>();
             foreach (var r in result.ResultDocuments)
             {
+                if (r.GetValue("status", 0).AsInt32 == 1)
+                    continue;
                 Room room = ModelBind(r);
                 data.Add(room);
             }
@@ -226,7 +238,7 @@ namespace Rhea.Business.Estate
             }
             else
                 return null;
-        }        
+        }
 
         /// <summary>
         /// 添加房间
@@ -235,30 +247,7 @@ namespace Rhea.Business.Estate
         /// <returns>房间ID，0:添加失败</returns>
         public int Create(Room data)
         {
-            throw new NotImplementedException();
-
-            /*BsonDocument[] pipeline = {
-                new BsonDocument {
-                    { "$project", new BsonDocument {
-                        { "id", 1 }
-                    }}
-                },
-                new BsonDocument {
-                    { "$sort", new BsonDocument {
-                        { "id", -1 }
-                    }}
-                },
-                new BsonDocument {
-                    { "$limit", 1 }
-                }
-            };
-
-            AggregateResult max = this.context.Aggregate(CronusCollection.Room, pipeline);
-            if (max.ResultDocuments.Count() == 0)
-                return 0;
-
-            int maxId = max.ResultDocuments.First()["id"].AsInt32;
-            data.Id = maxId + 1;
+            data.Id = this.context.FindSequenceIndex(EstateCollection.Room) + 1;
 
             BsonDocument doc = new BsonDocument
             {
@@ -270,22 +259,18 @@ namespace Rhea.Business.Estate
                 { "orientation", (BsonValue)data.Orientation },
                 { "buildArea", (BsonValue)data.BuildArea },
                 { "usableArea", (BsonValue)data.UsableArea },
+                { "imageUrl", (BsonValue)data.ImageUrl },
                 { "function", new BsonDocument {
                     { "firstCode", data.Function.FirstCode },
                     { "secondCode", data.Function.SecondCode },
                     { "property", data.Function.Property }
                 }},
-                { "building", new BsonDocument {
-                    { "id", data.Building.Id },
-                    { "name", data.Building.Name }
-                }},
-                { "department", new BsonDocument {
-                    { "id", data.Department.Id },
-                    { "name", data.Department.Name }
-                }},
+                { "buildingId", data.BuildingId },
+                { "departmentId", data.DepartmentId },
                 { "startDate", (BsonValue)data.StartDate },
                 { "fixedYear", (BsonValue)data.FixedYear },
-                { "manager", data.Manager ?? ""},
+                //{ "manager", data.Manager ?? ""},
+                { "personNumber", (BsonValue)data.PersonNumber },
                 { "roomStatus", data.RoomStatus },
                 { "remark", data.Remark ?? "" },
                 { "status", 0 },
@@ -309,12 +294,12 @@ namespace Rhea.Business.Estate
                 { "usageCharge", (BsonValue)data.UsageCharge }
             };
 
-            WriteConcernResult result = this.context.Insert(CronusCollection.Room, doc);
+            WriteConcernResult result = this.context.Insert(EstateCollection.Room, doc);
 
             if (result.HasLastErrorMessage)
                 return 0;
             else
-                return data.Id;*/
+                return data.Id;
         }
 
         /// <summary>
@@ -324,9 +309,7 @@ namespace Rhea.Business.Estate
         /// <returns></returns>
         public bool Edit(Room data)
         {
-            throw new NotImplementedException();
-
-            /*var query = Query.EQ("id", data.Id);
+            var query = Query.EQ("id", data.Id);
 
             var update = Update.Set("name", data.Name)
                 .Set("number", data.Number)
@@ -335,16 +318,16 @@ namespace Rhea.Business.Estate
                 .Set("orientation", data.Orientation ?? "")
                 .Set("buildArea", (BsonValue)data.BuildArea)
                 .Set("usableArea", (BsonValue)data.UsableArea)
+                .Set("imageUrl", data.ImageUrl ?? "")
                 .Set("function.firstCode", data.Function.FirstCode)
                 .Set("function.secondCode", data.Function.SecondCode)
                 .Set("function.property", data.Function.Property)
-                .Set("building.id", data.Building.Id)
-                .Set("building.name", data.Building.Name)
-                .Set("department.id", data.Department.Id)
-                .Set("department.name", data.Department.Name)
+                .Set("buildingId", data.BuildingId)
+                .Set("departmentId", data.DepartmentId)
                 .Set("startDate", (BsonValue)data.StartDate)
                 .Set("fixedYear", (BsonValue)data.FixedYear)
-                .Set("manager", data.Manager ?? "")
+                //.Set("manager", data.Manager ?? "")
+                .Set("personNumber", (BsonValue)data.PersonNumber)
                 .Set("roomStatus", data.RoomStatus)
                 .Set("remark", data.Remark ?? "")
                 .Set("heating", (BsonValue)data.Heating)
@@ -366,12 +349,12 @@ namespace Rhea.Business.Estate
                 .Set("hasTestBed", (BsonValue)data.HasTestBed)
                 .Set("usageCharge", (BsonValue)data.UsageCharge);
 
-            WriteConcernResult result = this.context.Update(CronusCollection.Room, query, update);
+            WriteConcernResult result = this.context.Update(EstateCollection.Room, query, update);
 
             if (result.HasLastErrorMessage)
                 return false;
             else
-                return true;*/
+                return true;
         }
 
         /// <summary>

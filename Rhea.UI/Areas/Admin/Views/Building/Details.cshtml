@@ -88,10 +88,11 @@
         </div>
 
         <p>
-            <a class="btn btn-success" href="@Url.Action("List", new { controller = "Building", buildingGroupId = Model.BuildingGroupId, area = "Admin" })"><i class="icon-list icon-white"></i> 回到列表</a> 
+            <a class="btn btn-success" href="@Url.Action("List", new { controller = "Building", buildingGroupId = Model.BuildingGroupId, area = "Admin" })"><i class="icon-list icon-white"></i> 楼宇列表</a> 
             <a class="btn btn-warning" href="@Url.Action("Edit", new { controller = "Building", id = Model.Id, area = "Admin" })"><i class="icon-edit icon-white"></i> 编辑</a> 
             <a class="btn btn-danger" href="@Url.Action("Delete", new { controller = "Building", id = Model.Id, area = "Admin" })"><i class="icon-remove icon-white"></i> 删除</a>
-            <a class="btn btn-primary" href="@Url.Action("CreateFloor", new { controller = "Building", buildingId = Model.Id, area = "Admin" })"><i class="icon-plus icon-white"></i>添加楼层</a> 
+            <a class="btn btn-primary" href="@Url.Action("CreateFloor", new { controller = "Building", buildingId = Model.Id, area = "Admin" })"><i class="icon-plus icon-white"></i> 添加楼层</a> 
+            <a class="btn btn-info" href="@Url.Action("ListByBuilding", new { controller = "Room", buildingId = Model.Id, area = "Admin" })"><i class="icon-th-large icon-white"></i> 房间</a>
         </p>
     </div>
 </div>
@@ -153,8 +154,8 @@
                                 @item.ImageUrl
                             </td>
                             <td>
-                                <a class="btn btn-warning btn-small" href="@Url.Action("EditFloor", new { controller = "Building", buildingId = Model.Id, floorId = item.Id, area = "Admin" })"><i class="icon-edit icon-white"></i>编辑</a> 
-                                <a class="btn btn-danger btn-small" href="@Url.Action("DeleteFloor", new { controller = "Building", buildingId = Model.Id, floorId = item.Id, area = "Admin" })"><i class="icon-remove icon-white"></i>删除</a>
+                                <a class="btn btn-warning btn-small" href="@Url.Action("EditFloor", new { controller = "Building", buildingId = Model.Id, floorId = item.Id, area = "Admin" })"><i class="icon-edit icon-white"></i> 编辑</a> 
+                                <a class="btn btn-danger btn-small" href="@Url.Action("DeleteFloor", new { controller = "Building", buildingId = Model.Id, floorId = item.Id, area = "Admin" })"><i class="icon-remove icon-white"></i> 删除</a>
                             </td>
                         </tr>
                     }
