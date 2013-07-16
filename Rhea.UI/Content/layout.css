@@ -62,6 +62,10 @@
 /***************************
 	nav bar login
 ****************************/
+a#logo {
+	font-family: 微软雅黑;
+	color:#FFFFFF;
+}
 #navbar-login .btn {
 	margin-top:0;
 }

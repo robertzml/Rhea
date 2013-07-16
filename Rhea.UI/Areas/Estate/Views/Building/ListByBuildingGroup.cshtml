@@ -34,6 +34,9 @@
                     <th>
                         使用类型
                     </th>
+                    <th>
+                        操作
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -51,9 +54,22 @@
                         @type.DisplayName(); 
                     }
                     </td>
+                    <td>
+                        <a class="btn btn-success btn-small building-details" href="#" ref="@item.Id"><i class="icon-zoom-in icon-white"></i>详细</a>
+                    </td>
                 </tr>
             }
             </tbody>
         </table>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(function () {
+        $('a.building-details').click(function () {
+            var bid = $(this).attr('ref');
+            ajaxLoadPage("Details", "Building", "Estate", { id: bid });
+            return false;
+        });
+    });
+</script>

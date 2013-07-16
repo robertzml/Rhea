@@ -140,6 +140,16 @@ namespace Rhea.UI.Areas.Estate.Controllers
             BuildingGroup data = this.buildingGroupBusiness.Get(id);
             return View(data);
         }
+
+        /// <summary>
+        /// 房间汇总
+        /// </summary>
+        /// <param name="id">楼群ID</param>
+        /// <returns></returns>
+        public ActionResult RoomSummary(int id)
+        {
+            return View();
+        }
         #endregion //Action
 
         #region Json

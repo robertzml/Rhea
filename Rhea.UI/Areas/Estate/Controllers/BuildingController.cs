@@ -69,6 +69,20 @@ namespace Rhea.UI.Areas.Estate.Controllers
         }
 
         /// <summary>
+        /// 楼宇摘要
+        /// </summary>
+        /// <param name="id">楼宇ID</param>
+        /// <returns></returns>
+        public ActionResult Summary(int id)
+        {
+            IRoomBusiness roomBusiness = new MongoRoomBusiness();
+            ViewBag.RoomCount = roomBusiness.CountByBuilding(id);
+
+            Building data = this.buildingBusiness.Get(id);
+            return View(data);
+        }
+
+        /// <summary>
         /// 楼层视图
         /// </summary>
         /// <param name="id">楼宇ID</param>
@@ -112,7 +126,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
 
         #region Json
         /// <summary>
-        /// 按楼群得到楼宇信息
+        /// 按楼群得到楼宇列表
         /// </summary>
         /// <param name="buildingGroupId">楼群ID</param>
         /// <returns></returns>
@@ -134,7 +148,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         }
 
         /// <summary>
-        /// 得到房间数量
+        /// 得到楼宇内房间数量
         /// </summary>
         /// <param name="buildingId">楼宇ID</param>
         /// <returns></returns>
