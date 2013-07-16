@@ -173,6 +173,7 @@
     <Compile Include="Areas\Estate\Controllers\RoomController.cs" />
     <Compile Include="Areas\Estate\EstateAreaRegistration.cs" />
     <Compile Include="Areas\Estate\Models\BuildingGroupModels.cs" />
+    <Compile Include="Areas\Estate\Models\BuildingModels.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -553,6 +554,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Department\Statistic.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Department\ClassifyArea.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Building\ListByBuildingGroup.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Building\Floor.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Estate\Views\Building\FloorByDepartment.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

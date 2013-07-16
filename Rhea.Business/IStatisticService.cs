@@ -18,14 +18,25 @@ namespace Rhea.Business
         /// <param name="departmentId">部门ID</param>
         /// <param name="firstCode">一级编码</param>
         /// <param name="functionCodes">功能编码列表</param>
-        List<CollegeSecondClassifyAreaModel> GetClassifyArea(int departmentId, int firstCode, List<RoomFunctionCode> functionCodes);
+        List<DepartmentSecondClassifyAreaModel> GetSecondClassifyArea(int departmentId, int firstCode, List<RoomFunctionCode> functionCodes);
+
 
         /// <summary>
-        /// 得到部门分类面积
+        /// 获取部门一级级分类面积
+        /// </summary>
+        /// <param name="departmentId">部门ID</param>
+        /// <param name="firstCode">一级编码</param>
+        /// <param name="title">编码名称</param>
+        /// <param name="functionCodes">功能编码列表</param>
+        /// <returns></returns>
+        DepartmentFirstClassifyAreaModel GetFirstClassifyArea(int departmentId, int firstCode, string title, List<RoomFunctionCode> functionCodes);
+
+        /// <summary>
+        /// 获取部门分类面积
         /// </summary>
         /// <param name="departmentId"></param>
         /// <returns></returns>
-        CollegeClassifyAreaModel GetCollegeClassifyArea(int departmentId);
+        DepartmentClassifyAreaModel GetDepartmentClassifyArea(int departmentId);     
        
         /// <summary>
         /// 根据类别得到楼群建筑面积

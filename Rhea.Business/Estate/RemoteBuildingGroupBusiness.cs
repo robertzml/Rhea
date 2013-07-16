@@ -106,6 +106,11 @@ namespace Rhea.Business.Estate
         {
             throw new NotImplementedException();
         }
-        #endregion //Method        
+
+        public string GetName(int id)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion //Method
     }
 }

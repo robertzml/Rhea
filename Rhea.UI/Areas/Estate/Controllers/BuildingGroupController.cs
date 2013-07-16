@@ -41,6 +41,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         public ActionResult Index(int id)
         {
+            ViewBag.Title = this.buildingGroupBusiness.GetName(id);
             return View(id);
         }
 
@@ -140,5 +141,9 @@ namespace Rhea.UI.Areas.Estate.Controllers
             return View(data);
         }
         #endregion //Action
+
+        #region Json
+
+        #endregion //Json
     }
 }

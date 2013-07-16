@@ -17,185 +17,186 @@
         </div>     
 
         <div class="row-fluid">
-                <div class="span6">
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>
-                                    属性
-                                </th>
-                                <th>
-                                    值
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    @Html.DisplayNameFor(model => model.Name)
-                                </td>
-                                <td>
-                                    @Model.Name
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    @Html.DisplayNameFor(model => model.BuildingCount)
-                                </td>
-                                <td>
-                                    @Model.BuildingCount
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    @Html.DisplayNameFor(model => model.AreaCoeffcient)
-                                </td>
-                                <td>
-                                    @Model.AreaCoeffcient
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    @Html.DisplayNameFor(model => model.BuildArea)
-                                </td>
-                                <td>
-                                    @Model.BuildArea
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    @Html.DisplayNameFor(model => model.UsableArea)
-                                </td>
-                                <td>
-                                    @Model.UsableArea
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    @Html.DisplayNameFor(model => model.Floorage)
-                                </td>
-                                <td>
-                                    @Model.Floorage
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    @Html.DisplayNameFor(model => model.BuildType)
-                                </td>
-                                <td>
-                                    @Model.BuildType
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    @Html.DisplayNameFor(model => model.BuildStructure)
-                                </td>
-                                <td>
-                                    @Model.BuildStructure
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    @Html.DisplayNameFor(model => model.BuildCost)
-                                </td>
-                                <td>
-                                    @Model.BuildCost
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="span6">
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>
-                                    属性
-                                </th>
-                                <th>
-                                    值
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    @Html.DisplayNameFor(model => model.CurrentValue)
-                                </td>
-                                <td>
-                                    @Model.CurrentValue
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    @Html.DisplayNameFor(model => model.Classified)
-                                </td>
-                                <td>
-                                    @Model.Classified
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    @Html.DisplayNameFor(model => model.FundsSubject)
-                                </td>
-                                <td>
-                                    @Model.FundsSubject
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    @Html.DisplayNameFor(model => model.EquityNumber)
-                                </td>
-                                <td>
-                                    @Model.EquityNumber
-                            </tr>
-                            <tr>
-                                <td>
-                                    @Html.DisplayNameFor(model => model.BuildDate)
-                                </td>
-                                <td>
-                                    @if (Model.BuildDate != null)
-                                    {                                    
-                                        @Convert.ToDateTime(Model.BuildDate).ToShortDateString();
-                                    }
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    @Html.DisplayNameFor(model => model.FixedYear)
-                                </td>
-                                <td>
-                                    @Model.FixedYear
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    @Html.DisplayNameFor(model => model.DesignCompany)
-                                </td>
-                                <td>
-                                    @Model.DesignCompany
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    @Html.DisplayNameFor(model => model.ConstructCompany)
-                                </td>
-                                <td>
-                                    @Model.ConstructCompany
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    @Html.DisplayNameFor(model => model.ManageType)
-                                </td>
-                                <td>
-                                    @Model.ManageType
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+            <div class="span6">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                属性
+                            </th>
+                            <th>
+                                值
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Name)
+                            </td>
+                            <td>
+                                @Model.Name
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.BuildingCount)
+                            </td>
+                            <td>
+                                @Model.BuildingCount
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.AreaCoeffcient)
+                            </td>
+                            <td>
+                                @Model.AreaCoeffcient
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.BuildArea)
+                            </td>
+                            <td>
+                                @Model.BuildArea
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.UsableArea)
+                            </td>
+                            <td>
+                                @Model.UsableArea
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Floorage)
+                            </td>
+                            <td>
+                                @Model.Floorage
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.BuildType)
+                            </td>
+                            <td>
+                                @Model.BuildType
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.BuildStructure)
+                            </td>
+                            <td>
+                                @Model.BuildStructure
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.BuildCost)
+                            </td>
+                            <td>
+                                @Model.BuildCost
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-         
+            <div class="span6">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                属性
+                            </th>
+                            <th>
+                                值
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.CurrentValue)
+                            </td>
+                            <td>
+                                @Model.CurrentValue
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Classified)
+                            </td>
+                            <td>
+                                @Model.Classified
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.FundsSubject)
+                            </td>
+                            <td>
+                                @Model.FundsSubject
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.EquityNumber)
+                            </td>
+                            <td>
+                                @Model.EquityNumber
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.BuildDate)
+                            </td>
+                            <td>
+                                @if (Model.BuildDate != null)
+                                {                                    
+                                    @Convert.ToDateTime(Model.BuildDate).ToShortDateString();
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.FixedYear)
+                            </td>
+                            <td>
+                                @Model.FixedYear
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.DesignCompany)
+                            </td>
+                            <td>
+                                @Model.DesignCompany
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.ConstructCompany)
+                            </td>
+                            <td>
+                                @Model.ConstructCompany
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.ManageType)
+                            </td>
+                            <td>
+                                @Model.ManageType
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>         
     </div>
 </div>
+
+@Html.Action("ListByBuildingGroup", new { controller = "Building", area = "Estate", buildingGroupId = Model.Id })

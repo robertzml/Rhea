@@ -43,6 +43,7 @@ namespace Rhea.UI.Controllers
         /// <returns></returns>
         public ActionResult Index(int id)
         {
+            ViewBag.Title = this.departmentBusiness.GetName(id);
             return View(id);
         }
 
@@ -127,6 +128,16 @@ namespace Rhea.UI.Controllers
             Department data = this.departmentBusiness.Get(id);
             return View(data);
         }
+
+        /// <summary>
+        /// 部门分类用房面积
+        /// </summary>
+        /// <param name="id">部门ID</param>
+        /// <returns></returns>
+        public ActionResult ClassifyArea(int id)
+        {
+            return View(id);
+        }
         #endregion //Action
 
         #region Json
@@ -138,7 +149,7 @@ namespace Rhea.UI.Controllers
         public JsonResult GetClassifyArea(int id)
         {
             IStatisticService statisticService = new MongoStatisticService();
-            CollegeClassifyAreaModel data = statisticService.GetCollegeClassifyArea(id);
+            DepartmentClassifyAreaModel data = statisticService.GetDepartmentClassifyArea(id);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
         #endregion //Json

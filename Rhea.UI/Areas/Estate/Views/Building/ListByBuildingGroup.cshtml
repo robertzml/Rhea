@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Rhea.Model.Estate.Building>
+@using Rhea.Common
+
+@{
+    ViewBag.Title = "楼宇列表";
+    Layout = null;
+}
+
+<div class="box">
+    <div class="box-header well" data-original-title>
+        <h2>
+            <i class="icon-tasks"></i>@ViewBag.Title</h2>
+    </div>
+
+    <div class="box-content">
+        <table id="building-list" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        楼宇名称
+                    </th>
+                    <th>
+                        建筑面积(m<sup>2</sup>)
+                    </th>
+                    <th>
+                        使用面积(m<sup>2</sup>)
+                    </th>
+                    <th>
+                        地上楼层
+                    </th>
+                    <th>
+                        地下楼层
+                    </th>
+                    <th>
+                        使用类型
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.BuildArea</td>
+                    <td>@item.UsableArea</td>
+                    <td>@item.AboveGroundFloor</td>
+                    <td>@item.UnderGroundFloor</td>
+                    <td>
+                    @{
+                        var type = (BuildingUseType)item.UseType;
+                        @type.DisplayName(); 
+                    }
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

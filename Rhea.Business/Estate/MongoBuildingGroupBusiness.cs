@@ -102,6 +102,21 @@ namespace Rhea.Business.Estate
             else
                 return null;
         }
+        
+        /// <summary>
+        /// 得到楼群名称
+        /// </summary>
+        /// <param name="id">楼群ID</param>
+        /// <returns></returns>
+        public string GetName(int id)
+        {
+            BsonDocument doc = this.context.FindOne(EstateCollection.BuildingGroup, "id", id);
+
+            if (doc != null)
+                return doc["name"].AsString;
+            else
+                return string.Empty;
+        }
 
         /// <summary>
         /// 添加楼群

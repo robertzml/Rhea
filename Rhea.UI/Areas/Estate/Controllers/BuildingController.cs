@@ -4,8 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Rhea.Business;
 using Rhea.Business.Estate;
 using Rhea.Model.Estate;
+using Rhea.UI.Areas.Estate.Models;
 
 namespace Rhea.UI.Areas.Estate.Controllers
 {
@@ -42,6 +44,17 @@ namespace Rhea.UI.Areas.Estate.Controllers
         }
 
         /// <summary>
+        /// 楼宇列表
+        /// </summary>
+        /// <param name="buildingGroupId">楼群ID</param>
+        /// <returns></returns>
+        public ActionResult ListByBuildingGroup(int buildingGroupId)
+        {
+            var data = this.buildingBusiness.GetListByBuildingGroup(buildingGroupId);
+            return View(data);
+        }
+
+        /// <summary>
         /// 楼宇信息
         /// </summary>
         /// <param name="id">楼宇ID</param>
@@ -56,22 +69,11 @@ namespace Rhea.UI.Areas.Estate.Controllers
         }
 
         /// <summary>
-        /// 楼层导航
+        /// 楼层视图
         /// </summary>
         /// <param name="id">楼宇ID</param>
         /// <returns></returns>
-        public ActionResult Floors(int id)
-        {
-            Building data = this.buildingBusiness.Get(id);
-            return View(data);
-        }
-
-        /// <summary>
-        /// 楼层列表
-        /// </summary>
-        /// <param name="id">楼宇ID</param>
-        /// <returns></returns>
-        public ActionResult FloorList(int id)
+        public ActionResult Floor(int id)
         {
             Building data = this.buildingBusiness.Get(id);
             return View(data);
@@ -83,7 +85,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <param name="id">楼宇ID</param>
         /// <param name="departmentId">部门ID</param>
         /// <returns></returns>
-        public ActionResult FloorListByDepartment(int id, int departmentId)
+        public ActionResult FloorByDepartment(int id, int departmentId)
         {
             Building data = this.buildingBusiness.Get(id);
 
@@ -93,6 +95,17 @@ namespace Rhea.UI.Areas.Estate.Controllers
 
             data.Floors = data.Floors.Where(r => floorNumbers.Contains(r.Number)).ToList();
 
+            return View(data);
+        }
+
+        /// <summary>
+        /// 楼层列表
+        /// </summary>
+        /// <param name="id">楼宇ID</param>
+        /// <returns></returns>
+        public ActionResult FloorList(int id)
+        {
+            Building data = this.buildingBusiness.Get(id);
             return View(data);
         }
         #endregion //Action
@@ -130,6 +143,35 @@ namespace Rhea.UI.Areas.Estate.Controllers
             IRoomBusiness roomBusiness = new MongoRoomBusiness();
             int count = roomBusiness.CountByBuilding(buildingId);
             return Json(count, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 得到楼层信息
+        /// </summary>
+        /// <param name="floorId">楼层ID</param>
+        /// <param name="buildingId">楼宇ID</param>
+        /// <returns></returns>
+        public JsonResult GetFloorInfo(int floorId, int buildingId)
+        {
+            var floor = this.buildingBusiness.GetFloor(floorId);
+
+            FloorViewModel model = new FloorViewModel
+            {
+                Id = floor.Id,
+                Number = floor.Number,
+                BuildArea = Convert.ToDouble(floor.BuildArea),
+                UsableArea = Convert.ToDouble(floor.UsableArea)
+            };
+
+            IRoomBusiness roomBusiness = new MongoRoomBusiness();
+            model.RoomCount = roomBusiness.CountByFloor(buildingId, model.Number);
+
+            if (!string.IsNullOrEmpty(floor.ImageUrl))
+                model.SvgPath = RheaConstant.SvgRoot + floor.ImageUrl;
+            else
+                model.SvgPath = string.Empty;
+
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
         #endregion //Json
     }

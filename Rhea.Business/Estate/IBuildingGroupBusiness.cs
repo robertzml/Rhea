@@ -22,7 +22,14 @@ namespace Rhea.Business.Estate
         /// </summary>
         /// <param name="id">楼群ID</param>
         /// <returns></returns>
-        BuildingGroup Get(int id);       
+        BuildingGroup Get(int id);
+
+        /// <summary>
+        /// 得到楼群名称
+        /// </summary>
+        /// <param name="id">楼群ID</param>
+        /// <returns></returns>
+        string GetName(int id);
 
         /// <summary>
         /// 添加楼群

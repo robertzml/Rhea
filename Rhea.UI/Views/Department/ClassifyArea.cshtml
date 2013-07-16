@@ -1,0 +1,129 @@
+﻿@model int
+@{
+    ViewBag.Title = "部门分类用房面积";
+    Layout = null;
+}
+
+<div class="box">
+    <div class="box-header well" data-original-title>
+        <h2>
+            <i class="icon-th-list"></i>部门分类用房面积</h2>
+    </div>
+    <div class="box-content">
+        <div id="container-classify-area" style="width: 100%; height:350px;">
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        var chart1; 
+        var colors = Highcharts.getOptions().colors;
+        var categories = ['办公用房', '教学用房', '实验用房', '科研用房'];
+        var data = [];       
+
+        $.getJSON('/Department/GetClassifyArea', { id: @Model }, function (response) {
+            setColumnData(response);
+            setColumnChart(data);
+        });
+
+        function setColumnData(response) {            
+            $.each(response.FirstClassify, function(i, item) {                
+                var cate1 = [], data1 = []; 
+                $.each(item.SecondClassify, function(i, item) {
+                    cate1.push(item.FunctionProperty);
+                    data1.push(item.Area);
+                });
+
+                data.push( { name: item.Title, y: parseFloat(item.Area), color: colors[i],
+                    drilldown: { name: item.Title, color: colors[i], categories: cate1, data: data1 }
+                });
+            });
+        };        
+
+        function setChart(name, categories, data, color) {
+			chart1.xAxis[0].setCategories(categories, false);
+			chart1.series[0].remove(false);
+			chart1.addSeries({
+				name: name,
+				data: data,
+				color: color || 'gray'
+			}, false);
+			chart1.redraw();
+        } 
+
+        function setColumnChart(data) {
+            var name = '面积';
+            var option = {
+                chart: {
+                    renderTo: 'container-classify-area',
+                    type: 'column'
+                },
+                title: {
+                    text: '分类用房面积图'
+                },               
+                credits: {
+                    enabled: false
+                },
+                xAxis: {
+                    categories: categories
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: '面积 (m2)'
+                    }
+                },
+                plotOptions: {
+                    column: {
+                        cursor: 'pointer',
+                        point: {
+                            events: {
+                                click: function () {
+                                    var drilldown = this.drilldown;
+                                    if (drilldown) { // drill down
+                                        setChart(drilldown.name, drilldown.categories, drilldown.data, drilldown.color);
+                                    } else { // restore
+                                        setChart(name, categories, data);
+                                    }
+                                }
+                            }
+                        },
+                        dataLabels: {
+                            enabled: true,
+                            color: colors[0],
+                            style: {
+                                fontWeight: 'bold'
+                            },
+                            formatter: function () {
+                                return this.y;
+                            }
+                        }
+                    }
+                },
+                tooltip: {
+                    formatter: function () {
+                        var point = this.point,
+                        s = this.x + ':<b>' + this.y + ' m<sup>2</sup></b><br/>';
+                        if (point.drilldown) {
+                            s += '点击显示 ' + point.category + ' 详细';
+                        } else {
+                            s += '点击回到上一级';
+                        }
+                        return s;
+                    }
+                },
+                series: [{
+                    name: name,
+                    data: data,
+                    color: 'gray'
+                }],
+                exporting: {
+                    enabled: true
+                }
+            };
+           
+            chart1 = new Highcharts.Chart(option);
+        };
+    });
+</script>

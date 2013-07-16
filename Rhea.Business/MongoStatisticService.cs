@@ -125,7 +125,7 @@ namespace Rhea.Business
         /// <param name="departmentId">部门ID</param>
         /// <param name="firstCode">一级编码</param>
         /// <param name="functionCodes">功能编码列表</param>
-        public List<CollegeSecondClassifyAreaModel> GetClassifyArea(int departmentId, int firstCode, List<RoomFunctionCode> functionCodes)
+        public List<DepartmentSecondClassifyAreaModel> GetSecondClassifyArea(int departmentId, int firstCode, List<RoomFunctionCode> functionCodes)
         {
             BsonDocument[] pipeline = {
                 new BsonDocument { 
@@ -149,13 +149,13 @@ namespace Rhea.Business
 
             AggregateResult result = this.context.Aggregate(EstateCollection.Room, pipeline);
 
-            List<CollegeSecondClassifyAreaModel> data = new List<CollegeSecondClassifyAreaModel>();
+            List<DepartmentSecondClassifyAreaModel> data = new List<DepartmentSecondClassifyAreaModel>();
             var function = functionCodes.Where(r => r.FirstCode == firstCode);
             foreach (var f in function)
             {
                 BsonDocument doc = result.ResultDocuments.SingleOrDefault(r => r["_id"].AsInt32 == f.SecondCode);
 
-                CollegeSecondClassifyAreaModel model = new CollegeSecondClassifyAreaModel
+                DepartmentSecondClassifyAreaModel model = new DepartmentSecondClassifyAreaModel
                 {
                     FunctionFirstCode = firstCode,
                     FunctionSecondCode = f.SecondCode,
@@ -181,11 +181,31 @@ namespace Rhea.Business
         }
 
         /// <summary>
-        /// 得到部门分类面积
+        /// 获取部门一级级分类面积
         /// </summary>
-        /// <param name="departmentId"></param>
+        /// <param name="departmentId">部门ID</param>
+        /// <param name="firstCode">一级编码</param>
+        /// <param name="title">编码名称</param>
+        /// <param name="functionCodes">功能编码列表</param>
         /// <returns></returns>
-        public CollegeClassifyAreaModel GetCollegeClassifyArea(int departmentId)
+        public DepartmentFirstClassifyAreaModel GetFirstClassifyArea(int departmentId, int firstCode, string title, List<RoomFunctionCode> functionCodes)
+        {
+            DepartmentFirstClassifyAreaModel m1 = new DepartmentFirstClassifyAreaModel();
+            m1.Title = title;
+            m1.FunctionFirstCode = firstCode;
+            m1.SecondClassify = GetSecondClassifyArea(departmentId, firstCode, functionCodes);
+            m1.Area = Math.Round(m1.SecondClassify.Sum(r => r.Area), 3);
+            m1.RoomCount = m1.SecondClassify.Sum(r => r.RoomCount);
+
+            return m1;
+        }
+
+        /// <summary>
+        /// 获取部门分类面积
+        /// </summary>
+        /// <param name="departmentId">部门ID</param>
+        /// <returns></returns>
+        public DepartmentClassifyAreaModel GetDepartmentClassifyArea(int departmentId)
         {
             IDepartmentBusiness departmentBusiness = new MongoDepartmentBusiness();
             Department department = departmentBusiness.Get(departmentId);
@@ -194,34 +214,23 @@ namespace Rhea.Business
             IRoomBusiness roomBusiness = new MongoRoomBusiness();
             var functionCodes = roomBusiness.GetFunctionCodeList();
 
-            CollegeClassifyAreaModel c = new CollegeClassifyAreaModel
+            DepartmentClassifyAreaModel data = new DepartmentClassifyAreaModel
             {
                 DepartmentId = department.Id,
-                CollegeName = department.Name
+                DepartmentName = department.Name
             };
 
-            c.OfficeDetailArea = GetClassifyArea(department.Id, 1, functionCodes);
-            c.OfficeArea = Math.Round(c.OfficeDetailArea.Sum(r => r.Area), 3);
-            c.OfficeRoomCount = c.OfficeDetailArea.Sum(r => r.RoomCount);
+            data.FirstClassify = new List<DepartmentFirstClassifyAreaModel>();
 
-            c.EducationDetailArea = GetClassifyArea(department.Id, 2, functionCodes);
-            c.EducationArea = Math.Round(c.EducationDetailArea.Sum(r => r.Area), 3);
-            c.EducationRoomCount = c.EducationDetailArea.Sum(r => r.RoomCount);
+            data.FirstClassify.Add(GetFirstClassifyArea(departmentId, 1, "办公用房", functionCodes));
+            data.FirstClassify.Add(GetFirstClassifyArea(departmentId, 2, "教学用房", functionCodes));
+            data.FirstClassify.Add(GetFirstClassifyArea(departmentId, 3, "实验用房", functionCodes));
+            data.FirstClassify.Add(GetFirstClassifyArea(departmentId, 4, "科研用房", functionCodes));
 
-            c.ExperimentDetailArea = GetClassifyArea(department.Id, 3, functionCodes);
-            c.ExperimentArea = Math.Round(c.ExperimentDetailArea.Sum(r => r.Area), 3);
-            c.ExperimentRoomCount = c.ExperimentDetailArea.Sum(r => r.RoomCount);
+            data.FirstClassify = data.FirstClassify.OrderByDescending(r => r.Area).ToList();
 
-            c.ResearchDetailArea = GetClassifyArea(department.Id, 4, functionCodes);
-            c.ResearchArea = Math.Round(c.ResearchDetailArea.Sum(r => r.Area), 3);
-            c.ResearchRoomCount = c.ResearchDetailArea.Sum(r => r.RoomCount);
-
-            c.TotalArea = c.OfficeArea + c.EducationArea + c.ExperimentArea + c.ResearchArea;
-            c.TotalRoomCount = c.OfficeRoomCount + c.EducationRoomCount + c.ExperimentRoomCount + c.ResearchRoomCount;
-
-            return c;           
-        }
-
+            return data;
+        }        
         #endregion //Method
     }
 }
