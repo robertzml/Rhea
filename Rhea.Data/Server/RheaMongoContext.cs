@@ -304,6 +304,25 @@ namespace Rhea.Data.Server
                 return maxId;
             }
         }
+
+        /// <summary>
+        /// 查找是否有重复id
+        /// </summary>
+        /// <param name="collectionName">集合名称</param>
+        /// <param name="id">id值</param>
+        /// <returns>有重复返回true</returns>
+        public bool CheckDuplicateId(string collectionName, BsonValue id)
+        {
+            MongoCollection<BsonDocument> collection = this.database.GetCollection<BsonDocument>(collectionName);
+
+            var query = Query.EQ("id", id);            
+            var data = collection.Find(query);
+            
+            if (data.Count() == 0)
+                return false;
+            else
+                return true;
+        }
         #endregion //Method
 
         #region Property

@@ -56,6 +56,8 @@ namespace Rhea.Business.Personnel
 
             foreach (var d in doc)
             {
+                if (d.GetValue("status", 0).AsInt32 == 1)
+                    continue;
                 Department department = ModelBind(d);
                 departments.Add(department);
             }
@@ -75,6 +77,9 @@ namespace Rhea.Business.Personnel
             if (doc != null)
             {
                 Department department = ModelBind(doc);
+                if (department.Status == 1)
+                    return null;
+
                 return department;
             }
             else
@@ -97,6 +102,37 @@ namespace Rhea.Business.Personnel
         }
 
         /// <summary>
+        /// 添加部门
+        /// </summary>
+        /// <param name="data">部门数据</param>
+        /// <returns>部门ID,0:添加失败</returns>
+        public int Create(Department data)
+        {
+            bool dup = this.context.CheckDuplicateId(PersonnelCollection.Department, data.Id);
+            if (dup)
+                return 0;
+
+            BsonDocument doc = new BsonDocument
+            {
+                { "id", data.Id },                
+                { "name" , data.Name },  
+                { "shortName", data.ShortName ?? "" },
+                { "imageUrl", data.ImageUrl ?? "" },
+                { "logoUrl", data.LogoUrl ?? "" },
+                { "type", data.Type },           
+                { "description", data.Description ?? "" },
+                { "status", 0 }
+            };
+
+            WriteConcernResult result = this.context.Insert(PersonnelCollection.Department, doc);
+
+            if (result.HasLastErrorMessage)
+                return 0;
+            else
+                return data.Id;
+        }
+
+        /// <summary>
         /// 编辑部门
         /// </summary>
         /// <param name="data">部门数据</param>
@@ -105,8 +141,29 @@ namespace Rhea.Business.Personnel
         {
             var query = Query.EQ("id", data.Id);
             var update = Update.Set("name", data.Name)
-                .Set("description", data.Description)
-                .Set("imageUrl", data.ImageUrl);
+                .Set("shortName", data.ShortName ?? "")
+                .Set("type", data.Type)
+                .Set("description", data.Description ?? "")
+                .Set("imageUrl", data.ImageUrl ?? "")
+                .Set("logoUrl", data.LogoUrl ?? "");
+
+            WriteConcernResult result = this.context.Update(PersonnelCollection.Department, query, update);
+
+            if (result.HasLastErrorMessage)
+                return false;
+            else
+                return true;
+        }
+
+        /// <summary>
+        /// 删除部门
+        /// </summary>
+        /// <param name="id">部门ID</param>
+        /// <returns></returns>
+        public bool Delete(int id)
+        {
+            var query = Query.EQ("id", id);
+            var update = Update.Set("status", 1);
 
             WriteConcernResult result = this.context.Update(PersonnelCollection.Department, query, update);
 

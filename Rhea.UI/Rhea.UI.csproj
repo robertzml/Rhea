@@ -164,6 +164,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BuildingController.cs" />
     <Compile Include="Areas\Admin\Controllers\BuildingGroupController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DepartmentController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoomController.cs" />
     <Compile Include="Areas\Admin\Models\RoomEditModel.cs" />
@@ -464,7 +465,6 @@
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Boolean.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\BuildingDropDownList.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\BuildingGroupDropDownList.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\BuildingGroupType.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\BuildStructure.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\BuildType.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\DepartmentDropDownList.cshtml" />
@@ -575,6 +575,24 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Statistic\DepartmentBuildAreaCompare.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Department\List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Department\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\DepartmentType.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Department\Details.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Department\Delete.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Department\Create.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

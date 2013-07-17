@@ -61,5 +61,13 @@ namespace Rhea.Model.Account
         /// 本次登录时间
         /// </summary>
         public DateTime CurrentLoginTime { get; set; }
+
+        /// <summary>
+        /// 系统状态
+        /// </summary>
+        /// <remarks>
+        /// 0:正常, 1:禁用
+        /// </remarks>
+        public int Status { get; set; }
     }
 }

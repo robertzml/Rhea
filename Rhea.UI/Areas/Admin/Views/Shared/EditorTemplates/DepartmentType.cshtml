@@ -1,8 +1,8 @@
 ﻿@model int?
 
-<select id="UseType" name="UseType">
+<select id="Type" name="Type">
     <option value="">-- 请选择 --</option>
-    @foreach (BuildingUseType o in Enum.GetValues(typeof(BuildingUseType)))
+    @foreach (DepartmentType o in Enum.GetValues(typeof(DepartmentType)))
     {                      
         <option value="@Convert.ToInt32(o)" @(Model == (int)o ? "selected='selected'" : "")>@o.DisplayName()</option>
     }

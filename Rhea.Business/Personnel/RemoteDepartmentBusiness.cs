@@ -11,7 +11,7 @@ namespace Rhea.Business.Personnel
     /// <summary>
     /// 部门业务类
     /// </summary>
-    public class RemoteDepartmentBusiness : IDepartmentBusiness
+    public class RemoteDepartmentBusiness //: IDepartmentBusiness
     {
         #region Method
         /// <summary>

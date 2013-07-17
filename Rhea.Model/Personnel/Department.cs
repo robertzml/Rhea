@@ -32,6 +32,9 @@ namespace Rhea.Model.Personnel
         /// <summary>
         /// 部门类型
         /// </summary>
+        [Required]
+        [UIHint("DepartmentType")]
+        [Display(Name = "部门类型")]
         public int Type { get; set; }
 
         /// <summary>

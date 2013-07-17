@@ -54,6 +54,9 @@ namespace Rhea.Business.Account
             BsonDocument doc = context.FindOne(RheaCollection.User, "userName", userName);
             if (doc != null)
             {
+                if (doc.GetValue("status", 0) == 1)
+                    return null;
+
                 string pass = doc["password"].AsString;
                 if (Hasher.MD5Encrypt(password) != pass)
                     return null;
@@ -66,6 +69,7 @@ namespace Rhea.Business.Account
                 //user.ManagerGroupId = doc["managerGroupId"].AsInt32;
                 user.LastLoginTime = doc.GetValue("currentLoginTime", DateTime.Now).ToLocalTime();
                 user.CurrentLoginTime = DateTime.Now;
+                user.Status = doc.GetValue("status", 0).AsInt32;
 
                 /*IAdminService adminService = new MongoAdminService();
                 if (user.ManagerGroupId != 0)
