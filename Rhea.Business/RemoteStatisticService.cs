@@ -60,22 +60,7 @@ namespace Rhea.Business
         public List<DepartmentSecondClassifyAreaModel> GetClassifyArea(int departmentId, int firstCode, List<RoomFunctionCode> functionCodes)
         {
             throw new NotImplementedException();
-        }
-
-        public CollegeClassifyAreaModel GetCollegeClassifyArea(int departmentId)
-        {
-            throw new NotImplementedException();
-        }      
-
-        public List<BuildingAreaModel> GetBuildingArea(int departmentId, List<Building> buildingList)
-        {
-            throw new NotImplementedException();
-        }
-
-        public CollegeBuildingAreaModel GetCollegeBuildingArea(int departmentId)
-        {
-            throw new NotImplementedException();
-        }
+        }       
 
         public double GetBuildingAreaByType(int buildingType)
         {

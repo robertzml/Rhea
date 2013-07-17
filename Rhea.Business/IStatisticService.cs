@@ -44,22 +44,5 @@ namespace Rhea.Business
         /// <param name="useType">楼宇使用类型</param>
         /// <returns></returns>
         double GetBuildingAreaByType(int buildingType);
-
-        #region Obsolote
-        /// <summary>
-        /// 获取部门楼宇面积
-        /// </summary>
-        /// <param name="departmentId">部门ID</param>
-        /// <param name="buildingList">楼宇列表</param>
-        /// <returns></returns>
-        List<BuildingAreaModel> GetBuildingArea(int departmentId, List<Building> buildingList);
-
-        /// <summary>
-        /// 得到部门分楼宇面积
-        /// </summary>
-        /// <param name="departmentId">部门ID</param>
-        /// <returns></returns>
-        CollegeBuildingAreaModel GetCollegeBuildingArea(int departmentId);
-        #endregion //Obsolote
     }
 }

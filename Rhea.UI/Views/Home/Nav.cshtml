@@ -121,7 +121,7 @@
                                                      
                         </div>
                     </li>
-                    <li><a href="#">统计</a></li>
+                    <li><a href="@Url.Action("Index", new { controller = "Statistic", area = "" })">统计</a></li>
                     @if (Request.IsAuthenticated)
                     {                        
                     <li><a href="@Url.Action("Index", new { controller = "Home", area = "Admin" })">后台管理</a></li>

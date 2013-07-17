@@ -61,9 +61,10 @@
             @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-signin" }))
             {
                 @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
            
                 <h2 class="form-signin-heading">请登录</h2>
-                @Html.TextBoxFor(m => m.UserName, new { autofocus = "true", placeholder="用户名", @class = "input-block-level", type = "text" })
+                @Html.TextBoxFor(m => m.UserName, new { autofocus = "true", placeholder = "用户名", @class = "input-block-level", type = "text" })
                 <br />
                 @Html.ValidationMessageFor(m => m.UserName) 
                 @Html.PasswordFor(m => m.Password, new { placeholder = "密码", @class = "input-block-level", type = "password" }) 

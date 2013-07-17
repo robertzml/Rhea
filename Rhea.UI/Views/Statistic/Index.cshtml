@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "统计";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="span2">
+    <div class="well sidebar-nav">
+        <ul class="nav nav-list">
+            <li class="nav-header">导航</li>
+            <li class="active"><a href="#" id="department-summary">摘要</a></li>     
+            <li class="nav-header">学院房屋数据</li>
+            <li><a href="#" id="department-usable-area-Compare">学院使用面积比较</a></li>
+            <li><a href="#" id="department-build-area-Compare">学院建筑面积比较</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="span10">
+    <div id="ajax-content1">
+    
+    </div>
+</div>
+
+
+@section scripts {
+<script type="text/javascript">
+    $(function () {
+        $('a#department-usable-area-Compare').click(function() {
+            menuNavActive($(this));
+            ajaxLoadPage2("DepartmentUsableAreaCompare", "Statistic", { });
+            return false;
+        });
+
+        $('a#department-build-area-Compare').click(function () {
+            menuNavActive($(this));
+            ajaxLoadPage2("DepartmentBuildAreaCompare", "Statistic", {});
+            return false;
+        });
+    });
+</script>
+}

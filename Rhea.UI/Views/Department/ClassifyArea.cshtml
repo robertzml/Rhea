@@ -20,11 +20,10 @@
         var chart1; 
         var colors = Highcharts.getOptions().colors;
         var categories = []; 
-        var data1 = [], data2 = [];   
+        var data1 = [];   
 
         $.getJSON('/Department/GetClassifyArea', { id: @Model }, function (response) {
-            setColumnData(response);
-            //setLineData(response);           
+            setColumnData(response);                 
             setColumnChart(data1);
         });
 
@@ -41,28 +40,11 @@
                 });
                 categories.push(item.Title);
             });
-        }; 
-
-        function setLineData(response) {
-            $.each(response.FirstClassify, function(i, item) {                
-                var cate0 = [], data0 = []; 
-                $.each(item.SecondClassify, function(i, item) {
-                    cate0.push(item.FunctionProperty);
-                    data0.push(parseInt(item.RoomCount));
-                });
-
-                data2.push( { name: item.Title, y: parseInt(item.RoomCount), color: colors[4],
-                    drilldown: { name: item.Title, color: colors[4], categories: cate0, data: data0 }
-                });                
-            });
-        };
+        };        
 
         function setChart(name, categories, data, color) {
 			chart1.xAxis[0].setCategories(categories, false);
-			//chart1.series[0].remove(false);
-            while (chart1.series.length > 0){
-                chart1.series[0].remove(true);
-            }
+			chart1.series[0].remove(false);          
 			chart1.addSeries({
 				name: name,
 				data: data,
@@ -76,9 +58,8 @@
             var nameA = '面积', nameB = '房间数量';
             var option = {
                 chart: {
-                    renderTo: 'container-classify-area',
-                    zoomType: 'xy'
-                    //type: 'column'
+                    renderTo: 'container-classify-area',                    
+                    type: 'column'
                 },
                 title: {
                     text: '分类用房面积图'
@@ -128,8 +109,7 @@
                 tooltip: {                    
                     formatter: function () {
                         var point = this.point;
-                        s = this.x + ':<b>' + this.y + ' m<sup>2</sup></b><br/>'; 
-                        //s += '房间数量:<b>' + this.points[1].y + '</b><br/>';
+                        s = this.x + ':<b>' + this.y + ' m<sup>2</sup></b><br/>';                  
                         if (point.drilldown) {
                             s += '点击显示 ' + point.category + ' 详细';
                         } else {
