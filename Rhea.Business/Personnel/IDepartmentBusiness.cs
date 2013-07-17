@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Rhea.Data.Personnel;
 using Rhea.Model.Personnel;
 
 namespace Rhea.Business.Personnel
@@ -25,6 +26,14 @@ namespace Rhea.Business.Personnel
         Department Get(int id);
 
         /// <summary>
+        /// 获取部门
+        /// </summary>
+        /// <param name="id">部门ID</param>
+        /// <param name="addition">附加数据</param>
+        /// <returns></returns>
+        Department Get(int id, DepartmentAdditionType addition);
+
+        /// <summary>
         /// 得到部门名称
         /// </summary>
         /// <param name="id">部门ID</param>
@@ -43,7 +52,7 @@ namespace Rhea.Business.Personnel
         /// </summary>
         /// <param name="data">部门数据</param>
         /// <returns></returns>
-        bool Edit(Department data);
+        bool Edit(Department data);       
 
         /// <summary>
         /// 删除部门
@@ -51,5 +60,12 @@ namespace Rhea.Business.Personnel
         /// <param name="id">部门ID</param>
         /// <returns></returns>
         bool Delete(int id);
+
+        /// <summary>
+        /// 编辑规模数据
+        /// </summary>
+        /// <param name="data">部门数据</param>
+        /// <returns></returns>
+        bool EditScale(Department data);
     }
 }

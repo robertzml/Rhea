@@ -5,6 +5,7 @@ using System.Text;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
+using Rhea.Data.Personnel;
 using Rhea.Data.Server;
 using Rhea.Model.Personnel;
 
@@ -41,6 +42,32 @@ namespace Rhea.Business.Personnel
             department.Status = doc.GetValue("status", 0).AsInt32;
 
             return department;
+        }
+
+        /// <summary>
+        /// 绑定学院规模数据
+        /// </summary>
+        /// <param name="doc">原文档</param>
+        /// <param name="department">部门模型</param>
+        private void BindCollegeScale(BsonDocument doc, ref Department department)
+        {
+            if (department.Type != (int)DepartmentType.Type1)
+                return;
+
+            department.BachelorCount = doc.GetValue("bachelorCount", 0).AsInt32;
+            department.GraduateCount = doc.GetValue("graduateCount", 0).AsInt32;
+            department.MasterOfEngineerCount = doc.GetValue("masterOfEngineerCount", 0).AsInt32;
+            department.DoctorCount = doc.GetValue("doctorCount", 0).AsInt32;
+            department.StaffCount = doc.GetValue("staffCount", 0).AsInt32;
+            department.PartyLeaderCount = doc.GetValue("partyLeaderCount", 0).AsInt32;
+            department.SectionChiefCount = doc.GetValue("SectionChiefCount", 0).AsInt32;
+            department.ProfessorCount = doc.GetValue("professorCount", 0).AsInt32;
+            department.AssociateProfessorCount = doc.GetValue("associateProfessorCount", 0).AsInt32;
+            department.MediumTeacherCount = doc.GetValue("mediumTeacherCount", 0).AsInt32;
+            department.AdvanceAssistantCount = doc.GetValue("advanceAssistantCount", 0).AsInt32;
+            department.MediumAssistantCount = doc.GetValue("mediumAssistantCount", 0).AsInt32;
+
+            return;
         }
         #endregion //Function
 
@@ -79,6 +106,35 @@ namespace Rhea.Business.Personnel
                 Department department = ModelBind(doc);
                 if (department.Status == 1)
                     return null;
+
+                return department;
+            }
+            else
+                return null;
+        }
+
+        /// <summary>
+        /// 获取部门
+        /// </summary>
+        /// <param name="id">部门ID</param>
+        /// <param name="addition">附加数据</param>
+        /// <returns></returns>
+        public Department Get(int id, DepartmentAdditionType addition)
+        {
+            BsonDocument doc = this.context.FindOne(PersonnelCollection.Department, "id", id);
+            if (doc != null)
+            {
+                Department department = ModelBind(doc);
+                if (department.Status == 1)
+                    return null;
+
+                switch (addition)
+                {
+                    case DepartmentAdditionType.ScaleData:
+                        if (department.Type == (int)DepartmentType.Type1)
+                            BindCollegeScale(doc, ref department);
+                        break;
+                }
 
                 return department;
             }
@@ -164,6 +220,38 @@ namespace Rhea.Business.Personnel
         {
             var query = Query.EQ("id", id);
             var update = Update.Set("status", 1);
+
+            WriteConcernResult result = this.context.Update(PersonnelCollection.Department, query, update);
+
+            if (result.HasLastErrorMessage)
+                return false;
+            else
+                return true;
+        }
+
+        /// <summary>
+        /// 编辑规模数据
+        /// </summary>
+        /// <param name="data">部门数据</param>
+        /// <returns></returns>
+        public bool EditScale(Department data)
+        {
+            if (data.Type != (int)DepartmentType.Type1)
+                return false;
+
+            var query = Query.EQ("id", data.Id);
+            var update = Update.Set("bachelorCount", data.BachelorCount)
+                .Set("graduateCount", data.GraduateCount)
+                .Set("masterOfEngineerCount", data.MasterOfEngineerCount)
+                .Set("doctorCount", data.DoctorCount)
+                .Set("staffCount", data.StaffCount)
+                .Set("partyLeaderCount", data.PartyLeaderCount)
+                .Set("sectionChiefCount", data.SectionChiefCount)
+                .Set("professorCount", data.ProfessorCount)
+                .Set("associateProfessorCount", data.AssociateProfessorCount)
+                .Set("mediumTeacherCount", data.MediumTeacherCount)
+                .Set("advanceAssistantCount", data.AdvanceAssistantCount)
+                .Set("mediumAssistantCount", data.MediumAssistantCount);
 
             WriteConcernResult result = this.context.Update(PersonnelCollection.Department, query, update);
 

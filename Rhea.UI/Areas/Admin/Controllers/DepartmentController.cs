@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Rhea.Business.Personnel;
+using Rhea.Data.Personnel;
 using Rhea.Model.Personnel;
 
 namespace Rhea.UI.Areas.Admin.Controllers
@@ -54,7 +55,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult Details(int id)
         {
-            var data = this.departmentBusiness.Get(id);
+            var data = this.departmentBusiness.Get(id, DepartmentAdditionType.ScaleData);
             return View(data);
         }
 
@@ -101,7 +102,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult Edit(int id)
         {
-            var data = this.departmentBusiness.Get(id);
+            var data = this.departmentBusiness.Get(id, DepartmentAdditionType.ScaleData);
             return View(data);
         }
 
@@ -118,14 +119,23 @@ namespace Rhea.UI.Areas.Admin.Controllers
             {
                 bool result = this.departmentBusiness.Edit(model);
 
-                if (result)
+                if (!result)
                 {
-                    TempData["Message"] = "编辑成功";
-                    return RedirectToAction("Details", "Department", new { area = "Admin", id = model.Id });
+                    ModelState.AddModelError("", "保存基础信息失败");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "保存失败");
+                    result = this.departmentBusiness.EditScale(model);
+
+                    if (result)
+                    {
+                        TempData["Message"] = "编辑成功";
+                        return RedirectToAction("Details", "Department", new { area = "Admin", id = model.Id });
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "保存规模数据失败");
+                    }
                 }
             }
 
@@ -164,6 +174,5 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 return View("Delete", id);
         }
         #endregion //Action
-
     }
 }

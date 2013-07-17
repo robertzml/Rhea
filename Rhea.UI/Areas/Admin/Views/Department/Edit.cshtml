@@ -15,7 +15,7 @@
         <div class="row-fluid">
             <div class="span12">
 
-            @using (Html.BeginForm()) 
+            @using (Html.BeginForm())
             {                
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
@@ -25,75 +25,212 @@
 
                     @Html.HiddenFor(model => model.Id)
 
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th style="width:20%">
-                                    属性
-                                </th>
-                                <th style="width:80%">
-                                    值
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    @Html.DisplayNameFor(model => model.Name)
-                                </td>
-                                <td>
-                                    @Html.EditorFor(model => model.Name)
-                                    @Html.ValidationMessageFor(model => model.Name)
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    @Html.DisplayNameFor(model => model.ShortName)
-                                </td>
-                                <td>
-                                    @Html.EditorFor(model => model.ShortName)
-                                    @Html.ValidationMessageFor(model => model.ShortName)
-                                </td>
-                            </tr>
+                    <ul class="nav nav-tabs" id="myTab">
+                        <li class="active"><a href="#info">基础信息</a></li>
+                        <li><a href="#scale">规模信息</a></li>
+                    </ul>
 
-                            <tr>
-                                <td>
-                                    @Html.DisplayNameFor(model => model.Type)
-                                </td>
-                                <td>
-                                    @Html.EditorFor(model => model.Type)
-                                    @Html.ValidationMessageFor(model => model.Type)
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    @Html.DisplayNameFor(model => model.ImageUrl)
-                                </td>
-                                <td>
-                                    @Html.EditorFor(model => model.ImageUrl)
-                                    @Html.ValidationMessageFor(model => model.ImageUrl)
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    @Html.DisplayNameFor(model => model.LogoUrl)
-                                </td>
-                                <td>
-                                    @Html.EditorFor(model => model.LogoUrl)
-                                    @Html.ValidationMessageFor(model => model.LogoUrl)
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    @Html.DisplayNameFor(model => model.Description)
-                                </td>
-                                <td>
-                                    @Html.EditorFor(model => model.Description)
-                                    @Html.ValidationMessageFor(model => model.Description)
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div id="myTabContent" class="tab-content">
+                        <div class="tab-pane active" id="info">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style="width:150px">
+                                            属性
+                                        </th>
+                                        <th>
+                                            值
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.Name)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.Name)
+                                            @Html.ValidationMessageFor(model => model.Name)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.ShortName)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.ShortName)
+                                            @Html.ValidationMessageFor(model => model.ShortName)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.Type)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.Type)
+                                            @Html.ValidationMessageFor(model => model.Type)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.ImageUrl)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.ImageUrl)
+                                            @Html.ValidationMessageFor(model => model.ImageUrl)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.LogoUrl)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.LogoUrl)
+                                            @Html.ValidationMessageFor(model => model.LogoUrl)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.Description)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.Description)
+                                            @Html.ValidationMessageFor(model => model.Description)
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane" id="scale">
+                        @if (Model.Type == (int)DepartmentType.Type1)
+                        {
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style="width:150px">
+                                            属性
+                                        </th>
+                                        <th>
+                                            值
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.BachelorCount)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.BachelorCount)
+                                            @Html.ValidationMessageFor(model => model.BachelorCount)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.GraduateCount)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.GraduateCount)
+                                            @Html.ValidationMessageFor(model => model.GraduateCount)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.MasterOfEngineerCount)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.MasterOfEngineerCount)
+                                            @Html.ValidationMessageFor(model => model.MasterOfEngineerCount)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.DoctorCount)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.DoctorCount)
+                                            @Html.ValidationMessageFor(model => model.DoctorCount)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.StaffCount)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.StaffCount)
+                                            @Html.ValidationMessageFor(model => model.StaffCount)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.PartyLeaderCount)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.PartyLeaderCount)
+                                            @Html.ValidationMessageFor(model => model.PartyLeaderCount)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.SectionChiefCount)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.SectionChiefCount)
+                                            @Html.ValidationMessageFor(model => model.SectionChiefCount)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.ProfessorCount)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.ProfessorCount)
+                                            @Html.ValidationMessageFor(model => model.ProfessorCount)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.AssociateProfessorCount)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.AssociateProfessorCount)
+                                            @Html.ValidationMessageFor(model => model.AssociateProfessorCount)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.MediumTeacherCount)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.MediumTeacherCount)
+                                            @Html.ValidationMessageFor(model => model.MediumTeacherCount)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.AdvanceAssistantCount)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.AdvanceAssistantCount)
+                                            @Html.ValidationMessageFor(model => model.AdvanceAssistantCount)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.MediumAssistantCount)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.MediumAssistantCount)
+                                            @Html.ValidationMessageFor(model => model.MediumAssistantCount)
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        }
+                        </div>
+                    </div>
 
                     <div class="form-actions">
                         <button type="submit" class="btn btn-primary">保存</button>
@@ -112,5 +249,11 @@
     $(function () {
         var menu = $('a#department-manage');
         menuNavActive(menu);
+
+        $('#myTab a:first').tab('show');
+        $('#myTab a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });
     });
 </script>
