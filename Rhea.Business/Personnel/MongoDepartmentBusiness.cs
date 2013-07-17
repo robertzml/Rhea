@@ -60,7 +60,7 @@ namespace Rhea.Business.Personnel
             department.DoctorCount = doc.GetValue("doctorCount", 0).AsInt32;
             department.StaffCount = doc.GetValue("staffCount", 0).AsInt32;
             department.PartyLeaderCount = doc.GetValue("partyLeaderCount", 0).AsInt32;
-            department.SectionChiefCount = doc.GetValue("SectionChiefCount", 0).AsInt32;
+            department.SectionChiefCount = doc.GetValue("sectionChiefCount", 0).AsInt32;
             department.ProfessorCount = doc.GetValue("professorCount", 0).AsInt32;
             department.AssociateProfessorCount = doc.GetValue("associateProfessorCount", 0).AsInt32;
             department.MediumTeacherCount = doc.GetValue("mediumTeacherCount", 0).AsInt32;

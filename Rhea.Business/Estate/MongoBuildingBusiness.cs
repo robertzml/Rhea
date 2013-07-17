@@ -394,14 +394,43 @@ namespace Rhea.Business.Estate
         }
 
         /// <summary>
-        /// 获取总数
+        /// 获取楼宇总数
         /// </summary>
         /// <returns></returns>
         public int Count()
         {
-            long count = this.context.Count(EstateCollection.Building);
+            var query = Query.NE("status", 1);
+            long count = this.context.Count(EstateCollection.Building, query);
             return (int)count;
         }
-        #endregion //Method
+
+        /// <summary>
+        /// 楼层总数
+        /// </summary>
+        /// <returns></returns>
+        public int FloorCount()
+        {
+            BsonDocument[] pipeline = {
+                new BsonDocument {
+                    { "$project", new BsonDocument {
+                        { "id", 1 },
+                        { "floors", 1 }
+                    }}
+                }, new BsonDocument {
+                    { "$unwind", "$floors" }
+                }, new BsonDocument {
+                    { "$match", new BsonDocument {
+                        { "floors.status", new BsonDocument {
+                            { "$ne", 1 }
+                        }}
+                    }}
+                }
+            };
+
+            AggregateResult result = this.context.Aggregate(EstateCollection.Building, pipeline);
+
+            return result.ResultDocuments.Count();
+        }
+        #endregion //Method        
     }
 }

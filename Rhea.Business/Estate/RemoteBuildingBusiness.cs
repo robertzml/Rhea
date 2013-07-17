@@ -183,6 +183,11 @@ namespace Rhea.Business.Estate
         {
             throw new NotImplementedException();
         }
-        #endregion //Method        
+
+        public int FloorCount()
+        {
+            throw new NotImplementedException();
+        }
+        #endregion //Method
     }
 }

@@ -49,6 +49,12 @@
             return false;
         });
 
+        $('a#department-details').click(function() {
+            menuNavActive($(this));
+            ajaxLoadPage2("Details", "Department", { id: @Model });
+            return false;
+        });
+
         $('a#department-statistic').click(function() {
             menuNavActive($(this));
             ajaxLoadPage2("Statistic", "Department", { id: @Model });

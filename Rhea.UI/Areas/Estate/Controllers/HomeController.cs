@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Rhea.Business.Estate;
+using Rhea.UI.Areas.Estate.Models;
 
 namespace Rhea.UI.Areas.Estate.Controllers
 {
@@ -23,7 +25,19 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         public ActionResult Summary()
         {
-            return View();
+            EstateSummaryModel data = new EstateSummaryModel();
+
+            IBuildingGroupBusiness buildingGroupBusiness = new MongoBuildingGroupBusiness();
+            data.BuildingGroupCount = buildingGroupBusiness.Count();
+
+            IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
+            data.BuildingCount = buildingBusiness.Count();
+            data.FloorCount = buildingBusiness.FloorCount();
+
+            IRoomBusiness roomBusiness = new MongoRoomBusiness();
+            data.RoomCount = roomBusiness.Count();
+
+            return View(data);
         }
     }
 }

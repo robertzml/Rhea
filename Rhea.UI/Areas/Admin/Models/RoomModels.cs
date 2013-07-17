@@ -6,6 +6,9 @@ using System.Web;
 
 namespace Rhea.UI.Areas.Admin.Models
 {
+    /// <summary>
+    /// 房间编辑模型
+    /// </summary>
     public class RoomEditModel
     {
         /// <summary>
@@ -128,7 +131,7 @@ namespace Rhea.UI.Areas.Admin.Models
         /// </summary>
         [DataType(DataType.MultilineText)]
         [Display(Name = "备注")]
-        public string Remark { get; set; }       
+        public string Remark { get; set; }
 
         /// <summary>
         /// 供热情况

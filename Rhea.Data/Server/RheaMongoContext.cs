@@ -90,7 +90,7 @@ namespace Rhea.Data.Server
         {
             MongoCollection<BsonDocument> collection = this.database.GetCollection<BsonDocument>(collectionName);
             WriteConcernResult result = collection.Insert(data);
-            return result;            
+            return result;
         }
 
         /// <summary>
@@ -117,8 +117,8 @@ namespace Rhea.Data.Server
         {
             MongoCollection<BsonDocument> collection = this.database.GetCollection<BsonDocument>(collectionName);
             var query = Query.EQ(key, value);
-            
-            BsonDocument d = collection.FindOne(query);               
+
+            BsonDocument d = collection.FindOne(query);
             return d;
         }
 
@@ -132,7 +132,7 @@ namespace Rhea.Data.Server
         public List<BsonDocument> Find(string collectionName, string key, BsonValue value)
         {
             MongoCollection<BsonDocument> collection = this.database.GetCollection<BsonDocument>(collectionName);
-            var query = Query.EQ(key, value);            
+            var query = Query.EQ(key, value);
 
             var data = collection.Find(query);
 
@@ -141,7 +141,7 @@ namespace Rhea.Data.Server
             {
                 document.Add(d);
             }
-            
+
             return document;
         }
 
@@ -156,7 +156,7 @@ namespace Rhea.Data.Server
             MongoCollection<BsonDocument> collection = this.database.GetCollection<BsonDocument>(collectionName);
             var query = Query.EQ("_id", id);
 
-            BsonDocument d = collection.FindOne(query);            
+            BsonDocument d = collection.FindOne(query);
             return d;
         }
 
@@ -168,13 +168,13 @@ namespace Rhea.Data.Server
         public List<BsonDocument> FindAll(string collectionName)
         {
             MongoCollection<BsonDocument> collection = this.database.GetCollection<BsonDocument>(collectionName);
-            
+
             List<BsonDocument> document = new List<BsonDocument>();
             foreach (BsonDocument d in collection.FindAll())
-            {               
+            {
                 document.Add(d);
             }
-            
+
             return document;
         }
 
@@ -212,7 +212,7 @@ namespace Rhea.Data.Server
         public WriteConcernResult Save(string collectionName, BsonDocument document)
         {
             MongoCollection<BsonDocument> collection = this.database.GetCollection<BsonDocument>(collectionName);
-            WriteConcernResult result = collection.Save(document);            
+            WriteConcernResult result = collection.Save(document);
             return result;
         }
 
@@ -267,7 +267,7 @@ namespace Rhea.Data.Server
         public AggregateResult Aggregate(string collectionName, BsonDocument[] pipeline)
         {
             MongoCollection<BsonDocument> collection = this.database.GetCollection<BsonDocument>(collectionName);
-            AggregateResult result = collection.Aggregate(pipeline); 
+            AggregateResult result = collection.Aggregate(pipeline);
             return result;
         }
 
@@ -315,9 +315,9 @@ namespace Rhea.Data.Server
         {
             MongoCollection<BsonDocument> collection = this.database.GetCollection<BsonDocument>(collectionName);
 
-            var query = Query.EQ("id", id);            
+            var query = Query.EQ("id", id);
             var data = collection.Find(query);
-            
+
             if (data.Count() == 0)
                 return false;
             else

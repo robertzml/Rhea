@@ -5,3 +5,8 @@
     Layout = null;
 }
 
+<div class="row-fluid"> 
+    <div class="span12">
+        @Html.Action("BuildingTotalAreaCompare", new { controller = "BuildingGroup", area = "Estate", id = Model.Id })
+    </div>    
+</div>

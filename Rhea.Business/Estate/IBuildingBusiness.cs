@@ -98,9 +98,15 @@ namespace Rhea.Business.Estate
         bool DeleteFloor(int buildingId, int floorId);
 
         /// <summary>
-        /// 获取总数
+        /// 获取楼宇总数
         /// </summary>
         /// <returns></returns>
         int Count();
+
+        /// <summary>
+        /// 获取楼层总数
+        /// </summary>
+        /// <returns></returns>
+        int FloorCount();
     }
 }

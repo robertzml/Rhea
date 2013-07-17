@@ -1,0 +1,133 @@
+﻿@model Rhea.Model.Personnel.Department
+
+@{
+    ViewBag.Title = "部门详细";
+    Layout = null;
+}
+
+<div class="row-fluid"> 
+    <div class="span6">
+        <div class="box">
+            <div class="box-header well" data-original-title>
+                <h2>
+                    <i class="icon-th-list"></i>部门规模</h2>
+            </div>
+            <div class="box-content">
+            @if (Model.Type == (int)Rhea.Data.Personnel.DepartmentType.Type1)
+            {
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th style="width:180px">
+                                属性
+                            </th>
+                            <th>
+                                值（人数）
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.BachelorCount)
+                            </td>
+                            <td>
+                                @Model.BachelorCount
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.GraduateCount)
+                            </td>
+                            <td>
+                                @Model.GraduateCount
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.MasterOfEngineerCount)
+                            </td>
+                            <td>
+                                @Model.MasterOfEngineerCount
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.DoctorCount)
+                            </td>
+                            <td>
+                                @Model.DoctorCount
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.StaffCount)
+                            </td>
+                            <td>
+                                @Model.StaffCount
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.PartyLeaderCount)
+                            </td>
+                            <td>
+                                @Model.PartyLeaderCount
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.SectionChiefCount)
+                            </td>
+                            <td>
+                                @Model.SectionChiefCount
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.ProfessorCount)
+                            </td>
+                            <td>
+                                @Model.ProfessorCount
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.AssociateProfessorCount)
+                            </td>
+                            <td>
+                                @Model.AssociateProfessorCount
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.MediumTeacherCount)
+                            </td>
+                            <td>
+                                @Model.MediumTeacherCount
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.AdvanceAssistantCount)
+                            </td>
+                            <td>
+                                @Model.AdvanceAssistantCount
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.MediumAssistantCount)
+                            </td>
+                            <td>
+                                @Model.MediumAssistantCount
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            }
+            </div>
+        </div>
+    </div>    
+</div>

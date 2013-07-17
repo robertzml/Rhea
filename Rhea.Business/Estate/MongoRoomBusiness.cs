@@ -409,7 +409,8 @@ namespace Rhea.Business.Estate
         /// <returns></returns>
         public int Count()
         {
-            long count = this.context.Count(EstateCollection.Room);
+            var query = Query.NE("status", 1);
+            long count = this.context.Count(EstateCollection.Room, query);
             return (int)count;
         }
 

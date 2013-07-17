@@ -142,6 +142,16 @@ namespace Rhea.UI.Areas.Estate.Controllers
         }
 
         /// <summary>
+        /// 分楼宇面积比较
+        /// </summary>
+        /// <param name="id">楼群ID</param>
+        /// <returns></returns>
+        public ActionResult BuildingTotalAreaCompare(int id)
+        {
+            return View(id);
+        }
+
+        /// <summary>
         /// 房间汇总
         /// </summary>
         /// <param name="id">楼群ID</param>
@@ -153,7 +163,35 @@ namespace Rhea.UI.Areas.Estate.Controllers
         #endregion //Action
 
         #region Json
+        /// <summary>
+        /// 分楼宇面积比较
+        /// </summary>
+        /// <param name="id">楼群ID</param>
+        /// <returns></returns>
+        public JsonResult BuildingTotalAreaCompareData(int id)
+        {
+            List<BuildingTotalAreaModel> data = new List<BuildingTotalAreaModel>();
 
+            IRoomBusiness roomBusiness = new MongoRoomBusiness();
+            IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
+            var buildings = buildingBusiness.GetListByBuildingGroup(id).OrderBy(r => r.Id);
+            foreach (var building in buildings)
+            {
+                BuildingTotalAreaModel m = new BuildingTotalAreaModel
+                {
+                    BuildingId = building.Id,
+                    BuildingName = building.Name,
+                    BuildArea = Convert.ToDouble(building.BuildArea),
+                    UsableArea = Convert.ToDouble(building.UsableArea)
+                };
+
+                m.RoomCount = roomBusiness.CountByBuilding(building.Id);
+
+                data.Add(m);
+            }
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
         #endregion //Json
     }
 }

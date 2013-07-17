@@ -8,6 +8,7 @@ using Rhea.Business;
 using Rhea.Business.Estate;
 using Rhea.Business.Personnel;
 using Rhea.Data.Estate;
+using Rhea.Data.Personnel;
 using Rhea.Model.Estate;
 using Rhea.Model.Personnel;
 using Rhea.UI.Models;
@@ -48,6 +49,16 @@ namespace Rhea.UI.Controllers
         }
 
         /// <summary>
+        /// 部门列表
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult List()
+        {
+            var data = this.departmentBusiness.GetList();
+            return View(data);
+        }
+
+        /// <summary>
         /// 部门摘要
         /// </summary>
         /// <param name="id">部门ID</param>
@@ -61,12 +72,13 @@ namespace Rhea.UI.Controllers
         }
 
         /// <summary>
-        /// 部门列表
+        /// 部门详细
         /// </summary>
+        /// <param name="id">部门ID</param>
         /// <returns></returns>
-        public ActionResult List()
+        public ActionResult Details(int id)
         {
-            var data = this.departmentBusiness.GetList();
+            var data = this.departmentBusiness.Get(id, DepartmentAdditionType.ScaleData);
             return View(data);
         }
 
