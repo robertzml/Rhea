@@ -37,7 +37,6 @@ namespace Rhea.UI.Controllers
             {
                 accountBusiness = new MongoAccountBusiness();
             }
-
             base.Initialize(requestContext);
         }
         #endregion //Function
@@ -72,7 +71,7 @@ namespace Rhea.UI.Controllers
 
                 if (user != null)
                 {
-                    HttpCookie cookie = formsService.SignIn(user.UserName, user.ManagerGroupName + "," + user.UserGroupName, true);
+                    HttpCookie cookie = formsService.SignIn(user.UserName, user.ManagerGroupName + "," + user.UserGroupName, model.RememberMe);
                     Response.Cookies.Add(cookie);
 
                     return RedirectToAction("Index", "Home");
@@ -117,6 +116,11 @@ namespace Rhea.UI.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 修改密码
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult ChangePassword(ChangePasswordModel model)
@@ -149,7 +153,7 @@ namespace Rhea.UI.Controllers
             }
 
             return View(model);
-        }
+        }        
         #endregion //Action
     }
 }

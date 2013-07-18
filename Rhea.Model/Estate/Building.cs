@@ -156,6 +156,7 @@ namespace Rhea.Model.Estate
         /// <summary>
         /// 状态
         /// </summary>
+        [Display(Name = "状态")]
         public int Status { get; set; }
     }
 }

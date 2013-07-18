@@ -51,8 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\UserGroup.cs" />
-    <Compile Include="Entities\ManagerGroup.cs" />
     <Compile Include="Estate\BuildingGroupModels.cs" />
     <Compile Include="Estate\BuildingModels.cs" />
     <Compile Include="Estate\RoomModels.cs" />

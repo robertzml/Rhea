@@ -15,7 +15,7 @@ namespace Rhea.Data.Server
         /// 用户组表
         /// userGroup
         /// </summary>
-        public static readonly string UserGroup = "userGroup";
+        public static readonly string UserGroup = "userGroup";      
 
         /// <summary>
         /// 用户表

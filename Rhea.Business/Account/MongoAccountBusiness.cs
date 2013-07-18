@@ -38,6 +38,37 @@ namespace Rhea.Business.Account
 
             return;
         }
+
+        /// <summary>
+        /// 得到用户组信息
+        /// </summary>
+        /// <param name="user">用户</param>
+        private void GetGroupInfo(ref UserProfile user)
+        {
+            IManagerGroupBusiness managerGroupBusiness = new MongoManagerGroupBusiness();
+            if (user.ManagerGroupId != 0)
+            {
+                ManagerGroup mGroup = managerGroupBusiness.Get(user.ManagerGroupId);
+                if (mGroup != null)
+                    user.ManagerGroupName = mGroup.Name;
+                else
+                    user.ManagerGroupName = "Null";
+            }
+            else
+                user.ManagerGroupName = "Null";
+
+            IUserGroupBusiness userGroupBusiness = new MongoUserGroupBusiness();
+            if (user.UserGroupId != 0)
+            {
+                UserGroup uGroup = userGroupBusiness.Get(user.UserGroupId);
+                if (uGroup != null)
+                    user.UserGroupName = uGroup.Name;
+                else
+                    user.UserGroupName = "Null";
+            }
+            else
+                user.UserGroupName = "Null";
+        }
         #endregion //Function
 
         #region Method
@@ -65,27 +96,13 @@ namespace Rhea.Business.Account
                 user._id = doc["_id"].AsObjectId;
                 user.UserName = userName;
                 user.UserId = doc.GetValue("userId", "").AsString;
-                //user.UserGroupId = doc["userGroupId"].AsInt32;
-                //user.ManagerGroupId = doc["managerGroupId"].AsInt32;
+                user.UserGroupId = doc.GetValue("userGroupId", 0).AsInt32;
+                user.ManagerGroupId = doc.GetValue("managerGroupId", 0).AsInt32;
                 user.LastLoginTime = doc.GetValue("currentLoginTime", DateTime.Now).ToLocalTime();
                 user.CurrentLoginTime = DateTime.Now;
                 user.Status = doc.GetValue("status", 0).AsInt32;
 
-                /*IAdminService adminService = new MongoAdminService();
-                if (user.ManagerGroupId != 0)
-                {
-                    ManagerGroup mGroup = adminService.GetManagerGroup(user.ManagerGroupId);
-                    user.ManagerGroupName = mGroup.Name;
-                }
-                else
-                    user.ManagerGroupName = "Null";
-                if (user.UserGroupId != 0)
-                {
-                    UserGroup uGroup = adminService.GetUserGroup(user.UserGroupId);
-                    user.UserGroupName = uGroup.Name;
-                }
-                else
-                    user.UserGroupName = "Null";*/
+                GetGroupInfo(ref user);
 
                 UpdateLoginTime(user._id, user.LastLoginTime, user.CurrentLoginTime);
 
@@ -111,10 +128,14 @@ namespace Rhea.Business.Account
                 user._id = doc["_id"].AsObjectId;
                 user.UserName = userName;
                 user.UserId = doc.GetValue("userId", "").AsString;
-                //user.UserGroupId = doc["userGroupId"].AsInt32;
-                //user.ManagerGroupId = doc["managerGroupId"].AsInt32;
+                user.UserGroupId = doc["userGroupId"].AsInt32;
+                user.ManagerGroupId = doc["managerGroupId"].AsInt32;
                 user.LastLoginTime = doc.GetValue("lastLoginTime", DateTime.Now).ToLocalTime();
                 user.CurrentLoginTime = doc.GetValue("currentLoginTime", DateTime.Now).ToLocalTime();
+                user.Status = doc.GetValue("status", 0).AsInt32;
+
+                GetGroupInfo(ref user);
+
                 return user;
             }
             else

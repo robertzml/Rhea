@@ -14,6 +14,8 @@
         <li class="nav-header">部门管理</li>
         <li><a href="@Url.Action("List", new { controller = "Department", area = "Admin" })" id="department-manage">部门列表</a></li>
         <li><a href="#">Link</a></li>
-        <li><a href="#">Link</a></li>
+        <li class="nav-header">用户管理</li>
+        <li><a href="@Url.Action("List", new { controller = "ManagerGroup", area = "Admin" })" id="manager-group-manage">管理组管理</a></li>
+        <li><a href="@Url.Action("List", new { controller = "UserGroup", area = "Admin" })" id="user-group-manage">用户组管理</a></li>
     </ul>
 </div>

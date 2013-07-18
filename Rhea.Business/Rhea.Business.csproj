@@ -59,6 +59,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account\IManagerGroupBusiness.cs" />
+    <Compile Include="Account\IUserGroupBusiness.cs" />
+    <Compile Include="Account\MongoManagerGroupBusiness.cs" />
+    <Compile Include="Account\MongoUserGroupBusiness.cs" />
     <Compile Include="ApiService.cs" />
     <Compile Include="IStatisticService.cs" />
     <Compile Include="ModelExtension.cs" />
@@ -76,8 +80,6 @@
     <Compile Include="Account\MongoAccountBusiness.cs" />
     <Compile Include="Estate\RemoteBuildingGroupBusiness.cs" />
     <Compile Include="Account\IAccountBusiness.cs" />
-    <Compile Include="MongoAdminService.cs" />
-    <Compile Include="IAdminService.cs" />
     <Compile Include="Estate\IBuildingGroupBusiness.cs" />
     <Compile Include="Estate\MongoBuildingBusiness.cs" />
     <Compile Include="Personnel\MongoDepartmentBusiness.cs" />

@@ -19,7 +19,7 @@ namespace Rhea.Model.Account
         /// <summary>
         /// 登录ID
         /// </summary>
-        /// <remarks>工号,学号</remarks>
+        /// <remarks>工号,学号,系统序号</remarks>
         public string UserId { get; set; }
 
         /// <summary>
@@ -63,10 +63,16 @@ namespace Rhea.Model.Account
         public DateTime CurrentLoginTime { get; set; }
 
         /// <summary>
+        /// 是否系统分配帐号
+        /// </summary>
+        /// <remarks>False:来自学校统一认证</remarks>
+        public bool IsSystem { get; set; }
+
+        /// <summary>
         /// 系统状态
         /// </summary>
         /// <remarks>
-        /// 0:正常, 1:禁用
+        /// 0:正常, 1:删除, 2:禁用
         /// </remarks>
         public int Status { get; set; }
     }
