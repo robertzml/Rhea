@@ -79,6 +79,37 @@ namespace Rhea.UI.Controllers
         public ActionResult Details(int id)
         {
             var data = this.departmentBusiness.Get(id, DepartmentAdditionType.ScaleData);
+
+            IStatisticService statisticService = new MongoStatisticService();
+            DepartmentClassifyAreaModel area = statisticService.GetDepartmentClassifyArea(id);
+
+            double officeArea = area.FirstClassify.Single(r => r.FunctionFirstCode == 1).Area;
+            if (data.StaffCount == 0)
+                ViewBag.AvgOfficeArea = 0;
+            else
+                ViewBag.AvgOfficeArea = Math.Round(officeArea / data.StaffCount, 2);
+
+            double researchArea = area.FirstClassify.Single(r => r.FunctionFirstCode == 4).Area;
+            if (data.GraduateCount + data.DoctorCount == 0)
+                ViewBag.AvgResearchArea = 0;
+            else
+                ViewBag.AvgResearchArea = Math.Round(researchArea / (data.GraduateCount + data.DoctorCount), 2);
+
+            return View(data);
+        }
+
+        /// <summary>
+        /// 部门指标
+        /// </summary>
+        /// <param name="id">部门ID</param>
+        /// <returns></returns>
+        public ActionResult Indicator(int id)
+        {
+            IIndicatorBusiness indicatorBusiness = new MongoIndicatorBusiness();
+
+            var department = this.departmentBusiness.Get(id, DepartmentAdditionType.ScaleData);            
+            DepartmentIndicatorModel data = indicatorBusiness.GetDepartmentIndicator(department);          
+
             return View(data);
         }
 

@@ -77,4 +77,104 @@ namespace Rhea.Data.Personnel
         /// <remarks>教学院系与行政部门不同</remarks>
         ScaleData = 1
     }
+
+    /// <summary>
+    /// 部门指标模型
+    /// </summary>
+    public class DepartmentIndicatorModel
+    {
+        /// <summary>
+        /// 部门ID
+        /// </summary>
+        public int DepartmentId { get; set; }
+
+        /// <summary>
+        /// 部门名称
+        /// </summary>
+        public string DepartmentName { get; set; }
+
+        /// <summary>
+        /// 办公用房
+        /// </summary>
+        [Display(Name = "办公用房")]
+        public double OfficeArea { get; set; }
+
+        /// <summary>
+        /// 机动用房
+        /// </summary>
+        [Display(Name = "机动用房")]
+        public double FlexibleArea { get; set; }
+
+        /// <summary>
+        /// 实验用房
+        /// </summary>
+        [Display(Name = "实验用房")]
+        public double ExperimentArea { get; set; }
+
+        /// <summary>
+        /// 研究生用房
+        /// </summary>
+        [Display(Name = "研究生用房")]
+        public double GraduateArea { get; set; }
+
+        /// <summary>
+        /// 博士生用房
+        /// </summary>
+        [Display(Name = "博士生用房")]
+        public double DoctorArea { get; set; }
+
+        /// <summary>
+        /// 工程硕士用房
+        /// </summary>
+        [Display(Name = "工程硕士用房")]
+        public double MasterOfEngineerArea { get; set; }
+
+        /// <summary>
+        /// 科研用房
+        /// </summary>
+        [Display(Name = "科研用房")]
+        public double ResearchArea { get; set; }
+
+        /// <summary>
+        /// 对公用房
+        /// </summary>
+        [Display(Name = "对公用房")]
+        public double PublicArea { get; set; }
+
+        /// <summary>
+        /// 教学补贴用房
+        /// </summary>
+        [Display(Name = "教学补贴用房")]
+        public double EducationBonusArea { get; set; }
+
+        /// <summary>
+        /// 特殊人才用房
+        /// </summary>
+        [Display(Name = "特殊人才用房")]
+        public double TalentArea { get; set; }
+
+        /// <summary>
+        /// 科研平台补贴
+        /// </summary>
+        [Display(Name = "科研平台补贴")]
+        public double ResearchBonusArea { get; set; }
+
+        /// <summary>
+        /// 实验教学平台补贴
+        /// </summary>
+        [Display(Name = "实验教学平台补贴")]
+        public double ExperimentBonusArea { get; set; }
+
+        /// <summary>
+        /// 调整面积
+        /// </summary>
+        [Display(Name = "调整面积")]
+        public double AdjustArea { get; set; }
+
+        /// <summary>
+        /// 应有面积
+        /// </summary>
+        [Display(Name = "应有面积")]
+        public double DeservedArea { get; set; }
+    }
 }

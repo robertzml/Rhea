@@ -136,6 +136,12 @@ namespace Rhea.Model.Personnel
         /// </summary>
         [Display(Name = "中级及以下教辅")]
         public int MediumAssistantCount { get; set; }
+
+        /// <summary>
+        /// 文理科, 1:文科, 2:理科
+        /// </summary>        
+        [Display(Name = "文理科" )]
+        public int ArtsAndScience { get; set; }
         #endregion //College Scale Property
     }
 }

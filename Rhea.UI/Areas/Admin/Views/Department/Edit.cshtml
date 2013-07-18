@@ -226,6 +226,15 @@
                                             @Html.ValidationMessageFor(model => model.MediumAssistantCount)
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.ArtsAndScience)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.ArtsAndScience)
+                                            @Html.ValidationMessageFor(model => model.ArtsAndScience)
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         }

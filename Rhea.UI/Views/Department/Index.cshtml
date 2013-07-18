@@ -9,7 +9,8 @@
             <li class="nav-header">导航</li>
             <li class="active"><a href="#" id="department-summary">摘要</a></li>
             <li><a href="#" id="department-details">详细</a></li>
-            <li><a href="#" id="department-statistic">统计</a></li>       
+            <li><a href="#" id="department-statistic">统计</a></li>
+            <li><a href="#" id="department-indicator">指标</a></li>      
             <li class="nav-header" id="building-list">楼宇列表</li> 
             <li class="nav-header">房屋信息</li>
             <li><a href="#" id="room-list">房间列表</a></li>
@@ -52,6 +53,12 @@
         $('a#department-details').click(function() {
             menuNavActive($(this));
             ajaxLoadPage2("Details", "Department", { id: @Model });
+            return false;
+        });
+
+        $('a#department-indicator').click(function() {
+            menuNavActive($(this));
+            ajaxLoadPage2("Indicator", "Department", { id: @Model });
             return false;
         });
 

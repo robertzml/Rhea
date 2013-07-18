@@ -124,10 +124,50 @@
                                 @Model.MediumAssistantCount
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.ArtsAndScience)
+                            </td>
+                            <td>
+                                @Model.ArtsAndScience
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             }
             </div>
         </div>
-    </div>    
+    </div>
+    <div class="span6">
+        <div class="box">
+            <div class="box-header well" data-original-title>
+                <h2>
+                    <i class="icon-th-list"></i>人均用房</h2>
+            </div>
+            <div class="box-content">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th style="width:180px">
+                                属性
+                            </th>
+                            <th>
+                                值（m<sup>2</sup>/人）
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>人均办公用房面积</td>
+                            <td>@ViewBag.AvgOfficeArea</td>
+                        </tr>
+                        <tr>
+                            <td>研究生人均科研用房面积</td>
+                            <td>@ViewBag.AvgResearchArea</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>   
 </div>

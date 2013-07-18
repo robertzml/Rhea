@@ -66,6 +66,7 @@ namespace Rhea.Business.Personnel
             department.MediumTeacherCount = doc.GetValue("mediumTeacherCount", 0).AsInt32;
             department.AdvanceAssistantCount = doc.GetValue("advanceAssistantCount", 0).AsInt32;
             department.MediumAssistantCount = doc.GetValue("mediumAssistantCount", 0).AsInt32;
+            department.ArtsAndScience = doc.GetValue("artsAndScience", 1).AsInt32;
 
             return;
         }
@@ -251,8 +252,9 @@ namespace Rhea.Business.Personnel
                 .Set("associateProfessorCount", data.AssociateProfessorCount)
                 .Set("mediumTeacherCount", data.MediumTeacherCount)
                 .Set("advanceAssistantCount", data.AdvanceAssistantCount)
-                .Set("mediumAssistantCount", data.MediumAssistantCount);
-
+                .Set("mediumAssistantCount", data.MediumAssistantCount)
+                .Set("artsAndScience", data.ArtsAndScience);
+                
             WriteConcernResult result = this.context.Update(PersonnelCollection.Department, query, update);
 
             if (result.HasLastErrorMessage)
