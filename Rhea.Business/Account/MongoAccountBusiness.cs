@@ -17,6 +17,10 @@ namespace Rhea.Business.Account
     public class MongoAccountBusiness : IAccountBusiness
     {
         #region Field
+        /// <summary>
+        /// 数据库连接
+        /// </summary>
+        private RheaMongoContext context = new RheaMongoContext(RheaServer.RheaDatabase);
         #endregion //Field
 
         #region Function
@@ -28,13 +32,11 @@ namespace Rhea.Business.Account
         /// <param name="current">本次登录时间</param>
         private void UpdateLoginTime(ObjectId _id, DateTime last, DateTime current)
         {
-            RheaMongoContext context = new RheaMongoContext(RheaServer.RheaDatabase);
-
             var query = Query.EQ("_id", _id);
             var update = Update.Set("lastLoginTime", last)
                 .Set("currentLoginTime", current);
 
-            WriteConcernResult result = context.Update(RheaCollection.User, query, update);
+            WriteConcernResult result = this.context.Update(RheaCollection.User, query, update);
 
             return;
         }
@@ -69,6 +71,28 @@ namespace Rhea.Business.Account
             else
                 user.UserGroupName = "Null";
         }
+
+        /// <summary>
+        /// 模型绑定
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <returns></returns>
+        private UserProfile ModelBind(BsonDocument doc)
+        {
+            UserProfile user = new UserProfile();
+            user._id = doc["_id"].AsObjectId;
+            user.UserName = doc["userName"].AsString;
+            user.UserId = doc.GetValue("userId", "").AsString;
+            user.UserGroupId = doc["userGroupId"].AsInt32;
+            user.ManagerGroupId = doc["managerGroupId"].AsInt32;
+            user.LastLoginTime = doc.GetValue("lastLoginTime", DateTime.Now).ToLocalTime();
+            user.CurrentLoginTime = doc.GetValue("currentLoginTime", DateTime.Now).ToLocalTime();
+            user.Status = doc.GetValue("status", 0).AsInt32;
+
+            GetGroupInfo(ref user);
+
+            return user;
+        }
         #endregion //Function
 
         #region Method
@@ -80,9 +104,7 @@ namespace Rhea.Business.Account
         /// <returns></returns>
         public UserProfile Login(string userName, string password)
         {
-            RheaMongoContext context = new RheaMongoContext(RheaServer.RheaDatabase);
-
-            BsonDocument doc = context.FindOne(RheaCollection.User, "userName", userName);
+            BsonDocument doc = this.context.FindOne(RheaCollection.User, "userName", userName);
             if (doc != null)
             {
                 if (doc.GetValue("status", 0) == 1)
@@ -119,27 +141,32 @@ namespace Rhea.Business.Account
         /// <returns></returns>
         public UserProfile Get(string userName)
         {
-            RheaMongoContext context = new RheaMongoContext(RheaServer.EstateDatabase);
-
-            BsonDocument doc = context.FindOne(RheaCollection.User, "userName", userName);
+            BsonDocument doc = this.context.FindOne(RheaCollection.User, "userName", userName);
             if (doc != null)
             {
-                UserProfile user = new UserProfile();
-                user._id = doc["_id"].AsObjectId;
-                user.UserName = userName;
-                user.UserId = doc.GetValue("userId", "").AsString;
-                user.UserGroupId = doc["userGroupId"].AsInt32;
-                user.ManagerGroupId = doc["managerGroupId"].AsInt32;
-                user.LastLoginTime = doc.GetValue("lastLoginTime", DateTime.Now).ToLocalTime();
-                user.CurrentLoginTime = doc.GetValue("currentLoginTime", DateTime.Now).ToLocalTime();
-                user.Status = doc.GetValue("status", 0).AsInt32;
-
-                GetGroupInfo(ref user);
-
+                UserProfile user = ModelBind(doc);
                 return user;
             }
             else
                 return null;
+        }
+
+        /// <summary>
+        /// 获取用户列表
+        /// </summary>
+        /// <returns></returns>
+        public List<UserProfile> GetList()
+        {
+            List<UserProfile> data = new List<UserProfile>();
+            List<BsonDocument> docs = this.context.FindAll(RheaCollection.User);
+
+            foreach (BsonDocument doc in docs)
+            {
+                UserProfile g = ModelBind(doc);
+                data.Add(g);
+            }
+
+            return data.OrderBy(r => r.UserId).ToList();
         }
 
         /// <summary>
@@ -149,10 +176,8 @@ namespace Rhea.Business.Account
         /// <param name="password">密码</param>
         /// <returns></returns>
         public bool ValidatePassword(string userName, string password)
-        {
-            RheaMongoContext context = new RheaMongoContext(RheaServer.RheaDatabase);
-
-            BsonDocument doc = context.FindOne(RheaCollection.User, "userName", userName);
+        {            
+            BsonDocument doc = this.context.FindOne(RheaCollection.User, "userName", userName);
             if (doc != null)
             {
                 string pass = doc["password"].AsString;
@@ -173,13 +198,11 @@ namespace Rhea.Business.Account
         /// <param name="newPassword">新密码</param>
         /// <returns></returns>
         public bool ChangePassword(string userName, string oldPassword, string newPassword)
-        {
-            RheaMongoContext context = new RheaMongoContext(RheaServer.RheaDatabase);
-
+        {          
             var query = Query.EQ("userName", userName);
             var update = Update.Set("password", Hasher.MD5Encrypt(newPassword));
 
-            WriteConcernResult result = context.Update(RheaCollection.User, query, update);
+            WriteConcernResult result = this.context.Update(RheaCollection.User, query, update);
 
             if (result.HasLastErrorMessage)
                 return false;

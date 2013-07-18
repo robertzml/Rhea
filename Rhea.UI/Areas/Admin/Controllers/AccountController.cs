@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Rhea.Business.Account;
+using Rhea.Model.Account;
 
 namespace Rhea.UI.Areas.Admin.Controllers
 {
@@ -31,7 +32,15 @@ namespace Rhea.UI.Areas.Admin.Controllers
         #endregion //Function
 
         #region Action
-      
+        /// <summary>
+        /// 用户列表
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult List()
+        {
+            var data = this.accountBusiness.GetList();
+            return View(data);
+        }
         #endregion //Action
     }
 }

@@ -27,6 +27,12 @@ namespace Rhea.Business.Account
         UserProfile Get(string userName);
 
         /// <summary>
+        /// 获取用户列表
+        /// </summary>
+        /// <returns></returns>
+        List<UserProfile> GetList();
+
+        /// <summary>
         /// 验证密码
         /// </summary>
         /// <param name="userName">用户名</param>

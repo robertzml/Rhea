@@ -20,5 +20,12 @@ namespace Rhea.Business.Account
         /// <param name="id">用户组ID</param>
         /// <returns></returns>
         UserGroup Get(int id);
+
+        /// <summary>
+        /// 用户组编辑
+        /// </summary>
+        /// <param name="data">用户组数据</param>
+        /// <returns></returns>
+        bool Edit(UserGroup data);
     }
 }

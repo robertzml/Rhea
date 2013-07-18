@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using MongoDB.Driver.Builders;
 using Rhea.Data.Server;
 using Rhea.Model.Account;
 
@@ -76,6 +77,28 @@ namespace Rhea.Business.Account
             }
             else
                 return null;
+        }
+
+        /// <summary>
+        /// 用户组编辑
+        /// </summary>
+        /// <param name="data">用户组数据</param>
+        /// <returns></returns>
+        public bool Edit(UserGroup data)
+        {
+            var query = Query.EQ("id", data.Id);
+
+            var update = Update.Set("name", data.Name)
+                .Set("title", data.Title)
+                .Set("rank", data.Rank)
+                .Set("remark", data.Remark ?? "");
+
+            WriteConcernResult result = this.context.Update(RheaCollection.UserGroup, query, update);
+
+            if (result.HasLastErrorMessage)
+                return false;
+            else
+                return true;
         }
         #endregion //Method
     }

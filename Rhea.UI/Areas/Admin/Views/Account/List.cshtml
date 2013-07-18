@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Rhea.Model.Account.UserProfile>
+
+@{
+    ViewBag.Title = "用户列表";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="box">
+    <div class="box-header well" data-original-title>
+        <h2>
+            <i class="icon-tasks"></i>@ViewBag.Title</h2>
+    </div>
+
+    <div class="box-content">
+        <table id="user-list" class="table table-striped table-bordered bootstrap-datatable datatable">
+            <thead>
+                <tr>
+                    <th>
+                        ID
+                    </th>
+                    <th>
+                        用户号
+                    </th>
+                    <th>
+                        用户名
+                    </th>                    
+                    <th>
+                        用户组
+                    </th>
+                    <th>
+                        管理组
+                    </th>
+                    <th>
+                        操作
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item._id</td>
+                    <td>@item.UserId</td>
+                    <td>@item.UserName</td>               
+                    <td>@item.UserGroupName</td>
+                    <td>@item.ManagerGroupName</td>
+                    <td>
+                        <a class="btn btn-success btn-small" href="@Url.Action("Details", new { controller = "Account", id = item._id, area = "Admin" })"><i class="icon-zoom-in icon-white"></i>查看</a> 
+                        <a class="btn btn-warning btn-small" href="@Url.Action("Edit", new { controller = "Account", id = item._id, area = "Admin" })"><i class="icon-edit icon-white"></i>编辑</a> 
+                        <a class="btn btn-danger btn-small" href="@Url.Action("Delete", new { controller = "Account", id = item._id, area = "Admin" })"><i class="icon-remove icon-white"></i>删除</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+
+        <p>
+            <a class="btn btn-primary" href="@Url.Action("Create", new { controller = "Account", area = "Admin" })"><i class="icon-plus icon-white"></i>添加用户</a> 
+        </p>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        var dom = $('table#user-list');
+        initDataTable(dom);
+
+        var menu = $('a#user-manage');
+        menuNavActive(menu);
+    });
+</script>
