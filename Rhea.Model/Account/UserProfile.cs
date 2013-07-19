@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using MongoDB.Bson;
@@ -14,58 +15,77 @@ namespace Rhea.Model.Account
         /// <summary>
         /// 用户系统ID
         /// </summary>
+        [Display(Name = "用户系统ID")]
         public ObjectId _id { get; set; }
 
         /// <summary>
-        /// 登录ID
+        /// 用户系统ID,字符串格式
+        /// </summary>
+        [Display(Name = "用户系统ID")]
+        public string Id { get; set; }
+
+        /// <summary>
+        /// 用户ID
         /// </summary>
         /// <remarks>工号,学号,系统序号</remarks>
+        [Display(Name = "用户ID")]
         public string UserId { get; set; }
 
         /// <summary>
-        /// 登录名
+        /// 用户名
         /// </summary>
+        [Display(Name = "用户名")]
         public string UserName { get; set; }
 
         /// <summary>
         /// 密码
         /// </summary>
+        [Display(Name = "密码")]
         public string Password { get; set; }
 
         /// <summary>
         /// 管理组ID
         /// </summary>
+        [UIHint("ManagerGroupDropDownList")]
+        [Display(Name = "管理组ID")]
         public int ManagerGroupId { get; set; }
 
         /// <summary>
         /// 管理组名称
         /// </summary>
+        [Display(Name = "管理组名称")]
         public string ManagerGroupName { get; set; }
 
         /// <summary>
         /// 用户组ID
         /// </summary>
+        [UIHint("UserGroupDropDownList")]
+        [Display(Name = "用户组ID")]
         public int UserGroupId { get; set; }
 
         /// <summary>
         /// 用户组名称
         /// </summary>
+        [Display(Name = "用户组名称")]
         public string UserGroupName { get; set; }
 
         /// <summary>
         /// 上次登录时间
         /// </summary>
+        [Display(Name = "上次登录时间")]
         public DateTime LastLoginTime { get; set; }
 
         /// <summary>
         /// 本次登录时间
         /// </summary>
+        [Display(Name = "本次登录时间")]
         public DateTime CurrentLoginTime { get; set; }
 
         /// <summary>
         /// 是否系统分配帐号
         /// </summary>
         /// <remarks>False:来自学校统一认证</remarks>
+        [Display(Name = "是否系统分配帐号")]
         public bool IsSystem { get; set; }
 
         /// <summary>

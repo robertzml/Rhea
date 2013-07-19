@@ -81,12 +81,14 @@ namespace Rhea.Business.Account
         {
             UserProfile user = new UserProfile();
             user._id = doc["_id"].AsObjectId;
+            user.Id = user._id.ToString();
             user.UserName = doc["userName"].AsString;
             user.UserId = doc.GetValue("userId", "").AsString;
             user.UserGroupId = doc["userGroupId"].AsInt32;
             user.ManagerGroupId = doc["managerGroupId"].AsInt32;
             user.LastLoginTime = doc.GetValue("lastLoginTime", DateTime.Now).ToLocalTime();
             user.CurrentLoginTime = doc.GetValue("currentLoginTime", DateTime.Now).ToLocalTime();
+            user.IsSystem = doc.GetValue("isSystem", false).AsBoolean;
             user.Status = doc.GetValue("status", 0).AsInt32;
 
             GetGroupInfo(ref user);
@@ -137,9 +139,35 @@ namespace Rhea.Business.Account
         /// <summary>
         /// 获取用户信息
         /// </summary>
+        /// <param name="id">系统ID</param>
+        /// <returns></returns>
+        public UserProfile Get(string id)
+        {
+            try
+            {
+                ObjectId _id = new ObjectId(id);
+
+                BsonDocument doc = this.context.FindByKey(RheaCollection.User, _id);
+                if (doc != null)
+                {
+                    UserProfile user = ModelBind(doc);
+                    return user;
+                }
+                else
+                    return null;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 获取用户信息
+        /// </summary>
         /// <param name="userName">用户名</param>
         /// <returns></returns>
-        public UserProfile Get(string userName)
+        public UserProfile GetByUserName(string userName)
         {
             BsonDocument doc = this.context.FindOne(RheaCollection.User, "userName", userName);
             if (doc != null)
@@ -167,6 +195,34 @@ namespace Rhea.Business.Account
             }
 
             return data.OrderBy(r => r.UserId).ToList();
+        }
+
+        /// <summary>
+        /// 用户编辑
+        /// </summary>
+        /// <param name="data">用户数据</param>
+        /// <returns></returns>
+        public bool Edit(UserProfile data)
+        {
+            try
+            {
+                data._id = new ObjectId(data.Id);
+                var query = Query.EQ("_id", data._id);
+
+                var update = Update.Set("managerGroupId", data.ManagerGroupId)
+                    .Set("userGroupId", data.UserGroupId);
+
+                WriteConcernResult result = this.context.Update(RheaCollection.User, query, update);
+
+                if (result.HasLastErrorMessage)
+                    return false;
+                else
+                    return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         /// <summary>

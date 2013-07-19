@@ -42,6 +42,56 @@ namespace Rhea.UI.Areas.Admin.Controllers
             var data = this.accountBusiness.GetList();
             return View(data);
         }
+
+        /// <summary>
+        /// 用户信息
+        /// </summary>
+        /// <param name="id">用户系统ID</param>
+        /// <returns></returns>
+        public ActionResult Details(string id)
+        {
+            var data = this.accountBusiness.Get(id);
+            return View(data);
+        }
+
+        /// <summary>
+        /// 用户编辑
+        /// </summary>
+        /// <param name="id">用户系统ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Edit(string id)
+        {
+            var data = this.accountBusiness.Get(id);
+            return View(data);
+        }
+
+        /// <summary>
+        /// 用户编辑
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Edit(UserProfile model)
+        {
+            if (ModelState.IsValid)
+            {
+                bool result = this.accountBusiness.Edit(model);
+
+                if (result)
+                {
+                    TempData["Message"] = "编辑成功";
+                    return RedirectToAction("Details", "Account", new { area = "Admin", id = model.Id });
+                }
+                else
+                {
+                    ModelState.AddModelError("", "保存失败");
+                }
+            }
+
+            return View(model);
+        }
         #endregion //Action
     }
 }

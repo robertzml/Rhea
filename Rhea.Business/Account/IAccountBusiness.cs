@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MongoDB.Bson;
 using Rhea.Model.Account;
 
 namespace Rhea.Business.Account
@@ -22,15 +23,29 @@ namespace Rhea.Business.Account
         /// <summary>
         /// 获取用户信息
         /// </summary>
+        /// <param name="id">系统ID</param>
+        /// <returns></returns>
+        UserProfile Get(string id);
+
+        /// <summary>
+        /// 获取用户信息
+        /// </summary>
         /// <param name="userName">用户名</param>
         /// <returns></returns>
-        UserProfile Get(string userName);
+        UserProfile GetByUserName(string userName);
 
         /// <summary>
         /// 获取用户列表
         /// </summary>
         /// <returns></returns>
         List<UserProfile> GetList();
+
+        /// <summary>
+        /// 用户编辑
+        /// </summary>
+        /// <param name="data">用户数据</param>
+        /// <returns></returns>
+        bool Edit(UserProfile data);
 
         /// <summary>
         /// 验证密码

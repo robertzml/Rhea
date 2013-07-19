@@ -17,19 +17,22 @@
             <thead>
                 <tr>
                     <th>
-                        ID
+                        @Html.DisplayNameFor(model => model.Id)
                     </th>
                     <th>
-                        用户号
+                        @Html.DisplayNameFor(model => model.UserId)
                     </th>
                     <th>
-                        用户名
+                        @Html.DisplayNameFor(model => model.UserName)
                     </th>                    
                     <th>
-                        用户组
+                        @Html.DisplayNameFor(model => model.UserGroupName)
                     </th>
                     <th>
-                        管理组
+                        @Html.DisplayNameFor(model => model.ManagerGroupName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LastLoginTime)
                     </th>
                     <th>
                         操作
@@ -40,15 +43,16 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@item._id</td>
+                    <td>@item.Id</td>
                     <td>@item.UserId</td>
                     <td>@item.UserName</td>               
                     <td>@item.UserGroupName</td>
                     <td>@item.ManagerGroupName</td>
+                    <td>@item.LastLoginTime</td>
                     <td>
-                        <a class="btn btn-success btn-small" href="@Url.Action("Details", new { controller = "Account", id = item._id, area = "Admin" })"><i class="icon-zoom-in icon-white"></i>查看</a> 
-                        <a class="btn btn-warning btn-small" href="@Url.Action("Edit", new { controller = "Account", id = item._id, area = "Admin" })"><i class="icon-edit icon-white"></i>编辑</a> 
-                        <a class="btn btn-danger btn-small" href="@Url.Action("Delete", new { controller = "Account", id = item._id, area = "Admin" })"><i class="icon-remove icon-white"></i>删除</a>
+                        <a class="btn btn-success btn-small" href="@Url.Action("Details", new { controller = "Account", id = item.Id, area = "Admin" })"><i class="icon-zoom-in icon-white"></i>查看</a> 
+                        <a class="btn btn-warning btn-small" href="@Url.Action("Edit", new { controller = "Account", id = item.Id, area = "Admin" })"><i class="icon-edit icon-white"></i>编辑</a> 
+                        <a class="btn btn-danger btn-small" href="@Url.Action("Delete", new { controller = "Account", id = item.Id, area = "Admin" })"><i class="icon-remove icon-white"></i>删除</a>
                     </td>
                 </tr>
             }
