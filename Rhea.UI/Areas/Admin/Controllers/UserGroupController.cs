@@ -53,6 +53,42 @@ namespace Rhea.UI.Areas.Admin.Controllers
         }
 
         /// <summary>
+        /// 用户组添加
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 用户组添加
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Create(UserGroup model)
+        {
+            if (ModelState.IsValid)
+            {
+                int result = this.userGroupBusiness.Create(model);
+
+                if (result != 0)
+                {
+                    TempData["Message"] = "添加成功";
+                    return RedirectToAction("Details", "UserGroup", new { area = "Admin", id = result });
+                }
+                else
+                {
+                    ModelState.AddModelError("", "保存失败");
+                }
+            }
+
+            return View(model);
+        }
+
+        /// <summary>
         /// 用户组编辑
         /// </summary>
         /// <param name="id">管理组ID</param>

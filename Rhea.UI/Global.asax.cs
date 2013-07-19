@@ -25,6 +25,7 @@ namespace Rhea.UI
             AuthConfig.RegisterAuth();
         }
 
+        /*
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
         {
             HttpApplication app = (HttpApplication)sender;
@@ -40,6 +41,6 @@ namespace Rhea.UI
                     ctx.User = new System.Security.Principal.GenericPrincipal(fi, roles);   //这样当前用户就拥有角色信息了                    
                 }
             }
-        }
+        }*/
     }
 }

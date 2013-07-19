@@ -14,26 +14,36 @@ namespace Rhea.Model.Account
         /// <summary>
         /// ID
         /// </summary>
+        [Required]
         [Display(Name = "ID")]
         public int Id { get; set; }
 
         /// <summary>
         /// 名称
         /// </summary>
+        [Required]
         [Display(Name = "名称")]
         public string Name { get; set; }
 
         /// <summary>
         /// 显示名称
         /// </summary>
+        [Required]
         [Display(Name = "显示名称")]
         public string Title { get; set; }
 
         /// <summary>
         /// 级别
         /// </summary>
+        [Required]
         [Display(Name = "级别")]
         public int Rank { get; set; }
+
+        /// <summary>
+        /// 类型，为1
+        /// </summary>
+        [Display(Name = "类型")]
+        public int Type { get; set; }
 
         /// <summary>
         /// 备注

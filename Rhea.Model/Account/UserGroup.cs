@@ -36,6 +36,12 @@ namespace Rhea.Model.Account
         public int Rank { get; set; }
 
         /// <summary>
+        /// 类型，为2
+        /// </summary>
+        [Display(Name = "类型")]
+        public int Type { get; set; }
+
+        /// <summary>
         /// 备注
         /// </summary>
         [StringLength(500)]

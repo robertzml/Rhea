@@ -6,10 +6,10 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Rhea.Business.Account;
 using Rhea.Model.Account;
+using Rhea.UI.Filters;
 
 namespace Rhea.UI.Areas.Admin.Controllers
-{
-    [Authorize]
+{    
     public class AccountController : Controller
     {        
         #region Field       
@@ -36,8 +36,9 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// 用户列表
         /// </summary>
         /// <returns></returns>
+        [EnhancedAuthorize(Roles = "Root")]
         public ActionResult List()
-        {
+        {           
             var data = this.accountBusiness.GetList();
             return View(data);
         }

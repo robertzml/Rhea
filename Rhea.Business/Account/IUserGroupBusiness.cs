@@ -22,6 +22,13 @@ namespace Rhea.Business.Account
         UserGroup Get(int id);
 
         /// <summary>
+        /// 用户组添加
+        /// </summary>
+        /// <param name="data">用户组数据</param>
+        /// <returns></returns>
+        int Create(UserGroup data);
+
+        /// <summary>
         /// 用户组编辑
         /// </summary>
         /// <param name="data">用户组数据</param>

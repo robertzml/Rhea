@@ -22,6 +22,13 @@ namespace Rhea.Business.Account
         ManagerGroup Get(int id);
 
         /// <summary>
+        /// 管理组添加
+        /// </summary>
+        /// <param name="data">管理组数据</param>
+        /// <returns></returns>
+        int Create(ManagerGroup data);
+
+        /// <summary>
         /// 管理组编辑
         /// </summary>
         /// <param name="data">管理组数据</param>

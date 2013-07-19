@@ -35,6 +35,7 @@ namespace Rhea.Business.Account
             group.Name = doc["name"].AsString;
             group.Title = doc["title"].AsString;
             group.Rank = doc["rank"].AsInt32;
+            group.Type = doc["type"].AsInt32;
             group.Remark = doc.GetValue("remark", "").AsString;
             group.Status = doc.GetValue("status", 0).AsInt32;
 
@@ -77,6 +78,36 @@ namespace Rhea.Business.Account
             }
             else
                 return null;
+        }
+
+        /// <summary>
+        /// 用户组添加
+        /// </summary>
+        /// <param name="data">用户组数据</param>
+        /// <returns></returns>
+        public int Create(UserGroup data)
+        {
+            bool dup = this.context.CheckDuplicateId(RheaCollection.UserGroup, data.Id);
+            if (dup)
+                return 0;
+
+            BsonDocument doc = new BsonDocument
+            {
+                { "id", data.Id },
+                { "name", data.Name },
+                { "title", data.Title },
+                { "rank", data.Rank },
+                { "type", 2 },
+                { "remark", data.Remark ?? "" },
+                { "status", 0 }
+            };
+
+            WriteConcernResult result = this.context.Insert(RheaCollection.UserGroup, doc);
+
+            if (result.HasLastErrorMessage)
+                return 0;
+            else
+                return data.Id;
         }
 
         /// <summary>
