@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace Rhea.Model.Account
 {
@@ -15,6 +16,7 @@ namespace Rhea.Model.Account
         /// <summary>
         /// 用户系统ID
         /// </summary>
+        [BsonId]
         [Display(Name = "用户系统ID")]
         public ObjectId _id { get; set; }
 
@@ -40,6 +42,7 @@ namespace Rhea.Model.Account
         /// <summary>
         /// 密码
         /// </summary>
+        [DataType(DataType.Password)]
         [Display(Name = "密码")]
         public string Password { get; set; }
 

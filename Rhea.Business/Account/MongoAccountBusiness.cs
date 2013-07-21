@@ -198,6 +198,40 @@ namespace Rhea.Business.Account
         }
 
         /// <summary>
+        /// 用户添加
+        /// </summary>
+        /// <param name="data">用户数据</param>
+        /// <returns></returns>
+        public string Create(UserProfile data)
+        {
+            bool dup = this.context.CheckDuplicate(RheaCollection.User, "userId", data.UserId);
+            if (dup)
+                return string.Empty;
+
+            dup = this.context.CheckDuplicate(RheaCollection.User, "userName", data.UserName);
+            if (dup)
+                return string.Empty;
+
+            BsonDocument doc = new BsonDocument
+            {
+                { "userId", data.UserId },
+                { "userName", data.UserName },
+                { "password", Hasher.MD5Encrypt(data.Password) },
+                { "managerGroupId", data.ManagerGroupId },
+                { "userGroupId", data.UserGroupId },
+                { "isSystem", true },           
+                { "status", 0 }
+            };
+
+            WriteConcernResult result = this.context.Insert(RheaCollection.User, doc);
+
+            if (result.HasLastErrorMessage)
+                return string.Empty;
+            else
+                return data._id.ToString();
+        }
+
+        /// <summary>
         /// 用户编辑
         /// </summary>
         /// <param name="data">用户数据</param>

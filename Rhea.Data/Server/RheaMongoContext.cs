@@ -323,6 +323,26 @@ namespace Rhea.Data.Server
             else
                 return true;
         }
+
+        /// <summary>
+        /// 查找是否有重复值
+        /// </summary>
+        /// <param name="collectionName">集合名称</param>
+        /// <param name="key">键</param>
+        /// <param name="value">值</param>
+        /// <returns></returns>
+        public bool CheckDuplicate(string collectionName, string key, BsonValue value)
+        {
+            MongoCollection<BsonDocument> collection = this.database.GetCollection<BsonDocument>(collectionName);
+
+            var query = Query.EQ(key, value);
+            var data = collection.Find(query);
+
+            if (data.Count() == 0)
+                return false;
+            else
+                return true;
+        }
         #endregion //Method
 
         #region Property

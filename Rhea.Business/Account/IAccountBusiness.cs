@@ -41,6 +41,13 @@ namespace Rhea.Business.Account
         List<UserProfile> GetList();
 
         /// <summary>
+        /// 用户添加
+        /// </summary>
+        /// <param name="data">用户数据</param>
+        /// <returns></returns>
+        string Create(UserProfile data);
+
+        /// <summary>
         /// 用户编辑
         /// </summary>
         /// <param name="data">用户数据</param>

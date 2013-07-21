@@ -3,7 +3,7 @@
 @model int?
 
 <select id="ManagerGroupId" name="ManagerGroupId">
-    <option value="">-- 请选择 --</option>
+    <option value="0">-- 请选择 --</option>
     @{
         IManagerGroupBusiness business = new MongoManagerGroupBusiness();
         List<ManagerGroup> groups = business.GetList();

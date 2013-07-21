@@ -55,6 +55,42 @@ namespace Rhea.UI.Areas.Admin.Controllers
         }
 
         /// <summary>
+        /// 用户添加
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 用户添加
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Create(UserProfile model)
+        {
+            if (ModelState.IsValid)
+            {
+                string result = this.accountBusiness.Create(model);
+
+                if (!string.IsNullOrEmpty(result))
+                {
+                    TempData["Message"] = "添加成功";
+                    return RedirectToAction("List", "Account", new { area = "Admin" });
+                }
+                else
+                {
+                    ModelState.AddModelError("", "保存失败");
+                }
+            }
+
+            return View(model);
+        }
+
+        /// <summary>
         /// 用户编辑
         /// </summary>
         /// <param name="id">用户系统ID</param>

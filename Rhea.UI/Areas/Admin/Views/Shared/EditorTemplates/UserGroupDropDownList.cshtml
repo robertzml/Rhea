@@ -3,7 +3,7 @@
 @model int?
 
 <select id="UserGroupId" name="UserGroupId">
-    <option value="">-- 请选择 --</option>
+    <option value="0">-- 请选择 --</option>
     @{
         IUserGroupBusiness business = new MongoUserGroupBusiness();
         List<UserGroup> groups = business.GetList();
