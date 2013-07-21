@@ -381,7 +381,7 @@ namespace Rhea.Business.Estate
         /// <returns></returns>
         public List<RoomFunctionCode> GetFunctionCodeList()
         {
-            BsonDocument doc = this.context.FindOne("generalProperty", "name", "RoomFunctionCode");
+            BsonDocument doc = this.context.FindOne(EstateCollection.Dictionary, "name", "RoomFunctionCode");
 
             List<RoomFunctionCode> data = new List<RoomFunctionCode>();
 

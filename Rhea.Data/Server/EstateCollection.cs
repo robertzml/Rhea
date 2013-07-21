@@ -28,6 +28,12 @@ namespace Rhea.Data.Server
         /// room
         /// </summary>
         public static readonly string Room = "room";
+
+        /// <summary>
+        /// 字典表
+        /// dictionary
+        /// </summary>
+        public static readonly string Dictionary = "dictionary";
         #endregion //Field
     }
 }

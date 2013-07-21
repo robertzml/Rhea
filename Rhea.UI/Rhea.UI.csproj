@@ -166,6 +166,7 @@
     <Compile Include="Areas\Admin\Controllers\BuildingController.cs" />
     <Compile Include="Areas\Admin\Controllers\BuildingGroupController.cs" />
     <Compile Include="Areas\Admin\Controllers\DepartmentController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DictionaryController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManagerGroupController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoomController.cs" />

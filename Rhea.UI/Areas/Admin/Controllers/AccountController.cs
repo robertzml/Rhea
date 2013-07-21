@@ -9,10 +9,11 @@ using Rhea.Model.Account;
 using Rhea.UI.Filters;
 
 namespace Rhea.UI.Areas.Admin.Controllers
-{    
+{
+    [EnhancedAuthorize(Roles = "Root")]
     public class AccountController : Controller
-    {        
-        #region Field       
+    {
+        #region Field
         /// <summary>
         /// 管理业务
         /// </summary>
@@ -35,10 +36,9 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// <summary>
         /// 用户列表
         /// </summary>
-        /// <returns></returns>
-        [EnhancedAuthorize(Roles = "Root")]
+        /// <returns></returns>       
         public ActionResult List()
-        {           
+        {
             var data = this.accountBusiness.GetList();
             return View(data);
         }
