@@ -55,6 +55,8 @@ namespace Rhea.Business.Estate
             buildingGroup.Remark = doc.GetValue("remark", "").AsString;            
             buildingGroup.Status = doc.GetValue("status", 0).AsInt32;
 
+            buildingGroup.UsableArea = GetUsableArea(buildingGroup.Id);
+
             if (buildingGroup.BuildDate != null)
                 buildingGroup.BuildDate = ((DateTime)buildingGroup.BuildDate).ToLocalTime();
             return buildingGroup;
@@ -227,6 +229,27 @@ namespace Rhea.Business.Estate
             var query = Query.NE("status", 1);
             long count = this.context.Count(EstateCollection.BuildingGroup, query);
             return (int)count;
+        }
+
+        /// <summary>
+        /// 获取使用面积
+        /// </summary>
+        /// <param name="id">楼群ID</param>
+        /// <returns></returns>
+        public double GetUsableArea(int id)
+        {
+            //Optimize
+            IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
+            var buildings = buildingBusiness.GetListByBuildingGroup(id);
+            double area = 0;
+
+            foreach (var b in buildings)
+            {
+                double a = buildingBusiness.GetUsableArea(b.Id);
+                area += a;
+            }
+
+            return area;
         }
         #endregion //Method
     }

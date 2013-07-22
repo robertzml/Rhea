@@ -188,6 +188,16 @@ namespace Rhea.Business.Estate
         {
             throw new NotImplementedException();
         }
-        #endregion //Method
+
+        public double GetUsableArea(int buildingId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public double GetFloorUsableArea(int buildingId, int floor)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion //Method       
     }
 }

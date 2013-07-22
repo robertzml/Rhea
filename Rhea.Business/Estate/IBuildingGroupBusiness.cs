@@ -57,5 +57,12 @@ namespace Rhea.Business.Estate
         /// </summary>
         /// <returns></returns>
         int Count();
+
+        /// <summary>
+        /// 获取使用面积
+        /// </summary>
+        /// <param name="id">楼群ID</param>
+        /// <returns></returns>
+        double GetUsableArea(int id);
     }
 }

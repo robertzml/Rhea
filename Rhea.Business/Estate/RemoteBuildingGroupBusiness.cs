@@ -112,5 +112,11 @@ namespace Rhea.Business.Estate
             throw new NotImplementedException();
         }
         #endregion //Method
+
+
+        public double GetUsableArea(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

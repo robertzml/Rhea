@@ -36,12 +36,13 @@ namespace Rhea.Business.Estate
             building.ImageUrl = doc.GetValue("imageUrl", "").AsString;
             building.BuildingGroupId = doc.GetValue("buildingGroupId").AsInt32;
             building.BuildArea = (double?)doc.GetValue("buildArea", null);
-            building.UsableArea = (double?)doc.GetValue("usableArea", null);
+            //building.UsableArea = (double?)doc.GetValue("usableArea", null);
             building.AboveGroundFloor = (int?)doc.GetValue("aboveGroundFloor", null);
             building.UnderGroundFloor = (int?)doc.GetValue("underGroundFloor", null);
             building.UseType = doc["useType"].AsInt32;
             building.Remark = doc.GetValue("remark", "").AsString;
             building.Status = doc.GetValue("status", 0).AsInt32;
+            building.UsableArea = GetUsableArea(building.Id);
 
             if (doc.Contains("floors"))
             {
@@ -51,19 +52,21 @@ namespace Rhea.Business.Estate
                     BsonDocument d = array[i].AsBsonDocument;
                     if (d.GetValue("status", 0).AsInt32 == 1)
                         continue;
-                    building.Floors.Add(
-                        new Floor
-                        {
-                            Id = d["id"].AsInt32,
-                            Name = d["name"].AsString,
-                            Number = d["number"].AsInt32,
-                            BuildArea = (double?)d.GetValue("buildArea", null),
-                            UsableArea = (double?)d.GetValue("usableArea", null),
-                            ImageUrl = d.GetValue("imageUrl", "").AsString,
-                            Remark = d.GetValue("remark", "").AsString,
-                            Status = d.GetValue("status", 0).AsInt32
-                        }
-                    );
+
+                    Floor f = new Floor
+                    {
+                        Id = d["id"].AsInt32,
+                        Name = d["name"].AsString,
+                        Number = d["number"].AsInt32,
+                        BuildArea = (double?)d.GetValue("buildArea", null),
+                        //UsableArea = (double?)d.GetValue("usableArea", null),
+                        ImageUrl = d.GetValue("imageUrl", "").AsString,
+                        Remark = d.GetValue("remark", "").AsString,
+                        Status = d.GetValue("status", 0).AsInt32
+                    };
+                    f.UsableArea = GetFloorUsableArea(building.Id, f.Number);
+
+                    building.Floors.Add(f);
                 }
             }
 
@@ -85,7 +88,7 @@ namespace Rhea.Business.Estate
             {
                 if (doc.GetValue("status", 0).AsInt32 == 1)
                     continue;
-                Building building = ModelBind(doc);
+                Building building = ModelBind(doc);             
                 buildings.Add(building);
             }
 
@@ -106,47 +109,11 @@ namespace Rhea.Business.Estate
             {
                 if (doc.GetValue("status", 0).AsInt32 == 1)
                     continue;
-                Building building = ModelBind(doc);
+                Building building = ModelBind(doc);              
                 buildings.Add(building);
             }
 
             return buildings;
-        }
-
-        /// <summary>
-        /// 获取楼宇
-        /// </summary>
-        /// <param name="id">楼宇ID</param>
-        /// <returns></returns>
-        public Building Get(int id)
-        {
-            BsonDocument doc = this.context.FindOne(EstateCollection.Building, "id", id);
-
-            if (doc != null)
-            {
-                Building building = ModelBind(doc);
-                if (building.Status == 1)
-                    return null;
-
-                return building;
-            }
-            else
-                return null;
-        }
-
-        /// <summary>
-        /// 得到楼宇名称
-        /// </summary>
-        /// <param name="id">楼宇ID</param>
-        /// <returns></returns>
-        public string GetName(int id)
-        {
-            BsonDocument doc = this.context.FindOne(EstateCollection.Building, "id", id);
-
-            if (doc != null)
-                return doc["name"].AsString;
-            else
-                return string.Empty;
         }
 
         /// <summary>
@@ -173,10 +140,10 @@ namespace Rhea.Business.Estate
                     }
                 }}
             };
-                        
+
             AggregateResult result = this.context.Aggregate(EstateCollection.Room, pipeline);
 
-            List<Building> buildings = new List<Building>();           
+            List<Building> buildings = new List<Building>();
             foreach (var doc in result.ResultDocuments)
             {
                 int bid = doc["_id"].AsInt32;
@@ -190,13 +157,49 @@ namespace Rhea.Business.Estate
         }
 
         /// <summary>
+        /// 获取楼宇
+        /// </summary>
+        /// <param name="id">楼宇ID</param>
+        /// <returns></returns>
+        public Building Get(int id)
+        {
+            BsonDocument doc = this.context.FindOne(EstateCollection.Building, "id", id);
+
+            if (doc != null)
+            {
+                Building building = ModelBind(doc);
+                if (building.Status == 1)
+                    return null;
+                
+                return building;
+            }
+            else
+                return null;
+        }
+
+        /// <summary>
+        /// 得到楼宇名称
+        /// </summary>
+        /// <param name="id">楼宇ID</param>
+        /// <returns></returns>
+        public string GetName(int id)
+        {
+            BsonDocument doc = this.context.FindOne(EstateCollection.Building, "id", id);
+
+            if (doc != null)
+                return doc["name"].AsString;
+            else
+                return string.Empty;
+        }
+
+        /// <summary>
         /// 添加楼宇
         /// </summary>
         /// <param name="data">楼宇数据</param>
         /// <returns>楼宇ID,0:添加失败</returns>
         public int Create(Building data)
         {
-            data.Id = this.context.FindSequenceIndex(EstateCollection.Building) + 1;           
+            data.Id = this.context.FindSequenceIndex(EstateCollection.Building) + 1;
 
             BsonDocument doc = new BsonDocument
             {
@@ -265,7 +268,6 @@ namespace Rhea.Business.Estate
             else
                 return true;
         }
-
 
         /// <summary>
         /// 获取楼层
@@ -431,6 +433,74 @@ namespace Rhea.Business.Estate
 
             return result.ResultDocuments.Count();
         }
-        #endregion //Method        
+
+        /// <summary>
+        /// 获取楼宇使用面积
+        /// </summary>
+        /// <param name="buildingId">楼宇ID</param>
+        /// <returns></returns>
+        public double GetUsableArea(int buildingId)
+        {
+            BsonDocument[] pipeline = {
+                new BsonDocument {
+                    { "$match", new BsonDocument {
+                        { "buildingId", buildingId }
+                    }}
+                },
+                new BsonDocument {
+                    { "$group", new BsonDocument {
+                        { "_id", "id" },
+                        { "area", new BsonDocument {
+                            { "$sum", "$usableArea" }
+                        }}
+                    }}
+                }
+            };
+
+            AggregateResult result = this.context.Aggregate(EstateCollection.Room, pipeline);
+
+            var doc = result.ResultDocuments.SingleOrDefault();
+
+            if (doc != null)
+                return Math.Round(doc["area"].AsDouble, 2);
+            else
+                return 0;
+        }
+
+        /// <summary>
+        /// 获取楼层使用面积
+        /// </summary>
+        /// <param name="buildingId">楼宇ID</param>
+        /// <param name="floor">楼层</param>
+        /// <returns></returns>
+        public double GetFloorUsableArea(int buildingId, int floor)
+        {
+            BsonDocument[] pipeline = {
+                new BsonDocument {
+                    { "$match", new BsonDocument {
+                        { "buildingId", buildingId },
+                        { "floor", floor }
+                    }}
+                },
+                new BsonDocument {
+                    { "$group", new BsonDocument {
+                        { "_id", "id" },
+                        { "area", new BsonDocument {
+                            { "$sum", "$usableArea" }
+                        }}
+                    }}
+                }
+            };
+
+            AggregateResult result = this.context.Aggregate(EstateCollection.Room, pipeline);
+
+            var doc = result.ResultDocuments.SingleOrDefault();
+
+            if (doc != null)
+                return Math.Round(doc["area"].AsDouble, 2);
+            else
+                return 0;
+        }
+        #endregion //Method
     }
 }

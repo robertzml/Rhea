@@ -108,5 +108,20 @@ namespace Rhea.Business.Estate
         /// </summary>
         /// <returns></returns>
         int FloorCount();
+
+        /// <summary>
+        /// 获取楼宇使用面积
+        /// </summary>
+        /// <param name="buildingId">楼宇ID</param>
+        /// <returns></returns>
+        double GetUsableArea(int buildingId);
+
+        /// <summary>
+        /// 获取楼层使用面积
+        /// </summary>
+        /// <param name="buildingId">楼宇ID</param>
+        /// <param name="floor">楼层</param>
+        /// <returns></returns>
+        double GetFloorUsableArea(int buildingId, int floor);
     }
 }

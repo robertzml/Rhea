@@ -28,6 +28,8 @@
 </div>
 
 @section scripts {
+@Scripts.Render("~/bundles/colorbox")
+
 <script type="text/javascript">
     $(function () {
         $.getJSON('/Estate/Building/GetListByBuildingGroup', { buildingGroupId: @Model }, function (response) {
@@ -45,6 +47,9 @@
                 return false;
             });
         });
+
+       
+        $('a#building-group-pic').colorbox({ transition: "elastic", maxWidth: "95%", maxHeight: "95%" }); 
 
         $('a#building-group-summary').click(function() {
             menuNavActive($(this));

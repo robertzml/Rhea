@@ -142,7 +142,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <param name="departmentId">部门ID</param>
         /// <returns></returns>
         public JsonResult GetListByDepartment(int departmentId)
-        {
+        {           
             var data = this.buildingBusiness.GetListByDepartment(departmentId);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
