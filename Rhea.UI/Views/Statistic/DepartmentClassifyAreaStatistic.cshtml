@@ -1,0 +1,213 @@
+﻿@{
+    ViewBag.Title = "学院分类用房统计";
+    Layout = null;
+}
+
+<div class="box">
+    <div class="box-header well" data-original-title>
+        <h2>
+            <i class="icon-align-left"></i>@ViewBag.Title</h2>
+    </div>
+
+    <div class="box-content">
+        <div class="row-fluid">
+            <div class="span12">
+                <form class="form-inline">
+                    <label for="department-list">选择：</label>
+                    <select id="department-list">
+                    </select>
+                    <label for="classify-list">分类：</label>
+                    <select id="classify-list">
+                        <option value="0">全部</option>
+                        <option value="1">办公分类</option>
+                        <option value="2">教学分类</option>
+                        <option value="3">实验分类</option>
+                        <option value="4">科研分类</option>
+                    </select>
+                </form>                
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span12">
+                <div id="container-department-classify-pie" style="width: 99%; height:400px;">
+                </div>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span12">
+                <div id="container-department-classify-column" style="width: 99%; height:400px;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        var dataList;
+        var colors = Highcharts.getOptions().colors;      
+
+        $.getJSON('/Statistic/DepartmentClassifyAreaData', { type: 1 }, function (response) {
+            dataList = response;
+            initSelectList(response);
+        });
+
+        function initSelectList(data) {
+            $.each(data, function (i, item) {
+                $('#department-list').append("<option value='" + item.DepartmentId + "'>" + item.DepartmentName + "</option>");
+            });
+            setPieChart(data[0], 0);
+            setColumnChart(data[0], 0);
+        }
+
+        $('#department-list').change(function () {
+            var id = $(this).val();
+            for (var i = 0; i < dataList.length; i++) {
+                if (dataList[i].DepartmentId == id) {
+                    setPieChart(dataList[i], 0);
+                    setColumnChart(dataList[i], 0);
+                    break;
+                }
+            }
+            $('#classify-list').get(0).selectedIndex = 0;
+        });
+
+        $('#classify-list').change(function () {
+            var id = $('#department-list').val();
+            var cl = $(this).val();
+            for (var i = 0; i < dataList.length; i++) {
+                if (dataList[i].DepartmentId == id) {
+                    setPieChart(dataList[i], cl);
+                    setColumnChart(dataList[i], cl);
+                    break;
+                }
+            }
+        });
+
+        function pushData(option, data) {
+            $.each(data, function (i, item) {
+                option.series[0].data.push([item.FunctionProperty, parseFloat(item.Area)]);
+            });
+        }
+
+        function pushData2(option, data) {
+            $.each(data, function (i, item) {
+                option.series[0].data.push([item.FunctionProperty, parseFloat(item.Area)]);
+                option.xAxis.categories.push(item.FunctionProperty);
+            });
+        }
+
+        function setPieChart(data, type) {
+            var option = {
+                chart: {
+                    renderTo: 'container-department-classify-pie',
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                credits: {
+                    enabled: false
+                },
+                title: {
+                    text: '分类用房比例图'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.2f}%</b>',
+                    percentageDecimals: 2
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            color: '#000000',
+                            connectorColor: '#000000',
+                            formatter: function () {
+                                return '<b>' + this.point.name + '</b>: ' + this.percentage.toFixed(2) + ' %';
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: '比例',
+                    data: []
+                }]
+            };
+
+            if (type == 0) {
+                for (var i = 0; i < 4; i++) {
+                    option.series[0].data.push([data.FirstClassify[i].Title, parseFloat(data.FirstClassify[i].Area)]);
+                }
+            } else {
+                for (var i = 0; i < 4; i++) {
+                    if (data.FirstClassify[i].FunctionFirstCode == type) {
+                        pushData(option, data.FirstClassify[i].SecondClassify);
+                        break;
+                    }
+                }
+            }
+
+            var chart1 = new Highcharts.Chart(option);
+        }
+
+        function setColumnChart(data, type) {
+            var option = {
+                chart: {
+                    renderTo: 'container-department-classify-column',
+                    type: 'column'
+                },
+                credits: {
+                    enabled: false
+                },
+                title: {
+                    text: '分类用房柱状图'
+                },
+                xAxis: {
+                    categories: []
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: '面积 (m2)'
+                    }
+                },
+                tooltip: {
+                    formatter: function () {
+                        return '' + this.x + ': ' + this.y + ' m<sup>2</sup>';
+                    }
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+                series: [{
+                    name: "面积",
+                    color: colors[5],
+                    data: []
+                }]
+            };
+
+            if (type == 0) {
+                for (var i = 0; i < 4; i++) {
+                    option.series[0].data.push([data.FirstClassify[i].Title, parseFloat(data.FirstClassify[i].Area)]);
+                    option.xAxis.categories.push(data.FirstClassify[i].Title);
+                }
+            } else {
+                for (var i = 0; i < 4; i++) {
+                    if (data.FirstClassify[i].FunctionFirstCode == type) {
+                        pushData2(option, data.FirstClassify[i].SecondClassify);
+                        break;
+                    }
+                }
+            }
+
+            var chart2 = new Highcharts.Chart(option);
+        }
+    });
+</script>

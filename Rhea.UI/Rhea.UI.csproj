@@ -273,6 +273,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Images\ajax-loader-7.gif" />
     <Content Include="Images\map1.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -666,6 +667,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Statistic\DepartmentBuildingAreaStatistic.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Statistic\DepartmentClassifyAreaStatistic.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Statistic\DepartmentClassifyAreaCompare.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

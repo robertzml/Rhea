@@ -125,8 +125,9 @@ namespace Rhea.Business
         /// 获取部门分类面积
         /// </summary>
         /// <param name="departmentId">部门ID</param>
+        /// <param name="sortByFirstArea">是否按一级分类排序</param>
         /// <returns></returns>
-        public DepartmentClassifyAreaModel GetDepartmentClassifyArea(int departmentId)
+        public DepartmentClassifyAreaModel GetDepartmentClassifyArea(int departmentId, bool sortByFirstArea = true)
         {
             IDepartmentBusiness departmentBusiness = new MongoDepartmentBusiness();
             Department department = departmentBusiness.Get(departmentId);
@@ -148,7 +149,10 @@ namespace Rhea.Business
             data.FirstClassify.Add(GetFirstClassifyArea(departmentId, 3, "实验用房", functionCodes));
             data.FirstClassify.Add(GetFirstClassifyArea(departmentId, 4, "科研用房", functionCodes));
 
-            data.FirstClassify = data.FirstClassify.OrderByDescending(r => r.Area).ToList();
+            if (sortByFirstArea)
+                data.FirstClassify = data.FirstClassify.OrderByDescending(r => r.Area).ToList();
+
+            data.TotalArea = data.FirstClassify.Sum(r => r.Area);
 
             return data;
         }

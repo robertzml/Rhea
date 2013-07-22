@@ -15,6 +15,8 @@
             <li><a href="#" id="department-usable-area-compare">学院使用面积比较</a></li>
             <li><a href="#" id="department-build-area-compare">学院建筑面积比较</a></li>
             <li><a href="#" id="department-building-area-statistic">学院楼宇用房统计</a></li>
+            <li><a href="#" id="department-classify-area-statistic">学院分类用房统计</a></li>
+            <li><a href="#" id="department-classify-area-compare">学院分类用房比较</a></li>
         </ul>
     </div>
 </div>
@@ -56,6 +58,18 @@
         $('a#department-building-area-statistic').click(function () {
             menuNavActive($(this));
             ajaxLoadPage2("DepartmentBuildingAreaStatistic", "Statistic", {});
+            return false;
+        });
+
+        $('a#department-classify-area-statistic').click(function () {
+            menuNavActive($(this));
+            ajaxLoadPage2("DepartmentClassifyAreaStatistic", "Statistic", {});
+            return false;
+        });
+
+        $('a#department-classify-area-compare').click(function () {
+            menuNavActive($(this));
+            ajaxLoadPage2("DepartmentClassifyAreaCompare", "Statistic", {});
             return false;
         });
     });

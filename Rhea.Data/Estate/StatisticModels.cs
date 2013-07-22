@@ -102,6 +102,11 @@ namespace Rhea.Data.Estate
         /// 一级分类
         /// </summary>
         public List<DepartmentFirstClassifyAreaModel> FirstClassify { get; set; }
+
+        /// <summary>
+        /// 使用总面积
+        /// </summary>
+        public double TotalArea { get; set; }
     }
 
     /// <summary>

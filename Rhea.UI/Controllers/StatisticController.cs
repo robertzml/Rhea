@@ -125,6 +125,24 @@ namespace Rhea.UI.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// 学院分类用房统计
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult DepartmentClassifyAreaStatistic()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 学院分类用房比较
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult DepartmentClassifyAreaCompare()
+        {
+            return View();
+        }
         #endregion //Action
 
         #region Json
@@ -219,13 +237,12 @@ namespace Rhea.UI.Controllers
         }
 
         /// <summary>
-        /// 部门楼宇用房面积
+        /// 所有部门分楼宇用房面积
         /// </summary>
         /// <param name="type">部门类型</param>
         /// <returns></returns>
         public JsonResult DepartmentBuildingAreaStatisticData(int type)
         {
-            //get departments
             IDepartmentBusiness departmentBusiness = new MongoDepartmentBusiness();
             var departments = departmentBusiness.GetList().Where(r => r.Type == type);
 
@@ -234,6 +251,27 @@ namespace Rhea.UI.Controllers
             {
                 DepartmentTotalAreaModel m = this.statisticBusiness.GetDepartmentTotalArea(department.Id);
                 data.Add(m);
+            }
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 所有部门分类用房统计
+        /// </summary>
+        /// <param name="type">部门类型</param>
+        /// <returns></returns>
+        public JsonResult DepartmentClassifyAreaData(int type)
+        {
+            IDepartmentBusiness departmentBusiness = new MongoDepartmentBusiness();
+            var departments = departmentBusiness.GetList().Where(r => r.Type == type);
+
+            List<DepartmentClassifyAreaModel> data = new List<DepartmentClassifyAreaModel>();
+            foreach (var department in departments)
+            {
+                DepartmentClassifyAreaModel model = statisticBusiness.GetDepartmentClassifyArea(department.Id, false);
+
+                data.Add(model);
             }
 
             return Json(data, JsonRequestBehavior.AllowGet);

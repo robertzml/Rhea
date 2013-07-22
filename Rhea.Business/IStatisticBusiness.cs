@@ -34,9 +34,10 @@ namespace Rhea.Business
         /// <summary>
         /// 获取部门分类面积
         /// </summary>
-        /// <param name="departmentId"></param>
+        /// <param name="departmentId">部门ID</param>
+        /// <param name="sortByFirstArea">是否按一级分类排序</param>
         /// <returns></returns>
-        DepartmentClassifyAreaModel GetDepartmentClassifyArea(int departmentId);     
+        DepartmentClassifyAreaModel GetDepartmentClassifyArea(int departmentId, bool sortByFirstArea = true);     
        
         /// <summary>
         /// 根据类别得到楼群建筑面积
