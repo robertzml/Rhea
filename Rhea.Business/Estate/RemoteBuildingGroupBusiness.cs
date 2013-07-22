@@ -11,7 +11,7 @@ namespace Rhea.Business.Estate
     /// <summary>
     /// 楼群业务类
     /// </summary>
-    public class RemoteBuildingGroupBusiness : IBuildingGroupBusiness
+    public class RemoteBuildingGroupBusiness //: IBuildingGroupBusiness
     {
         #region Method
         /// <summary>

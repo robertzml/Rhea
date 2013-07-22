@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Rhea.UI.Models.DepartmentBuildingModel>
+﻿@model Rhea.Data.Estate.DepartmentTotalAreaModel
 
 @{
     ViewBag.Title = "部门分楼宇数据";
@@ -30,12 +30,12 @@
                     <tfoot>
                         <tr>
                             <td>合计</td>
-                            <td>@Model.Sum(r => r.RoomCount)</td>
-                            <td>@Model.Sum(r => r.TotalUsableArea)</td>
+                            <td>@Model.TotalRoomCount</td>
+                            <td>@Model.UsableArea</td>
                         </tr>
                     </tfoot>
                     <tbody>
-                    @foreach (var item in Model)
+                    @foreach (var item in Model.BuildingArea)
                     {
                         <tr>
                             <td>
@@ -45,7 +45,7 @@
                                 @item.RoomCount
                             </td>
                             <td>
-                                @item.TotalUsableArea
+                                @item.UsableArea
                             </td>
                         </tr>
                     }

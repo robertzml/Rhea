@@ -10,7 +10,7 @@ namespace Rhea.Business
     /// <summary>
     /// 统计业务接口
     /// </summary>
-    public interface IStatisticService
+    public interface IStatisticBusiness
     {
         /// <summary>
         /// 获取部门二级分类面积
@@ -44,5 +44,12 @@ namespace Rhea.Business
         /// <param name="useType">楼宇使用类型</param>
         /// <returns></returns>
         double GetBuildingAreaByType(int buildingType);
+
+         /// <summary>
+        /// 获取部门总面积模型
+        /// </summary>
+        /// <param name="departmentId">部门ID</param>
+        /// <returns></returns>
+        DepartmentTotalAreaModel GetDepartmentTotalArea(int departmentId);
     }
 }

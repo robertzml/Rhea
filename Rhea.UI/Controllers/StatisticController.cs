@@ -20,15 +20,15 @@ namespace Rhea.UI.Controllers
         /// <summary>
         /// 统计业务
         /// </summary>
-        private IStatisticService statisticService;
+        private IStatisticBusiness statisticBusiness;
         #endregion //Field
 
         #region Function
         protected override void Initialize(RequestContext requestContext)
         {
-            if (statisticService == null)
+            if (statisticBusiness == null)
             {
-                statisticService = new MongoStatisticService();
+                statisticBusiness = new MongoStatisticBusiness();
             }
 
             base.Initialize(requestContext);
@@ -82,6 +82,24 @@ namespace Rhea.UI.Controllers
         }
 
         /// <summary>
+        /// 楼群使用面积比较
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult BuildingGroupUsableAreaCompare()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 楼群建筑面积比较
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult BuildingGroupBuildAreaCompare()
+        {
+            return View();
+        }
+
+        /// <summary>
         /// 学院使用面积比较
         /// </summary>
         /// <returns></returns>
@@ -98,9 +116,51 @@ namespace Rhea.UI.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// 学院楼宇用房统计
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult DepartmentBuildingAreaStatistic()
+        {
+            return View();
+        }
         #endregion //Action
 
         #region Json
+        /// <summary>
+        /// 楼群面积比较
+        /// </summary>
+        /// <param name="areaType">面积类型, 1:使用面积, 2:建筑面积</param>
+        /// <returns></returns>
+        public JsonResult BuildingGroupTotalAreaCompareData(int areaType)
+        {
+            List<BuildingGroupTotalAreaModel> data = new List<BuildingGroupTotalAreaModel>();
+
+            IBuildingGroupBusiness buildingGroupBusiness = new MongoBuildingGroupBusiness();
+
+            var buildingGroups = buildingGroupBusiness.GetList();
+            foreach (var buildingGroup in buildingGroups)
+            {
+                BuildingGroupTotalAreaModel model = new BuildingGroupTotalAreaModel
+                {
+                    BuildingGroupId = buildingGroup.Id,
+                    BuildingGroupName = buildingGroup.Name,
+                    BuildArea = Math.Round(Convert.ToDouble(buildingGroup.BuildArea), RheaConstant.AreaDecimalDigits),
+                    UsableArea = Math.Round(Convert.ToDouble(buildingGroup.UsableArea), RheaConstant.AreaDecimalDigits)
+                };
+                data.Add(model);
+            }
+
+            if (areaType == 1)
+            {
+                data = data.OrderByDescending(r => r.UsableArea).ToList();
+            }
+            else
+                data = data.OrderByDescending(r => r.BuildArea).ToList();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
         /// <summary>
         /// 学校总体建筑分类面积数据
         /// </summary>
@@ -112,7 +172,7 @@ namespace Rhea.UI.Controllers
             for (int i = 1; i <= 4; i++)
             {
                 UseTypeAreaModel data = new UseTypeAreaModel();
-                data.BuildArea = this.statisticService.GetBuildingAreaByType(i);
+                data.BuildArea = this.statisticBusiness.GetBuildingAreaByType(i);
                 data.TypeName = ((BuildingUseType)i).DisplayName();
 
                 model.Add(data);
@@ -143,8 +203,8 @@ namespace Rhea.UI.Controllers
                 {
                     DepartmentId = department.Id,
                     DepartmentName = department.Name,
-                    BuildArea = Convert.ToDouble(rooms.Sum(r => r.BuildArea)),
-                    UsableArea = Math.Round(Convert.ToDouble(rooms.Sum(r => r.UsableArea)), 2)
+                    BuildArea = Math.Round(Convert.ToDouble(rooms.Sum(r => r.BuildArea)), RheaConstant.AreaDecimalDigits),
+                    UsableArea = Math.Round(Convert.ToDouble(rooms.Sum(r => r.UsableArea)), RheaConstant.AreaDecimalDigits)
                 };
 
                 data.Add(model);
@@ -154,6 +214,27 @@ namespace Rhea.UI.Controllers
                 data = data.OrderByDescending(r => r.UsableArea).ToList();
             else
                 data = data.OrderByDescending(r => r.BuildArea).ToList();
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 部门楼宇用房面积
+        /// </summary>
+        /// <param name="type">部门类型</param>
+        /// <returns></returns>
+        public JsonResult DepartmentBuildingAreaStatisticData(int type)
+        {
+            //get departments
+            IDepartmentBusiness departmentBusiness = new MongoDepartmentBusiness();
+            var departments = departmentBusiness.GetList().Where(r => r.Type == type);
+
+            List<DepartmentTotalAreaModel> data = new List<DepartmentTotalAreaModel>();
+            foreach (var department in departments)
+            {
+                DepartmentTotalAreaModel m = this.statisticBusiness.GetDepartmentTotalArea(department.Id);
+                data.Add(m);
+            }
 
             return Json(data, JsonRequestBehavior.AllowGet);
         }

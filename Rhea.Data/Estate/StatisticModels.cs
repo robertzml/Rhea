@@ -116,7 +116,54 @@ namespace Rhea.Data.Estate
 
         public string DepartmentName { get; set; }
 
+        /// <summary>
+        /// 总建筑面积
+        /// </summary>
         public double BuildArea { get; set; }
+
+        /// <summary>
+        /// 总使用面积
+        /// </summary>
+        public double UsableArea { get; set; }
+
+        /// <summary>
+        /// 部门分楼宇使用面积
+        /// </summary>
+        public List<DepartmentBuildingAreaModel> BuildingArea { get; set; }
+
+        /// <summary>
+        /// 房间总数
+        /// </summary>
+        public int TotalRoomCount { get; set; }
+    }
+
+    /// <summary>
+    /// 楼群总面积模型
+    /// </summary>
+    /// <remarks>
+    /// 总建筑面积，总使用面积
+    /// </remarks>
+    public class BuildingGroupTotalAreaModel
+    {
+        public int BuildingGroupId { get; set; }
+
+        public string BuildingGroupName { get; set; }
+
+        public double BuildArea { get; set; }
+
+        public double UsableArea { get; set; }
+    }
+
+    /// <summary>
+    /// 部门单个楼宇内用房面积
+    /// </summary>
+    public class DepartmentBuildingAreaModel
+    {
+        public int BuildingId { get; set; }
+
+        public string BuildingName { get; set; }
+
+        public int RoomCount { get; set; }
 
         public double UsableArea { get; set; }
     }

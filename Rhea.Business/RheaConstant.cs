@@ -33,6 +33,11 @@ namespace Rhea.Business
         /// SVG根目录
         /// </summary>
         public static readonly string SvgRoot = "/Attachment/svg/";
+
+        /// <summary>
+        /// 面积小数位数
+        /// </summary>
+        public static readonly int AreaDecimalDigits = 2;
         #endregion //Field
     }
 }

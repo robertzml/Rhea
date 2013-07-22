@@ -1,0 +1,111 @@
+﻿@{
+    ViewBag.Title = "楼群建筑面积比较";
+    Layout = null;
+}
+
+<div class="box">
+    <div class="box-header well" data-original-title>
+        <h2>
+            <i class="icon-align-left"></i>@ViewBag.Title</h2>
+    </div>
+    <div class="box-content">       
+        <div class="row-fluid">
+            <div class="span12">
+                <img class="ajax-loader" src="/images/ajax-loader-7.gif" alt="loader" style="width:220px; margin:0px auto;" />
+                <div id="container-bgbuildarea-compare" style="width: 100%; height: 650px; ">
+                </div>
+            </div>         
+        </div>       
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        var dataList;
+        var colors = Highcharts.getOptions().colors;
+
+        $.getJSON('/Statistic/BuildingGroupTotalAreaCompareData', { areaType: 2 }, function (response) {
+            dataList = response;
+            setStackChart(response);
+
+            $('img.ajax-loader').hide();           
+        });
+
+        $('button#compare').click(function () {
+            var sel = [];
+            $.each(dataList, function (i, item) {
+                var id = dataList[i].DepartmentId;
+                var $input = $('#check-list input:checkbox[value=' + id.toString() + ']');
+                if ($input.prop('checked')) {
+                    sel.push(dataList[i]);
+                }
+            });
+
+            setStackChart(sel);
+            return false;
+        });
+
+        function setStackChart(data) {
+            var option = {
+                chart: {
+                    renderTo: 'container-bgbuildarea-compare',
+                    type: 'bar'
+                },
+                title: {
+                    text: '楼群建筑面积比较'
+                },
+                credits: {
+                    enabled: false
+                },
+                xAxis: {
+                    categories: []
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: '建筑面积(m2)'
+                    },
+                    stackLabels: {
+                        enabled: true,
+                        style: {
+                            fontWeight: 'normal',
+                            color: colors[2] || 'gray'
+                        }
+                    }
+                },
+                legend: {
+                    backgroundColor: '#FFFFFF',
+                    reversed: true
+                },
+                tooltip: {
+                    formatter: function () {
+                        return '' + this.series.name + ': ' + this.y + ' m<sup>2</sup>';
+                    }
+                },
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+                series: [{
+                    name: '建筑面积',
+                    color: colors[2],
+                    data: []
+                }]
+            };
+
+            option.xAxis.categories = [];
+            $.each(data, function (i, item) {
+                option.xAxis.categories.push(item.BuildingGroupName);
+            });
+
+            $.each(data, function (i, item) {
+                option.series[0].data.push({ name: item.BuildingGroupName, y: parseFloat(item.BuildArea) });
+            });
+
+            var chart = new Highcharts.Chart(option);
+        };
+    });
+</script>

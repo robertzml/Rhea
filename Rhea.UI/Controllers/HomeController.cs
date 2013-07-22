@@ -34,7 +34,7 @@ namespace Rhea.UI.Controllers
             data.Departments = departmentBusiness.GetList();
 
             IBuildingGroupBusiness buildingGroupBusiness = new MongoBuildingGroupBusiness();
-            data.BuildingGroups = buildingGroupBusiness.GetList();
+            data.BuildingGroups = buildingGroupBusiness.GetSimpleList();
 
             return View(data);
         }

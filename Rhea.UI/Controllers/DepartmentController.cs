@@ -11,7 +11,6 @@ using Rhea.Data.Estate;
 using Rhea.Data.Personnel;
 using Rhea.Model.Estate;
 using Rhea.Model.Personnel;
-using Rhea.UI.Models;
 
 namespace Rhea.UI.Controllers
 {
@@ -80,8 +79,8 @@ namespace Rhea.UI.Controllers
         {
             var data = this.departmentBusiness.Get(id, DepartmentAdditionType.ScaleData);
 
-            IStatisticService statisticService = new MongoStatisticService();
-            DepartmentClassifyAreaModel area = statisticService.GetDepartmentClassifyArea(id);
+            IStatisticBusiness statisticBusiness = new MongoStatisticBusiness();
+            DepartmentClassifyAreaModel area = statisticBusiness.GetDepartmentClassifyArea(id);
 
             double officeArea = area.FirstClassify.Single(r => r.FunctionFirstCode == 1).Area;
             if (data.StaffCount == 0)
@@ -107,8 +106,8 @@ namespace Rhea.UI.Controllers
         {
             IIndicatorBusiness indicatorBusiness = new MongoIndicatorBusiness();
 
-            var department = this.departmentBusiness.Get(id, DepartmentAdditionType.ScaleData);            
-            DepartmentIndicatorModel data = indicatorBusiness.GetDepartmentIndicator(department);          
+            var department = this.departmentBusiness.Get(id, DepartmentAdditionType.ScaleData);
+            DepartmentIndicatorModel data = indicatorBusiness.GetDepartmentIndicator(department);
 
             return View(data);
         }
@@ -120,28 +119,8 @@ namespace Rhea.UI.Controllers
         /// <returns></returns>
         public ActionResult BuildingSummary(int id)
         {
-            Department department = this.departmentBusiness.Get(id);
-
-            IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
-            List<Building> buildings = buildingBusiness.GetListByDepartment(id);
-
-            IRoomBusiness roomBusiness = new MongoRoomBusiness();
-            List<DepartmentBuildingModel> data = new List<DepartmentBuildingModel>();
-
-            foreach (var building in buildings)
-            {
-                DepartmentBuildingModel model = new DepartmentBuildingModel();
-                var rooms = roomBusiness.GetListByDepartment(id, building.Id);
-
-                model.DepartmentId = id;
-                model.DepartmentName = department.Name;
-                model.BuildingId = building.Id;
-                model.BuildingName = building.Name;
-                model.RoomCount = rooms.Count();
-                model.TotalUsableArea = Convert.ToDouble(rooms.Sum(r => r.UsableArea));
-
-                data.Add(model);
-            }
+            IStatisticBusiness statisticBusiness = new MongoStatisticBusiness();
+            DepartmentTotalAreaModel data = statisticBusiness.GetDepartmentTotalArea(id);
 
             return View(data);
         }
@@ -191,8 +170,8 @@ namespace Rhea.UI.Controllers
         /// <returns></returns>
         public JsonResult GetClassifyArea(int id)
         {
-            IStatisticService statisticService = new MongoStatisticService();
-            DepartmentClassifyAreaModel data = statisticService.GetDepartmentClassifyArea(id);
+            IStatisticBusiness statisticBusiness = new MongoStatisticBusiness();
+            DepartmentClassifyAreaModel data = statisticBusiness.GetDepartmentClassifyArea(id);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
         #endregion //Json

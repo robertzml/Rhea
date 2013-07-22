@@ -86,6 +86,31 @@ namespace Rhea.Business.Estate
         }
 
         /// <summary>
+        /// 得到楼群简单列表
+        /// </summary>
+        /// <returns></returns>
+        public List<BuildingGroup> GetSimpleList()
+        {
+            List<BuildingGroup> buildingGroups = new List<BuildingGroup>();
+            List<BsonDocument> docs = this.context.FindAll(EstateCollection.BuildingGroup);
+
+            foreach (var doc in docs)
+            {
+                if (doc.GetValue("status", 0).AsInt32 == 1)
+                    continue;
+                BuildingGroup buildingGroup = new BuildingGroup
+                {
+                    Id = doc["id"].AsInt32,
+                    Name = doc["name"].AsString
+                };
+                buildingGroups.Add(buildingGroup);
+            }
+
+            buildingGroups = buildingGroups.OrderBy(r => r.Id).ToList();
+            return buildingGroups;
+        }
+
+        /// <summary>
         /// 获取楼群
         /// </summary>
         /// <param name="id">楼群ID</param>

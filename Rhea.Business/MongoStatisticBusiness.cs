@@ -16,7 +16,7 @@ namespace Rhea.Business
     /// <summary>
     /// 统计业务类
     /// </summary>
-    public class MongoStatisticService : IStatisticService
+    public class MongoStatisticBusiness : IStatisticBusiness
     {
         #region Field
         /// <summary>
@@ -151,7 +151,47 @@ namespace Rhea.Business
             data.FirstClassify = data.FirstClassify.OrderByDescending(r => r.Area).ToList();
 
             return data;
-        }        
+        }
+
+        /// <summary>
+        /// 获取部门总面积模型
+        /// </summary>
+        /// <param name="departmentId">部门ID</param>
+        /// <returns></returns>
+        public DepartmentTotalAreaModel GetDepartmentTotalArea(int departmentId)
+        {
+            IDepartmentBusiness departmentBusiness = new MongoDepartmentBusiness();
+            Department department = departmentBusiness.Get(departmentId);
+
+            IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
+            List<Building> buildings = buildingBusiness.GetListByDepartment(departmentId);
+
+            IRoomBusiness roomBusiness = new MongoRoomBusiness();
+
+            DepartmentTotalAreaModel data = new DepartmentTotalAreaModel();
+            data.DepartmentId = departmentId;
+            data.DepartmentName = department.Name;
+            data.BuildingArea = new List<DepartmentBuildingAreaModel>();
+
+            //分楼宇统计面积
+            foreach (var building in buildings)
+            {
+                var rooms = roomBusiness.GetListByDepartment(departmentId, building.Id);
+
+                DepartmentBuildingAreaModel model = new DepartmentBuildingAreaModel();
+                model.BuildingId = building.Id;
+                model.BuildingName = building.Name;
+                model.RoomCount = rooms.Count();
+                model.UsableArea = Math.Round(Convert.ToDouble(rooms.Sum(r => r.UsableArea)), RheaConstant.AreaDecimalDigits);
+
+                data.BuildingArea.Add(model);
+            }
+
+            data.TotalRoomCount = data.BuildingArea.Sum(r => r.RoomCount);
+            data.UsableArea = data.BuildingArea.Sum(r => r.UsableArea);
+
+            return data;
+        }
         #endregion //Method
     }
 }

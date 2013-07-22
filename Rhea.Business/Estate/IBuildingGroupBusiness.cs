@@ -18,6 +18,12 @@ namespace Rhea.Business.Estate
         List<BuildingGroup> GetList();
 
         /// <summary>
+        /// 得到楼群简单列表
+        /// </summary>
+        /// <returns></returns>
+        List<BuildingGroup> GetSimpleList();
+
+        /// <summary>
         /// 获取楼群
         /// </summary>
         /// <param name="id">楼群ID</param>

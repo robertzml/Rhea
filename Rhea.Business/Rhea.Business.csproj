@@ -65,9 +65,9 @@
     <Compile Include="Account\MongoUserGroupBusiness.cs" />
     <Compile Include="ApiService.cs" />
     <Compile Include="IDictionaryBusiness.cs" />
-    <Compile Include="IStatisticService.cs" />
+    <Compile Include="IStatisticBusiness.cs" />
     <Compile Include="ModelExtension.cs" />
-    <Compile Include="MongoStatisticService.cs" />
+    <Compile Include="MongoStatisticBusiness.cs" />
     <Compile Include="Estate\RemoteBuildingBusiness.cs" />
     <Compile Include="Personnel\IIndicatorBusiness.cs" />
     <Compile Include="Personnel\MongoIndicatorBusiness.cs" />
