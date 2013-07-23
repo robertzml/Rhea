@@ -5,13 +5,16 @@
     ViewBag.Title = "楼群列表";   
 }
 
-<div class="box">
-    <div class="box-header well" data-original-title>
-        <h2>
-            <i class="icon-align-left"></i>@ViewBag.Title</h2>
+<div class="box gradient">
+    <div class="title">
+        <h4>
+            <span class="icon16 icomoon-icon-bars"></span>
+            <span>@ViewBag.Title</span>
+        </h4>
+        <a href="#" class="minimize">Minimize</a>
     </div>
 
-    <div class="box-content">
+    <div class="content noPad clearfix">
         <table id="building-group-list" class="table table-striped table-bordered bootstrap-datatable datatable">
             <thead>
                 <tr>
@@ -50,10 +53,9 @@
     </div>
 </div>
 
-
 <script type="text/javascript">
     $(function () { 
         var dom = $('table#building-group-list');
-        initDataTable(dom); 
+        initDataTable(dom);
     });
 </script>

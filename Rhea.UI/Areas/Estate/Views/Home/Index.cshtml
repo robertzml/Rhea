@@ -17,12 +17,11 @@
 <div id="sidebarbg"></div>
 <!--Sidebar content-->
 <div id="sidebar">
-
     <div class="shortcuts">
         <ul>
-            <li><a href="support.html" title="Support section" class="tip"><span class="icon24 icomoon-icon-support"></span></a></li>
+            <li><a href="#" title="Support section" class="tip"><span class="icon24 icomoon-icon-support"></span></a></li>
             <li><a href="#" title="Database backup" class="tip"><span class="icon24 icomoon-icon-database"></span></a></li>
-            <li><a href="charts.html" title="Sales statistics" class="tip"><span class="icon24 icomoon-icon-pie-2"></span></a></li>
+            <li><a href="#" title="Sales statistics" class="tip"><span class="icon24 icomoon-icon-pie-2"></span></a></li>
             <li><a href="#" title="Write post" class="tip"><span class="icon24 icomoon-icon-pencil"></span></a></li>
         </ul>
     </div><!-- End search -->
@@ -35,10 +34,10 @@
 
         <div class="mainnav">
             <ul>
-                <li><a href="charts.html"><span class="icon16 icomoon-icon-stats-up"></span>摘要</a></li>
-                <li><a href="typo.html"><span class="icon16 icomoon-icon-font"></span>土地证</a></li>
-                <li><a href="grid.html"><span class="icon16 icomoon-icon-grid-view"></span>Grid</a></li>
-                <li><a href="calendar.html"><span class="icon16 icomoon-icon-calendar"></span>Calendar</a></li>
+                <li><a href="#" id="summary"><span class="icon16 icomoon-icon-stats-up"></span>摘要</a></li>
+                <li><a href="#"><span class="icon16 icomoon-icon-font"></span>土地证</a></li>
+                <li><a href="#" id="building-group-list"><span class="icon16 icomoon-icon-grid-view"></span>楼群列表</a></li>
+                <li><a href="#" id="department-list"><span class="icon16 icomoon-icon-calendar"></span>部门列表</a></li>
                
             </ul>
         </div>
@@ -89,96 +88,32 @@
 
 <!--Body content-->
 <div id="content" class="clearfix">
-    <div class="contentwrapper"><!--Content wrapper-->
-
-        <div class="heading">
-
-            <h3>@ViewBag.Title</h3>
-
-            <div class="resBtnSearch">
-                <a href="#"><span class="icon16 icomoon-icon-search-3"></span></a>
-            </div>
-
-            <div class="search">
-
-                <form id="searchform" action="search.html">
-                    <input type="text" id="tipue_search_input" class="top-search" placeholder="Search here ..." />
-                    <input type="submit" id="tipue_search_button" class="search-btn" value=""/>
-                </form>
-                
-            </div><!-- End search -->
-                    
-            <ul class="breadcrumb">
-                <li>You are here:</li>
-                <li>
-                    <a href="#" class="tip" title="back to dashboard">
-                        <span class="icon16 icomoon-icon-screen-2"></span>
-                    </a> 
-                    <span class="divider">
-                        <span class="icon16 icomoon-icon-arrow-right-2"></span>
-                    </span>
-                </li>
-                <li class="active">Blank Page</li>
-            </ul>
-
-        </div><!-- End .heading-->
-
+    <div class="contentwrapper">
+        
         <!-- Build page from here: -->
         <div id="ajax-content1">
-        @Html.Action("Summary", new { controller = "Home", area = "Estate" })
+            @Html.Action("Summary", new { controller = "Home", area = "Estate" })
         </div>
-        
         <!--End page -->
                 
-    </div><!-- End contentwrapper -->
+    </div>
 </div><!-- End #content -->
-
-<!--<div class="span2">
-    <div class="well sidebar-nav">
-        <ul class="nav nav-list">
-            <li class="nav-header">导航</li>
-            <li class="active"><a href="#" id="summary">摘要</a></li>
-            <li><a href="#">土地证</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li class="nav-header">信息</li>
-            <li><a href="#" id="building-group-list">楼群列表</a></li>
-            <li><a href="#" id="department-list">部门列表</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-        </ul>
-    </div>
-</div>
-
-<div class="span10">
-    <div id="ajax-content1">
-    @Html.Action("Summary", new { controller = "Home", area = "Estate" })
-    </div>
-</div> -->
 
 @section scripts {
 <script type="text/javascript">
     $(function () {
-        $('a#summary').click(function() {
-            $('ul.nav').children().removeClass('active');
-            $(this).parent().addClass('active');
+        $('a#summary').click(function() {           
             ajaxLoadPage("Summary", "Home", "Estate", {});
             return false;
         });
 
         $('a#building-group-list').click(function() {
-            $('ul.nav').children().removeClass('active');
-            $(this).parent().addClass('active');
-            ajaxLoadPage("List", "BuildingGroup", "Estate", {});
+            ajaxLoadPage("BuildingGroupList", "Home", "Estate", {});
             return false;
         });
 
         $('a#department-list').click(function () {
-            $('ul.nav').children().removeClass('active');
-            $(this).parent().addClass('active');
-            ajaxLoadPage2("List", "Department", {});
+            ajaxLoadPage("DepartmentList", "Home", "Estate", {});
             return false;
         });
     });

@@ -65,6 +65,11 @@ namespace Rhea.UI.Controllers
             return View();
         }
 
+        public ActionResult SearchInline()
+        {
+            return View();
+        }
+
         public ActionResult Test()
         {
             return View();

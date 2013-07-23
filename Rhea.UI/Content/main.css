@@ -1,6 +1,5 @@
 /* Main.css
 ================================================== */
-
 html {height: 100%;}
 body {
 	background: #fff;
@@ -8,67 +7,6 @@ body {
 	overflow-x:	hidden;
 	background: url(../images/patterns/5.png) repeat;
 	height: 100%;
-}
-
-/*Switcher styles (Remove it in production site)*/
-#switcher {
-	display: none;
-	position: fixed; 
-	right:0; top:160px; 
-	width: 120px; 
-	height: auto; 
-	z-index: 9999; 
-	padding:5px;
-	padding-left: 10px;
-	border: 2px solid #c4c4c4;
-	border-right: none;
-	background: rgb(255,255,255);
-	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIxJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmM2YzZjMiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
-	background: -moz-linear-gradient(top,  rgba(255,255,255,1) 1%, rgba(243,243,243,1) 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,rgba(255,255,255,1)), color-stop(100%,rgba(243,243,243,1)));
-	background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 1%,rgba(243,243,243,1) 100%);
-	background: -o-linear-gradient(top,  rgba(255,255,255,1) 1%,rgba(243,243,243,1) 100%);
-	background: -ms-linear-gradient(top,  rgba(255,255,255,1) 1%,rgba(243,243,243,1) 100%);
-	background: linear-gradient(top,  rgba(255,255,255,1) 1%,rgba(243,243,243,1) 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f3f3f3',GradientType=0 );
-	-moz-box-shadow:0 1px 0px rgba(255, 255, 255, 1);
-	-webkit-box-shadow: 0 1px 0px rgba(255, 255, 255, 1);
-	box-shadow: 0 1px 0px rgba(255, 255, 255, 1);
-}
-	#switcher h4 {}
-	#switcher ul {list-style: none; margin-bottom: 0; margin-left: 0;}
-	#switcher ul li {display: inline;}
-	#switcher ul li a {
-		width: 20px;
-		height: 20px;
-		border: 1px solid #555;
-		display: inline-block;
-		margin-right: 3px;
-		margin-bottom: 3px;
-	}
-	#swithcher img {width: 20px !important; height: 20px !important;}
-#switchBtn {
-	position: fixed; 
-	right:-2px; top:160px;
-	padding: 10px 5px;
-	z-index: 99999; 
-	border: 2px solid #c4c4c4;
-	border-right: 1px solid transparent;
-	-moz-border-radius: 2px;
-	-webkit-border-radius: 2px;
-	border-radius: 2px;
-	background: rgb(255,255,255);
-	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIxJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmM2YzZjMiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
-	background: -moz-linear-gradient(top,  rgba(255,255,255,1) 1%, rgba(243,243,243,1) 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,rgba(255,255,255,1)), color-stop(100%,rgba(243,243,243,1)));
-	background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 1%,rgba(243,243,243,1) 100%);
-	background: -o-linear-gradient(top,  rgba(255,255,255,1) 1%,rgba(243,243,243,1) 100%);
-	background: -ms-linear-gradient(top,  rgba(255,255,255,1) 1%,rgba(243,243,243,1) 100%);
-	background: linear-gradient(top,  rgba(255,255,255,1) 1%,rgba(243,243,243,1) 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f3f3f3',GradientType=0 );
-	-moz-box-shadow:0 1px 0px rgba(255, 255, 255, 1);
-	-webkit-box-shadow: 0 1px 0px rgba(255, 255, 255, 1);
-	box-shadow: 0 1px 0px rgba(255, 255, 255, 1);
 }
 
 /*Error pages style*/
@@ -95,86 +33,6 @@ body.errorPage, body.loginPage {
 	.errorContainer h1 {font-size: 10em; line-height: 1em;}
 		.errorContainer.offline h1 {font-size: 5em;}
 	.errorContainer h1 small {font-weight: 700; font-size: 0.3em;}
-
-.loginContainer {
-	position: absolute;
-	border:1px solid #c4c4c4;
-	width:300px;
-	/*height:232px;*/
-	height: auto;
-	left:50%;
-	top:50%;
-	margin-left:-171px;
-    margin-top: -150px;
-    border-radius: 2px;
-	-moz-border-radius:2px;
-	-webkit-border-radius:2px;
-	-webkit-box-shadow:  0px 0px 1px 1px rgba(0, 0, 0, 0.1);
-	-moz-box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1);
-    box-shadow:  0px 0px 1px 1px rgba(0, 0, 0, 0.1);
-    background: #fefefe;
-    padding:0px 20px 0 20px;
-}
-
-.loginContainer:after,.loginContainer:before,.errorContainer:after,.errorContainer:before {
-	background: #f9f9f9;
-	background: -moz-linear-gradient(top,  rgba(248,248,248,1) 0%, rgba(249,249,249,1) 100%);
-	background: -webkit-linear-gradient(top,  rgba(248,248,248,1) 0%,rgba(249,249,249,1) 100%);
-	background: -o-linear-gradient(top,  rgba(248,248,248,1) 0%,rgba(249,249,249,1) 100%);
-	background: -ms-linear-gradient(top,  rgba(248,248,248,1) 0%,rgba(249,249,249,1) 100%);
-	background: linear-gradient(top,  rgba(248,248,248,1) 0%,rgba(249,249,249,1) 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8f8f8', endColorstr='#f9f9f9',GradientType=0 );
-	border: 1px solid #c4c6ca;
-	content: "";
-	display: block;
-	height: 100%;
-	left: -1px;
-	position: absolute;
-	width: 100%;
-}
-.loginContainer:after, .errorContainer:after {
-	-webkit-transform: rotate(2deg);
-	-moz-transform: rotate(2deg);
-	-ms-transform: rotate(2deg);
-	-o-transform: rotate(2deg);
-	transform: rotate(2deg);
-	top: 0;
-	z-index: -1;
-}
-.loginContainer:before, .errorContainer:before {
-	-webkit-transform: rotate(-3deg);
-	-moz-transform: rotate(-3deg);
-	-ms-transform: rotate(-3deg);
-	-o-transform: rotate(-3deg);
-	transform: rotate(-3deg);
-	top: 0;
-	z-index: -2;
-}
-
-.loginPage .navbar .brand {float: none; text-align: center; margin:0;}
-.loginContainer .forgot {float: right;margin-right: -20px; font-size: 11px;}
-.loginContainer .form-horizontal {margin-bottom: 0px;}
-.loginContainer .form-actions {
-	margin: 0 -20px 0 -20px;
-	padding-left:20px !important;
-	padding-right: 12px;
-}
-.loginContainer .form-row .form-label {
-	text-align: left;
-	padding-right: 27px;
-	padding-top: 6px;
-	position: relative;
-}
-#loginForm label .icon16 {
-	position: absolute;
-	right: 0;
-	bottom: -26px;
-}
-/** {
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-}*/
 
 /*Colors*/
 .green {color: #9FC569;}
@@ -386,7 +244,7 @@ body, p {font-family: 新宋体, Helvetica, Arial, sans-serif;}
 
 .table .ch {width: 10px;}
 .noPad .table {border: 1px solid transparent;margin-bottom: -1px; margin-top:-1px;}
-.box .dataTables_wrapper {margin-left: -1px;}
+.box .dataTables_wrapper {margin-left: 0px;}
 /*Forms*/
 .form-row {
 	margin-top: 15px;
@@ -965,7 +823,7 @@ select {width: 150px;}
 /* Layout structure
 ================================================== */
 #header {
-	background:url('../images/patterns/header/4.png') repeat;
+	background:url('../images/patterns/4.png') repeat;
 	height:66px;
 	border-bottom: 1px solid #c4c4c4;
 	-moz-box-shadow:0 1px 0px rgba(255, 255, 255, 1);
@@ -2857,7 +2715,7 @@ form input.valid {border: 1px solid #9FC569 !important;}
 
 @media only screen and (max-width: 1350px) {
 	body { -webkit-text-size-adjust: none; }
-	.box .dataTables_filter {float: none;}
+	/*.box .dataTables_filter {float: none;}*/
 
 }
 @media only screen and (max-width: 1100px) {

@@ -12,9 +12,8 @@
 
         <!-- Plugins stylesheets -->
         <link href="/plugins/misc/qtip/jquery.qtip.css" rel="stylesheet" type="text/css" />
-        <link href="/plugins/misc/fullcalendar/fullcalendar.css" rel="stylesheet" type="text/css" />
-        <link href="/plugins/misc/search/tipuesearch.css" type="text/css" rel="stylesheet" />
-        <link href="/plugins/forms/uniform/uniform.default.css" type="text/css" rel="stylesheet" />
+        <link href="/plugins/tables/dataTables/jquery.dataTables.css" type="text/css" rel="stylesheet" />
+        
 
         <!-- Main stylesheets -->
         <link href="@Url.Content("~/Content/main.css")" rel="stylesheet" type="text/css" /> 
@@ -39,7 +38,7 @@
         <div id="qLoverlay"></div>
         <div id="qLbar"></div>
 
-        <div id="header">
+        <div id="header" class="fixed">
             @Html.Action("Nav", new { controller = "Home", area = "" })
         </div>
 
@@ -55,43 +54,20 @@
         @Scripts.Render("~/bundles/bootstrap")
         <script type="text/javascript" src="/Scripts/jquery.cookie.js"></script>
         <script type="text/javascript" src="/Scripts/jquery.mousewheel.js"></script>
+        @Scripts.Render("~/bundles/jqueryui")
         @Scripts.Render("~/bundles/highcharts")
          
-        <!-- Charts plugins -->
-        <script type="text/javascript" src="/plugins/charts/flot/jquery.flot.js"></script>
-        <script type="text/javascript" src="/plugins/charts/flot/jquery.flot.grow.js"></script>
-        <script type="text/javascript" src="/plugins/charts/flot/jquery.flot.pie.js"></script>
-        <script type="text/javascript" src="/plugins/charts/flot/jquery.flot.resize.js"></script>
-        <script type="text/javascript" src="/plugins/charts/flot/jquery.flot.tooltip_0.4.4.js"></script>
-        <script type="text/javascript" src="/plugins/charts/flot/jquery.flot.orderBars.js"></script>
-        <script type="text/javascript" src="/plugins/charts/sparkline/jquery.sparkline.min.js"></script><!-- Sparkline plugin -->
-        <script type="text/javascript" src="/plugins/charts/knob/jquery.knob.js"></script><!-- Circular sliders and stats -->
+        <!-- Table plugins -->
+        <script type="text/javascript" src="/plugins/tables/dataTables/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="/plugins/tables/responsive-tables/responsive-tables.js"></script><!-- Make tables responsive -->
 
-        <!-- Misc plugins -->
-        <script type="text/javascript" src="/plugins/misc/fullcalendar/fullcalendar.min.js"></script><!-- Calendar plugin -->
         <script type="text/javascript" src="/plugins/misc/qtip/jquery.qtip.min.js"></script><!-- Custom tooltip plugin -->
         <script type="text/javascript" src="/plugins/misc/totop/jquery.ui.totop.min.js"></script> <!-- Back to top plugin -->
-    
-        <!-- Search plugin -->
-        <script type="text/javascript" src="/plugins/misc/search/tipuesearch_set.js"></script>
-        <script type="text/javascript" src="/plugins/misc/search/tipuesearch_data.js"></script><!-- JSON for searched results -->
-        <script type="text/javascript" src="/plugins/misc/search/tipuesearch.js"></script>
 
-        <!-- Form plugins -->
-        <script type="text/javascript" src="/plugins/forms/watermark/jquery.watermark.min.js"></script>
-        <script type="text/javascript" src="/plugins/forms/uniform/jquery.uniform.min.js"></script>
-    
-        <!-- Fix plugins -->
-        <script type="text/javascript" src="/plugins/fix/ios-fix/ios-orientationchange-fix.js"></script>
-
-        <!-- Important Place before main.js  -->
-        @Scripts.Render("~/bundles/jqueryui")
-        <script type="text/javascript" src="/plugins/fix/touch-punch/jquery.ui.touch-punch.min.js"></script><!-- Unable touch for JQueryUI -->
+        <script src="@Url.Content("~/Scripts/function.js")" type="text/javascript"></script>
+        @RenderSection("scripts", required: false)
 
         <!-- Init plugins -->
         <script type="text/javascript" src="/Scripts/main.js"></script><!-- Core js functions -->
-        
-        <script src="@Url.Content("~/Scripts/function.js")" type="text/javascript"></script>
-        @RenderSection("scripts", required: false)
     </body>
 </html>

@@ -10,6 +10,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
 {
     public class HomeController : Controller
     {
+        #region Action
         /// <summary>
         /// 房产概况
         /// </summary>
@@ -39,5 +40,24 @@ namespace Rhea.UI.Areas.Estate.Controllers
 
             return View(data);
         }
+
+        /// <summary>
+        /// 楼群列表
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult BuildingGroupList()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 部门列表
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult DepartmentList()
+        {
+            return View();
+        }
+        #endregion //Action
     }
 }
