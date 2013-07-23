@@ -1461,7 +1461,7 @@
     <Content Include="Views\Department\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Department\Summary.cshtml" />
+    <Content Include="Views\Department\Intro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Estate\Views\Room\Details.cshtml" />

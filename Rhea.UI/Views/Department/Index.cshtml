@@ -1,8 +1,26 @@
 ﻿@model int
 @{
-    //ViewBag.Title = "部门主页";
+    ViewBag.Title = "部门主页";
+    Layout = null;
 }
 
+@Html.Action("Heading", new { controller = "Common", area = "", title = ViewBag.Title, active = "部门导航" })
+
+<div class="contentwrapper">
+    <div id="section-bar">
+        <div class="section-nav">
+        </div>
+    </div>
+
+    <div class="row-fluid">
+    <div class="span12">
+        <div id="ajax-content2">
+            @Html.Action("Intro", "Department", new { area = "", id = Model })
+        </div>
+    </div>
+    </div>
+</div>
+<!--
 <div class="span2">
     <div class="well sidebar-nav">
         <ul class="nav nav-list">
@@ -20,11 +38,11 @@
 
 <div class="span10">
     <div id="ajax-content1">
-    @Html.Action("Summary", "Department", new { area = "", id = Model })
+    @Html.Action("Intro", "Department", new { area = "", id = Model })
     </div>
 </div>
 
-
+-->
 @section scripts {
 <script type="text/javascript">
     $(function () {

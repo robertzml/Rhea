@@ -1,0 +1,39 @@
+﻿@model Rhea.Model.Personnel.Department
+
+@{
+    ViewBag.Title = "部门概况";
+    Layout = null;
+}
+
+<div class="row-fluid"> 
+    <div class="span6">
+        <div class="box gradient">
+            <div class="title">
+                <h4>
+                    <span class="icon16 icomoon-icon-bars"></span><span>部门图片</span>
+                </h4>
+                <a href="#" class="minimize">Minimize</a>
+            </div>
+            <div class="content">
+                <img src="@Model.ImageUrl" alt="部门图片" />
+            </div>
+        </div>
+    </div>
+    <div class="span6">
+        <div class="box gradient">
+            <div class="title">
+                <h4>
+                    <span class="icon16 icomoon-icon-bars"></span><span>部门介绍</span>
+                </h4>
+                <a href="#" class="minimize">Minimize</a>
+            </div>
+            <div class="content">
+                <p>@Model.Description</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row-fluid"> 
+    @Html.Action("BuildingSummary", new { controller = "Department", area = "", id = Model.Id })
+</div>

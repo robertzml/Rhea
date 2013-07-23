@@ -47,7 +47,7 @@
                     <ul class="sub">
                     @foreach (var r in Model.Departments.Where(r => r.Type == 1))
                     {
-                        <li><a href="#" title="@r.Name"><span class="icon16 icomoon-icon-file"></span>@r.Name</a></li>
+                        <li><a href="#" ref="@r.Id" class="department-index" title="@r.Name"><span class="icon16 icomoon-icon-file"></span>@r.Name</a></li>
                     }
                     </ul>
                 </li>
@@ -55,7 +55,7 @@
                     <ul class="sub">
                     @foreach (var r in Model.Departments.Where(r => r.Type == 2))
                     {
-                        <li><a href="#" title="@r.Name"><span class="icon16 icomoon-icon-file"></span>@r.Name</a></li>
+                        <li><a href="#" ref="@r.Id" class="department-index" title="@r.Name"><span class="icon16 icomoon-icon-file"></span>@r.Name</a></li>
                     }
                     </ul>
                 </li>
@@ -63,7 +63,7 @@
                     <ul class="sub">
                     @foreach (var r in Model.Departments.Where(r => r.Type == 3))
                     {
-                        <li><a href="#" title="@r.Name"><span class="icon16 icomoon-icon-file"></span>@r.Name</a></li>
+                        <li><a href="#" ref="@r.Id" class="department-index" title="@r.Name"><span class="icon16 icomoon-icon-file"></span>@r.Name</a></li>
                     }
                     </ul>
                 </li>
@@ -71,7 +71,7 @@
                     <ul class="sub">
                     @foreach (var r in Model.Departments.Where(r => r.Type == 4))
                     {
-                        <li><a href="#" title="@r.Name"><span class="icon16 icomoon-icon-file"></span>@r.Name</a></li>
+                        <li><a href="#" ref="@r.Id" class="department-index" title="@r.Name"><span class="icon16 icomoon-icon-file"></span>@r.Name</a></li>
                     }
                     </ul>
                 </li>
@@ -79,7 +79,7 @@
                     <ul class="sub">
                     @foreach (var r in Model.Departments.Where(r => r.Type == 5))
                     {
-                        <li><a href="#" title="@r.Name"><span class="icon16 icomoon-icon-file"></span>@r.Name</a></li>
+                        <li><a href="#" ref="@r.Id" class="department-index" title="@r.Name"><span class="icon16 icomoon-icon-file"></span>@r.Name</a></li>
                     }
                     </ul>
                 </li>
@@ -87,7 +87,7 @@
                     <ul class="sub">
                     @foreach (var r in Model.Departments.Where(r => r.Type == 6))
                     {
-                        <li><a href="#" title="@r.Name"><span class="icon16 icomoon-icon-file"></span>@r.Name</a></li>
+                        <li><a href="#" ref="@r.Id" class="department-index" title="@r.Name"><span class="icon16 icomoon-icon-file"></span>@r.Name</a></li>
                     }
                     </ul>
                 </li>
@@ -95,7 +95,7 @@
                     <ul class="sub">
                     @foreach (var r in Model.Departments.Where(r => r.Type == 7))
                     {
-                        <li><a href="#" title="@r.Name"><span class="icon16 icomoon-icon-file"></span>@r.Name</a></li>
+                        <li><a href="#" ref="@r.Id" class="department-index" title="@r.Name"><span class="icon16 icomoon-icon-file"></span>@r.Name</a></li>
                     }
                     </ul>
                 </li>
@@ -103,7 +103,7 @@
                     <ul class="sub">
                     @foreach (var r in Model.Departments.Where(r => r.Type == 9))
                     {
-                        <li><a href="#" title="@r.Name"><span class="icon16 icomoon-icon-file"></span>@r.Name</a></li>
+                        <li><a href="#" ref="@r.Id" class="department-index" title="@r.Name"><span class="icon16 icomoon-icon-file"></span>@r.Name</a></li>
                     }
                     </ul>
                 </li>               
@@ -113,3 +113,26 @@
     <!-- End sidenav -->
 </div>
 <!-- End #sidebar -->
+
+<!--Body content-->
+<div id="content" class="clearfix">    
+    <!-- Build page from here: -->
+    <div id="ajax-content1">
+    </div>
+    <!--End page -->
+</div>
+<!-- End #content -->
+
+@section scripts {
+<script type="text/javascript">
+    $(function () {
+        $('.navbar .nav #nav-department').parent().addClass('active');
+
+        $('a.department-index').click(function () {
+            var id = $(this).attr('ref');
+            ajaxLoadPage2("Index", "Department", { id: id });
+            return false;
+        });
+    });
+</script>
+}

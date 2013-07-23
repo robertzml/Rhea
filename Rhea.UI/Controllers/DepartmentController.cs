@@ -37,6 +37,15 @@ namespace Rhea.UI.Controllers
 
         #region Action
         /// <summary>
+        /// 摘要
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Summary()
+        {
+            return View();
+        }
+
+        /// <summary>
         /// 部门主页
         /// </summary>
         /// <param name="id">部门ID</param>
@@ -62,7 +71,7 @@ namespace Rhea.UI.Controllers
         /// </summary>
         /// <param name="id">部门ID</param>
         /// <returns></returns>
-        public ActionResult Summary(int id)
+        public ActionResult Intro(int id)
         {
             Department data = this.departmentBusiness.Get(id);
             if (!string.IsNullOrEmpty(data.ImageUrl))
