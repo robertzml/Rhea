@@ -1726,6 +1726,7 @@
   <ItemGroup>
     <Content Include="Areas\Estate\Views\Home\BuildingGroupList.cshtml" />
     <Content Include="Areas\Estate\Views\Home\DepartmentList.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Nav.cshtml" />
     <None Include="Content\fonts\broccolidry.eot" />
     <None Include="Content\fonts\broccolidry.ttf" />
     <None Include="Content\fonts\broccolidry.woff" />
@@ -1757,6 +1758,8 @@
     <Content Include="Views\Common\Heading.cshtml" />
     <Content Include="Views\Common\SearchInline.cshtml" />
     <Content Include="Views\Common\ShowMessage.cshtml" />
+    <Content Include="Views\Home\Estate.cshtml" />
+    <Content Include="Views\Home\Department.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

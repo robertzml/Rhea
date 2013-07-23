@@ -1,0 +1,76 @@
+﻿@model Rhea.UI.Models.EstateMenuModel
+
+@{
+    ViewBag.Title = "楼群导航";
+}
+
+<!--Responsive navigation button-->
+<div class="resBtn">
+    <a href="#"><span class="icon16 minia-icon-list-3"></span></a>
+</div>
+
+<!--Left Sidebar collapse button-->
+<div class="collapseBtn leftbar">
+    <a href="#" class="tipR" title="Hide Left Sidebar"><span class="icon12 minia-icon-layout">
+    </span></a>
+</div>
+
+<!--Sidebar background-->
+<div id="sidebarbg">
+</div>
+
+<!--Sidebar content-->
+<div id="sidebar">
+    <div class="shortcuts">
+        <ul>
+            <li><a href="#" title="Support section" class="tip"><span class="icon24 icomoon-icon-support">
+            </span></a></li>
+            <li><a href="#" title="Database backup" class="tip"><span class="icon24 icomoon-icon-database">
+            </span></a></li>
+            <li><a href="#" title="Sales statistics" class="tip"><span class="icon24 icomoon-icon-pie-2">
+            </span></a></li>
+            <li><a href="#" title="Write post" class="tip"><span class="icon24 icomoon-icon-pencil">
+            </span></a></li>
+        </ul>
+    </div>
+
+    <div class="sidenav">
+        <div class="sidebar-widget" style="margin: -1px 0 0 0;">
+            <h5 class="title" style="margin-bottom: 0">
+                导航</h5>
+        </div>
+        <!-- End .sidenav-widget -->
+        <div class="mainnav">
+            <ul>
+                <li><a href="#" id="summary"><span class="icon16 icomoon-icon-newspaper"></span>摘要</a></li>
+                <li><a href="#"><span class="icon16 icomoon-icon-grid"></span>建筑物面积数据</a>
+                    <ul class="sub">
+                        <li><a href="#" id="building-group-usable-area-compare"><span class="icon16 icomoon-icon-cube">
+                        </span>楼群使用面积比较</a></li>
+                        <li><a href="#" id="building-group-build-area-compare"><span class="icon16 icomoon-icon-cube-2">
+                        </span>楼群建筑面积比较</a></li>
+                    </ul>
+                </li>
+                <li><a href="#"><span class="icon16 icomoon-icon-list-view-2"></span>蠡湖校区<span class="notification red">50</span></a>
+                    <ul class="sub">
+                    @foreach (var bg in Model.BuildingGroups)
+                    {
+                        <li><a href="#" title="@bg.Name"><span class="icon16 icomoon-icon-file"></span>@bg.Name</a>
+                            <ul class="sub">
+                            @foreach (var item in bg.Buildings)
+                            {
+                                <li><a href="#" title="@item.Name"><span class="icon16 icomoon-icon-arrow-right-2"></span>@item.Name</a></li>
+                            }
+                            </ul>
+                        </li>
+                    }
+                    </ul>
+                </li>
+             
+            </ul>
+        </div>
+    </div>
+    <!-- End sidenav -->
+
+</div>
+<!-- End #sidebar -->

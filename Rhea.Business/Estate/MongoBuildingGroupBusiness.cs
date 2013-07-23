@@ -55,7 +55,7 @@ namespace Rhea.Business.Estate
             buildingGroup.Remark = doc.GetValue("remark", "").AsString;            
             buildingGroup.Status = doc.GetValue("status", 0).AsInt32;
 
-            buildingGroup.UsableArea = GetUsableArea(buildingGroup.Id);
+            //buildingGroup.UsableArea = GetUsableArea(buildingGroup.Id);
 
             if (buildingGroup.BuildDate != null)
                 buildingGroup.BuildDate = ((DateTime)buildingGroup.BuildDate).ToLocalTime();

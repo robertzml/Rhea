@@ -13,4 +13,20 @@ namespace Rhea.UI.Models
 
         public List<BuildingGroup> BuildingGroups { get; set; }
     }
+
+    /// <summary>
+    /// 房产菜单模型
+    /// </summary>
+    public class EstateMenuModel
+    {
+        public List<BuildingGroup> BuildingGroups { get; set; }
+    }
+
+    /// <summary>
+    /// 部门菜单模型
+    /// </summary>
+    public class DepartmentMenuModel
+    {
+        public List<Department> Departments { get; set; }
+    }
 }

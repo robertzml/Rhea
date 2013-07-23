@@ -11,6 +11,7 @@ namespace Rhea.Model.Estate
     /// </summary>    
     public class BuildingGroup
     {
+        #region Database Property
         /// <summary>
         /// ID
         /// </summary>
@@ -159,7 +160,15 @@ namespace Rhea.Model.Estate
         /// <summary>
         /// 状态
         /// </summary>
-        [Display(Name = "状态" )]
+        [Display(Name = "状态")]
         public int Status { get; set; }
+        #endregion //Database Property
+
+        #region Additional Property
+        /// <summary>
+        /// 下属楼宇
+        /// </summary>
+        public List<Building> Buildings { get; set; }
+        #endregion //Additional Property
     }
 }

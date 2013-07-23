@@ -10,9 +10,9 @@
             <div class="nav-no-collapse">
                 <ul class="nav">
                     <li><a href="@Url.Action("Index", new { controller = "Home", area = "Estate" })" id="nav-summary"><span class="icon16 icomoon-icon-home-2"></span> 概况</a></li>
-                    <li><a href="dashboard.html"><span class="icon16 icomoon-icon-map-2"></span> 地图</a></li>
-                    <li><a href="dashboard.html"><span class="icon16 icomoon-icon-office"></span> 楼群</a></li>
-                    <li><a href="dashboard.html"><span class="icon16 icomoon-icon-screen-2"></span> 部门</a></li>
+                    <li><a href="#"><span class="icon16 icomoon-icon-map-2"></span> 地图</a></li>
+                    <li><a href="@Url.Action("Estate", new { controller = "Home", area = "" })"><span class="icon16 icomoon-icon-office"></span> 楼群</a></li>
+                    <li><a href="@Url.Action("Department", new { controller = "Home", area = "" })"><span class="icon16 icomoon-icon-screen-2"></span> 部门</a></li>
                     <li><a href="@Url.Action("Index", new { controller = "Statistic", area = "" })" id="nav-statistic"><span class="icon16 icomoon-icon-graph"></span> 统计</a></li>
                 </ul>
                   

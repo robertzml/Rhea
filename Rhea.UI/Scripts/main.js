@@ -108,7 +108,7 @@ $(document).ready(function(){
 	//click magic
 	mainNavLink.click(function(event) {
 		$this = $(this);
-		console.log($this)
+		//console.log($this)
 		if($this.hasClass('hasUl')) {
 			event.preventDefault();
 			if($this.hasClass('drop')) {

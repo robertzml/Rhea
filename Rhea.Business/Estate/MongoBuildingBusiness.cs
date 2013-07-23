@@ -36,13 +36,13 @@ namespace Rhea.Business.Estate
             building.ImageUrl = doc.GetValue("imageUrl", "").AsString;
             building.BuildingGroupId = doc.GetValue("buildingGroupId").AsInt32;
             building.BuildArea = (double?)doc.GetValue("buildArea", null);
-            //building.UsableArea = (double?)doc.GetValue("usableArea", null);
+            building.UsableArea = (double?)doc.GetValue("usableArea", null);
             building.AboveGroundFloor = (int?)doc.GetValue("aboveGroundFloor", null);
             building.UnderGroundFloor = (int?)doc.GetValue("underGroundFloor", null);
             building.UseType = doc["useType"].AsInt32;
             building.Remark = doc.GetValue("remark", "").AsString;
             building.Status = doc.GetValue("status", 0).AsInt32;
-            building.UsableArea = GetUsableArea(building.Id);
+            //building.UsableArea = GetUsableArea(building.Id);
 
             if (doc.Contains("floors"))
             {
@@ -59,12 +59,12 @@ namespace Rhea.Business.Estate
                         Name = d["name"].AsString,
                         Number = d["number"].AsInt32,
                         BuildArea = (double?)d.GetValue("buildArea", null),
-                        //UsableArea = (double?)d.GetValue("usableArea", null),
+                        UsableArea = (double?)d.GetValue("usableArea", null),
                         ImageUrl = d.GetValue("imageUrl", "").AsString,
                         Remark = d.GetValue("remark", "").AsString,
                         Status = d.GetValue("status", 0).AsInt32
                     };
-                    f.UsableArea = GetFloorUsableArea(building.Id, f.Number);
+                    //f.UsableArea = GetFloorUsableArea(building.Id, f.Number);
 
                     building.Floors.Add(f);
                 }
