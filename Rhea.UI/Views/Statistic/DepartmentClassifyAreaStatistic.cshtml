@@ -3,44 +3,54 @@
     Layout = null;
 }
 
-<div class="box">
-    <div class="box-header well" data-original-title>
-        <h2>
-            <i class="icon-align-left"></i>@ViewBag.Title</h2>
-    </div>
+@Html.Action("Heading", new { controller = "Common", area = "", title = ViewBag.Title, active = "房产统计" })
 
-    <div class="box-content">
-        <div class="row-fluid">
-            <div class="span12">
-                <form class="form-inline">
-                    <label for="department-list">选择：</label>
-                    <select id="department-list">
-                    </select>
-                    <label for="classify-list">分类：</label>
-                    <select id="classify-list">
-                        <option value="0">全部</option>
-                        <option value="1">办公分类</option>
-                        <option value="2">教学分类</option>
-                        <option value="3">实验分类</option>
-                        <option value="4">科研分类</option>
-                    </select>
-                </form>                
+<div class="row-fluid">
+    <div class="span12">
+
+        <div class="box chart gradient">
+            <div class="title">
+                <h4>
+                    <span class="icon16 icomoon-icon-bars"></span><span>使用面积图</span>
+                </h4>
+                <a href="#" class="minimize">Minimize</a>
             </div>
-        </div>
 
-        <div class="row-fluid">
-            <div class="span12">
-                <div id="container-department-classify-pie" style="width: 99%; height:400px;">
+            <div class="content">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <form class="form-inline">
+                            <label for="department-list">选择：</label>
+                            <select id="department-list">
+                            </select>
+                            <label for="classify-list">分类：</label>
+                            <select id="classify-list">
+                                <option value="0">全部</option>
+                                <option value="1">办公分类</option>
+                                <option value="2">教学分类</option>
+                                <option value="3">实验分类</option>
+                                <option value="4">科研分类</option>
+                            </select>
+                        </form>                
+                    </div>
+                </div>
+
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div id="container-department-classify-pie" style="width: 99%; height:400px;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div id="container-department-classify-column" style="width: 99%; height:400px;">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="row-fluid">
-            <div class="span12">
-                <div id="container-department-classify-column" style="width: 99%; height:400px;">
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 
@@ -53,6 +63,8 @@
             dataList = response;
             initSelectList(response);
         });
+
+        setBoxAction();
 
         function initSelectList(data) {
             $.each(data, function (i, item) {

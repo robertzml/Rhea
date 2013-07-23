@@ -1,74 +1,145 @@
 ﻿@{
-    ViewBag.Title = "统计";
-    Layout = "~/Views/Shared/_Layout1.cshtml";
+    ViewBag.Title = "房产统计";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="span2">
-    <div class="well sidebar-nav">
-        <ul class="nav nav-list">
-            <li class="nav-header">导航</li>
-            <li class="active"><a href="#" id="department-summary">摘要</a></li>
-            <li class="nav-header">建筑物面积数据</li>
-            <li><a href="#" id="building-group-usable-area-compare">楼群使用面积比较</a></li>
-            <li><a href="#" id="building-group-build-area-compare">楼群建筑面积比较</a></li>
-            <li class="nav-header">学院房屋数据</li>
-            <li><a href="#" id="department-usable-area-compare">学院使用面积比较</a></li>
-            <li><a href="#" id="department-build-area-compare">学院建筑面积比较</a></li>
-            <li><a href="#" id="department-building-area-statistic">学院楼宇用房统计</a></li>
-            <li><a href="#" id="department-classify-area-statistic">学院分类用房统计</a></li>
-            <li><a href="#" id="department-classify-area-compare">学院分类用房比较</a></li>
+<!--Responsive navigation button-->
+<div class="resBtn">
+    <a href="#"><span class="icon16 minia-icon-list-3"></span></a>
+</div>
+<!--Left Sidebar collapse button-->
+<div class="collapseBtn leftbar">
+    <a href="#" class="tipR" title="Hide Left Sidebar"><span class="icon12 minia-icon-layout">
+    </span></a>
+</div>
+<!--Sidebar background-->
+<div id="sidebarbg">
+</div>
+
+<!--Sidebar content-->
+<div id="sidebar">
+    <div class="shortcuts">
+        <ul>
+            <li><a href="#" title="Support section" class="tip"><span class="icon24 icomoon-icon-support">
+            </span></a></li>
+            <li><a href="#" title="Database backup" class="tip"><span class="icon24 icomoon-icon-database">
+            </span></a></li>
+            <li><a href="#" title="Sales statistics" class="tip"><span class="icon24 icomoon-icon-pie-2">
+            </span></a></li>
+            <li><a href="#" title="Write post" class="tip"><span class="icon24 icomoon-icon-pencil">
+            </span></a></li>
         </ul>
     </div>
+    <!-- End search -->
+    <div class="sidenav">
+        <div class="sidebar-widget" style="margin: -1px 0 0 0;">
+            <h5 class="title" style="margin-bottom: 0">
+                导航</h5>
+        </div>
+        <!-- End .sidenav-widget -->
+        <div class="mainnav">
+            <ul>
+                <li><a href="#" id="summary"><span class="icon16 icomoon-icon-newspaper"></span>摘要</a></li>
+                <li><a href="#"><span class="icon16 icomoon-icon-grid"></span>建筑物面积数据</a>
+                    <ul class="sub">
+                        <li><a href="#" id="building-group-usable-area-compare"><span class="icon16 icomoon-icon-cube"></span>楼群使用面积比较</a></li>
+                        <li><a href="#" id="building-group-build-area-compare"><span class="icon16 icomoon-icon-cube-2"></span>楼群建筑面积比较</a></li>
+                    </ul>
+                </li>
+                <li><a href="#"><span class="icon16 icomoon-icon-equalizer-2"></span>学院房屋数据</a>
+                    <ul class="sub">
+                        <li><a href="#" id="department-usable-area-compare"><span class="icon16 icomoon-icon-stats-up "></span>学院使用面积比较</a></li>
+                        <li><a href="#" id="department-build-area-compare"><span class="icon16 icomoon-icon-stairs"></span>学院建筑面积比较</a></li>
+                        <li><a href="#" id="department-building-area-statistic"><span class="icon16 icomoon-icon-ladder"></span>学院楼宇用房统计</a></li>
+                        <li><a href="#" id="department-classify-area-statistic"><span class="icon16 icomoon-icon-drawer-2"></span>学院分类用房统计</a></li>
+                        <li><a href="#" id="department-classify-area-compare"><span class="icon16 icomoon-icon-box"></span>学院分类用房比较</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- End sidenav -->
+    <div class="sidebar-widget">
+        <h5 class="title">
+            Monthly Bandwidth Transfer</h5>
+        <div class="content">
+            <span class="icon16 icomoon-icon-loop left"></span>
+            <div class="progress progress-mini progress-danger left tip" title="87%">
+                <div class="bar" style="width: 87%;">
+                </div>
+            </div>
+            <span class="percent">87%</span>
+            <div class="stat">
+                19419.94 / 12000 MB</div>
+        </div>
+    </div>
+    <!-- End .sidenav-widget -->
+    <div class="sidebar-widget">
+        <h5 class="title">
+            Disk Space Usage</h5>
+        <div class="content">
+            <span class="icon16 icomoon-icon-drive left"></span>
+            <div class="progress progress-mini progress-success left tip" title="16%">
+                <div class="bar" style="width: 16%;">
+                </div>
+            </div>
+            <span class="percent">16%</span>
+            <div class="stat">
+                304.44 / 8000 MB</div>
+        </div>
+    </div>
+    <!-- End .sidenav-widget -->
 </div>
+<!-- End #sidebar -->
 
-<div class="span10">
-    <div id="ajax-content1">
-    
+<!--Body content-->
+<div id="content" class="clearfix">
+    <div class="contentwrapper">
+        <!-- Build page from here: -->
+        <div id="ajax-content1">
+            
+        </div>
+        <!--End page -->
     </div>
 </div>
-
+<!-- End #content -->
 
 @section scripts {
 <script type="text/javascript">
     $(function () {
+        $('.navbar .nav #nav-statistic').parent().addClass('active');
+
         $('a#building-group-usable-area-compare').click(function () {
-            menuNavActive($(this));
             ajaxLoadPage2("BuildingGroupUsableAreaCompare", "Statistic", {});
             return false;
         });
 
-        $('a#building-group-build-area-compare').click(function () {
-            menuNavActive($(this));
+        $('a#building-group-build-area-compare').click(function () {           
             ajaxLoadPage2("BuildingGroupBuildAreaCompare", "Statistic", {});
             return false;
         });
-        
-        $('a#department-usable-area-compare').click(function() {
-            menuNavActive($(this));
-            ajaxLoadPage2("DepartmentUsableAreaCompare", "Statistic", { });
+
+        $('a#department-usable-area-compare').click(function () {           
+            ajaxLoadPage2("DepartmentUsableAreaCompare", "Statistic", {});
             return false;
         });
 
-        $('a#department-build-area-compare').click(function () {
-            menuNavActive($(this));
+        $('a#department-build-area-compare').click(function () {           
             ajaxLoadPage2("DepartmentBuildAreaCompare", "Statistic", {});
             return false;
         });
 
-        $('a#department-building-area-statistic').click(function () {
-            menuNavActive($(this));
+        $('a#department-building-area-statistic').click(function () {         
             ajaxLoadPage2("DepartmentBuildingAreaStatistic", "Statistic", {});
             return false;
         });
 
-        $('a#department-classify-area-statistic').click(function () {
-            menuNavActive($(this));
+        $('a#department-classify-area-statistic').click(function () {         
             ajaxLoadPage2("DepartmentClassifyAreaStatistic", "Statistic", {});
             return false;
         });
 
-        $('a#department-classify-area-compare').click(function () {
-            menuNavActive($(this));
+        $('a#department-classify-area-compare').click(function () {          
             ajaxLoadPage2("DepartmentClassifyAreaCompare", "Statistic", {});
             return false;
         });

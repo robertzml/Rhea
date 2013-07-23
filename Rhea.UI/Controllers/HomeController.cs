@@ -52,23 +52,7 @@ namespace Rhea.UI.Controllers
             ViewBag.Message = "你的联系方式页。";
 
             return View();
-        }
-
-        /// <summary>
-        /// 显示消息
-        /// </summary>
-        /// <param name="msg">消息内容</param>
-        /// <returns></returns>       
-        public ActionResult ShowMessage(string msg)
-        {
-            ViewBag.Message = msg;
-            return View();
-        }
-
-        public ActionResult SearchInline()
-        {
-            return View();
-        }
+        }  
 
         public ActionResult Test()
         {

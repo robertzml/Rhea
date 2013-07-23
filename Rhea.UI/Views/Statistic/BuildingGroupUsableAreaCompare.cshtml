@@ -3,19 +3,28 @@
     Layout = null;
 }
 
+@Html.Action("Heading", new { controller = "Common", area = "", title = ViewBag.Title, active = "房产统计" })
 
-<div class="box">
-    <div class="box-header well" data-original-title>
-        <h2>
-            <i class="icon-align-left"></i>@ViewBag.Title</h2>
-    </div>
-    <div class="box-content">       
-        <div class="row-fluid">
-            <div class="span12">
-                <div id="container-bgusablearea-compare" style="width: 100%; height: 650px;">
+<div class="row-fluid">
+    <div class="span12">
+
+        <div class="box chart gradient">
+            <div class="title">
+                <h4>
+                    <span class="icon16 icomoon-icon-bars"></span><span>使用面积图</span>
+                </h4>
+                <a href="#" class="minimize">Minimize</a>
+            </div>
+            <div class="content">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div id="container-bgusablearea-compare" style="width: 100%; height: 650px;">
+                        </div>
+                    </div>
                 </div>
-            </div>         
-        </div>       
+            </div>
+        </div>
+
     </div>
 </div>
 
@@ -28,6 +37,8 @@
             dataList = response;
             setStackChart(response);
         });
+
+        setBoxAction();
 
         $('button#compare').click(function () {
             var sel = [];
@@ -50,7 +61,7 @@
                     type: 'bar'
                 },
                 title: {
-                    text: '楼群使用面积比较'
+                    text: null
                 },
                 credits: {
                     enabled: false

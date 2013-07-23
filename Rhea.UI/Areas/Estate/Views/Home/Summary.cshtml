@@ -4,27 +4,9 @@
     Layout = null;
 }
 
-<div class="heading">
-    <h3>@ViewBag.Title</h3>
+@Html.Action("Heading", new { controller = "Common", area = "", title = ViewBag.Title, active = "房产概况" })
 
-    @Html.Action("SearchInline", new { controller = "Home", area = "" })
-                    
-    <ul class="breadcrumb">
-        <li>你的位置:</li>
-        <li>
-            <a href="#" class="tip" title="回到首页">
-                <span class="icon16 icomoon-icon-home "></span>
-            </a> 
-            <span class="divider">
-                <span class="icon16 icomoon-icon-arrow-right-2"></span>
-            </span>
-        </li>
-        <li class="active">房产概况</li>
-    </ul>
-
-</div><!-- End .heading-->
-
-<div class="row-fluid">    
+<div class="row-fluid">
     <div class="span5">
         @Html.Action("TotalUseTypeArea", new { controller = "Statistic", area = "" })
     </div>
@@ -74,12 +56,12 @@
                 </li>
             </ul>
         </div><!-- End .reminder -->
-    </div>                                      
+    </div>
 
 </div>
 
 <script type="text/javascript">
     $(function () {
-        setBox();
+        setBoxAction();
     });
 </script>

@@ -62,7 +62,7 @@ function menuNavActive($dom) {
 	$dom.parent().addClass('active');
 }
 
-function setBox() {
+function setBoxAction() {
 	//------------- widget box magic -------------//
 	var widget = $('div.box');
 	var widgetOpen = $('div.box').not('div.box.closed');

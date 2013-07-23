@@ -1,1 +1,1 @@
-html {height: 100%;}body {	background: #fff;	-webkit-font-smoothing: antialiased;	overflow-x:	hidden;	background: url(../images/patterns/5.png) repeat;	height: 100%;}.sidenav {width: 100%; margin-left:0;}.navbar-inner {background-color:none; background-image:none; }
+html {height: 100%;}body {	background: #fff;	-webkit-font-smoothing: antialiased;	overflow-x:	hidden;	background: url(../images/patterns/5.png) repeat;	height: 100%;}.sidenav {width: 100%; margin-left:0;}.navbar-inner {background:transparent; }#header, #sidebar { font-family:微软雅黑;}

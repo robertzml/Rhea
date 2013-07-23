@@ -22,8 +22,8 @@ namespace Rhea.UI
                        "~/Scripts/bootstrap.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/highcharts").Include(
-                        "~/Scripts/highcharts.js",
-                        "~/Scripts/modules/exporting.js"));
+                        "~/Plugins/charts/highcharts/highcharts.js",
+                        "~/Plugins/charts/highcharts/modules/exporting.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/noty").Include(
                         "~/Scripts/noty/jquery.noty.js",

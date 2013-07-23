@@ -181,6 +181,7 @@
     <Compile Include="Areas\Estate\Models\BuildingModels.cs" />
     <Compile Include="Areas\Estate\Models\HomeModels.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StatisticController.cs" />
@@ -290,6 +291,7 @@
     <Content Include="Images\ajax-loader-7.gif" />
     <Content Include="Images\arrowdown.png" />
     <Content Include="Images\arrowup.png" />
+    <Content Include="Images\avatar.png" />
     <Content Include="Images\icons\arrow-left.png" />
     <Content Include="Images\icons\arrow-right.png" />
     <Content Include="Images\icons\external.png" />
@@ -366,6 +368,18 @@
     <Content Include="Plugins\charts\flot\jquery.flot.pie.min.js" />
     <Content Include="Plugins\charts\flot\jquery.flot.resize.js" />
     <Content Include="Plugins\charts\flot\jquery.flot.tooltip_0.4.4.js" />
+    <Content Include="Plugins\charts\highcharts\highcharts-more.js" />
+    <Content Include="Plugins\charts\highcharts\highcharts.js" />
+    <Content Include="Plugins\charts\highcharts\modules\annotations.js" />
+    <Content Include="Plugins\charts\highcharts\modules\canvas-tools.js" />
+    <Content Include="Plugins\charts\highcharts\modules\data.js" />
+    <Content Include="Plugins\charts\highcharts\modules\exporting.js" />
+    <Content Include="Plugins\charts\highcharts\modules\funnel.js" />
+    <Content Include="Plugins\charts\highcharts\themes\dark-blue.js" />
+    <Content Include="Plugins\charts\highcharts\themes\dark-green.js" />
+    <Content Include="Plugins\charts\highcharts\themes\gray.js" />
+    <Content Include="Plugins\charts\highcharts\themes\grid.js" />
+    <Content Include="Plugins\charts\highcharts\themes\skies.js" />
     <Content Include="Plugins\charts\knob\jquery.knob-original.js" />
     <Content Include="Plugins\charts\knob\jquery.knob.js" />
     <Content Include="Plugins\charts\sparkline\index.html" />
@@ -1317,8 +1331,6 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\dashboard.js" />
     <Content Include="Scripts\function.js" />
-    <Content Include="Scripts\highcharts-more.js" />
-    <Content Include="Scripts\highcharts.js" />
     <Content Include="Scripts\html5shiv.js" />
     <Content Include="Scripts\jquery-1.8.3-vsdoc.js" />
     <Content Include="Scripts\jquery-1.8.3.js" />
@@ -1339,11 +1351,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
-    <Content Include="Scripts\modules\annotations.js" />
-    <Content Include="Scripts\modules\canvas-tools.js" />
-    <Content Include="Scripts\modules\data.js" />
-    <Content Include="Scripts\modules\exporting.js" />
-    <Content Include="Scripts\modules\funnel.js" />
     <Content Include="Scripts\noty\jquery.noty.js" />
     <Content Include="Scripts\noty\layouts\bottom.js" />
     <Content Include="Scripts\noty\layouts\bottomCenter.js" />
@@ -1360,11 +1367,6 @@
     <Content Include="Scripts\noty\promise.js" />
     <Content Include="Scripts\noty\themes\default.js" />
     <Content Include="Scripts\rhea.js" />
-    <Content Include="Scripts\themes\dark-blue.js" />
-    <Content Include="Scripts\themes\dark-green.js" />
-    <Content Include="Scripts\themes\gray.js" />
-    <Content Include="Scripts\themes\grid.js" />
-    <Content Include="Scripts\themes\skies.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1566,9 +1568,6 @@
     <Content Include="Views\Account\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\ShowMessage.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Areas\Admin\Views\Building\EditFloor.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -1755,7 +1754,9 @@
     <None Include="Content\fonts\wpzoom.ttf" />
     <None Include="Content\fonts\wpzoom.woff" />
     <None Include="Plugins\misc\search\tipuesearch_content.json" />
-    <Content Include="Views\Home\SearchInline.cshtml" />
+    <Content Include="Views\Common\Heading.cshtml" />
+    <Content Include="Views\Common\SearchInline.cshtml" />
+    <Content Include="Views\Common\ShowMessage.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

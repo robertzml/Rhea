@@ -244,7 +244,7 @@ body, p {font-family: 新宋体, Helvetica, Arial, sans-serif;}
 
 .table .ch {width: 10px;}
 .noPad .table {border: 1px solid transparent;margin-bottom: -1px; margin-top:-1px;}
-.box .dataTables_wrapper {margin-left: 0px;}
+.box .dataTables_wrapper {margin-left: -1px;}
 /*Forms*/
 .form-row {
 	margin-top: 15px;

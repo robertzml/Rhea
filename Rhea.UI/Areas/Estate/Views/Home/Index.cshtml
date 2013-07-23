@@ -34,7 +34,7 @@
 
         <div class="mainnav">
             <ul>
-                <li><a href="#" id="summary"><span class="icon16 icomoon-icon-stats-up"></span>摘要</a></li>
+                <li><a href="#" id="summary"><span class="icon16 icomoon-icon-newspaper"></span>摘要</a></li>
                 <li><a href="#"><span class="icon16 icomoon-icon-font"></span>土地证</a></li>
                 <li><a href="#" id="building-group-list"><span class="icon16 icomoon-icon-grid-view"></span>楼群列表</a></li>
                 <li><a href="#" id="department-list"><span class="icon16 icomoon-icon-calendar"></span>部门列表</a></li>
@@ -66,7 +66,6 @@
             <span class="percent">16%</span>
             <div class="stat">304.44 / 8000 MB</div>
         </div>
-
     </div><!-- End .sidenav-widget -->
 
     <div class="sidebar-widget">
@@ -81,7 +80,6 @@
                 </ul>
             </div>
         </div>
-
     </div><!-- End .sidenav-widget -->
 
 </div><!-- End #sidebar -->
@@ -102,6 +100,8 @@
 @section scripts {
 <script type="text/javascript">
     $(function () {
+        $('.navbar .nav #nav-summary').parent().addClass('active');
+
         $('a#summary').click(function() {           
             ajaxLoadPage("Summary", "Home", "Estate", {});
             return false;
