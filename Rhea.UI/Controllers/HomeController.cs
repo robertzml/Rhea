@@ -28,7 +28,7 @@ namespace Rhea.UI.Controllers
         /// <returns></returns>
         public ActionResult Nav()
         {
-            NavModel data = new NavModel();
+            /*NavModel data = new NavModel();
             
             IDepartmentBusiness departmentBusiness = new MongoDepartmentBusiness();
             data.Departments = departmentBusiness.GetList();
@@ -36,7 +36,8 @@ namespace Rhea.UI.Controllers
             IBuildingGroupBusiness buildingGroupBusiness = new MongoBuildingGroupBusiness();
             data.BuildingGroups = buildingGroupBusiness.GetSimpleList();
 
-            return View(data);
+            return View(data);*/
+            return View();
         }
 
         public ActionResult About()
@@ -61,6 +62,11 @@ namespace Rhea.UI.Controllers
         public ActionResult ShowMessage(string msg)
         {
             ViewBag.Message = msg;
+            return View();
+        }
+
+        public ActionResult Test()
+        {
             return View();
         }
     }
