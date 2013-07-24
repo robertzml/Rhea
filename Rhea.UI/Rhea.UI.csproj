@@ -1359,7 +1359,6 @@
     <Content Include="Scripts\jquery-ui-1.10.3.js" />
     <Content Include="Scripts\jquery-ui-1.10.3.min.js" />
     <Content Include="Scripts\jquery.cookie.js" />
-    <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery.mousewheel.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
@@ -1453,7 +1452,7 @@
     <Content Include="Areas\Estate\Views\Building\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Estate\Views\Building\Summary.cshtml" />
+    <Content Include="Areas\Estate\Views\Building\Intro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Estate\Views\Building\FloorList.cshtml" />

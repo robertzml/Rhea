@@ -34,7 +34,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// <summary>
         /// 楼宇列表
         /// </summary>
-        /// <param name="buildingGroupId"></param>
+        /// <param name="buildingGroupId">所属楼群ID</param>
         /// <returns></returns>
         public ActionResult List(int? buildingGroupId)
         {

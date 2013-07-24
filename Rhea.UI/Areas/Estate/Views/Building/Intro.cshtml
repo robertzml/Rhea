@@ -1,0 +1,78 @@
+﻿@model Rhea.Model.Estate.Building
+
+@{
+    ViewBag.Title = "楼宇信息";
+    Layout = null;
+}
+
+<div class="box gradient">
+    <div class="title">
+        <h4>
+            <span class="icon16 icomoon-icon-glasses"></span><span>@ViewBag.Title</span>
+        </h4>
+        <a href="#" class="minimize">Minimize</a>
+    </div>
+
+    <div class="content noPad">
+        <table class="responsive table table-bordered table-striped">
+            <tbody>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </td>
+                    <td>
+                        @Model.Name
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.BuildArea)
+                    </td>
+                    <td>
+                        @Model.BuildArea
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.UsableArea)
+                    </td>
+                    <td>
+                        @Model.UsableArea
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.AboveGroundFloor)
+                    </td>
+                    <td>
+                        @Model.AboveGroundFloor
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.UnderGroundFloor)
+                    </td>
+                    <td>
+                        @Model.UnderGroundFloor
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.UseType)
+                    </td>
+                    <td>
+                        @{
+                            var type = (BuildingUseType)Model.UseType;
+                            @type.DisplayName(); 
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>房间数量</td>
+                    <td>@ViewBag.RoomCount</td>
+                </tr>
+            </tbody>
+        </table>
+ 
+    </div>
+</div>

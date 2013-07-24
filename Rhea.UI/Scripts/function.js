@@ -102,10 +102,11 @@ function menuNavActive($dom) {
 	$dom.parent().addClass('active');
 }
 
+/*
 function menuNavActive($parent, $dom) {
 	$parent.children().removeClass('active');
 	$dom.parent().addClass('active');
-}
+}*/
 
 function setBoxAction() {
 	//------------- widget box magic -------------//

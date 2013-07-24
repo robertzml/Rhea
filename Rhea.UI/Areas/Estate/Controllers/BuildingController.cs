@@ -40,6 +40,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         public ActionResult Index(int id)
         {
+            ViewBag.Title = this.buildingBusiness.GetName(id);
             return View(id);
         }
 
@@ -73,7 +74,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// </summary>
         /// <param name="id">楼宇ID</param>
         /// <returns></returns>
-        public ActionResult Summary(int id)
+        public ActionResult Intro(int id)
         {
             IRoomBusiness roomBusiness = new MongoRoomBusiness();
             ViewBag.RoomCount = roomBusiness.CountByBuilding(id);

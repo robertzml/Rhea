@@ -53,7 +53,7 @@
                             <ul class="sub">
                             @foreach (var item in bg.Buildings)
                             {
-                                <li><a href="#" title="@item.Name" ref="@item.Id"><span class="icon16 icomoon-icon-arrow-right-2"></span>@item.Name</a></li>
+                                <li><a href="#" title="@item.Name" ref="@item.Id" class="building-index"><span class="icon16 icomoon-icon-arrow-right-2"></span>@item.Name</a></li>
                             }
                             </ul>
                         </li>
@@ -94,6 +94,12 @@
         $('span.building-group-index').click(function () {
             var id = $(this).parent().attr('ref');
             ajaxLoadPage("Index", "BuildingGroup", "Estate", { id: id });
+            return false;
+        });
+
+        $('a.building-index').click(function () {
+            var id = $(this).attr('ref');
+            ajaxLoadPage("Index", "Building", "Estate", { id: id });
             return false;
         });
     });
