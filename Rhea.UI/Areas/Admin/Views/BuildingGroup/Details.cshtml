@@ -103,6 +103,17 @@
                                     @Model.BuildCost
                                 </td>
                             </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.UseType)
+                                </td>
+                                <td>
+                                    @{
+                                        var type = (BuildingUseType)Model.UseType;
+                                        @type.DisplayName(); 
+                                    }
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -191,6 +202,14 @@
                                 </td>
                                 <td>
                                     @Model.ManageType
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.Remark)
+                                </td>
+                                <td>
+                                    @Model.Remark
                                 </td>
                             </tr>
                         </tbody>

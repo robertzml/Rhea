@@ -52,6 +52,7 @@ namespace Rhea.Business.Estate
             buildingGroup.DesignCompany = doc.GetValue("designCompany", "").AsString;
             buildingGroup.ConstructCompany = doc.GetValue("constructCompany", "").AsString;
             buildingGroup.ManageType = doc.GetValue("manageType", "").AsString;
+            buildingGroup.UseType = doc["useType"].AsInt32;
             buildingGroup.Remark = doc.GetValue("remark", "").AsString;            
             buildingGroup.Status = doc.GetValue("status", 0).AsInt32;
 

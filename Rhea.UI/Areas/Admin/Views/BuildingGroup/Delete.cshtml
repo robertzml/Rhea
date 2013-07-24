@@ -185,7 +185,18 @@
                                 <td>
                                     @Model.ManageType
                                 </td>
-                            </tr>                          
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.UseType)
+                                </td>
+                                <td>
+                                @{
+                                    var type = (BuildingUseType)Model.UseType;
+                                    @type.DisplayName(); 
+                                }
+                                </td>
+                            </tr>
                             <tr>
                                 <td>
                                     @Html.DisplayNameFor(model => model.Remark)

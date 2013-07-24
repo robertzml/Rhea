@@ -150,6 +150,17 @@ namespace Rhea.Model.Estate
         public string ManageType { get; set; }
 
         /// <summary>
+        /// 使用类型
+        /// </summary>
+        /// <remarks>
+        /// 1:学院楼宇,2:教学楼宇,3:行政办公,4:宿舍楼宇
+        /// </remarks>
+        [Required]
+        [UIHint("BuildingUseType")]
+        [Display(Name = "使用类型")]
+        public int UseType { get; set; }
+
+        /// <summary>
         /// 备注
         /// </summary>        
         [StringLength(500)]

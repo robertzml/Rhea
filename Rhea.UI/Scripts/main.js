@@ -196,32 +196,6 @@ $(document).ready(function(){
 	});
 	
 	//Hide and show sidebar btn
-
-	$(function () {
-		//var pages = ['grid.html','charts.html'];
-		var pages = [];
-	
-		for ( var i = 0, j = pages.length; i < j; i++ ) {
-
-		    if($.cookie("currentPage") == pages[i]) {
-				var cBtn = $('.collapseBtn.leftbar');
-				cBtn.children('a').attr('title','Show Left Sidebar');
-				cBtn.addClass('shadow hide');
-				cBtn.css({'top': '20px', 'left':'200px'});
-				$('#sidebarbg').css('margin-left','-299'+'px');
-				$('#sidebar').css('margin-left','-299'+'px');
-				if($('#content').length) {
-					$('#content').css('margin-left', '0');
-				}
-				if($('#content-two').length) {
-					$('#content-two').css('margin-left', '0');
-				}
-		    }
-
-		}
-		
-	});
-
 	$( '.collapseBtn' ).bind( 'click', function(){
 		$this = $(this);
 
@@ -263,77 +237,7 @@ $(document).ready(function(){
 			}
 
 		}
-
-		//right sidebar clicked
-		if ($this.hasClass('rightbar')) {
-			
-			if($(this).hasClass('hide')) {
-				//show sidebar
-				$('#sidebarbg-right').css('margin-right','0');
-				$('#sidebar-right').css({'right' : '0', 'margin-right' : '0'});
-				if($('#content').length) {
-					$('#content').css('margin-left', '213'+'px');
-				}
-				if($('#content-one').length) {
-					$('#content-one').css('margin-right', '212'+'px');
-				}
-				if($('#content-two').length) {
-					$('#content-two').css({'margin-right' : '212' + 'px'});
-				}			
-				/*if($('#sidebar').length) {
-					$('#sidebar').css({'left' : '0', 'margin-left' : '0'});
-				}*/
-				$this.removeClass('hide');
-				$('.collapseBtn.rightbar').css('top', '120'+'px').css('right', '18'+'px').removeClass('shadow');
-				$this.children('a').attr('title','Hide Right Sidebar');
-				
-			} else {
-				//hide sidebar
-				$('#sidebarbg-right').css('margin-right','-299'+'px');			
-				$('#sidebar-right').css('margin-right','-299'+'px');
-				if($('#content').length) {
-					$('#content').css('margin-right', '0');
-				}
-				if($('#content-one').length) {
-					$('#content-one').css({'margin-left': '0', 'margin-right' : '0'});
-				}
-				if($('#content-two').length) {
-					$('#content-two').css({'margin-right' : '0'});
-				}	
-				$('.collapseBtn.rightbar').animate({ //use .hide() if you experience heavy animation :)
-				    right: '10',
-				    top: '78'
-				  }, 500, 'easeInExpo', function() {
-				    // Animation complete.
-				  
-				}).addClass('shadow');
-				//expand content
-				$this.addClass('hide');
-				$this.children('a').attr('title','Show Right Sidebar')
-			}
-
-		}
 	});	
-
-	//------------- placeholder fallback  -------------//
-	//$('input[placeholder], textarea[placeholder]').placeholder();
-
-	//------------- Search forms  submit handler  -------------//
-	/*$('#tipue_search_input').tipuesearch({
-          'show': 5
-     });
-	$('#search-form').submit(function() {
-	  return false;
-	});*/
-
-	//make custom redirect for search form in .heading
-	/*$('#searchform').submit(function() {
-		var sText = $('.top-search').val();
-		var sAction = $(this).attr('action');
-		var sUrl = sAction + '?q=' + sText;
-		$(location).attr('href',sUrl);
-		return false;
-	});*/
 
 	//------------- To top plugin  -------------//
 	$().UItoTop({ 
@@ -408,7 +312,6 @@ $(document).ready(function(){
 
 
 //additional functions for data table
-
 $.fn.dataTableExt.oApi.fnPagingInfo = function ( oSettings )
 {
 	return {

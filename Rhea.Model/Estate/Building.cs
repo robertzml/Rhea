@@ -18,6 +18,7 @@ namespace Rhea.Model.Estate
         }
         #endregion //Constructor
 
+        #region Property
         /// <summary>
         /// ID
         /// </summary>
@@ -102,6 +103,7 @@ namespace Rhea.Model.Estate
         /// 楼层列表
         /// </summary>
         public List<Floor> Floors { get; set; }
+        #endregion //Property
     }
 
     /// <summary>

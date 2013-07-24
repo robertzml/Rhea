@@ -23,7 +23,7 @@
 <div id="sidebar">
     <div class="shortcuts">
         <ul>
-            <li><a href="#" title="Support section" class="tip"><span class="icon24 icomoon-icon-support">
+            <li><a href="#" title="Support section"><span class="icon24 icomoon-icon-support">
             </span></a></li>
             <li><a href="#" title="Database backup" class="tip"><span class="icon24 icomoon-icon-database">
             </span></a></li>
@@ -74,3 +74,18 @@
 
 </div>
 <!-- End #sidebar -->
+
+@section scripts {
+
+<script type="text/javascript">
+    $(function () {
+        $('.navbar .nav #nav-estate').parent().addClass('active');       
+
+        $('a.department-index').click(function () {
+            var id = $(this).attr('ref');
+            ajaxLoadPage2("Index", "Department", { id: id });
+            return false;
+        });
+    });
+</script>
+}
