@@ -60,10 +60,11 @@
         <script type="text/javascript" src="/plugins/misc/qtip/jquery.qtip.min.js"></script><!-- Custom tooltip plugin -->
         <script type="text/javascript" src="/plugins/misc/totop/jquery.ui.totop.min.js"></script> <!-- Back to top plugin -->
 
-        <script src="@Url.Content("~/Scripts/function.js")" type="text/javascript"></script>
-        @RenderSection("scripts", required: false)
+        <script src="@Url.Content("~/Scripts/function.js")" type="text/javascript"></script>        
 
         <!-- Init plugins -->
         <script type="text/javascript" src="/Scripts/main.js"></script><!-- Core js functions -->
+
+        @RenderSection("scripts", required: false)
     </body>
 </html>

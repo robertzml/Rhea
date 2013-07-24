@@ -1,25 +1,166 @@
 ﻿@model int
 @{
-    ViewBag.Title = "部门主页";
+    //ViewBag.Title = "部门主页";
     Layout = null;
 }
 
 @Html.Action("Heading", new { controller = "Common", area = "", title = ViewBag.Title, active = "部门导航" })
 
-<div class="contentwrapper">
-    <div id="section-bar">
-        <div class="section-nav">
-        </div>
-    </div>
 
-    <div class="row-fluid">
-    <div class="span12">
-        <div id="ajax-content2">
-            @Html.Action("Intro", "Department", new { area = "", id = Model })
+<!--Sidebar background-->
+<div id="section-barbg">
+</div>
+
+<div id="section-bar">
+    <div class="section-nav">
+        <ul id="secTab" class="nav nav-tabs pattern">
+            <li class="active"><a href="#tab-fun" data-toggle="tab">功 能</a></li>
+            <li><a href="#tab-room" data-toggle="tab">房 屋</a></li>
+            <li><a href="#tab-stat" data-toggle="tab">统 计</a></li>                
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane fade in active" id="tab-fun">
+                <div class="secbar-widget">
+                    <div class="content">
+                        <button class="btn btn-primary" id="department-intro"><span class="icon16 icomoon-icon-cog white"></span> 简介</button>
+                        <button class="btn btn-info" id="department-details"><span class="icon16 icomoon-icon-info-2 white"></span> 详细</button>
+                    </div>
+                </div>
+                <hr />
+                <div class="centerContent">
+                    <div dir="ltr" class="circle-stats">                                
+                        <div class="circular-item tipB" title="Site overload">
+                            <span class="icon icomoon-icon-fire"></span>
+                            <input type="text" value="62" class="redCircle" />
+                        </div>
+
+                        <div class="circular-item tipB" title="Site average load time">
+                            <span class="icon icomoon-icon-busy"></span>
+                            <input type="text" value="12" class="blueCircle" />
+                        </div>
+
+                        <div class="circular-item tipB" title="Target complete">
+                            <span class="icon icomoon-icon-target-2"></span>
+                            <input type="text" value="94" class="greenCircle" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="secbar-widget">
+                    <h5 class="title">当前</h5>
+                    <div class="content">
+                        <div class="rightnow">
+                            <ul class="unstyled">
+                                <li><span class="number">340</span><span class="icon16 icomoon-icon-new-2"></span>师生</li>
+                                <li><span class="number">7</span><span class="icon16 icomoon-icon-file"></span>楼宇</li>
+                                <li><span class="number">140</span><span class="icon16 icomoon-icon-list-view"></span>房间</li>
+                                <li><span class="number">2041</span><span class="icon16 icomoon-icon-tag"></span>面积</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div><!-- End .sidenav-widget -->
+
+            </div>
+            <div class="tab-pane fade" id="tab-room">
+                <div class="secbar-widget">
+                    <h4 class="title">楼宇列表</h4>
+                    <div class="content">                      
+                        <ul id="building-list" class="nav nav-pills nav-stacked">                   
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="reminder secbar-widget">
+                    <h4 class="title">房间信息</h4>
+                    <ul>
+                        <li class="clearfix">
+                            <div class="icon">
+                                <span class="icon32 icomoon-icon-home-7 gray"></span>
+                            </div>
+                            <span class="number">88</span> 
+                            <span class="txt">总数</span>
+                            <a class="btn btn-warning">go</a>
+                        </li>
+                        <li class="clearfix">
+                            <div class="icon">
+                                <span class="icon32 icomoon-icon-support red"></span>
+                            </div>
+                            <span class="number">3</span> 
+                            <span class="txt">汇总 </span>
+                            <a class="btn btn-warning">go</a>
+                        </li>                                                          
+                    </ul>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tab-stat">
+                <div class="centerContent">
+                    <ul class="bigBtnIcon">
+                        <li>
+                            <a href="#" id="department-statistic" title="分类统计" class="tipB">
+                                <span class="icon icomoon-icon-users"></span>
+                                <span class="txt">分类统计</span>                                
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" id="department-indicator" title="指标化" class="tipB">
+                                <span class="icon icomoon-icon-support"></span>
+                                <span class="txt">指标化</span>
+                                <span class="notification red">超</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" title="I`m with pattern" class="pattern tipB">
+                                <span class="icon icomoon-icon-comments-2"></span>
+                                <span class="txt">消息</span>
+                                <span class="notification green">23</span>
+                            </a>
+                        </li>                   
+                    </ul>
+                </div>
+
+                <div class="sparkStats secbar-widget">
+                    <h4 class="title">389 人每平米</h4>
+                    <ul class="unstyled">
+                        <li><span class="sparkLine1 "></span> 总人数: <span class="number">509</span></li>
+                        <li>
+                            <span class="sparkLine2"></span>
+                            教授: 
+                            <span class="number">389</span>
+                        </li>
+                        <li><span class="sparkLine3"></span> 
+                            副教授: 
+                            <span class="number">731</span>
+                        </li>
+                        <li><span class="sparkLine4"></span>
+                            人均: 
+                            <span class="number">1.44</span>
+                        </li>
+                        <li><span class="sparkLine5"></span>
+                            时间: 
+                            <span class="number">00:01:21</span>
+                        </li>                        
+                    </ul>
+                    <div class="right" style="padding: 15px 0">
+                        <a href="#" class="btn btn-info">View full <span class="icon16 icomoon-icon-arrow-right white"></span></a>
+                    </div>
+                </div><!-- End .sparkStats -->
+            </div>            
         </div>
-    </div>
     </div>
 </div>
+
+<div id="section-content" class="clearfix">
+    <div class="row-fluid">
+        <div class="span12">
+            <div id="ajax-content2">
+                @Html.Action("Intro", "Department", new { area = "", id = Model })
+            </div>
+        </div>
+    </div>
+</div>
+
 <!--
 <div class="span2">
     <div class="well sidebar-nav">
@@ -43,7 +184,9 @@
 </div>
 
 -->
-@section scripts {
+
+
+
 <script type="text/javascript">
     $(function () {
         $.getJSON('/Estate/Building/GetListByDepartment', { departmentId: @Model }, function (response) {
@@ -52,45 +195,117 @@
                 text.push("<li><a href='#' class='building-index' ref='" + item.Id + "'>" + item.Name + "</a></li>");
             });
             text = text.join('');
-            $('li#building-list').after(text);
+            $('ul#building-list').append(text);
 
             $('a.building-index').click(function() {
-                menuNavActive($(this));
+                menuNavActive($('ul#building-list'), $(this));
                 var buildingId = $(this).attr('ref');
-                ajaxLoadPage2("Building", "Department", { id: @Model, buildingId: buildingId });
+                ajaxContentLoadPage2("Building", "Department", { id: '@Model', buildingId: buildingId }, $('#ajax-content2'));
                 return false;
             });
         });
 
-        $('a#department-summary').click(function() {
-            menuNavActive($(this));
-            ajaxLoadPage2("Summary", "Department", { id: @Model });
+        $('#secTab a').click(function (e) {
+	  	    e.preventDefault();
+	  	    $(this).tab('show');
+	    });
+
+        //circular progrress bar
+		$(".greenCircle").knob({
+            'min':0,
+            'max':100,
+            'readOnly': true,
+            'width': 80,
+            'height': 80,
+            'fgColor': '#9FC569',
+            'dynamicDraw': true,
+            'thickness': 0.2,
+            'tickColorizeValues': true
+        });
+        $(".redCircle").knob({
+            'min':0,
+            'max':100,
+            'readOnly': true,
+            'width': 80,
+            'height': 80,
+            'fgColor': '#ED7A53',
+            'dynamicDraw': true,
+            'thickness': 0.2,
+            'tickColorizeValues': true
+        });
+        $(".blueCircle").knob({
+            'min':0,
+            'max':100,
+            'readOnly': true,
+            'width': 80,
+            'height': 80,
+            'fgColor': '#88BBC8',
+            'dynamicDraw': true,
+            'thickness': 0.2,
+            'tickColorizeValues': true
+        });
+
+        //tooltip in bottom
+	    $('.tipB').qtip({
+		    content: false,
+		    position: {
+			    my: 'top center',
+			    at: 'bottom center',
+			    viewport: $(window)
+		    },
+		    style: {
+			    classes: 'qtip-tipsy'
+		    }
+	    });
+	
+        //generate random number for charts
+        randNum = function(){
+	        //return Math.floor(Math.random()*101);
+	        return (Math.floor( Math.random()* (1+40-20) ) ) + 20;
+        }
+
+        //sparklines (making loop with random data for all 7 sparkline)
+        for (var i=1; i<6; i++) {
+ 	        var data = [[1, 3+randNum()], [2, 5+randNum()], [3, 8+randNum()], [4, 11+randNum()],[5, 14+randNum()],[6, 17+randNum()],[7, 20+randNum()], [8, 15+randNum()], [9, 18+randNum()], [10, 22+randNum()]];
+ 	        placeholder = '.sparkLine' + i;
+	        $(placeholder).sparkline(data, { 
+		        width: 100,//Width of the chart - Defaults to 'auto' - May be any valid css width - 1.5em, 20px, etc (using a number without a unit specifier won't do what you want) - This option does nothing for bar and tristate chars (see barWidth)
+		        height: 30,//Height of the chart - Defaults to 'auto' (line height of the containing tag)
+		        lineColor: '#88bbc8',//Used by line and discrete charts to specify the colour of the line drawn as a CSS values string
+		        fillColor: '#f2f7f9',//Specify the colour used to fill the area under the graph as a CSS value. Set to false to disable fill
+		        spotColor: '#467e8c',//The CSS colour of the final value marker. Set to false or an empty string to hide it
+		        maxSpotColor: '#9FC569',//The CSS colour of the marker displayed for the maximum value. Set to false or an empty string to hide it
+		        minSpotColor: '#ED7A53',//The CSS colour of the marker displayed for the mimum value. Set to false or an empty string to hide it
+		        spotRadius: 3,//Radius of all spot markers, In pixels (default: 1.5) - Integer
+		        lineWidth: 2//In pixels (default: 1) - Integer
+	        });
+        }
+
+        
+        $('button#department-intro').click(function() {           
+            ajaxContentLoadPage2("Intro", "Department", { id: '@Model' }, $('#ajax-content2'));
             return false;
         });
 
-        $('a#department-details').click(function() {
-            menuNavActive($(this));
-            ajaxLoadPage2("Details", "Department", { id: @Model });
+        $('button#department-details').click(function() {            
+            ajaxContentLoadPage2("Details", "Department", { id: '@Model' }, $('#ajax-content2'));
             return false;
         });
 
-        $('a#department-indicator').click(function() {
-            menuNavActive($(this));
-            ajaxLoadPage2("Indicator", "Department", { id: @Model });
+        $('a#department-indicator').click(function() {           
+            ajaxContentLoadPage2("Indicator", "Department", { id: '@Model' }, $('#ajax-content2'));
             return false;
         });
 
-        $('a#department-statistic').click(function() {
-            menuNavActive($(this));
-            ajaxLoadPage2("Statistic", "Department", { id: @Model });
+        $('a#department-statistic').click(function() {            
+            ajaxContentLoadPage2("Statistic", "Department", { id: '@Model' }, $('#ajax-content2'));
             return false;
         });
 
         $('a#room-list').click(function() {
             menuNavActive($(this));
-            ajaxLoadPage("ListByDepartment", "Room", "Estate", { departmentId: @Model });
+            ajaxLoadPage("ListByDepartment", "Room", "Estate", { departmentId: '@Model' });
             return false;
         });
     });
 </script>
-}

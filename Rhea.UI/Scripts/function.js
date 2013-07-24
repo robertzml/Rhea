@@ -40,6 +40,40 @@ function ajaxLoadPage2(action, controller, request) {
 	});
 }
 
+function ajaxContentLoadPage(action, controller, area, request, $dom) {		
+	$.ajax({
+		url: "/" + area + "/" + controller + "/" + action,
+		type: 'get',
+		data: request,
+		success: function (response) {			
+			$dom.html(response);			
+		},
+		error: function (response) {		
+			noty({
+				text: 'ajax error',
+				type: 'error'
+			});
+		}
+	});
+}
+
+function ajaxContentLoadPage2(action, controller, request, $dom) {		
+	$.ajax({
+		url: "/" + controller + "/" + action,
+		type: 'get',
+		data: request,
+		success: function (response) {			
+			$dom.html(response);			
+		},
+		error: function (response) {		
+			noty({
+				text: 'ajax error',
+				type: 'error'
+			});
+		}
+	});
+}
+
 function initDataTable($dom) {	
 	$dom.dataTable({
 		"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
@@ -59,6 +93,11 @@ function initDataTable($dom) {
 
 function menuNavActive($dom) {
 	$('ul.nav').children().removeClass('active');
+	$dom.parent().addClass('active');
+}
+
+function menuNavActive($parent, $dom) {
+	$parent.children().removeClass('active');
 	$dom.parent().addClass('active');
 }
 

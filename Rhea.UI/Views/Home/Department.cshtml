@@ -115,15 +115,20 @@
 <!-- End #sidebar -->
 
 <!--Body content-->
-<div id="content" class="clearfix">    
-    <!-- Build page from here: -->
-    <div id="ajax-content1">
+<div id="content" class="clearfix">
+    <div class="contentwrapper">
+        <!-- Build page from here: -->
+        <div id="ajax-content1">
+        </div>
+        <!--End page -->
     </div>
-    <!--End page -->
 </div>
 <!-- End #content -->
 
 @section scripts {
+<script type="text/javascript" src="/plugins/charts/sparkline/jquery.sparkline.min.js"></script><!-- Sparkline plugin -->
+<script type="text/javascript" src="/plugins/charts/knob/jquery.knob.js"></script><!-- Circular sliders and stats -->
+
 <script type="text/javascript">
     $(function () {
         $('.navbar .nav #nav-department').parent().addClass('active');
