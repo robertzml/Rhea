@@ -20,7 +20,7 @@ namespace Rhea.UI.Controllers
         public ActionResult Index()
         {
             return View();
-        }       
+        }
 
         /// <summary>
         /// 导航栏
@@ -81,17 +81,12 @@ namespace Rhea.UI.Controllers
             ViewBag.Message = "你的应用程序说明页。";
 
             return View();
-        }   
+        }
 
         public ActionResult Contact()
         {
             ViewBag.Message = "你的联系方式页。";
 
-            return View();
-        }  
-
-        public ActionResult Test()
-        {
             return View();
         }
     }

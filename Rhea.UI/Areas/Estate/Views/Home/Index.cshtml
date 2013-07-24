@@ -10,7 +10,7 @@
         
 <!--Left Sidebar collapse button-->  
 <div class="collapseBtn leftbar">
-    <a href="#" class="tipR" title="Hide Left Sidebar"><span class="icon12 minia-icon-layout"></span></a>
+    <a href="#" class="tip" data-placement="bottom" data-toggle="tooltip" title="Hide"><span class="icon12 minia-icon-layout"></span></a>
 </div>
 
 <!--Sidebar background-->
@@ -20,10 +20,10 @@
 <div id="sidebar">
     <div class="shortcuts">
         <ul>
-            <li><a href="#" title="Support section" class="tip" data-toggle="tooltip"><span class="icon24 icomoon-icon-support"></span></a></li>
-            <li><a href="#" title="Database backup" class="tip"><span class="icon24 icomoon-icon-database"></span></a></li>
-            <li><a href="#" title="Sales statistics" class="tip"><span class="icon24 icomoon-icon-pie-2"></span></a></li>
-            <li><a href="#" title="Write post" class="tip"><span class="icon24 icomoon-icon-pencil"></span></a></li>
+            <li><a href="#" title="Support section" class="tip" data-placement="bottom" data-toggle="tooltip"><span class="icon24 icomoon-icon-support"></span></a></li>
+            <li><a href="#" title="Database backup" class="tip" data-placement="bottom" data-toggle="tooltip"><span class="icon24 icomoon-icon-database"></span></a></li>
+            <li><a href="#" title="Sales statistics" class="tip" data-placement="bottom" data-toggle="tooltip"><span class="icon24 icomoon-icon-pie-2"></span></a></li>
+            <li><a href="#" title="Write post" class="tip" data-placement="bottom" data-toggle="tooltip"><span class="icon24 icomoon-icon-pencil"></span></a></li>
         </ul>
     </div>
 
@@ -101,7 +101,7 @@
 <script type="text/javascript">
     $(function () {
         $('.navbar .nav #nav-summary').parent().addClass('active');
-        $('.tip2').tooltip();
+        $('.tip').tooltip();
 
         $('a#summary').click(function() {           
             ajaxLoadPage("Summary", "Home", "Estate", {});

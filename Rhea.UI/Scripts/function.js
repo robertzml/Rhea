@@ -77,7 +77,7 @@ function ajaxContentLoadPage2(action, controller, request, $dom) {
 function initDataTable($dom) {	
 	$dom.dataTable({
 		"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
-			"sPaginationType": "bootstrap",
+			"sPaginationType": "full_numbers",
 			"bJQueryUI": false,
 			"bAutoWidth": false,
 			"oLanguage": {
@@ -86,7 +86,13 @@ function initDataTable($dom) {
 				"sInfoEmpty": "记录为空",
 				"sInfoFiltered": " - 从 _MAX_ 条记录中",
 				"sZeroRecords": "结果为空",
-				"sSearch": "搜索:"
+				"sSearch": "搜索:",
+				"oPaginate": {
+					"sFirst": "首页",
+					"sLast": "末页",
+					"sPrevious": "前页",
+					"sNext": "下页"					
+				}				
 			}		
 	});
 }
