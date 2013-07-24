@@ -1,9 +1,120 @@
 ﻿@model int
 @{    
     //ViewBag.Title = "楼群主页";
-    Layout = "~/Views/Shared/_Layout1.cshtml";
+    Layout = null;
 }
 
+@Html.Action("Heading", new { controller = "Common", area = "", title = ViewBag.Title, active = "楼群导航" })
+
+<!--Sidebar background-->
+<div id="section-barbg">
+</div>
+
+<div id="section-bar">
+    <div class="section-nav">
+        <ul id="secTab" class="nav nav-tabs pattern">
+            <li class="active"><a href="#tab-fun" data-toggle="tab">功 能</a></li>
+            <li><a href="#tab-room" data-toggle="tab">房 屋</a></li>
+            <li><a href="#tab-stat" data-toggle="tab">统 计</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane fade in active" id="tab-fun">
+                <div class="secbar-widget">
+                    <div class="content">
+                        <button class="btn btn-primary" id="building-group-intro"><span class="icon16 icomoon-icon-cog white"></span> 简介</button>
+                        <button class="btn btn-info" id="building-group-details"><span class="icon16 icomoon-icon-info-2 white"></span> 详细</button>
+                    </div>
+                </div>
+                <hr />
+                <div class="centerContent">
+                    <div dir="ltr" class="circle-stats">
+                        <div class="circular-item tip" title="Site overload">
+                            <span class="icon icomoon-icon-fire"></span>
+                            <input type="text" value="62" class="redCircle" />
+                        </div>
+                        <div class="circular-item tip" title="Site average load time">
+                            <span class="icon icomoon-icon-busy"></span>
+                            <input type="text" value="12" class="blueCircle" />
+                        </div>
+                        <div class="circular-item tip" title="Target complete">
+                            <span class="icon icomoon-icon-target-2"></span>
+                            <input type="text" value="94" class="greenCircle" />
+                        </div>
+                    </div>
+                </div>
+                <div class="secbar-widget">
+                    <h5 class="title">
+                        当前</h5>
+                    <div class="content">
+                        <div class="rightnow">
+                            <ul class="unstyled">
+                                <li><span class="number">340</span><span class="icon16 icomoon-icon-new-2"></span>师生</li>
+                                <li><span class="number">7</span><span class="icon16 icomoon-icon-file"></span>楼宇</li>
+                                <li><span class="number">140</span><span class="icon16 icomoon-icon-list-view"></span>房间</li>
+                                <li><span class="number">2041</span><span class="icon16 icomoon-icon-tag"></span>面积</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- End .sidenav-widget -->
+            </div>
+            <div class="tab-pane fade" id="tab-room">
+                <div class="secbar-widget">
+                    <h4 class="title">
+                        楼宇列表</h4>
+                    <div class="content">
+                        <ul id="building-list" class="nav nav-pills nav-stacked">
+                        </ul>
+                    </div>
+                </div>
+                <div class="reminder secbar-widget">
+                    <h4 class="title">
+                        房间信息</h4>
+                    <ul>
+                        <li class="clearfix">
+                            <div class="icon">
+                                <span class="icon32 icomoon-icon-home-7 gray"></span>
+                            </div>
+                            <span class="number">88</span> <span class="txt">总数</span> <a class="btn btn-warning">
+                                go</a> </li>
+                        <li class="clearfix">
+                            <div class="icon">
+                                <span class="icon32 icomoon-icon-support red"></span>
+                            </div>
+                            <span class="number">3</span> <span class="txt">汇总 </span><a class="btn btn-warning">
+                                go</a> </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tab-stat">
+                <div class="centerContent">
+                    <ul class="bigBtnIcon">
+                        <li><a href="#" id="department-statistic" title="分类统计" class="tip"><span class="icon icomoon-icon-users">
+                        </span><span class="txt">分类统计</span> </a></li>
+                        <li><a href="#" id="department-indicator" title="指标化" class="tip"><span class="icon icomoon-icon-support">
+                        </span><span class="txt">指标化</span> <span class="notification red">超</span> </a>
+                        </li>
+                        <li><a href="#" title="I`m with pattern" class="pattern tip"><span class="icon icomoon-icon-comments-2">
+                        </span><span class="txt">消息</span> <span class="notification green">23</span> </a>
+                        </li>
+                    </ul>
+                </div>              
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="section-content" class="clearfix">
+    <div class="row-fluid">
+        <div class="span12">
+            <div id="ajax-content2">
+                @Html.Action("Intro", "BuildingGroup", new { area = "Estate", id = Model })
+            </div>
+        </div>
+    </div>
+</div>
+<!--
 <div class="span2">
     <div class="well sidebar-nav">
         <ul class="nav nav-list">
@@ -23,16 +134,16 @@
 
 <div class="span10">
     <div id="ajax-content1">
-        @Html.Action("Summary", "BuildingGroup", new { area = "Estate", id = Model })
+        @Html.Action("Intro", "BuildingGroup", new { area = "Estate", id = Model })
     </div>
 </div>
+-->
 
-@section scripts {
-@Scripts.Render("~/bundles/colorbox")
 
 <script type="text/javascript">
     $(function () {
-        $.getJSON('/Estate/Building/GetListByBuildingGroup', { buildingGroupId: @Model }, function (response) {
+
+        /*$.getJSON('/Estate/Building/GetListByBuildingGroup', { buildingGroupId: @Model }, function (response) {
             var text = [];
             $.each(response, function(i, item) {
                 text.push("<li><a href='#' class='building-index' ref='" + item.Id + "'>" + item.Name + "</a></li>");
@@ -46,20 +157,55 @@
                 ajaxLoadPage("Index", "Building", "Estate", { id: buildingId });
                 return false;
             });
+        });*/
+
+        $('#secTab a').click(function (e) {
+	  	    e.preventDefault();
+	  	    $(this).tab('show');
+	    });
+
+        //circular progrress bar
+		$(".greenCircle").knob({
+            'min':0,
+            'max':100,
+            'readOnly': true,
+            'width': 80,
+            'height': 80,
+            'fgColor': '#9FC569',
+            'dynamicDraw': true,
+            'thickness': 0.2,
+            'tickColorizeValues': true
+        });
+        $(".redCircle").knob({
+            'min':0,
+            'max':100,
+            'readOnly': true,
+            'width': 80,
+            'height': 80,
+            'fgColor': '#ED7A53',
+            'dynamicDraw': true,
+            'thickness': 0.2,
+            'tickColorizeValues': true
+        });
+        $(".blueCircle").knob({
+            'min':0,
+            'max':100,
+            'readOnly': true,
+            'width': 80,
+            'height': 80,
+            'fgColor': '#88BBC8',
+            'dynamicDraw': true,
+            'thickness': 0.2,
+            'tickColorizeValues': true
         });
 
-       
-        $('a#building-group-pic').colorbox({ transition: "elastic", maxWidth: "95%", maxHeight: "95%" }); 
-
-        $('a#building-group-summary').click(function() {
-            menuNavActive($(this));
-            ajaxLoadPage("Summary", "BuildingGroup", "Estate", { id: @Model });
+        $('button#building-group-intro').click(function() {
+            ajaxContentLoadPage("Intro", "BuildingGroup", "Estate", { id: '@Model' }, $('#ajax-content2'));
             return false;
         });
 
-        $('a#building-group-details').click(function() {
-            menuNavActive($(this));
-            ajaxLoadPage("Details", "BuildingGroup", "Estate", { id: @Model });
+        $('button#building-group-details').click(function() {
+            ajaxContentLoadPage("Details", "BuildingGroup", "Estate", { id: '@Model' }, $('#ajax-content2'));           
             return false;
         });
 
@@ -76,4 +222,3 @@
         });
     });
 </script>
-}

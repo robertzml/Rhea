@@ -201,12 +201,6 @@
     <Content Include="Content\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\colorbox.css" />
-    <Content Include="Content\colorbox\border.png" />
-    <Content Include="Content\colorbox\controls.png" />
-    <Content Include="Content\colorbox\loading.gif" />
-    <Content Include="Content\colorbox\loading_background.png" />
-    <Content Include="Content\colorbox\overlay.png" />
     <Content Include="Content\custom.css" />
     <Content Include="Content\fonts\broccolidry.svg" />
     <Content Include="Content\fonts\cuticons.svg" />
@@ -1192,6 +1186,14 @@
     <Content Include="Plugins\forms\validate\localization\methods_pt.js" />
     <Content Include="Plugins\forms\validate\validate.css" />
     <Content Include="Plugins\forms\watermark\jquery.watermark.min.js" />
+    <Content Include="Plugins\gallery\colorbox\colorbox.css" />
+    <Content Include="Plugins\gallery\colorbox\images\border.png" />
+    <Content Include="Plugins\gallery\colorbox\images\controls.png" />
+    <Content Include="Plugins\gallery\colorbox\images\loading.gif" />
+    <Content Include="Plugins\gallery\colorbox\images\loading_background.png" />
+    <Content Include="Plugins\gallery\colorbox\images\overlay.png" />
+    <Content Include="Plugins\gallery\colorbox\jquery.colorbox-min.js" />
+    <Content Include="Plugins\gallery\colorbox\jquery.colorbox.js" />
     <Content Include="Plugins\gallery\jpages\jPages.css" />
     <Content Include="Plugins\gallery\jpages\jPages.js" />
     <Content Include="Plugins\gallery\jpages\jPages.min.js" />
@@ -1274,6 +1276,21 @@
     <Content Include="Plugins\misc\jqueryFileTree\jqueryFileTree.js" />
     <Content Include="Plugins\misc\nicescroll\jquery.nicescroll.js" />
     <Content Include="Plugins\misc\nicescroll\jquery.nicescroll.min.js" />
+    <Content Include="Plugins\misc\noty\jquery.noty.js" />
+    <Content Include="Plugins\misc\noty\layouts\bottom.js" />
+    <Content Include="Plugins\misc\noty\layouts\bottomCenter.js" />
+    <Content Include="Plugins\misc\noty\layouts\bottomLeft.js" />
+    <Content Include="Plugins\misc\noty\layouts\bottomRight.js" />
+    <Content Include="Plugins\misc\noty\layouts\center.js" />
+    <Content Include="Plugins\misc\noty\layouts\centerLeft.js" />
+    <Content Include="Plugins\misc\noty\layouts\centerRight.js" />
+    <Content Include="Plugins\misc\noty\layouts\inline.js" />
+    <Content Include="Plugins\misc\noty\layouts\top.js" />
+    <Content Include="Plugins\misc\noty\layouts\topCenter.js" />
+    <Content Include="Plugins\misc\noty\layouts\topLeft.js" />
+    <Content Include="Plugins\misc\noty\layouts\topRight.js" />
+    <Content Include="Plugins\misc\noty\promise.js" />
+    <Content Include="Plugins\misc\noty\themes\default.js" />
     <Content Include="Plugins\misc\pnotify\jquery.pnotify.default.css" />
     <Content Include="Plugins\misc\pnotify\jquery.pnotify.js" />
     <Content Include="Plugins\misc\pnotify\jquery.pnotify.min.js" />
@@ -1341,8 +1358,6 @@
     <Content Include="Scripts\jquery-ui-1.10.3.all.min.js" />
     <Content Include="Scripts\jquery-ui-1.10.3.js" />
     <Content Include="Scripts\jquery-ui-1.10.3.min.js" />
-    <Content Include="Scripts\jquery.colorbox-min.js" />
-    <Content Include="Scripts\jquery.colorbox.js" />
     <Content Include="Scripts\jquery.cookie.js" />
     <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery.mousewheel.js" />
@@ -1355,21 +1370,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
-    <Content Include="Scripts\noty\jquery.noty.js" />
-    <Content Include="Scripts\noty\layouts\bottom.js" />
-    <Content Include="Scripts\noty\layouts\bottomCenter.js" />
-    <Content Include="Scripts\noty\layouts\bottomLeft.js" />
-    <Content Include="Scripts\noty\layouts\bottomRight.js" />
-    <Content Include="Scripts\noty\layouts\center.js" />
-    <Content Include="Scripts\noty\layouts\centerLeft.js" />
-    <Content Include="Scripts\noty\layouts\centerRight.js" />
-    <Content Include="Scripts\noty\layouts\inline.js" />
-    <Content Include="Scripts\noty\layouts\top.js" />
-    <Content Include="Scripts\noty\layouts\topCenter.js" />
-    <Content Include="Scripts\noty\layouts\topLeft.js" />
-    <Content Include="Scripts\noty\layouts\topRight.js" />
-    <Content Include="Scripts\noty\promise.js" />
-    <Content Include="Scripts\noty\themes\default.js" />
     <Content Include="Scripts\rhea.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -1447,7 +1447,7 @@
     <Content Include="Areas\Estate\Views\BuildingGroup\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Estate\Views\BuildingGroup\Summary.cshtml" />
+    <Content Include="Areas\Estate\Views\BuildingGroup\Intro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Estate\Views\Building\Index.cshtml" />

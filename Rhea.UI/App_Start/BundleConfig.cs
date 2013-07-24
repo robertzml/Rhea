@@ -26,12 +26,12 @@ namespace Rhea.UI
                         "~/Plugins/charts/highcharts/modules/exporting.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/noty").Include(
-                        "~/Scripts/noty/jquery.noty.js",
-                        "~/Scripts/noty/layouts/top.js",
-                        "~/Scripts/noty/themes/default.js"));
+                        "~/Plugins/misc/noty/jquery.noty.js",
+                        "~/Plugins/misc/noty/layouts/top.js",
+                        "~/Plugins/misc/noty/themes/default.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/colorbox").Include(
-                        "~/Scripts/jquery.colorbox.js"));
+                        "~/Plugins/gallery/colorbox/jquery.colorbox.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/datatable").Include(
                         "~/Plugins/tables/dataTables/jquery.dataTables.js",
@@ -63,7 +63,7 @@ namespace Rhea.UI
                         "~/Content/bootstrap-responsive.css"));
 
             bundles.Add(new StyleBundle("~/Content/colorbox").Include(
-                        "~/Content/colorbox.css"));
+                        "~/Plugins/gallery/colorbox/colorbox.css"));
         }
     }
 }

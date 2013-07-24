@@ -50,7 +50,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// </summary>
         /// <param name="id">楼群ID</param>
         /// <returns></returns>
-        public ActionResult Summary(int id)
+        public ActionResult Intro(int id)
         {
             BuildingGroup data = this.buildingGroupBusiness.Get(id);
             if (!string.IsNullOrEmpty(data.ImageUrl))

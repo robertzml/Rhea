@@ -6,52 +6,51 @@
 }
 
 <div class="box">
-    <div class="box-header well" data-original-title>
-        <h2><i class="icon-th-list"></i>@ViewBag.Title</h2>    
+    <div class="title">
+        <h4>
+            <span class="icon16 icomoon-icon-tag"></span><span>@ViewBag.Title</span>
+        </h4>
+        <a href="#" class="minimize">Minimize</a>
     </div>
 
-    <div class="box-content">
-        <div class="row-fluid">
-            <div class="span12">
-                <table class="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <th>
-                                部门名称
-                            </th>
-                            <th>
-                                房间数量
-                            </th>
-                            <th>
-                                使用总面积 (m<sup>2</sup>)
-                            </th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <td>合计</td>
-                            <td>@Model.Sum(r => r.RoomCount)</td>
-                            <td>@Model.Sum(r => r.TotalUsableArea)</td>
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @item.DepartmentName
-                            </td>
-                            <td>
-                                @item.RoomCount
-                            </td>
-                            <td>
-                                @item.TotalUsableArea
-                            </td>
-                        </tr>
-                    }
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <div class="content noPad">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        部门名称
+                    </th>
+                    <th>
+                        房间数量
+                    </th>
+                    <th>
+                        使用总面积 (m<sup>2</sup>)
+                    </th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td>合计</td>
+                    <td>@Model.Sum(r => r.RoomCount)</td>
+                    <td>@Model.Sum(r => r.TotalUsableArea)</td>
+                </tr>
+            </tfoot>
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.DepartmentName
+                    </td>
+                    <td>
+                        @item.RoomCount
+                    </td>
+                    <td>
+                        @item.TotalUsableArea
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
     </div>
 </div>

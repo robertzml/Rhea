@@ -4,6 +4,8 @@
     ViewBag.Title = "楼群导航";
 }
 
+@Styles.Render("~/Content/colorbox")
+
 <!--Responsive navigation button-->
 <div class="resBtn">
     <a href="#"><span class="icon16 minia-icon-list-3"></span></a>
@@ -43,30 +45,25 @@
         <div class="mainnav">
             <ul>
                 <li><a href="#" id="summary"><span class="icon16 icomoon-icon-newspaper"></span>摘要</a></li>
-                <li><a href="#"><span class="icon16 icomoon-icon-grid"></span>建筑物面积数据</a>
-                    <ul class="sub">
-                        <li><a href="#" id="building-group-usable-area-compare"><span class="icon16 icomoon-icon-cube">
-                        </span>楼群使用面积比较</a></li>
-                        <li><a href="#" id="building-group-build-area-compare"><span class="icon16 icomoon-icon-cube-2">
-                        </span>楼群建筑面积比较</a></li>
-                    </ul>
-                </li>
-                <li><a href="#"><span class="icon16 icomoon-icon-list-view-2"></span>蠡湖校区<span class="notification red">50</span></a>
+                <li><a href="#"><span class="icon16 icomoon-icon-lab"></span>学院楼<span class="notification blue">19</span></a>
                     <ul class="sub">
                     @foreach (var bg in Model.BuildingGroups)
                     {
-                        <li><a href="#" title="@bg.Name"><span class="icon16 icomoon-icon-file"></span>@bg.Name</a>
+                        <li><a href="#" title="@bg.Name" ref="@bg.Id"><span class="building-group-index icon16 icomoon-icon-file"></span>@bg.Name</a>
                             <ul class="sub">
                             @foreach (var item in bg.Buildings)
                             {
-                                <li><a href="#" title="@item.Name"><span class="icon16 icomoon-icon-arrow-right-2"></span>@item.Name</a></li>
+                                <li><a href="#" title="@item.Name" ref="@item.Id"><span class="icon16 icomoon-icon-arrow-right-2"></span>@item.Name</a></li>
                             }
                             </ul>
                         </li>
                     }
                     </ul>
                 </li>
-             
+                <li><a href="#"><span class="icon16 icomoon-icon-books"></span>教学楼<span class="notification blue">2</span></a>
+                    <ul class="sub">
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
@@ -75,15 +72,28 @@
 </div>
 <!-- End #sidebar -->
 
+<!--Body content-->
+<div id="content" class="clearfix">
+    <div class="contentwrapper">
+        <!-- Build page from here: -->
+        <div id="ajax-content1">
+        </div>
+        <!--End page -->
+    </div>
+</div>
+<!-- End #content -->
+
 @section scripts {
+<script type="text/javascript" src="@Url.Content("~/Plugins/charts/knob/jquery.knob.js")"></script>
+@Scripts.Render("~/bundles/colorbox")
 
 <script type="text/javascript">
     $(function () {
-        $('.navbar .nav #nav-estate').parent().addClass('active');       
+        $('.navbar .nav #nav-estate').parent().addClass('active');
 
-        $('a.department-index').click(function () {
-            var id = $(this).attr('ref');
-            ajaxLoadPage2("Index", "Department", { id: id });
+        $('span.building-group-index').click(function () {
+            var id = $(this).parent().attr('ref');
+            ajaxLoadPage("Index", "BuildingGroup", "Estate", { id: id });
             return false;
         });
     });
