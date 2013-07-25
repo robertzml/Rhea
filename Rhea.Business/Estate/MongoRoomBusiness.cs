@@ -438,6 +438,18 @@ namespace Rhea.Business.Estate
             long count = this.context.Count(EstateCollection.Room, query);
             return (int)count;          
         }
+
+        /// <summary>
+        /// 部门房间数量
+        /// </summary>
+        /// <param name="departmentId">部门ID</param>
+        /// <returns></returns>
+        public int CountByDepartment(int departmentId)
+        {
+            var query = Query.EQ("departmentId", departmentId);
+            long count = this.context.Count(EstateCollection.Room, query);
+            return (int)count;
+        }
         #endregion //Method
     }
 }

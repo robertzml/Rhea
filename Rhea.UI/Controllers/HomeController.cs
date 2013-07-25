@@ -28,15 +28,6 @@ namespace Rhea.UI.Controllers
         /// <returns></returns>
         public ActionResult Nav()
         {
-            /*NavModel data = new NavModel();
-            
-            IDepartmentBusiness departmentBusiness = new MongoDepartmentBusiness();
-            data.Departments = departmentBusiness.GetList();
-
-            IBuildingGroupBusiness buildingGroupBusiness = new MongoBuildingGroupBusiness();
-            data.BuildingGroups = buildingGroupBusiness.GetSimpleList();
-
-            return View(data);*/
             return View();
         }
 

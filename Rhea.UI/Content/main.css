@@ -2060,7 +2060,7 @@ h4 .icon span:hover {color: #3F3F3F;}
 .rightnow {position: relative;}
 	.rightnow ul {margin-left:10px;}
 	.rightnow li {line-height: 24px;}
-	.rightnow .number {font-size: 18px; font-weight: 700; margin-right:10px; width:30px; float: left; text-align: right; color: #2C7282;}
+	.rightnow .number {font-size: 18px; font-weight: 700; margin-right:10px; width:50px; float: left; text-align: right; color: #2C7282;}
 
 /*Misc styles*/
 .pie-chart-label {

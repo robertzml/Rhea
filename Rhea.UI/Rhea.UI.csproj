@@ -190,6 +190,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\DepartmentModels.cs" />
     <Compile Include="Models\NavModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ContextExtension.cs" />
@@ -1319,9 +1320,6 @@
     <Content Include="Plugins\misc\qtip\jquery.qtip.css" />
     <Content Include="Plugins\misc\qtip\jquery.qtip.js" />
     <Content Include="Plugins\misc\qtip\jquery.qtip.min.js" />
-    <Content Include="Plugins\misc\scrollbar\jquery.mCustomScrollbar.concat.min.js" />
-    <Content Include="Plugins\misc\scrollbar\jquery.mCustomScrollbar.css" />
-    <Content Include="Plugins\misc\scrollbar\jquery.mCustomScrollbar.js" />
     <Content Include="Plugins\misc\search\loader.gif" />
     <Content Include="Plugins\misc\search\search.gif" />
     <Content Include="Plugins\misc\search\tipuesearch.css" />
@@ -1617,12 +1615,6 @@
     <Content Include="Areas\Estate\Views\Building\ListByBuildingGroup.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Estate\Views\Building\Floor.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Estate\Views\Building\FloorByDepartment.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Areas\Estate\Views\Building\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -1731,6 +1723,7 @@
     <Content Include="Areas\Estate\Views\Building\Department.cshtml" />
     <Content Include="Areas\Estate\Views\Room\ListByBuilding.cshtml" />
     <Content Include="Areas\Estate\Views\Building\FloorView.cshtml" />
+    <Content Include="Areas\Estate\Views\BuildingGroup\Summary.cshtml" />
     <None Include="Content\fonts\broccolidry.eot" />
     <None Include="Content\fonts\broccolidry.ttf" />
     <None Include="Content\fonts\broccolidry.woff" />
@@ -1764,6 +1757,7 @@
     <Content Include="Views\Common\ShowMessage.cshtml" />
     <Content Include="Views\Home\Estate.cshtml" />
     <Content Include="Views\Home\Department.cshtml" />
+    <Content Include="Views\Department\Summary.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

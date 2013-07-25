@@ -35,6 +35,15 @@ namespace Rhea.UI.Areas.Estate.Controllers
 
         #region Action
         /// <summary>
+        /// 楼群摘要页
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Summary()
+        {
+            return View();
+        }
+
+        /// <summary>
         /// 楼群主页
         /// </summary>
         /// <param name="id">楼群ID</param>

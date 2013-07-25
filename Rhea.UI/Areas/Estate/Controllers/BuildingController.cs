@@ -143,18 +143,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
             }           
 
             return View(data);
-        }
-
-        /// <summary>
-        /// 楼层视图
-        /// </summary>
-        /// <param name="id">楼宇ID</param>
-        /// <returns></returns>
-        public ActionResult Floor(int id)
-        {
-            Building data = this.buildingBusiness.Get(id);
-            return View(data);
-        }
+        }              
 
         /// <summary>
         /// 楼层视图

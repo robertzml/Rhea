@@ -25,13 +25,13 @@
 <div id="sidebar">
     <div class="shortcuts">
         <ul>
-            <li><a href="#" title="Support section"><span class="icon24 icomoon-icon-support">
+            <li><a href="#" title="Support" class="tip"><span class="icon24 icomoon-icon-support">
             </span></a></li>
-            <li><a href="#" title="Database backup" class="tip"><span class="icon24 icomoon-icon-database">
+            <li><a href="#" title="Backup" class="tip"><span class="icon24 icomoon-icon-database">
             </span></a></li>
-            <li><a href="#" title="Sales statistics" class="tip"><span class="icon24 icomoon-icon-pie-2">
+            <li><a href="#" title="Statistics" class="tip"><span class="icon24 icomoon-icon-pie-2">
             </span></a></li>
-            <li><a href="#" title="Write post" class="tip"><span class="icon24 icomoon-icon-pencil">
+            <li><a href="#" title="Request" class="tip"><span class="icon24 icomoon-icon-pencil">
             </span></a></li>
         </ul>
     </div>
@@ -44,7 +44,7 @@
         <!-- End .sidenav-widget -->
         <div class="mainnav">
             <ul>
-                <li><a href="#" id="summary"><span class="icon16 icomoon-icon-newspaper"></span>摘要</a></li>
+                <li><a href="#" id="building-group-summary"><span class="icon16 icomoon-icon-newspaper"></span>摘要</a></li>
                 <li><a href="#"><span class="icon16 icomoon-icon-lab"></span>学院楼<span class="notification blue">@Model.BuildingGroups.Where(r => r.UseType == 1).Count()</span></a>
                     <ul class="sub scroll">
                     @foreach (var bg in Model.BuildingGroups.Where(r => r.UseType == 1))
@@ -133,6 +133,7 @@
     <div class="contentwrapper">
         <!-- Build page from here: -->
         <div id="ajax-content1">
+        @Html.Action("Summary", new { controller = "BuildingGroup", area = "Estate" })
         </div>
         <!--End page -->
     </div>
@@ -142,12 +143,16 @@
 @section scripts {
 <script type="text/javascript" src="@Url.Content("~/Plugins/charts/sparkline/jquery.sparkline.min.js")"></script>
 <script type="text/javascript" src="@Url.Content("~/Plugins/charts/knob/jquery.knob.js")"></script>
-<script type="text/javascript" src="/plugins/misc/nicescroll/jquery.nicescroll.min.js"></script>
+<script type="text/javascript" src="@Url.Content("~/Plugins/misc/nicescroll/jquery.nicescroll.min.js")"></script>
 @Scripts.Render("~/bundles/colorbox")
 
 <script type="text/javascript">
     $(function () {
         $('.navbar .nav #nav-estate').parent().addClass('active');
+
+        $('a#building-group-summary').click(function () {
+            ajaxLoadPage("Summary", "BuildingGroup", "Estate", {});
+        });
 
         $('span.building-group-index').click(function () {
             var id = $(this).parent().attr('ref');
@@ -165,7 +170,8 @@
             $(".scroll").niceScroll({
                 cursoropacitymax: 0.7,
                 cursorborderradius: 6,
-                cursorwidth: "7px"
+                cursorwidth: "7px",
+                horizrailenabled: false
             });
         }
     });

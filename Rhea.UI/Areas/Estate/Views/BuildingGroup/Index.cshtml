@@ -73,8 +73,7 @@
                     </div>
                 </div>
                 <div class="secbar-widget">
-                    <h4 class="title">
-                        房间信息</h4>
+                    <h4 class="title">房屋统计</h4>
                     <div class="content">
                         <ul class="bigBtnIcon">
                             <li><a href="#" id="room-list" title="房间列表" class="tip"><span class="icon icomoon-icon-list-view">
@@ -172,6 +171,7 @@
 
         $('ul#building-list li a').click(function () {
             var id = $(this).attr('ref');
+            secNavActive($('ul#building-list'), $(this));
             ajaxLoadPage("Index", "Building", "Estate", { id: id });
             return false;
         });

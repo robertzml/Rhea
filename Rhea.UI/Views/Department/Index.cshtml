@@ -1,10 +1,10 @@
-﻿@model int
+﻿@model Rhea.UI.Models.DepartmentSectionModel
 @{
-    //ViewBag.Title = "部门主页";
+    ViewBag.Title = "部门主页";
     Layout = null;
 }
 
-@Html.Action("Heading", new { controller = "Common", area = "", title = ViewBag.Title, active = "部门导航" })
+@Html.Action("Heading", new { controller = "Common", area = "", title = Model.DepartmentName, active = "部门导航" })
 
 
 <!--Sidebar background-->
@@ -23,13 +23,13 @@
             <div class="tab-pane fade in active" id="tab-fun">
                 <div class="secbar-widget">
                     <div class="content">
-                        <button class="btn btn-primary" id="department-intro"><span class="icon16 icomoon-icon-cog white"></span> 简介</button>
-                        <button class="btn btn-info" id="department-details"><span class="icon16 icomoon-icon-info-2 white"></span> 详细</button>
+                        <button class="btn btn-primary btn-block" id="department-intro"><span class="icon16 icomoon-icon-cog white"></span> 简介</button>
+                        <button class="btn btn-info btn-block" id="department-details"><span class="icon16 icomoon-icon-info-2 white"></span> 详细</button>
                     </div>
                 </div>
                 <hr />
                 <div class="centerContent">
-                    <div dir="ltr" class="circle-stats">                                
+                    <div dir="ltr" class="circle-stats">
                         <div class="circular-item tipB" title="Site overload">
                             <span class="icon icomoon-icon-fire"></span>
                             <input type="text" value="62" class="redCircle" />
@@ -53,9 +53,9 @@
                         <div class="rightnow">
                             <ul class="unstyled">
                                 <li><span class="number">340</span><span class="icon16 icomoon-icon-new-2"></span>师生</li>
-                                <li><span class="number">7</span><span class="icon16 icomoon-icon-file"></span>楼宇</li>
-                                <li><span class="number">140</span><span class="icon16 icomoon-icon-list-view"></span>房间</li>
-                                <li><span class="number">2041</span><span class="icon16 icomoon-icon-tag"></span>面积</li>
+                                <li><span class="number">@Model.Buildings.Count</span><span class="icon16 icomoon-icon-clubs"></span>楼宇</li>
+                                <li><span class="number">@Model.RoomCount</span><span class="icon16 icomoon-icon-home-9"></span>房间</li>
+                                <li><span class="number">@Model.TotalArea</span><span class="icon16 icomoon-icon-tag"></span>面积</li>
                             </ul>
                         </div>
                     </div>
@@ -68,30 +68,31 @@
                     <h4 class="title">楼宇列表</h4>
                     <div class="content">
                         <ul id="building-list" class="nav nav-pills nav-stacked">
+                        @foreach (var item in Model.Buildings)
+                        {
+                            <li><a href="#" ref="@item.Id">@item.Name</a></li>
+                        }
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="secbar-widget">
+                    <h4 class="title">楼层列表</h4>
+                    <div class="content">
+                        <ul id="floor-list" class="nav nav-pills nav-stacked">
+                        
                         </ul>
                     </div>
                 </div>
                 
-                <div class="reminder secbar-widget">
-                    <h4 class="title">房间信息</h4>
-                    <ul>
-                        <li class="clearfix">
-                            <div class="icon">
-                                <span class="icon32 icomoon-icon-home-7 gray"></span>
-                            </div>
-                            <span class="number">88</span> 
-                            <span class="txt">总数</span>
-                            <a class="btn btn-warning">go</a>
-                        </li>
-                        <li class="clearfix">
-                            <div class="icon">
-                                <span class="icon32 icomoon-icon-support red"></span>
-                            </div>
-                            <span class="number">3</span> 
-                            <span class="txt">汇总 </span>
-                            <a class="btn btn-warning">go</a>
-                        </li>                                                          
-                    </ul>
+                <div class="secbar-widget">
+                    <h4 class="title">房屋统计</h4>
+                    <div class="content">
+                        <ul class="bigBtnIcon">
+                            <li><a href="#" id="room-list" title="房间列表" class="tip"><span class="icon icomoon-icon-list-view">
+                            </span><span class="txt">房间列表</span> </a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="tab-pane fade" id="tab-stat">
@@ -120,32 +121,34 @@
                     </ul>
                 </div>
 
-                <div class="sparkStats secbar-widget">
-                    <h4 class="title">389 人每平米</h4>
-                    <ul class="unstyled">
-                        <li><span class="sparkLine1 "></span> 总人数: <span class="number">509</span></li>
-                        <li>
-                            <span class="sparkLine2"></span>
-                            教授: 
-                            <span class="number">389</span>
-                        </li>
-                        <li><span class="sparkLine3"></span> 
-                            副教授: 
-                            <span class="number">731</span>
-                        </li>
-                        <li><span class="sparkLine4"></span>
-                            人均: 
-                            <span class="number">1.44</span>
-                        </li>
-                        <li><span class="sparkLine5"></span>
-                            时间: 
-                            <span class="number">00:01:21</span>
-                        </li>                        
-                    </ul>
-                    <div class="right" style="padding: 15px 0">
-                        <a href="#" class="btn btn-info">View full <span class="icon16 icomoon-icon-arrow-right white"></span></a>
-                    </div>
-                </div><!-- End .sparkStats -->
+                <div class="secbar-widget">
+                    <h4 class="title">基本数据</h4>
+                    <div class="content sparkStats">                    
+                        <ul class="unstyled">
+                            <li><span class="sparkLine1 "></span> 总人数: <span class="number">509</span></li>
+                            <li>
+                                <span class="sparkLine2"></span>
+                                教授: 
+                                <span class="number">389</span>
+                            </li>
+                            <li><span class="sparkLine3"></span> 
+                                副教授: 
+                                <span class="number">731</span>
+                            </li>
+                            <li><span class="sparkLine4"></span>
+                                人均: 
+                                <span class="number">1.44</span>
+                            </li>
+                            <li><span class="sparkLine5"></span>
+                                时间: 
+                                <span class="number">00:01:21</span>
+                            </li>                        
+                        </ul>
+                        <div class="right" style="padding: 15px 0">
+                            <a href="#" class="btn btn-info btn-small">View<span class="icon16 icomoon-icon-arrow-right white"></span></a>
+                        </div>
+                    </div><!-- End .sparkStats -->
+                </div>
             </div>            
         </div>
     </div>
@@ -155,65 +158,35 @@
     <div class="row-fluid">
         <div class="span12">
             <div id="ajax-content2">
-                @Html.Action("Intro", "Department", new { area = "", id = Model })
+                @Html.Action("Intro", "Department", new { area = "", id = Model.DepartmentId })
             </div>
         </div>
     </div>
 </div>
 
-<!--
-<div class="span2">
-    <div class="well sidebar-nav">
-        <ul class="nav nav-list">
-            <li class="nav-header">导航</li>
-            <li class="active"><a href="#" id="department-summary">摘要</a></li>
-            <li><a href="#" id="department-details">详细</a></li>
-            <li><a href="#" id="department-statistic">统计</a></li>
-            <li><a href="#" id="department-indicator">指标</a></li>      
-            <li class="nav-header" id="building-list">楼宇列表</li> 
-            <li class="nav-header">房屋信息</li>
-            <li><a href="#" id="room-list">房间列表</a></li>
-        </ul>
-    </div>
-</div>
-
-<div class="span10">
-    <div id="ajax-content1">
-    @Html.Action("Intro", "Department", new { area = "", id = Model })
-    </div>
-</div>
-
--->
-
-
 
 <script type="text/javascript">
     $(function () {
-        $.getJSON('/Estate/Building/GetListByDepartment', { departmentId: @Model }, function (response) {
-            var text = [];
-            $.each(response, function(i, item) {
-                text.push("<li><a href='#' class='building-index' ref='" + item.Id + "'>" + item.Name + "</a></li>");
-            });
-            text = text.join('');
-            $('ul#building-list').append(text);
-
-            $('a.building-index').click(function() {
-                menuNavActive($('ul#building-list'), $(this));
-                var buildingId = $(this).attr('ref');
-                ajaxContentLoadPage2("Building", "Department", { id: '@Model', buildingId: buildingId }, $('#ajax-content2'));
-                return false;
-            });
+        /*$.getJSON('/Estate/Building/GetListByDepartment', { departmentId: @Model }, function (response) {
+        var text = [];
+        $.each(response, function(i, item) {
+        text.push("<li><a href='#' class='building-index' ref='" + item.Id + "'>" + item.Name + "</a></li>");
         });
+        text = text.join('');
+        $('ul#building-list').append(text);
 
-        $('#secTab a').click(function (e) {
-	  	    e.preventDefault();
-	  	    $(this).tab('show');
-	    });
+        $('a.building-index').click(function() {
+        menuNavActive($('ul#building-list'), $(this));
+        var buildingId = $(this).attr('ref');
+        ajaxContentLoadPage2("Building", "Department", { id: '@Model', buildingId: buildingId }, $('#ajax-content2'));
+        return false;
+        });
+        });*/
 
         //circular progrress bar
-		$(".greenCircle").knob({
-            'min':0,
-            'max':100,
+        $(".greenCircle").knob({
+            'min': 0,
+            'max': 100,
             'readOnly': true,
             'width': 80,
             'height': 80,
@@ -223,8 +196,8 @@
             'tickColorizeValues': true
         });
         $(".redCircle").knob({
-            'min':0,
-            'max':100,
+            'min': 0,
+            'max': 100,
             'readOnly': true,
             'width': 80,
             'height': 80,
@@ -234,8 +207,8 @@
             'tickColorizeValues': true
         });
         $(".blueCircle").knob({
-            'min':0,
-            'max':100,
+            'min': 0,
+            'max': 100,
             'readOnly': true,
             'width': 80,
             'height': 80,
@@ -243,55 +216,78 @@
             'dynamicDraw': true,
             'thickness': 0.2,
             'tickColorizeValues': true
-        });  
-	
+        });
+
         //generate random number for charts
-        randNum = function(){
-	        //return Math.floor(Math.random()*101);
-	        return (Math.floor( Math.random()* (1+40-20) ) ) + 20;
+        randNum = function () {
+            //return Math.floor(Math.random()*101);
+            return (Math.floor(Math.random() * (1 + 40 - 20))) + 20;
         }
 
         //sparklines (making loop with random data for all 7 sparkline)
-        for (var i=1; i<6; i++) {
- 	        var data = [[1, 3+randNum()], [2, 5+randNum()], [3, 8+randNum()], [4, 11+randNum()],[5, 14+randNum()],[6, 17+randNum()],[7, 20+randNum()], [8, 15+randNum()], [9, 18+randNum()], [10, 22+randNum()]];
- 	        placeholder = '.sparkLine' + i;
-	        $(placeholder).sparkline(data, { 
-		        width: 100,//Width of the chart - Defaults to 'auto' - May be any valid css width - 1.5em, 20px, etc (using a number without a unit specifier won't do what you want) - This option does nothing for bar and tristate chars (see barWidth)
-		        height: 30,//Height of the chart - Defaults to 'auto' (line height of the containing tag)
-		        lineColor: '#88bbc8',//Used by line and discrete charts to specify the colour of the line drawn as a CSS values string
-		        fillColor: '#f2f7f9',//Specify the colour used to fill the area under the graph as a CSS value. Set to false to disable fill
-		        spotColor: '#467e8c',//The CSS colour of the final value marker. Set to false or an empty string to hide it
-		        maxSpotColor: '#9FC569',//The CSS colour of the marker displayed for the maximum value. Set to false or an empty string to hide it
-		        minSpotColor: '#ED7A53',//The CSS colour of the marker displayed for the mimum value. Set to false or an empty string to hide it
-		        spotRadius: 3,//Radius of all spot markers, In pixels (default: 1.5) - Integer
-		        lineWidth: 2//In pixels (default: 1) - Integer
-	        });
+        for (var i = 1; i < 6; i++) {
+            var data = [[1, 3 + randNum()], [2, 5 + randNum()], [3, 8 + randNum()], [4, 11 + randNum()], [5, 14 + randNum()], [6, 17 + randNum()], [7, 20 + randNum()], [8, 15 + randNum()], [9, 18 + randNum()], [10, 22 + randNum()]];
+            placeholder = '.sparkLine' + i;
+            $(placeholder).sparkline(data, {
+                width: 100, //Width of the chart - Defaults to 'auto' - May be any valid css width - 1.5em, 20px, etc (using a number without a unit specifier won't do what you want) - This option does nothing for bar and tristate chars (see barWidth)
+                height: 30, //Height of the chart - Defaults to 'auto' (line height of the containing tag)
+                lineColor: '#88bbc8', //Used by line and discrete charts to specify the colour of the line drawn as a CSS values string
+                fillColor: '#f2f7f9', //Specify the colour used to fill the area under the graph as a CSS value. Set to false to disable fill
+                spotColor: '#467e8c', //The CSS colour of the final value marker. Set to false or an empty string to hide it
+                maxSpotColor: '#9FC569', //The CSS colour of the marker displayed for the maximum value. Set to false or an empty string to hide it
+                minSpotColor: '#ED7A53', //The CSS colour of the marker displayed for the mimum value. Set to false or an empty string to hide it
+                spotRadius: 3, //Radius of all spot markers, In pixels (default: 1.5) - Integer
+                lineWidth: 2//In pixels (default: 1) - Integer
+            });
         }
 
-        
-        $('button#department-intro').click(function() {           
-            ajaxContentLoadPage2("Intro", "Department", { id: '@Model' }, $('#ajax-content2'));
+
+        $('button#department-intro').click(function () {
+            ajaxContentLoadPage2("Intro", "Department", { id: '@Model.DepartmentId' }, $('#ajax-content2'));
             return false;
         });
 
-        $('button#department-details').click(function() {            
-            ajaxContentLoadPage2("Details", "Department", { id: '@Model' }, $('#ajax-content2'));
+        $('button#department-details').click(function () {
+            ajaxContentLoadPage2("Details", "Department", { id: '@Model.DepartmentId' }, $('#ajax-content2'));
             return false;
         });
 
-        $('a#department-indicator').click(function() {           
-            ajaxContentLoadPage2("Indicator", "Department", { id: '@Model' }, $('#ajax-content2'));
+        $('a#department-indicator').click(function () {
+            ajaxContentLoadPage2("Indicator", "Department", { id: '@Model.DepartmentId' }, $('#ajax-content2'));
             return false;
         });
 
-        $('a#department-statistic').click(function() {            
-            ajaxContentLoadPage2("Statistic", "Department", { id: '@Model' }, $('#ajax-content2'));
+        $('a#department-statistic').click(function () {
+            ajaxContentLoadPage2("Statistic", "Department", { id: '@Model.DepartmentId' }, $('#ajax-content2'));
             return false;
         });
 
-        $('a#room-list').click(function() {
-            menuNavActive($(this));
-            ajaxLoadPage("ListByDepartment", "Room", "Estate", { departmentId: '@Model' });
+        $('a#room-list').click(function () {
+            ajaxContentLoadPage("ListByDepartment", "Room", "Estate", { departmentId: '@Model.DepartmentId' }, $('#ajax-content2'));
+            return false;
+        });
+
+        $('ul#building-list li a').click(function () {
+            var bid = $(this).attr('ref');
+            ajaxContentLoadPage2("Building", "Department", { id: '@Model.DepartmentId', buildingId: bid }, $('#ajax-content2'));
+            secNavActive($('ul#building-list'), $(this));
+
+            $.getJSON('/Department/GetFloors', { id: '@Model.DepartmentId', buildingId: bid }, function (response) {
+                var text = [];
+                $.each(response, function (i, item) {
+                    text.push("<li><a href='#' class='floor-index' ref='" + item.Number + "'>" + item.Name + "</a></li>");
+                });
+                text = text.join('');
+                $('ul#floor-list').empty();
+                $('ul#floor-list').append(text);
+
+                $('a.floor-index').click(function() {
+                    secNavActive($('ul#floor-list'), $(this));
+                    var floor = $(this).attr('ref');
+                    ajaxContentLoadPage("FloorView", "Building", "Estate", { id: bid, floor: floor }, $('#ajax-content2'));
+                    return false;
+                });
+            });
             return false;
         });
     });

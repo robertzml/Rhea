@@ -20,10 +20,10 @@
 <div id="sidebar">
     <div class="shortcuts">
         <ul>
-            <li><a href="#" title="Support section" class="tip" data-placement="bottom" data-toggle="tooltip"><span class="icon24 icomoon-icon-support"></span></a></li>
-            <li><a href="#" title="Database backup" class="tip" data-placement="bottom" data-toggle="tooltip"><span class="icon24 icomoon-icon-database"></span></a></li>
-            <li><a href="#" title="Sales statistics" class="tip" data-placement="bottom" data-toggle="tooltip"><span class="icon24 icomoon-icon-pie-2"></span></a></li>
-            <li><a href="#" title="Write post" class="tip" data-placement="bottom" data-toggle="tooltip"><span class="icon24 icomoon-icon-pencil"></span></a></li>
+            <li><a href="#" title="Support" class="tip" data-placement="bottom" data-toggle="tooltip"><span class="icon24 icomoon-icon-support"></span></a></li>
+            <li><a href="#" title="Backup" class="tip" data-placement="bottom" data-toggle="tooltip"><span class="icon24 icomoon-icon-database"></span></a></li>
+            <li><a href="#" title="Statistics" class="tip" data-placement="bottom" data-toggle="tooltip"><span class="icon24 icomoon-icon-pie-2"></span></a></li>
+            <li><a href="#" title="Request" class="tip" data-placement="bottom" data-toggle="tooltip"><span class="icon24 icomoon-icon-pencil"></span></a></li>
         </ul>
     </div>
 
@@ -37,9 +37,6 @@
             <ul>
                 <li><a href="#" id="summary"><span class="icon16 icomoon-icon-newspaper"></span>摘要</a></li>
                 <li><a href="#"><span class="icon16 icomoon-icon-font"></span>土地证</a></li>
-                <li><a href="#" id="building-group-list"><span class="icon16 icomoon-icon-grid-view"></span>楼群列表</a></li>
-                <li><a href="#" id="department-list"><span class="icon16 icomoon-icon-calendar"></span>部门列表</a></li>
-               
             </ul>
         </div>
     </div><!-- End sidenav -->
@@ -103,20 +100,11 @@
         $('.navbar .nav #nav-summary').parent().addClass('active');
         $('.tip').tooltip();
 
-        $('a#summary').click(function() {           
+        $('a#summary').click(function() {
             ajaxLoadPage("Summary", "Home", "Estate", {});
             return false;
         });
-
-        $('a#building-group-list').click(function() {
-            ajaxLoadPage("BuildingGroupList", "Home", "Estate", {});
-            return false;
-        });
-
-        $('a#department-list').click(function () {
-            ajaxLoadPage("DepartmentList", "Home", "Estate", {});
-            return false;
-        });        
+     
     });
 </script>
 }

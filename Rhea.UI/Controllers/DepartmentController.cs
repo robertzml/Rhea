@@ -11,6 +11,7 @@ using Rhea.Data.Estate;
 using Rhea.Data.Personnel;
 using Rhea.Model.Estate;
 using Rhea.Model.Personnel;
+using Rhea.UI.Models;
 
 namespace Rhea.UI.Controllers
 {
@@ -37,7 +38,7 @@ namespace Rhea.UI.Controllers
 
         #region Action
         /// <summary>
-        /// 摘要
+        /// 部门摘要
         /// </summary>
         /// <returns></returns>
         public ActionResult Summary()
@@ -52,8 +53,21 @@ namespace Rhea.UI.Controllers
         /// <returns></returns>
         public ActionResult Index(int id)
         {
-            ViewBag.Title = this.departmentBusiness.GetName(id);
-            return View(id);
+            DepartmentSectionModel data = new DepartmentSectionModel();
+
+            var department = this.departmentBusiness.Get(id);
+            data.DepartmentId = id;
+            data.DepartmentName = department.Name;
+
+            IRoomBusiness roomBusiness = new MongoRoomBusiness();
+            var rooms = roomBusiness.GetListByDepartment(id);
+            data.RoomCount = rooms.Count;
+            data.TotalArea = Convert.ToInt32(rooms.Sum(r => r.UsableArea));
+
+            IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
+            data.Buildings = buildingBusiness.GetListByDepartment(id);
+
+            return View(data);
         }
 
         /// <summary>
@@ -142,11 +156,10 @@ namespace Rhea.UI.Controllers
         /// <returns></returns>
         public ActionResult Building(int id, int buildingId)
         {
-            Dictionary<string, int> data = new Dictionary<string, int>();
-            data.Add("DepartmentId", id);
-            data.Add("BuildingId", buildingId);
+            ViewBag.DepartmentId = id;
+            ViewBag.BuildingId = buildingId;
 
-            return View(data);
+            return View();
         }
 
         /// <summary>
@@ -181,6 +194,26 @@ namespace Rhea.UI.Controllers
         {
             IStatisticBusiness statisticBusiness = new MongoStatisticBusiness();
             DepartmentClassifyAreaModel data = statisticBusiness.GetDepartmentClassifyArea(id);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 按部门得到楼宇楼层
+        /// </summary>
+        /// <param name="id">部门ID</param>
+        /// <param name="buildingId">楼宇ID</param>
+        /// <returns></returns>
+        public JsonResult GetFloors(int id, int buildingId)
+        {
+            IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
+            Building building = buildingBusiness.Get(buildingId);
+
+            IRoomBusiness roomBusiness = new MongoRoomBusiness();
+            var rooms = roomBusiness.GetListByDepartment(id, buildingId);
+            var floorNumbers = rooms.Select(r => r.Floor).Distinct();
+
+            var data = building.Floors.Where(r => floorNumbers.Contains(r.Number)).ToList();
+
             return Json(data, JsonRequestBehavior.AllowGet);
         }
         #endregion //Json
