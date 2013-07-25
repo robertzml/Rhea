@@ -1276,6 +1276,7 @@
     <Content Include="Plugins\misc\jqueryFileTree\jqueryFileTree.js" />
     <Content Include="Plugins\misc\nicescroll\jquery.nicescroll.js" />
     <Content Include="Plugins\misc\nicescroll\jquery.nicescroll.min.js" />
+    <Content Include="Plugins\misc\nicescroll\zoomico.png" />
     <Content Include="Plugins\misc\noty\jquery.noty.js" />
     <Content Include="Plugins\misc\noty\layouts\bottom.js" />
     <Content Include="Plugins\misc\noty\layouts\bottomCenter.js" />
@@ -1729,6 +1730,7 @@
     <Content Include="Areas\Admin\Views\Home\Nav.cshtml" />
     <Content Include="Areas\Estate\Views\Building\Department.cshtml" />
     <Content Include="Areas\Estate\Views\Room\ListByBuilding.cshtml" />
+    <Content Include="Areas\Estate\Views\Building\FloorView.cshtml" />
     <None Include="Content\fonts\broccolidry.eot" />
     <None Include="Content\fonts\broccolidry.ttf" />
     <None Include="Content\fonts\broccolidry.woff" />

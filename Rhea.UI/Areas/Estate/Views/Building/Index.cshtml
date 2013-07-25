@@ -32,6 +32,12 @@
                 </div>
                 <hr />
                 <div class="secbar-widget">
+                    <h5 class="title">趋势</h5>
+                    <div class="content">
+                        <span class="inlinesparkline">1,4,4,7,5,9,10</span>
+                    </div>
+                </div>
+                <div class="secbar-widget">
                     <h5 class="title">
                         当前</h5>
                     <div class="content">
@@ -55,7 +61,7 @@
                         <ul id="floor-list" class="nav nav-pills nav-stacked">
                         @foreach (var item in Model.Floors)
                         {
-                            <li><a href="#">@item.Name</a></li>
+                            <li><a href="#" ref="@item.Number">@item.Name</a></li>
                         }
                         </ul>
                     </div>
@@ -114,6 +120,16 @@
 
 <script type="text/javascript">
     $(function () {
+        $('.inlinesparkline').sparkline('html', { 
+            width:180, 
+            height:30,
+            lineColor: '#88bbc8',
+	        fillColor: '#f2f7f9',
+	        spotColor: '#e72828',
+	        maxSpotColor: '#005e20',
+	        minSpotColor: '#f7941d',
+	        lineWidth: 2
+         });
 
         $('button#building-intro').click(function () {
             ajaxContentLoadPage("Intro", "Building", "Estate", { id: '@Model.BuildingId' }, $('#ajax-content2'));
@@ -135,5 +151,10 @@
             return false;
         });
 
+        $('ul#floor-list li a').click(function () {
+            var floor = $(this).attr('ref');
+            ajaxContentLoadPage("FloorView", "Building", "Estate", { id: '@Model.BuildingId', floor: floor }, $('#ajax-content2'));
+            return false;
+        });
     });
 </script>

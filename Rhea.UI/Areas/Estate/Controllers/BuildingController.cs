@@ -157,6 +157,39 @@ namespace Rhea.UI.Areas.Estate.Controllers
         }
 
         /// <summary>
+        /// 楼层视图
+        /// </summary>
+        /// <param name="id">楼宇ID</param>
+        /// <param name="floor">楼层</param>
+        /// <returns></returns>
+        public ActionResult FloorView(int id, int floor)
+        {
+            var building = this.buildingBusiness.Get(id);          
+
+            Floor data = building.Floors.Single(r => r.Number == floor);
+
+            FloorViewModel model = new FloorViewModel
+            {
+                Id = data.Id,
+                BuildingId = id,
+                Number = data.Number,
+                Name = data.Name,
+                BuildArea = Convert.ToDouble(data.BuildArea),
+                UsableArea = Convert.ToDouble(data.UsableArea)
+            };
+
+            IRoomBusiness roomBusiness = new MongoRoomBusiness();
+            model.RoomCount = roomBusiness.CountByFloor(id, model.Number);
+
+            if (!string.IsNullOrEmpty(data.ImageUrl))
+                model.SvgPath = RheaConstant.SvgRoot + data.ImageUrl;
+            else
+                model.SvgPath = string.Empty;
+
+            return View(model);
+        }
+
+        /// <summary>
         /// 楼层列表
         /// </summary>
         /// <param name="id">楼宇ID</param>

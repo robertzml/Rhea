@@ -13,6 +13,8 @@ namespace Rhea.UI.Areas.Estate.Models
     {
         public int Id { get; set; }
 
+        public int BuildingId { get; set; }
+
         public string Name { get; set; }
 
         public int Number { get; set; }

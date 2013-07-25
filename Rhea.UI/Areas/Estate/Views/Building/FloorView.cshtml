@@ -1,0 +1,110 @@
+﻿@model Rhea.UI.Areas.Estate.Models.FloorViewModel
+
+@{
+    ViewBag.Title = "楼层视图";
+    Layout = null;
+}
+
+<div class="box">
+    <div class="title">
+        <h4 class="clearfix">
+            <span class="left">楼层平面图</span>
+            <div id="floor-info">
+                <span class="label label-info">建筑面积</span> <span id="floor-build-area">@Model.BuildArea m<sup>2</sup></span>
+                <span class="label label-info">使用面积</span> <span id="floor-usable-area">@Model.UsableArea m<sup>2</sup></span>
+                <span class="label label-info">房间数量</span> <span id="floor-room-count">@Model.RoomCount</span>
+            </div>
+            <form class="box-form right" action="">
+                <button id="zoom-in" class="btn btn-success btn-mini" type="submit">放大</button>
+                <button id="zoom-out" class="btn btn-success btn-mini" type="submit">缩小</button>
+            </form>
+        </h4>
+        <a href="#" class="minimize">Minimize</a>
+    </div>
+
+    <div class="content noPad">
+        <div class="row-fluid">
+            <div class="span12">
+                <div id="svgwrapper" style="height:500px; overflow:auto; margin-top:10px;"> 
+                <div id="svg" style="visibility:hidden"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row-fluid">
+    <div class="span6">
+        <div id="room-summary"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        var svg;
+        var zoomRate = 1.1;
+
+        loadSvg('@Model.SvgPath');
+
+        $("#svgwrapper").niceScroll({
+            cursoropacitymax: 0.7,
+            cursorborderradius: 6,
+            cursorwidth: "7px"
+        });
+        setBoxAction();
+
+        function loadSvg(svgFile) {
+            //var svgFile = '/Attachment/svg/300173.svg';
+
+            if (svgFile != '') {
+                $('div#svg').load(svgFile, function (response, status, xhr) {
+                    if (status == "error") {
+                        $(this).css("visibility", "visible");
+                        $(this).html("无平面图");
+                        return;
+                    }
+
+                    $(this).css("visibility", "visible");
+                    svg = $(this).children('svg');
+
+                    $("svg g[id^='g']").click(function () {
+                        var id = $(this).attr('id').toString().substring(1);
+                        $("svg rect[class='room-select']").attr('class', 'fil0');
+                        $(this).children('[ref=bound]').attr('class', 'room-select');
+                        $('#room-summary').load('/Estate/Room/Summary', { id: id });
+                    });
+                });
+            }
+            else {
+                $('div#svg').html("无平面图");
+                $('div#svg').css("visibility", "visible");
+            }
+        }
+
+        $('#zoom-in').click(function () {
+            zoom('zoomIn');
+            return false;
+        });
+
+        $('#zoom-out').click(function () {
+            zoom('zoomOut');
+            return false;
+        });
+
+        function zoom(zoomType) {
+            var width = parseFloat(svg.attr('width'));
+            var height = parseFloat(svg.attr('height'));
+
+            if (zoomType == 'zoomIn') {
+                width *= zoomRate;
+                height *= zoomRate;
+            }
+            else if (zoomType == 'zoomOut') {
+                width /= zoomRate;
+                height /= zoomRate;
+            }
+            svg.attr('width', width);
+            svg.attr('height', height);
+        }
+    });
+</script>
