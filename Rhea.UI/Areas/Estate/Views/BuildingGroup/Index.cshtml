@@ -22,8 +22,8 @@
             <div class="tab-pane fade in active" id="tab-fun">
                 <div class="secbar-widget">
                     <div class="content">
-                        <button class="btn btn-primary" id="building-group-intro"><span class="icon16 icomoon-icon-cog white"></span> 简介</button>
-                        <button class="btn btn-info" id="building-group-details"><span class="icon16 icomoon-icon-info-2 white"></span> 详细</button>
+                        <button class="btn btn-block btn-primary" id="building-group-intro"><span class="icon16 icomoon-icon-cog white"></span> 简介</button>
+                        <button class="btn btn-block btn-info" id="building-group-details"><span class="icon16 icomoon-icon-info-2 white"></span> 详细</button>
                     </div>
                 </div>
                 <hr />
@@ -64,10 +64,10 @@
                     <h4 class="title">
                         楼宇列表</h4>
                     <div class="content">
-                        <ul id="building-list">
+                        <ul id="building-list" class="nav nav-pills nav-stacked">
                         @foreach (var item in Model.Buildings)
                         {
-                            <li><a href="#">@item.Name</a></li>
+                            <li><a href="#" ref="@item.Id">@item.Name</a></li>
                         }
                         </ul>
                     </div>
@@ -77,7 +77,7 @@
                         房间信息</h4>
                     <div class="content">
                         <ul class="bigBtnIcon">
-                            <li><a href="#" id="room-list" title="房间列表" class="tip"><span class="icon icomoon-icon-users">
+                            <li><a href="#" id="room-list" title="房间列表" class="tip"><span class="icon icomoon-icon-list-view">
                             </span><span class="txt">房间列表</span> </a></li>                        
                         </ul>
                     </div>
@@ -86,16 +86,16 @@
             <div class="tab-pane fade" id="tab-stat">
                 <div class="centerContent">
                     <ul class="bigBtnIcon">
-                        <li><a href="#" id="department-statistic" title="分类统计" class="tip"><span class="icon icomoon-icon-users">
+                        <li><a href="#" title="分类统计" class="tip"><span class="icon icomoon-icon-users">
                         </span><span class="txt">分类统计</span> </a></li>
                         <li><a href="#" id="building-group-statistic" title="分楼宇统计" class="tip"><span class="icon icomoon-icon-support">
                         </span><span class="txt">分楼宇统计</span></a>
                         </li>
-                        <li><a href="#" title="I`m with pattern" class="pattern tip"><span class="icon icomoon-icon-comments-2">
+                        <li><a href="#"><span class="icon icomoon-icon-comments-2">
                         </span><span class="txt">消息</span> <span class="notification green">23</span> </a>
                         </li>
                     </ul>
-                </div>              
+                </div>
             </div>
         </div>
     </div>
@@ -115,15 +115,15 @@
 <script type="text/javascript">
     $(function () {
 
-        $('#secTab a').click(function (e) {
-	  	    e.preventDefault();
-	  	    $(this).tab('show');
-	    });
+        /*$('#secTab a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });*/
 
         //circular progrress bar
-		$(".greenCircle").knob({
-            'min':0,
-            'max':100,
+        $(".greenCircle").knob({
+            'min': 0,
+            'max': 100,
             'readOnly': true,
             'width': 80,
             'height': 80,
@@ -133,8 +133,8 @@
             'tickColorizeValues': true
         });
         $(".redCircle").knob({
-            'min':0,
-            'max':100,
+            'min': 0,
+            'max': 100,
             'readOnly': true,
             'width': 80,
             'height': 80,
@@ -144,8 +144,8 @@
             'tickColorizeValues': true
         });
         $(".blueCircle").knob({
-            'min':0,
-            'max':100,
+            'min': 0,
+            'max': 100,
             'readOnly': true,
             'width': 80,
             'height': 80,
@@ -155,23 +155,29 @@
             'tickColorizeValues': true
         });
 
-        $('button#building-group-intro').click(function() {
+        $('button#building-group-intro').click(function () {
             ajaxContentLoadPage("Intro", "BuildingGroup", "Estate", { id: '@Model.BuildingGroupId' }, $('#ajax-content2'));
             return false;
         });
 
-        $('button#building-group-details').click(function() {
-            ajaxContentLoadPage("Details", "BuildingGroup", "Estate", { id: '@Model.BuildingGroupId' }, $('#ajax-content2'));           
+        $('button#building-group-details').click(function () {
+            ajaxContentLoadPage("Details", "BuildingGroup", "Estate", { id: '@Model.BuildingGroupId' }, $('#ajax-content2'));
             return false;
         });
 
-        $('a#building-group-statistic').click(function() {
+        $('a#building-group-statistic').click(function () {
             ajaxContentLoadPage("Statistic", "BuildingGroup", "Estate", { id: '@Model.BuildingGroupId' }, $('#ajax-content2'));
             return false;
         });
 
-        $('a#room-list').click(function() {
+        $('a#room-list').click(function () {
             ajaxContentLoadPage("ListByBuildingGroup", "Room", "Estate", { buildingGroupId: '@Model.BuildingGroupId' }, $('#ajax-content2'));
+            return false;
+        });
+
+        $('ul#building-list li a').click(function () {
+            var id = $(this).attr('ref');
+            ajaxLoadPage("Index", "Building", "Estate", { id: id });
             return false;
         });
     });

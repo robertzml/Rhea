@@ -90,6 +90,17 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <summary>
         /// 房间列表
         /// </summary>
+        /// <param name="buildingId">所属楼宇ID</param>
+        /// <returns></returns>
+        public ActionResult ListByBuilding(int buildingId)
+        {
+            var data = this.roomBusiness.GetListByBuilding(buildingId);
+            return View(data);
+        }
+
+        /// <summary>
+        /// 房间列表
+        /// </summary>
         /// <param name="departmentId">所属部门ID</param>
         /// <returns></returns>
         public ActionResult ListByDepartment(int departmentId)

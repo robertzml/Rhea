@@ -6,7 +6,9 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Rhea.Business;
 using Rhea.Business.Estate;
+using Rhea.Business.Personnel;
 using Rhea.Model.Estate;
+using Rhea.Model.Personnel;
 using Rhea.UI.Areas.Estate.Models;
 
 namespace Rhea.UI.Areas.Estate.Controllers
@@ -40,8 +42,20 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         public ActionResult Index(int id)
         {
-            ViewBag.Title = this.buildingBusiness.GetName(id);
-            return View(id);
+            BuildingSectionModel data = new BuildingSectionModel();
+
+            Building building = this.buildingBusiness.Get(id);
+            data.BuildingId = building.Id;
+            data.BuildingName = building.Name;
+            data.BuildArea = Convert.ToInt32(building.BuildArea);
+            data.UsableArea = Convert.ToInt32(building.UsableArea);
+            data.Floors = building.Floors;
+            data.BuildingGroupId = building.BuildingGroupId;
+
+            IRoomBusiness roomBusiness = new MongoRoomBusiness();
+            data.RoomCount = roomBusiness.CountByBuilding(id);
+
+            return View(data);
         }
 
         /// <summary>
@@ -80,6 +94,54 @@ namespace Rhea.UI.Areas.Estate.Controllers
             ViewBag.RoomCount = roomBusiness.CountByBuilding(id);
 
             Building data = this.buildingBusiness.Get(id);
+
+            if (!string.IsNullOrEmpty(data.ImageUrl))
+                data.ImageUrl = RheaConstant.ImagesRoot + data.ImageUrl;
+            if (!string.IsNullOrEmpty(data.PartMapUrl))
+                data.PartMapUrl = RheaConstant.ImagesRoot + data.PartMapUrl;
+
+            return View(data);
+        }
+
+        /// <summary>
+        /// 楼宇入住部门
+        /// </summary>
+        /// <param name="id">楼宇ID</param>
+        /// <returns></returns>
+        public ActionResult Department(int id)
+        {
+            List<BuildingDepartmentModel> data = new List<BuildingDepartmentModel>();
+
+            IDepartmentBusiness departmentBusiness = new MongoDepartmentBusiness();
+            IRoomBusiness roomBusiness = new MongoRoomBusiness();
+
+            var building = this.buildingBusiness.Get(id);            
+            var roomList = roomBusiness.GetListByBuilding(building.Id);
+
+            // get departments in one building
+            var dList = roomList.GroupBy(r => r.DepartmentId).Select(s => new { s.Key, Count = s.Count(), Area = s.Sum(r => r.UsableArea) });
+            foreach (var d in dList)
+            {
+                BuildingDepartmentModel model = new BuildingDepartmentModel
+                {
+                    BuildingId = id,                   
+                    DepartmentId = d.Key,
+                    RoomCount = d.Count,
+                    TotalUsableArea = Convert.ToDouble(d.Area)
+                };
+
+                model.DepartmentName = departmentBusiness.GetName(model.DepartmentId);
+
+                var result = data.Find(r => r.DepartmentId == model.DepartmentId);
+                if (result != null)
+                {
+                    result.RoomCount += model.RoomCount;
+                    result.TotalUsableArea = model.TotalUsableArea;
+                }
+                else
+                    data.Add(model);
+            }           
+
             return View(data);
         }
 

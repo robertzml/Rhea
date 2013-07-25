@@ -1727,6 +1727,8 @@
     <Content Include="Areas\Estate\Views\Home\BuildingGroupList.cshtml" />
     <Content Include="Areas\Estate\Views\Home\DepartmentList.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Nav.cshtml" />
+    <Content Include="Areas\Estate\Views\Building\Department.cshtml" />
+    <Content Include="Areas\Estate\Views\Room\ListByBuilding.cshtml" />
     <None Include="Content\fonts\broccolidry.eot" />
     <None Include="Content\fonts\broccolidry.ttf" />
     <None Include="Content\fonts\broccolidry.woff" />
