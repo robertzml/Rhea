@@ -33,6 +33,12 @@ namespace Rhea.Data.Estate
         /// 宿舍楼宇
         /// </summary>
         [Display(Name = "宿舍楼宇")]
-        Dormitory = 4
+        Dormitory = 4,
+
+        /// <summary>
+        /// 辅助楼宇
+        /// </summary>
+        [Display(Name = "辅助楼宇")]
+        Auxiliary = 5
     }
 }

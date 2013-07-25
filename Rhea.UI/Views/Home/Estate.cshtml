@@ -45,9 +45,9 @@
         <div class="mainnav">
             <ul>
                 <li><a href="#" id="summary"><span class="icon16 icomoon-icon-newspaper"></span>摘要</a></li>
-                <li><a href="#"><span class="icon16 icomoon-icon-lab"></span>学院楼<span class="notification blue">19</span></a>
+                <li><a href="#"><span class="icon16 icomoon-icon-lab"></span>学院楼<span class="notification blue">@Model.BuildingGroups.Where(r => r.UseType == 1).Count()</span></a>
                     <ul class="sub">
-                    @foreach (var bg in Model.BuildingGroups)
+                    @foreach (var bg in Model.BuildingGroups.Where(r => r.UseType == 1))
                     {
                         <li><a href="#" title="@bg.Name" ref="@bg.Id"><span class="building-group-index icon16 icomoon-icon-file"></span>@bg.Name</a>
                             <ul class="sub">
@@ -60,8 +60,64 @@
                     }
                     </ul>
                 </li>
-                <li><a href="#"><span class="icon16 icomoon-icon-books"></span>教学楼<span class="notification blue">2</span></a>
+                <li><a href="#"><span class="icon16 icomoon-icon-books"></span>教学楼<span class="notification blue">@Model.BuildingGroups.Where(r => r.UseType == 2).Count()</span></a>
                     <ul class="sub">
+                    @foreach (var bg in Model.BuildingGroups.Where(r => r.UseType == 2))
+                    {
+                        <li><a href="#" title="@bg.Name" ref="@bg.Id"><span class="building-group-index icon16 icomoon-icon-file"></span>@bg.Name</a>
+                            <ul class="sub">
+                            @foreach (var item in bg.Buildings)
+                            {
+                                <li><a href="#" title="@item.Name" ref="@item.Id" class="building-index"><span class="icon16 icomoon-icon-arrow-right-2"></span>@item.Name</a></li>
+                            }
+                            </ul>
+                        </li>
+                    }
+                    </ul>
+                </li>
+                <li><a href="#"><span class="icon16 icomoon-icon-user-4"></span>行政办公<span class="notification blue">@Model.BuildingGroups.Where(r => r.UseType == 3).Count()</span></a>
+                    <ul class="sub">
+                    @foreach (var bg in Model.BuildingGroups.Where(r => r.UseType == 3))
+                    {
+                        <li><a href="#" title="@bg.Name" ref="@bg.Id"><span class="building-group-index icon16 icomoon-icon-file"></span>@bg.Name</a>
+                            <ul class="sub">
+                            @foreach (var item in bg.Buildings)
+                            {
+                                <li><a href="#" title="@item.Name" ref="@item.Id" class="building-index"><span class="icon16 icomoon-icon-arrow-right-2"></span>@item.Name</a></li>
+                            }
+                            </ul>
+                        </li>
+                    }
+                    </ul>
+                </li>
+                <li><a href="#"><span class="icon16 icomoon-icon-printer-3 "></span>宿舍楼<span class="notification blue">@Model.BuildingGroups.Where(r => r.UseType == 4).Count()</span></a>
+                    <ul class="sub">
+                    @foreach (var bg in Model.BuildingGroups.Where(r => r.UseType == 4))
+                    {
+                        <li><a href="#" title="@bg.Name" ref="@bg.Id"><span class="building-group-index icon16 icomoon-icon-file"></span>@bg.Name</a>
+                            <ul class="sub">
+                            @foreach (var item in bg.Buildings)
+                            {
+                                <li><a href="#" title="@item.Name" ref="@item.Id" class="building-index"><span class="icon16 icomoon-icon-arrow-right-2"></span>@item.Name</a></li>
+                            }
+                            </ul>
+                        </li>
+                    }
+                    </ul>
+                </li>
+                <li><a href="#"><span class="icon16 icomoon-icon-bag"></span>辅助楼<span class="notification blue">@Model.BuildingGroups.Where(r => r.UseType == 5).Count()</span></a>
+                    <ul class="sub">
+                    @foreach (var bg in Model.BuildingGroups.Where(r => r.UseType == 5))
+                    {
+                        <li><a href="#" title="@bg.Name" ref="@bg.Id"><span class="building-group-index icon16 icomoon-icon-file"></span>@bg.Name</a>
+                            <ul class="sub">
+                            @foreach (var item in bg.Buildings)
+                            {
+                                <li><a href="#" title="@item.Name" ref="@item.Id" class="building-index"><span class="icon16 icomoon-icon-arrow-right-2"></span>@item.Name</a></li>
+                            }
+                            </ul>
+                        </li>
+                    }
                     </ul>
                 </li>
             </ul>

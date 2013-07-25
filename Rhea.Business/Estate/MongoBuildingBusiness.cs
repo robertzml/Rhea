@@ -40,6 +40,7 @@ namespace Rhea.Business.Estate
             building.AboveGroundFloor = (int?)doc.GetValue("aboveGroundFloor", null);
             building.UnderGroundFloor = (int?)doc.GetValue("underGroundFloor", null);
             building.UseType = doc["useType"].AsInt32;
+            building.PartMapUrl = doc.GetValue("partMapUrl", "").AsString;
             building.Remark = doc.GetValue("remark", "").AsString;
             building.Status = doc.GetValue("status", 0).AsInt32;
             //building.UsableArea = GetUsableArea(building.Id);
@@ -88,7 +89,7 @@ namespace Rhea.Business.Estate
             {
                 if (doc.GetValue("status", 0).AsInt32 == 1)
                     continue;
-                Building building = ModelBind(doc);             
+                Building building = ModelBind(doc);
                 buildings.Add(building);
             }
 
@@ -109,7 +110,7 @@ namespace Rhea.Business.Estate
             {
                 if (doc.GetValue("status", 0).AsInt32 == 1)
                     continue;
-                Building building = ModelBind(doc);              
+                Building building = ModelBind(doc);
                 buildings.Add(building);
             }
 
@@ -170,7 +171,7 @@ namespace Rhea.Business.Estate
                 Building building = ModelBind(doc);
                 if (building.Status == 1)
                     return null;
-                
+
                 return building;
             }
             else
@@ -212,6 +213,7 @@ namespace Rhea.Business.Estate
                 { "aboveGroundFloor", (BsonValue)data.AboveGroundFloor },
                 { "underGroundFloor", (BsonValue)data.UnderGroundFloor },
                 { "useType", data.UseType },
+                { "parMapUrl", data.PartMapUrl ?? "" },
                 { "remark", data.Remark ?? "" },
                 { "status", 0 }
             };
@@ -241,6 +243,7 @@ namespace Rhea.Business.Estate
                 .Set("aboveGroundFloor", (BsonValue)data.AboveGroundFloor)
                 .Set("underGroundFloor", (BsonValue)data.UnderGroundFloor)
                 .Set("useType", data.UseType)
+                .Set("partMapUrl", data.PartMapUrl ?? "")
                 .Set("remark", data.Remark ?? "");
 
             WriteConcernResult result = this.context.Update(EstateCollection.Building, query, update);

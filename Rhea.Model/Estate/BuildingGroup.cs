@@ -153,12 +153,18 @@ namespace Rhea.Model.Estate
         /// 使用类型
         /// </summary>
         /// <remarks>
-        /// 1:学院楼宇,2:教学楼宇,3:行政办公,4:宿舍楼宇
+        /// 1:学院楼宇,2:教学楼宇,3:行政办公,4:宿舍楼宇,5:辅助楼宇
         /// </remarks>
         [Required]
         [UIHint("BuildingUseType")]
         [Display(Name = "使用类型")]
         public int UseType { get; set; }
+
+        /// <summary>
+        /// 图片展示
+        /// </summary>
+        [Display(Name = "图片展示")]
+        public string[] Gallery { get; set; }
 
         /// <summary>
         /// 备注

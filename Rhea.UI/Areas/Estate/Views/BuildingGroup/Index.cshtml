@@ -1,10 +1,10 @@
-﻿@model int
+﻿@model Rhea.UI.Areas.Estate.Models.BuildingGroupSectionModel
 @{    
-    //ViewBag.Title = "楼群主页";
+    ViewBag.Title = "楼群主页";
     Layout = null;
 }
 
-@Html.Action("Heading", new { controller = "Common", area = "", title = ViewBag.Title, active = "楼群导航" })
+@Html.Action("Heading", new { controller = "Common", area = "", title = Model.BuildingGroupName, active = "楼群导航" })
 
 <!--Sidebar background-->
 <div id="section-barbg">
@@ -49,10 +49,10 @@
                     <div class="content">
                         <div class="rightnow">
                             <ul class="unstyled">
-                                <li><span class="number">340</span><span class="icon16 icomoon-icon-new-2"></span>师生</li>
-                                <li><span class="number">7</span><span class="icon16 icomoon-icon-file"></span>楼宇</li>
-                                <li><span class="number">140</span><span class="icon16 icomoon-icon-list-view"></span>房间</li>
-                                <li><span class="number">2041</span><span class="icon16 icomoon-icon-tag"></span>面积</li>
+                                <li><span class="number">@Model.Buildings.Count</span><span class="icon16 icomoon-icon-clubs"></span>楼宇</li>
+                                <li><span class="number">@Model.RoomCount</span><span class="icon16 icomoon-icon-home-9"></span>房间</li>
+                                <li><span class="number">@Model.BuildArea</span><span class="icon16 icomoon-icon-copy"></span>建筑面积</li>
+                                <li><span class="number">@Model.UsableArea</span><span class="icon16 icomoon-icon-copy-2"></span>使用面积</li>
                             </ul>
                         </div>
                     </div>
@@ -64,27 +64,23 @@
                     <h4 class="title">
                         楼宇列表</h4>
                     <div class="content">
-                        <ul id="building-list" class="nav nav-pills nav-stacked">
+                        <ul id="building-list">
+                        @foreach (var item in Model.Buildings)
+                        {
+                            <li><a href="#">@item.Name</a></li>
+                        }
                         </ul>
                     </div>
                 </div>
-                <div class="reminder secbar-widget">
+                <div class="secbar-widget">
                     <h4 class="title">
                         房间信息</h4>
-                    <ul>
-                        <li class="clearfix">
-                            <div class="icon">
-                                <span class="icon32 icomoon-icon-home-7 gray"></span>
-                            </div>
-                            <span class="number">88</span> <span class="txt">总数</span> <a class="btn btn-warning">
-                                go</a> </li>
-                        <li class="clearfix">
-                            <div class="icon">
-                                <span class="icon32 icomoon-icon-support red"></span>
-                            </div>
-                            <span class="number">3</span> <span class="txt">汇总 </span><a class="btn btn-warning">
-                                go</a> </li>
-                    </ul>
+                    <div class="content">
+                        <ul class="bigBtnIcon">
+                            <li><a href="#" id="room-list" title="房间列表" class="tip"><span class="icon icomoon-icon-users">
+                            </span><span class="txt">房间列表</span> </a></li>                        
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="tab-pane fade" id="tab-stat">
@@ -92,8 +88,8 @@
                     <ul class="bigBtnIcon">
                         <li><a href="#" id="department-statistic" title="分类统计" class="tip"><span class="icon icomoon-icon-users">
                         </span><span class="txt">分类统计</span> </a></li>
-                        <li><a href="#" id="department-indicator" title="指标化" class="tip"><span class="icon icomoon-icon-support">
-                        </span><span class="txt">指标化</span> <span class="notification red">超</span> </a>
+                        <li><a href="#" id="building-group-statistic" title="分楼宇统计" class="tip"><span class="icon icomoon-icon-support">
+                        </span><span class="txt">分楼宇统计</span></a>
                         </li>
                         <li><a href="#" title="I`m with pattern" class="pattern tip"><span class="icon icomoon-icon-comments-2">
                         </span><span class="txt">消息</span> <span class="notification green">23</span> </a>
@@ -109,55 +105,15 @@
     <div class="row-fluid">
         <div class="span12">
             <div id="ajax-content2">
-                @Html.Action("Intro", "BuildingGroup", new { area = "Estate", id = Model })
+                @Html.Action("Intro", "BuildingGroup", new { area = "Estate", id = Model.BuildingGroupId })
             </div>
         </div>
     </div>
 </div>
-<!--
-<div class="span2">
-    <div class="well sidebar-nav">
-        <ul class="nav nav-list">
-            <li class="nav-header">导航</li>
-            <li class="active"><a href="#" id="building-group-summary">摘要</a></li>
-            <li><a href="#" id="building-group-details">详细</a></li>
-            <li><a href="#" id="building-group-statistic">统计</a></li>
-            <li><a href="#">展示</a></li>
-            <li class="nav-header" id="building-list">楼宇列表</li>          
-            <li class="nav-header">房屋信息</li>
-            <li><a href="#" id="room-list">房间列表</a></li>
-            <li><a href="#" id="room-collect">房间汇总</a></li>
-            <li><a href="#">Link</a></li>
-        </ul>
-    </div>
-</div>
-
-<div class="span10">
-    <div id="ajax-content1">
-        @Html.Action("Intro", "BuildingGroup", new { area = "Estate", id = Model })
-    </div>
-</div>
--->
 
 
 <script type="text/javascript">
     $(function () {
-
-        /*$.getJSON('/Estate/Building/GetListByBuildingGroup', { buildingGroupId: @Model }, function (response) {
-            var text = [];
-            $.each(response, function(i, item) {
-                text.push("<li><a href='#' class='building-index' ref='" + item.Id + "'>" + item.Name + "</a></li>");
-            });
-            text = text.join('');
-            $('li#building-list').after(text);
-
-            $('a.building-index').click(function() {
-                menuNavActive($(this));
-                var buildingId = $(this).attr('ref');
-                ajaxLoadPage("Index", "Building", "Estate", { id: buildingId });
-                return false;
-            });
-        });*/
 
         $('#secTab a').click(function (e) {
 	  	    e.preventDefault();
@@ -200,24 +156,22 @@
         });
 
         $('button#building-group-intro').click(function() {
-            ajaxContentLoadPage("Intro", "BuildingGroup", "Estate", { id: '@Model' }, $('#ajax-content2'));
+            ajaxContentLoadPage("Intro", "BuildingGroup", "Estate", { id: '@Model.BuildingGroupId' }, $('#ajax-content2'));
             return false;
         });
 
         $('button#building-group-details').click(function() {
-            ajaxContentLoadPage("Details", "BuildingGroup", "Estate", { id: '@Model' }, $('#ajax-content2'));           
+            ajaxContentLoadPage("Details", "BuildingGroup", "Estate", { id: '@Model.BuildingGroupId' }, $('#ajax-content2'));           
             return false;
         });
 
         $('a#building-group-statistic').click(function() {
-            menuNavActive($(this));
-            ajaxLoadPage("Statistic", "BuildingGroup", "Estate", { id: @Model });
+            ajaxContentLoadPage("Statistic", "BuildingGroup", "Estate", { id: '@Model.BuildingGroupId' }, $('#ajax-content2'));
             return false;
         });
 
         $('a#room-list').click(function() {
-            menuNavActive($(this));
-            ajaxLoadPage("ListByBuildingGroup", "Room", "Estate", { buildingGroupId: @Model });
+            ajaxContentLoadPage("ListByBuildingGroup", "Room", "Estate", { buildingGroupId: '@Model.BuildingGroupId' }, $('#ajax-content2'));
             return false;
         });
     });

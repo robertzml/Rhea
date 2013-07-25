@@ -41,8 +41,26 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         public ActionResult Index(int id)
         {
-            ViewBag.Title = this.buildingGroupBusiness.GetName(id);
-            return View(id);
+            BuildingGroupSectionModel data = new BuildingGroupSectionModel();
+
+            var buildingGroup = this.buildingGroupBusiness.Get(id);
+            data.BuildingGroupId = id;
+            data.BuildingGroupName = buildingGroup.Name;
+            data.BuildArea = Convert.ToInt32(buildingGroup.BuildArea);
+            data.UsableArea = Convert.ToInt32(buildingGroup.UsableArea);
+
+            IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
+            var buildings = buildingBusiness.GetListByBuildingGroup(id);
+            data.Buildings = buildings;
+            data.RoomCount = 0;
+
+            IRoomBusiness roomBusiness = new MongoRoomBusiness();
+            foreach (var b in buildings)
+            {
+                data.RoomCount += roomBusiness.CountByBuilding(b.Id);
+            }
+
+            return View(data);
         }
 
         /// <summary>
