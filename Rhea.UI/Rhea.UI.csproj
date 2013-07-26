@@ -209,7 +209,6 @@
     <Content Include="Content\fonts\icomoon.svg" />
     <Content Include="Content\fonts\iconic.svg" />
     <Content Include="Content\fonts\index.html" />
-    <Content Include="Content\fonts\license.txt" />
     <Content Include="Content\fonts\meteocons.svg" />
     <Content Include="Content\fonts\minia.svg" />
     <Content Include="Content\fonts\silkcons.svg" />
@@ -1454,9 +1453,6 @@
     <Content Include="Areas\Estate\Views\Building\Intro.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Estate\Views\Building\FloorList.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Areas\Estate\Views\Room\Summary.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -1724,6 +1720,7 @@
     <Content Include="Areas\Estate\Views\Room\ListByBuilding.cshtml" />
     <Content Include="Areas\Estate\Views\Building\FloorView.cshtml" />
     <Content Include="Areas\Estate\Views\BuildingGroup\Summary.cshtml" />
+    <Content Include="Areas\Estate\Views\Building\Classify.cshtml" />
     <None Include="Content\fonts\broccolidry.eot" />
     <None Include="Content\fonts\broccolidry.ttf" />
     <None Include="Content\fonts\broccolidry.woff" />

@@ -26,6 +26,11 @@ namespace Rhea.Model.Estate
         public int SecondCode { get; set; }
 
         /// <summary>
+        /// 一级分类名称
+        /// </summary>
+        public string ClassifyName { get; set; }
+
+        /// <summary>
         /// 功能属性
         /// </summary>
         public string FunctionProperty { get; set; }

@@ -7,6 +7,7 @@ using System.Web.Routing;
 using Rhea.Business;
 using Rhea.Business.Estate;
 using Rhea.Business.Personnel;
+using Rhea.Data.Estate;
 using Rhea.Model.Estate;
 using Rhea.Model.Personnel;
 using Rhea.UI.Areas.Estate.Models;
@@ -198,13 +199,15 @@ namespace Rhea.UI.Areas.Estate.Controllers
         }
 
         /// <summary>
-        /// 楼层列表
+        /// 分类统计
         /// </summary>
         /// <param name="id">楼宇ID</param>
         /// <returns></returns>
-        public ActionResult FloorList(int id)
+        public ActionResult Classify(int id)
         {
-            Building data = this.buildingBusiness.Get(id);
+            IStatisticBusiness statisticBusiness = new MongoStatisticBusiness();
+            BuildingClassifyAreaModel data = statisticBusiness.GetBuildingClassifyArea(id, false);
+
             return View(data);
         }
         #endregion //Action

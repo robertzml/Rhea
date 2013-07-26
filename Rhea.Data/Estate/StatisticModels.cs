@@ -22,9 +22,12 @@ namespace Rhea.Data.Estate
     }
 
     /// <summary>
-    /// 部门二级分类面积模型
+    /// 房间二级分类面积模型
     /// </summary>
-    public class DepartmentSecondClassifyAreaModel
+    /// <remarks>
+    /// 部门统计，楼宇统计，共同使用
+    /// </remarks>
+    public class RoomSecondClassifyAreaModel
     {
         /// <summary>
         /// 一级编码
@@ -55,7 +58,7 @@ namespace Rhea.Data.Estate
     /// <summary>
     /// 部门一级分类面积模型
     /// </summary>
-    public class DepartmentFirstClassifyAreaModel
+    public class RoomFirstClassifyAreaModel
     {
         /// <summary>
         /// 名称
@@ -70,7 +73,7 @@ namespace Rhea.Data.Estate
         /// <summary>
         /// 下属二级分类
         /// </summary>
-        public List<DepartmentSecondClassifyAreaModel> SecondClassify { get; set; }
+        public List<RoomSecondClassifyAreaModel> SecondClassify { get; set; }
 
         /// <summary>
         /// 总面积
@@ -101,7 +104,7 @@ namespace Rhea.Data.Estate
         /// <summary>
         /// 一级分类
         /// </summary>
-        public List<DepartmentFirstClassifyAreaModel> FirstClassify { get; set; }
+        public List<RoomFirstClassifyAreaModel> FirstClassify { get; set; }
 
         /// <summary>
         /// 使用总面积
@@ -140,6 +143,32 @@ namespace Rhea.Data.Estate
         /// 房间总数
         /// </summary>
         public int TotalRoomCount { get; set; }
+    }
+
+    /// <summary>
+    /// 楼宇分类用房面积模型
+    /// </summary>
+    public class BuildingClassifyAreaModel
+    {
+        /// <summary>
+        /// 楼宇编号
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
+        /// 楼宇名称
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// 一级分类
+        /// </summary>
+        public List<RoomFirstClassifyAreaModel> FirstClassify { get; set; }
+
+        /// <summary>
+        /// 使用总面积
+        /// </summary>
+        public double TotalArea { get; set; }
     }
 
     /// <summary>

@@ -57,7 +57,7 @@ namespace Rhea.Business
                 return 0;
         }
 
-        public List<DepartmentSecondClassifyAreaModel> GetClassifyArea(int departmentId, int firstCode, List<RoomFunctionCode> functionCodes)
+        public List<RoomSecondClassifyAreaModel> GetClassifyArea(int departmentId, int firstCode, List<RoomFunctionCode> functionCodes)
         {
             throw new NotImplementedException();
         }       

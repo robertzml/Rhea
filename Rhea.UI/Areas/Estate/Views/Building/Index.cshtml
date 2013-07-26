@@ -83,10 +83,10 @@
             <div class="tab-pane fade" id="tab-stat">
                 <div class="centerContent">
                     <ul class="bigBtnIcon">
-                        <li><a href="#" id="department-statistic" title="分类统计" class="tip"><span class="icon icomoon-icon-users">
-                        </span><span class="txt">分类统计</span> </a></li>
-                        <li><a href="#" id="department-indicator" title="指标化" class="tip"><span class="icon icomoon-icon-support">
-                        </span><span class="txt">指标化</span> <span class="notification red">超</span> </a>
+                        <li>
+                            <a href="#" id="building-classify" title="分类统计" class="tip">
+                                <span class="icon icomoon-icon-users"></span><span class="txt">分类统计</span> 
+                            </a>
                         </li>
                         <li><a href="#" title="I`m with pattern" class="pattern tip"><span class="icon icomoon-icon-comments-2">
                         </span><span class="txt">消息</span> <span class="notification green">23</span> </a>
@@ -111,16 +111,16 @@
 
 <script type="text/javascript">
     $(function () {
-        $('.inlinesparkline').sparkline('html', { 
-            width:180, 
-            height:30,
+        $('.inlinesparkline').sparkline('html', {
+            width: 180,
+            height: 30,
             lineColor: '#88bbc8',
-	        fillColor: '#f2f7f9',
-	        spotColor: '#e72828',
-	        maxSpotColor: '#005e20',
-	        minSpotColor: '#f7941d',
-	        lineWidth: 2
-         });
+            fillColor: '#f2f7f9',
+            spotColor: '#e72828',
+            maxSpotColor: '#005e20',
+            minSpotColor: '#f7941d',
+            lineWidth: 2
+        });
 
         $('button#building-intro').click(function () {
             ajaxContentLoadPage("Intro", "Building", "Estate", { id: '@Model.BuildingId' }, $('#ajax-content2'));
@@ -134,6 +134,11 @@
 
         $('button#return-building-group').click(function () {
             ajaxLoadPage("Index", "BuildingGroup", "Estate", { id: '@Model.BuildingGroupId' });
+            return false;
+        });
+
+        $('a#building-classify').click(function () {
+            ajaxContentLoadPage("Classify", "Building", "Estate", { id: '@Model.BuildingId' }, $('#ajax-content2'));
             return false;
         });
 

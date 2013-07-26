@@ -394,6 +394,7 @@ namespace Rhea.Business.Estate
                     CodeId = d["codeId"].AsString,
                     FirstCode = d["firstCode"].AsInt32,
                     SecondCode = d["secondCode"].AsInt32,
+                    ClassifyName = d["classifyName"].AsString,
                     FunctionProperty = d["functionProperty"].AsString,
                     Remark = d["remark"].AsString
                 };
@@ -436,7 +437,7 @@ namespace Rhea.Business.Estate
         {
             var query = Query.And(Query.EQ("buildingId", buildingId), Query.EQ("floor", floor));
             long count = this.context.Count(EstateCollection.Room, query);
-            return (int)count;          
+            return (int)count;
         }
 
         /// <summary>

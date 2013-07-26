@@ -169,6 +169,16 @@ namespace Rhea.UI.Areas.Estate.Controllers
         }
 
         /// <summary>
+        /// 分类统计
+        /// </summary>
+        /// <param name="id">楼群ID</param>
+        /// <returns></returns>
+        public ActionResult Classify(int id)
+        {
+            return View();
+        }
+
+        /// <summary>
         /// 分楼宇面积比较
         /// </summary>
         /// <param name="id">楼群ID</param>
