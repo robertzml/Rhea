@@ -56,7 +56,7 @@ namespace Rhea.Data.Estate
     }
 
     /// <summary>
-    /// 部门一级分类面积模型
+    /// 房间一级分类面积模型
     /// </summary>
     public class RoomFirstClassifyAreaModel
     {

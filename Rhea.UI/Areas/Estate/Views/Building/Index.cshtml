@@ -85,7 +85,7 @@
                     <ul class="bigBtnIcon">
                         <li>
                             <a href="#" id="building-classify" title="分类统计" class="tip">
-                                <span class="icon icomoon-icon-users"></span><span class="txt">分类统计</span> 
+                                <span class="icon icomoon-icon-drawer-2"></span><span class="txt">分类统计</span> 
                             </a>
                         </li>
                         <li><a href="#" title="I`m with pattern" class="pattern tip"><span class="icon icomoon-icon-comments-2">
@@ -148,6 +148,7 @@
         });
 
         $('ul#floor-list li a').click(function () {
+            secNavActive($('ul#floor-list'), $(this));
             var floor = $(this).attr('ref');
             ajaxContentLoadPage("FloorView", "Building", "Estate", { id: '@Model.BuildingId', floor: floor }, $('#ajax-content2'));
             return false;

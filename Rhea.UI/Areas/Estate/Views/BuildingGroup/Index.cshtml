@@ -85,13 +85,20 @@
             <div class="tab-pane fade" id="tab-stat">
                 <div class="centerContent">
                     <ul class="bigBtnIcon">
-                        <li><a href="#" title="分类统计" class="tip"><span class="icon icomoon-icon-users">
-                        </span><span class="txt">分类统计</span> </a></li>
-                        <li><a href="#" id="building-group-statistic" title="分楼宇统计" class="tip"><span class="icon icomoon-icon-support">
-                        </span><span class="txt">分楼宇统计</span></a>
+                        <li>
+                            <a href="#" id="building-group-classify" title="分类统计" class="tip">
+                                <span class="icon icomoon-icon-drawer-2"></span><span class="txt">分类统计</span>
+                            </a>
                         </li>
-                        <li><a href="#"><span class="icon icomoon-icon-comments-2">
-                        </span><span class="txt">消息</span> <span class="notification green">23</span> </a>
+                        <li>
+                            <a href="#" id="building-group-statistic" title="分楼宇统计" class="tip">
+                                <span class="icon icomoon-icon-support"></span><span class="txt">分楼宇统计</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="icon icomoon-icon-comments-2"></span><span class="txt">消息</span> <span class="notification green">23</span>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -161,6 +168,11 @@
 
         $('a#building-group-statistic').click(function () {
             ajaxContentLoadPage("Statistic", "BuildingGroup", "Estate", { id: '@Model.BuildingGroupId' }, $('#ajax-content2'));
+            return false;
+        });
+
+        $('a#building-group-classify').click(function () {
+            ajaxContentLoadPage("Classify", "BuildingGroup", "Estate", { id: '@Model.BuildingGroupId' }, $('#ajax-content2'));
             return false;
         });
 

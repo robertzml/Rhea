@@ -7,6 +7,7 @@ using System.Web.Routing;
 using Rhea.Business;
 using Rhea.Business.Estate;
 using Rhea.Business.Personnel;
+using Rhea.Data.Estate;
 using Rhea.Model.Estate;
 using Rhea.UI.Areas.Estate.Models;
 
@@ -175,7 +176,19 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         public ActionResult Classify(int id)
         {
-            return View();
+            IStatisticBusiness statisticBusiness = new MongoStatisticBusiness();
+
+            IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
+            var buildings = buildingBusiness.GetListByBuildingGroup(id);
+
+            List<BuildingClassifyAreaModel> list = new List<BuildingClassifyAreaModel>();
+            foreach (var building in buildings)
+            {
+                BuildingClassifyAreaModel m = statisticBusiness.GetBuildingClassifyArea(building.Id, false);
+                list.Add(m);
+            }
+
+            return View(list);
         }
 
         /// <summary>

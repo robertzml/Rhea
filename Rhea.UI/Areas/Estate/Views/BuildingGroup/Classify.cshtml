@@ -1,7 +1,7 @@
-﻿@model Rhea.Data.Estate.BuildingClassifyAreaModel
+﻿@model List<Rhea.Data.Estate.BuildingClassifyAreaModel>
 
 @{
-    ViewBag.Title = "楼宇分类用房面积";
+    ViewBag.Title = "楼群分类用房面积";
     Layout = null;
 }
 
@@ -29,9 +29,12 @@ table#classify-table td { text-align:center; }
                 </tr>
             </thead>
             <tbody>
-            @foreach (var item in Model.FirstClassify)
+            @if (Model.Count != 0)
+            {   
+            for (int i = 0; i < Model[0].FirstClassify.Count; i++)
             {
-                if (item.SecondClassify.Count == 0)
+                var item = Model[0].FirstClassify[i];
+                if (Model[0].FirstClassify[i].SecondClassify.Count == 0)
                 {
                     continue;
                 }
@@ -46,35 +49,36 @@ table#classify-table td { text-align:center; }
                         @item.SecondClassify[0].FunctionProperty
                     </td>
                     <td>
-                        @item.SecondClassify[0].Area
+                        @Model.Sum(r => r.FirstClassify[i].SecondClassify[0].Area)
                     </td>
                     <td>
-                        @item.SecondClassify[0].RoomCount
+                        @Model.Sum(r => r.FirstClassify[i].SecondClassify[0].RoomCount)
                     </td>
                     <td rowspan="@item.SecondClassify.Count">
-                        @item.Area
+                        @Model.Sum(r => r.FirstClassify[i].Area)
                     </td>
                     <td rowspan="@item.SecondClassify.Count">
-                        @item.RoomCount
+                        @Model.Sum(r => r.FirstClassify[i].RoomCount)
                     </td>
                 </tr>
-                for (int i = 1; i < item.SecondClassify.Count; i++)
+                for (int j = 1; j < item.SecondClassify.Count; j++)
                 {
                 <tr>
                     <td>
-                        @string.Format("{0}.{1}", item.SecondClassify[i].FunctionFirstCode, item.SecondClassify[i].FunctionSecondCode)
+                        @string.Format("{0}.{1}", item.SecondClassify[j].FunctionFirstCode, item.SecondClassify[j].FunctionSecondCode)
                     </td>
                     <td>
-                        @item.SecondClassify[i].FunctionProperty
+                        @item.SecondClassify[j].FunctionProperty
                     </td>
                     <td>
-                        @item.SecondClassify[i].Area
+                        @Model.Sum(r => r.FirstClassify[i].SecondClassify[j].Area)
                     </td>
                     <td>
-                        @item.SecondClassify[i].RoomCount
+                        @Model.Sum(r => r.FirstClassify[i].SecondClassify[j].RoomCount)
                     </td>
                 </tr>
                 }
+            }
             }
             </tbody>
         </table>
