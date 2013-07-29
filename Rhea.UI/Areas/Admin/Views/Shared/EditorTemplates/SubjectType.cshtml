@@ -1,0 +1,16 @@
+﻿@model int?
+@using Rhea.Business
+@using Rhea.Business.Personnel
+
+<select id="SubjectType" name="SubjectType">
+    <option value="">-- 请选择 --</option>
+    @{
+        IDictionaryBusiness business = new PersonnelDictionaryBusiness();
+        var dict = business.GetDict("SubjectType");
+
+        foreach (var item in dict)
+        {
+        <option value="@item.Key" @(Model == item.Key ? "selected='selected'" : "")>@item.Value</option>
+        }
+    }   
+</select>

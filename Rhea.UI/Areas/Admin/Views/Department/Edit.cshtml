@@ -28,6 +28,8 @@
                     <ul class="nav nav-tabs" id="myTab">
                         <li class="active"><a href="#info">基础信息</a></li>
                         <li><a href="#scale">规模信息</a></li>
+                        <li><a href="#research">科研信息</a></li>
+                        <li><a href="#special">特殊面积</a></li>
                     </ul>
 
                     <div id="myTabContent" class="tab-content">
@@ -102,9 +104,9 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="tab-pane" id="scale">
                         @if (Model.Type == (int)DepartmentType.Type1)
                         {
+                        <div class="tab-pane" id="scale">
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
@@ -228,17 +230,130 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            @Html.DisplayNameFor(model => model.ArtsAndScience)
+                                            @Html.DisplayNameFor(model => model.SubjectType)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.ArtsAndScience)
-                                            @Html.ValidationMessageFor(model => model.ArtsAndScience)
+                                            @Html.EditorFor(model => model.SubjectType)
+                                            @Html.ValidationMessageFor(model => model.SubjectType)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.FactorK1)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.FactorK1)
+                                            @Html.ValidationMessageFor(model => model.FactorK1)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.FactorK3)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.FactorK3)
+                                            @Html.ValidationMessageFor(model => model.FactorK3)
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
-                        }
                         </div>
+                        <div class="tab-pane" id="research">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style="width:150px">
+                                            属性
+                                        </th>
+                                        <th>
+                                            值
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.LongitudinalFunds)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.LongitudinalFunds)
+                                            @Html.ValidationMessageFor(model => model.LongitudinalFunds)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.TransverseFunds)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.TransverseFunds)
+                                            @Html.ValidationMessageFor(model => model.TransverseFunds)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.CompanyFunds)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.CompanyFunds)
+                                            @Html.ValidationMessageFor(model => model.CompanyFunds)
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane" id="special">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style="width:150px">
+                                            属性
+                                        </th>
+                                        <th>
+                                            值
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.TalentArea)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.TalentArea)
+                                            @Html.ValidationMessageFor(model => model.TalentArea)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.ResearchBonusArea)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.ResearchBonusArea)
+                                            @Html.ValidationMessageFor(model => model.ResearchBonusArea)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.ExperimentBonusArea)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.ExperimentBonusArea)
+                                            @Html.ValidationMessageFor(model => model.ExperimentBonusArea)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.AdjustArea)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.AdjustArea)
+                                            @Html.ValidationMessageFor(model => model.AdjustArea)
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        }
                     </div>
 
                     <div class="form-actions">

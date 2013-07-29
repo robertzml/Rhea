@@ -66,7 +66,44 @@ namespace Rhea.Business.Personnel
             department.MediumTeacherCount = doc.GetValue("mediumTeacherCount", 0).AsInt32;
             department.AdvanceAssistantCount = doc.GetValue("advanceAssistantCount", 0).AsInt32;
             department.MediumAssistantCount = doc.GetValue("mediumAssistantCount", 0).AsInt32;
-            department.ArtsAndScience = doc.GetValue("artsAndScience", 1).AsInt32;
+            department.SubjectType = doc.GetValue("subjectType", 1).AsInt32;
+            department.FactorK1 = doc.GetValue("factorK1", 0.0).AsDouble;
+            department.FactorK3 = doc.GetValue("factorK3", 0.0).AsDouble;
+
+            return;
+        }
+
+        /// <summary>
+        /// 绑定学院科研数据
+        /// </summary>
+        /// <param name="doc">原文档</param>
+        /// <param name="department">部门模型</param>
+        private void BindCollegeResearch(BsonDocument doc, ref Department department)
+        {
+            if (department.Type != (int)DepartmentType.Type1)
+                return;
+
+            department.LongitudinalFunds = doc.GetValue("longitudinalFunds", 0.0).AsDouble;
+            department.TransverseFunds = doc.GetValue("transverseFunds", 0.0).AsDouble;
+            department.CompanyFunds = doc.GetValue("companyFunds", 0.0).AsDouble;
+
+            return;
+        }
+
+        /// <summary>
+        /// 绑定学院特殊面积
+        /// </summary>
+        /// <param name="doc">原文档</param>
+        /// <param name="department">部门模型</param>
+        private void BindCollegeSpecialArea(BsonDocument doc, ref Department department)
+        {
+            if (department.Type != (int)DepartmentType.Type1)
+                return;
+
+            department.TalentArea = doc.GetValue("talentArea", 0.0).AsDouble;
+            department.ResearchBonusArea = doc.GetValue("researchBonusArea", 0.0).AsDouble;
+            department.ExperimentBonusArea = doc.GetValue("ExperimentBonusArea", 0.0).AsDouble;
+            department.AdjustArea = doc.GetValue("adjustArea", 0.0).AsDouble;
 
             return;
         }
@@ -129,12 +166,14 @@ namespace Rhea.Business.Personnel
                 if (department.Status == 1)
                     return null;
 
-                switch (addition)
+                if (department.Type == (int)DepartmentType.Type1)
                 {
-                    case DepartmentAdditionType.ScaleData:
-                        if (department.Type == (int)DepartmentType.Type1)
-                            BindCollegeScale(doc, ref department);
-                        break;
+                    if ((addition & DepartmentAdditionType.ScaleData) != 0)
+                        BindCollegeScale(doc, ref department);
+                    if ((addition & DepartmentAdditionType.ResearchData) != 0)
+                        BindCollegeResearch(doc, ref department);
+                    if ((addition & DepartmentAdditionType.SpecialAreaData) != 0)
+                        BindCollegeSpecialArea(doc, ref department);
                 }
 
                 return department;
@@ -253,8 +292,57 @@ namespace Rhea.Business.Personnel
                 .Set("mediumTeacherCount", data.MediumTeacherCount)
                 .Set("advanceAssistantCount", data.AdvanceAssistantCount)
                 .Set("mediumAssistantCount", data.MediumAssistantCount)
-                .Set("artsAndScience", data.ArtsAndScience);
-                
+                .Set("subjectType", data.SubjectType)
+                .Set("factorK1", data.FactorK1)
+                .Set("factorK3", data.FactorK3);
+
+            WriteConcernResult result = this.context.Update(PersonnelCollection.Department, query, update);
+
+            if (result.HasLastErrorMessage)
+                return false;
+            else
+                return true;
+        }
+
+        /// <summary>
+        /// 编辑科研数据
+        /// </summary>
+        /// <param name="data">部门数据</param>
+        /// <returns></returns>
+        public bool EditResearch(Department data)
+        {
+            if (data.Type != (int)DepartmentType.Type1)
+                return false;
+
+            var query = Query.EQ("id", data.Id);
+            var update = Update.Set("longitudinalFunds", data.LongitudinalFunds)
+                .Set("transverseFunds", data.TransverseFunds)
+                .Set("companyFunds", data.CompanyFunds);
+
+            WriteConcernResult result = this.context.Update(PersonnelCollection.Department, query, update);
+
+            if (result.HasLastErrorMessage)
+                return false;
+            else
+                return true;
+        }
+
+        /// <summary>
+        /// 编辑特殊面积数据
+        /// </summary>
+        /// <param name="data">部门数据</param>
+        /// <returns></returns>
+        public bool EditSpecialArea(Department data)
+        {
+            if (data.Type != (int)DepartmentType.Type1)
+                return false;
+
+            var query = Query.EQ("id", data.Id);
+            var update = Update.Set("talentArea", data.TalentArea)
+                .Set("researchBonusArea", data.ResearchBonusArea)
+                .Set("experimentBonusArea", data.ExperimentBonusArea)
+                .Set("adjustArea", data.AdjustArea);
+
             WriteConcernResult result = this.context.Update(PersonnelCollection.Department, query, update);
 
             if (result.HasLastErrorMessage)

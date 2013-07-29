@@ -100,7 +100,7 @@ namespace Rhea.UI.Controllers
         /// <returns></returns>
         public ActionResult Details(int id)
         {
-            var data = this.departmentBusiness.Get(id, DepartmentAdditionType.ScaleData);
+            var data = this.departmentBusiness.Get(id, DepartmentAdditionType.ScaleData | DepartmentAdditionType.ResearchData | DepartmentAdditionType.SpecialAreaData);
 
             IStatisticBusiness statisticBusiness = new MongoStatisticBusiness();
             DepartmentClassifyAreaModel area = statisticBusiness.GetDepartmentClassifyArea(id);
@@ -129,8 +129,13 @@ namespace Rhea.UI.Controllers
         {
             IIndicatorBusiness indicatorBusiness = new MongoIndicatorBusiness();
 
-            var department = this.departmentBusiness.Get(id, DepartmentAdditionType.ScaleData);
+            var department = this.departmentBusiness.Get(id, DepartmentAdditionType.ScaleData | DepartmentAdditionType.ResearchData | DepartmentAdditionType.SpecialAreaData);
             DepartmentIndicatorModel data = indicatorBusiness.GetDepartmentIndicator(department);
+
+            IRoomBusiness roomBusiness = new MongoRoomBusiness();
+            var rooms = roomBusiness.GetListByDepartment(id);
+            var droom = rooms.Where(r => r.Function.FirstCode == 1 || r.Function.FirstCode == 2 || r.Function.FirstCode == 3 || r.Function.FirstCode == 4);
+            data.ExistingArea = Convert.ToDouble(droom.Sum(r => r.UsableArea));
 
             return View(data);
         }

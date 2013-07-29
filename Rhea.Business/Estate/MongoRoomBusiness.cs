@@ -74,6 +74,7 @@ namespace Rhea.Business.Estate
                 BsonDocument fun = doc["function"].AsBsonDocument;
                 room.Function.FirstCode = fun["firstCode"].AsInt32;
                 room.Function.SecondCode = fun["secondCode"].AsInt32;
+                room.Function.ClassifyName = fun["classifyName"].AsString;
                 room.Function.Property = fun["property"].AsString;
             }
             else
@@ -263,6 +264,7 @@ namespace Rhea.Business.Estate
                 { "function", new BsonDocument {
                     { "firstCode", data.Function.FirstCode },
                     { "secondCode", data.Function.SecondCode },
+                    { "classifyName", data.Function.ClassifyName },
                     { "property", data.Function.Property }
                 }},
                 { "buildingId", data.BuildingId },
@@ -321,6 +323,7 @@ namespace Rhea.Business.Estate
                 .Set("imageUrl", data.ImageUrl ?? "")
                 .Set("function.firstCode", data.Function.FirstCode)
                 .Set("function.secondCode", data.Function.SecondCode)
+                .Set("function.classifyName", data.Function.ClassifyName)
                 .Set("function.property", data.Function.Property)
                 .Set("buildingId", data.BuildingId)
                 .Set("departmentId", data.DepartmentId)

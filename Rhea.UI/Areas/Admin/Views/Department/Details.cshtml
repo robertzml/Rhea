@@ -8,7 +8,7 @@
 
 <div class="box">
     <div class="box-header well" data-original-title>
-        <h2><i class="icon-tasks"></i>@ViewBag.Title</h2>    
+        <h2><i class="icon-tasks"></i>@ViewBag.Title</h2>
     </div>
 
     <div class="box-content">    
@@ -22,6 +22,8 @@
                 <ul class="nav nav-tabs" id="myTab">
                     <li class="active"><a href="#info">基础信息</a></li>
                     <li><a href="#scale">规模信息</a></li>
+                    <li><a href="#research">科研信息</a></li>
+                    <li><a href="#special">特殊面积</a></li>
                 </ul>
 
                 <div id="myTabContent" class="tab-content">
@@ -92,9 +94,9 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="tab-pane" id="scale">
                     @if (Model.Type == (int)DepartmentType.Type1)
                     {
+                    <div class="tab-pane" id="scale">
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
@@ -123,7 +125,6 @@
                                         @Html.DisplayFor(model => model.GraduateCount)
                                     </td>
                                 </tr>
-
                                 <tr>
                                     <td>
                                         @Html.DisplayNameFor(model => model.MasterOfEngineerCount)
@@ -206,16 +207,120 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        @Html.DisplayNameFor(model => model.ArtsAndScience)
+                                        @Html.DisplayNameFor(model => model.SubjectType)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(model => model.ArtsAndScience)
+                                        @Html.DisplayFor(model => model.SubjectType)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.FactorK1)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.FactorK1)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.FactorK3)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.FactorK3)
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-                    }
                     </div>
+                    <div class="tab-pane" id="research">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th style="width:180px">
+                                        属性
+                                    </th>
+                                    <th>
+                                        值
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.LongitudinalFunds)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.LongitudinalFunds)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.TransverseFunds)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.TransverseFunds)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.CompanyFunds)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.CompanyFunds)
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane" id="special">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th style="width:180px">
+                                        属性
+                                    </th>
+                                    <th>
+                                        值
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.TalentArea)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.TalentArea)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.ResearchBonusArea)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.ResearchBonusArea)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.ExperimentBonusArea)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.ExperimentBonusArea)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.AdjustArea)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.AdjustArea)
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    }
                 </div>
             </div>
         </div>

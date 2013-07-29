@@ -140,8 +140,67 @@ namespace Rhea.Model.Personnel
         /// <summary>
         /// 文理科, 1:文科, 2:理科
         /// </summary>        
-        [Display(Name = "文理科" )]
-        public int ArtsAndScience { get; set; }
+        [UIHint("SubjectType")]
+        [Display(Name = "学科类别" )]
+        public int SubjectType { get; set; }
+
+        /// <summary>
+        /// 学科系数K1
+        /// </summary>
+        [Display(Name = "学科系数K1" )]
+        public double FactorK1 { get; set; }
+
+        /// <summary>
+        /// 科研系数K3
+        /// </summary>
+        [Display(Name = "科研系数K3")]
+        public double FactorK3 { get; set; }
         #endregion //College Scale Property
+
+        #region College Research Property
+        /// <summary>
+        /// 纵向经费
+        /// </summary>
+        [Display(Name = "纵向经费")]
+        public double LongitudinalFunds { get; set; }
+
+        /// <summary>
+        /// 横向经费
+        /// </summary>
+        [Display(Name = "横向经费")]
+        public double TransverseFunds { get; set; }
+
+        /// <summary>
+        /// 开发公司经费
+        /// </summary>
+        [Display(Name = "开发公司经费")]
+        public double CompanyFunds { get; set; }            
+        #endregion //College Research Property
+
+        #region Special Area Property
+        /// <summary>
+        /// 特殊人才用房面积
+        /// </summary>
+        [Display(Name = "特殊人才用房面积")]
+        public double TalentArea { get; set; }
+
+        /// <summary>
+        /// 科研平台补贴面积
+        /// </summary>
+        [Display(Name = "科研平台补贴面积")]
+        public double ResearchBonusArea { get; set; }
+
+        /// <summary>
+        /// 实验教学平台补贴面积
+        /// </summary>
+        [Display(Name = "实验教学平台补贴面积")]
+        public double ExperimentBonusArea { get; set; }
+
+        /// <summary>
+        /// 调整面积
+        /// </summary>
+        [Display(Name = "调整面积")]
+        public double AdjustArea { get; set; }
+        #endregion //Special Area Property
     }
 }

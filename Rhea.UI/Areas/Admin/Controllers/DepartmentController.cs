@@ -55,7 +55,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult Details(int id)
         {
-            var data = this.departmentBusiness.Get(id, DepartmentAdditionType.ScaleData);
+            var data = this.departmentBusiness.Get(id, DepartmentAdditionType.ScaleData | DepartmentAdditionType.ResearchData | DepartmentAdditionType.SpecialAreaData);
             return View(data);
         }
 
@@ -126,16 +126,28 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 else
                 {
                     result = this.departmentBusiness.EditScale(model);
-
-                    if (result)
-                    {
-                        TempData["Message"] = "编辑成功";
-                        return RedirectToAction("Details", "Department", new { area = "Admin", id = model.Id });
-                    }
-                    else
+                    if (!result)
                     {
                         ModelState.AddModelError("", "保存规模数据失败");
+                        return View(model);
                     }
+
+                    result = this.departmentBusiness.EditResearch(model);
+                    if (!result)
+                    {
+                        ModelState.AddModelError("", "保存科研数据失败");
+                        return View(model);
+                    }
+
+                    result = this.departmentBusiness.EditSpecialArea(model);
+                    if (!result)
+                    {
+                        ModelState.AddModelError("", "保存特殊面积数据失败");
+                        return View(model);
+                    }
+
+                    TempData["Message"] = "编辑成功";
+                    return RedirectToAction("Details", "Department", new { area = "Admin", id = model.Id });
                 }
             }
 

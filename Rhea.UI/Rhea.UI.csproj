@@ -1722,6 +1722,7 @@
     <Content Include="Areas\Estate\Views\BuildingGroup\Summary.cshtml" />
     <Content Include="Areas\Estate\Views\Building\Classify.cshtml" />
     <Content Include="Areas\Estate\Views\BuildingGroup\Classify.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\SubjectType.cshtml" />
     <None Include="Content\fonts\broccolidry.eot" />
     <None Include="Content\fonts\broccolidry.ttf" />
     <None Include="Content\fonts\broccolidry.woff" />

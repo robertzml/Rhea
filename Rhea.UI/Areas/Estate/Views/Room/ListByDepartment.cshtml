@@ -70,7 +70,7 @@
                     </th>
                     <th>
                         楼层
-                    </th>
+                    </th>                   
                     <th>
                         功能
                     </th>
@@ -96,7 +96,7 @@
                             @item.Floor
                         </td>                       
                         <td>
-                            @item.Function.Property
+                            @string.Format("{0}.{1} {2}", item.Function.FirstCode, item.Function.SecondCode, item.Function.Property)
                         </td>
                         <td>
                             <a class="btn btn-success btn-small room-details" ref="@item.Id">
