@@ -160,6 +160,7 @@ body, p {font-family: 新宋体, Helvetica, Arial, sans-serif;}
 	-moz-box-shadow:0 1px 0px rgba(255, 255, 255, 1);
 	-webkit-box-shadow: 0 1px 0px rgba(255, 255, 255, 1);
 	box-shadow: 0 1px 0px rgba(255, 255, 255, 1);
+	position:relative;
 }
 
 /*Tables*/

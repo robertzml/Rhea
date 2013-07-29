@@ -473,6 +473,8 @@
     <Content Include="Plugins\forms\color-picker\marker.png" />
     <Content Include="Plugins\forms\color-picker\mask.png" />
     <Content Include="Plugins\forms\color-picker\wheel.png" />
+    <Content Include="Plugins\forms\datepicker\bootstrap-datepicker.js" />
+    <Content Include="Plugins\forms\datepicker\datepicker.css" />
     <Content Include="Plugins\forms\dualselect\jquery.dualListBox-1.3.min.js" />
     <Content Include="Plugins\forms\elastic\jquery.elastic.js" />
     <Content Include="Plugins\forms\globalize\cultures\globalize.culture.af-ZA.js" />

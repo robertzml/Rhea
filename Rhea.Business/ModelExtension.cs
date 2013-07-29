@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Rhea.Business;
 using Rhea.Business.Estate;
 using Rhea.Business.Personnel;
 using Rhea.Model.Estate;
+using Rhea.Model.Personnel;
 
 namespace Rhea.Business
 {
@@ -31,6 +33,13 @@ namespace Rhea.Business
         {
             IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
             string name = buildingBusiness.GetName(room.BuildingId);
+            return name;
+        }
+
+        public static string SubjectTypeName(this Department department)
+        {
+            IDictionaryBusiness dictionaryBusiness = new PersonnelDictionaryBusiness();
+            string name = dictionaryBusiness.GetItemValue("SubjectType", department.SubjectType);
             return name;
         }
     }

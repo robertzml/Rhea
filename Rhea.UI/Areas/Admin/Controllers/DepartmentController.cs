@@ -102,7 +102,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult Edit(int id)
         {
-            var data = this.departmentBusiness.Get(id, DepartmentAdditionType.ScaleData);
+            var data = this.departmentBusiness.Get(id, DepartmentAdditionType.ScaleData | DepartmentAdditionType.ResearchData | DepartmentAdditionType.SpecialAreaData);
             return View(data);
         }
 

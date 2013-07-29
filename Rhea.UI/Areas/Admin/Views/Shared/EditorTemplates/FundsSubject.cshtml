@@ -1,9 +1,15 @@
 ﻿@model string
+@using Rhea.Business.Estate
 
 <select id="FundsSubject" name="FundsSubject">
     <option value="">-- 请选择 --</option>
-    @foreach (FundsSubject o in Enum.GetValues(typeof(FundsSubject)))
-    {                      
-        <option value="@o" @(Model == o.ToString() ? "selected='selected'" : "")>@o</option>
-    }
+    @{
+        IDictionaryBusiness business = new EstateDictionaryBusiness();
+        var dict = business.GetDict("FundsSubject");
+        
+        foreach(string item in dict)
+        {
+            <option value="@item" @(Model == item ? "selected='selected'" : "")>@item</option>
+        }
+    }  
 </select>

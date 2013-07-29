@@ -208,8 +208,7 @@ $(document).ready(function(){
 				$('#content').css('margin-left', '213'+'px');
 				$('#content-two').css('margin-left', '213'+'px');
 				$('#sidebar').css({'left' : '0', 'margin-left' : '0'});
-				//$('#section-barbg').css('z-index', '0');
-				
+								
 				$this.removeClass('hide');
 				$('.collapseBtn.leftbar').css('top', '120'+'px').css('left', '170'+'px').removeClass('shadow');
 				$this.children('a').attr('title','Hide Left Sidebar');
@@ -224,8 +223,7 @@ $(document).ready(function(){
 				  }, 500, 'easeInExpo', function() {
 				    // Animation complete.
 				  
-				}).addClass('shadow');
-				//$('#section-barbg').css('z-index', '-50');
+				}).addClass('shadow');				
 				//expand content
 				$this.addClass('hide');
 				$this.children('a').attr('title','Show Left Sidebar');

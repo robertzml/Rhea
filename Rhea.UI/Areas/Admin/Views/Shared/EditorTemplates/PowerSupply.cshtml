@@ -1,9 +1,15 @@
 ﻿@model string
+@using Rhea.Business.Estate
 
 <select id="PowerSupply" name="PowerSupply">
     <option value="">-- 请选择 --</option>
-    <option value="220V" @(Model == "220V" ? "selected='selected'" : "")>220V</option>
-    <option value="380V" @(Model == "380V" ? "selected='selected'" : "")>380V</option>
-    <option value="高压电" @(Model == "高压电" ? "selected='selected'" : "")>高压电</option>
-    <option value="其它" @(Model == "其它" ? "selected='selected'" : "")>其它</option>
+    @{
+        IDictionaryBusiness business = new EstateDictionaryBusiness();
+        var dict = business.GetDict("PowerSupply");
+        
+        foreach(string item in dict)
+        {
+            <option value="@item" @(Model == item ? "selected='selected'" : "")>@item</option>
+        }
+    }  
 </select>
