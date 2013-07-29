@@ -6,18 +6,18 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using Rhea.Data.Server;
 
-namespace Rhea.Business.Personnel
+namespace Rhea.Business.Estate
 {
     /// <summary>
-    /// 人事字典
+    /// 房产字典
     /// </summary>
-    public class PersonnelDictionaryBusiness : IDictionaryBusiness
+    public class EstateDictionaryBusiness : IDictionaryBusiness
     {
         #region Field
         /// <summary>
         /// 数据库连接
         /// </summary>
-        private RheaMongoContext context = new RheaMongoContext(RheaServer.PersonnelDatabase);
+        private RheaMongoContext context = new RheaMongoContext(RheaServer.EstateDatabase);
         #endregion //Field
 
         #region Method
@@ -45,6 +45,29 @@ namespace Rhea.Business.Personnel
         }
 
         /// <summary>
+        /// 得到非组合字典集
+        /// </summary>
+        /// <param name="name">字典名称</param>
+        /// <returns></returns>
+        public string[] GetDict(string name)
+        {
+            BsonDocument doc = this.context.FindOne(PersonnelCollection.Dictionary, "name", name);
+
+            if (doc == null)
+                return null;
+
+            BsonArray array = doc["property"].AsBsonArray;
+            string[] data = new string[array.Count];
+
+            for (int i = 0; i < array.Count; i++)
+            {
+                data[i] = array[i].AsString;
+            }
+
+            return data;
+        }
+
+        /// <summary>
         /// 得到字典项值
         /// </summary>
         /// <param name="dictName">字典名称</param>
@@ -61,11 +84,6 @@ namespace Rhea.Business.Personnel
             BsonValue item = array.First(r => r["id"].AsInt32 == id);
             string value = item["value"].AsString;
             return value;
-        }
-
-        public string[] GetDict(string name)
-        {
-            throw new NotImplementedException();
         }
         #endregion //Method
     }

@@ -6,7 +6,7 @@
     <option value="">-- 请选择 --</option>
     @{
         IDictionaryBusiness business = new PersonnelDictionaryBusiness();
-        var dict = business.GetDict("SubjectType");
+        var dict = business.GetCombineDict("SubjectType");
 
         foreach (var item in dict)
         {

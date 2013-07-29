@@ -11,11 +11,18 @@ namespace Rhea.Business
     public interface IDictionaryBusiness
     {
         /// <summary>
-        /// 得到字典集
+        /// 得到组合字典集
         /// </summary>
-        /// <param name="name">名称</param>
+        /// <param name="name">字典名称</param>
         /// <returns></returns>
-        Dictionary<int, string> GetDict(string name);
+        Dictionary<int, string> GetCombineDict(string name);
+
+        /// <summary>
+        /// 得到非组合字典集
+        /// </summary>
+        /// <param name="name">字典名称</param>
+        /// <returns></returns>
+        string[] GetDict(string name);
 
         /// <summary>
         /// 得到字典项值

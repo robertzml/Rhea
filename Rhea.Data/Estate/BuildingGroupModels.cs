@@ -6,22 +6,6 @@ using System.Text;
 namespace Rhea.Data.Estate
 {
     /// <summary>
-    /// 建造方式
-    /// </summary>
-    public enum BuildType
-    {
-        自建 = 1,
-
-        购入,
-
-        接受捐赠,
-
-        接受投资,
-
-        融资相入
-    }
-
-    /// <summary>
     /// 建筑结构
     /// </summary>
     public enum BuildStructure
