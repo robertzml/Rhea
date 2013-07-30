@@ -354,6 +354,70 @@
                             </table>
                         </div>
                         }
+                        else
+                        {
+                        <div class="tab-pane" id="scale">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style="width:150px">
+                                            属性
+                                        </th>
+                                        <th>
+                                            值
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.PresidentCount)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.PresidentCount)
+                                            @Html.ValidationMessageFor(model => model.PresidentCount)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.VicePresidentCount)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.VicePresidentCount)
+                                            @Html.ValidationMessageFor(model => model.VicePresidentCount)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.ChiefCount)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.ChiefCount)
+                                            @Html.ValidationMessageFor(model => model.ChiefCount)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.ViceChiefCount)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.ViceChiefCount)
+                                            @Html.ValidationMessageFor(model => model.ViceChiefCount)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.MemberCount)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.MemberCount)
+                                            @Html.ValidationMessageFor(model => model.MemberCount)
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        }
                     </div>
 
                     <div class="form-actions">

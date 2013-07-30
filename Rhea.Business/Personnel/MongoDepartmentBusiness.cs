@@ -107,6 +107,25 @@ namespace Rhea.Business.Personnel
 
             return;
         }
+
+        /// <summary>
+        /// 绑定行政部门规模数据
+        /// </summary>
+        /// <param name="doc">原文档</param>
+        /// <param name="department">部门模型</param>
+        private void BindDepartmentScale(BsonDocument doc, ref Department department)
+        {
+            if (department.Type == (int)DepartmentType.Type1)
+                return;
+
+            department.PresidentCount = doc.GetValue("presidentCount", 0).AsInt32;
+            department.VicePresidentCount = doc.GetValue("vicePresidentCount", 0).AsInt32;
+            department.ChiefCount = doc.GetValue("chiefCount", 0).AsInt32;
+            department.ViceChiefCount = doc.GetValue("viceChiefCount", 0).AsInt32;
+            department.MemberCount = doc.GetValue("memberCount", 0).AsInt32;
+
+            return;
+        }
         #endregion //Function
 
         #region Method
@@ -166,7 +185,7 @@ namespace Rhea.Business.Personnel
                 if (department.Status == 1)
                     return null;
 
-                if (department.Type == (int)DepartmentType.Type1)
+                if (department.Type == (int)DepartmentType.Type1)   //教学院系
                 {
                     if ((addition & DepartmentAdditionType.ScaleData) != 0)
                         BindCollegeScale(doc, ref department);
@@ -174,6 +193,11 @@ namespace Rhea.Business.Personnel
                         BindCollegeResearch(doc, ref department);
                     if ((addition & DepartmentAdditionType.SpecialAreaData) != 0)
                         BindCollegeSpecialArea(doc, ref department);
+                }
+                else
+                {
+                    if ((addition & DepartmentAdditionType.ScaleData) != 0)
+                        BindDepartmentScale(doc, ref department);
                 }
 
                 return department;
@@ -276,25 +300,37 @@ namespace Rhea.Business.Personnel
         /// <returns></returns>
         public bool EditScale(Department data)
         {
-            if (data.Type != (int)DepartmentType.Type1)
-                return false;
+            IMongoQuery query;
+            IMongoUpdate update;
 
-            var query = Query.EQ("id", data.Id);
-            var update = Update.Set("bachelorCount", data.BachelorCount)
-                .Set("graduateCount", data.GraduateCount)
-                .Set("masterOfEngineerCount", data.MasterOfEngineerCount)
-                .Set("doctorCount", data.DoctorCount)
-                .Set("staffCount", data.StaffCount)
-                .Set("partyLeaderCount", data.PartyLeaderCount)
-                .Set("sectionChiefCount", data.SectionChiefCount)
-                .Set("professorCount", data.ProfessorCount)
-                .Set("associateProfessorCount", data.AssociateProfessorCount)
-                .Set("mediumTeacherCount", data.MediumTeacherCount)
-                .Set("advanceAssistantCount", data.AdvanceAssistantCount)
-                .Set("mediumAssistantCount", data.MediumAssistantCount)
-                .Set("subjectType", data.SubjectType)
-                .Set("factorK1", data.FactorK1)
-                .Set("factorK3", data.FactorK3);
+            if (data.Type == (int)DepartmentType.Type1)
+            {
+                query = Query.EQ("id", data.Id);
+                update = Update.Set("bachelorCount", data.BachelorCount)
+                    .Set("graduateCount", data.GraduateCount)
+                    .Set("masterOfEngineerCount", data.MasterOfEngineerCount)
+                    .Set("doctorCount", data.DoctorCount)
+                    .Set("staffCount", data.StaffCount)
+                    .Set("partyLeaderCount", data.PartyLeaderCount)
+                    .Set("sectionChiefCount", data.SectionChiefCount)
+                    .Set("professorCount", data.ProfessorCount)
+                    .Set("associateProfessorCount", data.AssociateProfessorCount)
+                    .Set("mediumTeacherCount", data.MediumTeacherCount)
+                    .Set("advanceAssistantCount", data.AdvanceAssistantCount)
+                    .Set("mediumAssistantCount", data.MediumAssistantCount)
+                    .Set("subjectType", data.SubjectType)
+                    .Set("factorK1", data.FactorK1)
+                    .Set("factorK3", data.FactorK3);
+            }
+            else
+            {
+                query = Query.EQ("id", data.Id);
+                update = Update.Set("presidentCount", data.PresidentCount)
+                    .Set("vicePresidentCount", data.VicePresidentCount)
+                    .Set("chiefCount", data.ChiefCount)
+                    .Set("viceChiefCount", data.ViceChiefCount)
+                    .Set("memberCount", data.MemberCount);
+            }
 
             WriteConcernResult result = this.context.Update(PersonnelCollection.Department, query, update);
 

@@ -16,17 +16,14 @@ namespace Rhea.Business.Personnel
         #region Field
         #endregion //Field
 
-        #region Method
+        #region Function
         /// <summary>
-        /// 部门指标计算(限学院)
+        /// 学院指标
         /// </summary>
-        /// <param name="department">部门数据</param>
+        /// <param name="department"></param>
         /// <returns></returns>
-        public DepartmentIndicatorModel GetDepartmentIndicator(Department department)
+        private DepartmentIndicatorModel CollegeIndicator(Department department)
         {
-            if (department.Type != (int)DepartmentType.Type1)
-                return null;
-
             DepartmentIndicatorModel data = new DepartmentIndicatorModel();
             data.DepartmentId = department.Id;
             data.DepartmentName = department.Name;
@@ -161,8 +158,62 @@ namespace Rhea.Business.Personnel
             data.DeservedArea = (data.OfficeArea + data.FlexibleArea) * factorK2 + data.ExperimentArea +
                 data.GraduateArea + data.DoctorArea + data.MasterOfEngineerArea + data.ResearchArea + data.PublicArea +
                 data.EducationBonusArea + data.TalentArea + data.ResearchBonusArea + data.ExperimentBonusArea + data.AdjustArea;
-            
+
             return data;
+        }
+
+        /// <summary>
+        /// 部门指标
+        /// </summary>
+        /// <param name="department"></param>
+        /// <returns></returns>
+        private DepartmentIndicatorModel DepartmentIndicator(Department department)
+        {
+            DepartmentIndicatorModel data = new DepartmentIndicatorModel();
+            data.DepartmentId = department.Id;
+            data.DepartmentName = department.Name;
+
+            //1、正校长（书记）50平方/人，副校长（书记）40平方/人。
+            data.PresidentArea = department.PresidentCount * 50 + department.VicePresidentCount * 40;
+
+            //2、部门正职25平方/人，部门副职18平方/人，部门其它人员8平方/人。部门人员少于3人的，该科室按20平方配置。
+            if (department.ChiefCount + department.ViceChiefCount + department.MemberCount < 3)
+                data.SectionArea = 20;
+            else
+                data.SectionArea = department.ChiefCount * 25 + department.ViceChiefCount * 18 + department.MemberCount * 8;
+
+            //3、部门业务用房2平方/人，不足10人的部门按20平方算。
+            int totalPerson = department.PresidentCount + department.VicePresidentCount +
+                department.ChiefCount + department.ViceChiefCount + department.MemberCount;
+            if (totalPerson < 10)
+                data.BusinessArea = 20;
+            else
+                data.BusinessArea = totalPerson * 2;
+
+            data.DeservedArea = data.PresidentArea + data.SectionArea + data.BusinessArea;
+
+            return data;
+        }
+        #endregion //Function
+
+        #region Method
+        /// <summary>
+        /// 部门指标计算(限学院)
+        /// </summary>
+        /// <param name="department">部门数据</param>
+        /// <returns></returns>
+        public DepartmentIndicatorModel GetDepartmentIndicator(Department department)
+        {
+            if (department.Type == (int)DepartmentType.Type1)
+            {
+                DepartmentIndicatorModel data = CollegeIndicator(department);
+                return data;
+            }
+            else
+            {
+                DepartmentIndicatorModel data = DepartmentIndicator(department);
+                return data;
+            }
         }
         #endregion //Method
     }

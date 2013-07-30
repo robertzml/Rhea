@@ -30,6 +30,8 @@
                         </tr>
                     </thead>
                     <tbody>
+                    @if (ViewBag.Type == (int)Rhea.Data.Personnel.DepartmentType.Type1)
+                    {
                         <tr>
                             <td>1</td>
                             <td>@Html.DisplayNameFor(model => model.OfficeArea)</td>
@@ -95,8 +97,27 @@
                             <td>@Html.DisplayNameFor(model => model.AdjustArea)</td>
                             <td>@Model.AdjustArea</td>
                         </tr>
+                    }
+                    else
+                    {
                         <tr>
-                            <td>14</td>
+                            <td>1</td>
+                            <td>@Html.DisplayNameFor(model => model.PresidentArea)</td>
+                            <td>@Model.PresidentArea</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>@Html.DisplayNameFor(model => model.SectionArea)</td>
+                            <td>@Model.SectionArea</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>@Html.DisplayNameFor(model => model.BusinessArea)</td>
+                            <td>@Model.BusinessArea</td>
+                        </tr>
+                    }
+                        <tr>
+                            <td>&nbsp;</td>
                             <td>@Html.DisplayNameFor(model => model.DeservedArea)</td>
                             <td>@Model.DeservedArea</td>
                         </tr>
@@ -127,6 +148,8 @@
                 <a href="#" class="minimize">Minimize</a>
             </div>
             <div class="content">
+            @if (ViewBag.Type == (int)Rhea.Data.Personnel.DepartmentType.Type1)
+            {
                 <p>
                     <strong>1. (办公用房+机动用房) * K2</strong><br />
                     K2=1.2	学院教职工人数＜50人
@@ -189,8 +212,20 @@
                     <strong>12. 调整面积：</strong>
                 </p>
                 <p>
-                    学院应有面积=以上12项之和
+                    学院应有面积=以上12项之和 <br />
+                    学院现有面积=编码为1.*、2.*、3.*、4.*的房间面积之和。 <br />
+                    超额比值=（学院现有面积/学院应有面积）*100%
                 </p>
+            }
+            else
+            {
+                <p>1、正校长（书记）50平方/人，副校长（书记）40平方/人。</p>
+                <p>2、部门正职25平方/人，部门副职18平方/人，部门其它人员8平方/人。部门人员少于3人的，该科室按20平方配置。</p>
+                <p>3、部门业务用房2平方/人，不足10人的部门按20平方算。</p>
+                <p>部门应有面积=以上3项之和。</p>
+                <p>部门现有面积=部门房间面积累加。</p>
+                <p>超额比值=（部门现有面积/部门应有面积）*100%</p>
+            }
             </div>
         </div>
     </div>

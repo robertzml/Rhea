@@ -75,7 +75,7 @@
                 yAxis: {
                     min: 0,
                     title: {
-                        text: '人均面积(人/m2)'
+                        text: '人均面积(m2/人)'
                     },
                     stackLabels: {
                         enabled: true,
@@ -91,7 +91,7 @@
                 },
                 tooltip: {
                     formatter: function () {
-                        return '' + this.series.name + ': ' + this.y + ' 人/m<sup>2</sup>';
+                        return '' + this.series.name + ': ' + this.y + ' m<sup>2</sup>/人';
                     }
                 },
                 plotOptions: {

@@ -177,7 +177,7 @@ namespace Rhea.Model.Personnel
         public double CompanyFunds { get; set; }            
         #endregion //College Research Property
 
-        #region Special Area Property
+        #region College Special Area Property
         /// <summary>
         /// 特殊人才用房面积
         /// </summary>
@@ -201,6 +201,38 @@ namespace Rhea.Model.Personnel
         /// </summary>
         [Display(Name = "调整面积")]
         public double AdjustArea { get; set; }
-        #endregion //Special Area Property
+        #endregion //College Special Area Property
+
+        #region Department Scale Property
+        /// <summary>
+        /// 正校长(书记)
+        /// </summary>
+        [Display(Name = "正校长(书记)")]
+        public int PresidentCount { get; set; }
+
+        /// <summary>
+        /// 副校长(书记)
+        /// </summary>
+        [Display(Name = "正校长(书记)")]
+        public int VicePresidentCount { get; set; }
+
+        /// <summary>
+        /// 部门正职
+        /// </summary>
+        [Display(Name = "部门正职")]
+        public int ChiefCount { get; set; }
+
+        /// <summary>
+        /// 部门副职
+        /// </summary>
+        [Display(Name = "部门副职")]
+        public int ViceChiefCount { get; set; }
+
+        /// <summary>
+        /// 部门成员
+        /// </summary>
+        [Display(Name = "部门成员")]
+        public int MemberCount { get; set; }
+        #endregion //Department Scale Property
     }
 }

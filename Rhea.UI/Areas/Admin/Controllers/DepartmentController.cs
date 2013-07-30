@@ -125,25 +125,37 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 }
                 else
                 {
-                    result = this.departmentBusiness.EditScale(model);
-                    if (!result)
+                    if (model.Type == (int)DepartmentType.Type1)
                     {
-                        ModelState.AddModelError("", "保存规模数据失败");
-                        return View(model);
-                    }
+                        result = this.departmentBusiness.EditScale(model);
+                        if (!result)
+                        {
+                            ModelState.AddModelError("", "保存规模数据失败");
+                            return View(model);
+                        }
 
-                    result = this.departmentBusiness.EditResearch(model);
-                    if (!result)
-                    {
-                        ModelState.AddModelError("", "保存科研数据失败");
-                        return View(model);
-                    }
+                        result = this.departmentBusiness.EditResearch(model);
+                        if (!result)
+                        {
+                            ModelState.AddModelError("", "保存科研数据失败");
+                            return View(model);
+                        }
 
-                    result = this.departmentBusiness.EditSpecialArea(model);
-                    if (!result)
+                        result = this.departmentBusiness.EditSpecialArea(model);
+                        if (!result)
+                        {
+                            ModelState.AddModelError("", "保存特殊面积数据失败");
+                            return View(model);
+                        }
+                    }
+                    else
                     {
-                        ModelState.AddModelError("", "保存特殊面积数据失败");
-                        return View(model);
+                        result = this.departmentBusiness.EditScale(model);
+                        if (!result)
+                        {
+                            ModelState.AddModelError("", "保存规模数据失败");
+                            return View(model);
+                        }
                     }
 
                     TempData["Message"] = "编辑成功";
