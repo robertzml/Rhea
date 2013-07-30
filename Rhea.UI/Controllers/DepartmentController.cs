@@ -55,7 +55,7 @@ namespace Rhea.UI.Controllers
         {
             DepartmentSectionModel data = new DepartmentSectionModel();
 
-            var department = this.departmentBusiness.Get(id);
+            var department = this.departmentBusiness.Get(id, DepartmentAdditionType.ScaleData | DepartmentAdditionType.ResearchData | DepartmentAdditionType.SpecialAreaData);
             data.DepartmentId = id;
             data.DepartmentName = department.Name;
 
@@ -66,6 +66,16 @@ namespace Rhea.UI.Controllers
 
             IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
             data.Buildings = buildingBusiness.GetListByDepartment(id);
+
+            IIndicatorBusiness indicatorBusiness = new MongoIndicatorBusiness();
+            DepartmentIndicatorModel indicator = indicatorBusiness.GetDepartmentIndicator(department);
+            var droom = rooms.Where(r => r.Function.FirstCode == 1 || r.Function.FirstCode == 2 || r.Function.FirstCode == 3 || r.Function.FirstCode == 4);
+            data.ExistingArea = Convert.ToDouble(droom.Sum(r => r.UsableArea));
+            data.DeservedArea = indicator.DeservedArea;
+            if (data.DeservedArea == 0)
+                data.Overproof = 0;
+            else
+                data.Overproof = Math.Round(data.ExistingArea / data.DeservedArea * 100, 2);
 
             return View(data);
         }
@@ -137,6 +147,10 @@ namespace Rhea.UI.Controllers
             var droom = rooms.Where(r => r.Function.FirstCode == 1 || r.Function.FirstCode == 2 || r.Function.FirstCode == 3 || r.Function.FirstCode == 4);
             data.ExistingArea = Convert.ToDouble(droom.Sum(r => r.UsableArea));
 
+            if (data.DeservedArea == 0)
+                data.Overproof = 0;
+            else
+                data.Overproof = data.ExistingArea / data.DeservedArea * 100;
             return View(data);
         }
 
@@ -199,6 +213,8 @@ namespace Rhea.UI.Controllers
         {
             IStatisticBusiness statisticBusiness = new MongoStatisticBusiness();
             DepartmentClassifyAreaModel data = statisticBusiness.GetDepartmentClassifyArea(id);
+            data.FirstClassify = data.FirstClassify.Where(r => r.FunctionFirstCode == 1 || r.FunctionFirstCode == 2 ||
+                r.FunctionFirstCode == 3 || r.FunctionFirstCode == 4).ToList();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 

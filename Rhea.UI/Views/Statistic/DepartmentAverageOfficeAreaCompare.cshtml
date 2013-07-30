@@ -1,0 +1,123 @@
+﻿@{
+    ViewBag.Title = "学院人均办公用房比较";
+    Layout = null;
+}
+
+@Html.Action("Heading", new { controller = "Common", area = "", title = ViewBag.Title, active = "房产统计" })
+
+@Html.Action("DepartmentFilter", new { controller = "Statistic", area = "", type = 1 })
+
+<div class="row-fluid">
+    <div class="span12">
+
+        <div class="box chart gradient">
+            <div class="title">
+                <h4>
+                    <span class="icon16 icomoon-icon-bars"></span><span>办公面积图</span>
+                </h4>
+                <a href="#" class="minimize">Minimize</a>
+            </div>
+
+            <div class="content">       
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div id="container-avgofficearea-compare" style="width: 100%; height: 650px;">
+                        </div>
+                    </div>         
+                </div>       
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        var dataList;
+        var colors = Highcharts.getOptions().colors;
+
+        $.getJSON('/Statistic/DepartmentAverageOfficeAreaCompareData', { type: 1 }, function (response) {
+            dataList = response;
+            setStackChart(response);
+        });
+
+        setBoxAction();
+
+        $('button#compare').click(function () {
+            var sel = [];
+            $.each(dataList, function (i, item) {
+                var id = dataList[i].DepartmentId;
+                var $input = $('#check-list input:checkbox[value=' + id.toString() + ']');
+                if ($input.prop('checked')) {
+                    sel.push(dataList[i]);
+                }
+            });
+
+            setStackChart(sel);
+            return false;
+        });
+
+        function setStackChart(data) {
+            var option = {
+                chart: {
+                    renderTo: 'container-avgofficearea-compare',
+                    type: 'bar'
+                },
+                title: {
+                    text: '学院人均办公用房面积比较'
+                },
+                credits: {
+                    enabled: false
+                },
+                xAxis: {
+                    categories: []
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: '人均面积(m2)'
+                    },
+                    stackLabels: {
+                        enabled: true,
+                        style: {
+                            fontWeight: 'normal',
+                            color: colors[1] || 'gray'
+                        }
+                    }
+                },
+                legend: {
+                    backgroundColor: '#FFFFFF',
+                    reversed: true
+                },
+                tooltip: {
+                    formatter: function () {
+                        return '' + this.series.name + ': ' + this.y + ' m<sup>2</sup>';
+                    }
+                },
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+                series: [{
+                    name: '人均面积',
+                    color: colors[0],
+                    data: []
+                }]
+            };
+
+            option.xAxis.categories = [];
+            $.each(data, function (i, item) {
+                option.xAxis.categories.push(item.DepartmentName);
+            });
+
+            $.each(data, function (i, item) {
+                option.series[0].data.push({ name: item.DepartmentName, y: parseFloat(item.AverageArea) });
+            });
+
+            var chart = new Highcharts.Chart(option);
+        };
+    });
+</script>

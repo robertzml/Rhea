@@ -161,7 +161,7 @@ namespace Rhea.Business.Personnel
             data.DeservedArea = (data.OfficeArea + data.FlexibleArea) * factorK2 + data.ExperimentArea +
                 data.GraduateArea + data.DoctorArea + data.MasterOfEngineerArea + data.ResearchArea + data.PublicArea +
                 data.EducationBonusArea + data.TalentArea + data.ResearchBonusArea + data.ExperimentBonusArea + data.AdjustArea;
-
+            
             return data;
         }
         #endregion //Method

@@ -192,5 +192,11 @@ namespace Rhea.Data.Personnel
         /// </summary>
         [Display(Name = "现有面积")]
         public double ExistingArea { get; set; }
+
+        /// <summary>
+        /// 超标比值
+        /// </summary>
+        [Display(Name = "超标比值")]
+        public double Overproof { get; set; }
     }
 }

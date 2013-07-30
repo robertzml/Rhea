@@ -1759,6 +1759,7 @@
     <Content Include="Views\Home\Estate.cshtml" />
     <Content Include="Views\Home\Department.cshtml" />
     <Content Include="Views\Department\Summary.cshtml" />
+    <Content Include="Views\Statistic\DepartmentAverageOfficeAreaCompare.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

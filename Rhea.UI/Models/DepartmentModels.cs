@@ -26,5 +26,20 @@ namespace Rhea.UI.Models
         /// 使用总面积
         /// </summary>
         public int TotalArea { get; set; }
+
+        /// <summary>
+        /// 指标应有面积
+        /// </summary>
+        public double DeservedArea { get; set; }
+
+        /// <summary>
+        /// 指标现有面积
+        /// </summary>
+        public double ExistingArea { get; set; }
+
+        /// <summary>
+        /// 超标比值
+        /// </summary>
+        public double Overproof { get; set; }
     }
 }

@@ -28,23 +28,25 @@
                     </div>
                 </div>
                 <hr />
+                <div class="secbar-widget">
                 <div class="centerContent">
                     <div dir="ltr" class="circle-stats">
-                        <div class="circular-item tipB" title="Site overload">
+                        <div class="circular-item tip" title="Site overload">
                             <span class="icon icomoon-icon-fire"></span>
                             <input type="text" value="62" class="redCircle" />
                         </div>
 
-                        <div class="circular-item tipB" title="Site average load time">
+                        <div class="circular-item tip" title="Site average load time">
                             <span class="icon icomoon-icon-busy"></span>
                             <input type="text" value="12" class="blueCircle" />
                         </div>
 
-                        <div class="circular-item tipB" title="Target complete">
+                        <div class="circular-item tip" title="超标比值">
                             <span class="icon icomoon-icon-target-2"></span>
-                            <input type="text" value="94" class="greenCircle" />
+                            <input type="text" value="@Model.Overproof" class="greenCircle" />
                         </div>
                     </div>
+                </div>
                 </div>
 
                 <div class="secbar-widget">
@@ -60,7 +62,7 @@
                         </div>
                     </div>
 
-                </div><!-- End .sidenav-widget -->
+                </div>
 
             </div>
             <div class="tab-pane fade" id="tab-room">
@@ -108,7 +110,14 @@
                             <a href="#" id="department-indicator" title="指标化">
                                 <span class="icon icomoon-icon-shield"></span>
                                 <span class="txt">指标化</span>
+                                @if (Model.Overproof > 100)
+                                {
                                 <span class="notification red">超</span>
+                                }
+                                else
+                                {
+                                <span class="notification green">@Model.Overproof%</span>
+                                }
                             </a>
                         </li>
                         <li>
@@ -167,29 +176,16 @@
 
 <script type="text/javascript">
     $(function () {
-        /*$.getJSON('/Estate/Building/GetListByDepartment', { departmentId: @Model }, function (response) {
-        var text = [];
-        $.each(response, function(i, item) {
-        text.push("<li><a href='#' class='building-index' ref='" + item.Id + "'>" + item.Name + "</a></li>");
-        });
-        text = text.join('');
-        $('ul#building-list').append(text);
 
-        $('a.building-index').click(function() {
-        menuNavActive($('ul#building-list'), $(this));
-        var buildingId = $(this).attr('ref');
-        ajaxContentLoadPage2("Building", "Department", { id: '@Model', buildingId: buildingId }, $('#ajax-content2'));
-        return false;
-        });
-        });*/
+        $('.tip').tooltip();
 
         //circular progrress bar
         $(".greenCircle").knob({
             'min': 0,
             'max': 100,
             'readOnly': true,
-            'width': 80,
-            'height': 80,
+            'width': 100,
+            'height': 100,
             'fgColor': '#9FC569',
             'dynamicDraw': true,
             'thickness': 0.2,
@@ -199,8 +195,8 @@
             'min': 0,
             'max': 100,
             'readOnly': true,
-            'width': 80,
-            'height': 80,
+            'width': 100,
+            'height': 100,
             'fgColor': '#ED7A53',
             'dynamicDraw': true,
             'thickness': 0.2,
@@ -210,8 +206,8 @@
             'min': 0,
             'max': 100,
             'readOnly': true,
-            'width': 80,
-            'height': 80,
+            'width': 100,
+            'height': 100,
             'fgColor': '#88BBC8',
             'dynamicDraw': true,
             'thickness': 0.2,

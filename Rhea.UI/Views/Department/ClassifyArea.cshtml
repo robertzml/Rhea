@@ -25,7 +25,7 @@
         var categories = []; 
         var data1 = [];   
 
-        $.getJSON('/Department/GetClassifyArea', { id: @Model }, function (response) {
+        $.getJSON('/Department/GetClassifyArea', { id: '@Model' }, function (response) {
             setColumnData(response);                 
             setColumnChart(data1);
         });

@@ -201,4 +201,32 @@ namespace Rhea.Data.Estate
 
         public double UsableArea { get; set; }
     }
+
+    /// <summary>
+    /// 部门人均面积模型
+    /// </summary>
+    public class DepartmentAverageAreaModel
+    {
+        public int DepartmentId { get; set; }
+
+        public string DepartmentName { get; set; }
+
+        /// <summary>
+        /// 平均面积
+        /// </summary>
+        /// <remarks>
+        /// 如人均办公面积，人均科研面积
+        /// </remarks>
+        public double AverageArea { get; set; }
+
+        /// <summary>
+        /// 人数
+        /// </summary>
+        public int PeopleCount { get; set; }
+
+        /// <summary>
+        /// 面积总数
+        /// </summary>
+        public double TotalArea { get; set; }
+    }
 }

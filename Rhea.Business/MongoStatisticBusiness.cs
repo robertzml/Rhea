@@ -155,10 +155,18 @@ namespace Rhea.Business
 
             data.FirstClassify = new List<RoomFirstClassifyAreaModel>();
 
-            data.FirstClassify.Add(GetFirstClassifyArea("departmentId", departmentId, 1, "办公用房", functionCodes, sortByFirstArea));
-            data.FirstClassify.Add(GetFirstClassifyArea("departmentId", departmentId, 2, "教学用房", functionCodes, sortByFirstArea));
-            data.FirstClassify.Add(GetFirstClassifyArea("departmentId", departmentId, 3, "实验用房", functionCodes, sortByFirstArea));
-            data.FirstClassify.Add(GetFirstClassifyArea("departmentId", departmentId, 4, "科研用房", functionCodes, sortByFirstArea));
+            //data.FirstClassify.Add(GetFirstClassifyArea("departmentId", departmentId, 1, "办公用房", functionCodes, sortByFirstArea));
+            //data.FirstClassify.Add(GetFirstClassifyArea("departmentId", departmentId, 2, "教学用房", functionCodes, sortByFirstArea));
+            //data.FirstClassify.Add(GetFirstClassifyArea("departmentId", departmentId, 3, "实验用房", functionCodes, sortByFirstArea));
+            //data.FirstClassify.Add(GetFirstClassifyArea("departmentId", departmentId, 4, "科研用房", functionCodes, sortByFirstArea));
+
+            var fc = functionCodes.GroupBy(r => new { r.FirstCode, r.ClassifyName }).Select(g => new { g.Key.FirstCode, g.Key.ClassifyName });
+
+            foreach (var f in fc)
+            {
+                var c = GetFirstClassifyArea("departmentId", departmentId, f.FirstCode, f.ClassifyName, functionCodes, sortByFirstArea);
+                data.FirstClassify.Add(c);
+            }
 
             if (sortByFirstArea)
                 data.FirstClassify = data.FirstClassify.OrderByDescending(r => r.Area).ToList();
