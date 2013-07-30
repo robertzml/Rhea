@@ -11,10 +11,19 @@ namespace Rhea.UI.Models
     /// </summary>
     public class DepartmentSectionModel
     {
+        /// <summary>
+        /// 部门ID
+        /// </summary>
         public int DepartmentId { get; set; }
 
+        /// <summary>
+        /// 部门名称
+        /// </summary>
         public string DepartmentName { get; set; }
 
+        /// <summary>
+        /// 部门楼宇列表
+        /// </summary>
         public List<Building> Buildings { get; set; }
 
         /// <summary>
@@ -26,6 +35,11 @@ namespace Rhea.UI.Models
         /// 使用总面积
         /// </summary>
         public int TotalArea { get; set; }
+
+        /// <summary>
+        /// 教职工人数
+        /// </summary>
+        public int StaffCount { get; set; }
 
         /// <summary>
         /// 指标应有面积

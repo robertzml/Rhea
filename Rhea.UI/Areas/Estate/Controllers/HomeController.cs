@@ -58,6 +58,17 @@ namespace Rhea.UI.Areas.Estate.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// 展示
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Gallery()
+        {
+            EstateMiscBusiness business = new EstateMiscBusiness();
+            var data = business.GetGallery();
+            return View(data);
+        }
         #endregion //Action
     }
 }

@@ -58,6 +58,7 @@ namespace Rhea.UI.Controllers
             var department = this.departmentBusiness.Get(id, DepartmentAdditionType.ScaleData | DepartmentAdditionType.ResearchData | DepartmentAdditionType.SpecialAreaData);
             data.DepartmentId = id;
             data.DepartmentName = department.Name;
+            data.StaffCount = department.StaffCount;
 
             IRoomBusiness roomBusiness = new MongoRoomBusiness();
             var rooms = roomBusiness.GetListByDepartment(id);

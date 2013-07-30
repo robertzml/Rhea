@@ -1188,6 +1188,22 @@
     <Content Include="Plugins\forms\validate\localization\methods_pt.js" />
     <Content Include="Plugins\forms\validate\validate.css" />
     <Content Include="Plugins\forms\watermark\jquery.watermark.min.js" />
+    <Content Include="Plugins\gallery\camera\camera.css" />
+    <Content Include="Plugins\gallery\camera\camera.js" />
+    <Content Include="Plugins\gallery\camera\camera.min.js" />
+    <Content Include="Plugins\gallery\camera\images\blank.gif" />
+    <Content Include="Plugins\gallery\camera\images\camera-loader.gif" />
+    <Content Include="Plugins\gallery\camera\images\camera_skins.png" />
+    <Content Include="Plugins\gallery\camera\images\patterns\overlay1.png" />
+    <Content Include="Plugins\gallery\camera\images\patterns\overlay10.png" />
+    <Content Include="Plugins\gallery\camera\images\patterns\overlay2.png" />
+    <Content Include="Plugins\gallery\camera\images\patterns\overlay3.png" />
+    <Content Include="Plugins\gallery\camera\images\patterns\overlay4.png" />
+    <Content Include="Plugins\gallery\camera\images\patterns\overlay5.png" />
+    <Content Include="Plugins\gallery\camera\images\patterns\overlay6.png" />
+    <Content Include="Plugins\gallery\camera\images\patterns\overlay7.png" />
+    <Content Include="Plugins\gallery\camera\images\patterns\overlay8.png" />
+    <Content Include="Plugins\gallery\camera\images\patterns\overlay9.png" />
     <Content Include="Plugins\gallery\colorbox\colorbox.css" />
     <Content Include="Plugins\gallery\colorbox\images\border.png" />
     <Content Include="Plugins\gallery\colorbox\images\controls.png" />
@@ -1712,9 +1728,6 @@
     <Content Include="Views\Statistic\DepartmentClassifyAreaCompare.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\_Layout1.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Areas\Estate\Views\Home\BuildingGroupList.cshtml" />
     <Content Include="Areas\Estate\Views\Home\DepartmentList.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Nav.cshtml" />
@@ -1725,6 +1738,7 @@
     <Content Include="Areas\Estate\Views\Building\Classify.cshtml" />
     <Content Include="Areas\Estate\Views\BuildingGroup\Classify.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\SubjectType.cshtml" />
+    <Content Include="Areas\Estate\Views\Home\Gallery.cshtml" />
     <None Include="Content\fonts\broccolidry.eot" />
     <None Include="Content\fonts\broccolidry.ttf" />
     <None Include="Content\fonts\broccolidry.woff" />
@@ -1760,6 +1774,8 @@
     <Content Include="Views\Home\Department.cshtml" />
     <Content Include="Views\Department\Summary.cshtml" />
     <Content Include="Views\Statistic\DepartmentAverageOfficeAreaCompare.cshtml" />
+    <Content Include="Views\Statistic\DepartmentAverageResearchAreaCompare.cshtml" />
+    <Content Include="Views\Statistic\DepartmentResearchFundsAreaCompare.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

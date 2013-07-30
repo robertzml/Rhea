@@ -54,7 +54,7 @@
                     <div class="content">
                         <div class="rightnow">
                             <ul class="unstyled">
-                                <li><span class="number">340</span><span class="icon16 icomoon-icon-new-2"></span>师生</li>
+                                <li><span class="number">@Model.StaffCount</span><span class="icon16 icomoon-icon-new-2"></span>教职工</li>
                                 <li><span class="number">@Model.Buildings.Count</span><span class="icon16 icomoon-icon-clubs"></span>楼宇</li>
                                 <li><span class="number">@Model.RoomCount</span><span class="icon16 icomoon-icon-home-9"></span>房间</li>
                                 <li><span class="number">@Model.TotalArea</span><span class="icon16 icomoon-icon-tag"></span>面积</li>
@@ -101,13 +101,13 @@
                 <div class="centerContent">
                     <ul class="bigBtnIcon">
                         <li>
-                            <a href="#" id="department-statistic" title="分类统计">
+                            <a href="#" id="department-statistic">
                                 <span class="icon icomoon-icon-drawer-2"></span>
                                 <span class="txt">分类统计</span>                                
                             </a>
                         </li>
                         <li>
-                            <a href="#" id="department-indicator" title="指标化">
+                            <a href="#" id="department-indicator">
                                 <span class="icon icomoon-icon-shield"></span>
                                 <span class="txt">指标化</span>
                                 @if (Model.Overproof > 100)
@@ -121,7 +121,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#" title="I`m with pattern" class="pattern">
+                            <a href="#" class="pattern">
                                 <span class="icon icomoon-icon-comments-2"></span>
                                 <span class="txt">消息</span>
                                 <span class="notification green">23</span>

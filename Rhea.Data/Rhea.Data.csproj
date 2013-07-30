@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Estate\BuildingModels.cs" />
+    <Compile Include="Estate\MiscModels.cs" />
     <Compile Include="Estate\StatisticModels.cs" />
     <Compile Include="Personnel\DepartmentModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

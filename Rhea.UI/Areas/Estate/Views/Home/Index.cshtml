@@ -3,6 +3,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link rel="stylesheet" href="@Url.Content("~/Plugins/gallery/camera/camera.css")" type="text/css" media="all"> 
+
  <!--Responsive navigation button-->  
 <div class="resBtn">
     <a href="#"><span class="icon16 minia-icon-list-3"></span></a>
@@ -37,6 +39,7 @@
             <ul>
                 <li><a href="#" id="summary"><span class="icon16 icomoon-icon-newspaper"></span>摘要</a></li>
                 <li><a href="#"><span class="icon16 icomoon-icon-font"></span>土地证</a></li>
+                <li><a href="#" id="gallery"><span class="icon16 icomoon-icon-film-2"></span>展示</a></li>
             </ul>
         </div>
     </div><!-- End sidenav -->
@@ -95,6 +98,7 @@
 </div><!-- End #content -->
 
 @section scripts {
+<script type="text/javascript" src="@Url.Content("~/Plugins/gallery/camera/camera.min.js")"></script> 
 <script type="text/javascript">
     $(function () {
         $('.navbar .nav #nav-summary').parent().addClass('active');
@@ -104,7 +108,11 @@
             ajaxLoadPage("Summary", "Home", "Estate", {});
             return false;
         });
-     
+
+        $('a#gallery').click(function () {
+            ajaxLoadPage("Gallery", "Home", "Estate", {});
+            return false;
+        });
     });
 </script>
 }

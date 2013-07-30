@@ -225,6 +225,11 @@ namespace Rhea.Data.Estate
         public int PeopleCount { get; set; }
 
         /// <summary>
+        /// 总经费
+        /// </summary>
+        public double TotalFunds { get; set; }
+
+        /// <summary>
         /// 面积总数
         /// </summary>
         public double TotalArea { get; set; }

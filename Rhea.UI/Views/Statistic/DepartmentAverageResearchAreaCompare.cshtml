@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "学院人均办公用房比较";
+    ViewBag.Title = "研究生人均科研用房比较";
     Layout = null;
 }
 
@@ -13,18 +13,18 @@
         <div class="box chart gradient">
             <div class="title">
                 <h4>
-                    <span class="icon16 icomoon-icon-bars"></span><span>办公面积图</span>
+                    <span class="icon16 icomoon-icon-bars"></span><span>科研面积图</span>
                 </h4>
                 <a href="#" class="minimize">Minimize</a>
             </div>
 
-            <div class="content">
+            <div class="content">       
                 <div class="row-fluid">
                     <div class="span12">
-                        <div id="container-avgofficearea-compare" style="width: 100%; height: 650px;">
+                        <div id="container-avgresearcharea-compare" style="width: 100%; height: 650px;">
                         </div>
-                    </div>
-                </div>
+                    </div>         
+                </div>       
             </div>
         </div>
 
@@ -36,7 +36,7 @@
         var dataList;
         var colors = Highcharts.getOptions().colors;
 
-        $.getJSON('/Statistic/DepartmentAverageOfficeAreaCompareData', { type: 1 }, function (response) {
+        $.getJSON('/Statistic/DepartmentAverageResearchAreaCompareData', { type: 1 }, function (response) {
             dataList = response;
             setStackChart(response);
         });
@@ -60,11 +60,11 @@
         function setStackChart(data) {
             var option = {
                 chart: {
-                    renderTo: 'container-avgofficearea-compare',
+                    renderTo: 'container-avgresearcharea-compare',
                     type: 'bar'
                 },
                 title: {
-                    text: '学院人均办公用房面积比较'
+                    text: '研究生人均科研用房比较'
                 },
                 credits: {
                     enabled: false

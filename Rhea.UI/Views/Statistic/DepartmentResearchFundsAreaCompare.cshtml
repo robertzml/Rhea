@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "学院人均办公用房比较";
+    ViewBag.Title = "年度科研经费用房面积比较";
     Layout = null;
 }
 
@@ -13,7 +13,7 @@
         <div class="box chart gradient">
             <div class="title">
                 <h4>
-                    <span class="icon16 icomoon-icon-bars"></span><span>办公面积图</span>
+                    <span class="icon16 icomoon-icon-bars"></span><span>科研经费用房面积图</span>
                 </h4>
                 <a href="#" class="minimize">Minimize</a>
             </div>
@@ -21,7 +21,7 @@
             <div class="content">
                 <div class="row-fluid">
                     <div class="span12">
-                        <div id="container-avgofficearea-compare" style="width: 100%; height: 650px;">
+                        <div id="container-avgfundsarea-compare" style="width: 100%; height: 650px;">
                         </div>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
         var dataList;
         var colors = Highcharts.getOptions().colors;
 
-        $.getJSON('/Statistic/DepartmentAverageOfficeAreaCompareData', { type: 1 }, function (response) {
+        $.getJSON('/Statistic/DepartmentResearchFundsAreaCompareData', { type: 1 }, function (response) {
             dataList = response;
             setStackChart(response);
         });
@@ -60,11 +60,11 @@
         function setStackChart(data) {
             var option = {
                 chart: {
-                    renderTo: 'container-avgofficearea-compare',
+                    renderTo: 'container-avgfundsarea-compare',
                     type: 'bar'
                 },
                 title: {
-                    text: '学院人均办公用房面积比较'
+                    text: '年度科研经费用房面积'
                 },
                 credits: {
                     enabled: false
@@ -75,7 +75,7 @@
                 yAxis: {
                     min: 0,
                     title: {
-                        text: '人均面积(人/m2)'
+                        text: '经费面积(万元/m2)'
                     },
                     stackLabels: {
                         enabled: true,
@@ -91,7 +91,7 @@
                 },
                 tooltip: {
                     formatter: function () {
-                        return '' + this.series.name + ': ' + this.y + ' 人/m<sup>2</sup>';
+                        return '' + this.series.name + ': ' + this.y + ' 万元/m<sup>2</sup>';
                     }
                 },
                 plotOptions: {
@@ -102,7 +102,7 @@
                     }
                 },
                 series: [{
-                    name: '人均面积',
+                    name: '经费面积',
                     color: colors[0],
                     data: []
                 }]
