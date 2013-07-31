@@ -36,13 +36,14 @@ namespace Rhea.Business.Estate
             building.ImageUrl = doc.GetValue("imageUrl", "").AsString;
             building.BuildingGroupId = doc.GetValue("buildingGroupId").AsInt32;
             building.BuildArea = (double?)doc.GetValue("buildArea", null);
-            //building.UsableArea = (double?)doc.GetValue("usableArea", null);
+            building.UsableArea = (double?)doc.GetValue("usableArea", null);
             building.AboveGroundFloor = (int?)doc.GetValue("aboveGroundFloor", null);
             building.UnderGroundFloor = (int?)doc.GetValue("underGroundFloor", null);
             building.UseType = doc["useType"].AsInt32;
+            building.PartMapUrl = doc.GetValue("partMapUrl", "").AsString;
             building.Remark = doc.GetValue("remark", "").AsString;
             building.Status = doc.GetValue("status", 0).AsInt32;
-            building.UsableArea = GetUsableArea(building.Id);
+            //building.UsableArea = GetUsableArea(building.Id);
 
             if (doc.Contains("floors"))
             {
@@ -59,12 +60,12 @@ namespace Rhea.Business.Estate
                         Name = d["name"].AsString,
                         Number = d["number"].AsInt32,
                         BuildArea = (double?)d.GetValue("buildArea", null),
-                        //UsableArea = (double?)d.GetValue("usableArea", null),
+                        UsableArea = (double?)d.GetValue("usableArea", null),
                         ImageUrl = d.GetValue("imageUrl", "").AsString,
                         Remark = d.GetValue("remark", "").AsString,
                         Status = d.GetValue("status", 0).AsInt32
                     };
-                    f.UsableArea = GetFloorUsableArea(building.Id, f.Number);
+                    //f.UsableArea = GetFloorUsableArea(building.Id, f.Number);
 
                     building.Floors.Add(f);
                 }
@@ -88,7 +89,7 @@ namespace Rhea.Business.Estate
             {
                 if (doc.GetValue("status", 0).AsInt32 == 1)
                     continue;
-                Building building = ModelBind(doc);             
+                Building building = ModelBind(doc);
                 buildings.Add(building);
             }
 
@@ -109,7 +110,7 @@ namespace Rhea.Business.Estate
             {
                 if (doc.GetValue("status", 0).AsInt32 == 1)
                     continue;
-                Building building = ModelBind(doc);              
+                Building building = ModelBind(doc);
                 buildings.Add(building);
             }
 
@@ -170,7 +171,7 @@ namespace Rhea.Business.Estate
                 Building building = ModelBind(doc);
                 if (building.Status == 1)
                     return null;
-                
+
                 return building;
             }
             else
@@ -212,6 +213,7 @@ namespace Rhea.Business.Estate
                 { "aboveGroundFloor", (BsonValue)data.AboveGroundFloor },
                 { "underGroundFloor", (BsonValue)data.UnderGroundFloor },
                 { "useType", data.UseType },
+                { "parMapUrl", data.PartMapUrl ?? "" },
                 { "remark", data.Remark ?? "" },
                 { "status", 0 }
             };
@@ -241,6 +243,7 @@ namespace Rhea.Business.Estate
                 .Set("aboveGroundFloor", (BsonValue)data.AboveGroundFloor)
                 .Set("underGroundFloor", (BsonValue)data.UnderGroundFloor)
                 .Set("useType", data.UseType)
+                .Set("partMapUrl", data.PartMapUrl ?? "")
                 .Set("remark", data.Remark ?? "");
 
             WriteConcernResult result = this.context.Update(EstateCollection.Building, query, update);

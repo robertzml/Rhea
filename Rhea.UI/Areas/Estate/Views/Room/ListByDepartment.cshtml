@@ -4,14 +4,59 @@
     Layout = null;
 }
 
-<div class="box">
-    <div class="box-header well" data-original-title>
-        <h2>
-            <i class="icon-align-left"></i>@ViewBag.Title</h2>
+<style type="text/css">
+    form#filter { margin:0; padding:0;}
+</style>
+
+<div class="box closed">
+    <div class="title">
+        <h4>
+            <span class="icon16 icomoon-icon-equalizer"></span><span>房间筛选</span>
+        </h4>
+        <a href="#" class="minimize">Minimize</a>
     </div>
 
-    <div class="box-content">
-        <table id="room-list" class="table table-striped table-bordered bootstrap-datatable datatable">
+    <div class="content">        
+        <form id="filter" class="horizontal">
+            <div class="form-row row-fluid">
+                <div class="span12">
+                    <div class="row-fluid">
+                        <label class="form-label span2" for="checkboxes">房间功能</label>
+                        <div class="span5 controls">   
+                            <select name="select">
+                                <option>Who</option>
+                                <option selected="selected">What</option>
+                                <option>When</option>
+                                <option>Where</option>
+                                <option>How</option>
+                            </select>
+                        </div>
+                        <div class="span5 controls">   
+                            <select name="select">
+                                <option>Who</option>
+                                <option selected="selected">What</option>
+                                <option>When</option>
+                                <option>Where</option>
+                                <option>How</option>
+                            </select>
+                        </div>  
+                    </div>
+                </div> 
+            </div>
+        </form>          
+    </div>
+</div>
+
+<div class="box">
+    <div class="title">
+        <h4>
+            <span class="icon16 icomoon-icon-list-view"></span><span>@ViewBag.Title</span>
+        </h4>
+        <a href="#" class="minimize">Minimize</a>
+    </div>
+
+    <div class="content">
+        <table id="room-list" class="responsive dynamicTable display table table-bordered">
             <thead>
                 <tr>
                     <th>
@@ -29,7 +74,7 @@
                     <th>
                         功能
                     </th>
-                    <th>
+                    <th style="width:80px;">
                         操作
                     </th>
                 </tr>
@@ -51,10 +96,10 @@
                             @item.Floor
                         </td>                       
                         <td>
-                            @item.Function.Property
+                            @string.Format("{0}.{1} {2}", item.Function.FirstCode, item.Function.SecondCode, item.Function.Property)
                         </td>
                         <td>
-                            <a class="btn btn-success room-details" ref="@item.Id">
+                            <a class="btn btn-success btn-small room-details" ref="@item.Id">
                             <i class="icon-zoom-in icon-white"></i>查看</a>
                         </td>
                     </tr>
@@ -86,17 +131,10 @@
             return false;
         });
 
-        $('table#room-list').dataTable({
-            "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span12'i><'span12 center'p>>",
-            "sPaginationType": "bootstrap",
-            "oLanguage": {
-                "sLengthMenu": "每页 _MENU_ 条记录",
-                "sInfo": "显示 _START_ 至 _END_ 共有 _TOTAL_ 条记录",
-                "sInfoEmpty": "记录为空",
-                "sInfoFiltered": " - 从 _MAX_ 条记录中",
-                "sZeroRecords": "结果为空",
-                "sSearch": "搜索:"
-            }
-        });
+        var dom = $('table#room-list');
+        var oTable = initDataTable(dom);
+
+        setBoxAction();
+        //oTable.fnFilter('院控房', 4);  
     });
 </script>

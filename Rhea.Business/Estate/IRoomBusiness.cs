@@ -108,5 +108,12 @@ namespace Rhea.Business.Estate
         /// <param name="floor">楼层</param>
         /// <returns></returns>
         int CountByFloor(int buildingId, int floor);
+
+        /// <summary>
+        /// 部门房间数量
+        /// </summary>
+        /// <param name="departmentId">部门ID</param>
+        /// <returns></returns>
+        int CountByDepartment(int departmentId);
     }
 }

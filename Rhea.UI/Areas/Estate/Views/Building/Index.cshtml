@@ -1,20 +1,157 @@
-﻿@model int
+﻿@model Rhea.UI.Areas.Estate.Models.BuildingSectionModel
 @{
     ViewBag.Title = "楼宇主页";
     Layout = null;
 }
 
-<div class="row-fluid">    
-    <div class="span12">
-        @Html.Action("Floor", new { controller = "Building", area = "Estate", buildingId = Model })
+@Html.Action("Heading", new { controller = "Common", area = "", title = Model.BuildingName, active = "楼群导航" })
+
+<!--Sidebar background-->
+<div id="section-barbg">
+</div>
+
+<div id="section-bar">
+    <div class="section-nav">
+        <ul id="secTab" class="nav nav-tabs pattern">
+            <li class="active"><a href="#tab-fun" data-toggle="tab">常 规</a></li>
+            <li><a href="#tab-room" data-toggle="tab">房 屋</a></li>
+            <li><a href="#tab-stat" data-toggle="tab">统 计</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane fade in active" id="tab-fun">
+                <div class="secbar-widget">
+                    <div class="content">
+                        <button class="btn btn-block btn-primary" id="building-intro">
+                            <span class="icon16 icomoon-icon-cog white"></span> 简介</button>
+                        <button class="btn btn-block btn-info" id="building-details">
+                            <span class="icon16 icomoon-icon-info-2 white"></span> 详细</button>
+                        <button class="btn btn-block" id="return-building-group">
+                            <span class="icon16 icomoon-icon-arrow-first"></span> 回到楼群</button>
+                    </div>
+                </div>
+                <hr />
+                <div class="secbar-widget">
+                    <h5 class="title">趋势</h5>
+                    <div class="content">
+                        <span class="inlinesparkline">1,4,4,7,5,9,10</span>
+                    </div>
+                </div>
+                <div class="secbar-widget">
+                    <h5 class="title">
+                        当前</h5>
+                    <div class="content">
+                        <div class="rightnow">
+                            <ul class="unstyled">
+                                <li><span class="number">@Model.Floors.Count</span><span class="icon16 icomoon-icon-clubs"></span>楼层</li>
+                                <li><span class="number">@Model.RoomCount</span><span class="icon16 icomoon-icon-home-9"></span>房间</li>
+                                <li><span class="number">@Model.BuildArea</span><span class="icon16 icomoon-icon-copy"></span>建筑面积</li>
+                                <li><span class="number">@Model.UsableArea</span><span class="icon16 icomoon-icon-copy-2"></span>使用面积</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- End .sidenav-widget -->
+            </div>
+            <div class="tab-pane fade" id="tab-room">
+                <div class="secbar-widget">
+                    <h4 class="title">
+                        楼层列表</h4>
+                    <div class="content">
+                        <ul id="floor-list" class="nav nav-pills nav-stacked">
+                        @foreach (var item in Model.Floors)
+                        {
+                            <li><a href="#" ref="@item.Number">@item.Name</a></li>
+                        }
+                        </ul>
+                    </div>
+                </div>
+                <div class="secbar-widget">
+                    <h4 class="title">
+                        房间信息</h4>
+                    <div class="content">
+                        <ul class="bigBtnIcon">
+                            <li>
+                                <a href="#" id="room-list" title="房间列表" class="tip">
+                                    <span class="icon icomoon-icon-list-view"></span><span class="txt">房间列表</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tab-stat">
+                <div class="centerContent">
+                    <ul class="bigBtnIcon">
+                        <li>
+                            <a href="#" id="building-classify" title="分类统计" class="tip">
+                                <span class="icon icomoon-icon-drawer-2"></span><span class="txt">分类统计</span> 
+                            </a>
+                        </li>
+                        <li><a href="#" title="I`m with pattern" class="pattern tip"><span class="icon icomoon-icon-comments-2">
+                        </span><span class="txt">消息</span> <span class="notification green">23</span> </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<div class="row-fluid">
-    <div class="span6">
-        @Html.Action("Summary", new { controller = "Building", area = "Estate", id = Model })
-    </div>
-    <div class="span6">
-        
+<div id="section-content" class="clearfix">
+    <div class="row-fluid">
+        <div class="span12">
+            <div id="ajax-content2">
+                @Html.Action("Intro", "Building", new { area = "Estate", id = Model.BuildingId })
+            </div>
+        </div>
     </div>
 </div>
+
+
+<script type="text/javascript">
+    $(function () {
+        $('.inlinesparkline').sparkline('html', {
+            width: 180,
+            height: 30,
+            lineColor: '#88bbc8',
+            fillColor: '#f2f7f9',
+            spotColor: '#e72828',
+            maxSpotColor: '#005e20',
+            minSpotColor: '#f7941d',
+            lineWidth: 2
+        });
+
+        $('button#building-intro').click(function () {
+            ajaxContentLoadPage("Intro", "Building", "Estate", { id: '@Model.BuildingId' }, $('#ajax-content2'));
+            return false;
+        });
+
+        $('button#building-details').click(function () {
+            ajaxContentLoadPage("Details", "Building", "Estate", { id: '@Model.BuildingId' }, $('#ajax-content2'));
+            return false;
+        });
+
+        $('button#return-building-group').click(function () {
+            ajaxLoadPage("Index", "BuildingGroup", "Estate", { id: '@Model.BuildingGroupId' });
+            return false;
+        });
+
+        $('a#building-classify').click(function () {
+            ajaxContentLoadPage("Classify", "Building", "Estate", { id: '@Model.BuildingId' }, $('#ajax-content2'));
+            return false;
+        });
+
+        $('a#room-list').click(function () {
+            ajaxContentLoadPage("ListByBuilding", "Room", "Estate", { buildingId: '@Model.BuildingId' }, $('#ajax-content2'));
+            return false;
+        });
+
+        $('ul#floor-list li a').click(function () {
+            secNavActive($('ul#floor-list'), $(this));
+            var floor = $(this).attr('ref');
+            ajaxContentLoadPage("FloorView", "Building", "Estate", { id: '@Model.BuildingId', floor: floor }, $('#ajax-content2'));
+            return false;
+        });
+    });
+</script>

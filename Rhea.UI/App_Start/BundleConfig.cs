@@ -12,7 +12,7 @@ namespace Rhea.UI
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
-                        "~/Scripts/jquery-ui-{version}.js"));
+                        "~/Scripts/jquery-ui-{version}.js"));     
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.unobtrusive*",
@@ -22,16 +22,20 @@ namespace Rhea.UI
                        "~/Scripts/bootstrap.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/highcharts").Include(
-                        "~/Scripts/highcharts.js",
-                        "~/Scripts/modules/exporting.js"));
+                        "~/Plugins/charts/highcharts/highcharts.js",
+                        "~/Plugins/charts/highcharts/modules/exporting.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/noty").Include(
-                        "~/Scripts/noty/jquery.noty.js",
-                        "~/Scripts/noty/layouts/top.js",
-                        "~/Scripts/noty/themes/default.js"));
+                        "~/Plugins/misc/noty/jquery.noty.js",
+                        "~/Plugins/misc/noty/layouts/top.js",
+                        "~/Plugins/misc/noty/themes/default.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/colorbox").Include(
-                        "~/Scripts/jquery.colorbox.js"));
+                        "~/Plugins/gallery/colorbox/jquery.colorbox.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/datatable").Include(
+                        "~/Plugins/tables/dataTables/jquery.dataTables.js",
+                        "~/Plugins/tables/responsive-tables/responsive-tables.js"));
 
             // 使用 Modernizr 的开发版本进行开发和了解信息。然后，当你做好
             // 生产准备时，请使用 http://modernizr.com 上的生成工具来仅选择所需的测试。
@@ -54,8 +58,12 @@ namespace Rhea.UI
                         "~/Content/themes/base/jquery.ui.progressbar.css",
                         "~/Content/themes/base/jquery.ui.theme.css"));
 
+            bundles.Add(new StyleBundle("~/Content/bootstrap").Include(
+                        "~/Content/bootstrap.css",
+                        "~/Content/bootstrap-responsive.css"));
+
             bundles.Add(new StyleBundle("~/Content/colorbox").Include(
-                        "~/Content/colorbox.css"));
+                        "~/Plugins/gallery/colorbox/colorbox.css"));
         }
     }
 }

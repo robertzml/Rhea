@@ -1,0 +1,99 @@
+﻿@model IEnumerable<Rhea.Model.Estate.Room>
+
+@{
+    ViewBag.Title = "房间列表";
+    Layout = null;
+}
+
+
+<div class="box">
+    <div class="title">
+        <h4>
+            <span class="icon16 icomoon-icon-list-view"></span><span>@ViewBag.Title</span>
+        </h4>
+        <a href="#" class="minimize">Minimize</a>
+    </div>
+
+    <div class="content">
+        <table id="room-list" class="responsive dynamicTable display table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        房间号
+                    </th>
+                    <th>
+                        名称
+                    </th>
+                    <th>
+                        楼层
+                    </th>
+                    <th>
+                        部门
+                    </th>
+                    <th>
+                        功能
+                    </th>
+                    <th style="width:80px;">
+                        操作
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Number
+                    </td>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.Floor
+                    </td>
+                    <td>
+                        @item.DepartmentName()
+                    </td>
+                    <td>
+                        @item.Function.Property
+                    </td>
+                    <td>
+                        <a class="btn btn-success btn-small room-details" ref="@item.Id">
+                        <i class="icon-zoom-in icon-white"></i>查看</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">房间信息</h3>
+    </div>
+    <div class="modal-body">    
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">关闭</button>      
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+        $('table a.room-details').click(function () {
+            var url = "/Estate/Room/Details/" + $(this).attr('ref');
+            $('.modal-body').load(url);
+            $('#myModal').modal();
+
+            return false;
+        });
+
+        var dom = $('table#room-list');
+        initDataTable(dom);
+    });
+</script>
+

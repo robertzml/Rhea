@@ -33,6 +33,10 @@ namespace Rhea.UI.Areas.Admin.Controllers
         #endregion //Function
 
         #region Action
+        /// <summary>
+        /// 部门管理主页
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             return View();
@@ -55,7 +59,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult Details(int id)
         {
-            var data = this.departmentBusiness.Get(id, DepartmentAdditionType.ScaleData);
+            var data = this.departmentBusiness.Get(id, DepartmentAdditionType.ScaleData | DepartmentAdditionType.ResearchData | DepartmentAdditionType.SpecialAreaData);
             return View(data);
         }
 
@@ -102,7 +106,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult Edit(int id)
         {
-            var data = this.departmentBusiness.Get(id, DepartmentAdditionType.ScaleData);
+            var data = this.departmentBusiness.Get(id, DepartmentAdditionType.ScaleData | DepartmentAdditionType.ResearchData | DepartmentAdditionType.SpecialAreaData);
             return View(data);
         }
 
@@ -125,17 +129,41 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 }
                 else
                 {
-                    result = this.departmentBusiness.EditScale(model);
-
-                    if (result)
+                    if (model.Type == (int)DepartmentType.Type1)
                     {
-                        TempData["Message"] = "编辑成功";
-                        return RedirectToAction("Details", "Department", new { area = "Admin", id = model.Id });
+                        result = this.departmentBusiness.EditScale(model);
+                        if (!result)
+                        {
+                            ModelState.AddModelError("", "保存规模数据失败");
+                            return View(model);
+                        }
+
+                        result = this.departmentBusiness.EditResearch(model);
+                        if (!result)
+                        {
+                            ModelState.AddModelError("", "保存科研数据失败");
+                            return View(model);
+                        }
+
+                        result = this.departmentBusiness.EditSpecialArea(model);
+                        if (!result)
+                        {
+                            ModelState.AddModelError("", "保存特殊面积数据失败");
+                            return View(model);
+                        }
                     }
                     else
                     {
-                        ModelState.AddModelError("", "保存规模数据失败");
+                        result = this.departmentBusiness.EditScale(model);
+                        if (!result)
+                        {
+                            ModelState.AddModelError("", "保存规模数据失败");
+                            return View(model);
+                        }
                     }
+
+                    TempData["Message"] = "编辑成功";
+                    return RedirectToAction("Details", "Department", new { area = "Admin", id = model.Id });
                 }
             }
 

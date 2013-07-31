@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "用户编辑";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Account.cshtml";
 }
 
 
@@ -51,6 +51,14 @@
                                 <td>
                                     @Html.TextBoxFor(model => model.UserName, new { @readonly = "readonly" })
                                     @Html.ValidationMessageFor(model => model.UserName)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.Password)
+                                </td>
+                                <td>
+                                    <input type="password" name="Password" id="Password" />
                                 </td>
                             </tr>
                             <tr>

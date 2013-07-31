@@ -1,0 +1,158 @@
+﻿@model Rhea.UI.Models.DepartmentMenuModel
+
+@{
+    ViewBag.Title = "部门导航";
+}
+
+<!--Responsive navigation button-->
+<div class="resBtn">
+    <a href="#"><span class="icon16 minia-icon-list-3"></span></a>
+</div>
+
+<!--Left Sidebar collapse button-->
+<div class="collapseBtn leftbar">
+    <a href="#" class="tipR" title="Hide Left Sidebar"><span class="icon12 minia-icon-layout">
+    </span></a>
+</div>
+
+<!--Sidebar background-->
+<div id="sidebarbg">
+</div>
+
+<!--Sidebar content-->
+<div id="sidebar">
+    <div class="shortcuts">
+        <ul>
+            <li><a href="#" title="Support"><span class="icon24 icomoon-icon-support">
+            </span></a></li>
+            <li><a href="#" title="Backup"><span class="icon24 icomoon-icon-database">
+            </span></a></li>
+            <li><a href="#" title="Statistics"><span class="icon24 icomoon-icon-pie-2">
+            </span></a></li>
+            <li><a href="#" title="Request"><span class="icon24 icomoon-icon-pencil">
+            </span></a></li>
+        </ul>
+    </div>
+
+    <div class="sidenav">
+        <div class="sidebar-widget" style="margin: -1px 0 0 0;">
+            <h5 class="title" style="margin-bottom: 0">
+                导航</h5>
+        </div>
+        <!-- End .sidenav-widget -->
+        <div class="mainnav">
+            <ul>
+                <li><a href="#" id="department-summary"><span class="icon16 icomoon-icon-newspaper"></span>摘要</a></li>               
+                <li><a href="#"><span class="icon16 icomoon-icon-graduation"></span>教学院系<span class="notification green">@Model.Departments.Where(r => r.Type == 1).Count()</span></a>
+                    <ul class="sub scroll">
+                    @foreach (var r in Model.Departments.Where(r => r.Type == 1))
+                    {
+                        <li><a href="#" ref="@r.Id" class="department-index" title="@r.Name"><span class="icon16 icomoon-icon-file"></span>@r.Name</a></li>
+                    }
+                    </ul>
+                </li>
+                <li><a href="#"><span class="icon16 icomoon-icon-clipboard-3"></span>科研机构<span class="notification green">@Model.Departments.Where(r => r.Type == 2).Count()</span></a>
+                    <ul class="sub scroll">
+                    @foreach (var r in Model.Departments.Where(r => r.Type == 2))
+                    {
+                        <li><a href="#" ref="@r.Id" class="department-index" title="@r.Name"><span class="icon16 icomoon-icon-file"></span>@r.Name</a></li>
+                    }
+                    </ul>
+                </li>
+                <li><a href="#"><span class="icon16 icomoon-icon-library"></span>公共服务<span class="notification green">@Model.Departments.Where(r => r.Type == 3).Count()</span></a>
+                    <ul class="sub scroll">
+                    @foreach (var r in Model.Departments.Where(r => r.Type == 3))
+                    {
+                        <li><a href="#" ref="@r.Id" class="department-index" title="@r.Name"><span class="icon16 icomoon-icon-file"></span>@r.Name</a></li>
+                    }
+                    </ul>
+                </li>
+                <li><a href="#"><span class="icon16 icomoon-icon-podcast"></span>党务部门<span class="notification green">@Model.Departments.Where(r => r.Type == 4).Count()</span></a>
+                    <ul class="sub scroll">
+                    @foreach (var r in Model.Departments.Where(r => r.Type == 4))
+                    {
+                        <li><a href="#" ref="@r.Id" class="department-index" title="@r.Name"><span class="icon16 icomoon-icon-file"></span>@r.Name</a></li>
+                    }
+                    </ul>
+                </li>
+                <li><a href="#"><span class="icon16 icomoon-icon-phone"></span>行政单位<span class="notification green">@Model.Departments.Where(r => r.Type == 5).Count()</span></a>
+                    <ul class="sub scroll">
+                    @foreach (var r in Model.Departments.Where(r => r.Type == 5))
+                    {
+                        <li><a href="#" ref="@r.Id" class="department-index" title="@r.Name"><span class="icon16 icomoon-icon-file"></span>@r.Name</a></li>
+                    }
+                    </ul>
+                </li>
+                <li><a href="#"><span class="icon16 icomoon-icon-folder-3"></span>附（直）属单位<span class="notification green">@Model.Departments.Where(r => r.Type == 6).Count()</span></a>
+                    <ul class="sub scroll">
+                    @foreach (var r in Model.Departments.Where(r => r.Type == 6))
+                    {
+                        <li><a href="#" ref="@r.Id" class="department-index" title="@r.Name"><span class="icon16 icomoon-icon-file"></span>@r.Name</a></li>
+                    }
+                    </ul>
+                </li>
+                <li><a href="#"><span class="icon16 icomoon-icon-reading"></span>后勤部门<span class="notification green">@Model.Departments.Where(r => r.Type == 7).Count()</span></a>
+                    <ul class="sub scroll">
+                    @foreach (var r in Model.Departments.Where(r => r.Type == 7))
+                    {
+                        <li><a href="#" ref="@r.Id" class="department-index" title="@r.Name"><span class="icon16 icomoon-icon-file"></span>@r.Name</a></li>
+                    }
+                    </ul>
+                </li>
+                <li><a href="#"><span class="icon16 icomoon-icon-balloon"></span>其它<span class="notification green">@Model.Departments.Where(r => r.Type == 9).Count()</span></a>
+                    <ul class="sub scroll">
+                    @foreach (var r in Model.Departments.Where(r => r.Type == 9))
+                    {
+                        <li><a href="#" ref="@r.Id" class="department-index" title="@r.Name"><span class="icon16 icomoon-icon-file"></span>@r.Name</a></li>
+                    }
+                    </ul>
+                </li>               
+            </ul>
+        </div>
+    </div>
+    <!-- End sidenav -->
+</div>
+<!-- End #sidebar -->
+
+<!--Body content-->
+<div id="content" class="clearfix">
+    <div class="contentwrapper">
+        <!-- Build page from here: -->
+        <div id="ajax-content1">
+        @Html.Action("Summary", new { controller = "Department", area = "" })
+        </div>
+        <!--End page -->
+    </div>
+</div>
+<!-- End #content -->
+
+@section scripts {
+<script type="text/javascript" src="@Url.Content("~/Plugins/charts/sparkline/jquery.sparkline.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Plugins/charts/knob/jquery.knob.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Plugins/misc/nicescroll/jquery.nicescroll.min.js")"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $('.navbar .nav #nav-department').parent().addClass('active');
+        
+        $('a#department-summary').click(function () {
+            ajaxLoadPage2("Summary", "Department", {});
+        });
+
+        $('a.department-index').click(function () {
+            var id = $(this).attr('ref');
+            ajaxLoadPage2("Index", "Department", { id: id });
+            return false;
+        });
+
+        if ($(".scroll").length) {
+            $(".scroll").niceScroll({
+                cursoropacitymax: 0.7,
+                cursorborderradius: 6,
+                cursorwidth: "7px",
+                horizrailenabled: false
+            });
+        }
+    });
+</script>
+}

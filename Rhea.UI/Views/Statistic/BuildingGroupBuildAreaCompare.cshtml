@@ -3,19 +3,28 @@
     Layout = null;
 }
 
-<div class="box">
-    <div class="box-header well" data-original-title>
-        <h2>
-            <i class="icon-align-left"></i>@ViewBag.Title</h2>
-    </div>
-    <div class="box-content">       
-        <div class="row-fluid">
-            <div class="span12">
-                <img class="ajax-loader" src="/images/ajax-loader-7.gif" alt="loader" style="width:220px; margin:0px auto;" />
-                <div id="container-bgbuildarea-compare" style="width: 100%; height: 650px; ">
+@Html.Action("Heading", new { controller = "Common", area = "", title = ViewBag.Title, active = "房产统计" })
+
+<div class="row-fluid">
+    <div class="span12">
+
+        <div class="box chart gradient">
+            <div class="title">
+                <h4>
+                    <span class="icon16 icomoon-icon-bars"></span><span>建筑面积图</span>
+                </h4>
+                <a href="#" class="minimize">Minimize</a>
+            </div>
+            <div class="content">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div id="container-bgbuildarea-compare" style="width: 100%; height: 650px;">
+                        </div>
+                    </div>
                 </div>
-            </div>         
-        </div>       
+            </div>
+        </div>
+
     </div>
 </div>
 
@@ -28,8 +37,10 @@
             dataList = response;
             setStackChart(response);
 
-            $('img.ajax-loader').hide();           
+            $('img.ajax-loader').hide();
         });
+
+        setBoxAction();
 
         $('button#compare').click(function () {
             var sel = [];

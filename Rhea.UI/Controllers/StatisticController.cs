@@ -9,6 +9,7 @@ using Rhea.Business.Estate;
 using Rhea.Business.Personnel;
 using Rhea.Common;
 using Rhea.Data.Estate;
+using Rhea.Data.Personnel;
 using Rhea.Model.Personnel;
 using Rhea.UI.Models;
 
@@ -143,6 +144,33 @@ namespace Rhea.UI.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// 学院人均办公用房比较
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult DepartmentAverageOfficeAreaCompare()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 学院人均科研用房面积
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult DepartmentAverageResearchAreaCompare()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 年度科研经费用房面积
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult DepartmentResearchFundsAreaCompare()
+        {
+            return View();
+        }
         #endregion //Action
 
         #region Json
@@ -274,6 +302,114 @@ namespace Rhea.UI.Controllers
                 data.Add(model);
             }
 
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 所有部门人均办公面积
+        /// </summary>
+        /// <param name="type">部门类型</param>
+        /// <returns></returns>
+        public JsonResult DepartmentAverageOfficeAreaCompareData(int type)
+        {
+            IDepartmentBusiness departmentBusiness = new MongoDepartmentBusiness();
+            var departments = departmentBusiness.GetList().Where(r => r.Type == type);
+
+            List<DepartmentAverageAreaModel> data = new List<DepartmentAverageAreaModel>();
+
+            foreach (var department in departments)
+            {
+                DepartmentClassifyAreaModel model = statisticBusiness.GetDepartmentClassifyArea(department.Id, false);
+
+                DepartmentAverageAreaModel avg = new DepartmentAverageAreaModel();
+                avg.DepartmentId = department.Id;
+                avg.DepartmentName = department.Name;
+                avg.TotalArea = model.FirstClassify.Where(r => r.FunctionFirstCode == 1).Sum(r => r.Area);
+
+                Department addition = departmentBusiness.Get(department.Id, DepartmentAdditionType.ScaleData);
+                avg.PeopleCount = addition.StaffCount;
+
+                if (avg.PeopleCount == 0)
+                    avg.AverageArea = 0;
+                else
+                    avg.AverageArea = Math.Round(avg.TotalArea / avg.PeopleCount, 2);
+
+                data.Add(avg);
+            }
+
+            data = data.OrderByDescending(r => r.AverageArea).ToList();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 所有部门人均科研面积
+        /// </summary>
+        /// <param name="type">部门类型</param>
+        /// <returns></returns>
+        public JsonResult DepartmentAverageResearchAreaCompareData(int type)
+        {
+            IDepartmentBusiness departmentBusiness = new MongoDepartmentBusiness();
+            var departments = departmentBusiness.GetList().Where(r => r.Type == type);
+
+            List<DepartmentAverageAreaModel> data = new List<DepartmentAverageAreaModel>();
+
+            foreach (var department in departments)
+            {
+                DepartmentClassifyAreaModel model = statisticBusiness.GetDepartmentClassifyArea(department.Id, false);
+
+                DepartmentAverageAreaModel avg = new DepartmentAverageAreaModel();
+                avg.DepartmentId = department.Id;
+                avg.DepartmentName = department.Name;
+                avg.TotalArea = model.FirstClassify.Where(r => r.FunctionFirstCode == 4).Sum(r => r.Area);
+
+                Department addition = departmentBusiness.Get(department.Id, DepartmentAdditionType.ScaleData);
+                avg.PeopleCount = addition.GraduateCount + addition.DoctorCount;
+
+                if (avg.PeopleCount == 0)
+                    avg.AverageArea = 0;
+                else
+                    avg.AverageArea = Math.Round(avg.TotalArea / avg.PeopleCount, 2);
+
+                data.Add(avg);
+            }
+
+            data = data.OrderByDescending(r => r.AverageArea).ToList();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 年度科研经费用房面积
+        /// </summary>
+        /// <param name="type">部门类型</param>
+        /// <returns></returns>
+        public JsonResult DepartmentResearchFundsAreaCompareData(int type)
+        {
+            IDepartmentBusiness departmentBusiness = new MongoDepartmentBusiness();
+            var departments = departmentBusiness.GetList().Where(r => r.Type == type);
+
+            List<DepartmentAverageAreaModel> data = new List<DepartmentAverageAreaModel>();
+
+            foreach (var department in departments)
+            {
+                DepartmentClassifyAreaModel model = statisticBusiness.GetDepartmentClassifyArea(department.Id, false);
+
+                DepartmentAverageAreaModel avg = new DepartmentAverageAreaModel();
+                avg.DepartmentId = department.Id;
+                avg.DepartmentName = department.Name;
+                avg.TotalArea = model.FirstClassify.Where(r => r.FunctionFirstCode == 4).Sum(r => r.Area);
+
+                Department addition = departmentBusiness.Get(department.Id, DepartmentAdditionType.ResearchData);
+                avg.TotalFunds = addition.LongitudinalFunds + addition.TransverseFunds + addition.CompanyFunds;
+
+                if (avg.TotalArea == 0d)
+                    avg.AverageArea = 0;
+                else
+                    avg.AverageArea = Math.Round(avg.TotalFunds / avg.TotalArea, 2);
+
+                data.Add(avg);
+            }
+
+            data = data.OrderByDescending(r => r.AverageArea).ToList();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
         #endregion //Json

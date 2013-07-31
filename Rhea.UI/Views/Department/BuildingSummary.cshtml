@@ -5,53 +5,52 @@
     Layout = null;
 }
 
-<div class="box">
-    <div class="box-header well" data-original-title>
-        <h2><i class="icon-th-list"></i>@ViewBag.Title</h2>    
+<div class="box gradient">
+    <div class="title">
+        <h4>
+            <span class="icon16 icomoon-icon-list-view-2"></span><span>@ViewBag.Title</span>
+        </h4>
+        <a href="#" class="minimize">Minimize</a>
     </div>
 
-    <div class="box-content">
-        <div class="row-fluid">
-            <div class="span12">
-                <table class="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <th>
-                                楼宇名称
-                            </th>
-                            <th>
-                                房间数量
-                            </th>
-                            <th>
-                                使用总面积 (m<sup>2</sup>)
-                            </th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <td>合计</td>
-                            <td>@Model.TotalRoomCount</td>
-                            <td>@Model.UsableArea</td>
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                    @foreach (var item in Model.BuildingArea)
-                    {
-                        <tr>
-                            <td>
-                                @item.BuildingName
-                            </td>
-                            <td>
-                                @item.RoomCount
-                            </td>
-                            <td>
-                                @item.UsableArea
-                            </td>
-                        </tr>
-                    }
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <div class="content noPad">
+        <table class="responsive table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        楼宇名称
+                    </th>
+                    <th>
+                        房间数量
+                    </th>
+                    <th>
+                        使用总面积 (m<sup>2</sup>)
+                    </th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td>合计</td>
+                    <td>@Model.TotalRoomCount</td>
+                    <td>@Model.UsableArea</td>
+                </tr>
+            </tfoot>
+            <tbody>
+            @foreach (var item in Model.BuildingArea)
+            {
+                <tr>
+                    <td>
+                        @item.BuildingName
+                    </td>
+                    <td>
+                        @item.RoomCount
+                    </td>
+                    <td>
+                        @item.UsableArea
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
     </div>
 </div>

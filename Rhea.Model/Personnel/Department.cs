@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
-using System.ComponentModel.DataAnnotations;
 
 namespace Rhea.Model.Personnel
 {
@@ -140,8 +140,99 @@ namespace Rhea.Model.Personnel
         /// <summary>
         /// 文理科, 1:文科, 2:理科
         /// </summary>        
-        [Display(Name = "文理科" )]
-        public int ArtsAndScience { get; set; }
+        [UIHint("SubjectType")]
+        [Display(Name = "学科类别" )]
+        public int SubjectType { get; set; }
+
+        /// <summary>
+        /// 学科系数K1
+        /// </summary>
+        [Display(Name = "学科系数K1" )]
+        public double FactorK1 { get; set; }
+
+        /// <summary>
+        /// 科研系数K3
+        /// </summary>
+        [Display(Name = "科研系数K3")]
+        public double FactorK3 { get; set; }
         #endregion //College Scale Property
+
+        #region College Research Property
+        /// <summary>
+        /// 纵向经费
+        /// </summary>
+        [Display(Name = "纵向经费")]
+        public double LongitudinalFunds { get; set; }
+
+        /// <summary>
+        /// 横向经费
+        /// </summary>
+        [Display(Name = "横向经费")]
+        public double TransverseFunds { get; set; }
+
+        /// <summary>
+        /// 开发公司经费
+        /// </summary>
+        [Display(Name = "开发公司经费")]
+        public double CompanyFunds { get; set; }            
+        #endregion //College Research Property
+
+        #region College Special Area Property
+        /// <summary>
+        /// 特殊人才用房面积
+        /// </summary>
+        [Display(Name = "特殊人才用房面积")]
+        public double TalentArea { get; set; }
+
+        /// <summary>
+        /// 科研平台补贴面积
+        /// </summary>
+        [Display(Name = "科研平台补贴面积")]
+        public double ResearchBonusArea { get; set; }
+
+        /// <summary>
+        /// 实验教学平台补贴面积
+        /// </summary>
+        [Display(Name = "实验教学平台补贴面积")]
+        public double ExperimentBonusArea { get; set; }
+
+        /// <summary>
+        /// 调整面积
+        /// </summary>
+        [Display(Name = "调整面积")]
+        public double AdjustArea { get; set; }
+        #endregion //College Special Area Property
+
+        #region Department Scale Property
+        /// <summary>
+        /// 正校长(书记)
+        /// </summary>
+        [Display(Name = "正校长(书记)")]
+        public int PresidentCount { get; set; }
+
+        /// <summary>
+        /// 副校长(书记)
+        /// </summary>
+        [Display(Name = "正校长(书记)")]
+        public int VicePresidentCount { get; set; }
+
+        /// <summary>
+        /// 部门正职
+        /// </summary>
+        [Display(Name = "部门正职")]
+        public int ChiefCount { get; set; }
+
+        /// <summary>
+        /// 部门副职
+        /// </summary>
+        [Display(Name = "部门副职")]
+        public int ViceChiefCount { get; set; }
+
+        /// <summary>
+        /// 部门成员
+        /// </summary>
+        [Display(Name = "部门成员")]
+        public int MemberCount { get; set; }
+        #endregion //Department Scale Property
     }
 }

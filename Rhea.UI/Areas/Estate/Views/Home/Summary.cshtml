@@ -1,32 +1,67 @@
 ﻿@model Rhea.UI.Areas.Estate.Models.EstateSummaryModel
 @{
-    ViewBag.Title = "摘要";
+    ViewBag.Title = "摘要";   
     Layout = null;
 }
 
-<div class="box">
-    <div class="box-header well" data-original-title>
-        <h2><i class="icon-glass"></i>学校房屋总计</h2>    
-    </div>
-
-    <div class="box-content">        
-        <div class="row-fluid">
-            <div class="span12">
-                <p class="lead">
-                    现学校共有<br /><strong>楼群：@Model.BuildingGroupCount 个，楼宇：@Model.BuildingCount 栋,
-                    楼层：@Model.FloorCount 层，房屋：@Model.RoomCount 间。</strong>
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
+@Html.Action("Heading", new { controller = "Common", area = "", title = ViewBag.Title, active = "房产概况" })
 
 <div class="row-fluid">
-    <div class="span6">
+    <div class="span5">
         @Html.Action("TotalUseTypeArea", new { controller = "Statistic", area = "" })
     </div>
 
-    <div class="span6">
+    <div class="span5">
         @Html.Action("LandType", new { controller = "Statistic", area = "" })
+    </div>    
+
+    <div class="span2">
+        <div class="infoview">
+            <h4>总计</h4>
+            <ul>
+                <li class="clearfix">
+                    <div class="icon">
+                        <span class="icon32 icomoon-icon-cog dark"></span>
+                    </div>
+                    <span class="number">1</span> 
+                    <span class="txt"> 校区 </span>
+                </li>       
+                <li class="clearfix">
+                    <div class="icon">
+                        <span class="icon32 icomoon-icon-library gray"></span>
+                    </div>
+                    <span class="number">@Model.BuildingGroupCount</span> 
+                    <span class="txt"> 楼群 </span>
+                </li>
+                <li class="clearfix">
+                    <div class="icon">
+                        <span class="icon32 icomoon-icon-support red"></span>
+                    </div>
+                    <span class="number">@Model.BuildingCount</span> 
+                    <span class="txt"> 楼宇 </span>
+                </li>
+                <li class="clearfix">
+                    <div class="icon">
+                        <span class="icon32 icomoon-icon-drive green"></span>
+                    </div>
+                    <span class="number">@Model.FloorCount</span> 
+                    <span class="txt"> 楼层 </span>
+                </li>
+                <li class="clearfix">
+                    <div class="icon">
+                        <span class="icon32 icomoon-icon-comments-4 blue"></span>
+                    </div>
+                    <span class="number">@Model.RoomCount</span> 
+                    <span class="txt"> 房间 </span>
+                </li>
+            </ul>
+        </div><!-- End .reminder -->
     </div>
+
 </div>
+
+<script type="text/javascript">
+    $(function () {
+        setBoxAction();
+    });
+</script>

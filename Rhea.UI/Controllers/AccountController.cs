@@ -149,7 +149,7 @@ namespace Rhea.UI.Controllers
                     return View(model);
                 }
 
-                return RedirectToAction("ShowMessage", "Home", new { area = "", msg = "修改密码成功" });
+                return RedirectToAction("ShowMessage", "Common", new { area = "", msg = "修改密码成功" });
             }
 
             return View(model);

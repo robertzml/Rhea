@@ -11,6 +11,7 @@ namespace Rhea.Model.Estate
     /// </summary>    
     public class BuildingGroup
     {
+        #region Database Property
         /// <summary>
         /// ID
         /// </summary>
@@ -149,6 +150,23 @@ namespace Rhea.Model.Estate
         public string ManageType { get; set; }
 
         /// <summary>
+        /// 使用类型
+        /// </summary>
+        /// <remarks>
+        /// 1:学院楼宇,2:教学楼宇,3:行政办公,4:宿舍楼宇,5:辅助楼宇
+        /// </remarks>
+        [Required]
+        [UIHint("BuildingUseType")]
+        [Display(Name = "使用类型")]
+        public int UseType { get; set; }
+
+        /// <summary>
+        /// 图片展示
+        /// </summary>
+        [Display(Name = "图片展示")]
+        public string[] Gallery { get; set; }
+
+        /// <summary>
         /// 备注
         /// </summary>        
         [StringLength(500)]
@@ -159,7 +177,15 @@ namespace Rhea.Model.Estate
         /// <summary>
         /// 状态
         /// </summary>
-        [Display(Name = "状态" )]
+        [Display(Name = "状态")]
         public int Status { get; set; }
+        #endregion //Database Property
+
+        #region Additional Property
+        /// <summary>
+        /// 下属楼宇
+        /// </summary>
+        public List<Building> Buildings { get; set; }
+        #endregion //Additional Property
     }
 }

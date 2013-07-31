@@ -74,6 +74,7 @@ namespace Rhea.Business.Estate
                 BsonDocument fun = doc["function"].AsBsonDocument;
                 room.Function.FirstCode = fun["firstCode"].AsInt32;
                 room.Function.SecondCode = fun["secondCode"].AsInt32;
+                room.Function.ClassifyName = fun["classifyName"].AsString;
                 room.Function.Property = fun["property"].AsString;
             }
             else
@@ -263,6 +264,7 @@ namespace Rhea.Business.Estate
                 { "function", new BsonDocument {
                     { "firstCode", data.Function.FirstCode },
                     { "secondCode", data.Function.SecondCode },
+                    { "classifyName", data.Function.ClassifyName },
                     { "property", data.Function.Property }
                 }},
                 { "buildingId", data.BuildingId },
@@ -321,6 +323,7 @@ namespace Rhea.Business.Estate
                 .Set("imageUrl", data.ImageUrl ?? "")
                 .Set("function.firstCode", data.Function.FirstCode)
                 .Set("function.secondCode", data.Function.SecondCode)
+                .Set("function.classifyName", data.Function.ClassifyName)
                 .Set("function.property", data.Function.Property)
                 .Set("buildingId", data.BuildingId)
                 .Set("departmentId", data.DepartmentId)
@@ -394,6 +397,7 @@ namespace Rhea.Business.Estate
                     CodeId = d["codeId"].AsString,
                     FirstCode = d["firstCode"].AsInt32,
                     SecondCode = d["secondCode"].AsInt32,
+                    ClassifyName = d["classifyName"].AsString,
                     FunctionProperty = d["functionProperty"].AsString,
                     Remark = d["remark"].AsString
                 };
@@ -436,7 +440,19 @@ namespace Rhea.Business.Estate
         {
             var query = Query.And(Query.EQ("buildingId", buildingId), Query.EQ("floor", floor));
             long count = this.context.Count(EstateCollection.Room, query);
-            return (int)count;          
+            return (int)count;
+        }
+
+        /// <summary>
+        /// 部门房间数量
+        /// </summary>
+        /// <param name="departmentId">部门ID</param>
+        /// <returns></returns>
+        public int CountByDepartment(int departmentId)
+        {
+            var query = Query.EQ("departmentId", departmentId);
+            long count = this.context.Count(EstateCollection.Room, query);
+            return (int)count;
         }
         #endregion //Method
     }

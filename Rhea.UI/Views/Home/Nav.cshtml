@@ -1,136 +1,56 @@
-﻿@model Rhea.UI.Models.NavModel
-@{
+﻿@{
     Layout = null;
-    ViewBag.Title = "Nav";
+    ViewBag.Title = "导航栏";
 }
 
- <div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar">
     <div class="navbar-inner">
         <div class="container-fluid">
-            <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="@Url.Action("Index", "Home")" class="brand" id="logo">房产管理系统</a>
-            <div class="nav-collapse collapse">                
-                @Html.Partial("_LoginPartial")                    
-               
+            <a class="brand" href="@Url.Action("Index", new { controller = "Home", area = "" })">房产管理系统</a>
+            <div class="nav-no-collapse">
                 <ul class="nav">
-                    <li><a href="@Url.Action("Index", new { controller = "Home", area = "Estate" })">概况</a></li>
-                    <li class="dropdown">
-                        <a id="drop1" class="dropdown-toggle" data-toggle="dropdown" role="button" href="#">楼群</a>
-                        <div id="building-group-menu" class="dropdown-menu" role="menu" aria-labelledby="drop1">   
-                            <div class="row-fluid">
-                                <div class="span4">                                   
-                                    <ul>
-                                    @foreach (var item in Model.BuildingGroups.Take(10))
-                                    {
-                                        <li><a href="@Url.Action("Index", new { controller = "BuildingGroup", area = "Estate", id = item.Id })">@item.Name</a></li>
-                                    }   
-                                    </ul>
-                                </div>
-                                <div class="span4">                                   
-                                    <ul>
-                                    @foreach (var item in Model.BuildingGroups.Skip(10).Take(10))
-                                    {
-                                        <li><a href="@Url.Action("Index", new { controller = "BuildingGroup", area = "Estate", id = item.Id })">@item.Name</a></li>
-                                    }   
-                                    </ul>
-                                </div>
-                                <div class="span4">                                   
-                                    <ul>
-                                    @foreach (var item in Model.BuildingGroups.Skip(20))
-                                    {
-                                        <li><a href="@Url.Action("Index", new { controller = "BuildingGroup", area = "Estate", id = item.Id })">@item.Name</a></li>
-                                    }   
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="dropdown">
-                        <a id="drop2" class="dropdown-toggle" data-toggle="dropdown"  role="button" href="#">部门</a>
-                        <div id="department-menu" class="dropdown-menu" role="menu" aria-labelledby="drop2">                           
-                            <div class="row-fluid">
-                                <div class="span3">
-                                    <h4>教学院系</h4>
-                                    <ul>
-                                    @foreach (var item in Model.Departments.Where(r => r.Type == 1))
-                                    {
-                                        <li><a href="@Url.Action("Index", new { controller = "Department", area = "", id = item.Id })">@item.Name</a></li>
-                                    }   
-                                    </ul>
-                                </div>
-                                <div class="span3">
-                                    <h4>党务部门</h4>
-                                    <ul>
-                                    @foreach (var item in Model.Departments.Where(r => r.Type == 4))
-                                    {
-                                        <li><a href="@Url.Action("Index", new { controller = "Department", area = "", id = item.Id })">@item.Name</a></li>
-                                    }   
-                                    </ul>
-                                    <h4>公共服务</h4>
-                                    <ul>
-                                    @foreach (var item in Model.Departments.Where(r => r.Type == 3))
-                                    {
-                                        <li><a href="@Url.Action("Index", new { controller = "Department", area = "", id = item.Id })">@item.Name</a></li>
-                                    }   
-                                    </ul>
-                                </div>
-                                <div class="span3">
-                                    <h4>行政单位</h4>
-                                    <ul>
-                                    @foreach (var item in Model.Departments.Where(r => r.Type == 5))
-                                    {
-                                        <li><a href="@Url.Action("Index", new { controller = "Department", area = "", id = item.Id })">@item.Name</a></li>
-                                    }   
-                                    </ul>
-                                </div>
-                                <div class="span3">
-                                    <h4>科研机构</h4>
-                                    <ul>
-                                    @foreach (var item in Model.Departments.Where(r => r.Type == 2))
-                                    {
-                                        <li><a href="@Url.Action("Index", new { controller = "Department", area = "", id = item.Id })">@item.Name</a></li>
-                                    }   
-                                    </ul>
-                                    <h4>附（直）属单位</h4>
-                                    <ul>
-                                    @foreach (var item in Model.Departments.Where(r => r.Type == 6))
-                                    {
-                                        <li><a href="@Url.Action("Index", new { controller = "Department", area = "", id = item.Id })">@item.Name</a></li>
-                                    }   
-                                    </ul>
-                                    <h4>后勤部门</h4>
-                                    <ul>
-                                    @foreach (var item in Model.Departments.Where(r => r.Type == 7))
-                                    {
-                                        <li><a href="@Url.Action("Index", new { controller = "Department", area = "", id = item.Id })">@item.Name</a></li>
-                                    }   
-                                    </ul>
-                                    <h4>其它</h4>
-                                    <ul>
-                                    @foreach (var item in Model.Departments.Where(r => r.Type == 9))
-                                    {
-                                        <li><a href="@Url.Action("Index", new { controller = "Department", area = "", id = item.Id })">@item.Name</a></li>
-                                    }   
-                                    </ul>
-                                </div>
-                            </div>
-                                                     
-                        </div>
-                    </li>
-                    <li><a href="@Url.Action("Index", new { controller = "Statistic", area = "" })">统计</a></li>
-                    @if (Request.IsAuthenticated)
-                    {                        
-                    <li><a href="@Url.Action("Index", new { controller = "Home", area = "Admin" })">后台管理</a></li>
-                    }
-                    <li>
-                        <a href="#">关于我们</a>                      
-                    </li>
+                    <li><a href="@Url.Action("Index", new { controller = "Home", area = "Estate" })" id="nav-summary"><span class="icon16 icomoon-icon-home-2"></span> 概况</a></li>
+                    <li><a href="#"><span class="icon16 icomoon-icon-map-2"></span> 地图</a></li>
+                    <li><a href="@Url.Action("Estate", new { controller = "Home", area = "" })" id="nav-estate"><span class="icon16 icomoon-icon-office"></span> 楼群</a></li>
+                    <li><a href="@Url.Action("Department", new { controller = "Home", area = "" })" id="nav-department"><span class="icon16 icomoon-icon-screen-2"></span> 部门</a></li>
+                    <li><a href="@Url.Action("Index", new { controller = "Statistic", area = "" })" id="nav-statistic"><span class="icon16 icomoon-icon-graph"></span> 统计</a></li>
                 </ul>
-            </div><!--/.nav-collapse -->
+                  
+                <ul class="nav pull-right usernav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <span class="icon16 icomoon-icon-bell-2"></span><span class="notification">3</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="menu">
+                                <ul class="notif">
+                                    <li class="header">(3) 个<strong>通知</strong></li>
+                                    <li>
+                                        <a href="#">
+                                            <span class="icon"><span class="icon16 icomoon-icon-user-3"></span></span>
+                                            <span class="event">3间房屋变动</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <span class="icon"><span class="icon16 icomoon-icon-comments-4"></span></span>
+                                            <span class="event">xx学院有1个申请</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <span class="icon"><span class="icon16 icomoon-icon-new-2"></span></span>
+                                            <span class="event">新增一间房屋</span>
+                                        </a>
+                                    </li>
+                                    <li class="view-all"><a href="#">更多 <span class="icon16 icomoon-icon-arrow-right-8"></span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>                    
+                    @Html.Partial("_LoginPartial")                    
+                </ul>
+            </div><!-- /.nav-collapse -->
         </div>
-    </div>
-</div>
+    </div><!-- /navbar-inner -->
+</div><!-- /navbar --> 

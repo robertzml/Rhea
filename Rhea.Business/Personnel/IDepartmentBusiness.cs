@@ -52,7 +52,7 @@ namespace Rhea.Business.Personnel
         /// </summary>
         /// <param name="data">部门数据</param>
         /// <returns></returns>
-        bool Edit(Department data);       
+        bool Edit(Department data);
 
         /// <summary>
         /// 删除部门
@@ -67,5 +67,19 @@ namespace Rhea.Business.Personnel
         /// <param name="data">部门数据</param>
         /// <returns></returns>
         bool EditScale(Department data);
+
+        /// <summary>
+        /// 编辑科研数据
+        /// </summary>
+        /// <param name="data">部门数据</param>
+        /// <returns></returns>
+        bool EditResearch(Department data);
+
+        /// <summary>
+        /// 编辑特殊面积数据
+        /// </summary>
+        /// <param name="data">部门数据</param>
+        /// <returns></returns>
+        bool EditSpecialArea(Department data);
     }
 }

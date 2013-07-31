@@ -20,7 +20,7 @@ namespace Rhea.UI.Controllers
         public ActionResult Index()
         {
             return View();
-        }       
+        }
 
         /// <summary>
         /// 导航栏
@@ -28,13 +28,41 @@ namespace Rhea.UI.Controllers
         /// <returns></returns>
         public ActionResult Nav()
         {
-            NavModel data = new NavModel();
-            
-            IDepartmentBusiness departmentBusiness = new MongoDepartmentBusiness();
-            data.Departments = departmentBusiness.GetList();
+            return View();
+        }
+
+        /// <summary>
+        /// 楼群导航
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Estate()
+        {
+            EstateMenuModel data = new EstateMenuModel();
 
             IBuildingGroupBusiness buildingGroupBusiness = new MongoBuildingGroupBusiness();
             data.BuildingGroups = buildingGroupBusiness.GetSimpleList();
+
+            IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
+            var buildings = buildingBusiness.GetList().OrderBy(r => r.Id);
+
+            foreach (var bg in data.BuildingGroups)
+            {
+                bg.Buildings = buildings.Where(r => r.BuildingGroupId == bg.Id).ToList();
+            }
+
+            return View(data);
+        }
+
+        /// <summary>
+        /// 部门导航
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Department()
+        {
+            DepartmentMenuModel data = new DepartmentMenuModel();
+
+            IDepartmentBusiness departmentBusiness = new MongoDepartmentBusiness();
+            data.Departments = departmentBusiness.GetList();
 
             return View(data);
         }
@@ -44,23 +72,12 @@ namespace Rhea.UI.Controllers
             ViewBag.Message = "你的应用程序说明页。";
 
             return View();
-        }   
+        }
 
         public ActionResult Contact()
         {
             ViewBag.Message = "你的联系方式页。";
 
-            return View();
-        }
-
-        /// <summary>
-        /// 显示消息
-        /// </summary>
-        /// <param name="msg">消息内容</param>
-        /// <returns></returns>       
-        public ActionResult ShowMessage(string msg)
-        {
-            ViewBag.Message = msg;
             return View();
         }
     }

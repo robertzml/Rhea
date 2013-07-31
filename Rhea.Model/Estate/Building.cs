@@ -18,6 +18,7 @@ namespace Rhea.Model.Estate
         }
         #endregion //Constructor
 
+        #region Property
         /// <summary>
         /// ID
         /// </summary>
@@ -77,12 +78,18 @@ namespace Rhea.Model.Estate
         /// 使用类型
         /// </summary>
         /// <remarks>
-        /// 1:学院楼宇,2:教学楼宇,3:行政办公,4:宿舍楼宇
+        /// 1:学院楼宇,2:教学楼宇,3:行政办公,4:宿舍楼宇,5:辅助楼宇
         /// </remarks>
         [Required]
         [UIHint("BuildingUseType")]
         [Display(Name = "使用类型" )]
         public int UseType { get; set; }
+
+        /// <summary>
+        /// 局部平面图
+        /// </summary>
+        [Display(Name = "局部导航")]
+        public string PartMapUrl { get; set; }
 
         /// <summary>
         /// 备注
@@ -102,6 +109,7 @@ namespace Rhea.Model.Estate
         /// 楼层列表
         /// </summary>
         public List<Floor> Floors { get; set; }
+        #endregion //Property
     }
 
     /// <summary>

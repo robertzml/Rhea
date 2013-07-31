@@ -52,10 +52,20 @@ namespace Rhea.Business.Estate
             buildingGroup.DesignCompany = doc.GetValue("designCompany", "").AsString;
             buildingGroup.ConstructCompany = doc.GetValue("constructCompany", "").AsString;
             buildingGroup.ManageType = doc.GetValue("manageType", "").AsString;
-            buildingGroup.Remark = doc.GetValue("remark", "").AsString;            
+            buildingGroup.UseType = doc.GetValue("useType").AsInt32;
+            buildingGroup.Remark = doc.GetValue("remark", "").AsString;
             buildingGroup.Status = doc.GetValue("status", 0).AsInt32;
+            //buildingGroup.UsableArea = GetUsableArea(buildingGroup.Id);
 
-            buildingGroup.UsableArea = GetUsableArea(buildingGroup.Id);
+            if (doc.Contains("gallery"))
+            {
+                BsonArray array = doc["gallery"].AsBsonArray;
+                buildingGroup.Gallery = new string[array.Count];
+                for (int i = 0; i < array.Count; i++)
+                {
+                    buildingGroup.Gallery[i] = array[i].AsString;
+                }
+            }
 
             if (buildingGroup.BuildDate != null)
                 buildingGroup.BuildDate = ((DateTime)buildingGroup.BuildDate).ToLocalTime();
@@ -101,7 +111,8 @@ namespace Rhea.Business.Estate
                 BuildingGroup buildingGroup = new BuildingGroup
                 {
                     Id = doc["id"].AsInt32,
-                    Name = doc["name"].AsString
+                    Name = doc["name"].AsString,
+                    UseType = doc["useType"].AsInt32
                 };
                 buildingGroups.Add(buildingGroup);
             }
@@ -129,7 +140,7 @@ namespace Rhea.Business.Estate
             else
                 return null;
         }
-        
+
         /// <summary>
         /// 得到楼群名称
         /// </summary>
@@ -151,7 +162,7 @@ namespace Rhea.Business.Estate
         /// <param name="data">楼群数据</param>
         /// <returns>楼群ID</returns>
         public int Create(BuildingGroup data)
-        {            
+        {
             data.Id = this.context.FindSequenceIndex(EstateCollection.BuildingGroup) + 1;
 
             BsonDocument doc = new BsonDocument
@@ -176,7 +187,8 @@ namespace Rhea.Business.Estate
                 { "fixedYear", data.FixedYear },
                 { "designCompany", data.DesignCompany },
                 { "constructCompany", data.ConstructCompany },
-                { "manageType", data.ManageType },           
+                { "manageType", data.ManageType },     
+                { "useType", data.UseType },
                 { "remark", data.Remark },
                 { "status", 0 }
             };
@@ -216,7 +228,8 @@ namespace Rhea.Business.Estate
                 .Set("fixedYear", (BsonValue)data.FixedYear)
                 .Set("designCompany", data.DesignCompany ?? "")
                 .Set("constructCompany", data.ConstructCompany ?? "")
-                .Set("manageType", data.ManageType ?? "")               
+                .Set("manageType", data.ManageType ?? "")
+                .Set("useType", data.UseType)
                 .Set("remark", data.Remark ?? "");
 
             WriteConcernResult result = this.context.Update(EstateCollection.BuildingGroup, query, update);

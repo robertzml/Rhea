@@ -278,6 +278,8 @@ namespace Rhea.Model.Estate
 
             public int SecondCode { get; set; }
 
+            public string ClassifyName { get; set; }
+
             public string Property { get; set; }
         }      
         #endregion Inner Class

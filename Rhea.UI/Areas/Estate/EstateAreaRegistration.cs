@@ -17,7 +17,7 @@ namespace Rhea.UI.Areas.Estate
             context.MapRoute(
                 "Estate_default",
                 "Estate/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

@@ -3,52 +3,114 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="span2">
-    <div class="well sidebar-nav">
-        <ul class="nav nav-list">
-            <li class="nav-header">导航</li>
-            <li class="active"><a href="#" id="summary">摘要</a></li>
-            <li><a href="#">土地证</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li class="nav-header">信息</li>
-            <li><a href="#" id="building-group-list">楼群列表</a></li>
-            <li><a href="#" id="department-list">部门列表</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
+<link rel="stylesheet" href="@Url.Content("~/Plugins/gallery/camera/camera.css")" type="text/css" media="all"> 
+
+ <!--Responsive navigation button-->  
+<div class="resBtn">
+    <a href="#"><span class="icon16 minia-icon-list-3"></span></a>
+</div>
+        
+<!--Left Sidebar collapse button-->  
+<div class="collapseBtn leftbar">
+    <a href="#" class="tip" data-placement="bottom" data-toggle="tooltip" title="Hide"><span class="icon12 minia-icon-layout"></span></a>
+</div>
+
+<!--Sidebar background-->
+<div id="sidebarbg"></div>
+
+<!--Sidebar content-->
+<div id="sidebar">
+    <div class="shortcuts">
+        <ul>
+            <li><a href="#" title="Support" class="tip" data-placement="bottom" data-toggle="tooltip"><span class="icon24 icomoon-icon-support"></span></a></li>
+            <li><a href="#" title="Backup" class="tip" data-placement="bottom" data-toggle="tooltip"><span class="icon24 icomoon-icon-database"></span></a></li>
+            <li><a href="#" title="Statistics" class="tip" data-placement="bottom" data-toggle="tooltip"><span class="icon24 icomoon-icon-pie-2"></span></a></li>
+            <li><a href="#" title="Request" class="tip" data-placement="bottom" data-toggle="tooltip"><span class="icon24 icomoon-icon-pencil"></span></a></li>
         </ul>
     </div>
-</div>
 
-<div class="span10">
-    <div id="ajax-content1">
-    @Html.Action("Summary", new { controller = "Home", area = "Estate" })
+    <div class="sidenav">
+
+        <div class="sidebar-widget" style="margin: -1px 0 0 0;">
+            <h5 class="title" style="margin-bottom:0">导航</h5>
+        </div><!-- End .sidenav-widget -->
+
+        <div class="mainnav">
+            <ul>
+                <li><a href="#" id="summary"><span class="icon16 icomoon-icon-newspaper"></span>摘要</a></li>
+                <li><a href="#"><span class="icon16 icomoon-icon-font"></span>土地证</a></li>
+                <li><a href="#" id="gallery"><span class="icon16 icomoon-icon-film-2"></span>展示</a></li>
+            </ul>
+        </div>
+    </div><!-- End sidenav -->
+
+    <div class="sidebar-widget">
+        <h5 class="title">附加显示数据1</h5>
+        <div class="content">
+            <span class="icon16 icomoon-icon-loop left"></span>
+            <div class="progress progress-mini progress-danger left tip" title="87%">
+                <div class="bar" style="width: 87%;"></div>
+            </div>
+            <span class="percent">87%</span>
+            <div class="stat">19419.94 / 12000 MB</div>
+        </div>
+
+    </div><!-- End .sidenav-widget -->
+
+    <div class="sidebar-widget">
+        <h5 class="title">附加显示数据2</h5>
+        <div class="content">
+            <span class="icon16 icomoon-icon-drive left"></span>
+            <div class="progress progress-mini progress-success left tip" title="16%">
+                <div class="bar" style="width: 16%;"></div>
+            </div>
+            <span class="percent">16%</span>
+            <div class="stat">304.44 / 8000 MB</div>
+        </div>
+    </div><!-- End .sidenav-widget -->
+
+    <div class="sidebar-widget">
+        <h5 class="title">附加显示数据3</h5>
+        <div class="content">
+            <div class="rightnow">
+                <ul class="unstyled">
+                    <li><span class="number">34</span><span class="icon16 icomoon-icon-new-2"></span>Posts</li>
+                    <li><span class="number">7</span><span class="icon16 icomoon-icon-file"></span>Pages</li>
+                    <li><span class="number">14</span><span class="icon16 icomoon-icon-list-view"></span>Categories</li>
+                    <li><span class="number">201</span><span class="icon16 icomoon-icon-tag"></span>Tags</li>
+                </ul>
+            </div>
+        </div>
+    </div><!-- End .sidenav-widget -->
+
+</div><!-- End #sidebar -->
+
+<!--Body content-->
+<div id="content" class="clearfix">
+    <div class="contentwrapper">        
+        <!-- Build page from here: -->
+        <div id="ajax-content1">            
+            @Html.Action("Summary", new { controller = "Home", area = "Estate" })
+        </div>
+        <!--End page -->
+                
     </div>
-</div>
+</div><!-- End #content -->
 
 @section scripts {
+<script type="text/javascript" src="@Url.Content("~/Plugins/gallery/camera/camera.min.js")"></script> 
 <script type="text/javascript">
     $(function () {
+        $('.navbar .nav #nav-summary').parent().addClass('active');
+        $('.tip').tooltip();
+
         $('a#summary').click(function() {
-            $('ul.nav').children().removeClass('active');
-            $(this).parent().addClass('active');
             ajaxLoadPage("Summary", "Home", "Estate", {});
             return false;
         });
 
-        $('a#building-group-list').click(function() {
-            $('ul.nav').children().removeClass('active');
-            $(this).parent().addClass('active');
-            ajaxLoadPage("List", "BuildingGroup", "Estate", {});
-            return false;
-        });
-
-        $('a#department-list').click(function () {
-            $('ul.nav').children().removeClass('active');
-            $(this).parent().addClass('active');
-            ajaxLoadPage2("List", "Department", {});
+        $('a#gallery').click(function () {
+            ajaxLoadPage("Gallery", "Home", "Estate", {});
             return false;
         });
     });

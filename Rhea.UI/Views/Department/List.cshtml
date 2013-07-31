@@ -7,14 +7,17 @@
     Layout = null;
 }
 
-<div class="box">
-    <div class="box-header well" data-original-title>
-        <h2>
-            <i class="icon-align-left"></i>@ViewBag.Title</h2>
+<div class="box gradient">
+    <div class="title">
+        <h4>
+            <span class="icon16 icomoon-icon-list-view-2"></span>
+            <span>@ViewBag.Title</span>
+        </h4>
+        <a href="#" class="minimize">Minimize</a>
     </div>
 
-    <div class="box-content">
-        <table id="department-list" class="table table-striped table-bordered bootstrap-datatable datatable">
+    <div class="content noPad clearfix">
+        <table id="department-list" class="responsive dynamicTable display table table-bordered">
             <thead>
                 <tr>
                     <th>
@@ -43,7 +46,7 @@
                         }        
                     </td>                 
                     <td>
-                        <a class="btn btn-success btn-small" href="@Url.Action("Index", new { controller = "Department", id = item.Id, area = "" })"><i class="icon-zoom-in icon-white"></i>查看</a>
+                        <a class="btn btn-success btn-small" onclick="loadDepartmentIndex('@item.Id');return false;" href="#"><i class="icon-zoom-in icon-white"></i>查看</a>
                     </td>
                 </tr>
             }
@@ -55,6 +58,10 @@
 <script type="text/javascript">
     $(function () {
         var dom = $('table#department-list');
-        initDataTable(dom); 
+        initDataTable(dom);
     });
+
+    function loadDepartmentIndex(id) {
+        ajaxLoadPage2("Index", "Department", { id: id });
+    }
 </script>

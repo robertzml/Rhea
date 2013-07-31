@@ -113,7 +113,7 @@ namespace Rhea.Business.Account
                     return null;
 
                 string pass = doc["password"].AsString;
-                if (Hasher.MD5Encrypt(password) != pass)
+                if (Hasher.SHA1Encrypt(password) != pass)
                     return null;
 
                 UserProfile user = new UserProfile();
@@ -216,7 +216,7 @@ namespace Rhea.Business.Account
             {
                 { "userId", data.UserId },
                 { "userName", data.UserName },
-                { "password", Hasher.MD5Encrypt(data.Password) },
+                { "password", Hasher.SHA1Encrypt(data.Password) },
                 { "managerGroupId", data.ManagerGroupId },
                 { "userGroupId", data.UserGroupId },
                 { "isSystem", true },           
@@ -243,9 +243,19 @@ namespace Rhea.Business.Account
                 data._id = new ObjectId(data.Id);
                 var query = Query.EQ("_id", data._id);
 
-                var update = Update.Set("managerGroupId", data.ManagerGroupId)
-                    .Set("userGroupId", data.UserGroupId);
+                IMongoUpdate update;
 
+                if (string.IsNullOrEmpty(data.Password))
+                {
+                    update = Update.Set("managerGroupId", data.ManagerGroupId)
+                        .Set("userGroupId", data.UserGroupId);
+                }
+                else
+                {
+                    update = Update.Set("managerGroupId", data.ManagerGroupId)
+                        .Set("userGroupId", data.UserGroupId)
+                        .Set("password", Hasher.SHA1Encrypt(data.Password));
+                }
                 WriteConcernResult result = this.context.Update(RheaCollection.User, query, update);
 
                 if (result.HasLastErrorMessage)
@@ -271,7 +281,7 @@ namespace Rhea.Business.Account
             if (doc != null)
             {
                 string pass = doc["password"].AsString;
-                if (Hasher.MD5Encrypt(password) != pass)
+                if (Hasher.SHA1Encrypt(password) != pass)
                     return false;
                 else
                     return true;
@@ -290,7 +300,7 @@ namespace Rhea.Business.Account
         public bool ChangePassword(string userName, string oldPassword, string newPassword)
         {          
             var query = Query.EQ("userName", userName);
-            var update = Update.Set("password", Hasher.MD5Encrypt(newPassword));
+            var update = Update.Set("password", Hasher.SHA1Encrypt(newPassword));
 
             WriteConcernResult result = this.context.Update(RheaCollection.User, query, update);
 

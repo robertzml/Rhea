@@ -7,6 +7,7 @@ using System.Web.Routing;
 using Rhea.Business;
 using Rhea.Business.Estate;
 using Rhea.Business.Personnel;
+using Rhea.Data.Estate;
 using Rhea.Model.Estate;
 using Rhea.UI.Areas.Estate.Models;
 
@@ -35,14 +36,41 @@ namespace Rhea.UI.Areas.Estate.Controllers
 
         #region Action
         /// <summary>
+        /// 楼群摘要页
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Summary()
+        {
+            return View();
+        }
+
+        /// <summary>
         /// 楼群主页
         /// </summary>
         /// <param name="id">楼群ID</param>
         /// <returns></returns>
         public ActionResult Index(int id)
         {
-            ViewBag.Title = this.buildingGroupBusiness.GetName(id);
-            return View(id);
+            BuildingGroupSectionModel data = new BuildingGroupSectionModel();
+
+            var buildingGroup = this.buildingGroupBusiness.Get(id);
+            data.BuildingGroupId = id;
+            data.BuildingGroupName = buildingGroup.Name;
+            data.BuildArea = Convert.ToInt32(buildingGroup.BuildArea);
+            data.UsableArea = Convert.ToInt32(buildingGroup.UsableArea);
+
+            IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
+            var buildings = buildingBusiness.GetListByBuildingGroup(id);
+            data.Buildings = buildings;
+            data.RoomCount = 0;
+
+            IRoomBusiness roomBusiness = new MongoRoomBusiness();
+            foreach (var b in buildings)
+            {
+                data.RoomCount += roomBusiness.CountByBuilding(b.Id);
+            }
+
+            return View(data);
         }
 
         /// <summary>
@@ -50,7 +78,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// </summary>
         /// <param name="id">楼群ID</param>
         /// <returns></returns>
-        public ActionResult Summary(int id)
+        public ActionResult Intro(int id)
         {
             BuildingGroup data = this.buildingGroupBusiness.Get(id);
             if (!string.IsNullOrEmpty(data.ImageUrl))
@@ -139,6 +167,28 @@ namespace Rhea.UI.Areas.Estate.Controllers
         {
             BuildingGroup data = this.buildingGroupBusiness.Get(id);
             return View(data);
+        }
+
+        /// <summary>
+        /// 分类统计
+        /// </summary>
+        /// <param name="id">楼群ID</param>
+        /// <returns></returns>
+        public ActionResult Classify(int id)
+        {
+            IStatisticBusiness statisticBusiness = new MongoStatisticBusiness();
+
+            IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
+            var buildings = buildingBusiness.GetListByBuildingGroup(id);
+
+            List<BuildingClassifyAreaModel> list = new List<BuildingClassifyAreaModel>();
+            foreach (var building in buildings)
+            {
+                BuildingClassifyAreaModel m = statisticBusiness.GetBuildingClassifyArea(building.Id, false);
+                list.Add(m);
+            }
+
+            return View(list);
         }
 
         /// <summary>

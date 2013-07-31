@@ -81,6 +81,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
             {
                 FirstCode = code.FirstCode,
                 SecondCode = code.SecondCode,
+                ClassifyName = code.ClassifyName,
                 Property = code.FunctionProperty
             };
 

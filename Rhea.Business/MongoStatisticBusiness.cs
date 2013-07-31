@@ -41,17 +41,21 @@ namespace Rhea.Business
         }
 
         /// <summary>
-        /// 获取部门二级分类面积
+        /// 获取房间二级分类面积
         /// </summary>
-        /// <param name="departmentId">部门ID</param>
+        /// <param name="matchId">匹配字段</param>
+        /// <param name="id">ID</param>
         /// <param name="firstCode">一级编码</param>
         /// <param name="functionCodes">功能编码列表</param>
-        public List<DepartmentSecondClassifyAreaModel> GetSecondClassifyArea(int departmentId, int firstCode, List<RoomFunctionCode> functionCodes)
+        /// <remarks>
+        /// 部门或楼宇
+        /// </remarks>
+        public List<RoomSecondClassifyAreaModel> GetSecondClassifyArea(string matchId, int id, int firstCode, List<RoomFunctionCode> functionCodes)
         {
             BsonDocument[] pipeline = {
                 new BsonDocument { 
                     { "$match", new BsonDocument {
-                        { "departmentId", departmentId },
+                        { matchId, id },
                         { "function.firstCode", firstCode }
                     }}
                 },
@@ -70,13 +74,13 @@ namespace Rhea.Business
 
             AggregateResult result = this.context.Aggregate(EstateCollection.Room, pipeline);
 
-            List<DepartmentSecondClassifyAreaModel> data = new List<DepartmentSecondClassifyAreaModel>();
+            List<RoomSecondClassifyAreaModel> data = new List<RoomSecondClassifyAreaModel>();
             var function = functionCodes.Where(r => r.FirstCode == firstCode);
             foreach (var f in function)
             {
                 BsonDocument doc = result.ResultDocuments.SingleOrDefault(r => r["_id"].AsInt32 == f.SecondCode);
 
-                DepartmentSecondClassifyAreaModel model = new DepartmentSecondClassifyAreaModel
+                RoomSecondClassifyAreaModel model = new RoomSecondClassifyAreaModel
                 {
                     FunctionFirstCode = firstCode,
                     FunctionSecondCode = f.SecondCode,
@@ -97,27 +101,34 @@ namespace Rhea.Business
                 data.Add(model);
             }
 
-            data = data.OrderByDescending(r => r.Area).ToList();
+            //data = data.OrderByDescending(r => r.Area).ToList();
             return data;
         }
 
         /// <summary>
-        /// 获取部门一级级分类面积
+        /// 获取房间一级级分类面积
         /// </summary>
-        /// <param name="departmentId">部门ID</param>
+        /// <param name="matchId">匹配字段</param>
+        /// <param name="id">iD</param>
         /// <param name="firstCode">一级编码</param>
         /// <param name="title">编码名称</param>
         /// <param name="functionCodes">功能编码列表</param>
+        /// <param name="sortSecondArea">二级分类是否排序</param>
+        /// <remarks>
+        /// 部门或楼宇
+        /// </remarks>
         /// <returns></returns>
-        public DepartmentFirstClassifyAreaModel GetFirstClassifyArea(int departmentId, int firstCode, string title, List<RoomFunctionCode> functionCodes)
+        public RoomFirstClassifyAreaModel GetFirstClassifyArea(string matchId, int id, int firstCode, string title, List<RoomFunctionCode> functionCodes, bool sortSecond = true)
         {
-            DepartmentFirstClassifyAreaModel m1 = new DepartmentFirstClassifyAreaModel();
+            RoomFirstClassifyAreaModel m1 = new RoomFirstClassifyAreaModel();
             m1.Title = title;
             m1.FunctionFirstCode = firstCode;
-            m1.SecondClassify = GetSecondClassifyArea(departmentId, firstCode, functionCodes);
+            m1.SecondClassify = GetSecondClassifyArea(matchId, id, firstCode, functionCodes);
             m1.Area = Math.Round(m1.SecondClassify.Sum(r => r.Area), 3);
             m1.RoomCount = m1.SecondClassify.Sum(r => r.RoomCount);
 
+            if (sortSecond)
+                m1.SecondClassify = m1.SecondClassify.OrderByDescending(r => r.Area).ToList();
             return m1;
         }
 
@@ -142,12 +153,58 @@ namespace Rhea.Business
                 DepartmentName = department.Name
             };
 
-            data.FirstClassify = new List<DepartmentFirstClassifyAreaModel>();
+            data.FirstClassify = new List<RoomFirstClassifyAreaModel>();
 
-            data.FirstClassify.Add(GetFirstClassifyArea(departmentId, 1, "办公用房", functionCodes));
-            data.FirstClassify.Add(GetFirstClassifyArea(departmentId, 2, "教学用房", functionCodes));
-            data.FirstClassify.Add(GetFirstClassifyArea(departmentId, 3, "实验用房", functionCodes));
-            data.FirstClassify.Add(GetFirstClassifyArea(departmentId, 4, "科研用房", functionCodes));
+            //data.FirstClassify.Add(GetFirstClassifyArea("departmentId", departmentId, 1, "办公用房", functionCodes, sortByFirstArea));
+            //data.FirstClassify.Add(GetFirstClassifyArea("departmentId", departmentId, 2, "教学用房", functionCodes, sortByFirstArea));
+            //data.FirstClassify.Add(GetFirstClassifyArea("departmentId", departmentId, 3, "实验用房", functionCodes, sortByFirstArea));
+            //data.FirstClassify.Add(GetFirstClassifyArea("departmentId", departmentId, 4, "科研用房", functionCodes, sortByFirstArea));
+
+            var fc = functionCodes.GroupBy(r => new { r.FirstCode, r.ClassifyName }).Select(g => new { g.Key.FirstCode, g.Key.ClassifyName });
+
+            foreach (var f in fc)
+            {
+                var c = GetFirstClassifyArea("departmentId", departmentId, f.FirstCode, f.ClassifyName, functionCodes, sortByFirstArea);
+                data.FirstClassify.Add(c);
+            }
+
+            if (sortByFirstArea)
+                data.FirstClassify = data.FirstClassify.OrderByDescending(r => r.Area).ToList();
+
+            data.TotalArea = data.FirstClassify.Sum(r => r.Area);
+
+            return data;
+        }
+
+        /// <summary>
+        /// 获取楼宇分类面积
+        /// </summary>
+        /// <param name="buildingId">楼宇ID</param>
+        /// <param name="sortByFirstArea">是否按一级分类排序</param>
+        /// <returns></returns>
+        public BuildingClassifyAreaModel GetBuildingClassifyArea(int buildingId, bool sortByFirstArea = true)
+        {
+            IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
+            Building building = buildingBusiness.Get(buildingId);
+
+            //get codes
+            IRoomBusiness roomBusiness = new MongoRoomBusiness();
+            var functionCodes = roomBusiness.GetFunctionCodeList();
+
+            BuildingClassifyAreaModel data = new BuildingClassifyAreaModel
+            {
+                Id = buildingId,
+                Name = building.Name
+            };
+
+            data.FirstClassify = new List<RoomFirstClassifyAreaModel>();
+            var fc = functionCodes.GroupBy(r => new { r.FirstCode, r.ClassifyName }).Select(g => new { g.Key.FirstCode, g.Key.ClassifyName });
+
+            foreach (var f in fc)
+            {
+                var c = GetFirstClassifyArea("buildingId", buildingId, f.FirstCode, f.ClassifyName, functionCodes, sortByFirstArea);
+                data.FirstClassify.Add(c);
+            }
 
             if (sortByFirstArea)
                 data.FirstClassify = data.FirstClassify.OrderByDescending(r => r.Area).ToList();

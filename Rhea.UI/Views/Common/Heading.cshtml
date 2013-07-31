@@ -1,0 +1,18 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="heading">
+    <h3>@ViewBag.Title</h3>
+
+    @Html.Action("SearchInline", new { controller = "Common", area = "" })
+
+    <ul class="breadcrumb">
+        <li>你的位置:</li>
+        <li><a href="#" class="tip" title="回到首页"><span class="icon16 icomoon-icon-home "></span>
+        </a><span class="divider"><span class="icon16 icomoon-icon-arrow-right-2"></span></span>
+        </li>
+        <li class="active">@ViewBag.Active</li>
+    </ul>
+</div>
+<!-- End .heading-->

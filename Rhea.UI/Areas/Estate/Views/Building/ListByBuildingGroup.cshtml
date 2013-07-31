@@ -7,13 +7,15 @@
 }
 
 <div class="box">
-    <div class="box-header well" data-original-title>
-        <h2>
-            <i class="icon-tasks"></i>@ViewBag.Title</h2>
+    <div class="title">
+        <h4>
+            <span class="icon16 icomoon-icon-list-view-2"></span><span>@ViewBag.Title</span>
+        </h4>
+        <a href="#" class="minimize">Minimize</a>
     </div>
 
-    <div class="box-content">
-        <table id="building-list" class="table table-striped table-bordered">
+    <div class="content noPad">
+        <table id="building-list" class="responsive table table-striped table-bordered">
             <thead>
                 <tr>
                     <th>
@@ -68,7 +70,7 @@
     $(function () {
         $('a.building-details').click(function () {
             var bid = $(this).attr('ref');
-            ajaxLoadPage("Details", "Building", "Estate", { id: bid });
+            ajaxLoadPage("Index", "Building", "Estate", { id: bid });
             return false;
         });
     });

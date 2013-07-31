@@ -75,7 +75,17 @@ namespace Rhea.Data.Personnel
         /// 规模数据
         /// </summary>
         /// <remarks>教学院系与行政部门不同</remarks>
-        ScaleData = 1
+        ScaleData = 1,
+
+        /// <summary>
+        /// 科研数据
+        /// </summary>
+        ResearchData = 2,
+
+        /// <summary>
+        /// 特殊面积数据
+        /// </summary>
+        SpecialAreaData = 4
     }
 
     /// <summary>
@@ -93,6 +103,7 @@ namespace Rhea.Data.Personnel
         /// </summary>
         public string DepartmentName { get; set; }
 
+        #region College
         /// <summary>
         /// 办公用房
         /// </summary>
@@ -148,21 +159,21 @@ namespace Rhea.Data.Personnel
         public double EducationBonusArea { get; set; }
 
         /// <summary>
-        /// 特殊人才用房
+        /// 特殊人才用房面积
         /// </summary>
-        [Display(Name = "特殊人才用房")]
+        [Display(Name = "特殊人才用房面积")]
         public double TalentArea { get; set; }
 
         /// <summary>
-        /// 科研平台补贴
+        /// 科研平台补贴面积
         /// </summary>
-        [Display(Name = "科研平台补贴")]
+        [Display(Name = "科研平台补贴面积")]
         public double ResearchBonusArea { get; set; }
 
         /// <summary>
-        /// 实验教学平台补贴
+        /// 实验教学平台补贴面积
         /// </summary>
-        [Display(Name = "实验教学平台补贴")]
+        [Display(Name = "实验教学平台补贴面积")]
         public double ExperimentBonusArea { get; set; }
 
         /// <summary>
@@ -170,11 +181,44 @@ namespace Rhea.Data.Personnel
         /// </summary>
         [Display(Name = "调整面积")]
         public double AdjustArea { get; set; }
+        #endregion //College
+
+        #region Department
+        /// <summary>
+        /// 校长面积
+        /// </summary>
+        [Display(Name = "校长面积")]
+        public double PresidentArea { get; set; }
+
+        /// <summary>
+        /// 部门面积
+        /// </summary>
+        [Display(Name = "部门面积")]
+        public double SectionArea { get; set; }
+
+        /// <summary>
+        /// 业务面积
+        /// </summary>
+        [Display(Name = "业务面积")]
+        public double BusinessArea { get; set; }
+        #endregion //Department
 
         /// <summary>
         /// 应有面积
         /// </summary>
         [Display(Name = "应有面积")]
         public double DeservedArea { get; set; }
+
+        /// <summary>
+        /// 现有面积
+        /// </summary>
+        [Display(Name = "现有面积")]
+        public double ExistingArea { get; set; }
+
+        /// <summary>
+        /// 超标比值
+        /// </summary>
+        [Display(Name = "超标比值")]
+        public double Overproof { get; set; }
     }
 }

@@ -8,11 +8,13 @@
 <div class="row-fluid"> 
     <div class="span12">
         <div class="box">
-            <div class="box-header well" data-original-title>
-                <h2>
-                    <i class="icon-th-list"></i>当前指标</h2>
+            <div class="title">
+                <h4>
+                    <span class="icon16 icomoon-icon-shield"></span><span>当前指标</span>
+                </h4>
+                <a href="#" class="minimize">Minimize</a>
             </div>
-            <div class="box-content">
+            <div class="content noPad">
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
@@ -24,96 +26,110 @@
                             </th>
                             <th>
                                 指标值 (m<sup>2</sup>)
-                            </th>
-                            <th>
-                                当前值 (m<sup>2</sup>)
-                            </th>
+                            </th>                           
                         </tr>
                     </thead>
                     <tbody>
+                    @if (ViewBag.Type == (int)Rhea.Data.Personnel.DepartmentType.Type1)
+                    {
                         <tr>
                             <td>1</td>
                             <td>@Html.DisplayNameFor(model => model.OfficeArea)</td>
                             <td>@Model.OfficeArea</td>
-                            <td></td>
                         </tr>
                         <tr>
                             <td>2</td>
                             <td>@Html.DisplayNameFor(model => model.FlexibleArea)</td>
                             <td>@Model.FlexibleArea</td>
-                            <td></td>
                         </tr>
                         <tr>
                             <td>3</td>
                             <td>@Html.DisplayNameFor(model => model.ExperimentArea)</td>
                             <td>@Model.ExperimentArea</td>
-                            <td></td>
                         </tr>
                         <tr>
                             <td>4</td>
                             <td>@Html.DisplayNameFor(model => model.GraduateArea)</td>
                             <td>@Model.GraduateArea</td>
-                            <td></td>
                         </tr>
                         <tr>
                             <td>5</td>
                             <td>@Html.DisplayNameFor(model => model.DoctorArea)</td>
                             <td>@Model.DoctorArea</td>
-                            <td></td>
                         </tr>
                         <tr>
                             <td>6</td>
                             <td>@Html.DisplayNameFor(model => model.MasterOfEngineerArea)</td>
                             <td>@Model.MasterOfEngineerArea</td>
-                            <td></td>
                         </tr>
                         <tr>
                             <td>7</td>
                             <td>@Html.DisplayNameFor(model => model.ResearchArea)</td>
                             <td>@Model.ResearchArea</td>
-                            <td></td>
                         </tr>
                         <tr>
                             <td>8</td>
                             <td>@Html.DisplayNameFor(model => model.PublicArea)</td>
                             <td>@Model.PublicArea</td>
-                            <td></td>
                         </tr>
                         <tr>
                             <td>9</td>
                             <td>@Html.DisplayNameFor(model => model.EducationBonusArea)</td>
                             <td>@Model.EducationBonusArea</td>
-                            <td></td>
                         </tr>
                         <tr>
                             <td>10</td>
                             <td>@Html.DisplayNameFor(model => model.TalentArea)</td>
                             <td>@Model.TalentArea</td>
-                            <td></td>
                         </tr>
                         <tr>
                             <td>11</td>
                             <td>@Html.DisplayNameFor(model => model.ResearchBonusArea)</td>
                             <td>@Model.ResearchBonusArea</td>
-                            <td></td>
                         </tr>
                         <tr>
                             <td>12</td>
                             <td>@Html.DisplayNameFor(model => model.ExperimentBonusArea)</td>
                             <td>@Model.ExperimentBonusArea</td>
-                            <td></td>
                         </tr>
                         <tr>
                             <td>13</td>
                             <td>@Html.DisplayNameFor(model => model.AdjustArea)</td>
                             <td>@Model.AdjustArea</td>
-                            <td></td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <td>1</td>
+                            <td>@Html.DisplayNameFor(model => model.PresidentArea)</td>
+                            <td>@Model.PresidentArea</td>
                         </tr>
                         <tr>
-                            <td>14</td>
-                            <td>总计</td>
-                            <td></td>
-                            <td></td>
+                            <td>2</td>
+                            <td>@Html.DisplayNameFor(model => model.SectionArea)</td>
+                            <td>@Model.SectionArea</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>@Html.DisplayNameFor(model => model.BusinessArea)</td>
+                            <td>@Model.BusinessArea</td>
+                        </tr>
+                    }
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>@Html.DisplayNameFor(model => model.DeservedArea)</td>
+                            <td>@Model.DeservedArea</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>@Html.DisplayNameFor(model => model.ExistingArea)</td>
+                            <td>@Model.ExistingArea</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>超额比值</td>
+                            <td>@Model.Overproof%</td>
                         </tr>
                     </tbody>
                 </table>
@@ -124,68 +140,99 @@
 
 <div class="row-fluid"> 
     <div class="span12">
-        <div class="box">
-            <div class="box-header well" data-original-title>
-                <h2>
-                    <i class="icon-th-list"></i>指标计算公式</h2>
+        <div class="box closed">
+            <div class="title">
+                <h4>
+                    <span class="icon16 icomoon-icon-info-2"></span><span>指标计算公式</span>
+                </h4>
+                <a href="#" class="minimize">Minimize</a>
             </div>
-            <div class="box-content">
+            <div class="content">
+            @if (ViewBag.Type == (int)Rhea.Data.Personnel.DepartmentType.Type1)
+            {
                 <p>
-                    <strong>1. 办公用房面积 = </strong> <br />
-                    中级职称及以下教师数×6平方米+副教授数×12平方米+教授数×18平方米+高级教辅人数×12平方米+中级及以下教辅人数×6平方米+学院党政管理人员数×6平方米+学院处级领导数×16平方米
+                    <strong>1. (办公用房+机动用房) * K2</strong><br />
+                    K2=1.2	学院教职工人数＜50人
+	                K2=1.1	学院教职工人数50-100人
+                    K2=1	学院教职工人数＞100人
                 </p>
                 <p>
-                    <strong>2. 机动用房：</strong><br />
-                    面积=200	 本科生+研究生+博士生+在编教职工总数≤500 <br />
-                    面积=225	 500＜本科生+研究生+博士生+在编教职工总数≤1000 <br />
-                    面积=250	 1000＜本科生+研究生+博士生+在编教职工总数≤2000 <br />
-                    面积=275	 本科生+研究生+博士生+在编教职工总数＞2000 <br />
+                    <strong>办公用房面积 = </strong> <br />
+                    中级职称及以下教师数×6平方米+副教授数×12平方米+教授数×20平方米+高级教辅人数×12平方米+中级及以下教辅人数×6平方米+学院党政管理人员数×8平方米+学院处级领导数×20平方米
                 </p>
                 <p>
-                    <strong>3. 实验用房：</strong><br />
+                    <strong>机动用房：</strong><br />
+                    面积=125		本科生+研究生+博士生+在编教职工总数≤500 <br />
+                    面积=150		500＜本科生+研究生+博士生+在编教职工总数≤1000 <br />
+                    面积=175		1000＜本科生+研究生+博士生+在编教职工总数≤2000 <br />
+                    面积=200		本科生+研究生+博士生+在编教职工总数＞2000 <br />
+                </p>
+                <p>
+                    <strong>2. 实验用房：</strong><br />
 	                文科：面积= (本科生数*66/468)*4*系数K1 <br />
 	                理科：面积= (本科生数*132/468)*4*系数K1
                 </p>
                 <p>
-                    <strong>4. 研究生用房：</strong><br />
+                    <strong>3. 研究生用房：</strong><br />
 	                面积=研究生人数*4*系数K1
                 </p>
                 <p>
-                    <strong>5. 博士生用房：</strong><br />
+                    <strong>4. 博士生用房：</strong><br />
 	                面积=博士生人数*6*系数K1
                 </p>
                 <p>
-                    <strong>6. 工程硕士用房：</strong><br />
+                    <strong>5. 工程硕士用房：</strong><br />
                     面积=工程硕士人数*0.4*系数K1
                 </p>
                 <p>
-                    <strong>7. 科研用房：</strong><br />
+                    <strong>6. 科研用房：</strong><br />
 	                年度科研经费=纵向科研经费+横向科研经费×0.65+年度到开发公司账经费×0.3<br />
-	                年度科研经费≤500	面积=年度科研经费×2×K2<br />
-	                500＜年度科研经费≤3000 面积=500×2×K2+（年度科研经费-500）*0.8<br />
-	                3000＜年度科研经费 面积=500×2×K2+2500*0.8+（年度科研经费-3000）*0.4<br />
+	                年度科研经费≤500	面积=年度科研经费×2×K3<br />
+	                500＜年度科研经费≤3000 面积=500×2×K3+（年度科研经费-500）*0.8<br />
+	                3000＜年度科研经费 面积=500×2×K3+2500*0.8+（年度科研经费-3000）*0.4<br />
                 </p>
                 <p>
-                    <strong>8. 对公用房：</strong><br />
+                    <strong>7. 对公用房：</strong><br />
 	                面积=房屋编码为2.1和3.1的房间面积
                 </p>
                 <p>
-                    <strong>9. 教学补贴用房：</strong><br />
+                    <strong>8. 教学补贴用房：</strong><br />
 	                面积=房屋编码为2.*（2.1除外）的房间面积
                 </p>
                 <p>
-                    <strong>10. 特殊人才用房面积：</strong>
+                    <strong>9. 特殊人才用房面积：</strong>
                 </p>
                 <p>
-                    <strong>11. 科研平台补贴：</strong>
+                    <strong>10. 科研平台补贴：</strong>
                 </p>
                 <p>
-                    <strong>12. 实验教学平台补贴：</strong>
+                    <strong>11. 实验教学平台补贴：</strong>
                 </p>
                 <p>
-                    <strong>13. 调整面积：</strong>
+                    <strong>12. 调整面积：</strong>
                 </p>
+                <p>
+                    学院应有面积=以上12项之和 <br />
+                    学院现有面积=编码为1.*、2.*、3.*、4.*的房间面积之和。 <br />
+                    超额比值=（学院现有面积/学院应有面积）*100%
+                </p>
+            }
+            else
+            {
+                <p>1、正校长（书记）50平方/人，副校长（书记）40平方/人。</p>
+                <p>2、部门正职25平方/人，部门副职18平方/人，部门其它人员8平方/人。部门人员少于3人的，该科室按20平方配置。</p>
+                <p>3、部门业务用房2平方/人，不足10人的部门按20平方算。</p>
+                <p>部门应有面积=以上3项之和。</p>
+                <p>部门现有面积=部门房间面积累加。</p>
+                <p>超额比值=（部门现有面积/部门应有面积）*100%</p>
+            }
             </div>
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(function () {
+        setBoxAction();
+    });
+</script>

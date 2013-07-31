@@ -1,58 +1,67 @@
 ﻿@model Rhea.Model.Estate.Room
 
 @{
-    ViewBag.Title = "Summary";
+    ViewBag.Title = "房间摘要";
     Layout = null;
 }
 
-<table class="table table-bordered table-striped">   
-    <tbody>      
-        <tr>
-            <td style="width: 30%">
-                编号
-            </td>
-            <td style="width: 70%">
-                @Model.Number
-            </td>           
-        </tr>
-        <tr>
-            <td>
-                名称
-            </td>
-            <td>
-                @Model.Name
-            </td>
-        </tr>
-        <tr>
-            <td>
-                部门
-            </td>
-            <td>
-                @Model.DepartmentName()
-            </td>
-        </tr>
-        <tr>
-            <td>
-                功能
-            </td>
-            <td>
-                @Model.Function.Property
-            </td>
-        </tr>
-        <tr>
-            <td>
-                使用面积
-            </td>
-            <td>
-                @Model.UsableArea m<sup>2</sup>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<div class="box">
+    <div class="title">
+        <h4>
+            <span class="icon16 icomoon-icon-camera"></span><span>所选房间信息</span>
+            <form class="box-form right" action="">
+                <button id="room-details" class="btn btn-primary btn-mini" data-toggle="modal" href="/Estate/Room/Details/@Model.Id" data-target="#myModal">详细</button>
+            </form>
+        </h4>
+    </div>
 
-<a class="btn btn-primary" data-toggle="modal" href="/Estate/Room/Details/@Model.Id" data-target="#myModal">
-    <i class="icon-zoom-in icon-white"></i>详细
-</a>
+    <div class="content noPad">
+        <table class="table table-bordered table-striped table-condensed">
+            <tbody>      
+                <tr>
+                    <td style="width: 30%">
+                        编号
+                    </td>
+                    <td style="width: 70%">
+                        @Model.Number
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        名称
+                    </td>
+                    <td>
+                        @Model.Name
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        部门
+                    </td>
+                    <td>
+                        @Model.DepartmentName()
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        功能
+                    </td>
+                    <td>
+                        @Model.Function.Property
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        使用面积
+                    </td>
+                    <td>
+                        @Model.UsableArea m<sup>2</sup>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">
@@ -62,6 +71,6 @@
     <div class="modal-body">    
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">关闭</button>      
+        <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">关闭</button>
     </div>
 </div>

@@ -34,6 +34,12 @@ namespace Rhea.Data.Server
         /// dictionary
         /// </summary>
         public static readonly string Dictionary = "dictionary";
+
+        /// <summary>
+        /// 杂项表
+        /// misc
+        /// </summary>
+        public static readonly string Misc = "misc";
         #endregion //Field
     }
 }
