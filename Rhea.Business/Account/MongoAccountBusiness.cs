@@ -243,9 +243,19 @@ namespace Rhea.Business.Account
                 data._id = new ObjectId(data.Id);
                 var query = Query.EQ("_id", data._id);
 
-                var update = Update.Set("managerGroupId", data.ManagerGroupId)
-                    .Set("userGroupId", data.UserGroupId);
+                IMongoUpdate update;
 
+                if (string.IsNullOrEmpty(data.Password))
+                {
+                    update = Update.Set("managerGroupId", data.ManagerGroupId)
+                        .Set("userGroupId", data.UserGroupId);
+                }
+                else
+                {
+                    update = Update.Set("managerGroupId", data.ManagerGroupId)
+                        .Set("userGroupId", data.UserGroupId)
+                        .Set("password", Hasher.SHA1Encrypt(data.Password));
+                }
                 WriteConcernResult result = this.context.Update(RheaCollection.User, query, update);
 
                 if (result.HasLastErrorMessage)

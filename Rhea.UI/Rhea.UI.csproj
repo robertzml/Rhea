@@ -167,6 +167,7 @@
     <Compile Include="Areas\Admin\Controllers\BuildingGroupController.cs" />
     <Compile Include="Areas\Admin\Controllers\DepartmentController.cs" />
     <Compile Include="Areas\Admin\Controllers\DictionaryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\EstateController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManagerGroupController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoomController.cs" />
@@ -1522,9 +1523,6 @@
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\Home\Menu.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -1739,6 +1737,12 @@
     <Content Include="Areas\Estate\Views\BuildingGroup\Classify.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\SubjectType.cshtml" />
     <Content Include="Areas\Estate\Views\Home\Gallery.cshtml" />
+    <Content Include="Areas\Admin\Views\Department\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout_Department.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout_Estate.cshtml" />
+    <Content Include="Areas\Admin\Views\Estate\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout_Account.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Index.cshtml" />
     <None Include="Content\fonts\broccolidry.eot" />
     <None Include="Content\fonts\broccolidry.ttf" />
     <None Include="Content\fonts\broccolidry.woff" />

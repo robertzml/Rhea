@@ -33,6 +33,10 @@ namespace Rhea.UI.Areas.Admin.Controllers
         #endregion //Function
 
         #region Action
+        /// <summary>
+        /// 部门管理主页
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             return View();

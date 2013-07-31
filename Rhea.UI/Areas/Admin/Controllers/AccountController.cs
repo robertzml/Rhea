@@ -34,6 +34,15 @@ namespace Rhea.UI.Areas.Admin.Controllers
 
         #region Action
         /// <summary>
+        /// 用户管理主页
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        /// <summary>
         /// 用户列表
         /// </summary>
         /// <returns></returns>       

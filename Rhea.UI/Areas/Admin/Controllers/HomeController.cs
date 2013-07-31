@@ -19,16 +19,11 @@ namespace Rhea.UI.Areas.Admin.Controllers
             return View();
         }
 
-        public ActionResult Nav()
-        {
-            return View();
-        }
-
         /// <summary>
-        /// 菜单
+        /// 导航
         /// </summary>
         /// <returns></returns>
-        public ActionResult Menu()
+        public ActionResult Nav()
         {
             return View();
         }
