@@ -44,20 +44,7 @@ namespace Rhea.Model.Account
         /// </summary>
         [DataType(DataType.Password)]
         [Display(Name = "密码")]
-        public string Password { get; set; }
-
-        /// <summary>
-        /// 管理组ID
-        /// </summary>
-        [UIHint("ManagerGroupDropDownList")]
-        [Display(Name = "管理组ID")]
-        public int ManagerGroupId { get; set; }
-
-        /// <summary>
-        /// 管理组名称
-        /// </summary>
-        [Display(Name = "管理组名称")]
-        public string ManagerGroupName { get; set; }
+        public string Password { get; set; }       
 
         /// <summary>
         /// 用户组ID

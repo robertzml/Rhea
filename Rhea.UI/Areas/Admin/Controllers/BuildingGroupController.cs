@@ -6,9 +6,11 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Rhea.Business.Estate;
 using Rhea.Model.Estate;
+using Rhea.UI.Filters;
 
 namespace Rhea.UI.Areas.Admin.Controllers
 {
+    [EnhancedAuthorize]
     public class BuildingGroupController : Controller
     {
         #region Field

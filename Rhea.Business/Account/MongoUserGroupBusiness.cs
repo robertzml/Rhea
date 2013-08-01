@@ -34,8 +34,7 @@ namespace Rhea.Business.Account
             group.Id = doc["id"].AsInt32;
             group.Name = doc["name"].AsString;
             group.Title = doc["title"].AsString;
-            group.Rank = doc["rank"].AsInt32;
-            group.Type = doc["type"].AsInt32;
+            group.Rank = doc["rank"].AsInt32;            
             group.Remark = doc.GetValue("remark", "").AsString;
             group.Status = doc.GetValue("status", 0).AsInt32;
 
@@ -51,7 +50,7 @@ namespace Rhea.Business.Account
         public List<UserGroup> GetList()
         {
             List<UserGroup> data = new List<UserGroup>();
-            List<BsonDocument> docs = this.context.Find(RheaCollection.UserGroup, "type", 2);
+            List<BsonDocument> docs = this.context.FindAll(RheaCollection.UserGroup);
 
             foreach (BsonDocument doc in docs)
             {
@@ -81,6 +80,24 @@ namespace Rhea.Business.Account
         }
 
         /// <summary>
+        /// 获取用户组
+        /// </summary>
+        /// <param name="name">用户组名称</param>
+        /// <returns></returns>
+        public UserGroup Get(string name)
+        {
+            BsonDocument doc = this.context.FindOne(RheaCollection.UserGroup, "name", name);
+
+            if (doc != null)
+            {
+                UserGroup group = ModelBind(doc);
+                return group;
+            }
+            else
+                return null;
+        }
+
+        /// <summary>
         /// 用户组添加
         /// </summary>
         /// <param name="data">用户组数据</param>
@@ -96,8 +113,7 @@ namespace Rhea.Business.Account
                 { "id", data.Id },
                 { "name", data.Name },
                 { "title", data.Title },
-                { "rank", data.Rank },
-                { "type", 2 },
+                { "rank", data.Rank },              
                 { "remark", data.Remark ?? "" },
                 { "status", 0 }
             };

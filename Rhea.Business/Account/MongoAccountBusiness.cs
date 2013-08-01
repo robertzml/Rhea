@@ -47,18 +47,6 @@ namespace Rhea.Business.Account
         /// <param name="user">用户</param>
         private void GetGroupInfo(ref UserProfile user)
         {
-            IManagerGroupBusiness managerGroupBusiness = new MongoManagerGroupBusiness();
-            if (user.ManagerGroupId != 0)
-            {
-                ManagerGroup mGroup = managerGroupBusiness.Get(user.ManagerGroupId);
-                if (mGroup != null)
-                    user.ManagerGroupName = mGroup.Name;
-                else
-                    user.ManagerGroupName = "Null";
-            }
-            else
-                user.ManagerGroupName = "Null";
-
             IUserGroupBusiness userGroupBusiness = new MongoUserGroupBusiness();
             if (user.UserGroupId != 0)
             {
@@ -84,8 +72,7 @@ namespace Rhea.Business.Account
             user.Id = user._id.ToString();
             user.UserName = doc["userName"].AsString;
             user.UserId = doc.GetValue("userId", "").AsString;
-            user.UserGroupId = doc["userGroupId"].AsInt32;
-            user.ManagerGroupId = doc["managerGroupId"].AsInt32;
+            user.UserGroupId = doc["userGroupId"].AsInt32;          
             user.LastLoginTime = doc.GetValue("lastLoginTime", DateTime.Now).ToLocalTime();
             user.CurrentLoginTime = doc.GetValue("currentLoginTime", DateTime.Now).ToLocalTime();
             user.IsSystem = doc.GetValue("isSystem", false).AsBoolean;
@@ -120,8 +107,7 @@ namespace Rhea.Business.Account
                 user._id = doc["_id"].AsObjectId;
                 user.UserName = userName;
                 user.UserId = doc.GetValue("userId", "").AsString;
-                user.UserGroupId = doc.GetValue("userGroupId", 0).AsInt32;
-                user.ManagerGroupId = doc.GetValue("managerGroupId", 0).AsInt32;
+                user.UserGroupId = doc.GetValue("userGroupId", 0).AsInt32;           
                 user.LastLoginTime = doc.GetValue("currentLoginTime", DateTime.Now).ToLocalTime();
                 user.CurrentLoginTime = DateTime.Now;
                 user.Status = doc.GetValue("status", 0).AsInt32;
@@ -216,8 +202,7 @@ namespace Rhea.Business.Account
             {
                 { "userId", data.UserId },
                 { "userName", data.UserName },
-                { "password", Hasher.SHA1Encrypt(data.Password) },
-                { "managerGroupId", data.ManagerGroupId },
+                { "password", Hasher.SHA1Encrypt(data.Password) },             
                 { "userGroupId", data.UserGroupId },
                 { "isSystem", true },           
                 { "status", 0 }
@@ -247,13 +232,11 @@ namespace Rhea.Business.Account
 
                 if (string.IsNullOrEmpty(data.Password))
                 {
-                    update = Update.Set("managerGroupId", data.ManagerGroupId)
-                        .Set("userGroupId", data.UserGroupId);
+                    update = Update.Set("userGroupId", data.UserGroupId);
                 }
                 else
                 {
-                    update = Update.Set("managerGroupId", data.ManagerGroupId)
-                        .Set("userGroupId", data.UserGroupId)
+                    update = Update.Set("userGroupId", data.UserGroupId)
                         .Set("password", Hasher.SHA1Encrypt(data.Password));
                 }
                 WriteConcernResult result = this.context.Update(RheaCollection.User, query, update);

@@ -47,7 +47,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account\ManagerGroup.cs" />
     <Compile Include="Account\UserGroup.cs" />
     <Compile Include="Account\UserProfile.cs" />
     <Compile Include="Estate\Building.cs" />

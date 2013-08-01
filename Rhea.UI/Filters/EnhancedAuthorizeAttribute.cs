@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using Rhea.Business.Account;
 
 namespace Rhea.UI.Filters
 {
@@ -13,14 +14,18 @@ namespace Rhea.UI.Filters
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
     public class EnhancedAuthorizeAttribute : AuthorizeAttribute
     {
-        #region Property
-        /// <summary>
-        /// 用户角色
-        /// </summary>
-        public string Roles2 = "";
-        #endregion //Property
-
         #region Function
+        /// <summary>
+        /// 判断角色
+        /// </summary>
+        /// <param name="userRoles">用户角色</param>
+        /// <param name="actionRoles">要求角色</param>
+        /// <returns></returns>
+        private bool CheckRole(string[] userRoles, string[] actionRoles)
+        {
+            return actionRoles.Any(r => userRoles.Contains(r));
+        }
+
         /// <summary>
         /// 根据cookie检查
         /// </summary>
@@ -49,11 +54,18 @@ namespace Rhea.UI.Filters
 
             if (authTicket != null)
             {
+                bool result;
                 string[] userRoles = authTicket.UserData.Split(',');
                 string[] roles = Roles.Split(',');
-                return roles.Any(x => userRoles.Contains(x));
+
+                if (string.IsNullOrEmpty(Roles))
+                    result = true;
+                else
+                    result = CheckRole(userRoles, roles);            
+
+                return result;
             }
-            return false;  
+            return false;
         }
 
         /// <summary>
@@ -66,22 +78,35 @@ namespace Rhea.UI.Filters
             if (httpContext.User != null && httpContext.User.Identity.IsAuthenticated)
             {
                 FormsIdentity fi = (FormsIdentity)httpContext.User.Identity;
+
+                bool result;
                 string[] userRoles = fi.Ticket.UserData.Split(',');
                 string[] actionRoles = Roles.Split(',');
-                if (actionRoles.Any(r => userRoles.Contains(r)))
-                    return true; //base.AuthorizeCore(httpContext);
+
+                if (string.IsNullOrEmpty(Roles))
+                    result = true;
                 else
-                    return false;
+                    result = CheckRole(userRoles, actionRoles);             
+
+                return result;
             }
 
             return false;
         }
 
+        /// <summary>
+        /// 用户检查
+        /// </summary>
+        /// <param name="httpContext"></param>
+        /// <returns></returns>
         protected override bool AuthorizeCore(System.Web.HttpContextBase httpContext)
         {
             bool result = checkByUser(httpContext);
             return result;
         }
         #endregion //Function
+
+        #region Property       
+        #endregion //Property
     }
 }

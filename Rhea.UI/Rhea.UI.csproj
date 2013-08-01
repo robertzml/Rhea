@@ -169,7 +169,6 @@
     <Compile Include="Areas\Admin\Controllers\DictionaryController.cs" />
     <Compile Include="Areas\Admin\Controllers\EstateController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
-    <Compile Include="Areas\Admin\Controllers\ManagerGroupController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoomController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserGroupController.cs" />
     <Compile Include="Areas\Admin\Models\RoomModels.cs" />
@@ -1672,15 +1671,6 @@
     <Content Include="Areas\Admin\Views\UserGroup\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\ManagerGroup\List.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Admin\Views\ManagerGroup\Details.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Admin\Views\ManagerGroup\Edit.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Areas\Admin\Views\UserGroup\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -1688,9 +1678,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Account\List.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Admin\Views\ManagerGroup\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\UserGroup\Create.cshtml" />

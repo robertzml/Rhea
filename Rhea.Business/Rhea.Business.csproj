@@ -59,9 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account\IManagerGroupBusiness.cs" />
     <Compile Include="Account\IUserGroupBusiness.cs" />
-    <Compile Include="Account\MongoManagerGroupBusiness.cs" />
     <Compile Include="Account\MongoUserGroupBusiness.cs" />
     <Compile Include="ApiService.cs" />
     <Compile Include="Estate\EstateDictionaryBusiness.cs" />

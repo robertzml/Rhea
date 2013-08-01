@@ -20,7 +20,7 @@
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
                 <fieldset>
-                    <legend>@ViewBag.Title</legend>                
+                    <legend>@ViewBag.Title</legend>
             
                     <table class="table table-bordered table-striped">
                         <thead>
@@ -33,7 +33,7 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody>                           
+                        <tbody>
                             <tr>
                                 <td>
                                     @Html.DisplayNameFor(model => model.UserId)
@@ -63,15 +63,6 @@
                             </tr>
                             <tr>
                                 <td>
-                                    @Html.DisplayNameFor(model => model.ManagerGroupId)
-                                </td>
-                                <td>
-                                    @Html.EditorFor(model => model.ManagerGroupId)
-                                    @Html.ValidationMessageFor(model => model.ManagerGroupId)
-                                </td>
-                            </tr>                            
-                            <tr>
-                                <td>
                                     @Html.DisplayNameFor(model => model.UserGroupId)
                                 </td>
                                 <td>
@@ -83,7 +74,7 @@
                     </table>
             
                     <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">保存</button>                       
+                        <button type="submit" class="btn btn-primary">保存</button>
                         <a class="btn" href="@Url.Action("List", new { controller = "Account", area = "Admin" })">回到列表</a> 
                     </div>
                 </fieldset>
