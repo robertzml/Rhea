@@ -45,11 +45,20 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// <summary>
         /// 用户列表
         /// </summary>
+        /// <param name="groupId">用户组ID</param>
         /// <returns></returns>       
-        public ActionResult List()
+        public ActionResult List(int groupId = 0)
         {
-            var data = this.accountBusiness.GetList();
-            return View(data);
+            if (groupId == 0)
+            {
+                var data = this.accountBusiness.GetList();
+                return View(data);
+            }
+            else
+            {
+                var data = this.accountBusiness.GetList(groupId);
+                return View(data);
+            }
         }
 
         /// <summary>

@@ -1409,7 +1409,6 @@
     <Content Include="Images\orderedList8.png" />
     <Content Include="Images\orderedList9.png" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
@@ -1767,6 +1766,8 @@
     <Content Include="Views\Statistic\DepartmentAverageOfficeAreaCompare.cshtml" />
     <Content Include="Views\Statistic\DepartmentAverageResearchAreaCompare.cshtml" />
     <Content Include="Views\Statistic\DepartmentResearchFundsAreaCompare.cshtml" />
+    <Content Include="Views\Account\Info.cshtml" />
+    <Content Include="Views\Account\Summary.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

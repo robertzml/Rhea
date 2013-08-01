@@ -98,7 +98,26 @@ namespace Rhea.UI.Controllers
         }
 
         /// <summary>
-        /// 设置
+        /// 用户信息
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Info()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 用户摘要
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Summary()
+        {
+            UserProfile user = this.accountBusiness.GetByUserName(User.Identity.Name);
+            return View(user);
+        }
+
+        /// <summary>
+        /// 用户设置
         /// </summary>
         /// <returns></returns>
         public ActionResult Setting()
@@ -153,7 +172,7 @@ namespace Rhea.UI.Controllers
             }
 
             return View(model);
-        }        
+        }    
         #endregion //Action
     }
 }

@@ -79,7 +79,7 @@
             <a class="btn btn-success" href="@Url.Action("List", new { controller = "UserGroup", area = "Admin" })"><i class="icon-list icon-white"></i> 回到列表</a> 
             <a class="btn btn-warning" href="@Url.Action("Edit", new { controller = "UserGroup", id = Model.Id, area = "Admin" })"><i class="icon-edit icon-white"></i> 编辑</a> 
             <a class="btn btn-danger" href="@Url.Action("Delete", new { controller = "UserGroup", id = Model.Id, area = "Admin" })"><i class="icon-remove icon-white"></i> 删除</a>
-            <a class="btn btn-info" href="@Url.Action("ListByBuilding", new { controller = "UserGroup", area = "Admin" })"><i class="icon-th-large icon-white"></i> 用户</a>
+            <a class="btn btn-info" href="@Url.Action("List", new { controller = "Account", area = "Admin", groupId = Model.Id })"><i class="icon-th-large icon-white"></i> 用户</a>
         </p>
 
     </div>

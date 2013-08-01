@@ -14,6 +14,13 @@ namespace Rhea.UI.Filters
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
     public class EnhancedAuthorizeAttribute : AuthorizeAttribute
     {
+        #region Field
+        /// <summary>
+        /// 要求级别
+        /// </summary>
+        private int rank = 0;
+        #endregion //Field
+
         #region Function
         /// <summary>
         /// 判断角色
@@ -24,6 +31,22 @@ namespace Rhea.UI.Filters
         private bool CheckRole(string[] userRoles, string[] actionRoles)
         {
             return actionRoles.Any(r => userRoles.Contains(r));
+        }
+
+        /// <summary>
+        /// 判断级别
+        /// </summary>
+        /// <param name="userRoles">用户角色</param>
+        /// <returns></returns>
+        private bool CheckRank(string[] userRoles)
+        {
+            IUserGroupBusiness business = new MongoUserGroupBusiness();
+            var group = business.Get(userRoles[0]);
+
+            if (group == null)
+                return false;
+            else
+                return group.Rank >= rank;
         }
 
         /// <summary>
@@ -61,7 +84,7 @@ namespace Rhea.UI.Filters
                 if (string.IsNullOrEmpty(Roles))
                     result = true;
                 else
-                    result = CheckRole(userRoles, roles);            
+                    result = CheckRole(userRoles, roles);
 
                 return result;
             }
@@ -86,7 +109,10 @@ namespace Rhea.UI.Filters
                 if (string.IsNullOrEmpty(Roles))
                     result = true;
                 else
-                    result = CheckRole(userRoles, actionRoles);             
+                    result = CheckRole(userRoles, actionRoles);
+
+                if (rank != 0)
+                    result &= CheckRank(userRoles);
 
                 return result;
             }
@@ -106,7 +132,21 @@ namespace Rhea.UI.Filters
         }
         #endregion //Function
 
-        #region Property       
+        #region Property
+        /// <summary>
+        /// 要求级别
+        /// </summary>
+        public int Rank
+        {
+            get
+            {
+                return this.rank;
+            }
+            set
+            {
+                this.rank = value;
+            }
+        }
         #endregion //Property
     }
 }

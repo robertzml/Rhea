@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Rhea.Business;
+using Rhea.Business.Account;
 using Rhea.Business.Estate;
 using Rhea.Business.Personnel;
+using Rhea.Model.Account;
 using Rhea.Model.Estate;
 using Rhea.Model.Personnel;
 
@@ -36,11 +37,28 @@ namespace Rhea.Business
             return name;
         }
 
+        /// <summary>
+        /// 学科类型名称
+        /// </summary>
+        /// <param name="department">部门对象</param>
+        /// <returns></returns>
         public static string SubjectTypeName(this Department department)
         {
             IDictionaryBusiness dictionaryBusiness = new PersonnelDictionaryBusiness();
             string name = dictionaryBusiness.GetItemValue("SubjectType", department.SubjectType);
             return name;
+        }
+
+        /// <summary>
+        /// 用户组名称
+        /// </summary>
+        /// <param name="user">用户对象</param>
+        /// <returns></returns>
+        public static string UserGroupTitle(this UserProfile user)
+        {
+            IUserGroupBusiness userGroupBusiness = new MongoUserGroupBusiness();
+            string title = userGroupBusiness.Get(user.UserGroupId).Title;
+            return title;
         }
     }
 }

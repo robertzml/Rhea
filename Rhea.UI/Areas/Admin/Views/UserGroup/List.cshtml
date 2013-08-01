@@ -45,7 +45,7 @@
                                 <a class="btn btn-success btn-small" href="@Url.Action("Details", new { controller = "UserGroup", id = item.Id, area = "Admin" })"><i class="icon-zoom-in icon-white"></i>查看</a>
                                 <a class="btn btn-warning btn-small" href="@Url.Action("Edit", new { controller = "UserGroup", id = item.Id, area = "Admin" })"><i class="icon-edit icon-white"></i>编辑</a> 
                                 <a class="btn btn-danger btn-small" href="@Url.Action("Delete", new { controller = "UserGroup", id = item.Id, area = "Admin" })"><i class="icon-remove icon-white"></i>删除</a>
-                                <a class="btn btn-info btn-small" href="@Url.Action("UserList", new { controller = "UserGroup", buildingId = item.Id, area = "Admin" })"><i class="icon-th-large icon-white"></i>用户</a>
+                                <a class="btn btn-info btn-small" href="@Url.Action("List", new { controller = "Account", groupId = item.Id, area = "Admin" })"><i class="icon-th-large icon-white"></i>用户</a>
                             </td>
                         </tr>
                     }

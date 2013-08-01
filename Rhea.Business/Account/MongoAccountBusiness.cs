@@ -184,6 +184,25 @@ namespace Rhea.Business.Account
         }
 
         /// <summary>
+        /// 获取用户列表
+        /// </summary>
+        /// <param name="userGroupId">用户组ID</param>
+        /// <returns></returns>
+        public List<UserProfile> GetList(int userGroupId)
+        {
+            List<UserProfile> data = new List<UserProfile>();
+            List<BsonDocument> docs = this.context.Find(RheaCollection.User, "userGroupId", userGroupId);
+
+            foreach (BsonDocument doc in docs)
+            {
+                UserProfile g = ModelBind(doc);
+                data.Add(g);
+            }
+
+            return data.OrderBy(r => r.UserId).ToList();
+        }
+
+        /// <summary>
         /// 用户添加
         /// </summary>
         /// <param name="data">用户数据</param>

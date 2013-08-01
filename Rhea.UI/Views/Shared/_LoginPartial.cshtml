@@ -10,13 +10,13 @@
             <li class="menu">
                 <ul>
                     <li>
-                        <a href="#"><span class="icon16 icomoon-icon-comments-2"></span>信息</a>
+                        <a href="@Url.Action("Info", new { controller = "Account", area = "" })"><span class="icon16 icomoon-icon-user-3"></span>信息</a>
                     </li>
                     <li>
-                        <a href="@Url.Action("Setting", "Account")"><span class="icon16 icomoon-icon-user-3"></span>设置</a>
+                        <a href="@Url.Action("Setting", new { controller = "Account", area = "" })"><span class="icon16 icomoon-icon-cog-2"></span>设置</a>
                     </li>
                     <li>
-                        <a href="@Url.Action("Logout", "Account")"><span class="icon16 icomoon-icon-exit"></span>注销</a>
+                        <a href="@Url.Action("Logout", new { controller = "Account", area = "" })"><span class="icon16 icomoon-icon-exit"></span>注销</a>
                     </li>
                 </ul>
             </li>
@@ -25,5 +25,5 @@
 }
 else
 {
-    <li><a href="@Url.Action("Login", "Account")"><span class="icon16 icomoon-icon-user-2"></span> 登录</a></li>
+    <li><a href="@Url.Action("Login", new { controller = "Account", area = "" })"><span class="icon16 icomoon-icon-user-2"></span> 登录</a></li>
 }

@@ -2,6 +2,14 @@
     Layout = null;    
 }
 
-<p>
-    @ViewBag.Message
-</p>
+<div class="row-fluid">
+    <div class="span12">
+        <div class="alert alert-block alert-info fade in">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <h4 class="alert-heading">消息</h4>
+            <p>
+                @ViewBag.Message
+            </p>
+        </div>
+    </div>
+</div>

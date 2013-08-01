@@ -79,6 +79,12 @@ namespace Rhea.Model.Account
         public bool IsSystem { get; set; }
 
         /// <summary>
+        /// 头像地址
+        /// </summary>
+        [Display(Name = "头像")]
+        public string AvatarUrl { get; set; }
+
+        /// <summary>
         /// 系统状态
         /// </summary>
         /// <remarks>

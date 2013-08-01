@@ -7,10 +7,12 @@ using Rhea.Business.Estate;
 using Rhea.Business.Personnel;
 using Rhea.Model.Estate;
 using Rhea.Model.Personnel;
+using Rhea.UI.Filters;
 using Rhea.UI.Models;
 
 namespace Rhea.UI.Controllers
-{
+{    
+    [EnhancedAuthorize]
     public class HomeController : Controller
     {
         /// <summary>
@@ -65,14 +67,7 @@ namespace Rhea.UI.Controllers
             data.Departments = departmentBusiness.GetList();
 
             return View(data);
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "你的应用程序说明页。";
-
-            return View();
-        }
+        }        
 
         public ActionResult Contact()
         {
