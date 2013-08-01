@@ -10,6 +10,8 @@ namespace Rhea.UI.Areas.Estate.Models
     /// </summary>
     public class EstateSummaryModel
     {
+        public int CampusCount { get; set; }
+
         public int BuildingGroupCount { get; set; }
 
         public int BuildingCount { get; set; }

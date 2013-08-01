@@ -28,6 +28,9 @@ namespace Rhea.UI.Areas.Estate.Controllers
         {
             EstateSummaryModel data = new EstateSummaryModel();
 
+            ICampusBusiness campusBusiness = new MongoCampusBusiness();
+            data.CampusCount = campusBusiness.Count();
+            
             IBuildingGroupBusiness buildingGroupBusiness = new MongoBuildingGroupBusiness();
             data.BuildingGroupCount = buildingGroupBusiness.Count();
 

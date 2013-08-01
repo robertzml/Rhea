@@ -7,15 +7,24 @@
 @Html.Action("Heading", new { controller = "Common", area = "", title = ViewBag.Title, active = "房产概况" })
 
 <div class="row-fluid">
-    <div class="span5">
-        @Html.Action("TotalUseTypeArea", new { controller = "Statistic", area = "" })
+    <div class="span9">
+        <div class="page-header">
+            <h4>学校简介</h4>
+        </div>
+
+        <div class="content">
+            <p>
+            江南大学坐落于太湖之滨的江南名城——江苏省无锡市，是教育部直属、国家“211工程”重点建设高校和“985优势学科创新平台” 建设高校。
+            在部省市的支持下，学校现已建成占地面积3200亩、建筑面积107万平方米，以“生态校园，曲水流觞”为设计理念，设施先进、功能齐全、环境优美的校园。
+            </p>
+            <p>
+            江南大学享有“轻工高等教育明珠”的美誉。学校源于1902年创建的三江师范学堂，历经国立中央大学、南京大学等发展时期；1952年由原中央大学、复旦大学、武汉大学、浙江大学、江南大学的有关系科组建南京工学院（现东南大学）食品工业系，1958年该系整建制东迁无锡，建立无锡轻工业学院，1995年更名为无锡轻工大学；
+            2001年1月，经教育部批准，无锡轻工大学、江南学院、无锡教育学院合并组建江南大学；2003年，东华大学无锡校区并入江南大学。历经百年风雨沧桑和半个多世纪的独立办学，江南大学现已建成一所规模结构较为合理，教学质量优秀，办学效益显著，教学、科研、服务均得到社会高度评价，在国内外具有一定知名度的特色鲜明的大学。
+            </p>
+        </div>
     </div>
 
-    <div class="span5">
-        @Html.Action("LandType", new { controller = "Statistic", area = "" })
-    </div>    
-
-    <div class="span2">
+    <div class="span3">
         <div class="infoview">
             <h4>总计</h4>
             <ul>
@@ -23,7 +32,7 @@
                     <div class="icon">
                         <span class="icon32 icomoon-icon-cog dark"></span>
                     </div>
-                    <span class="number">1</span> 
+                    <span class="number">@Model.CampusCount</span> 
                     <span class="txt"> 校区 </span>
                 </li>       
                 <li class="clearfix">
@@ -58,6 +67,16 @@
         </div><!-- End .reminder -->
     </div>
 
+</div>
+
+<div class="row-fluid">
+    <div class="span6">
+        @Html.Action("TotalUseTypeArea", new { controller = "Statistic", area = "" })
+    </div>
+
+    <div class="span6">
+        @Html.Action("LandType", new { controller = "Statistic", area = "" })
+    </div>  
 </div>
 
 <script type="text/javascript">

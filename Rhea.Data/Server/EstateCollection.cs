@@ -12,6 +12,12 @@ namespace Rhea.Data.Server
     {
         #region Field
         /// <summary>
+        /// 校区表
+        /// campus
+        /// </summary>
+        public static readonly string Campus = "campus";
+
+        /// <summary>
         /// 楼群表
         /// buildingGroup
         /// </summary>

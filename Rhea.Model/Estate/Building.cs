@@ -94,7 +94,7 @@ namespace Rhea.Model.Estate
         /// <summary>
         /// 备注
         /// </summary>
-        [StringLength(500)]
+        [StringLength(1000)]
         [DataType(DataType.MultilineText)]
         [Display(Name = "备注")]
         public string Remark { get; set; }

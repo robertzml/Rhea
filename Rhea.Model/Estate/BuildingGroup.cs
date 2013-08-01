@@ -37,6 +37,12 @@ namespace Rhea.Model.Estate
         public string PartMapUrl { get; set; }
 
         /// <summary>
+        /// 所属校区ID
+        /// </summary>
+        [Display(Name = "所属校区")]
+        public int CampusId { get; set; }
+
+        /// <summary>
         /// 楼宇栋数
         /// </summary>        
         [Range(1, int.MaxValue)]
@@ -169,7 +175,7 @@ namespace Rhea.Model.Estate
         /// <summary>
         /// 备注
         /// </summary>        
-        [StringLength(500)]
+        [StringLength(1000)]
         [DataType(DataType.MultilineText)]
         [Display(Name = "备注")]
         public string Remark { get; set; }

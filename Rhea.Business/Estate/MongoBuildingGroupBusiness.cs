@@ -35,6 +35,7 @@ namespace Rhea.Business.Estate
             buildingGroup.Name = doc["name"].AsString;
             buildingGroup.ImageUrl = doc.GetValue("imageUrl", "").AsString;
             buildingGroup.PartMapUrl = doc.GetValue("partMapUrl", "").AsString;
+            buildingGroup.CampusId = doc["campusId"].AsInt32;
             buildingGroup.BuildingCount = (int?)doc.GetValue("buildingCount", null);
             buildingGroup.AreaCoeffcient = doc.GetValue("areaCoeffcient", "").AsString;
             buildingGroup.BuildArea = (double?)doc.GetValue("buildArea", null);
