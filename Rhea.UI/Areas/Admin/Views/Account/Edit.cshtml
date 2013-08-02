@@ -70,6 +70,18 @@
                                     @Html.ValidationMessageFor(model => model.UserGroupId)
                                 </td>
                             </tr>
+                            @if (Model.UserGroupId == 100004)
+                            {
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.DepartmentId)
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.DepartmentId)
+                                    @Html.ValidationMessageFor(model => model.DepartmentId)
+                                </td>
+                            </tr>
+                            }
                         </tbody>
                     </table>
 

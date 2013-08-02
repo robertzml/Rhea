@@ -28,5 +28,10 @@ namespace Rhea.UI.Models
     public class DepartmentMenuModel
     {
         public List<Department> Departments { get; set; }
+
+        /// <summary>
+        /// 部门管理员相关
+        /// </summary>
+        public Department Single { get; set; }
     }
 }

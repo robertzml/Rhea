@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Rhea.Business.Account;
+using Rhea.Business.Personnel;
 using Rhea.Model.Account;
 using Rhea.UI.Filters;
 
@@ -69,6 +70,14 @@ namespace Rhea.UI.Areas.Admin.Controllers
         public ActionResult Details(string id)
         {
             var data = this.accountBusiness.Get(id);
+
+            if (data.DepartmentId == 0)
+                ViewBag.DepartmentName = "";
+            else
+            {
+                IDepartmentBusiness departmentBusiness = new MongoDepartmentBusiness();
+                ViewBag.DepartmentName = departmentBusiness.GetName(data.DepartmentId);
+            }
             return View(data);
         }
 

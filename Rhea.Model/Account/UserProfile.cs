@@ -79,6 +79,13 @@ namespace Rhea.Model.Account
         public bool IsSystem { get; set; }
 
         /// <summary>
+        /// 关联部门ID
+        /// </summary>
+        [UIHint("DepartmentDropDownList")]
+        [Display(Name = "关联部门")]
+        public int DepartmentId { get; set; }
+
+        /// <summary>
         /// 头像地址
         /// </summary>
         [Display(Name = "头像")]

@@ -8,9 +8,11 @@ using Rhea.Business;
 using Rhea.Business.Estate;
 using Rhea.Business.Personnel;
 using Rhea.Model.Estate;
+using Rhea.UI.Filters;
 
 namespace Rhea.UI.Areas.Estate.Controllers
 {
+    [EnhancedAuthorize]
     public class RoomController : Controller
     {
         #region Field

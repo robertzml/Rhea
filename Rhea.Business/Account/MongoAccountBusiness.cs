@@ -76,6 +76,7 @@ namespace Rhea.Business.Account
             user.LastLoginTime = doc.GetValue("lastLoginTime", DateTime.Now).ToLocalTime();
             user.CurrentLoginTime = doc.GetValue("currentLoginTime", DateTime.Now).ToLocalTime();
             user.IsSystem = doc.GetValue("isSystem", false).AsBoolean;
+            user.DepartmentId = doc.GetValue("departmentId", 0).AsInt32;
             user.Status = doc.GetValue("status", 0).AsInt32;
 
             GetGroupInfo(ref user);
@@ -110,6 +111,7 @@ namespace Rhea.Business.Account
                 user.UserGroupId = doc.GetValue("userGroupId", 0).AsInt32;           
                 user.LastLoginTime = doc.GetValue("currentLoginTime", DateTime.Now).ToLocalTime();
                 user.CurrentLoginTime = DateTime.Now;
+                user.DepartmentId = doc.GetValue("departmentId", 0).AsInt32;
                 user.Status = doc.GetValue("status", 0).AsInt32;
 
                 GetGroupInfo(ref user);
@@ -251,13 +253,16 @@ namespace Rhea.Business.Account
 
                 if (string.IsNullOrEmpty(data.Password))
                 {
-                    update = Update.Set("userGroupId", data.UserGroupId);
+                    update = Update.Set("userGroupId", data.UserGroupId)
+                        .Set("departmentId", (BsonValue)data.DepartmentId);
                 }
                 else
                 {
                     update = Update.Set("userGroupId", data.UserGroupId)
-                        .Set("password", Hasher.SHA1Encrypt(data.Password));
-                }
+                        .Set("password", Hasher.SHA1Encrypt(data.Password))
+                        .Set("departmentId", (BsonValue)data.DepartmentId);
+                }               
+
                 WriteConcernResult result = this.context.Update(RheaCollection.User, query, update);
 
                 if (result.HasLastErrorMessage)

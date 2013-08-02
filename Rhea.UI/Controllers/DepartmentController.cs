@@ -12,9 +12,11 @@ using Rhea.Data.Personnel;
 using Rhea.Model.Estate;
 using Rhea.Model.Personnel;
 using Rhea.UI.Models;
+using Rhea.UI.Filters;
 
 namespace Rhea.UI.Controllers
 {
+    [EnhancedAuthorize(Rank = 400)]
     public class DepartmentController : Controller
     {
         #region Field

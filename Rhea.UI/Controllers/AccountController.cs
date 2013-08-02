@@ -8,6 +8,7 @@ using Rhea.Business.Account;
 using Rhea.Model.Account;
 using Rhea.UI.Models;
 using Rhea.UI.Services;
+using Rhea.UI.Filters;
 
 namespace Rhea.UI.Controllers
 {

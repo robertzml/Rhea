@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "部门导航";
+    bool isDepartment = User.IsInRole2("Department");
 }
 
 <!--Responsive navigation button-->
@@ -42,7 +43,13 @@
         <!-- End .sidenav-widget -->
         <div class="mainnav">
             <ul>
-                <li><a href="#" id="department-summary"><span class="icon16 icomoon-icon-newspaper"></span>摘要</a></li>               
+            @if (isDepartment)
+            {
+                <li><a href="#" ref="@Model.Single.Id" class="department-index" title="@Model.Single.Name"><span class="icon16 icomoon-icon-file"></span>@Model.Single.Name</a></li>
+            }
+            else
+            {
+                <li><a href="#" id="department-summary"><span class="icon16 icomoon-icon-newspaper"></span>摘要</a></li>
                 <li><a href="#"><span class="icon16 icomoon-icon-graduation"></span>教学院系<span class="notification green">@Model.Departments.Where(r => r.Type == 1).Count()</span></a>
                     <ul class="sub scroll">
                     @foreach (var r in Model.Departments.Where(r => r.Type == 1))
@@ -106,7 +113,8 @@
                         <li><a href="#" ref="@r.Id" class="department-index" title="@r.Name"><span class="icon16 icomoon-icon-file"></span>@r.Name</a></li>
                     }
                     </ul>
-                </li>               
+                </li>
+            }
             </ul>
         </div>
     </div>
@@ -119,7 +127,14 @@
     <div class="contentwrapper">
         <!-- Build page from here: -->
         <div id="ajax-content1">
-        @Html.Action("Summary", new { controller = "Department", area = "" })
+        @if (isDepartment)
+        {
+            
+        }
+        else
+        {
+            @Html.Action("Summary", new { controller = "Department", area = "" })
+        }
         </div>
         <!--End page -->
     </div>
@@ -127,10 +142,6 @@
 <!-- End #content -->
 
 @section scripts {
-<script type="text/javascript" src="@Url.Content("~/Plugins/charts/sparkline/jquery.sparkline.min.js")"></script>
-<script type="text/javascript" src="@Url.Content("~/Plugins/charts/knob/jquery.knob.js")"></script>
-<script type="text/javascript" src="@Url.Content("~/Plugins/misc/nicescroll/jquery.nicescroll.min.js")"></script>
-
 <script type="text/javascript">
     $(function () {
         $('.navbar .nav #nav-department').parent().addClass('active');

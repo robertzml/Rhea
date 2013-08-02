@@ -10,9 +10,11 @@ using Rhea.Business.Personnel;
 using Rhea.Data.Estate;
 using Rhea.Model.Estate;
 using Rhea.UI.Areas.Estate.Models;
+using Rhea.UI.Filters;
 
 namespace Rhea.UI.Areas.Estate.Controllers
 {
+    [EnhancedAuthorize]
     public class BuildingGroupController : Controller
     {
         #region Field

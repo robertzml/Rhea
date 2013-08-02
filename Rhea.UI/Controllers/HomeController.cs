@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Rhea.Business.Account;
 using Rhea.Business.Estate;
 using Rhea.Business.Personnel;
 using Rhea.Model.Estate;
 using Rhea.Model.Personnel;
 using Rhea.UI.Filters;
 using Rhea.UI.Models;
+using Rhea.UI.Services;
 
 namespace Rhea.UI.Controllers
 {    
@@ -37,6 +39,7 @@ namespace Rhea.UI.Controllers
         /// 楼群导航
         /// </summary>
         /// <returns></returns>
+        [EnhancedAuthorize(Rank = 450)]
         public ActionResult Estate()
         {
             EstateMenuModel data = new EstateMenuModel();
@@ -59,15 +62,23 @@ namespace Rhea.UI.Controllers
         /// 部门导航
         /// </summary>
         /// <returns></returns>
+        [EnhancedAuthorize(Rank = 400)]
         public ActionResult Department()
         {
             DepartmentMenuModel data = new DepartmentMenuModel();
-
             IDepartmentBusiness departmentBusiness = new MongoDepartmentBusiness();
-            data.Departments = departmentBusiness.GetList();
+
+            if (User.IsInRole2("Department"))
+            {
+                IAccountBusiness accountBusiness = new MongoAccountBusiness();
+                var user = accountBusiness.GetByUserName(User.Identity.Name);
+                data.Single = departmentBusiness.Get(user.DepartmentId);
+            }
+            else
+                data.Departments = departmentBusiness.GetList();
 
             return View(data);
-        }        
+        }
 
         public ActionResult Contact()
         {

@@ -5,9 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using Rhea.Business.Estate;
 using Rhea.UI.Areas.Estate.Models;
+using Rhea.UI.Filters;
 
 namespace Rhea.UI.Areas.Estate.Controllers
 {
+    [EnhancedAuthorize]
     public class HomeController : Controller
     {
         #region Action
