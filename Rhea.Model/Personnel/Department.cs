@@ -203,7 +203,7 @@ namespace Rhea.Model.Personnel
         public double AdjustArea { get; set; }
         #endregion //College Special Area Property
 
-        #region Department Scale Property
+        #region Institution Scale Property
         /// <summary>
         /// 正校长(书记)
         /// </summary>
@@ -233,6 +233,6 @@ namespace Rhea.Model.Personnel
         /// </summary>
         [Display(Name = "部门成员")]
         public int MemberCount { get; set; }
-        #endregion //Department Scale Property
+        #endregion //Institution Scale Property
     }
 }

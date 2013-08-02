@@ -38,6 +38,18 @@ namespace Rhea.Business
         }
 
         /// <summary>
+        /// 房间所属楼宇楼层总数
+        /// </summary>
+        /// <param name="room">房间对象</param>
+        /// <returns></returns>
+        public static int TotalFloor(this Room room)
+        {
+            IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
+            int total = Convert.ToInt32(buildingBusiness.Get(room.BuildingId).AboveGroundFloor);
+            return total;
+        }
+
+        /// <summary>
         /// 学科类型名称
         /// </summary>
         /// <param name="department">部门对象</param>

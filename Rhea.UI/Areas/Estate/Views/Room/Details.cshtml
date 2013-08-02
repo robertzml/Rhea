@@ -11,7 +11,7 @@
     <div class="span12">
         <ul class="nav nav-tabs" id="myTab">
             <li class="active"><a href="#info">基础信息</a></li>
-            <li><a href="#additional">附加信息</a></li>                   
+            <li><a href="#additional">附加信息</a></li>
         </ul>
 
         <div id="myTabContent" class="tab-content">
@@ -54,26 +54,34 @@
                         </tr>
                         <tr>
                             <td>
+                                @Html.DisplayNameFor(model => model.Function)
+                            </td>
+                            <td>
+                                @Model.Function.Property
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.DepartmentId)
+                            </td>
+                            <td>
+                                @Model.DepartmentName()
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.BuildingId)
+                            </td>
+                            <td>
+                                @Model.BuildingName()
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 @Html.DisplayNameFor(model => model.Floor)
                             </td>
                             <td>
-                                @Model.Floor
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                @Html.DisplayNameFor(model => model.Span)
-                            </td>
-                            <td>
-                                @Model.Span
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                @Html.DisplayNameFor(model => model.Orientation)
-                            </td>
-                            <td>
-                                @Model.Orientation
+                                @Model.Floor / @Model.TotalFloor()
                             </td>
                         </tr>
                         <tr>
@@ -94,35 +102,27 @@
                         </tr>
                         <tr>
                             <td>
-                                @Html.DisplayNameFor(model => model.Function)
+                                @Html.DisplayNameFor(model => model.Span)
                             </td>
                             <td>
-                                @Model.Function.Property
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                @Html.DisplayNameFor(model => model.BuildingId)
-                            </td>
-                            <td>
-                                @Model.BuildingName()
+                                @Model.Span
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                @Html.DisplayNameFor(model => model.DepartmentId)
+                                @Html.DisplayNameFor(model => model.Orientation)
                             </td>
                             <td>
-                                @Model.DepartmentName()
+                                @Model.Orientation
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 @Html.DisplayNameFor(model => model.StartDate)
                             </td>
-                            <td>                                        
+                            <td>
                                 @if (Model.StartDate != null)
-                                {                                    
+                                {
                                     @Convert.ToDateTime(Model.StartDate).ToShortDateString();
                                 }
                             </td>
@@ -321,7 +321,7 @@
                         </tr>
                     </tbody>
                 </table>
-            </div>            
+            </div>
         </div>
     </div>
 </div>
@@ -333,6 +333,6 @@
         $('#myTab a').click(function (e) {
             e.preventDefault();
             $(this).tab('show');
-        });      
+        });
     });
 </script>

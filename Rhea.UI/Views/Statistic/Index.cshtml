@@ -60,6 +60,12 @@
                         <li><a href="#" id="department-avgfunds-area-compare"><span class="icon16 icomoon-icon-coins"></span>科研经费用房面积比较</a></li>
                     </ul>
                 </li>
+                <li><a href="#"><span class="icon16 icomoon-icon-equalizer-2"></span>行政机关房屋数据</a>
+                    <ul class="sub">
+                        <li><a href="#" id="institution-office-area-compare"><span class="icon16 icomoon-icon-stats-up"></span>办公用房面积比较</a></li>
+                        <li><a href="#" id="institution-avgoffice-area-compare"><span class="icon16 icomoon-icon-accessibility"></span>人均办公用房面积比较</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
@@ -161,6 +167,16 @@
 
         $('a#department-avgfunds-area-compare').click(function () {
             ajaxLoadPage2("DepartmentResearchFundsAreaCompare", "Statistic", {});
+            return false;
+        });
+
+        $('a#institution-office-area-compare').click(function () {
+            ajaxLoadPage2("InstitutionOfficeAreaCompare", "Statistic", {});
+            return false;
+        });
+
+        $('a#institution-avgoffice-area-compare').click(function () {
+            ajaxLoadPage2("InstitutionAverageOfficeAreaCompare", "Statistic", {});
             return false;
         });
     });

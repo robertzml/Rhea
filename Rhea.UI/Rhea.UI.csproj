@@ -352,16 +352,6 @@
     <Content Include="Images\search.png" />
     <Content Include="Images\spinner.png" />
     <Content Include="Images\ui.totop.png" />
-    <Content Include="Plugins\charts\flot\excanvas.min.js" />
-    <Content Include="Plugins\charts\flot\index.html" />
-    <Content Include="Plugins\charts\flot\jquery.flot.grow.js" />
-    <Content Include="Plugins\charts\flot\jquery.flot.js" />
-    <Content Include="Plugins\charts\flot\jquery.flot.min.js" />
-    <Content Include="Plugins\charts\flot\jquery.flot.orderBars.js" />
-    <Content Include="Plugins\charts\flot\jquery.flot.pie.js" />
-    <Content Include="Plugins\charts\flot\jquery.flot.pie.min.js" />
-    <Content Include="Plugins\charts\flot\jquery.flot.resize.js" />
-    <Content Include="Plugins\charts\flot\jquery.flot.tooltip_0.4.4.js" />
     <Content Include="Plugins\charts\highcharts\highcharts-more.js" />
     <Content Include="Plugins\charts\highcharts\highcharts.js" />
     <Content Include="Plugins\charts\highcharts\modules\annotations.js" />
@@ -476,7 +466,6 @@
     <Content Include="Plugins\forms\datepicker\bootstrap-datepicker.js" />
     <Content Include="Plugins\forms\datepicker\datepicker.css" />
     <Content Include="Plugins\forms\dualselect\jquery.dualListBox-1.3.min.js" />
-    <Content Include="Plugins\forms\elastic\jquery.elastic.js" />
     <Content Include="Plugins\forms\globalize\cultures\globalize.culture.af-ZA.js" />
     <Content Include="Plugins\forms\globalize\cultures\globalize.culture.af.js" />
     <Content Include="Plugins\forms\globalize\cultures\globalize.culture.am-ET.js" />
@@ -1723,6 +1712,8 @@
     <Content Include="Views\Statistic\DepartmentResearchFundsAreaCompare.cshtml" />
     <Content Include="Views\Account\Info.cshtml" />
     <Content Include="Views\Account\Summary.cshtml" />
+    <Content Include="Views\Statistic\InstitutionOfficeAreaCompare.cshtml" />
+    <Content Include="Views\Statistic\InstitutionAverageOfficeAreaCompare.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

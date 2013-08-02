@@ -58,7 +58,10 @@ namespace Rhea.UI.Controllers
 
             if (type != null)
             {
-                data = data.Where(r => r.Type == Convert.ToInt16(type)).ToList();
+                if (type == 1)
+                    data = data.Where(r => r.Type == 1).ToList();
+                else
+                    data = data.Where(r => r.Type != 1).ToList();
             }
 
             return View(data);
@@ -168,6 +171,24 @@ namespace Rhea.UI.Controllers
         /// </summary>
         /// <returns></returns>
         public ActionResult DepartmentResearchFundsAreaCompare()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 行政机关办公用房面积比较
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult InstitutionOfficeAreaCompare()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 行政机关人均办公用房面积比较
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult InstitutionAverageOfficeAreaCompare()
         {
             return View();
         }
@@ -410,6 +431,54 @@ namespace Rhea.UI.Controllers
             }
 
             data = data.OrderByDescending(r => r.AverageArea).ToList();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 机关办公面积
+        /// </summary>
+        /// <param name="sort">排序方式,1:总面积, 2:平均面积</param>
+        /// <returns></returns>
+        public JsonResult InstitutionOfficeAreaData(int sort)
+        {
+            IDepartmentBusiness departmentBusiness = new MongoDepartmentBusiness();
+            var departments = departmentBusiness.GetList().Where(r => r.Type != 1);
+
+            //get codes
+            IRoomBusiness roomBusiness = new MongoRoomBusiness();
+            var functionCodes = roomBusiness.GetFunctionCodeList();
+
+            List<DepartmentAverageAreaModel> data = new List<DepartmentAverageAreaModel>();
+
+            foreach (var department in departments)
+            {
+                RoomFirstClassifyAreaModel first = statisticBusiness.GetFirstClassifyArea("departmentId", department.Id,
+                    1, "办公面积", functionCodes, false);
+
+                DepartmentAverageAreaModel model = new DepartmentAverageAreaModel
+                {
+                    DepartmentId = department.Id,
+                    DepartmentName = department.Name,
+                    TotalArea = first.Area
+                };
+
+                Department addition = departmentBusiness.Get(department.Id, DepartmentAdditionType.ScaleData);
+                model.PeopleCount = addition.PresidentCount + addition.VicePresidentCount + addition.ChiefCount +
+                    addition.ViceChiefCount + addition.MemberCount;
+
+                if (model.PeopleCount == 0)
+                    model.AverageArea = 0;
+                else
+                    model.AverageArea = Math.Round(model.TotalArea / model.PeopleCount, 2);
+
+                data.Add(model);
+            }
+
+            if (sort == 1)
+                data = data.OrderByDescending(r => r.TotalArea).ToList();
+            else
+                data = data.OrderByDescending(r => r.AverageArea).ToList();
+
             return Json(data, JsonRequestBehavior.AllowGet);
         }
         #endregion //Json
