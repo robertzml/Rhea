@@ -11,6 +11,13 @@ namespace Rhea.Model.Estate
     /// </summary>    
     public class BuildingGroup
     {
+        #region Constructor
+        public BuildingGroup()
+        {
+            this.Editor = new BuildingGroupEditor();
+        }
+        #endregion //Constructor
+
         #region Database Property
         /// <summary>
         /// ID
@@ -167,6 +174,12 @@ namespace Rhea.Model.Estate
         public int UseType { get; set; }
 
         /// <summary>
+        /// 排序
+        /// </summary>
+        [Display(Name = "排序")]
+        public int Sort { get; set; }
+
+        /// <summary>
         /// 图片展示
         /// </summary>
         [Display(Name = "图片展示")]
@@ -181,11 +194,42 @@ namespace Rhea.Model.Estate
         public string Remark { get; set; }
 
         /// <summary>
+        /// 编辑属性
+        /// </summary>
+        [Display(Name = "编辑属性")]
+        public BuildingGroupEditor Editor { get; set; }
+
+        /// <summary>
         /// 状态
         /// </summary>
         [Display(Name = "状态")]
         public int Status { get; set; }
         #endregion //Database Property
+
+        #region Inner Class
+        /// <summary>
+        /// 编辑属性
+        /// </summary>
+        public class BuildingGroupEditor
+        {
+            /// <summary>
+            /// 编辑用户ID
+            /// </summary>
+            public string Id { get; set; }
+
+            /// <summary>
+            /// 编辑用户名
+            /// </summary>
+            [Display(Name = "编辑用户")]
+            public string Name { get; set; }
+
+            /// <summary>
+            /// 编辑时间
+            /// </summary>
+            [Display(Name = "编辑时间")]
+            public DateTime Time { get; set; }
+        }
+        #endregion //Inner Class
 
         #region Additional Property
         /// <summary>

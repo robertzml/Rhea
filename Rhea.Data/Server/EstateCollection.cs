@@ -46,6 +46,12 @@ namespace Rhea.Data.Server
         /// misc
         /// </summary>
         public static readonly string Misc = "misc";
+
+        /// <summary>
+        /// 楼群备份表
+        /// buildingGroupBackup
+        /// </summary>
+        public static readonly string BuildingGroupBackup = "buildingGroupBackup";
         #endregion //Field
     }
 }

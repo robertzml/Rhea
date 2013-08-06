@@ -6,6 +6,7 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using Rhea.Data.Server;
+using Rhea.Model.Account;
 using Rhea.Model.Estate;
 
 namespace Rhea.Business.Estate
@@ -54,6 +55,7 @@ namespace Rhea.Business.Estate
             buildingGroup.ConstructCompany = doc.GetValue("constructCompany", "").AsString;
             buildingGroup.ManageType = doc.GetValue("manageType", "").AsString;
             buildingGroup.UseType = doc.GetValue("useType").AsInt32;
+            buildingGroup.Sort = doc.GetValue("sort", 0).AsInt32;
             buildingGroup.Remark = doc.GetValue("remark", "").AsString;
             buildingGroup.Status = doc.GetValue("status", 0).AsInt32;
             //buildingGroup.UsableArea = GetUsableArea(buildingGroup.Id);
@@ -66,6 +68,14 @@ namespace Rhea.Business.Estate
                 {
                     buildingGroup.Gallery[i] = array[i].AsString;
                 }
+            }
+
+            if (doc.Contains("editor"))
+            {
+                BsonDocument editor = doc["editor"].AsBsonDocument;
+                buildingGroup.Editor.Id = editor["id"].AsObjectId.ToString();
+                buildingGroup.Editor.Name = editor["name"].AsString;
+                buildingGroup.Editor.Time = editor["time"].AsBsonDateTime.ToLocalTime();
             }
 
             if (buildingGroup.BuildDate != null)
@@ -113,7 +123,8 @@ namespace Rhea.Business.Estate
                 {
                     Id = doc["id"].AsInt32,
                     Name = doc["name"].AsString,
-                    UseType = doc["useType"].AsInt32
+                    UseType = doc["useType"].AsInt32,
+                    Sort = doc["sort"].AsInt32
                 };
                 buildingGroups.Add(buildingGroup);
             }
@@ -161,12 +172,13 @@ namespace Rhea.Business.Estate
         /// 添加楼群
         /// </summary>
         /// <param name="data">楼群数据</param>
+        /// <param name="user">相关用户</param>
         /// <returns>楼群ID</returns>
-        public int Create(BuildingGroup data)
+        public int Create(BuildingGroup data, UserProfile user)
         {
             data.Id = this.context.FindSequenceIndex(EstateCollection.BuildingGroup) + 1;
 
-            BsonDocument doc = new BsonDocument
+            BsonDocument doc = new BsonDocument //28
             {
                 { "id", data.Id },
                 { "name", data.Name },
@@ -190,7 +202,11 @@ namespace Rhea.Business.Estate
                 { "constructCompany", data.ConstructCompany },
                 { "manageType", data.ManageType },     
                 { "useType", data.UseType },
+                { "sort", data.Sort },
                 { "remark", data.Remark },
+                { "editor.id", user._id },
+                { "editor.name", user.UserName },
+                { "editor.time", DateTime.Now },
                 { "status", 0 }
             };
 
@@ -206,11 +222,12 @@ namespace Rhea.Business.Estate
         /// 更新楼群
         /// </summary>
         /// <param name="data">楼群数据</param>
+        /// <param name="user">相关用户</param>
         /// <returns></returns>
-        public bool Edit(BuildingGroup data)
+        public bool Edit(BuildingGroup data, UserProfile user)
         {
             var query = Query.EQ("id", data.Id);
-            var update = Update.Set("name", data.Name)
+            var update = Update.Set("name", data.Name)  //26
                 .Set("imageUrl", data.ImageUrl ?? "")
                 .Set("partMapUrl", data.PartMapUrl ?? "")
                 .Set("buildingCount", (BsonValue)data.BuildingCount)
@@ -230,8 +247,12 @@ namespace Rhea.Business.Estate
                 .Set("designCompany", data.DesignCompany ?? "")
                 .Set("constructCompany", data.ConstructCompany ?? "")
                 .Set("manageType", data.ManageType ?? "")
+                .Set("sort", data.Sort)
                 .Set("useType", data.UseType)
-                .Set("remark", data.Remark ?? "");
+                .Set("remark", data.Remark ?? "")
+                .Set("editor.id", user._id)
+                .Set("editor.name", user.UserName)
+                .Set("editor.time", DateTime.Now);
 
             WriteConcernResult result = this.context.Update(EstateCollection.BuildingGroup, query, update);
 
@@ -245,13 +266,34 @@ namespace Rhea.Business.Estate
         /// 删除楼群
         /// </summary>
         /// <param name="id">楼群ID</param>
+        /// <param name="user">相关用户</param>
         /// <returns></returns>
-        public bool Delete(int id)
+        public bool Delete(int id, UserProfile user)
         {
             var query = Query.EQ("id", id);
-            var update = Update.Set("status", 1);
+            var update = Update.Set("status", 1)
+                .Set("editor.id", user._id)
+                .Set("editor.name", user.UserName)
+                .Set("editor.time", DateTime.Now);
 
             WriteConcernResult result = this.context.Update(EstateCollection.BuildingGroup, query, update);
+
+            if (result.HasLastErrorMessage)
+                return false;
+            else
+                return true;
+        }
+
+        /// <summary>
+        /// 备份楼群
+        /// </summary>
+        /// <param name="id">楼群ID</param>
+        /// <returns></returns>
+        public bool Backup(int id)
+        {
+            BsonDocument doc = this.context.FindOne(EstateCollection.BuildingGroup, "id", id);
+
+            WriteConcernResult result = this.context.Insert(EstateCollection.BuildingGroupBackup, doc);
 
             if (result.HasLastErrorMessage)
                 return false;
@@ -289,6 +331,57 @@ namespace Rhea.Business.Estate
             }
 
             return area;
+        }
+
+        /// <summary>
+        /// 导出楼群
+        /// </summary>
+        /// <returns></returns>
+        public byte[] Export()
+        {
+            StringBuilder sb = new StringBuilder();
+            List<BsonDocument> docs = this.context.FindAll(EstateCollection.BuildingGroup);
+
+            sb.AppendLine(string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}," +
+                "{15},{16},{17},{18},{19},{20},{21},{22},{23},{24}",
+                "Id", "名称", "图片", "局部导航", "所属校区", "楼宇栋数", "面积系数", "建筑面积", "使用面积", "占地面积",
+                "建造方式", "建筑结构", "建筑物造价", "折旧后现值", "建筑物产别", "建筑物经费科目", "建筑物产权证号",
+                "建成日期", "使用年限", "建筑设计单位", "建筑物施工单位", "建筑物房管形式", "使用类型", "备注", "状态"));
+
+            foreach (var doc in docs)
+            {
+                sb.AppendLine(string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}," +
+                    "{15},{16},{17},{18},{19},{20},{21},{22},{23},{24}",
+                    doc["id"],
+                    doc["name"],
+                    doc.GetValue("imageUrl", ""),
+                    doc.GetValue("partMapUrl", ""),
+                    doc["campusId"],
+                    doc.GetValue("buildingCount", null),
+                    doc.GetValue("areaCoeffcient", ""),
+                    doc.GetValue("buildArea", null),
+                    doc.GetValue("usableArea", null),
+                    doc.GetValue("floorage", null),
+                    doc.GetValue("buildType", ""),
+                    doc.GetValue("buildStructure", ""),
+                    doc.GetValue("buildCost", null),
+                    doc.GetValue("currentValue", null),
+                    doc.GetValue("classified", ""),
+                    doc.GetValue("fundsSubject", ""),
+                    doc.GetValue("equityNumber", ""),
+                    doc.GetValue("buildDate", null),
+                    doc.GetValue("fixedYear", null),
+                    doc.GetValue("designCompany", ""),
+                    doc.GetValue("constructCompany", ""),
+                    doc.GetValue("manageType", ""),
+                    doc.GetValue("useType"),
+                    doc.GetValue("remark", ""),
+                    doc.GetValue("status", 0)
+                ));
+            }
+
+            byte[] fileContents = Encoding.Default.GetBytes(sb.ToString());
+            return fileContents;
         }
         #endregion //Method
     }

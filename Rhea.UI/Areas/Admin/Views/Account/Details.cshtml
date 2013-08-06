@@ -103,15 +103,24 @@
                                 @ViewBag.DepartmentName
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Status)
+                            </td>
+                            <td>
+                                @Model.Status
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
         <p>
-            <a class="btn btn-success" href="@Url.Action("List", new { controller = "Account", area = "Admin" })"><i class="icon-list icon-white"></i> 回到列表</a> 
-            <a class="btn btn-warning" href="@Url.Action("Edit", new { controller = "Account", id = Model.Id, area = "Admin" })"><i class="icon-edit icon-white"></i> 编辑</a> 
-            <a class="btn btn-danger" href="@Url.Action("Delete", new { controller = "Account", id = Model.Id, area = "Admin" })"><i class="icon-remove icon-white"></i> 删除</a>          
+            <a class="btn btn-success" href="@Url.Action("List", new { controller = "Account", area = "Admin" })"><i class="icon-list icon-white"></i> 回到列表</a>
+            <a class="btn btn-warning" href="@Url.Action("Edit", new { controller = "Account", id = Model.Id, area = "Admin" })"><i class="icon-edit icon-white"></i> 编辑</a>
+            <a class="btn btn-success" href="@Url.Action("Enable", new { controller = "Account", id = Model.Id, area = "Admin" })"><i class="icon-plus-sign icon-white"></i> 启用</a>
+            <a class="btn btn-danger" href="@Url.Action("Disable", new { controller = "Account", id = Model.Id, area = "Admin" })"><i class="icon-minus-sign icon-white"></i> 禁用</a>
         </p>
 
     </div>

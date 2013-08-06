@@ -105,6 +105,14 @@
                             </tr>
                             <tr>
                                 <td>
+                                    @Html.DisplayNameFor(model => model.CurrentValue)
+                                </td>
+                                <td>
+                                    @Model.CurrentValue
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
                                     @Html.DisplayNameFor(model => model.UseType)
                                 </td>
                                 <td>
@@ -112,6 +120,14 @@
                                         var type = (BuildingUseType)Model.UseType;
                                         @type.DisplayName(); 
                                     }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.Sort)
+                                </td>
+                                <td>
+                                    @Model.Sort
                                 </td>
                             </tr>
                         </tbody>
@@ -130,14 +146,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    @Html.DisplayNameFor(model => model.CurrentValue)
-                                </td>
-                                <td>
-                                    @Model.CurrentValue
-                                </td>
-                            </tr>
                             <tr>
                                 <td>
                                     @Html.DisplayNameFor(model => model.Classified)
@@ -206,6 +214,22 @@
                             </tr>
                             <tr>
                                 <td>
+                                    @Html.DisplayNameFor(model => model.Editor.Name)
+                                </td>
+                                <td>
+                                    @Model.Editor.Name
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.Editor.Time)
+                                </td>
+                                <td>
+                                    @Model.Editor.Time
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
                                     @Html.DisplayNameFor(model => model.Remark)
                                 </td>
                                 <td>
@@ -217,8 +241,8 @@
                 </div>
             </div>
             <p>               
-                <a class="btn btn-success" href="@Url.Action("List", new { controller = "BuildingGroup", area = "Admin" })"><i class="icon-list icon-white"></i> 回到列表</a> 
-                <a class="btn btn-warning" href="@Url.Action("Edit", new { controller = "BuildingGroup", id = Model.Id, area = "Admin" })"><i class="icon-edit icon-white"></i> 编辑</a> 
+                <a class="btn btn-success" href="@Url.Action("List", new { controller = "BuildingGroup", area = "Admin" })"><i class="icon-list icon-white"></i> 回到列表</a>
+                <a class="btn btn-warning" href="@Url.Action("Edit", new { controller = "BuildingGroup", id = Model.Id, area = "Admin" })"><i class="icon-edit icon-white"></i> 编辑</a>
                 <a class="btn btn-danger" href="@Url.Action("Delete", new { controller = "BuildingGroup", id = Model.Id, area = "Admin" })"><i class="icon-remove icon-white"></i> 删除</a>
                 <a class="btn btn-primary" href="@Url.Action("List", new { controller = "Building", buildingGroupId = Model.Id, area = "Admin" })"><i class="icon-chevron-right icon-white"></i>楼宇</a>
             </p>

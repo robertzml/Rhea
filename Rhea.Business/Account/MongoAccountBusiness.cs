@@ -316,6 +316,60 @@ namespace Rhea.Business.Account
             else
                 return true;
         }
+
+        /// <summary>
+        /// 禁用用户
+        /// </summary>
+        /// <param name="id">系统ID</param>
+        /// <returns></returns>
+        public bool Disable(string id)
+        {
+            try
+            {
+                ObjectId oid = new ObjectId(id);
+
+                var query = Query.EQ("_id", oid);
+                var update = Update.Set("status", 2);
+
+                WriteConcernResult result = this.context.Update(RheaCollection.User, query, update);
+
+                if (result.HasLastErrorMessage)
+                    return false;
+                else
+                    return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 启用用户
+        /// </summary>
+        /// <param name="id">系统ID</param>
+        /// <returns></returns>
+        public bool Enable(string id)
+        {
+            try
+            {
+                ObjectId oid = new ObjectId(id);
+
+                var query = Query.EQ("_id", oid);
+                var update = Update.Set("status", 0);
+
+                WriteConcernResult result = this.context.Update(RheaCollection.User, query, update);
+
+                if (result.HasLastErrorMessage)
+                    return false;
+                else
+                    return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
         #endregion //Method
     }
 }

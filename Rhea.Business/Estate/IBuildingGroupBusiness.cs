@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Rhea.Model.Account;
 using Rhea.Model.Estate;
 
 namespace Rhea.Business.Estate
@@ -41,22 +42,25 @@ namespace Rhea.Business.Estate
         /// 添加楼群
         /// </summary>
         /// <param name="data">楼群数据</param>
+        /// <param name="user">相关用户</param>
         /// <returns>楼群ID</returns>
-        int Create(BuildingGroup data);
+        int Create(BuildingGroup data, UserProfile user);
 
         /// <summary>
         /// 更新楼群
         /// </summary>
         /// <param name="data">楼群数据</param>
+        /// <param name="user">相关用户</param>
         /// <returns></returns>
-        bool Edit(BuildingGroup data);
+        bool Edit(BuildingGroup data, UserProfile user);
 
         /// <summary>
         /// 删除楼群
         /// </summary>
         /// <param name="id">楼群ID</param>
+        /// <param name="user">相关用户</param>
         /// <returns></returns>
-        bool Delete(int id);
+        bool Delete(int id, UserProfile user);
 
         /// <summary>
         /// 获取总数
@@ -70,5 +74,18 @@ namespace Rhea.Business.Estate
         /// <param name="id">楼群ID</param>
         /// <returns></returns>
         double GetUsableArea(int id);
+
+        /// <summary>
+        /// 导出楼群
+        /// </summary>
+        /// <returns></returns>
+        byte[] Export();
+
+        /// <summary>
+        /// 备份楼群
+        /// </summary>
+        /// <param name="id">楼群ID</param>
+        /// <returns></returns>
+        bool Backup(int id);
     }
 }

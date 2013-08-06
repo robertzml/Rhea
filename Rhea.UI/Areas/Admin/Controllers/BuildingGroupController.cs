@@ -7,6 +7,8 @@ using System.Web.Routing;
 using Rhea.Business.Estate;
 using Rhea.Model.Estate;
 using Rhea.UI.Filters;
+using Rhea.Model.Account;
+using Rhea.Business.Account;
 
 namespace Rhea.UI.Areas.Admin.Controllers
 {
@@ -29,6 +31,17 @@ namespace Rhea.UI.Areas.Admin.Controllers
             }
 
             base.Initialize(requestContext);
+        }
+
+        /// <summary>
+        /// 获取当前用户
+        /// </summary>
+        /// <returns></returns>
+        private UserProfile GetUser()
+        {
+            IAccountBusiness accountBusiness = new MongoAccountBusiness();
+            UserProfile user = accountBusiness.GetByUserName(User.Identity.Name);
+            return user;
         }
         #endregion //Function
 
@@ -75,7 +88,8 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                int result = this.buildingGroupBusiness.Create(model);
+                var user = GetUser();
+                int result = this.buildingGroupBusiness.Create(model, user);
 
                 if (result != 0)
                 {
@@ -115,7 +129,16 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool result = this.buildingGroupBusiness.Edit(model);
+                var user = GetUser();
+
+                bool result =this.buildingGroupBusiness.Backup(model.Id);
+                if (!result)
+                {
+                    ModelState.AddModelError("", "备份失败");
+                    return View(model);
+                }
+
+                result = this.buildingGroupBusiness.Edit(model, user);
 
                 if (result)
                 {
@@ -153,7 +176,16 @@ namespace Rhea.UI.Areas.Admin.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            bool result = this.buildingGroupBusiness.Delete(id);
+            var user = GetUser();
+
+            bool result = this.buildingGroupBusiness.Backup(id);
+            if (!result)
+            {
+                ModelState.AddModelError("", "备份失败");
+                return View("Delete", id);
+            }
+
+            result = this.buildingGroupBusiness.Delete(id, user);
 
             if (result)
             {
@@ -161,6 +193,16 @@ namespace Rhea.UI.Areas.Admin.Controllers
             }
             else
                 return View("Delete", id);
+        }
+
+        /// <summary>
+        /// 导出楼群
+        /// </summary>
+        /// <returns></returns>
+        public FileResult Export()
+        {
+            byte[] fileContents = this.buildingGroupBusiness.Export();
+            return File(fileContents, "application/ms-excel", "buildingGroup.csv");
         }
         #endregion //Action
     }

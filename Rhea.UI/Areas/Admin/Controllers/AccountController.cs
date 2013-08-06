@@ -155,6 +155,46 @@ namespace Rhea.UI.Areas.Admin.Controllers
 
             return View(model);
         }
+
+        /// <summary>
+        /// 禁用用户
+        /// </summary>
+        /// <param name="id">系统ID</param>
+        /// <returns></returns>
+        public ActionResult Disable(string id)
+        {
+            bool result = this.accountBusiness.Disable(id);
+            if (result)
+            {
+                TempData["Message"] = "禁用成功";
+            }
+            else
+            {
+                TempData["Message"] = "禁用失败";
+            }
+
+            return RedirectToAction("Details", "Account", new { area = "Admin", id = id });
+        }
+
+        /// <summary>
+        /// 启用用户
+        /// </summary>
+        /// <param name="id">系统ID</param>
+        /// <returns></returns>
+        public ActionResult Enable(string id)
+        {
+            bool result = this.accountBusiness.Enable(id);
+            if (result)
+            {
+                TempData["Message"] = "启用成功";
+            }
+            else
+            {
+                TempData["Message"] = "启用失败";
+            }
+
+            return RedirectToAction("Details", "Account", new { area = "Admin", id = id });
+        }
         #endregion //Action
     }
 }

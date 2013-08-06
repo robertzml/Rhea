@@ -59,7 +59,7 @@ namespace Rhea.Business.Account
         /// </summary>
         /// <param name="data">用户数据</param>
         /// <returns></returns>
-        bool Edit(UserProfile data);
+        bool Edit(UserProfile data);        
 
         /// <summary>
         /// 验证密码
@@ -77,5 +77,19 @@ namespace Rhea.Business.Account
         /// <param name="newPassword">新密码</param>
         /// <returns></returns>
         bool ChangePassword(string userName, string oldPassword, string newPassword);
+
+        /// <summary>
+        /// 禁用用户
+        /// </summary>
+        /// <param name="id">系统ID</param>
+        /// <returns></returns>
+        bool Disable(string id);
+
+        /// <summary>
+        /// 启用用户
+        /// </summary>
+        /// <param name="id">系统ID</param>
+        /// <returns></returns>
+        bool Enable(string id);
     }
 }
