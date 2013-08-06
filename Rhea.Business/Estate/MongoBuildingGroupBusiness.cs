@@ -292,6 +292,7 @@ namespace Rhea.Business.Estate
         public bool Backup(int id)
         {
             BsonDocument doc = this.context.FindOne(EstateCollection.BuildingGroup, "id", id);
+            doc.Remove("_id");
 
             WriteConcernResult result = this.context.Insert(EstateCollection.BuildingGroupBackup, doc);
 
@@ -343,15 +344,15 @@ namespace Rhea.Business.Estate
             List<BsonDocument> docs = this.context.FindAll(EstateCollection.BuildingGroup);
 
             sb.AppendLine(string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}," +
-                "{15},{16},{17},{18},{19},{20},{21},{22},{23},{24}",
+                "{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25}",
                 "Id", "名称", "图片", "局部导航", "所属校区", "楼宇栋数", "面积系数", "建筑面积", "使用面积", "占地面积",
                 "建造方式", "建筑结构", "建筑物造价", "折旧后现值", "建筑物产别", "建筑物经费科目", "建筑物产权证号",
-                "建成日期", "使用年限", "建筑设计单位", "建筑物施工单位", "建筑物房管形式", "使用类型", "备注", "状态"));
+                "建成日期", "使用年限", "建筑设计单位", "建筑物施工单位", "建筑物房管形式", "使用类型", "排序", "备注", "状态"));
 
             foreach (var doc in docs)
             {
                 sb.AppendLine(string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}," +
-                    "{15},{16},{17},{18},{19},{20},{21},{22},{23},{24}",
+                    "{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25}",
                     doc["id"],
                     doc["name"],
                     doc.GetValue("imageUrl", ""),
@@ -375,6 +376,7 @@ namespace Rhea.Business.Estate
                     doc.GetValue("constructCompany", ""),
                     doc.GetValue("manageType", ""),
                     doc.GetValue("useType"),
+                    doc.GetValue("sort"),
                     doc.GetValue("remark", ""),
                     doc.GetValue("status", 0)
                 ));
