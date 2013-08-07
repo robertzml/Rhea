@@ -46,6 +46,7 @@ namespace Rhea.Model.Estate
         /// <summary>
         /// 所属校区ID
         /// </summary>
+        [UIHint("CampusDropDownList")]
         [Display(Name = "所属校区")]
         public int CampusId { get; set; }
 

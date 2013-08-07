@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MongoDB.Bson;
 using MongoDB.Driver.Builders;
 using Rhea.Data.Server;
 using Rhea.Model.Estate;
@@ -17,6 +18,25 @@ namespace Rhea.Business.Estate
         private RheaMongoContext context = new RheaMongoContext(RheaServer.EstateDatabase);
         #endregion //Field
 
+        #region Function
+        /// <summary>
+        /// 模型绑定
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <returns></returns>
+        private Campus ModelBind(BsonDocument doc)
+        {
+            Campus campus = new Campus();
+            campus.Id = doc["id"].AsInt32;
+            campus.Name = doc["name"].AsString;
+            campus.ImageUrl = doc.GetValue("imageUrl", "").AsString;
+            campus.Remark = doc.GetValue("remark", "").AsString;
+            campus.Status = doc.GetValue("status", 0).AsInt32;
+
+            return campus;
+        }
+        #endregion //Function
+
         #region Method
         /// <summary>
         /// 得到校区列表
@@ -24,7 +44,18 @@ namespace Rhea.Business.Estate
         /// <returns></returns>
         public List<Campus> GetList()
         {
-            throw new NotImplementedException();
+            List<Campus> campusList = new List<Campus>();
+            List<BsonDocument> docs = this.context.FindAll(EstateCollection.Campus);
+
+            foreach (var doc in docs)
+            {
+                if (doc.GetValue("status", 0).AsInt32 == 1)
+                    continue;
+                Campus campus = ModelBind(doc);
+                campusList.Add(campus);
+            }
+
+            return campusList;
         }
 
         /// <summary>
@@ -34,7 +65,33 @@ namespace Rhea.Business.Estate
         /// <returns></returns>
         public Campus Get(int id)
         {
-            throw new NotImplementedException();
+            BsonDocument doc = this.context.FindOne(EstateCollection.Campus, "id", id);
+
+            if (doc != null)
+            {
+                Campus campus = ModelBind(doc);
+                if (campus.Status == 1)
+                    return null;
+
+                return campus;
+            }
+            else
+                return null;
+        }
+
+        /// <summary>
+        /// 得到校区名称
+        /// </summary>
+        /// <param name="id">校区ID</param>
+        /// <returns></returns>
+        public string GetName(int id)
+        {
+            BsonDocument doc = this.context.FindOne(EstateCollection.Campus, "id", id);
+
+            if (doc != null)
+                return doc["name"].AsString;
+            else
+                return string.Empty;
         }
 
         /// <summary>

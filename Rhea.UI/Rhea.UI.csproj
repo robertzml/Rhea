@@ -1673,6 +1673,7 @@
     <Content Include="Areas\Admin\Views\Estate\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout_Account.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\CampusDropDownList.cshtml" />
     <None Include="Content\fonts\broccolidry.eot" />
     <None Include="Content\fonts\broccolidry.ttf" />
     <None Include="Content\fonts\broccolidry.woff" />

@@ -58,6 +58,12 @@ namespace Rhea.Data.Server
         /// buildingBackup
         /// </summary>
         public static readonly string BuildingBackup = "buildingBackup";
+
+        /// <summary>
+        /// 房间备份表
+        /// roomBackup
+        /// </summary>
+        public static readonly string RoomBackup = "roomBackup";
         #endregion //Field
     }
 }

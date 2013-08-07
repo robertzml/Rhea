@@ -6,6 +6,7 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using Rhea.Data.Server;
+using Rhea.Model.Account;
 using Rhea.Model.Estate;
 
 namespace Rhea.Business.Estate
@@ -80,8 +81,17 @@ namespace Rhea.Business.Estate
             else
                 room.Function = null;
 
+            if (doc.Contains("editor"))
+            {
+                BsonDocument editor = doc["editor"].AsBsonDocument;
+                room.Editor.Id = editor["id"].AsObjectId.ToString();
+                room.Editor.Name = editor["name"].AsString;
+                room.Editor.Time = editor["time"].AsBsonDateTime.ToLocalTime();
+            }
+
             if (room.StartDate != null)
                 room.StartDate = ((DateTime)room.StartDate).ToLocalTime();
+
             return room;
         }
         #endregion //Function
@@ -245,12 +255,13 @@ namespace Rhea.Business.Estate
         /// 添加房间
         /// </summary>
         /// <param name="data">房间数据</param>
+        /// <param name="user">相关用户</param>
         /// <returns>房间ID，0:添加失败</returns>
-        public int Create(Room data)
+        public int Create(Room data, UserProfile user)
         {
             data.Id = this.context.FindSequenceIndex(EstateCollection.Room) + 1;
 
-            BsonDocument doc = new BsonDocument
+            BsonDocument doc = new BsonDocument //42
             {
                 { "id", data.Id },                
                 { "name" , data.Name },   
@@ -275,6 +286,9 @@ namespace Rhea.Business.Estate
                 { "personNumber", (BsonValue)data.PersonNumber },
                 { "roomStatus", data.RoomStatus },
                 { "remark", data.Remark ?? "" },
+                { "editor.id", user._id },
+                { "editor.name", user.UserName },
+                { "editor.time", DateTime.Now },
                 { "status", 0 },
                 { "heating", (BsonValue)data.Heating },
                 { "fireControl", data.FireControl ?? "" },
@@ -308,12 +322,13 @@ namespace Rhea.Business.Estate
         /// 编辑房间
         /// </summary>
         /// <param name="data">房间数据</param>
+        /// <param name="user">相关用户</param>
         /// <returns></returns>
-        public bool Edit(Room data)
+        public bool Edit(Room data, UserProfile user)
         {
             var query = Query.EQ("id", data.Id);
 
-            var update = Update.Set("name", data.Name)
+            var update = Update.Set("name", data.Name)  //40
                 .Set("number", data.Number)
                 .Set("floor", data.Floor)
                 .Set("span", (BsonValue)data.Span)
@@ -333,6 +348,9 @@ namespace Rhea.Business.Estate
                 .Set("personNumber", (BsonValue)data.PersonNumber)
                 .Set("roomStatus", data.RoomStatus)
                 .Set("remark", data.Remark ?? "")
+                .Set("editor.id", user._id)
+                .Set("editor.name", user.UserName)
+                .Set("editor.time", DateTime.Now)
                 .Set("heating", (BsonValue)data.Heating)
                 .Set("fireControl", data.FireControl ?? "")
                 .Set("height", (BsonValue)data.Height)
@@ -364,11 +382,15 @@ namespace Rhea.Business.Estate
         /// 删除房间
         /// </summary>
         /// <param name="id">房间ID</param>
+        /// <param name="user">相关用户</param>
         /// <returns></returns>
-        public bool Delete(int id)
+        public bool Delete(int id, UserProfile user)
         {
             var query = Query.EQ("id", id);
-            var update = Update.Set("status", 1);
+            var update = Update.Set("status", 1)
+                .Set("editor.id", user._id)
+                .Set("editor.name", user.UserName)
+                .Set("editor.time", DateTime.Now);
 
             WriteConcernResult result = this.context.Update(EstateCollection.Room, query, update);
 
@@ -453,6 +475,24 @@ namespace Rhea.Business.Estate
             var query = Query.EQ("departmentId", departmentId);
             long count = this.context.Count(EstateCollection.Room, query);
             return (int)count;
+        }
+
+        /// <summary>
+        /// 备份房间
+        /// </summary>
+        /// <param name="id">房间ID</param>
+        /// <returns></returns>
+        public bool Backup(int id)
+        {
+            BsonDocument doc = this.context.FindOne(EstateCollection.Room, "id", id);
+            doc.Remove("_id");
+
+            WriteConcernResult result = this.context.Insert(EstateCollection.RoomBackup, doc);
+
+            if (result.HasLastErrorMessage)
+                return false;
+            else
+                return true;
         }
         #endregion //Method
     }

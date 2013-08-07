@@ -25,6 +25,13 @@ namespace Rhea.Business.Estate
         Campus Get(int id);
 
         /// <summary>
+        /// 得到校区名称
+        /// </summary>
+        /// <param name="id">校区ID</param>
+        /// <returns></returns>
+        string GetName(int id);
+
+        /// <summary>
         /// 获取校区总数
         /// </summary>
         /// <returns></returns>

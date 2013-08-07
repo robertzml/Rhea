@@ -46,7 +46,6 @@ namespace Rhea.Model.Estate
         [UIHint("BuildingGroupDropDownList")]
         public int BuildingGroupId { get; set; }
 
-
         /// <summary>
         /// 建筑面积
         /// </summary>        

@@ -14,7 +14,8 @@ namespace Rhea.Model.Estate
         #region Constructor
         public Room()
         {
-            this.Function = new RoomFunction();           
+            this.Function = new RoomFunction();
+            this.Editor = new ModelEditor();
         }
         #endregion //Constructor
 
@@ -22,7 +23,7 @@ namespace Rhea.Model.Estate
         /// <summary>
         /// 房间ID
         /// </summary>
-        [Display(Name = "房间ID" )]
+        [Display(Name = "房间ID")]
         public int Id { get; set; }
 
         /// <summary>
@@ -145,13 +146,19 @@ namespace Rhea.Model.Estate
         public string Remark { get; set; }
 
         /// <summary>
+        /// 编辑属性
+        /// </summary>
+        [Display(Name = "编辑属性")]
+        public ModelEditor Editor { get; set; }
+
+        /// <summary>
         /// 状态
         /// </summary>
         /// <remarks>
         /// 0:正常 1:已删除 2:已合并 3:已拆分
         /// </remarks>
         [Display(Name = "状态")]
-        public int Status { get; set; }     
+        public int Status { get; set; }
 
         #region Additional
         /// <summary>
@@ -281,7 +288,7 @@ namespace Rhea.Model.Estate
             public string ClassifyName { get; set; }
 
             public string Property { get; set; }
-        }      
+        }
         #endregion Inner Class
     }
 }

@@ -72,5 +72,17 @@ namespace Rhea.Business
             string title = userGroupBusiness.Get(user.UserGroupId).Title;
             return title;
         }
+
+        /// <summary>
+        /// 楼群所属校区名称
+        /// </summary>
+        /// <param name="buildingGroup">楼群对象</param>
+        /// <returns></returns>
+        public static string CampusName(this BuildingGroup buildingGroup)
+        {
+            ICampusBusiness campusBusiness = new MongoCampusBusiness();
+            string name = campusBusiness.GetName(buildingGroup.CampusId);
+            return name;
+        }
     }
 }

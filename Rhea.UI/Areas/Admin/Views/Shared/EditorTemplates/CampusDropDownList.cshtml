@@ -1,0 +1,18 @@
+﻿@using Rhea.Business.Estate
+@using Rhea.Model.Estate
+@model int?
+
+<select id="CampusId" name="CampusId">
+    <option value="">-- 请选择 --</option>
+    @{
+        ICampusBusiness business = new MongoCampusBusiness();
+        List<Campus> campus = business.GetList();
+
+        foreach (var item in campus)
+        {
+        <option value="@item.Id" @(Model == item.Id ? "selected='selected'" : "")>
+            @item.Name
+        </option>
+        }
+    }
+</select>

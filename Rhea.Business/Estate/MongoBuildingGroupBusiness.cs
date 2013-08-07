@@ -189,12 +189,13 @@ namespace Rhea.Business.Estate
         {
             data.Id = this.context.FindSequenceIndex(EstateCollection.BuildingGroup) + 1;
 
-            BsonDocument doc = new BsonDocument //28
+            BsonDocument doc = new BsonDocument //29
             {
                 { "id", data.Id },
                 { "name", data.Name },
                 { "imageUrl", data.ImageUrl },
                 { "partMapUrl", data.PartMapUrl },
+                { "campusId", data.CampusId },
                 { "buildingCount", data.BuildingCount },
                 { "areaCoeffcient", data.AreaCoeffcient },
                 { "buildArea", data.BuildArea },
@@ -238,9 +239,10 @@ namespace Rhea.Business.Estate
         public bool Edit(BuildingGroup data, UserProfile user)
         {
             var query = Query.EQ("id", data.Id);
-            var update = Update.Set("name", data.Name)  //26
+            var update = Update.Set("name", data.Name)  //27
                 .Set("imageUrl", data.ImageUrl ?? "")
                 .Set("partMapUrl", data.PartMapUrl ?? "")
+                .Set("campusId", data.CampusId)
                 .Set("buildingCount", (BsonValue)data.BuildingCount)
                 .Set("areaCoeffcient", data.AreaCoeffcient ?? "")
                 .Set("buildArea", (BsonValue)data.BuildArea)

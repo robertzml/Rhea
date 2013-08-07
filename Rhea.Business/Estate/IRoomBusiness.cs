@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Rhea.Model.Account;
 using Rhea.Model.Estate;
 
 namespace Rhea.Business.Estate
@@ -15,7 +16,7 @@ namespace Rhea.Business.Estate
         /// 获取房间列表
         /// </summary>
         /// <returns></returns>
-        List<Room> GetList();        
+        List<Room> GetList();
 
         /// <summary>
         /// 获取房间列表
@@ -65,22 +66,25 @@ namespace Rhea.Business.Estate
         /// 添加房间
         /// </summary>
         /// <param name="data">房间数据</param>
+        /// <param name="user">相关用户</param>
         /// <returns>房间ID，0:添加失败</returns>
-        int Create(Room data);
+        int Create(Room data, UserProfile user);
 
         /// <summary>
         /// 编辑房间
         /// </summary>
         /// <param name="data">房间数据</param>
+        /// <param name="user">相关用户</param>
         /// <returns></returns>
-        bool Edit(Room data);
+        bool Edit(Room data, UserProfile user);
 
         /// <summary>
         /// 删除房间
         /// </summary>
         /// <param name="id">房间ID</param>
+        /// <param name="user">相关用户</param>
         /// <returns></returns>
-        bool Delete(int id);
+        bool Delete(int id, UserProfile user);
 
         /// <summary>
         /// 获取房间属性列表
@@ -115,5 +119,12 @@ namespace Rhea.Business.Estate
         /// <param name="departmentId">部门ID</param>
         /// <returns></returns>
         int CountByDepartment(int departmentId);
+
+        /// <summary>
+        /// 备份房间
+        /// </summary>
+        /// <param name="id">房间ID</param>
+        /// <returns></returns>
+        bool Backup(int id);
     }
 }

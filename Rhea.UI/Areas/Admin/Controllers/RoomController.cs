@@ -4,7 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Rhea.Business.Account;
 using Rhea.Business.Estate;
+using Rhea.Model.Account;
 using Rhea.Model.Estate;
 using Rhea.UI.Areas.Admin.Models;
 
@@ -29,6 +31,17 @@ namespace Rhea.UI.Areas.Admin.Controllers
             }
 
             base.Initialize(requestContext);
+        }
+
+        /// <summary>
+        /// 获取当前用户
+        /// </summary>
+        /// <returns></returns>
+        private UserProfile GetUser()
+        {
+            IAccountBusiness accountBusiness = new MongoAccountBusiness();
+            UserProfile user = accountBusiness.GetByUserName(User.Identity.Name);
+            return user;
         }
 
         /// <summary>
@@ -113,7 +126,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
             //room.Manager = model.Manager;
             room.PersonNumber = model.PersonNumber;
             room.RoomStatus = model.RoomStatus;
-            room.Remark = model.Remark;           
+            room.Remark = model.Remark;
 
             room.Heating = model.Heating;
             room.FireControl = model.FireControl;
@@ -207,7 +220,8 @@ namespace Rhea.UI.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 Room room = ModelTranslate(model);
-                int result = this.roomBusiness.Create(room);
+                var user = GetUser();
+                int result = this.roomBusiness.Create(room, user);
 
                 if (result != 0)
                 {
@@ -250,7 +264,16 @@ namespace Rhea.UI.Areas.Admin.Controllers
             {
                 Room room = ModelTranslate(model);
                 room.Id = model.Id;
-                bool result = this.roomBusiness.Edit(room);
+                var user = GetUser();
+
+                bool backok = this.roomBusiness.Backup(room.Id);
+                if (!backok)
+                {
+                    ModelState.AddModelError("", "备份失败");
+                    return View(model);
+                }
+
+                bool result = this.roomBusiness.Edit(room, user);
                 if (result)
                 {
                     TempData["Message"] = "编辑成功";
@@ -286,8 +309,16 @@ namespace Rhea.UI.Areas.Admin.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirm(int id)
         {
-            bool result = this.roomBusiness.Delete(id);
+            var user = GetUser();
 
+            bool backok = this.roomBusiness.Backup(id);
+            if (!backok)
+            {
+                ModelState.AddModelError("", "备份失败");
+                return View("Delete", id);
+            }
+
+            bool result = this.roomBusiness.Delete(id, user);
             if (result)
             {
                 TempData["Message"] = "删除成功";
