@@ -62,7 +62,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
             data.UsableArea = Convert.ToInt32(buildingGroup.UsableArea);
 
             IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
-            var buildings = buildingBusiness.GetListByBuildingGroup(id);
+            var buildings = buildingBusiness.GetListByBuildingGroup(id, true);
             data.Buildings = buildings;
             data.RoomCount = 0;
 
@@ -108,7 +108,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         public ActionResult List()
         {
-            List<BuildingGroup> data = this.buildingGroupBusiness.GetList().OrderBy(r => r.Id).ToList();
+            List<BuildingGroup> data = this.buildingGroupBusiness.GetList(true);
             return View(data);
         }
 
@@ -181,7 +181,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
             IStatisticBusiness statisticBusiness = new MongoStatisticBusiness();
 
             IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
-            var buildings = buildingBusiness.GetListByBuildingGroup(id);
+            var buildings = buildingBusiness.GetListByBuildingGroup(id, true);
 
             List<BuildingClassifyAreaModel> list = new List<BuildingClassifyAreaModel>();
             foreach (var building in buildings)

@@ -15,14 +15,16 @@ namespace Rhea.Business.Estate
         /// <summary>
         /// 获取楼群列表
         /// </summary>
+        /// <param name="sort">是否按sort排序</param>
         /// <returns></returns>
-        List<BuildingGroup> GetList();
+        List<BuildingGroup> GetList(bool sort = false);
 
         /// <summary>
         /// 得到楼群简单列表
         /// </summary>
+        /// <param name="sort">是否按sort排序</param>
         /// <returns></returns>
-        List<BuildingGroup> GetSimpleList();
+        List<BuildingGroup> GetSimpleList(bool sort = false);
 
         /// <summary>
         /// 获取楼群

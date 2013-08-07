@@ -68,7 +68,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         public ActionResult ListByBuildingGroup(int buildingGroupId)
         {
-            var data = this.buildingBusiness.GetListByBuildingGroup(buildingGroupId);
+            var data = this.buildingBusiness.GetListByBuildingGroup(buildingGroupId, true);
             return View(data);
         }
 
@@ -222,7 +222,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         public JsonResult GetListByBuildingGroup(int buildingGroupId)
         {
-            var data = buildingBusiness.GetListByBuildingGroup(buildingGroupId).OrderBy(r => r.Name);
+            var data = buildingBusiness.GetListByBuildingGroup(buildingGroupId, true);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 

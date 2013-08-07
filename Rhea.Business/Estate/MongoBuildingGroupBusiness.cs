@@ -80,6 +80,7 @@ namespace Rhea.Business.Estate
 
             if (buildingGroup.BuildDate != null)
                 buildingGroup.BuildDate = ((DateTime)buildingGroup.BuildDate).ToLocalTime();
+
             return buildingGroup;
         }
         #endregion //Function
@@ -88,8 +89,9 @@ namespace Rhea.Business.Estate
         /// <summary>
         /// 获取楼群列表
         /// </summary>
+        /// <param name="sort">是否按sort排序</param>
         /// <returns></returns>
-        public List<BuildingGroup> GetList()
+        public List<BuildingGroup> GetList(bool sort = false)
         {
             List<BuildingGroup> buildingGroups = new List<BuildingGroup>();
             List<BsonDocument> doc = this.context.FindAll(EstateCollection.BuildingGroup);
@@ -102,15 +104,20 @@ namespace Rhea.Business.Estate
                 buildingGroups.Add(buildingGroup);
             }
 
-            buildingGroups = buildingGroups.OrderBy(r => r.Id).ToList();
+            if (sort)
+                buildingGroups = buildingGroups.OrderBy(r => r.Sort).ToList();
+            else
+                buildingGroups = buildingGroups.OrderBy(r => r.Id).ToList();
+
             return buildingGroups;
         }
 
         /// <summary>
         /// 得到楼群简单列表
         /// </summary>
+        /// <param name="sort">是否按sort排序</param>
         /// <returns></returns>
-        public List<BuildingGroup> GetSimpleList()
+        public List<BuildingGroup> GetSimpleList(bool sort = false)
         {
             List<BuildingGroup> buildingGroups = new List<BuildingGroup>();
             List<BsonDocument> docs = this.context.FindAll(EstateCollection.BuildingGroup);
@@ -129,7 +136,11 @@ namespace Rhea.Business.Estate
                 buildingGroups.Add(buildingGroup);
             }
 
-            buildingGroups = buildingGroups.OrderBy(r => r.Id).ToList();
+            if (sort)
+                buildingGroups = buildingGroups.OrderBy(r => r.Sort).ToList();
+            else
+                buildingGroups = buildingGroups.OrderBy(r => r.Id).ToList();
+
             return buildingGroups;
         }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Rhea.Model.Account;
 using Rhea.Model.Estate;
 
 namespace Rhea.Business.Estate
@@ -14,15 +15,17 @@ namespace Rhea.Business.Estate
         /// <summary>
         /// 获取楼宇列表
         /// </summary>
+        /// <param name="sort">是否按sort排序</param>
         /// <returns></returns>
-        List<Building> GetList();
+        List<Building> GetList(bool sort = false);
 
         /// <summary>
         /// 获取楼宇列表
         /// </summary>
         /// <param name="buildingGroupId">所属楼群ID</param>
+        /// <param name="sort">是否按sort排序</param>
         /// <returns></returns>
-        List<Building> GetListByBuildingGroup(int buildingGroupId);
+        List<Building> GetListByBuildingGroup(int buildingGroupId, bool sort = false);
 
         /// <summary>
         /// 获取部门相关楼宇
@@ -56,22 +59,25 @@ namespace Rhea.Business.Estate
         /// 添加楼宇
         /// </summary>
         /// <param name="data">楼宇数据</param>
+        /// <param name="user">相关用户</param>
         /// <returns>楼宇ID,0:添加失败</returns>
-        int Create(Building data);
+        int Create(Building data, UserProfile user);
 
         /// <summary>
         /// 编辑楼宇
         /// </summary>
         /// <param name="data">楼宇数据</param>
+        /// <param name="user">相关用户</param>
         /// <returns></returns>
-        bool Edit(Building data);
+        bool Edit(Building data, UserProfile user);
 
         /// <summary>
         /// 删除楼宇
         /// </summary>
         /// <param name="id">楼宇ID</param>
+        /// <param name="user">相关用户</param>
         /// <returns></returns>
-        bool Delete(int id);
+        bool Delete(int id, UserProfile user);
 
         /// <summary>
         /// 添加楼层
@@ -79,7 +85,7 @@ namespace Rhea.Business.Estate
         /// <param name="buildingId">楼宇ID</param>
         /// <param name="floor">楼层数据</param>
         /// <returns></returns>
-        int CreateFloor(int buildingId, Floor floor);
+        int CreateFloor(int buildingId, Floor floor, UserProfile user);
 
         /// <summary>
         /// 编辑楼层
@@ -87,7 +93,7 @@ namespace Rhea.Business.Estate
         /// <param name="buildingId">楼宇ID</param>
         /// <param name="floor">楼层数据</param>
         /// <returns></returns>
-        bool EditFloor(int buildingId, Floor floor);
+        bool EditFloor(int buildingId, Floor floor, UserProfile user);
 
         /// <summary>
         /// 删除楼层
@@ -95,7 +101,7 @@ namespace Rhea.Business.Estate
         /// <param name="buildingId">楼宇ID</param>
         /// <param name="floorId">楼层ID</param>
         /// <returns></returns>
-        bool DeleteFloor(int buildingId, int floorId);
+        bool DeleteFloor(int buildingId, int floorId, UserProfile user);
 
         /// <summary>
         /// 获取楼宇总数
@@ -123,5 +129,12 @@ namespace Rhea.Business.Estate
         /// <param name="floor">楼层</param>
         /// <returns></returns>
         double GetFloorUsableArea(int buildingId, int floor);
+
+        /// <summary>
+        /// 备份楼宇
+        /// </summary>
+        /// <param name="id">楼宇ID</param>
+        /// <returns></returns>
+        bool Backup(int id);
     }
 }

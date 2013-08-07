@@ -131,7 +131,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
             {
                 var user = GetUser();
 
-                bool result =this.buildingGroupBusiness.Backup(model.Id);
+                bool result = this.buildingGroupBusiness.Backup(model.Id);
                 if (!result)
                 {
                     ModelState.AddModelError("", "备份失败");

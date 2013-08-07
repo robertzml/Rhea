@@ -15,6 +15,7 @@
         <div class="page-header">
             <h2>
                 @Model.Name <small>Id: @Model.Id</small></h2>
+            <p><small>@Model.Remark</small></p>
         </div>     
 
         <div class="row-fluid">
@@ -122,14 +123,6 @@
                                     }
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    @Html.DisplayNameFor(model => model.Sort)
-                                </td>
-                                <td>
-                                    @Model.Sort
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -214,6 +207,14 @@
                             </tr>
                             <tr>
                                 <td>
+                                    @Html.DisplayNameFor(model => model.Sort)
+                                </td>
+                                <td>
+                                    @Model.Sort
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
                                     @Html.DisplayNameFor(model => model.Editor.Name)
                                 </td>
                                 <td>
@@ -228,19 +229,11 @@
                                     @Model.Editor.Time
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    @Html.DisplayNameFor(model => model.Remark)
-                                </td>
-                                <td>
-                                    @Model.Remark
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-            <p>               
+            <p>
                 <a class="btn btn-success" href="@Url.Action("List", new { controller = "BuildingGroup", area = "Admin" })"><i class="icon-list icon-white"></i> 回到列表</a>
                 <a class="btn btn-warning" href="@Url.Action("Edit", new { controller = "BuildingGroup", id = Model.Id, area = "Admin" })"><i class="icon-edit icon-white"></i> 编辑</a>
                 <a class="btn btn-danger" href="@Url.Action("Delete", new { controller = "BuildingGroup", id = Model.Id, area = "Admin" })"><i class="icon-remove icon-white"></i> 删除</a>

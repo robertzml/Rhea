@@ -14,7 +14,7 @@ namespace Rhea.Model.Estate
         #region Constructor
         public BuildingGroup()
         {
-            this.Editor = new BuildingGroupEditor();
+            this.Editor = new ModelEditor();
         }
         #endregion //Constructor
 
@@ -197,7 +197,7 @@ namespace Rhea.Model.Estate
         /// 编辑属性
         /// </summary>
         [Display(Name = "编辑属性")]
-        public BuildingGroupEditor Editor { get; set; }
+        public ModelEditor Editor { get; set; }
 
         /// <summary>
         /// 状态
@@ -206,31 +206,6 @@ namespace Rhea.Model.Estate
         public int Status { get; set; }
         #endregion //Database Property
 
-        #region Inner Class
-        /// <summary>
-        /// 编辑属性
-        /// </summary>
-        public class BuildingGroupEditor
-        {
-            /// <summary>
-            /// 编辑用户ID
-            /// </summary>
-            public string Id { get; set; }
-
-            /// <summary>
-            /// 编辑用户名
-            /// </summary>
-            [Display(Name = "编辑用户")]
-            public string Name { get; set; }
-
-            /// <summary>
-            /// 编辑时间
-            /// </summary>
-            [Display(Name = "编辑时间")]
-            public DateTime Time { get; set; }
-        }
-        #endregion //Inner Class
-
         #region Additional Property
         /// <summary>
         /// 下属楼宇
@@ -238,4 +213,27 @@ namespace Rhea.Model.Estate
         public List<Building> Buildings { get; set; }
         #endregion //Additional Property
     }
+   
+    /// <summary>
+    /// 实体编辑属性类
+    /// </summary>
+    public class ModelEditor
+    {
+        /// <summary>
+        /// 编辑用户ID
+        /// </summary>
+        public string Id { get; set; }
+
+        /// <summary>
+        /// 编辑用户名
+        /// </summary>
+        [Display(Name = "编辑用户")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// 编辑时间
+        /// </summary>
+        [Display(Name = "编辑时间")]
+        public DateTime Time { get; set; }
+    }   
 }

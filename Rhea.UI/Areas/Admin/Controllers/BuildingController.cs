@@ -4,7 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Rhea.Business.Account;
 using Rhea.Business.Estate;
+using Rhea.Model.Account;
 using Rhea.Model.Estate;
 
 namespace Rhea.UI.Areas.Admin.Controllers
@@ -28,6 +30,17 @@ namespace Rhea.UI.Areas.Admin.Controllers
 
             base.Initialize(requestContext);
         }
+
+        /// <summary>
+        /// 获取当前用户
+        /// </summary>
+        /// <returns></returns>
+        private UserProfile GetUser()
+        {
+            IAccountBusiness accountBusiness = new MongoAccountBusiness();
+            UserProfile user = accountBusiness.GetByUserName(User.Identity.Name);
+            return user;
+        }
         #endregion //Function
 
         #region Action
@@ -40,12 +53,12 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             if (buildingGroupId == null)
             {
-                var data = this.buildingBusiness.GetList();
+                var data = this.buildingBusiness.GetList(true);
                 return View(data);
             }
             else
             {
-                var data = this.buildingBusiness.GetListByBuildingGroup((int)buildingGroupId);
+                var data = this.buildingBusiness.GetListByBuildingGroup((int)buildingGroupId, true);
                 return View(data);
             }
         }
@@ -82,7 +95,8 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                int result = this.buildingBusiness.Create(model);
+                var user = GetUser();
+                int result = this.buildingBusiness.Create(model, user);
 
                 if (result != 0)
                 {
@@ -121,7 +135,16 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool result = this.buildingBusiness.Edit(model);
+                var user = GetUser();
+
+                bool result = this.buildingBusiness.Backup(model.Id);
+                if (!result)
+                {
+                    ModelState.AddModelError("", "备份失败");
+                    return View(model);
+                }
+
+                result = this.buildingBusiness.Edit(model, user);
 
                 if (result)
                 {
@@ -159,7 +182,16 @@ namespace Rhea.UI.Areas.Admin.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirm(int id)
         {
-            bool result = this.buildingBusiness.Delete(id);
+            var user = GetUser();
+
+            bool result = this.buildingBusiness.Backup(id);
+            if (!result)
+            {
+                ModelState.AddModelError("", "备份失败");
+                return View("Delete", id);
+            }
+
+            result = this.buildingBusiness.Delete(id, user);
 
             if (result)
             {
@@ -194,7 +226,15 @@ namespace Rhea.UI.Areas.Admin.Controllers
             int buildingId = Convert.ToInt32(Request.Form["BuildingId"]);
             if (ModelState.IsValid)
             {
-                int result = this.buildingBusiness.CreateFloor(buildingId, model);
+                var user = GetUser();
+                bool backok = this.buildingBusiness.Backup(buildingId);
+                if (!backok)
+                {
+                    ModelState.AddModelError("", "备份失败");
+                    return View(model);
+                }
+
+                int result = this.buildingBusiness.CreateFloor(buildingId, model, user);
 
                 if (result != 0)
                 {
@@ -237,7 +277,16 @@ namespace Rhea.UI.Areas.Admin.Controllers
             int buildingId = Convert.ToInt32(Request.Form["BuildingId"]);
             if (ModelState.IsValid)
             {
-                bool result = this.buildingBusiness.EditFloor(buildingId, model);
+                var user = GetUser();
+
+                bool backok = this.buildingBusiness.Backup(buildingId);
+                if (!backok)
+                {
+                    ModelState.AddModelError("", "备份失败");
+                    return View(model);
+                }
+
+                bool result = this.buildingBusiness.EditFloor(buildingId, model, user);
 
                 if (result)
                 {
@@ -272,14 +321,23 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// <summary>
         /// 楼层删除 
         /// </summary>
-        /// <param name="id">楼宇ID</param>
+        /// <param name="id">楼层ID</param>
         /// <returns></returns>
         [ValidateAntiForgeryToken]
         [HttpPost, ActionName("DeleteFloor")]
         public ActionResult DeleteFloorConfirm(int id)
         {
             int buildingId = Convert.ToInt32(Request.Form["BuildingId"]);
-            bool result = this.buildingBusiness.DeleteFloor(buildingId, id);
+            var user = GetUser();
+
+            bool backok = this.buildingBusiness.Backup(buildingId);
+            if (!backok)
+            {
+                ModelState.AddModelError("", "备份失败");
+                return View("DeleteFloor", new { buildingId = buildingId, floorId = id });
+            }
+
+            bool result = this.buildingBusiness.DeleteFloor(buildingId, id, user);
 
             if (result)
             {
@@ -287,7 +345,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 return RedirectToAction("Details", "Building", new { area = "Admin", id = buildingId });
             }
             else
-                return View("Delete", id);
+                return View("DeleteFloor", new { buildingId = buildingId, floorId = id });
         }
         #endregion //Action
     }

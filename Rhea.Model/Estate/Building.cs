@@ -15,6 +15,7 @@ namespace Rhea.Model.Estate
         public Building()
         {
             this.Floors = new List<Floor>();
+            this.Editor = new ModelEditor();
         }
         #endregion //Constructor
 
@@ -100,10 +101,22 @@ namespace Rhea.Model.Estate
         public string Remark { get; set; }
 
         /// <summary>
+        /// 排序
+        /// </summary>
+        [Display(Name = "排序")]
+        public int Sort { get; set; }
+
+        /// <summary>
         /// 状态
         /// </summary>
         [Display(Name = "状态")]
         public int Status { get; set; }
+
+        /// <summary>
+        /// 编辑属性
+        /// </summary>
+        [Display(Name = "编辑属性")]
+        public ModelEditor Editor { get; set; }
 
         /// <summary>
         /// 楼层列表

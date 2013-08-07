@@ -45,10 +45,10 @@ namespace Rhea.UI.Controllers
             EstateMenuModel data = new EstateMenuModel();
 
             IBuildingGroupBusiness buildingGroupBusiness = new MongoBuildingGroupBusiness();
-            data.BuildingGroups = buildingGroupBusiness.GetSimpleList();
+            data.BuildingGroups = buildingGroupBusiness.GetSimpleList(true);
 
             IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
-            var buildings = buildingBusiness.GetList().OrderBy(r => r.Id);
+            var buildings = buildingBusiness.GetList(true);
 
             foreach (var bg in data.BuildingGroups)
             {
