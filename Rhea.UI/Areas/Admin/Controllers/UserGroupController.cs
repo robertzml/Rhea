@@ -6,9 +6,12 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Rhea.Business.Account;
 using Rhea.Model.Account;
+using Rhea.UI.Filters;
+using Rhea.UI.Services;
 
 namespace Rhea.UI.Areas.Admin.Controllers
 {
+    [EnhancedAuthorize(Roles = "Root,Administrator")]
     public class UserGroupController : Controller
     {
         #region Field
@@ -28,6 +31,20 @@ namespace Rhea.UI.Areas.Admin.Controllers
 
             base.Initialize(requestContext);
         }
+
+        /// <summary>
+        /// 检查是否有权限查看root
+        /// </summary>
+        /// <param name="groupId">用户组ID</param>
+        /// <returns></returns>
+        private bool CheckRoot(int groupId)
+        {
+            bool isRoot = User.IsInRole2("Root");
+            if (!isRoot && groupId == 100001)
+                return false;
+            else
+                return true;
+        }
         #endregion //Function
 
         #region Action
@@ -37,7 +54,9 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult List()
         {
-            var data = this.userGroupBusiness.GetList();
+            bool isRoot = User.IsInRole2("Root");
+
+            var data = this.userGroupBusiness.GetList(isRoot);
             return View(data);
         }
 
@@ -48,6 +67,9 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult Details(int id)
         {
+            if (!CheckRoot(id))
+                return RedirectToAction("Index", new { controller = "Account", area = "Admin" });
+
             var data = this.userGroupBusiness.Get(id);
             return View(data);
         }
@@ -96,6 +118,9 @@ namespace Rhea.UI.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
+            if (!CheckRoot(id))
+                return RedirectToAction("Index", new { controller = "Account", area = "Admin" });
+
             var data = this.userGroupBusiness.Get(id);
             return View(data);
         }

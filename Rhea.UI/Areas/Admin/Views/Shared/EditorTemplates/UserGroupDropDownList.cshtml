@@ -6,8 +6,9 @@
     <option value="0">-- 请选择 --</option>
     @{
         IUserGroupBusiness business = new MongoUserGroupBusiness();
-        List<UserGroup> groups = business.GetList();
-
+        bool isRoot = User.IsInRole2("Root");
+        List<UserGroup> groups = business.GetList(isRoot);
+        
         foreach (var item in groups)
         {
         <option value="@item.Id" @(Model == item.Id ? "selected='selected'" : "")>

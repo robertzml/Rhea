@@ -38,7 +38,7 @@ namespace Rhea.Business.Account
         /// 获取用户列表
         /// </summary>
         /// <returns></returns>
-        List<UserProfile> GetList();
+        List<UserProfile> GetList(bool showRoot = true);
 
         /// <summary>
         /// 获取用户列表

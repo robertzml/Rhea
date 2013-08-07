@@ -16,7 +16,7 @@
             <h2>
                 @Model.Name <small>Id: @Model.Id</small></h2>
             <p><small>@Model.Remark</small></p>
-        </div>     
+        </div>
 
         <div class="row-fluid">
                 <div class="span6">
@@ -176,7 +176,7 @@
                                 </td>
                                 <td>
                                     @if (Model.BuildDate != null)
-                                    {                                    
+                                    {
                                         @Convert.ToDateTime(Model.BuildDate).ToShortDateString();
                                     }
                                 </td>

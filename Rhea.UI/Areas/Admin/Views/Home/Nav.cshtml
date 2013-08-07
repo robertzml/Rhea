@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "Nav";
     Layout = null;
+    int rank = User.Rank();
 }
 
 <div class="navbar navbar-inverse navbar-fixed-top">
@@ -15,9 +16,9 @@
             <div class="nav-collapse collapse">                
                 <ul class="nav">
                     <li><a href="@Url.Action("Index", new { controller = "Estate", area = "Admin" })">房产管理</a></li>
-                    <li><a href="@Url.Action("Index", new { controller = "Department", area = "Admin" })">部门管理</a></li>
-                    @if (User.IsInRole2("Root"))
+                    @if (rank >= 900)
                     {
+                    <li><a href="@Url.Action("Index", new { controller = "Department", area = "Admin" })">部门管理</a></li>                    
                     <li><a href="@Url.Action("Index", new { controller = "Account", area = "Admin" })">用户管理</a></li>
                     }
                     <li><a href="@Url.Action("Index", new { controller = "Home", area = "" })">回主页</a></li>

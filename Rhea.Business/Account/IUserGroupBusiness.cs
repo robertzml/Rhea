@@ -12,7 +12,7 @@ namespace Rhea.Business.Account
         /// 获取用户组列表
         /// </summary>
         /// <returns></returns>
-        List<UserGroup> GetList();
+        List<UserGroup> GetList(bool showRoot = true);        
 
         /// <summary>
         /// 获取用户组

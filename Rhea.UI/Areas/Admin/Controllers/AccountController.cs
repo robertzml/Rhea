@@ -8,10 +8,11 @@ using Rhea.Business.Account;
 using Rhea.Business.Personnel;
 using Rhea.Model.Account;
 using Rhea.UI.Filters;
+using Rhea.UI.Services;
 
 namespace Rhea.UI.Areas.Admin.Controllers
 {
-    [EnhancedAuthorize(Roles = "Root")]
+    [EnhancedAuthorize(Roles = "Root,Administrator")]
     public class AccountController : Controller
     {
         #region Field
@@ -30,6 +31,20 @@ namespace Rhea.UI.Areas.Admin.Controllers
             }
 
             base.Initialize(requestContext);
+        }
+
+        /// <summary>
+        /// 检查是否有权限查看root
+        /// </summary>
+        /// <param name="user">查看用户</param>
+        /// <returns></returns>
+        private bool CheckRoot(UserProfile user)
+        {
+            bool isRoot = User.IsInRole2("Root");
+            if (!isRoot && user.UserGroupName == "Root")
+                return false;
+            else
+                return true;
         }
         #endregion //Function
 
@@ -50,13 +65,19 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// <returns></returns>       
         public ActionResult List(int groupId = 0)
         {
+            bool isRoot = User.IsInRole2("Root");
             if (groupId == 0)
             {
-                var data = this.accountBusiness.GetList();
+                var data = this.accountBusiness.GetList(isRoot);
                 return View(data);
             }
             else
             {
+                if (!isRoot && groupId == 100001)
+                {
+                    return RedirectToAction("Index", "Account");
+                }
+
                 var data = this.accountBusiness.GetList(groupId);
                 return View(data);
             }
@@ -70,6 +91,9 @@ namespace Rhea.UI.Areas.Admin.Controllers
         public ActionResult Details(string id)
         {
             var data = this.accountBusiness.Get(id);
+
+            if (!CheckRoot(data))
+                return RedirectToAction("Index", new { controller = "Account", area = "Admin" });
 
             if (data.DepartmentId == 0)
                 ViewBag.DepartmentName = "";
@@ -126,6 +150,10 @@ namespace Rhea.UI.Areas.Admin.Controllers
         public ActionResult Edit(string id)
         {
             var data = this.accountBusiness.Get(id);
+
+            if (!CheckRoot(data))
+                return RedirectToAction("Index", new { controller = "Account", area = "Admin" });
+
             return View(data);
         }
 

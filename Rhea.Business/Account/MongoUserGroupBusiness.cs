@@ -46,8 +46,9 @@ namespace Rhea.Business.Account
         /// <summary>
         /// 获取用户组列表
         /// </summary>
+        /// <param name="showRoot">显示Root</param>
         /// <returns></returns>
-        public List<UserGroup> GetList()
+        public List<UserGroup> GetList(bool showRoot = true)
         {
             List<UserGroup> data = new List<UserGroup>();
             List<BsonDocument> docs = this.context.FindAll(RheaCollection.UserGroup);
@@ -55,11 +56,13 @@ namespace Rhea.Business.Account
             foreach (BsonDocument doc in docs)
             {
                 UserGroup userGroup = ModelBind(doc);
+                if (!showRoot && userGroup.Name == "Root")
+                    continue;
                 data.Add(userGroup);
             }
 
             return data.OrderBy(r => r.Id).ToList();
-        }
+        }     
 
         /// <summary>
         /// 获取用户组

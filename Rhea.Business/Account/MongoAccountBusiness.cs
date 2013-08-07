@@ -170,8 +170,9 @@ namespace Rhea.Business.Account
         /// <summary>
         /// 获取用户列表
         /// </summary>
+        /// <param name="showRoot">显示Root</param>
         /// <returns></returns>
-        public List<UserProfile> GetList()
+        public List<UserProfile> GetList(bool showRoot = true)
         {
             List<UserProfile> data = new List<UserProfile>();
             List<BsonDocument> docs = this.context.FindAll(RheaCollection.User);
@@ -179,6 +180,9 @@ namespace Rhea.Business.Account
             foreach (BsonDocument doc in docs)
             {
                 UserProfile g = ModelBind(doc);
+                if (!showRoot && g.UserGroupName == "Root")
+                    continue;
+
                 data.Add(g);
             }
 
