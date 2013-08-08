@@ -66,23 +66,26 @@
                         </ul>
                     </div>
                 </div>
-                <div class="secbar-widget">
+                <div class="secbar-widget" id="sec-room-info" style="display:none;">
                     <h4 class="title">
                         房间信息</h4>
                     <div class="content">
-                        <ul class="bigBtnIcon">
-                            <li>
-                                <a href="#" id="room-list" title="房间列表" class="tip">
-                                    <span class="icon icomoon-icon-list-view"></span><span class="txt">房间列表</span>
-                                </a>
-                            </li>
-                        </ul>
+                        <div class="btn-group" data-toggle="buttons-radio">
+                            <button id="plan-view" class="btn btn-primary active">平面图</button>
+                            <button id="list-view" class="btn btn-primary">列表</button>
+                            <button id="floor-view" class="btn btn-primary">楼层</button>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="tab-pane fade" id="tab-stat">
                 <div class="centerContent">
                     <ul class="bigBtnIcon">
+                        <li>
+                            <a href="#" id="room-list" title="房间列表" class="tip">
+                                <span class="icon icomoon-icon-list-view"></span><span class="txt">房间列表</span>
+                            </a>
+                        </li>
                         <li>
                             <a href="#" id="building-classify" title="分类统计" class="tip">
                                 <span class="icon icomoon-icon-drawer-2"></span><span class="txt">分类统计</span> 
@@ -147,11 +150,38 @@
             return false;
         });
 
+        var buildingId = '@Model.BuildingId';
+        var currentFloor = 0;
+
         $('ul#floor-list li a').click(function () {
             secNavActive($('ul#floor-list'), $(this));
-            var floor = $(this).attr('ref');
-            ajaxContentLoadPage("FloorView", "Building", "Estate", { id: '@Model.BuildingId', floor: floor }, $('#ajax-content2'));
+            currentFloor = $(this).attr('ref');
+
+            ajaxContentLoadPage("FloorView", "Building", "Estate", { id: buildingId, floor: currentFloor }, $('#ajax-content2'));
+
+            $('div#sec-room-info').show();
             return false;
+        });
+
+        $('#sec-room-info #plan-view').click(function () {
+            if (currentFloor == 0)
+                return;
+            ajaxContentLoadPage("FloorView", "Building", "Estate", { id: buildingId, floor: currentFloor }, $('#ajax-content2'));
+            return;
+        });
+
+        $('#sec-room-info #list-view').click(function () {
+            if (currentFloor == 0)
+                return;
+            ajaxContentLoadPage("ListByFloor", "Room", "Estate", { buildingId: buildingId, floor: currentFloor }, $('#ajax-content2'));
+            return;
+        });
+
+        $('#sec-room-info #floor-view').click(function () {
+            if (currentFloor == 0)
+                return;
+            ajaxContentLoadPage("FloorInfo", "Building", "Estate", { id: buildingId, floor: currentFloor }, $('#ajax-content2'));
+            return;
         });
     });
 </script>
