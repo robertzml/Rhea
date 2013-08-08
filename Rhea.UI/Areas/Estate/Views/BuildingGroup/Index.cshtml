@@ -14,7 +14,7 @@
     <div class="section-nav">
         <ul id="secTab" class="nav nav-tabs pattern">
             <li class="active"><a href="#tab-fun" data-toggle="tab">常 规</a></li>
-            <li><a href="#tab-room" data-toggle="tab">房 屋</a></li>
+            <li><a href="#tab-room" data-toggle="tab">楼 宇</a></li>
             <li><a href="#tab-stat" data-toggle="tab">统 计</a></li>
         </ul>
 
@@ -27,19 +27,25 @@
                     </div>
                 </div>
                 <hr />
-                <div class="centerContent">
-                    <div dir="ltr" class="circle-stats">
-                        <div class="circular-item tip" title="Site overload">
-                            <span class="icon icomoon-icon-fire"></span>
-                            <input type="text" value="62" class="redCircle" />
-                        </div>
-                        <div class="circular-item tip" title="Site average load time">
-                            <span class="icon icomoon-icon-busy"></span>
-                            <input type="text" value="12" class="blueCircle" />
-                        </div>
-                        <div class="circular-item tip" title="Target complete">
-                            <span class="icon icomoon-icon-target-2"></span>
-                            <input type="text" value="94" class="greenCircle" />
+                <div class="secbar-widget">
+                    <div class="centerContent">
+                        <div dir="ltr" class="circle-stats">
+                            <div class="circular-item tip" title="办公用房比例">
+                                <span class="icon icomoon-icon-license"></span>
+                                <input type="text" value="@Model.OfficeAreaRatio" class="redCircle" />
+                            </div>
+                            <div class="circular-item tip" title="教学用房比例">
+                                <span class="icon icomoon-icon-book"></span>
+                                <input type="text" value="@Model.EducationAreaRatio" class="greenCircle" />
+                            </div>
+                            <div class="circular-item tip" title="实验用房比例">
+                                <span class="icon icomoon-icon-target-2"></span>
+                                <input type="text" value="@Model.ExperimentAreaRatio" class="blueCircle" />
+                            </div>
+                            <div class="circular-item tip" title="科研用房比例">
+                                <span class="icon icomoon-icon-announcement"></span>
+                                <input type="text" value="@Model.ResearchAreaRatio" class="yellowCircle" />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -72,19 +78,15 @@
                         </ul>
                     </div>
                 </div>
-                <div class="secbar-widget">
-                    <h4 class="title">房屋统计</h4>
-                    <div class="content">
-                        <ul class="bigBtnIcon">
-                            <li><a href="#" id="room-list" title="房间列表" class="tip"><span class="icon icomoon-icon-list-view">
-                            </span><span class="txt">房间列表</span> </a></li>                        
-                        </ul>
-                    </div>
-                </div>
             </div>
             <div class="tab-pane fade" id="tab-stat">
                 <div class="centerContent">
                     <ul class="bigBtnIcon">
+                        <li>
+                            <a href="#" id="room-list" title="房间列表" class="tip">
+                                <span class="icon icomoon-icon-list-view"></span><span class="txt">房间列表</span> 
+                            </a>
+                        </li>
                         <li>
                             <a href="#" id="building-group-classify" title="分类统计" class="tip">
                                 <span class="icon icomoon-icon-drawer-2"></span><span class="txt">分类统计</span>
@@ -120,26 +122,27 @@
 
 <script type="text/javascript">
     $(function () {
+        $('.tip').tooltip();
 
-        //circular progrress bar
-        $(".greenCircle").knob({
-            'min': 0,
-            'max': 100,
-            'readOnly': true,
-            'width': 80,
-            'height': 80,
-            'fgColor': '#9FC569',
-            'dynamicDraw': true,
-            'thickness': 0.2,
-            'tickColorizeValues': true
-        });
+        //circular progrress bar        
         $(".redCircle").knob({
             'min': 0,
             'max': 100,
             'readOnly': true,
-            'width': 80,
-            'height': 80,
+            'width': 100,
+            'height': 100,
             'fgColor': '#ED7A53',
+            'dynamicDraw': true,
+            'thickness': 0.2,
+            'tickColorizeValues': true
+        });
+        $(".greenCircle").knob({
+            'min': 0,
+            'max': 100,
+            'readOnly': true,
+            'width': 100,
+            'height': 100,
+            'fgColor': '#9FC569',
             'dynamicDraw': true,
             'thickness': 0.2,
             'tickColorizeValues': true
@@ -148,9 +151,20 @@
             'min': 0,
             'max': 100,
             'readOnly': true,
-            'width': 80,
-            'height': 80,
+            'width': 100,
+            'height': 100,
             'fgColor': '#88BBC8',
+            'dynamicDraw': true,
+            'thickness': 0.2,
+            'tickColorizeValues': true
+        });
+        $(".yellowCircle").knob({
+            'min': 0,
+            'max': 100,
+            'readOnly': true,
+            'width': 100,
+            'height': 100,
+            'fgColor': '#F4DC41',
             'dynamicDraw': true,
             'thickness': 0.2,
             'tickColorizeValues': true

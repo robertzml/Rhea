@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using MongoDB.Driver.Builders;
 using Rhea.Business.Estate;
 using Rhea.Business.Personnel;
 using Rhea.Data.Estate;
@@ -22,8 +23,101 @@ namespace Rhea.Business
         /// <summary>
         /// 数据库连接
         /// </summary>
-        private RheaMongoContext context = new RheaMongoContext(RheaServer.EstateDatabase);       
+        private RheaMongoContext context = new RheaMongoContext(RheaServer.EstateDatabase);
         #endregion //Field
+
+        #region Function
+        /// <summary>
+        /// 得到楼群房间二级分类
+        /// </summary>
+        /// <param name="buildingIds">楼群下属楼宇ID</param>
+        /// <param name="firstCode">一级编码</param>
+        /// <param name="functionCodes">功能编码列表</param>
+        /// <returns></returns>
+        private List<RoomSecondClassifyAreaModel> GetSecondClassifyArea(IEnumerable<int> buildingIds, int firstCode, List<RoomFunctionCode> functionCodes)
+        {
+            BsonDocument[] pipeline = {
+                new BsonDocument { 
+                    { "$match", new BsonDocument {
+                        { "buildingId", new BsonDocument {
+                            { "$in", new BsonArray(buildingIds)  }
+                        }},
+                        { "function.firstCode", firstCode }
+                    }}
+                },
+                new BsonDocument {
+                    { "$group", new BsonDocument {
+                        { "_id", "$function.secondCode" },
+                        { "area", new BsonDocument {
+                            { "$sum", "$usableArea" }
+                        }},
+                        { "roomCount", new BsonDocument {
+                            { "$sum", 1 }
+                        }}
+                    }}
+                }
+            };
+
+            AggregateResult result = this.context.Aggregate(EstateCollection.Room, pipeline);
+
+            List<RoomSecondClassifyAreaModel> data = new List<RoomSecondClassifyAreaModel>();
+            var function = functionCodes.Where(r => r.FirstCode == firstCode);
+            foreach (var f in function)
+            {
+                BsonDocument doc = result.ResultDocuments.SingleOrDefault(r => r["_id"].AsInt32 == f.SecondCode);
+
+                RoomSecondClassifyAreaModel model = new RoomSecondClassifyAreaModel
+                {
+                    FunctionFirstCode = firstCode,
+                    FunctionSecondCode = f.SecondCode,
+                    FunctionProperty = f.FunctionProperty,
+
+                };
+                if (doc != null)
+                {
+                    model.Area = Math.Round(doc["area"].AsDouble, 3);
+                    model.RoomCount = doc["roomCount"].AsInt32;
+                }
+                else
+                {
+                    model.Area = 0.0;
+                    model.RoomCount = 0;
+                }
+
+                data.Add(model);
+            }
+
+            return data;
+        }
+
+        /// <summary>
+        /// 得到楼群房间一级分类面积
+        /// </summary>
+        /// <param name="buildingGroupId">楼群ID</param>
+        /// <param name="firstCode">一级编码</param>
+        /// <param name="title">编码名称</param>
+        /// <param name="functionCodes">功能编码列表</param>
+        /// <param name="sort">是否排序</param>
+        /// <returns></returns>
+        private RoomFirstClassifyAreaModel GetBuildingGroupFirstClassifyArea(int buildingGroupId, int firstCode, string title, List<RoomFunctionCode> functionCodes, bool sort)
+        {
+            IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
+            var buildings = buildingBusiness.GetListByBuildingGroup(buildingGroupId);
+            var bids = buildings.Select(r => r.Id);
+
+            RoomFirstClassifyAreaModel m1 = new RoomFirstClassifyAreaModel();
+            m1.Title = title;
+            m1.FunctionFirstCode = firstCode;
+            m1.SecondClassify = GetSecondClassifyArea(bids, firstCode, functionCodes);
+            m1.Area = Math.Round(m1.SecondClassify.Sum(r => r.Area), 3);
+            m1.RoomCount = m1.SecondClassify.Sum(r => r.RoomCount);
+
+            if (sort)
+                m1.SecondClassify = m1.SecondClassify.OrderByDescending(r => r.Area).ToList();
+
+            return m1;
+        }
+        #endregion //Function
 
         #region Method
         /// <summary>
@@ -101,7 +195,6 @@ namespace Rhea.Business
                 data.Add(model);
             }
 
-            //data = data.OrderByDescending(r => r.Area).ToList();
             return data;
         }
 
@@ -252,6 +345,43 @@ namespace Rhea.Business
             data.UsableArea = data.BuildingArea.Sum(r => r.UsableArea);
 
             return data;
+        }
+
+        /// <summary>
+        /// 获取楼群总面积模型
+        /// </summary>
+        /// <param name="buildingGroupId">楼群ID</param>
+        /// <remarks>包括分类用房数据</remarks>
+        /// <returns></returns>
+        public BuildingGroupTotalAreaModel GetBuildingGroupTotalArea(int buildingGroupId)
+        {
+            BuildingGroupTotalAreaModel model = new BuildingGroupTotalAreaModel();
+
+            IBuildingGroupBusiness buildingGroupBuiness = new MongoBuildingGroupBusiness();
+            var buildingGroup = buildingGroupBuiness.Get(buildingGroupId);
+
+            model.BuildingGroupId = buildingGroupId;
+            model.BuildingGroupName = buildingGroup.Name;
+            model.BuildArea = Convert.ToDouble(buildingGroup.BuildArea);
+            model.UsableArea = Convert.ToDouble(buildingGroup.UsableArea);
+
+            //get codes
+            IRoomBusiness roomBusiness = new MongoRoomBusiness();
+            var functionCodes = roomBusiness.GetFunctionCodeList();
+
+            //get classify            
+            model.FirstClassify = new List<RoomFirstClassifyAreaModel>();
+            var fc = functionCodes.GroupBy(r => new { r.FirstCode, r.ClassifyName }).Select(g => new { g.Key.FirstCode, g.Key.ClassifyName });
+
+            foreach (var f in fc)
+            {
+                var first = GetBuildingGroupFirstClassifyArea(buildingGroupId, f.FirstCode, f.ClassifyName, functionCodes, false);
+                model.FirstClassify.Add(first);
+            }
+
+            model.RoomCount = model.FirstClassify.Sum(r => r.RoomCount);
+
+            return model;
         }
         #endregion //Method
     }

@@ -146,6 +146,27 @@ namespace Rhea.Data.Server
         }
 
         /// <summary>
+        /// 查找数据
+        /// </summary>
+        /// <param name="collectionName">集合名称</param>
+        /// <param name="query">查找条件</param>
+        /// <returns></returns>
+        public List<BsonDocument> Find(string collectionName, IMongoQuery query)
+        {
+            MongoCollection<BsonDocument> collection = this.database.GetCollection<BsonDocument>(collectionName);
+            
+            var data = collection.Find(query);
+
+            List<BsonDocument> document = new List<BsonDocument>();
+            foreach (BsonDocument d in data)
+            {
+                document.Add(d);
+            }
+
+            return document;
+        }
+
+        /// <summary>
         /// 根据主键查找
         /// </summary>
         /// <param name="collectionName">集合名称</param>

@@ -120,6 +120,33 @@ namespace Rhea.Business.Estate
         /// <summary>
         /// 获取房间列表
         /// </summary>
+        /// <param name="buildingGroupId">所属楼群ID</param>
+        /// <returns></returns>
+        public List<Room> GetListByBuildingGroup(int buildingGroupId)
+        {
+            IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
+            var buildings = buildingBusiness.GetListByBuildingGroup(buildingGroupId);
+
+            var bids = buildings.Select(r => r.Id);
+            var query = Query.In("buildingId", new BsonArray(bids));
+
+            List<BsonDocument> docs = this.context.Find(EstateCollection.Room, query);
+
+            List<Room> rooms = new List<Room>();
+            foreach (var doc in docs)
+            {
+                if (doc.GetValue("status", 0).AsInt32 == 1)
+                    continue;
+                Room room = ModelBind(doc);
+                rooms.Add(room);
+            }
+
+            return rooms;
+        }
+
+        /// <summary>
+        /// 获取房间列表
+        /// </summary>
         /// <param name="buildingId">所属楼宇ID</param>
         /// <returns></returns>
         public List<Room> GetListByBuilding(int buildingId)

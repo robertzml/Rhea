@@ -68,5 +68,12 @@ namespace Rhea.Business
         /// <param name="departmentId">部门ID</param>
         /// <returns></returns>
         DepartmentTotalAreaModel GetDepartmentTotalArea(int departmentId);
+
+        /// <summary>
+        /// 获取楼群总面积模型
+        /// </summary>
+        /// <param name="buildingGroupId">楼群ID</param>
+        /// <returns></returns>
+        BuildingGroupTotalAreaModel GetBuildingGroupTotalArea(int buildingGroupId);
     }
 }

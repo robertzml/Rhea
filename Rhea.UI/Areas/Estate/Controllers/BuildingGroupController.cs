@@ -64,13 +64,25 @@ namespace Rhea.UI.Areas.Estate.Controllers
             IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
             var buildings = buildingBusiness.GetListByBuildingGroup(id, true);
             data.Buildings = buildings;
-            data.RoomCount = 0;
 
-            IRoomBusiness roomBusiness = new MongoRoomBusiness();
-            foreach (var b in buildings)
-            {
-                data.RoomCount += roomBusiness.CountByBuilding(b.Id);
-            }
+            IStatisticBusiness statisticBusiness = new MongoStatisticBusiness();
+            BuildingGroupTotalAreaModel bgTotalArea = statisticBusiness.GetBuildingGroupTotalArea(id);
+
+            double totArea = bgTotalArea.FirstClassify.Sum(r => r.Area);
+
+            double offArea = bgTotalArea.FirstClassify.Single(r => r.FunctionFirstCode == 1).Area;
+            data.OfficeAreaRatio = Math.Round(offArea / totArea * 100, 2);
+
+            double eduArea = bgTotalArea.FirstClassify.Single(r => r.FunctionFirstCode == 2).Area;
+            data.EducationAreaRatio = Math.Round(eduArea / totArea * 100, 2);
+
+            double expArea = bgTotalArea.FirstClassify.Single(r => r.FunctionFirstCode == 3).Area;
+            data.ExperimentAreaRatio = Math.Round(expArea / totArea * 100, 2);
+
+            double resArea = bgTotalArea.FirstClassify.Single(r => r.FunctionFirstCode == 4).Area;
+            data.ResearchAreaRatio = Math.Round(resArea / totArea * 100, 2);
+
+            data.RoomCount = bgTotalArea.RoomCount;
 
             return View(data);
         }
@@ -179,18 +191,9 @@ namespace Rhea.UI.Areas.Estate.Controllers
         public ActionResult Classify(int id)
         {
             IStatisticBusiness statisticBusiness = new MongoStatisticBusiness();
+            var data = statisticBusiness.GetBuildingGroupTotalArea(id);
 
-            IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
-            var buildings = buildingBusiness.GetListByBuildingGroup(id, true);
-
-            List<BuildingClassifyAreaModel> list = new List<BuildingClassifyAreaModel>();
-            foreach (var building in buildings)
-            {
-                BuildingClassifyAreaModel m = statisticBusiness.GetBuildingClassifyArea(building.Id, false);
-                list.Add(m);
-            }
-
-            return View(list);
+            return View(data);
         }
 
         /// <summary>

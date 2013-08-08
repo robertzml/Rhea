@@ -179,13 +179,35 @@ namespace Rhea.Data.Estate
     /// </remarks>
     public class BuildingGroupTotalAreaModel
     {
+        /// <summary>
+        /// 楼群ID
+        /// </summary>
         public int BuildingGroupId { get; set; }
 
+        /// <summary>
+        /// 楼群名称
+        /// </summary>
         public string BuildingGroupName { get; set; }
 
+        /// <summary>
+        /// 建筑面积
+        /// </summary>
         public double BuildArea { get; set; }
 
+        /// <summary>
+        /// 使用面积
+        /// </summary>
         public double UsableArea { get; set; }
+
+        /// <summary>
+        /// 房间数量
+        /// </summary>
+        public int RoomCount { get; set; }
+
+        /// <summary>
+        /// 一级分类
+        /// </summary>
+        public List<RoomFirstClassifyAreaModel> FirstClassify { get; set; }
     }
 
     /// <summary>

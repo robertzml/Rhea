@@ -75,18 +75,8 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         public ActionResult ListByBuildingGroup(int buildingGroupId)
         {
-            IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
-            var buildings = buildingBusiness.GetListByBuildingGroup(buildingGroupId, true);
-
-            List<Room> room = new List<Room>();
-
-            foreach (var building in buildings)
-            {
-                var r = this.roomBusiness.GetListByBuilding(building.Id);
-                room.AddRange(r);
-            }
-
-            return View(room);
+            var data = this.roomBusiness.GetListByBuildingGroup(buildingGroupId);
+            return View(data);
         }
 
         /// <summary>
