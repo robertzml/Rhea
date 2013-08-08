@@ -22,6 +22,11 @@ namespace Rhea.UI.Models
         public string DepartmentName { get; set; }
 
         /// <summary>
+        /// 部门类型
+        /// </summary>
+        public int DepartmentType { get; set; }
+
+        /// <summary>
         /// 部门楼宇列表
         /// </summary>
         public List<Building> Buildings { get; set; }
@@ -34,7 +39,7 @@ namespace Rhea.UI.Models
         /// <summary>
         /// 使用总面积
         /// </summary>
-        public int TotalArea { get; set; }
+        public double TotalArea { get; set; }
 
         /// <summary>
         /// 教职工人数
@@ -55,5 +60,20 @@ namespace Rhea.UI.Models
         /// 超标比值
         /// </summary>
         public double Overproof { get; set; }
+
+        /// <summary>
+        /// 办公用房面积比例
+        /// </summary>
+        public double OfficeAreaRatio { get; set; }        
+
+        /// <summary>
+        /// 实验用房面积比例
+        /// </summary>
+        public double ExperimentAreaRatio { get; set; }
+
+        /// <summary>
+        /// 科研用房面积比例
+        /// </summary>
+        public double ResearchAreaRatio { get; set; }
     }
 }

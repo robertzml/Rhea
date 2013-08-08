@@ -78,6 +78,7 @@ namespace Rhea.Business.Personnel
                 data.ExperimentArea = (department.BachelorCount * 66 / 468d) * 4 * department.FactorK1;
             else
                 data.ExperimentArea = (department.BachelorCount * 132 / 468d) * 4 * department.FactorK1;
+            data.ExperimentArea = Math.Round(data.ExperimentArea, 2);
 
             /* 
              * 3 研究生用房
@@ -111,7 +112,7 @@ namespace Rhea.Business.Personnel
                 data.ResearchArea = 500 * 2 * department.FactorK3 + (totalFunds - 500) * 0.8;
             else
                 data.ResearchArea = 500 * 2 * department.FactorK3 + 2500 * 0.8 + (totalFunds - 3000) * 0.4;
-
+            data.ResearchArea = Math.Round(data.ResearchArea, 2);
 
             IRoomBusiness roomBusiness = new MongoRoomBusiness();
             var rooms = roomBusiness.GetListByDepartment(department.Id);

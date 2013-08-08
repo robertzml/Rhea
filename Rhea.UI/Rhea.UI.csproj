@@ -203,16 +203,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\custom.css" />
-    <Content Include="Content\fonts\broccolidry.svg" />
-    <Content Include="Content\fonts\cuticons.svg" />
-    <Content Include="Content\fonts\entypo.svg" />
     <Content Include="Content\fonts\icomoon.svg" />
-    <Content Include="Content\fonts\iconic.svg" />
     <Content Include="Content\fonts\index.html" />
-    <Content Include="Content\fonts\meteocons.svg" />
-    <Content Include="Content\fonts\minia.svg" />
-    <Content Include="Content\fonts\silkcons.svg" />
-    <Content Include="Content\fonts\wpzoom.svg" />
     <Content Include="Content\icons.css" />
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
@@ -1678,33 +1670,9 @@
     <Content Include="Areas\Estate\Views\Building\FloorInfo.cshtml" />
     <Content Include="Areas\Estate\Views\Building\FloorDepartment.cshtml" />
     <Content Include="Areas\Estate\Views\Room\RoomFunction.cshtml" />
-    <None Include="Content\fonts\broccolidry.eot" />
-    <None Include="Content\fonts\broccolidry.ttf" />
-    <None Include="Content\fonts\broccolidry.woff" />
-    <None Include="Content\fonts\cuticons.eot" />
-    <None Include="Content\fonts\cuticons.ttf" />
-    <None Include="Content\fonts\cuticons.woff" />
-    <None Include="Content\fonts\entypo.eot" />
-    <None Include="Content\fonts\entypo.ttf" />
-    <None Include="Content\fonts\entypo.woff" />
     <None Include="Content\fonts\icomoon.eot" />
     <None Include="Content\fonts\icomoon.ttf" />
     <None Include="Content\fonts\icomoon.woff" />
-    <None Include="Content\fonts\iconic.eot" />
-    <None Include="Content\fonts\iconic.ttf" />
-    <None Include="Content\fonts\iconic.woff" />
-    <None Include="Content\fonts\meteocons.eot" />
-    <None Include="Content\fonts\meteocons.ttf" />
-    <None Include="Content\fonts\meteocons.woff" />
-    <None Include="Content\fonts\minia.eot" />
-    <None Include="Content\fonts\minia.ttf" />
-    <None Include="Content\fonts\minia.woff" />
-    <None Include="Content\fonts\silkcons.eot" />
-    <None Include="Content\fonts\silkcons.ttf" />
-    <None Include="Content\fonts\silkcons.woff" />
-    <None Include="Content\fonts\wpzoom.eot" />
-    <None Include="Content\fonts\wpzoom.ttf" />
-    <None Include="Content\fonts\wpzoom.woff" />
     <None Include="Plugins\misc\search\tipuesearch_content.json" />
     <Content Include="Views\Common\Heading.cshtml" />
     <Content Include="Views\Common\SearchInline.cshtml" />
@@ -1719,6 +1687,7 @@
     <Content Include="Views\Account\Summary.cshtml" />
     <Content Include="Views\Statistic\InstitutionOfficeAreaCompare.cshtml" />
     <Content Include="Views\Statistic\InstitutionAverageOfficeAreaCompare.cshtml" />
+    <Content Include="Views\Department\Classify.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

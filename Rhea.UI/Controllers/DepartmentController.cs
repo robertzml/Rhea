@@ -65,7 +65,8 @@ namespace Rhea.UI.Controllers
             IRoomBusiness roomBusiness = new MongoRoomBusiness();
             var rooms = roomBusiness.GetListByDepartment(id);
             data.RoomCount = rooms.Count;
-            data.TotalArea = Convert.ToInt32(rooms.Sum(r => r.UsableArea));
+            data.TotalArea = Convert.ToDouble(rooms.Sum(r => r.UsableArea));
+            data.DepartmentType = department.Type;
 
             IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
             data.Buildings = buildingBusiness.GetListByDepartment(id);
@@ -73,7 +74,7 @@ namespace Rhea.UI.Controllers
             IIndicatorBusiness indicatorBusiness = new MongoIndicatorBusiness();
             DepartmentIndicatorModel indicator = indicatorBusiness.GetDepartmentIndicator(department);
 
-            if (department.Type == (int)DepartmentType.Type1)
+            if (department.Type == (int)DepartmentType.Type1)   //院系
             {
                 var droom = rooms.Where(r => r.Function.FirstCode == 1 || r.Function.FirstCode == 2 || r.Function.FirstCode == 3 || r.Function.FirstCode == 4);
                 data.ExistingArea = Convert.ToDouble(droom.Sum(r => r.UsableArea));
@@ -82,6 +83,15 @@ namespace Rhea.UI.Controllers
                     data.Overproof = 0;
                 else
                     data.Overproof = Math.Round(data.ExistingArea / data.DeservedArea * 100, 2);
+
+                double offArea = Convert.ToDouble(rooms.Where(r => r.Function.FirstCode == 1).Sum(r => r.UsableArea));
+                data.OfficeAreaRatio = Math.Round(offArea / data.TotalArea * 100, 2);          
+
+                double expArea = Convert.ToDouble(rooms.Where(r => r.Function.FirstCode == 3).Sum(r => r.UsableArea));
+                data.ExperimentAreaRatio = Math.Round(expArea / data.TotalArea * 100, 2);
+
+                double resArea = Convert.ToDouble(rooms.Where(r => r.Function.FirstCode == 4).Sum(r => r.UsableArea));
+                data.ResearchAreaRatio = Math.Round(resArea / data.TotalArea * 100, 2);
             }
             else
             {
@@ -93,7 +103,11 @@ namespace Rhea.UI.Controllers
                     data.Overproof = 0;
                 else
                     data.Overproof = Math.Round(data.ExistingArea / data.DeservedArea * 100, 2);
+
+                double offArea = Convert.ToDouble(rooms.Where(r => r.Function.FirstCode == 1).Sum(r => r.UsableArea));
+                data.OfficeAreaRatio = Math.Round(offArea / data.TotalArea * 100, 2);    
             }
+            
             return View(data);
         }
 
@@ -246,9 +260,22 @@ namespace Rhea.UI.Controllers
         }
 
         /// <summary>
-        /// 部门分类用房面积
+        /// 部门详细分类用房
         /// </summary>
         /// <param name="id">部门ID</param>
+        /// <returns></returns>
+        public ActionResult Classify(int id)
+        {
+            IStatisticBusiness statisticBusiness = new MongoStatisticBusiness();
+            DepartmentClassifyAreaModel data = statisticBusiness.GetDepartmentClassifyArea(id, false);
+            return View(data);
+        }
+
+        /// <summary>
+        /// 部门主要分类用房面积
+        /// </summary>
+        /// <param name="id">部门ID</param>
+        /// <remarks>四类柱状图</remarks>
         /// <returns></returns>
         public ActionResult ClassifyArea(int id)
         {
@@ -258,7 +285,7 @@ namespace Rhea.UI.Controllers
 
         #region Json
         /// <summary>
-        /// 部门分类用房面积
+        /// 部门主要分类用房面积
         /// </summary>
         /// <param name="id">部门ID</param>
         /// <returns></returns>

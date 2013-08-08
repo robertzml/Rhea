@@ -65,24 +65,24 @@ namespace Rhea.UI.Areas.Estate.Controllers
             var buildings = buildingBusiness.GetListByBuildingGroup(id, true);
             data.Buildings = buildings;
 
-            IStatisticBusiness statisticBusiness = new MongoStatisticBusiness();
-            BuildingGroupTotalAreaModel bgTotalArea = statisticBusiness.GetBuildingGroupTotalArea(id);
-
-            double totArea = bgTotalArea.FirstClassify.Sum(r => r.Area);
-
-            double offArea = bgTotalArea.FirstClassify.Single(r => r.FunctionFirstCode == 1).Area;
+            IRoomBusiness roomBusiness = new MongoRoomBusiness();
+            var rooms = roomBusiness.GetListByBuildingGroup(id);
+           
+            double totArea = Convert.ToDouble(rooms.Sum(r => r.UsableArea));
+           
+            double offArea = Convert.ToDouble(rooms.Where(r => r.Function.FirstCode == 1).Sum(r => r.UsableArea));
             data.OfficeAreaRatio = Math.Round(offArea / totArea * 100, 2);
 
-            double eduArea = bgTotalArea.FirstClassify.Single(r => r.FunctionFirstCode == 2).Area;
+            double eduArea = Convert.ToDouble(rooms.Where(r => r.Function.FirstCode == 2).Sum(r => r.UsableArea));
             data.EducationAreaRatio = Math.Round(eduArea / totArea * 100, 2);
 
-            double expArea = bgTotalArea.FirstClassify.Single(r => r.FunctionFirstCode == 3).Area;
+            double expArea = Convert.ToDouble(rooms.Where(r => r.Function.FirstCode == 3).Sum(r => r.UsableArea));
             data.ExperimentAreaRatio = Math.Round(expArea / totArea * 100, 2);
 
-            double resArea = bgTotalArea.FirstClassify.Single(r => r.FunctionFirstCode == 4).Area;
+            double resArea = Convert.ToDouble(rooms.Where(r => r.Function.FirstCode == 4).Sum(r => r.UsableArea));
             data.ResearchAreaRatio = Math.Round(resArea / totArea * 100, 2);
 
-            data.RoomCount = bgTotalArea.RoomCount;
+            data.RoomCount = rooms.Count;
 
             return View(data);
         }

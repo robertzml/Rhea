@@ -1,7 +1,8 @@
 ﻿@model Rhea.UI.Models.DepartmentSectionModel
+@using Rhea.Data.Personnel
 @{
     ViewBag.Title = "部门主页";
-    Layout = null;
+    Layout = null;    
 }
 
 @Html.Action("Heading", new { controller = "Common", area = "", title = Model.DepartmentName, active = "部门导航" })
@@ -30,17 +31,29 @@
                 <hr />
                 <div class="secbar-widget">
                 <div class="centerContent">
-                    <div dir="ltr" class="circle-stats">
-                        <div class="circular-item tip" title="Site overload">
-                            <span class="icon icomoon-icon-fire"></span>
-                            <input type="text" value="62" class="redCircle" />
+                    <div class="circle-stats">
+                    @if (Model.DepartmentType == (int)DepartmentType.Type1)
+                    {          
+                        <div class="circular-item tip" title="办公用房比例">
+                            <span class="icon icomoon-icon-license"></span>
+                            <input type="text" value="@Model.OfficeAreaRatio" class="redCircle" />
                         </div>
-
-                        <div class="circular-item tip" title="Site average load time">
-                            <span class="icon icomoon-icon-busy"></span>
-                            <input type="text" value="12" class="blueCircle" />
+                        <div class="circular-item tip" title="实验用房比例">
+                            <span class="icon icomoon-icon-target-2"></span>
+                            <input type="text" value="@Model.ExperimentAreaRatio" class="blueCircle" />
                         </div>
-
+                        <div class="circular-item tip" title="科研用房比例">
+                            <span class="icon icomoon-icon-announcement"></span>
+                            <input type="text" value="@Model.ResearchAreaRatio" class="yellowCircle" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="circular-item tip" title="办公用房比例">
+                            <span class="icon icomoon-icon-license"></span>
+                            <input type="text" value="@Model.OfficeAreaRatio" class="redCircle" />
+                        </div>
+                    }
                         <div class="circular-item tip" title="定额率">
                             <span class="icon icomoon-icon-target-2"></span>
                             <input type="text" value="@Model.Overproof" class="greenCircle" />
@@ -57,7 +70,7 @@
                                 <li><span class="number">@Model.StaffCount</span><span class="icon16 icomoon-icon-new-2"></span>教职工</li>
                                 <li><span class="number">@Model.Buildings.Count</span><span class="icon16 icomoon-icon-clubs"></span>楼宇</li>
                                 <li><span class="number">@Model.RoomCount</span><span class="icon16 icomoon-icon-home-9"></span>房间</li>
-                                <li><span class="number">@Model.TotalArea</span><span class="icon16 icomoon-icon-tag"></span>面积</li>
+                                <li><span class="number">@Math.Truncate(Model.TotalArea)</span><span class="icon16 icomoon-icon-tag"></span>面积</li>
                             </ul>
                         </div>
                     </div>
@@ -107,6 +120,12 @@
                         </li>
                         <li>
                             <a href="#" id="department-statistic">
+                                <span class="icon icomoon-icon-drawer"></span>
+                                <span class="txt">四类用房</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" id="department-classify">
                                 <span class="icon icomoon-icon-drawer-2"></span>
                                 <span class="txt">分类统计</span>
                             </a>
@@ -182,17 +201,6 @@
         $('.tip').tooltip();
 
         //circular progrress bar
-        $(".greenCircle").knob({
-            'min': 0,
-            'max': 100,
-            'readOnly': true,
-            'width': 100,
-            'height': 100,
-            'fgColor': '#9FC569',
-            'dynamicDraw': true,
-            'thickness': 0.2,
-            'tickColorizeValues': true
-        });
         $(".redCircle").knob({
             'min': 0,
             'max': 100,
@@ -215,6 +223,29 @@
             'thickness': 0.2,
             'tickColorizeValues': true
         });
+        $(".yellowCircle").knob({
+            'min': 0,
+            'max': 100,
+            'readOnly': true,
+            'width': 100,
+            'height': 100,
+            'fgColor': '#F4DC41',
+            'dynamicDraw': true,
+            'thickness': 0.2,
+            'tickColorizeValues': true
+        });
+        $(".greenCircle").knob({
+            'min': 0,
+            'max': 100,
+            'readOnly': true,
+            'width': 100,
+            'height': 100,
+            'fgColor': '#9FC569',
+            'dynamicDraw': true,
+            'thickness': 0.2,
+            'tickColorizeValues': true
+        });
+       
 
         //generate random number for charts
         randNum = function () {
@@ -257,6 +288,11 @@
 
         $('a#department-statistic').click(function () {
             ajaxContentLoadPage2("Statistic", "Department", { id: '@Model.DepartmentId' }, $('#ajax-content2'));
+            return false;
+        });
+
+        $('a#department-classify').click(function () {
+            ajaxContentLoadPage2("Classify", "Department", { id: '@Model.DepartmentId' }, $('#ajax-content2'));
             return false;
         });
 
