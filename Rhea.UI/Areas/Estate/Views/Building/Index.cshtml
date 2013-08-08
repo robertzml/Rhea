@@ -72,7 +72,7 @@
                     <div class="content">
                         <div class="btn-group" data-toggle="buttons-radio">
                             <button id="plan-view" class="btn btn-primary active">平面图</button>
-                            <button id="list-view" class="btn btn-primary">列表</button>
+                            <button id="list-view" class="btn btn-primary">房间</button>
                             <button id="floor-view" class="btn btn-primary">楼层</button>
                         </div>
                     </div>
@@ -151,7 +151,7 @@
         });
 
         var buildingId = '@Model.BuildingId';
-        var currentFloor = 0;
+        var currentFloor = null;
 
         $('ul#floor-list li a').click(function () {
             secNavActive($('ul#floor-list'), $(this));
@@ -164,21 +164,21 @@
         });
 
         $('#sec-room-info #plan-view').click(function () {
-            if (currentFloor == 0)
+            if (currentFloor == null)
                 return;
             ajaxContentLoadPage("FloorView", "Building", "Estate", { id: buildingId, floor: currentFloor }, $('#ajax-content2'));
             return;
         });
 
         $('#sec-room-info #list-view').click(function () {
-            if (currentFloor == 0)
+            if (currentFloor == null)
                 return;
             ajaxContentLoadPage("ListByFloor", "Room", "Estate", { buildingId: buildingId, floor: currentFloor }, $('#ajax-content2'));
             return;
         });
 
         $('#sec-room-info #floor-view').click(function () {
-            if (currentFloor == 0)
+            if (currentFloor == null)
                 return;
             ajaxContentLoadPage("FloorInfo", "Building", "Estate", { id: buildingId, floor: currentFloor }, $('#ajax-content2'));
             return;

@@ -99,6 +99,24 @@ namespace Rhea.UI.Areas.Estate.Models
     }
 
     /// <summary>
+    /// 楼层入住部门模型
+    /// </summary>
+    public class FloorDepartmentModel
+    {
+        public int BuildingId { get; set; }
+
+        public int Floor { get; set; }
+
+        public int DepartmentId { get; set; }
+
+        public string DepartmentName { get; set; }
+
+        public int RoomCount { get; set; }
+
+        public double TotalUsableArea { get; set; }
+    }
+
+    /// <summary>
     /// 楼宇侧边栏模型
     /// </summary>
     public class BuildingSectionModel

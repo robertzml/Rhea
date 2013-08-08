@@ -1676,6 +1676,8 @@
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\CampusDropDownList.cshtml" />
     <Content Include="Areas\Estate\Views\Room\ListByFloor.cshtml" />
     <Content Include="Areas\Estate\Views\Building\FloorInfo.cshtml" />
+    <Content Include="Areas\Estate\Views\Building\FloorDepartment.cshtml" />
+    <Content Include="Areas\Estate\Views\Room\RoomFunction.cshtml" />
     <None Include="Content\fonts\broccolidry.eot" />
     <None Include="Content\fonts\broccolidry.ttf" />
     <None Include="Content\fonts\broccolidry.woff" />

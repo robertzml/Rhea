@@ -5,6 +5,7 @@
     Layout = null;
 }
 
+@Html.Action("RoomFunction", new { controller = "Room", area = "Estate" })
 
 <div class="box">
     <div class="title">
@@ -55,6 +56,7 @@
                         @item.DepartmentName()
                     </td>
                     <td>
+                        <span style="display:none;">@item.Function.ClassifyName</span>
                         @item.Function.Property
                     </td>
                     <td>
@@ -93,7 +95,34 @@
         });
 
         var dom = $('table#room-list');
-        initDataTable(dom);
+        var oTable = initDataTable(dom);
+
+        setBoxAction();
+
+        $('#first-select').change(function () {
+            var fid = $(this).val();
+            var text = $(this).find("option:selected").text();
+            if (fid != 0) {
+                oTable.fnFilter(text, 4);
+            } else {
+                oTable.fnFilter('', 4);
+            }
+        });
+
+        $('#second-select').change(function () {
+            var sid = $(this).val();
+            var text = $(this).find("option:selected").text();
+            if (sid != 0) {
+                oTable.fnFilter(text, 4);
+            } else {
+                var fid = $('#first-select').val();
+                var ftext = $('#first-select').find("option:selected").text();
+                if (fid != 0)
+                    oTable.fnFilter(ftext, 4);
+                else
+                    oTable.fnFilter('', 4);
+            }
+        });
     });
 </script>
 

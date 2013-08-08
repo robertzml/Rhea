@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Rhea.Model.Estate.RoomFunctionCode>
+
+@{
+    ViewBag.Title = "房间功能筛选";
+    Layout = null;
+
+    var first = Model.GroupBy(r => new { r.FirstCode, r.ClassifyName }).
+        Select(g => new { g.Key.FirstCode, g.Key.ClassifyName })
+        .OrderBy(g => g.FirstCode);
+}
+
+<div class="box closed">
+    <div class="title">
+        <h4>
+            <span class="icon16 icomoon-icon-equalizer"></span><span>@ViewBag.Title</span>
+        </h4>
+        <a href="#" class="minimize">Minimize</a>
+    </div>
+
+    <div class="content">
+        <form id="filter" class="horizontal">
+            <div class="form-row row-fluid">
+                <div class="span12">
+                    <div class="row-fluid">
+                        <label class="form-label span2" for="checkboxes">房间功能</label>
+                        <div class="span5 controls">
+                            <select id="first-select">
+                                <option value="0">-- 请选择 --</option>
+                            @foreach (var item in first)
+                            {
+                                <option value="@item.FirstCode">@item.ClassifyName</option>
+                            }
+                            </select>
+                        </div>
+                        <div class="span5 controls">
+                            <select id="second-select">
+                                <option>-- 请选择 --</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#first-select').change(function () {
+            var fid = $(this).val();
+            if (fid != 0) {
+                $.getJSON('/Estate/Room/GetSecondClassify', { firstCode: fid }, function (response) {
+                    $('#second-select').empty();
+                    $('#second-select').append('<option value="0">-- 请选择 --</option>');
+                    $.each(response, function (i, item) {
+                        $('#second-select').append('<option value="' + item.SecondCode + '">' +
+                            item.FunctionProperty + '</option>');
+                    });
+                });
+            } else {
+                $('#second-select').empty();
+            }
+        });       
+    });
+</script>
+

@@ -5,6 +5,8 @@
     Layout = null;
 }
 
+@Html.Action("RoomFunction", new { controller = "Room", area = "Estate" })
+
 <div class="box">
     <div class="title">
         <h4>
@@ -32,7 +34,7 @@
                     <th>
                         功能
                     </th>
-                    <th>
+                    <th style="width:80px;">
                         操作
                     </th>
                 </tr>
@@ -54,6 +56,7 @@
                             @item.DepartmentName()
                         </td>
                         <td>
+                            <span style="display:none;">@item.Function.ClassifyName</span>
                             @item.Function.Property
                         </td>
                         <td>
@@ -72,16 +75,16 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel">房间信息</h3>
     </div>
-    <div class="modal-body">    
+    <div class="modal-body">
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">关闭</button>      
+        <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">关闭</button>
     </div>
 </div>
 
 <script type="text/javascript">
     $(function () {
-        $('table a.room-details').click(function () {           
+        $('table a.room-details').click(function () {
             var url = "/Estate/Room/Details/" + $(this).attr('ref');
             $('.modal-body').load(url);
             $('#myModal').modal();
@@ -90,6 +93,33 @@
         });
 
         var dom = $('table#room-list');
-        initDataTable(dom);
+        var oTable = initDataTable(dom);
+
+        setBoxAction();
+
+        $('#first-select').change(function () {
+            var fid = $(this).val();
+            var text = $(this).find("option:selected").text();
+            if (fid != 0) {
+                oTable.fnFilter(text, 4);
+            } else {
+                oTable.fnFilter('', 4);
+            }
+        });
+
+        $('#second-select').change(function () {
+            var sid = $(this).val();
+            var text = $(this).find("option:selected").text();
+            if (sid != 0) {
+                oTable.fnFilter(text, 4);
+            } else {
+                var fid = $('#first-select').val();
+                var ftext = $('#first-select').find("option:selected").text();
+                if (fid != 0)
+                    oTable.fnFilter(ftext, 4);
+                else
+                    oTable.fnFilter('', 4);
+            }
+        });
     });
 </script>

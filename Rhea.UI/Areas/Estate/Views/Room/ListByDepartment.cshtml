@@ -8,44 +8,7 @@
     form#filter { margin:0; padding:0;}
 </style>
 
-<div class="box closed">
-    <div class="title">
-        <h4>
-            <span class="icon16 icomoon-icon-equalizer"></span><span>房间筛选</span>
-        </h4>
-        <a href="#" class="minimize">Minimize</a>
-    </div>
-
-    <div class="content">        
-        <form id="filter" class="horizontal">
-            <div class="form-row row-fluid">
-                <div class="span12">
-                    <div class="row-fluid">
-                        <label class="form-label span2" for="checkboxes">房间功能</label>
-                        <div class="span5 controls">   
-                            <select name="select">
-                                <option>Who</option>
-                                <option selected="selected">What</option>
-                                <option>When</option>
-                                <option>Where</option>
-                                <option>How</option>
-                            </select>
-                        </div>
-                        <div class="span5 controls">   
-                            <select name="select">
-                                <option>Who</option>
-                                <option selected="selected">What</option>
-                                <option>When</option>
-                                <option>Where</option>
-                                <option>How</option>
-                            </select>
-                        </div>  
-                    </div>
-                </div> 
-            </div>
-        </form>          
-    </div>
-</div>
+@Html.Action("RoomFunction", new { controller = "Room", area = "Estate" })
 
 <div class="box">
     <div class="title">
@@ -96,7 +59,8 @@
                             @item.Floor
                         </td>                       
                         <td>
-                            @string.Format("{0}.{1} {2}", item.Function.FirstCode, item.Function.SecondCode, item.Function.Property)
+                            <span style="display:none;">@item.Function.ClassifyName</span>
+                            @item.Function.Property
                         </td>
                         <td>
                             <a class="btn btn-success btn-small room-details" ref="@item.Id">
@@ -135,6 +99,30 @@
         var oTable = initDataTable(dom);
 
         setBoxAction();
-        //oTable.fnFilter('院控房', 4);  
+
+        $('#first-select').change(function () {
+            var fid = $(this).val();
+            var text = $(this).find("option:selected").text();
+            if (fid != 0) {
+                oTable.fnFilter(text, 4);
+            } else {
+                oTable.fnFilter('', 4);
+            }
+        });
+
+        $('#second-select').change(function () {
+            var sid = $(this).val();
+            var text = $(this).find("option:selected").text();
+            if (sid != 0) {
+                oTable.fnFilter(text, 4);
+            } else {
+                var fid = $('#first-select').val();
+                var ftext = $('#first-select').find("option:selected").text();
+                if (fid != 0)
+                    oTable.fnFilter(ftext, 4);
+                else
+                    oTable.fnFilter('', 4);
+            }
+        });
     });
 </script>

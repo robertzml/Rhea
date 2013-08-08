@@ -118,7 +118,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
             IDepartmentBusiness departmentBusiness = new MongoDepartmentBusiness();
             IRoomBusiness roomBusiness = new MongoRoomBusiness();
 
-            var building = this.buildingBusiness.Get(id);            
+            var building = this.buildingBusiness.Get(id);
             var roomList = roomBusiness.GetListByBuilding(building.Id);
 
             // get departments in one building
@@ -127,7 +127,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
             {
                 BuildingDepartmentModel model = new BuildingDepartmentModel
                 {
-                    BuildingId = id,                   
+                    BuildingId = id,
                     DepartmentId = d.Key,
                     RoomCount = d.Count,
                     TotalUsableArea = Convert.ToDouble(d.Area)
@@ -143,7 +143,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
                 }
                 else
                     data.Add(model);
-            }           
+            }
 
             return View(data);
         }
@@ -184,7 +184,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         public ActionResult FloorView(int id, int floor)
         {
-            var building = this.buildingBusiness.Get(id);          
+            var building = this.buildingBusiness.Get(id);
 
             Floor data = building.Floors.Single(r => r.Number == floor);
 
@@ -210,20 +210,45 @@ namespace Rhea.UI.Areas.Estate.Controllers
         }
 
         /// <summary>
-        /// 楼层列表
+        /// 楼层入住部门
         /// </summary>
         /// <param name="id">楼宇ID</param>
-        /// <param name="departmentId">部门ID</param>
+        /// <param name="floor">楼层</param>
         /// <returns></returns>
-        public ActionResult FloorByDepartment(int id, int departmentId)
+        public ActionResult FloorDepartment(int id, int floor)
         {
-            Building data = this.buildingBusiness.Get(id);
+            List<FloorDepartmentModel> data = new List<FloorDepartmentModel>();
 
+            IDepartmentBusiness departmentBusiness = new MongoDepartmentBusiness();
             IRoomBusiness roomBusiness = new MongoRoomBusiness();
-            var rooms = roomBusiness.GetListByDepartment(departmentId, id);
-            var floorNumbers = rooms.Select(r => r.Floor).Distinct();
 
-            data.Floors = data.Floors.Where(r => floorNumbers.Contains(r.Number)).ToList();
+            var building = this.buildingBusiness.Get(id);
+            var roomList = roomBusiness.GetListByBuilding(building.Id, floor);
+
+            // get departments in one building
+            var dList = roomList.GroupBy(r => r.DepartmentId).Select(s => new { s.Key, Count = s.Count(), Area = s.Sum(r => r.UsableArea) });
+            foreach (var d in dList)
+            {
+                FloorDepartmentModel model = new FloorDepartmentModel
+                {
+                    BuildingId = id,
+                    DepartmentId = d.Key,
+                    Floor = floor,
+                    RoomCount = d.Count,
+                    TotalUsableArea = Convert.ToDouble(d.Area)
+                };
+
+                model.DepartmentName = departmentBusiness.GetName(model.DepartmentId);
+
+                var result = data.Find(r => r.DepartmentId == model.DepartmentId);
+                if (result != null)
+                {
+                    result.RoomCount += model.RoomCount;
+                    result.TotalUsableArea = model.TotalUsableArea;
+                }
+                else
+                    data.Add(model);
+            }
 
             return View(data);
         }
@@ -260,7 +285,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <param name="departmentId">部门ID</param>
         /// <returns></returns>
         public JsonResult GetListByDepartment(int departmentId)
-        {           
+        {
             var data = this.buildingBusiness.GetListByDepartment(departmentId);
             return Json(data, JsonRequestBehavior.AllowGet);
         }

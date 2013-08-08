@@ -93,8 +93,8 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <summary>
         /// 房间列表
         /// </summary>
-        /// <param name="buildingId"></param>
-        /// <param name="floor"></param>
+        /// <param name="buildingId">所属楼宇ID</param>
+        /// <param name="floor">楼层</param>
         /// <returns></returns>
         public ActionResult ListByFloor(int buildingId, int floor)
         {
@@ -106,12 +106,45 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// 房间列表
         /// </summary>
         /// <param name="departmentId">所属部门ID</param>
+        /// <param name="buildingId">楼宇ID</param>
+        /// <param name="floor">楼层</param>
         /// <returns></returns>
-        public ActionResult ListByDepartment(int departmentId)
+        public ActionResult ListByDepartment(int departmentId, int buildingId = 0, int? floor = null)
         {
             var data = this.roomBusiness.GetListByDepartment(departmentId);
+
+            if (buildingId != 0)
+                data = data.Where(r => r.BuildingId == buildingId).ToList();
+
+            if (floor != null)
+                data = data.Where(r => r.Floor == floor).ToList();
+
+            return View(data);
+        }
+
+        /// <summary>
+        /// 房间功能下拉框
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult RoomFunction()
+        {
+            var data = this.roomBusiness.GetFunctionCodeList();
             return View(data);
         }
         #endregion //Action
+
+        #region Json
+        /// <summary>
+        /// 得到二级分类
+        /// </summary>
+        /// <param name="firstCode">一级编码</param>
+        /// <returns></returns>
+        public JsonResult GetSecondClassify(int firstCode)
+        {
+            var data = this.roomBusiness.GetFunctionCodeList();
+            data = data.Where(r => r.FirstCode == firstCode).ToList();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        #endregion //Json
     }
 }

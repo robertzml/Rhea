@@ -16,7 +16,7 @@
         <ul id="secTab" class="nav nav-tabs pattern">
             <li class="active"><a href="#tab-fun" data-toggle="tab">功 能</a></li>
             <li><a href="#tab-room" data-toggle="tab">房 屋</a></li>
-            <li><a href="#tab-stat" data-toggle="tab">统 计</a></li>                
+            <li><a href="#tab-stat" data-toggle="tab">统 计</a></li>
         </ul>
 
         <div class="tab-content">
@@ -61,7 +61,6 @@
                             </ul>
                         </div>
                     </div>
-
                 </div>
 
             </div>
@@ -87,13 +86,14 @@
                     </div>
                 </div>
                 
-                <div class="secbar-widget">
-                    <h4 class="title">房屋统计</h4>
+                <div class="secbar-widget" id="sec-room-info" style="display:none;">
+                    <h4 class="title">房间信息</h4>
                     <div class="content">
-                        <ul class="bigBtnIcon">
-                            <li><a href="#" id="room-list" title="房间列表" class="tip"><span class="icon icomoon-icon-list-view">
-                            </span><span class="txt">房间列表</span> </a></li>
-                        </ul>
+                        <div class="btn-group" data-toggle="buttons-radio">
+                            <button id="plan-view" class="btn btn-primary active">平面图</button>
+                            <button id="list-view" class="btn btn-primary">房间</button>
+                            <button id="floor-view" class="btn btn-primary">楼层</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -101,9 +101,14 @@
                 <div class="centerContent">
                     <ul class="bigBtnIcon">
                         <li>
+                            <a href="#" id="room-list" title="房间列表" class="tip">
+                                <span class="icon icomoon-icon-list-view"></span><span class="txt">房间列表</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="#" id="department-statistic">
                                 <span class="icon icomoon-icon-drawer-2"></span>
-                                <span class="txt">分类统计</span>                                
+                                <span class="txt">分类统计</span>
                             </a>
                         </li>
                         <li>
@@ -126,13 +131,13 @@
                                 <span class="txt">消息</span>
                                 <span class="notification green">23</span>
                             </a>
-                        </li>                   
+                        </li>
                     </ul>
                 </div>
 
                 <div class="secbar-widget">
                     <h4 class="title">基本数据</h4>
-                    <div class="content sparkStats">                    
+                    <div class="content sparkStats">
                         <ul class="unstyled">
                             <li><span class="sparkLine1 "></span> 总人数: <span class="number">509</span></li>
                             <li>
@@ -151,14 +156,11 @@
                             <li><span class="sparkLine5"></span>
                                 时间: 
                                 <span class="number">00:01:21</span>
-                            </li>                        
+                            </li>
                         </ul>
-                        <div class="right" style="padding: 15px 0">
-                            <a href="#" class="btn btn-info btn-small">View<span class="icon16 icomoon-icon-arrow-right white"></span></a>
-                        </div>
                     </div><!-- End .sparkStats -->
                 </div>
-            </div>            
+            </div>
         </div>
     </div>
 </div>
@@ -263,12 +265,18 @@
             return false;
         });
 
+        var departmentId = '@Model.DepartmentId';
+        var currentFloor = null;
+        var currentBuildingId = 0;
+
         $('ul#building-list li a').click(function () {
-            var bid = $(this).attr('ref');
-            ajaxContentLoadPage2("Building", "Department", { id: '@Model.DepartmentId', buildingId: bid }, $('#ajax-content2'));
+            currentBuildingId = $(this).attr('ref');
+            currentFloor = null;
+
+            ajaxContentLoadPage2("Building", "Department", { id: departmentId, buildingId: currentBuildingId }, $('#ajax-content2'));
             secNavActive($('ul#building-list'), $(this));
 
-            $.getJSON('/Department/GetFloors', { id: '@Model.DepartmentId', buildingId: bid }, function (response) {
+            $.getJSON('/Department/GetFloors', { id: departmentId, buildingId: currentBuildingId }, function (response) {
                 var text = [];
                 $.each(response, function (i, item) {
                     text.push("<li><a href='#' class='floor-index' ref='" + item.Number + "'>" + item.Name + "</a></li>");
@@ -277,14 +285,36 @@
                 $('ul#floor-list').empty();
                 $('ul#floor-list').append(text);
 
-                $('a.floor-index').click(function() {
+                $('a.floor-index').click(function () {
                     secNavActive($('ul#floor-list'), $(this));
-                    var floor = $(this).attr('ref');
-                    ajaxContentLoadPage("FloorView", "Building", "Estate", { id: bid, floor: floor }, $('#ajax-content2'));
+                    currentFloor = $(this).attr('ref');
+                    ajaxContentLoadPage("FloorView", "Building", "Estate", { id: currentBuildingId, floor: currentFloor }, $('#ajax-content2'));
+                    $('div#sec-room-info').show();
                     return false;
                 });
             });
             return false;
+        });
+
+        $('#sec-room-info #plan-view').click(function () {
+            if (currentFloor == null)
+                return;
+            ajaxContentLoadPage("FloorView", "Building", "Estate", { id: currentBuildingId, floor: currentFloor }, $('#ajax-content2'));
+            return;
+        });
+
+        $('#sec-room-info #list-view').click(function () {
+            if (currentFloor == null)
+                return;
+            ajaxContentLoadPage("ListByDepartment", "Room", "Estate", { departmentId: departmentId, buildingId: currentBuildingId, floor: currentFloor }, $('#ajax-content2'));
+            return;
+        });
+
+        $('#sec-room-info #floor-view').click(function () {
+            if (currentFloor == null)
+                return;
+            ajaxContentLoadPage("FloorInfo", "Building", "Estate", { id: currentBuildingId, floor: currentFloor }, $('#ajax-content2'));
+            return;
         });
     });
 </script>
