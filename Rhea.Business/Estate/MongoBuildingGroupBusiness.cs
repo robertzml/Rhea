@@ -76,6 +76,7 @@ namespace Rhea.Business.Estate
                 buildingGroup.Editor.Id = editor["id"].AsObjectId.ToString();
                 buildingGroup.Editor.Name = editor["name"].AsString;
                 buildingGroup.Editor.Time = editor["time"].AsBsonDateTime.ToLocalTime();
+                buildingGroup.Editor.Type = editor["type"].AsInt32;
             }
 
             if (buildingGroup.BuildDate != null)
@@ -219,6 +220,7 @@ namespace Rhea.Business.Estate
                 { "editor.id", user._id },
                 { "editor.name", user.UserName },
                 { "editor.time", DateTime.Now },
+                { "editor.type", 1 },
                 { "status", 0 }
             };
 
@@ -265,7 +267,8 @@ namespace Rhea.Business.Estate
                 .Set("remark", data.Remark ?? "")
                 .Set("editor.id", user._id)
                 .Set("editor.name", user.UserName)
-                .Set("editor.time", DateTime.Now);
+                .Set("editor.time", DateTime.Now)
+                .Set("editor.type", 2);
 
             WriteConcernResult result = this.context.Update(EstateCollection.BuildingGroup, query, update);
 
@@ -287,7 +290,8 @@ namespace Rhea.Business.Estate
             var update = Update.Set("status", 1)
                 .Set("editor.id", user._id)
                 .Set("editor.name", user.UserName)
-                .Set("editor.time", DateTime.Now);
+                .Set("editor.time", DateTime.Now)
+                .Set("editor.type", 3);
 
             WriteConcernResult result = this.context.Update(EstateCollection.BuildingGroup, query, update);
 

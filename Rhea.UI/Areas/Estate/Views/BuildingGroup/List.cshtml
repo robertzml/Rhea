@@ -44,7 +44,7 @@
                     <td>@item.BuildArea</td>
                     <td>@item.UsableArea</td>
                     <td>
-                        <a class="btn btn-success btn-small" onclick="loadBuildingGroupIndex('@item.Id');return false;" href="#"><i class="icon-zoom-in icon-white"></i>查看</a>
+                        <a class="btn btn-success btn-small building-group-index" ref="@item.Id" href="#"><i class="icon-zoom-in icon-white"></i>查看</a>
                     </td>
                 </tr>
             }
@@ -54,13 +54,14 @@
 </div>
 
 <script type="text/javascript">
-    $(function () { 
+    $(function () {
+        $('#building-group-list a.building-group-index').click(function () {
+            var id = $(this).attr('ref');
+            ajaxLoadPage("Index", "BuildingGroup", "Estate", { id: id });
+            return false;
+        });
+
         var dom = $('table#building-group-list');
         initDataTable(dom);
     });
-
-    function loadBuildingGroupIndex(id) {
-        ajaxLoadPage("Index", "BuildingGroup", "Estate", { id: id });
-        return false;
-    }
 </script>

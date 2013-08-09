@@ -5,8 +5,10 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Rhea.Business;
+using Rhea.Business.Account;
 using Rhea.Business.Estate;
 using Rhea.Business.Personnel;
+using Rhea.Model.Account;
 using Rhea.Model.Estate;
 using Rhea.UI.Filters;
 
@@ -32,6 +34,17 @@ namespace Rhea.UI.Areas.Estate.Controllers
 
             base.Initialize(requestContext);
         }
+
+        /// <summary>
+        /// 获取当前用户
+        /// </summary>
+        /// <returns></returns>
+        private UserProfile GetUser()
+        {
+            IAccountBusiness accountBusiness = new MongoAccountBusiness();
+            UserProfile user = accountBusiness.GetByUserName(User.Identity.Name);
+            return user;
+        }
         #endregion //Function
 
         #region Action
@@ -43,13 +56,17 @@ namespace Rhea.UI.Areas.Estate.Controllers
         public ActionResult Details(int id)
         {
             var data = this.roomBusiness.Get(id);
+            return View(data);
+        }              
 
-            IDepartmentBusiness departmentBusiness = new MongoDepartmentBusiness();
-            ViewBag.DepartmentName = departmentBusiness.GetName(data.DepartmentId);
-
-            IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
-            ViewBag.BuildingName = buildingBusiness.GetName(data.BuildingId);
-
+        /// <summary>
+        /// 房间基本信息
+        /// </summary>
+        /// <param name="id">房间ID</param>
+        /// <returns></returns>
+        public ActionResult Intro(int id)
+        {
+            var data = this.roomBusiness.Get(id);
             return View(data);
         }
 
@@ -66,7 +83,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
             ViewBag.DepartmentName = departmentBusiness.GetName(data.DepartmentId);
 
             return View(data);
-        }
+        }        
 
         /// <summary>
         /// 房间列表
@@ -130,6 +147,73 @@ namespace Rhea.UI.Areas.Estate.Controllers
         {
             var data = this.roomBusiness.GetFunctionCodeList();
             return View(data);
+        }
+
+        /// <summary>
+        /// 房间分配
+        /// </summary>
+        /// <param name="id">房间ID</param>
+        /// <returns></returns>
+        [EnhancedAuthorize(Rank=650)]
+        [HttpGet]
+        public ActionResult Assign(int id)
+        {
+            var data = this.roomBusiness.Get(id);
+
+            var drooms = this.roomBusiness.GetListByDepartment(data.DepartmentId);
+            ViewBag.DepartmentArea = Math.Round(Convert.ToDouble(drooms.Sum(r => r.UsableArea)), 2);
+
+            return View(data);
+        }
+
+        /// <summary>
+        /// 房间分配
+        /// </summary>
+        /// <returns></returns>
+        [EnhancedAuthorize(Rank = 650)]
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Assign()
+        {
+            string msg, title = "房间管理";
+
+            int roomId = Convert.ToInt32(Request.Form["RoomId"]);
+
+            if (Request.Form["DepartmentId"] == "")
+            {
+                msg = "未选择部门";
+                return RedirectToAction("ShowMessage", new { controller = "Common", area = "", msg = msg, title = title });
+            }
+
+            int departmentId = Convert.ToInt32(Request.Form["DepartmentId"]);
+            int currentDepartmentId = Convert.ToInt32(Request.Form["CurrentDepartmentId"]);
+
+            if (departmentId == currentDepartmentId)
+            {
+                msg = "当前部门与新部门相同";
+                return RedirectToAction("ShowMessage", new { controller = "Common", area = "", msg = msg, title = title });
+            }
+
+            bool backok = this.roomBusiness.Backup(roomId);
+            if (!backok)
+            {
+                msg = "备份失败";
+                return RedirectToAction("ShowMessage", new { controller = "Common", area = "", msg = msg, title = title });
+            }
+
+            var user = GetUser();
+            bool result = this.roomBusiness.Assign(roomId, departmentId, user);
+
+            if (result)
+            {
+                msg = "分配房间成功";
+                return RedirectToAction("ShowMessage", new { controller = "Common", area = "", msg = msg, title = title });
+            }
+            else
+            {
+                msg = "分配房间失败";
+                return RedirectToAction("ShowMessage", new { controller = "Common", area = "", msg = msg, title = title });
+            }
         }
         #endregion //Action
 

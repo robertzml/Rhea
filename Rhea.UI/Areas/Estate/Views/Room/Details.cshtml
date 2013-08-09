@@ -7,9 +7,14 @@
     Layout = null;
 }
 
+<div class="page-header">
+    <h3>
+        @Model.Number <small>@Model.Name</small></h3>
+</div> 
+
 <div class="row-fluid">
     <div class="span12">
-        <ul class="nav nav-tabs" id="myTab">
+        <ul class="nav nav-tabs pattern" id="myTab">
             <li class="active"><a href="#info">基础信息</a></li>
             <li><a href="#additional">附加信息</a></li>
         </ul>
@@ -28,13 +33,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                @Html.DisplayNameFor(model => model.Id)
-                            </td>
-                            <td>
-                                @Model.Id
-                            </td>
                         </tr>
                         <tr>
                             <td>
@@ -50,6 +48,14 @@
                             </td>
                             <td>
                                 @Model.Name
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                一级分类
+                            </td>
+                            <td>
+                                @Model.Function.ClassifyName
                             </td>
                         </tr>
                         <tr>

@@ -236,5 +236,11 @@ namespace Rhea.Model.Estate
         /// </summary>
         [Display(Name = "编辑时间")]
         public DateTime Time { get; set; }
+
+        /// <summary>
+        /// 编辑类型
+        /// </summary>
+        [Display(Name = "编辑类型")]
+        public int Type { get; set; }
     }   
 }

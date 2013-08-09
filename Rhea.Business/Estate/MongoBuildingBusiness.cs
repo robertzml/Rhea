@@ -79,6 +79,7 @@ namespace Rhea.Business.Estate
                 building.Editor.Id = editor["id"].AsObjectId.ToString();
                 building.Editor.Name = editor["name"].AsString;
                 building.Editor.Time = editor["time"].AsBsonDateTime.ToLocalTime();
+                building.Editor.Type = editor["type"].AsInt32;
             }
 
             return building;
@@ -236,6 +237,7 @@ namespace Rhea.Business.Estate
                 { "editor.id", user._id },
                 { "editor.name", user.UserName },
                 { "editor.time", DateTime.Now },
+                { "editor.type", 1 },
                 { "status", 0 }
             };
 
@@ -270,7 +272,8 @@ namespace Rhea.Business.Estate
                 .Set("remark", data.Remark ?? "")
                 .Set("editor.id", user._id)
                 .Set("editor.name", user.UserName)
-                .Set("editor.time", DateTime.Now);
+                .Set("editor.time", DateTime.Now)
+                .Set("editor.type", 2);
 
             WriteConcernResult result = this.context.Update(EstateCollection.Building, query, update);
 
@@ -292,7 +295,8 @@ namespace Rhea.Business.Estate
             var update = Update.Set("status", 1)
                 .Set("editor.id", user._id)
                 .Set("editor.name", user.UserName)
-                .Set("editor.time", DateTime.Now);
+                .Set("editor.time", DateTime.Now)
+                .Set("editor.type", 3);
 
             WriteConcernResult result = this.context.Update(EstateCollection.Building, query, update);
 
@@ -376,7 +380,8 @@ namespace Rhea.Business.Estate
             var update = Update.Push("floors", doc)
                 .Set("editor.id", user._id)
                 .Set("editor.name", user.UserName)
-                .Set("editor.time", DateTime.Now);
+                .Set("editor.time", DateTime.Now)
+                .Set("editor.type", 4);
 
             WriteConcernResult result = this.context.Update(EstateCollection.Building, query, update);
             if (result.HasLastErrorMessage)
@@ -404,7 +409,8 @@ namespace Rhea.Business.Estate
                 .Set("floors.$.remark", floor.Remark ?? "")
                 .Set("editor.id", user._id)
                 .Set("editor.name", user.UserName)
-                .Set("editor.time", DateTime.Now);
+                .Set("editor.time", DateTime.Now)
+                .Set("editor.type", 5);
 
             WriteConcernResult result = this.context.Update(EstateCollection.Building, query, update);
 
@@ -428,7 +434,8 @@ namespace Rhea.Business.Estate
             var update = Update.Set("floors.$.status", 1)
                 .Set("editor.id", user._id)
                 .Set("editor.name", user.UserName)
-                .Set("editor.time", DateTime.Now);
+                .Set("editor.time", DateTime.Now)
+                .Set("editor.type", 6);
 
             WriteConcernResult result = this.context.Update(EstateCollection.Building, query, update);
 

@@ -14,6 +14,9 @@ using Rhea.UI.Filters;
 
 namespace Rhea.UI.Areas.Estate.Controllers
 {
+    /// <summary>
+    /// 楼群控制器
+    /// </summary>
     [EnhancedAuthorize]
     public class BuildingGroupController : Controller
     {

@@ -36,8 +36,9 @@ namespace Rhea.UI.Controllers
         /// </summary>
         /// <param name="msg">消息内容</param>
         /// <returns></returns>       
-        public ActionResult ShowMessage(string msg)
+        public ActionResult ShowMessage(string msg, string title)
         {
+            ViewBag.Title = title;
             ViewBag.Message = msg;
             return View();
         }

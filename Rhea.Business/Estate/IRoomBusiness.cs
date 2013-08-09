@@ -133,5 +133,14 @@ namespace Rhea.Business.Estate
         /// <param name="id">房间ID</param>
         /// <returns></returns>
         bool Backup(int id);
+
+        /// <summary>
+        /// 分配房间
+        /// </summary>
+        /// <param name="id">房间ID</param>
+        /// <param name="newDepartmentId">新部门ID</param>
+        /// <param name="user">相关用户</param>
+        /// <returns></returns>
+        bool Assign(int id, int newDepartmentId, UserProfile user);
     }
 }

@@ -63,8 +63,14 @@
                             @item.Function.Property
                         </td>
                         <td>
-                            <a class="btn btn-success btn-small room-details" ref="@item.Id">
-                            <i class="icon-zoom-in icon-white"></i>查看</a>
+                            <div class="btn-group">
+                                <a class="btn btn-success btn-small room-intro" ref="@item.Id"><span class="icon-zoom-in icon-white"></span> 查看</a>
+                                <a class="btn btn-success btn-small dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#" class="room-details" ref="@item.Id"><span class="icon-flag"></span> 信息</a></li>
+                                    <li><a href="#"><span class="icon-ban-circle"></span> Ban</a></li>
+                                </ul>
+                            </div>
                         </td>
                     </tr>
                 }
@@ -76,7 +82,7 @@
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel">房间信息</h3>
+        <h3 id="myModalLabel">房间基本信息</h3>
     </div>
     <div class="modal-body">    
     </div>
@@ -87,11 +93,17 @@
 
 <script type="text/javascript">
     $(function () {
-        $('table a.room-details').click(function () {
-            var url = "/Estate/Room/Details/" + $(this).attr('ref');
+        $('table a.room-intro').click(function () {
+            var url = "/Estate/Room/Intro/" + $(this).attr('ref');
             $('.modal-body').load(url);
             $('#myModal').modal();
 
+            return false;
+        });
+
+        $('table a.room-details').click(function () {
+            var id = $(this).attr('ref');
+            ajaxContentLoadPage("Details", "Room", "Estate", { id: id }, $('#ajax-content2'));
             return false;
         });
 

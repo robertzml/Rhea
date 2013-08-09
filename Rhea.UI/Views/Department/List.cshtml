@@ -46,7 +46,7 @@
                         }        
                     </td>                 
                     <td>
-                        <a class="btn btn-success btn-small" onclick="loadDepartmentIndex('@item.Id');return false;" href="#"><i class="icon-zoom-in icon-white"></i>查看</a>
+                        <a class="btn btn-success btn-small tdepartment-index" ref="@item.Id" href="#"><i class="icon-zoom-in icon-white"></i>查看</a>
                     </td>
                 </tr>
             }
@@ -57,11 +57,13 @@
 
 <script type="text/javascript">
     $(function () {
+        $('a.tdepartment-index').click(function () {
+            var id = $(this).attr('ref');
+            ajaxLoadPage2("Index", "Department", { id: id });
+            return false;
+        });
+
         var dom = $('table#department-list');
         initDataTable(dom);
-    });
-
-    function loadDepartmentIndex(id) {
-        ajaxLoadPage2("Index", "Department", { id: id });
-    }
+    });   
 </script>

@@ -87,6 +87,7 @@ namespace Rhea.Business.Estate
                 room.Editor.Id = editor["id"].AsObjectId.ToString();
                 room.Editor.Name = editor["name"].AsString;
                 room.Editor.Time = editor["time"].AsBsonDateTime.ToLocalTime();
+                room.Editor.Type = editor["type"].AsInt32;
             }
 
             if (room.StartDate != null)
@@ -316,6 +317,7 @@ namespace Rhea.Business.Estate
                 { "editor.id", user._id },
                 { "editor.name", user.UserName },
                 { "editor.time", DateTime.Now },
+                { "editor.type", 1 },
                 { "status", 0 },
                 { "heating", (BsonValue)data.Heating },
                 { "fireControl", data.FireControl ?? "" },
@@ -378,6 +380,7 @@ namespace Rhea.Business.Estate
                 .Set("editor.id", user._id)
                 .Set("editor.name", user.UserName)
                 .Set("editor.time", DateTime.Now)
+                .Set("editor.type", 2)
                 .Set("heating", (BsonValue)data.Heating)
                 .Set("fireControl", data.FireControl ?? "")
                 .Set("height", (BsonValue)data.Height)
@@ -417,7 +420,8 @@ namespace Rhea.Business.Estate
             var update = Update.Set("status", 1)
                 .Set("editor.id", user._id)
                 .Set("editor.name", user.UserName)
-                .Set("editor.time", DateTime.Now);
+                .Set("editor.time", DateTime.Now)
+                .Set("editor.type", 3);
 
             WriteConcernResult result = this.context.Update(EstateCollection.Room, query, update);
 
@@ -515,6 +519,30 @@ namespace Rhea.Business.Estate
             doc.Remove("_id");
 
             WriteConcernResult result = this.context.Insert(EstateCollection.RoomBackup, doc);
+
+            if (result.HasLastErrorMessage)
+                return false;
+            else
+                return true;
+        }
+
+        /// <summary>
+        /// 分配房间
+        /// </summary>
+        /// <param name="id">房间ID</param>
+        /// <param name="newDepartmentId">新部门ID</param>
+        /// <param name="user">相关用户</param>
+        /// <returns></returns>
+        public bool Assign(int id, int newDepartmentId, UserProfile user)
+        {
+            var query = Query.EQ("id", id);
+            var update = Update.Set("departmentId", newDepartmentId)
+                .Set("editor.id", user._id)
+                .Set("editor.name", user.UserName)
+                .Set("editor.time", DateTime.Now)
+                .Set("editor.type", 7);
+
+            WriteConcernResult result = this.context.Update(EstateCollection.Room, query, update);
 
             if (result.HasLastErrorMessage)
                 return false;

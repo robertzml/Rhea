@@ -1670,6 +1670,8 @@
     <Content Include="Areas\Estate\Views\Building\FloorInfo.cshtml" />
     <Content Include="Areas\Estate\Views\Building\FloorDepartment.cshtml" />
     <Content Include="Areas\Estate\Views\Room\RoomFunction.cshtml" />
+    <Content Include="Areas\Estate\Views\Room\Intro.cshtml" />
+    <Content Include="Areas\Estate\Views\Room\Assign.cshtml" />
     <None Include="Content\fonts\icomoon.eot" />
     <None Include="Content\fonts\icomoon.ttf" />
     <None Include="Content\fonts\icomoon.woff" />
@@ -1688,6 +1690,7 @@
     <Content Include="Views\Statistic\InstitutionOfficeAreaCompare.cshtml" />
     <Content Include="Views\Statistic\InstitutionAverageOfficeAreaCompare.cshtml" />
     <Content Include="Views\Department\Classify.cshtml" />
+    <Content Include="Views\Department\DropdownList.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

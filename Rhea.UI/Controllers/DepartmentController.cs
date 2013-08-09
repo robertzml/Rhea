@@ -281,6 +281,16 @@ namespace Rhea.UI.Controllers
         {
             return View(id);
         }
+
+        /// <summary>
+        /// 部门下拉选择框
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult DropdownList()
+        {
+            var data = this.departmentBusiness.GetList();
+            return View(data);
+        }
         #endregion //Action
 
         #region Json
@@ -314,6 +324,24 @@ namespace Rhea.UI.Controllers
             var floorNumbers = rooms.Select(r => r.Floor).Distinct();
 
             var data = building.Floors.Where(r => floorNumbers.Contains(r.Number)).ToList();
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 得到部门使用总面积
+        /// </summary>
+        /// <param name="id">部门ID</param>
+        /// <returns></returns>
+        public JsonResult GetArea(int id)
+        {
+            IRoomBusiness roomBusiness = new MongoRoomBusiness();
+            var drooms = roomBusiness.GetListByDepartment(id);
+
+            var data = new
+            {
+                Area = Math.Round(Convert.ToDouble(drooms.Sum(r => r.UsableArea)), 2)
+            };
 
             return Json(data, JsonRequestBehavior.AllowGet);
         }
