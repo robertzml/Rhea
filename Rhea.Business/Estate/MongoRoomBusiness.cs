@@ -512,18 +512,15 @@ namespace Rhea.Business.Estate
         /// 备份房间
         /// </summary>
         /// <param name="id">房间ID</param>
+        /// <param name="backupBusiness">备份功能接口</param>
         /// <returns></returns>
-        public bool Backup(int id)
+        public bool Backup(int id, IBackupBusiness backupBusiness)
         {
             BsonDocument doc = this.context.FindOne(EstateCollection.Room, "id", id);
             doc.Remove("_id");
 
-            WriteConcernResult result = this.context.Insert(EstateCollection.RoomBackup, doc);
-
-            if (result.HasLastErrorMessage)
-                return false;
-            else
-                return true;
+            bool result = backupBusiness.Backup(EstateCollection.RoomBackup, doc);
+            return result;            
         }
 
         /// <summary>

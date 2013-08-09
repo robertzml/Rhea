@@ -62,10 +62,12 @@
     <Compile Include="Account\IUserGroupBusiness.cs" />
     <Compile Include="Account\MongoUserGroupBusiness.cs" />
     <Compile Include="ApiService.cs" />
+    <Compile Include="Estate\EstateBackupBusiness.cs" />
     <Compile Include="Estate\EstateDictionaryBusiness.cs" />
     <Compile Include="Estate\EstateMiscBusiness.cs" />
     <Compile Include="Estate\ICampusBusiness.cs" />
     <Compile Include="Estate\MongoCampusBusiness.cs" />
+    <Compile Include="IBackupBusiness.cs" />
     <Compile Include="IDictionaryBusiness.cs" />
     <Compile Include="IStatisticBusiness.cs" />
     <Compile Include="ModelExtension.cs" />

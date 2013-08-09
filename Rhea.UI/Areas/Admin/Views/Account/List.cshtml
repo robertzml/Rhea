@@ -32,6 +32,9 @@
                         @Html.DisplayNameFor(model => model.LastLoginTime)
                     </th>
                     <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th>
                         操作
                     </th>
                 </tr>
@@ -45,6 +48,7 @@
                     <td>@item.UserName</td>
                     <td>@item.UserGroupName</td>
                     <td>@item.LastLoginTime</td>
+                    <td>@item.Status</td>
                     <td>
                         <a class="btn btn-success btn-small" href="@Url.Action("Details", new { controller = "Account", id = item.Id, area = "Admin" })"><i class="icon-zoom-in icon-white"></i>查看</a> 
                         <a class="btn btn-warning btn-small" href="@Url.Action("Edit", new { controller = "Account", id = item.Id, area = "Admin" })"><i class="icon-edit icon-white"></i>编辑</a>

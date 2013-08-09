@@ -131,8 +131,9 @@ namespace Rhea.Business.Estate
         /// 备份房间
         /// </summary>
         /// <param name="id">房间ID</param>
+        /// <param name="backupBusiness">备份功能接口</param>
         /// <returns></returns>
-        bool Backup(int id);
+        bool Backup(int id, IBackupBusiness backupBusiness);
 
         /// <summary>
         /// 分配房间

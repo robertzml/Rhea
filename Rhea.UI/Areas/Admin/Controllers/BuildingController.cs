@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Rhea.Business;
 using Rhea.Business.Account;
 using Rhea.Business.Estate;
 using Rhea.Model.Account;
@@ -137,15 +138,15 @@ namespace Rhea.UI.Areas.Admin.Controllers
             {
                 var user = GetUser();
 
-                bool result = this.buildingBusiness.Backup(model.Id);
-                if (!result)
+                IBackupBusiness backupBusiness = new EstateBackupBusiness();
+                bool backok = this.buildingBusiness.Backup(model.Id, backupBusiness);
+                if (!backok)
                 {
                     ModelState.AddModelError("", "备份失败");
                     return View(model);
                 }
 
-                result = this.buildingBusiness.Edit(model, user);
-
+                bool result = this.buildingBusiness.Edit(model, user);
                 if (result)
                 {
                     TempData["Message"] = "编辑成功";
@@ -184,14 +185,15 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             var user = GetUser();
 
-            bool result = this.buildingBusiness.Backup(id);
-            if (!result)
+            IBackupBusiness backupBusiness = new EstateBackupBusiness();
+            bool backok = this.buildingBusiness.Backup(id, backupBusiness);
+            if (!backok)
             {
                 ModelState.AddModelError("", "备份失败");
                 return View("Delete", id);
             }
 
-            result = this.buildingBusiness.Delete(id, user);
+            bool result = this.buildingBusiness.Delete(id, user);
 
             if (result)
             {
@@ -227,7 +229,9 @@ namespace Rhea.UI.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var user = GetUser();
-                bool backok = this.buildingBusiness.Backup(buildingId);
+
+                IBackupBusiness backupBusiness = new EstateBackupBusiness();
+                bool backok = this.buildingBusiness.Backup(buildingId, backupBusiness);
                 if (!backok)
                 {
                     ModelState.AddModelError("", "备份失败");
@@ -279,7 +283,8 @@ namespace Rhea.UI.Areas.Admin.Controllers
             {
                 var user = GetUser();
 
-                bool backok = this.buildingBusiness.Backup(buildingId);
+                IBackupBusiness backupBusiness = new EstateBackupBusiness();
+                bool backok = this.buildingBusiness.Backup(buildingId, backupBusiness);
                 if (!backok)
                 {
                     ModelState.AddModelError("", "备份失败");
@@ -314,7 +319,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             ViewBag.BuildingId = buildingId;
             var data = this.buildingBusiness.GetFloor(floorId);
-           
+
             return View(data);
         }
 
@@ -330,7 +335,8 @@ namespace Rhea.UI.Areas.Admin.Controllers
             int buildingId = Convert.ToInt32(Request.Form["BuildingId"]);
             var user = GetUser();
 
-            bool backok = this.buildingBusiness.Backup(buildingId);
+            IBackupBusiness backupBusiness = new EstateBackupBusiness();
+            bool backok = this.buildingBusiness.Backup(buildingId, backupBusiness);
             if (!backok)
             {
                 ModelState.AddModelError("", "备份失败");

@@ -96,8 +96,9 @@ namespace Rhea.Business.Account
         {
             BsonDocument doc = this.context.FindOne(RheaCollection.User, "userName", userName);
             if (doc != null)
-            {
-                if (doc.GetValue("status", 0) == 1)
+            {                
+                int userStatus = doc.GetValue("status", 0).AsInt32;
+                if (userStatus == 1 || userStatus == 2)
                     return null;
 
                 string pass = doc["password"].AsString;

@@ -4,11 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Rhea.Business;
+using Rhea.Business.Account;
 using Rhea.Business.Estate;
+using Rhea.Model.Account;
 using Rhea.Model.Estate;
 using Rhea.UI.Filters;
-using Rhea.Model.Account;
-using Rhea.Business.Account;
 
 namespace Rhea.UI.Areas.Admin.Controllers
 {
@@ -75,7 +76,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             return View();
         }
-       
+
         /// <summary>
         /// 添加楼群
         /// POST: /Admin/BuildingGroup/Create/
@@ -131,15 +132,15 @@ namespace Rhea.UI.Areas.Admin.Controllers
             {
                 var user = GetUser();
 
-                bool result = this.buildingGroupBusiness.Backup(model.Id);
-                if (!result)
+                IBackupBusiness backupBusiness = new EstateBackupBusiness();
+                bool backok = this.buildingGroupBusiness.Backup(model.Id, backupBusiness);
+                if (!backok)
                 {
                     ModelState.AddModelError("", "备份失败");
                     return View(model);
                 }
 
-                result = this.buildingGroupBusiness.Edit(model, user);
-
+                bool result = this.buildingGroupBusiness.Edit(model, user);
                 if (result)
                 {
                     TempData["Message"] = "编辑成功";
@@ -178,15 +179,15 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             var user = GetUser();
 
-            bool result = this.buildingGroupBusiness.Backup(id);
-            if (!result)
+            IBackupBusiness backupBusiness = new EstateBackupBusiness();
+            bool backok = this.buildingGroupBusiness.Backup(id, backupBusiness);
+            if (!backok)
             {
                 ModelState.AddModelError("", "备份失败");
                 return View("Delete", id);
             }
 
-            result = this.buildingGroupBusiness.Delete(id, user);
-
+            bool result = this.buildingGroupBusiness.Delete(id, user);
             if (result)
             {
                 return RedirectToAction("List", "BuildingGroup", new { area = "Admin" });

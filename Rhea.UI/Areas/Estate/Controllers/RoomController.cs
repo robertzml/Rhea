@@ -194,7 +194,8 @@ namespace Rhea.UI.Areas.Estate.Controllers
                 return RedirectToAction("ShowMessage", new { controller = "Common", area = "", msg = msg, title = title });
             }
 
-            bool backok = this.roomBusiness.Backup(roomId);
+            IBackupBusiness backupBusiness = new EstateBackupBusiness();
+            bool backok = this.roomBusiness.Backup(roomId, backupBusiness);
             if (!backok)
             {
                 msg = "备份失败";

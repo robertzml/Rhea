@@ -44,7 +44,7 @@ namespace Rhea.Model.Account
         /// </summary>
         [DataType(DataType.Password)]
         [Display(Name = "密码")]
-        public string Password { get; set; }       
+        public string Password { get; set; }
 
         /// <summary>
         /// 用户组ID
@@ -97,6 +97,7 @@ namespace Rhea.Model.Account
         /// <remarks>
         /// 0:正常, 1:删除, 2:禁用
         /// </remarks>
+        [Display(Name = "用户状态")]
         public int Status { get; set; }
     }
 }

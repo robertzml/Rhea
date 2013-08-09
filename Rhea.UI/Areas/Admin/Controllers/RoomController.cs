@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Rhea.Business;
 using Rhea.Business.Account;
 using Rhea.Business.Estate;
 using Rhea.Model.Account;
@@ -266,7 +267,8 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 room.Id = model.Id;
                 var user = GetUser();
 
-                bool backok = this.roomBusiness.Backup(room.Id);
+                IBackupBusiness backupBusiness = new EstateBackupBusiness();
+                bool backok = this.roomBusiness.Backup(room.Id, backupBusiness);
                 if (!backok)
                 {
                     ModelState.AddModelError("", "备份失败");
@@ -311,7 +313,8 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             var user = GetUser();
 
-            bool backok = this.roomBusiness.Backup(id);
+            IBackupBusiness backupBusiness = new EstateBackupBusiness();
+            bool backok = this.roomBusiness.Backup(id, backupBusiness);
             if (!backok)
             {
                 ModelState.AddModelError("", "备份失败");

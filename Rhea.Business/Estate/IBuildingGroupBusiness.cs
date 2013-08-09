@@ -87,7 +87,8 @@ namespace Rhea.Business.Estate
         /// 备份楼群
         /// </summary>
         /// <param name="id">楼群ID</param>
+        /// <param name="backupBusiness">备份功能接口</param>
         /// <returns></returns>
-        bool Backup(int id);
+        bool Backup(int id, IBackupBusiness backupBusiness);
     }
 }
