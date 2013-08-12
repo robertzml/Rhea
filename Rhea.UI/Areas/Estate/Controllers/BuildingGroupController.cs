@@ -62,7 +62,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
             data.BuildingGroupId = id;
             data.BuildingGroupName = buildingGroup.Name;
             data.BuildArea = Convert.ToInt32(buildingGroup.BuildArea);
-            data.UsableArea = Convert.ToInt32(buildingGroup.UsableArea);
+            data.UsableArea = Convert.ToInt32(this.buildingGroupBusiness.GetUsableArea(id));//Convert.ToInt32(buildingGroup.UsableArea);
 
             IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
             var buildings = buildingBusiness.GetListByBuildingGroup(id, true);
@@ -70,9 +70,9 @@ namespace Rhea.UI.Areas.Estate.Controllers
 
             IRoomBusiness roomBusiness = new MongoRoomBusiness();
             var rooms = roomBusiness.GetListByBuildingGroup(id);
-           
+
             double totArea = Convert.ToDouble(rooms.Sum(r => r.UsableArea));
-           
+
             double offArea = Convert.ToDouble(rooms.Where(r => r.Function.FirstCode == 1).Sum(r => r.UsableArea));
             data.OfficeAreaRatio = Math.Round(offArea / totArea * 100, 2);
 
@@ -137,39 +137,24 @@ namespace Rhea.UI.Areas.Estate.Controllers
             List<BuildingGroupDepartmentModel> data = new List<BuildingGroupDepartmentModel>();
 
             IDepartmentBusiness departmentBusiness = new MongoDepartmentBusiness();
+            IRoomBusiness roomBusiness = new MongoRoomBusiness();
+            var roomList = roomBusiness.GetListByBuildingGroup(id);
 
-            IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
-            var buildings = buildingBusiness.GetListByBuildingGroup(id);
+            // get departments in one building
+            var dList = roomList.GroupBy(r => r.DepartmentId).Select(s => new { s.Key, Count = s.Count(), Area = s.Sum(r => r.UsableArea) });
 
-            foreach (var building in buildings)
+            foreach (var d in dList)
             {
-                IRoomBusiness roomBusiness = new MongoRoomBusiness();
-                var roomList = roomBusiness.GetListByBuilding(building.Id);
-
-                // get departments in one building
-                var dList = roomList.GroupBy(r => r.DepartmentId).Select(s => new { s.Key, Count = s.Count(), Area = s.Sum(r => r.UsableArea) });
-
-                foreach (var d in dList)
+                BuildingGroupDepartmentModel model = new BuildingGroupDepartmentModel
                 {
-                    BuildingGroupDepartmentModel model = new BuildingGroupDepartmentModel
-                    {
-                        BuildingGroupId = id,
-                        DepartmentId = d.Key,
-                        RoomCount = d.Count,
-                        TotalUsableArea = Convert.ToDouble(d.Area)
-                    };
+                    BuildingGroupId = id,
+                    DepartmentId = d.Key,
+                    RoomCount = d.Count,
+                    TotalUsableArea = Convert.ToDouble(d.Area)
+                };
+                model.DepartmentName = departmentBusiness.GetName(model.DepartmentId);
 
-                    model.DepartmentName = departmentBusiness.GetName(model.DepartmentId);
-
-                    var result = data.Find(r => r.DepartmentId == model.DepartmentId);
-                    if (result != null)
-                    {
-                        result.RoomCount += model.RoomCount;
-                        result.TotalUsableArea = model.TotalUsableArea;
-                    }
-                    else
-                        data.Add(model);
-                }
+                data.Add(model);
             }
 
             return View(data);

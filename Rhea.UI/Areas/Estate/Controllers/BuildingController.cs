@@ -135,17 +135,9 @@ namespace Rhea.UI.Areas.Estate.Controllers
                     RoomCount = d.Count,
                     TotalUsableArea = Convert.ToDouble(d.Area)
                 };
-
                 model.DepartmentName = departmentBusiness.GetName(model.DepartmentId);
 
-                var result = data.Find(r => r.DepartmentId == model.DepartmentId);
-                if (result != null)
-                {
-                    result.RoomCount += model.RoomCount;
-                    result.TotalUsableArea = model.TotalUsableArea;
-                }
-                else
-                    data.Add(model);
+                data.Add(model);
             }
 
             return View(data);

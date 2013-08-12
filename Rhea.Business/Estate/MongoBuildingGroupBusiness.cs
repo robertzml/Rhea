@@ -348,18 +348,41 @@ namespace Rhea.Business.Estate
         /// <returns></returns>
         public double GetUsableArea(int id)
         {
-            //Optimize
-            IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
-            var buildings = buildingBusiness.GetListByBuildingGroup(id);
-            double area = 0;
+            var query = Query.EQ("buildingGroupId", id);
+            var buildings = this.context.Find(EstateCollection.Building, query).SetFields("id");
 
-            foreach (var b in buildings)
+            BsonArray bids = new BsonArray();
+            foreach (var building in buildings)
             {
-                double a = buildingBusiness.GetUsableArea(b.Id);
-                area += a;
+                bids.Add(building["id"]);
             }
 
-            return area;
+            BsonDocument[] pipeline = {
+                new BsonDocument {
+                    { "$match", new BsonDocument {
+                        { "buildingId", new BsonDocument { 
+                            { "$in", bids }
+                        }}
+                    }}
+                },
+                new BsonDocument {
+                    { "$group", new BsonDocument {
+                        { "_id", "id" },
+                        { "area", new BsonDocument {
+                            { "$sum", "$usableArea" }
+                        }}
+                    }}
+                }
+            };
+
+            AggregateResult result = this.context.Aggregate(EstateCollection.Room, pipeline);
+
+            var doc = result.ResultDocuments.SingleOrDefault();
+
+            if (doc != null)
+                return Math.Round(doc["area"].AsDouble, 2);
+            else
+                return 0;          
         }
 
         /// <summary>

@@ -20,7 +20,7 @@ namespace Rhea.Business.Estate
         /// <summary>
         /// 数据库连接
         /// </summary>
-        private RheaMongoContext context = new RheaMongoContext(RheaServer.EstateDatabase);
+        private RheaMongoContext context;
 
         /// <summary>
         /// 备份接口
@@ -34,7 +34,8 @@ namespace Rhea.Business.Estate
         /// </summary>
         public MongoRoomBusiness()
         {
-            backupBusiness = new EstateBackupBusiness();
+            this.context = new RheaMongoContext(RheaServer.EstateDatabase);
+            this.backupBusiness = new EstateBackupBusiness();
         }
         #endregion //Constructor
 
@@ -140,11 +141,16 @@ namespace Rhea.Business.Estate
         /// <returns></returns>
         public List<Room> GetListByBuildingGroup(int buildingGroupId)
         {
-            IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
-            var buildings = buildingBusiness.GetListByBuildingGroup(buildingGroupId);
+            var query = Query.EQ("buildingGroupId", buildingGroupId);
+            var buildings = this.context.Find(EstateCollection.Building, query).SetFields("id");
 
-            var bids = buildings.Select(r => r.Id);
-            var query = Query.In("buildingId", new BsonArray(bids));
+            BsonArray bids = new BsonArray();
+            foreach (var building in buildings)
+            {
+                bids.Add(building["id"]);
+            }
+
+            query = Query.In("buildingId", bids);
 
             var docs = this.context.Find(EstateCollection.Room, query);
 
@@ -534,7 +540,7 @@ namespace Rhea.Business.Estate
             doc.Remove("_id");
 
             bool result = this.backupBusiness.Backup(EstateCollection.RoomBackup, doc);
-            return result;            
+            return result;
         }
 
         /// <summary>
@@ -573,7 +579,7 @@ namespace Rhea.Business.Estate
             var currentDoc = this.context.FindOne(EstateCollection.Room, "id", id);
             Room current = ModelBind(currentDoc);
             if (current.Editor.Type == 7)
-                data.Add(current);             
+                data.Add(current);
 
             var backups = this.backupBusiness.FindBackup(EstateCollection.RoomBackup, id, 7);
             foreach (var doc in backups)
