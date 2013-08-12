@@ -36,6 +36,24 @@ namespace Rhea.Business.Estate
         }
 
         /// <summary>
+        /// 查找首次备份
+        /// </summary>
+        /// <param name="collectionName">目标collection</param>
+        /// <param name="id">备份对象ID</param>    
+        /// <returns></returns>
+        public BsonDocument FindFirstBackup(string collectionName, BsonValue id)
+        {
+            var query = Query.EQ("id", id);
+            var data = this.context.Find(collectionName, query);
+            data = data.SetSortOrder(SortBy.Ascending("editor.time")).SetLimit(1);
+
+            if (data.Count() == 0)
+                return null;
+            else
+                return data.First();
+        }
+
+        /// <summary>
         /// 查找备份
         /// </summary>
         /// <param name="collectionName">目标collection</param>
@@ -59,8 +77,8 @@ namespace Rhea.Business.Estate
             var query = Query.And(Query.EQ("id", id),
                 Query.EQ("editor.type", type));
 
-            var data = this.context.Find(collectionName, query);
-            return data;
+            var data = this.context.Find(collectionName, query).SetSortOrder(SortBy.Descending("editor.time"));
+            return data.ToList();
         }
         #endregion //Method
     }

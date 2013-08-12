@@ -20,6 +20,14 @@ namespace Rhea.Business
         bool Backup(string collectionName, BsonDocument doc);
 
         /// <summary>
+        /// 查找首次备份
+        /// </summary>
+        /// <param name="collectionName">目标collection</param>
+        /// <param name="id">备份对象ID</param>    
+        /// <returns></returns>
+        BsonDocument FindFirstBackup(string collectionName, BsonValue id);
+
+        /// <summary>
         /// 查找备份
         /// </summary>
         /// <param name="collectionName">目标collection</param>

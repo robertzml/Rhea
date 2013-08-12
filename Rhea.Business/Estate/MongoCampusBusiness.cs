@@ -9,6 +9,9 @@ using Rhea.Model.Estate;
 
 namespace Rhea.Business.Estate
 {
+    /// <summary>
+    /// 校区业务类
+    /// </summary>
     public class MongoCampusBusiness : ICampusBusiness
     {
         #region Field
@@ -32,6 +35,15 @@ namespace Rhea.Business.Estate
             campus.ImageUrl = doc.GetValue("imageUrl", "").AsString;
             campus.Remark = doc.GetValue("remark", "").AsString;
             campus.Status = doc.GetValue("status", 0).AsInt32;
+
+            if (doc.Contains("editor"))
+            {
+                BsonDocument editor = doc["editor"].AsBsonDocument;
+                campus.Editor.Id = editor["id"].AsObjectId.ToString();
+                campus.Editor.Name = editor["name"].AsString;
+                campus.Editor.Time = editor["time"].AsBsonDateTime.ToLocalTime();
+                campus.Editor.Type = editor["type"].AsInt32;
+            }
 
             return campus;
         }

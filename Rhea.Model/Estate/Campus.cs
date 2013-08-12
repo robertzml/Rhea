@@ -11,6 +11,14 @@ namespace Rhea.Model.Estate
     /// </summary>
     public class Campus
     {
+        #region Constructor
+        public Campus()
+        {
+            this.Editor = new ModelEditor();
+        }
+        #endregion //Constructor
+
+        #region Property
         /// <summary>
         /// ID
         /// </summary>
@@ -42,5 +50,12 @@ namespace Rhea.Model.Estate
         /// </summary>
         [Display(Name = "状态")]
         public int Status { get; set; }
+
+        /// <summary>
+        /// 编辑属性
+        /// </summary>
+        [Display(Name = "编辑属性")]
+        public ModelEditor Editor { get; set; }
+        #endregion //Property
     }
 }

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Rhea.Model.Estate.Room>
+
+@{
+    ViewBag.Title = "分配历史";
+    Layout = null;
+}
+
+<div class="page-header">
+    <h3>
+       @ViewBag.Title</h3>
+</div> 
+
+<div class="row-fluid">
+    <div class="span12">
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        分配时间
+                    </th>
+                    <th>
+                        学院
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Editor.Time</td>
+                    <td>@item.DepartmentName()</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+
+    </div>
+</div>

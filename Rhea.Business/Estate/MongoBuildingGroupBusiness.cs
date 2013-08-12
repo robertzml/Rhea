@@ -21,7 +21,22 @@ namespace Rhea.Business.Estate
         /// 数据库连接
         /// </summary>
         private RheaMongoContext context = new RheaMongoContext(RheaServer.EstateDatabase);
+
+        /// <summary>
+        /// 备份接口
+        /// </summary>
+        private IBackupBusiness backupBusiness;
         #endregion //Field
+
+        #region Constructor
+        /// <summary>
+        /// 楼群业务类
+        /// </summary>
+        public MongoBuildingGroupBusiness()
+        {
+            this.backupBusiness = new EstateBackupBusiness();
+        }
+        #endregion //Constructor
 
         #region Function
         /// <summary>
@@ -305,14 +320,13 @@ namespace Rhea.Business.Estate
         /// 备份楼群
         /// </summary>
         /// <param name="id">楼群ID</param>
-        /// <param name="backupBusiness">备份功能接口</param>
         /// <returns></returns>
-        public bool Backup(int id, IBackupBusiness backupBusiness)
+        public bool Backup(int id)
         {
             BsonDocument doc = this.context.FindOne(EstateCollection.BuildingGroup, "id", id);
             doc.Remove("_id");
 
-            bool result = backupBusiness.Backup(EstateCollection.BuildingGroupBackup, doc);
+            bool result = this.backupBusiness.Backup(EstateCollection.BuildingGroupBackup, doc);
             return result;
         }
 

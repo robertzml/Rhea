@@ -21,7 +21,22 @@ namespace Rhea.Business.Estate
         /// 数据库连接
         /// </summary>
         private RheaMongoContext context = new RheaMongoContext(RheaServer.EstateDatabase);
+
+        /// <summary>
+        /// 备份接口
+        /// </summary>
+        private IBackupBusiness backupBusiness;
         #endregion //Field
+
+        #region Constructor
+        /// <summary>
+        /// 房间业务类
+        /// </summary>
+        public MongoRoomBusiness()
+        {
+            backupBusiness = new EstateBackupBusiness();
+        }
+        #endregion //Constructor
 
         #region Function
         /// <summary>
@@ -131,7 +146,7 @@ namespace Rhea.Business.Estate
             var bids = buildings.Select(r => r.Id);
             var query = Query.In("buildingId", new BsonArray(bids));
 
-            List<BsonDocument> docs = this.context.Find(EstateCollection.Room, query);
+            var docs = this.context.Find(EstateCollection.Room, query);
 
             List<Room> rooms = new List<Room>();
             foreach (var doc in docs)
@@ -511,15 +526,14 @@ namespace Rhea.Business.Estate
         /// <summary>
         /// 备份房间
         /// </summary>
-        /// <param name="id">房间ID</param>
-        /// <param name="backupBusiness">备份功能接口</param>
+        /// <param name="id">房间ID</param>   
         /// <returns></returns>
-        public bool Backup(int id, IBackupBusiness backupBusiness)
+        public bool Backup(int id)
         {
             BsonDocument doc = this.context.FindOne(EstateCollection.Room, "id", id);
             doc.Remove("_id");
 
-            bool result = backupBusiness.Backup(EstateCollection.RoomBackup, doc);
+            bool result = this.backupBusiness.Backup(EstateCollection.RoomBackup, doc);
             return result;            
         }
 
@@ -545,6 +559,38 @@ namespace Rhea.Business.Estate
                 return false;
             else
                 return true;
+        }
+
+        /// <summary>
+        /// 查找分配历史
+        /// </summary>
+        /// <param name="id">房间ID</param>
+        /// <returns></returns>
+        public List<Room> GetAssignHistory(int id)
+        {
+            List<Room> data = new List<Room>();
+
+            var currentDoc = this.context.FindOne(EstateCollection.Room, "id", id);
+            Room current = ModelBind(currentDoc);
+            if (current.Editor.Type == 7)
+                data.Add(current);             
+
+            var backups = this.backupBusiness.FindBackup(EstateCollection.RoomBackup, id, 7);
+            foreach (var doc in backups)
+            {
+                Room room = ModelBind(doc);
+                data.Add(room);
+            }
+
+            var first = this.backupBusiness.FindFirstBackup(EstateCollection.RoomBackup, id);
+            if (first != null && data.Count != 0)
+            {
+                Room firstRoom = ModelBind(first);
+                if (firstRoom.Editor.Type != 7)
+                    data.Add(firstRoom);
+            }
+
+            return data;
         }
         #endregion //Method
     }

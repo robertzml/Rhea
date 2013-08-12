@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Rhea.Business;
 using Rhea.Business.Account;
 using Rhea.Business.Estate;
 using Rhea.Business.Personnel;
@@ -193,9 +192,8 @@ namespace Rhea.UI.Areas.Estate.Controllers
                 msg = "当前部门与新部门相同";
                 return RedirectToAction("ShowMessage", new { controller = "Common", area = "", msg = msg, title = title });
             }
-
-            IBackupBusiness backupBusiness = new EstateBackupBusiness();
-            bool backok = this.roomBusiness.Backup(roomId, backupBusiness);
+         
+            bool backok = this.roomBusiness.Backup(roomId);
             if (!backok)
             {
                 msg = "备份失败";
@@ -215,6 +213,17 @@ namespace Rhea.UI.Areas.Estate.Controllers
                 msg = "分配房间失败";
                 return RedirectToAction("ShowMessage", new { controller = "Common", area = "", msg = msg, title = title });
             }
+        }
+
+        /// <summary>
+        /// 房间分配历史
+        /// </summary>
+        /// <param name="id">房间ID</param>
+        /// <returns></returns>
+        public ActionResult AssignHistory(int id)
+        {
+            var data = this.roomBusiness.GetAssignHistory(id);
+            return View(data);
         }
         #endregion //Action
 

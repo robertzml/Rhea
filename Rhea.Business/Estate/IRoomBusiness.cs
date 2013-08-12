@@ -131,9 +131,8 @@ namespace Rhea.Business.Estate
         /// 备份房间
         /// </summary>
         /// <param name="id">房间ID</param>
-        /// <param name="backupBusiness">备份功能接口</param>
         /// <returns></returns>
-        bool Backup(int id, IBackupBusiness backupBusiness);
+        bool Backup(int id);
 
         /// <summary>
         /// 分配房间
@@ -143,5 +142,12 @@ namespace Rhea.Business.Estate
         /// <param name="user">相关用户</param>
         /// <returns></returns>
         bool Assign(int id, int newDepartmentId, UserProfile user);
+
+        /// <summary>
+        /// 查找分配历史
+        /// </summary>
+        /// <param name="id">房间ID</param>
+        /// <returns></returns>
+        List<Room> GetAssignHistory(int id);
     }
 }
