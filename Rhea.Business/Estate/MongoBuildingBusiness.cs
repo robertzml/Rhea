@@ -20,7 +20,7 @@ namespace Rhea.Business.Estate
         /// <summary>
         /// 数据库连接
         /// </summary>
-        private RheaMongoContext context = new RheaMongoContext(RheaServer.EstateDatabase);
+        private RheaMongoContext context;
 
         /// <summary>
         /// 备份接口
@@ -34,6 +34,7 @@ namespace Rhea.Business.Estate
         /// </summary>
         public MongoBuildingBusiness()
         {
+            this.context = new RheaMongoContext(RheaServer.EstateDatabase);
             this.backupBusiness = new EstateBackupBusiness();
         }
         #endregion //Constructor
@@ -579,6 +580,47 @@ namespace Rhea.Business.Estate
                 return Math.Round(doc["area"].AsDouble, 2);
             else
                 return 0;
+        }
+
+        /// <summary>
+        /// 导出楼宇
+        /// </summary>
+        /// <returns></returns>
+        public byte[] Export()
+        {
+            StringBuilder sb = new StringBuilder();
+            List<BsonDocument> docs = this.context.FindAll(EstateCollection.Building);
+
+            sb.AppendLine(string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}",
+                "Id", "名称", "图片", "所属楼群", "建筑面积", "使用面积", "地上楼层数", "地下楼层数",
+                "使用类型", "局部导航", "排序", "备注", "编辑人", "编辑时间", "编辑类型", "状态"));
+
+            foreach (var doc in docs)
+            {
+                BsonDocument editor = doc["editor"].AsBsonDocument;
+
+                sb.AppendLine(string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}",
+                    doc["id"],
+                    doc["name"],
+                    doc.GetValue("imageUrl", ""),
+                    doc.GetValue("buildingGroupId"),
+                    doc.GetValue("buildArea", null),
+                    doc.GetValue("usableArea", null),
+                    doc.GetValue("aboveGroundFloor", null),
+                    doc.GetValue("underGroundFloor", null),
+                    doc.GetValue("useType"),
+                    doc.GetValue("partMapUrl", ""),
+                    doc.GetValue("sort"),
+                    doc.GetValue("remark", ""),
+                    editor.GetValue("name", ""),
+                    editor.GetValue("time", null),
+                    editor.GetValue("type", null),
+                    doc.GetValue("status", 0)
+                ));
+            }
+
+            byte[] fileContents = Encoding.Default.GetBytes(sb.ToString());
+            return fileContents;
         }
         #endregion //Method
     }

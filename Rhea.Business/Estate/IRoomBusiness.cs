@@ -128,6 +128,12 @@ namespace Rhea.Business.Estate
         int CountByDepartment(int departmentId);
 
         /// <summary>
+        /// 导出房间
+        /// </summary>
+        /// <returns></returns>
+        byte[] Export();
+
+        /// <summary>
         /// 备份房间
         /// </summary>
         /// <param name="id">房间ID</param>

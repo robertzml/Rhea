@@ -136,5 +136,11 @@ namespace Rhea.Business.Estate
         /// <param name="id">楼宇ID</param>   
         /// <returns></returns>
         bool Backup(int id);
+
+        /// <summary>
+        /// 导出楼宇
+        /// </summary>
+        /// <returns></returns>
+        byte[] Export();
     }
 }

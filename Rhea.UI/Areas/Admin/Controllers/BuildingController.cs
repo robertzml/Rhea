@@ -347,6 +347,16 @@ namespace Rhea.UI.Areas.Admin.Controllers
             else
                 return View("DeleteFloor", new { buildingId = buildingId, floorId = id });
         }
+
+        /// <summary>
+        /// 导出楼宇
+        /// </summary>
+        /// <returns></returns>
+        public FileResult Export()
+        {
+            byte[] fileContents = this.buildingBusiness.Export();
+            return File(fileContents, "application/ms-excel", "building.csv");
+        }
         #endregion //Action
     }
 }

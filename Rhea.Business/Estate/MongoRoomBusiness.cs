@@ -530,6 +530,79 @@ namespace Rhea.Business.Estate
         }
 
         /// <summary>
+        /// 导出房间
+        /// </summary>
+        /// <returns></returns>
+        public byte[] Export()
+        {
+            StringBuilder sb = new StringBuilder();
+            List<BsonDocument> docs = this.context.FindAll(EstateCollection.Room);
+
+            sb.AppendLine(string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}," +
+                "{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27},{28},{29},{30},{31},{32}," +
+                "{33},{34},{35},{36},{37},{38}",
+                "Id", "房间名称", "房间编号", "楼层", "跨数", "朝向", "建筑面积", "使用面积", "图片", "功能编码",
+                "所属楼宇", "所属部门", "开始使用日期", "使用期限", "房间总人数", "房间状态", "备注",
+                "供热情况", "消防情况", "房间高度", "房间东西长度", "房间南北长度", "国际分类编号", "教育部分类编号",
+                "供电情况", "空调情况", "是否有安全制度", "是否有危险化学品", "是否有废液处理", "是否有安全教育检查",
+                "压力容器数量", "钢瓶数量", "通风是否有取暖", "是否有试验台", "使用费用",
+                "编辑人", "编辑时间", "编辑类型", "状态"));
+
+            foreach (var doc in docs)
+            {
+                BsonDocument function = doc["function"].AsBsonDocument;
+                BsonDocument editor = doc["editor"].AsBsonDocument;
+
+                sb.AppendLine(string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}," +
+                    "{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27},{28},{29},{30},{31},{32}," +
+                    "{33},{34},{35},{36},{37},{38}",
+                    doc["id"],
+                    doc["name"],
+                    doc["number"],
+                    doc["floor"],
+                    doc.GetValue("span", null),
+                    doc.GetValue("orientation", ""),
+                    doc.GetValue("buildArea", null),
+                    doc.GetValue("usableArea", null),
+                    doc.GetValue("imageUrl", ""),
+                    function["firstCode"].ToString() + "." + function["secondCode"].ToString(),
+                    doc["buildingId"],
+                    doc["departmentId"],
+                    doc.GetValue("startDate", null),
+                    doc.GetValue("fixedYear", null),
+                    doc.GetValue("personNumber", null),
+                    doc.GetValue("roomStatus", ""),
+                    doc.GetValue("remark", ""),
+                    doc.GetValue("heating", null),
+                    doc.GetValue("fireControl", ""),
+                    doc.GetValue("height", null),
+                    doc.GetValue("ewWidth", null),
+                    doc.GetValue("snWidth", null),
+                    doc.GetValue("internationalId", null),
+                    doc.GetValue("educationId", null),
+                    doc.GetValue("powerSupply", ""),
+                    doc.GetValue("airCondition", ""),
+                    doc.GetValue("hasSecurity", null),
+                    doc.GetValue("hasChemical", null),
+                    doc.GetValue("hasTrash", ""),
+                    doc.GetValue("hasSecurityCheck", null),
+                    doc.GetValue("pressureContainer", null),
+                    doc.GetValue("cylinder", null),
+                    doc.GetValue("heatingInAeration", null),
+                    doc.GetValue("hasTestBed", null),
+                    doc.GetValue("usageCharge", null),
+                    editor.GetValue("name", ""),
+                    editor.GetValue("time", null),
+                    editor.GetValue("type", null),
+                    doc.GetValue("status", 0)
+                ));
+            }
+
+            byte[] fileContents = Encoding.Default.GetBytes(sb.ToString());
+            return fileContents;
+        }
+
+        /// <summary>
         /// 备份房间
         /// </summary>
         /// <param name="id">房间ID</param>   

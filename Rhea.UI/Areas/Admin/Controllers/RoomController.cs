@@ -327,6 +327,16 @@ namespace Rhea.UI.Areas.Admin.Controllers
             else
                 return View("Delete", id);
         }
+
+        /// <summary>
+        /// 导出房间
+        /// </summary>
+        /// <returns></returns>
+        public FileResult Export()
+        {
+            byte[] fileContents = this.roomBusiness.Export();
+            return File(fileContents, "application/ms-excel", "room.csv");
+        }
         #endregion //Action
     }
 }
