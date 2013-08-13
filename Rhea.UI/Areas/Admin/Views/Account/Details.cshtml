@@ -108,7 +108,18 @@
                                 @Html.DisplayNameFor(model => model.Status)
                             </td>
                             <td>
-                                @Model.Status
+                            @if (Model.Status == 0)
+                            {
+                                <span class="label label-success">正常</span>
+                            }
+                            else if (Model.Status == 1)
+                            {
+                                <span class="label label-inverse">已删除</span>
+                            }
+                            else
+                            {
+                                <span class="label label-warning">禁用</span>
+                            }
                             </td>
                         </tr>
                     </tbody>

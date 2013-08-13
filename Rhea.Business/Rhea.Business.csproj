@@ -70,7 +70,6 @@
     <Compile Include="IBackupBusiness.cs" />
     <Compile Include="IDictionaryBusiness.cs" />
     <Compile Include="IStatisticBusiness.cs" />
-    <Compile Include="IWriteBusiness.cs" />
     <Compile Include="ModelExtension.cs" />
     <Compile Include="MongoStatisticBusiness.cs" />
     <Compile Include="Estate\RemoteBuildingBusiness.cs" />

@@ -5,6 +5,7 @@ using System.Text;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using Rhea.Data.Server;
+using Rhea.Model.Estate;
 
 namespace Rhea.Business.Estate
 {
@@ -28,7 +29,7 @@ namespace Rhea.Business.Estate
         /// <returns></returns>
         public Dictionary<int, string> GetCombineDict(string name)
         {
-            BsonDocument doc = this.context.FindOne(PersonnelCollection.Dictionary, "name", name);
+            BsonDocument doc = this.context.FindOne(EstateCollection.Dictionary, "name", name);
 
             if (doc == null)
                 return null;
@@ -51,7 +52,7 @@ namespace Rhea.Business.Estate
         /// <returns></returns>
         public string[] GetDict(string name)
         {
-            BsonDocument doc = this.context.FindOne(PersonnelCollection.Dictionary, "name", name);
+            BsonDocument doc = this.context.FindOne(EstateCollection.Dictionary, "name", name);
 
             if (doc == null)
                 return null;
@@ -75,7 +76,7 @@ namespace Rhea.Business.Estate
         /// <returns></returns>
         public string GetItemValue(string dictName, int id)
         {
-            BsonDocument doc = this.context.FindOne(PersonnelCollection.Dictionary, "name", dictName);
+            BsonDocument doc = this.context.FindOne(EstateCollection.Dictionary, "name", dictName);
 
             if (doc == null)
                 return null;

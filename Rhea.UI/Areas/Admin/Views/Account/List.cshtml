@@ -48,7 +48,20 @@
                     <td>@item.UserName</td>
                     <td>@item.UserGroupName</td>
                     <td>@item.LastLoginTime</td>
-                    <td>@item.Status</td>
+                    <td>
+                    @if (item.Status == 0)
+                    {
+                        <span class="label label-success">正常</span>
+                    }
+                    else if (item.Status == 1)
+                    {
+                        <span class="label label-inverse">已删除</span>
+                    }
+                    else
+                    {
+                        <span class="label label-warning">禁用</span>
+                    }
+                    </td>
                     <td>
                         <a class="btn btn-success btn-small" href="@Url.Action("Details", new { controller = "Account", id = item.Id, area = "Admin" })"><i class="icon-zoom-in icon-white"></i>查看</a> 
                         <a class="btn btn-warning btn-small" href="@Url.Action("Edit", new { controller = "Account", id = item.Id, area = "Admin" })"><i class="icon-edit icon-white"></i>编辑</a>

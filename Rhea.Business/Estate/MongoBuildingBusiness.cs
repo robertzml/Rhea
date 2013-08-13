@@ -471,7 +471,7 @@ namespace Rhea.Business.Estate
             doc.Remove("_id");
 
             bool result = this.backupBusiness.Backup(EstateCollection.BuildingBackup, doc);
-            return result;           
+            return result;
         }
 
         /// <summary>

@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "房间列表";
     Layout = null;
+    int rank = User.Rank();
 }
 
 @Html.Action("RoomFunction", new { controller = "Room", area = "Estate" })
@@ -65,7 +66,10 @@
                             <a class="btn btn-success btn-small dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#" class="room-details" ref="@item.Id"><span class="icon-flag"></span> 信息</a></li>
-                                <li><a href="#"><span class="icon-ban-circle"></span> Ban</a></li>
+                                @if (rank >= 650)
+                                {
+                                <li><a href="#" class="room-assign" ref="@item.Id"><span class="icon-screenshot"></span> 分配</a></li>
+                                }
                             </ul>
                         </div>
                     </td>
@@ -103,6 +107,12 @@
         $('table a.room-details').click(function () {
             var id = $(this).attr('ref');
             ajaxContentLoadPage("Details", "Room", "Estate", { id: id }, $('#ajax-content2'));
+            return false;
+        });
+
+        $('table a.room-assign').click(function () {
+            var id = $(this).attr('ref');
+            ajaxContentLoadPage("Assign", "Room", "Estate", { id: id }, $('#ajax-content2'));
             return false;
         });
 
