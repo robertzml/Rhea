@@ -13,7 +13,7 @@ using Rhea.UI.Models;
 using Rhea.UI.Services;
 
 namespace Rhea.UI.Controllers
-{    
+{
     [EnhancedAuthorize]
     public class HomeController : Controller
     {
@@ -31,6 +31,15 @@ namespace Rhea.UI.Controllers
         /// </summary>
         /// <returns></returns>
         public ActionResult Nav()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 地图
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Map()
         {
             return View();
         }

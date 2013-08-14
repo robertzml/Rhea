@@ -1194,6 +1194,33 @@
     <Content Include="Plugins\gallery\pretty-photo\jquery.prettyPhoto.js" />
     <Content Include="Plugins\gallery\pretty-photo\prettyPhoto.css" />
     <Content Include="Plugins\index.html" />
+    <Content Include="Plugins\map\smartmap\base.css" />
+    <Content Include="Plugins\map\smartmap\images\map\click.png" />
+    <Content Include="Plugins\map\smartmap\images\map\flag_blue.png" />
+    <Content Include="Plugins\map\smartmap\images\map\flag_green.png" />
+    <Content Include="Plugins\map\smartmap\images\map\flag_red.png" />
+    <Content Include="Plugins\map\smartmap\images\map\flag_yellow.png" />
+    <Content Include="Plugins\map\smartmap\images\map\focuse.png" />
+    <Content Include="Plugins\map\smartmap\images\map\fullscreen.png" />
+    <Content Include="Plugins\map\smartmap\images\map\heart_blue.png" />
+    <Content Include="Plugins\map\smartmap\images\map\heart_green.png" />
+    <Content Include="Plugins\map\smartmap\images\map\heart_red.png" />
+    <Content Include="Plugins\map\smartmap\images\map\heart_yellow.png" />
+    <Content Include="Plugins\map\smartmap\images\map\mapcontrols.png" />
+    <Content Include="Plugins\map\smartmap\images\map\normal.png" />
+    <Content Include="Plugins\map\smartmap\images\map\pin_blue.png" />
+    <Content Include="Plugins\map\smartmap\images\map\pin_green.png" />
+    <Content Include="Plugins\map\smartmap\images\map\pin_red.png" />
+    <Content Include="Plugins\map\smartmap\images\map\pin_yellow.png" />
+    <Content Include="Plugins\map\smartmap\images\map\point_blue.png" />
+    <Content Include="Plugins\map\smartmap\images\map\point_green.png" />
+    <Content Include="Plugins\map\smartmap\images\map\point_red.png" />
+    <Content Include="Plugins\map\smartmap\images\map\point_yellow.png" />
+    <Content Include="Plugins\map\smartmap\images\map\search.png" />
+    <Content Include="Plugins\map\smartmap\images\map\select.png" />
+    <Content Include="Plugins\map\smartmap\images\map\setup.png" />
+    <Content Include="Plugins\map\smartmap\jquery.mapbox.js" />
+    <Content Include="Plugins\map\smartmap\smartmap.js" />
     <Content Include="Plugins\misc\animated-progress-bar\jquery.progressbar.js" />
     <Content Include="Plugins\misc\fullcalendar\fullcalendar.css" />
     <Content Include="Plugins\misc\fullcalendar\fullcalendar.js" />
@@ -1692,6 +1719,7 @@
     <Content Include="Views\Statistic\InstitutionAverageOfficeAreaCompare.cshtml" />
     <Content Include="Views\Department\Classify.cshtml" />
     <Content Include="Views\Department\DropdownList.cshtml" />
+    <Content Include="Views\Home\Map.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -11,7 +11,7 @@
             <div class="nav-no-collapse">
                 <ul class="nav">
                     <li><a href="@Url.Action("Index", new { controller = "Home", area = "Estate" })" id="nav-summary"><span class="icon16 icomoon-icon-home-2"></span> 概况</a></li>
-                    <li><a href="#"><span class="icon16 icomoon-icon-map-2"></span> 地图</a></li>
+                    <li><a href="@Url.Action("Map", new { controller = "Home", area = "" })" id="nav-map"><span class="icon16 icomoon-icon-map-2"></span> 地图</a></li>
                     @if (rank >= 450)
                     {
                     <li><a href="@Url.Action("Estate", new { controller = "Home", area = "" })" id="nav-estate"><span class="icon16 icomoon-icon-office"></span> 楼群</a></li>
