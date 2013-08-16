@@ -112,7 +112,9 @@
 <div id="section-content" class="clearfix">
     <div class="row-fluid">
         <div class="span12">
-            <div id="ajax-content2">
+            <div id="content2-layer"></div>
+            <div id="content2-loader"></div>
+            <div id="ajax-content2">                
                 @Html.Action("Intro", "BuildingGroup", new { area = "Estate", id = Model.BuildingGroupId })
             </div>
         </div>

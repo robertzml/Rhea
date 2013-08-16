@@ -131,11 +131,13 @@
 <!--Body content-->
 <div id="content" class="clearfix">
     <div class="contentwrapper">
-        <!-- Build page from here: -->
+
+        <div id="content1-layer"></div>
+        <div id="content1-loader"></div>
         <div id="ajax-content1">
-        @Html.Action("Summary", new { controller = "BuildingGroup", area = "Estate" })
+            @Html.Action("Summary", new { controller = "BuildingGroup", area = "Estate" })
         </div>
-        <!--End page -->
+
     </div>
 </div>
 <!-- End #content -->

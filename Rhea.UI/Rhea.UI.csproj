@@ -274,7 +274,6 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Images\ajax-loader-7.gif" />
     <Content Include="Images\arrowdown.png" />
     <Content Include="Images\arrowup.png" />
     <Content Include="Images\avatar.png" />

@@ -6,15 +6,18 @@ function showMessage(text) {
 	});
 }
 
-function ajaxLoadPage(action, controller, area, request) {		
+function ajaxLoadPage(action, controller, area, request) {	
+	$('#ajax-content1').parent().addClass('content1-loadstate');
 	$.ajax({
 		url: "/" + area + "/" + controller + "/" + action,
 		type: 'get',
 		data: request,
-		success: function (response) {			
-			$('#ajax-content1').html(response);			
+		success: function (response) {
+			$('#ajax-content1').parent().removeClass('content1-loadstate');
+			$('#ajax-content1').html(response);				
 		},
-		error: function (response) {		
+		error: function (response) {
+			$('#ajax-content1').parent().removeClass('content1-loadstate');
 			noty({
 				text: 'ajax error',
 				type: 'error'
@@ -23,15 +26,18 @@ function ajaxLoadPage(action, controller, area, request) {
 	});
 }
 
-function ajaxLoadPage2(action, controller, request) {		
+function ajaxLoadPage2(action, controller, request) {
+	$('#ajax-content1').parent().addClass('content1-loadstate');	
 	$.ajax({
 		url: "/" + controller + "/" + action,
 		type: 'get',
 		data: request,
-		success: function (response) {			
+		success: function (response) {
+			$('#ajax-content1').parent().removeClass('content1-loadstate');
 			$('#ajax-content1').html(response);			
 		},
-		error: function (response) {		
+		error: function (response) {
+			$('#ajax-content1').parent().removeClass('content1-loadstate');
 			noty({
 				text: 'ajax error',
 				type: 'error'
@@ -40,15 +46,18 @@ function ajaxLoadPage2(action, controller, request) {
 	});
 }
 
-function ajaxContentLoadPage(action, controller, area, request, $dom) {		
+function ajaxContentLoadPage(action, controller, area, request, $dom) {	
+	$dom.parent().addClass('content2-loadstate');	
 	$.ajax({
 		url: "/" + area + "/" + controller + "/" + action,
 		type: 'get',
 		data: request,
-		success: function (response) {			
-			$dom.html(response);			
+		success: function (response) {	
+			$dom.html(response);
+			$dom.parent().removeClass('content2-loadstate');
 		},
-		error: function (response) {		
+		error: function (response) {
+			$dom.parent().removeClass('content2-loadstate');	
 			noty({
 				text: 'ajax error',
 				type: 'error'
@@ -57,15 +66,18 @@ function ajaxContentLoadPage(action, controller, area, request, $dom) {
 	});
 }
 
-function ajaxContentLoadPage2(action, controller, request, $dom) {		
+function ajaxContentLoadPage2(action, controller, request, $dom) {
+	$dom.parent().addClass('content2-loadstate');
 	$.ajax({
 		url: "/" + controller + "/" + action,
 		type: 'get',
 		data: request,
-		success: function (response) {			
-			$dom.html(response);			
+		success: function (response) {
+			$dom.html(response);
+			$dom.parent().removeClass('content2-loadstate');
 		},
-		error: function (response) {		
+		error: function (response) {
+			$dom.parent().removeClass('content2-loadstate');
 			noty({
 				text: 'ajax error',
 				type: 'error'
