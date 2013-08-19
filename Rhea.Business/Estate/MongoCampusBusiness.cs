@@ -18,8 +18,24 @@ namespace Rhea.Business.Estate
         /// <summary>
         /// 数据库连接
         /// </summary>
-        private RheaMongoContext context = new RheaMongoContext(RheaServer.EstateDatabase);
+        private RheaMongoContext context;
+
+        /// <summary>
+        /// 备份接口
+        /// </summary>
+        private IBackupBusiness backupBusiness;
         #endregion //Field
+
+        #region Constructor
+        /// <summary>
+        /// 校区业务类
+        /// </summary>
+        public MongoCampusBusiness()
+        {
+            this.context = new RheaMongoContext(RheaServer.EstateDatabase);
+            this.backupBusiness = new EstateBackupBusiness();
+        }
+        #endregion //Constructor
 
         #region Function
         /// <summary>
@@ -57,7 +73,7 @@ namespace Rhea.Business.Estate
         public List<Campus> GetList()
         {
             List<Campus> campusList = new List<Campus>();
-            List<BsonDocument> docs = this.context.FindAll(EstateCollection.Campus);
+            var docs = this.context.FindAll(EstateCollection.Campus);
 
             foreach (var doc in docs)
             {
@@ -115,6 +131,20 @@ namespace Rhea.Business.Estate
             var query = Query.NE("status", 1);
             long count = this.context.Count(EstateCollection.Campus, query);
             return (int)count;
+        }
+
+        /// <summary>
+        /// 备份楼群
+        /// </summary>
+        /// <param name="id">楼群ID</param>
+        /// <returns></returns>
+        public bool Backup(int id)
+        {
+            BsonDocument doc = this.context.FindOne(EstateCollection.Campus, "id", id);
+            doc.Remove("_id");
+
+            bool result = this.backupBusiness.Backup(EstateCollection.CampusBackup, doc);
+            return result;
         }
         #endregion //Method
     }

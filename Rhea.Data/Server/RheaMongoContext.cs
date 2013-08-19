@@ -99,7 +99,7 @@ namespace Rhea.Data.Server
         /// <param name="collectionName">集合名称</param>
         /// <param name="data">数据</param>
         /// <returns></returns>
-        public IEnumerable<WriteConcernResult> InsertBatch(string collectionName, BsonDocument[] data)
+        public IEnumerable<WriteConcernResult> InsertBatch(string collectionName, IEnumerable<BsonDocument> data)
         {
             MongoCollection<BsonDocument> collection = this.database.GetCollection<BsonDocument>(collectionName);
             IEnumerable<WriteConcernResult> result = collection.InsertBatch(data);
@@ -180,17 +180,12 @@ namespace Rhea.Data.Server
         /// </summary>
         /// <param name="collectionName">集合名称</param>
         /// <returns></returns>
-        public List<BsonDocument> FindAll(string collectionName)
+        public MongoCursor<BsonDocument> FindAll(string collectionName)
         {
             MongoCollection<BsonDocument> collection = this.database.GetCollection<BsonDocument>(collectionName);
 
-            List<BsonDocument> document = new List<BsonDocument>();
-            foreach (BsonDocument d in collection.FindAll())
-            {
-                document.Add(d);
-            }
-
-            return document;
+            var data = collection.FindAll();
+            return data;
         }
 
         /// <summary>

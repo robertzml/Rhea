@@ -141,6 +141,14 @@ namespace Rhea.Business.Estate
         bool Backup(int id);
 
         /// <summary>
+        /// 归档房间
+        /// </summary>
+        /// <param name="user">相关用户</param>
+        /// <param name="date">归档日期</param>
+        /// <returns></returns>
+        bool Archive(UserProfile user, DateTime date);
+
+        /// <summary>
         /// 分配房间
         /// </summary>
         /// <param name="id">房间ID</param>

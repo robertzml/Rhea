@@ -72,7 +72,8 @@ namespace Rhea.Business.Account
             user.Id = user._id.ToString();
             user.UserName = doc["userName"].AsString;
             user.UserId = doc.GetValue("userId", "").AsString;
-            user.UserGroupId = doc["userGroupId"].AsInt32;          
+            user.UserGroupId = doc["userGroupId"].AsInt32;
+            user.Name = doc.GetValue("name", "").AsString;
             user.LastLoginTime = doc.GetValue("lastLoginTime", DateTime.Now).ToLocalTime();
             user.CurrentLoginTime = doc.GetValue("currentLoginTime", DateTime.Now).ToLocalTime();
             user.IsSystem = doc.GetValue("isSystem", false).AsBoolean;
@@ -96,7 +97,7 @@ namespace Rhea.Business.Account
         {
             BsonDocument doc = this.context.FindOne(RheaCollection.User, "userName", userName);
             if (doc != null)
-            {                
+            {
                 int userStatus = doc.GetValue("status", 0).AsInt32;
                 if (userStatus == 1 || userStatus == 2)
                     return null;
@@ -109,7 +110,8 @@ namespace Rhea.Business.Account
                 user._id = doc["_id"].AsObjectId;
                 user.UserName = userName;
                 user.UserId = doc.GetValue("userId", "").AsString;
-                user.UserGroupId = doc.GetValue("userGroupId", 0).AsInt32;           
+                user.UserGroupId = doc.GetValue("userGroupId", 0).AsInt32;
+                user.Name = doc.GetValue("name", "").AsString;
                 user.LastLoginTime = doc.GetValue("currentLoginTime", DateTime.Now).ToLocalTime();
                 user.CurrentLoginTime = DateTime.Now;
                 user.DepartmentId = doc.GetValue("departmentId", 0).AsInt32;
@@ -176,7 +178,7 @@ namespace Rhea.Business.Account
         public List<UserProfile> GetList(bool showRoot = true)
         {
             List<UserProfile> data = new List<UserProfile>();
-            List<BsonDocument> docs = this.context.FindAll(RheaCollection.User);
+            var docs = this.context.FindAll(RheaCollection.User);
 
             foreach (BsonDocument doc in docs)
             {
@@ -228,6 +230,7 @@ namespace Rhea.Business.Account
             {
                 { "userId", data.UserId },
                 { "userName", data.UserName },
+                { "name", data.Name },
                 { "password", Hasher.SHA1Encrypt(data.Password) },             
                 { "userGroupId", data.UserGroupId },
                 { "isSystem", true },           
@@ -266,7 +269,7 @@ namespace Rhea.Business.Account
                     update = Update.Set("userGroupId", data.UserGroupId)
                         .Set("password", Hasher.SHA1Encrypt(data.Password))
                         .Set("departmentId", (BsonValue)data.DepartmentId);
-                }               
+                }
 
                 WriteConcernResult result = this.context.Update(RheaCollection.User, query, update);
 
@@ -288,7 +291,7 @@ namespace Rhea.Business.Account
         /// <param name="password">密码</param>
         /// <returns></returns>
         public bool ValidatePassword(string userName, string password)
-        {            
+        {
             BsonDocument doc = this.context.FindOne(RheaCollection.User, "userName", userName);
             if (doc != null)
             {
@@ -310,7 +313,7 @@ namespace Rhea.Business.Account
         /// <param name="newPassword">新密码</param>
         /// <returns></returns>
         public bool ChangePassword(string userName, string oldPassword, string newPassword)
-        {          
+        {
             var query = Query.EQ("userName", userName);
             var update = Update.Set("password", Hasher.SHA1Encrypt(newPassword));
 

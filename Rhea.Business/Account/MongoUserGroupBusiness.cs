@@ -34,7 +34,7 @@ namespace Rhea.Business.Account
             group.Id = doc["id"].AsInt32;
             group.Name = doc["name"].AsString;
             group.Title = doc["title"].AsString;
-            group.Rank = doc["rank"].AsInt32;            
+            group.Rank = doc["rank"].AsInt32;
             group.Remark = doc.GetValue("remark", "").AsString;
             group.Status = doc.GetValue("status", 0).AsInt32;
 
@@ -51,7 +51,7 @@ namespace Rhea.Business.Account
         public List<UserGroup> GetList(bool showRoot = true)
         {
             List<UserGroup> data = new List<UserGroup>();
-            List<BsonDocument> docs = this.context.FindAll(RheaCollection.UserGroup);
+            var docs = this.context.FindAll(RheaCollection.UserGroup);
 
             foreach (BsonDocument doc in docs)
             {
@@ -62,7 +62,7 @@ namespace Rhea.Business.Account
             }
 
             return data.OrderBy(r => r.Id).ToList();
-        }     
+        }
 
         /// <summary>
         /// 获取用户组

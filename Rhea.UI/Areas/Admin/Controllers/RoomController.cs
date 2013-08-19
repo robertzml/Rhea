@@ -337,6 +337,19 @@ namespace Rhea.UI.Areas.Admin.Controllers
             byte[] fileContents = this.roomBusiness.Export();
             return File(fileContents, "application/ms-excel", "room.csv");
         }
+
+        /// <summary>
+        /// 归档房间
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Archive()
+        {
+            var user = GetUser();
+            DateTime date = new DateTime(2013, 7, 15);
+            this.roomBusiness.Archive(user, date);
+
+            return RedirectToAction("Archive", new { controller = "Estate", area = "Admin" });
+        }
         #endregion //Action
     }
 }

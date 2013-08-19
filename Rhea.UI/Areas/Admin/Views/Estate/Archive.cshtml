@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "归档数据";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Estate.cshtml";
+}
+
+<div class="box">
+    <div class="box-header well" data-original-title>
+        <h2>
+            <i class="icon-tasks"></i>@ViewBag.Title</h2>
+    </div>
+
+    <div class="box-content">
+        <p>
+            <a class="btn btn-primary" href="@Url.Action("Archive", new { controller = "Room", area = "Admin" })"><i class="icon-download icon-white"></i>归档房间</a>
+        </p>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+        var menu = $('a#archive-task');
+        menuNavActive(menu);
+    });
+</script>

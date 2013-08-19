@@ -110,7 +110,7 @@ namespace Rhea.Business.Estate
         public List<Building> GetList(bool sort = false)
         {
             List<Building> buildings = new List<Building>();
-            List<BsonDocument> docs = this.context.FindAll(EstateCollection.Building);
+            var docs = this.context.FindAll(EstateCollection.Building);
 
             foreach (var doc in docs)
             {
@@ -251,7 +251,7 @@ namespace Rhea.Business.Estate
                 { "remark", data.Remark ?? "" },
                 { "sort", data.Sort },
                 { "editor.id", user._id },
-                { "editor.name", user.UserName },
+                { "editor.name", user.Name },
                 { "editor.time", DateTime.Now },
                 { "editor.type", 1 },
                 { "status", 0 }
@@ -287,7 +287,7 @@ namespace Rhea.Business.Estate
                 .Set("sort", data.Sort)
                 .Set("remark", data.Remark ?? "")
                 .Set("editor.id", user._id)
-                .Set("editor.name", user.UserName)
+                .Set("editor.name", user.Name)
                 .Set("editor.time", DateTime.Now)
                 .Set("editor.type", 2);
 
@@ -310,7 +310,7 @@ namespace Rhea.Business.Estate
             var query = Query.EQ("id", id);
             var update = Update.Set("status", 1)
                 .Set("editor.id", user._id)
-                .Set("editor.name", user.UserName)
+                .Set("editor.name", user.Name)
                 .Set("editor.time", DateTime.Now)
                 .Set("editor.type", 3);
 
@@ -395,7 +395,7 @@ namespace Rhea.Business.Estate
             var query = Query.EQ("id", buildingId);
             var update = Update.Push("floors", doc)
                 .Set("editor.id", user._id)
-                .Set("editor.name", user.UserName)
+                .Set("editor.name", user.Name)
                 .Set("editor.time", DateTime.Now)
                 .Set("editor.type", 4);
 
@@ -424,7 +424,7 @@ namespace Rhea.Business.Estate
                 .Set("floors.$.imageUrl", floor.ImageUrl ?? "")
                 .Set("floors.$.remark", floor.Remark ?? "")
                 .Set("editor.id", user._id)
-                .Set("editor.name", user.UserName)
+                .Set("editor.name", user.Name)
                 .Set("editor.time", DateTime.Now)
                 .Set("editor.type", 5);
 
@@ -449,7 +449,7 @@ namespace Rhea.Business.Estate
 
             var update = Update.Set("floors.$.status", 1)
                 .Set("editor.id", user._id)
-                .Set("editor.name", user.UserName)
+                .Set("editor.name", user.Name)
                 .Set("editor.time", DateTime.Now)
                 .Set("editor.type", 6);
 
@@ -589,7 +589,7 @@ namespace Rhea.Business.Estate
         public byte[] Export()
         {
             StringBuilder sb = new StringBuilder();
-            List<BsonDocument> docs = this.context.FindAll(EstateCollection.Building);
+            var docs = this.context.FindAll(EstateCollection.Building);
 
             sb.AppendLine(string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}",
                 "Id", "名称", "图片", "所属楼群", "建筑面积", "使用面积", "地上楼层数", "地下楼层数",

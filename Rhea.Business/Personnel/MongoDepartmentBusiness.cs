@@ -136,7 +136,7 @@ namespace Rhea.Business.Personnel
         public List<Department> GetList()
         {
             List<Department> departments = new List<Department>();
-            List<BsonDocument> doc = this.context.FindAll(PersonnelCollection.Department);
+            var doc = this.context.FindAll(PersonnelCollection.Department);
 
             foreach (var d in doc)
             {

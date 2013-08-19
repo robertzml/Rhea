@@ -1699,6 +1699,8 @@
     <Content Include="Areas\Estate\Views\Room\Intro.cshtml" />
     <Content Include="Areas\Estate\Views\Room\Assign.cshtml" />
     <Content Include="Areas\Estate\Views\Room\AssignHistory.cshtml" />
+    <Content Include="Areas\Admin\Views\Estate\Export.cshtml" />
+    <Content Include="Areas\Admin\Views\Estate\Archive.cshtml" />
     <None Include="Content\fonts\icomoon.eot" />
     <None Include="Content\fonts\icomoon.ttf" />
     <None Include="Content\fonts\icomoon.woff" />

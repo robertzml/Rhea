@@ -110,13 +110,13 @@ namespace Rhea.Business.Estate
         public List<BuildingGroup> GetList(bool sort = false)
         {
             List<BuildingGroup> buildingGroups = new List<BuildingGroup>();
-            List<BsonDocument> doc = this.context.FindAll(EstateCollection.BuildingGroup);
+            var docs = this.context.FindAll(EstateCollection.BuildingGroup);
 
-            foreach (var d in doc)
+            foreach (var doc in docs)
             {
-                if (d.GetValue("status", 0).AsInt32 == 1)
+                if (doc.GetValue("status", 0).AsInt32 == 1)
                     continue;
-                BuildingGroup buildingGroup = ModelBind(d);
+                BuildingGroup buildingGroup = ModelBind(doc);
                 buildingGroups.Add(buildingGroup);
             }
 
@@ -136,7 +136,7 @@ namespace Rhea.Business.Estate
         public List<BuildingGroup> GetSimpleList(bool sort = false)
         {
             List<BuildingGroup> buildingGroups = new List<BuildingGroup>();
-            List<BsonDocument> docs = this.context.FindAll(EstateCollection.BuildingGroup);
+            var docs = this.context.FindAll(EstateCollection.BuildingGroup);
 
             foreach (var doc in docs)
             {
@@ -233,7 +233,7 @@ namespace Rhea.Business.Estate
                 { "sort", data.Sort },
                 { "remark", data.Remark },
                 { "editor.id", user._id },
-                { "editor.name", user.UserName },
+                { "editor.name", user.Name },
                 { "editor.time", DateTime.Now },
                 { "editor.type", 1 },
                 { "status", 0 }
@@ -281,7 +281,7 @@ namespace Rhea.Business.Estate
                 .Set("useType", data.UseType)
                 .Set("remark", data.Remark ?? "")
                 .Set("editor.id", user._id)
-                .Set("editor.name", user.UserName)
+                .Set("editor.name", user.Name)
                 .Set("editor.time", DateTime.Now)
                 .Set("editor.type", 2);
 
@@ -304,7 +304,7 @@ namespace Rhea.Business.Estate
             var query = Query.EQ("id", id);
             var update = Update.Set("status", 1)
                 .Set("editor.id", user._id)
-                .Set("editor.name", user.UserName)
+                .Set("editor.name", user.Name)
                 .Set("editor.time", DateTime.Now)
                 .Set("editor.type", 3);
 
@@ -382,7 +382,7 @@ namespace Rhea.Business.Estate
             if (doc != null)
                 return Math.Round(doc["area"].AsDouble, 2);
             else
-                return 0;          
+                return 0;
         }
 
         /// <summary>
@@ -392,13 +392,13 @@ namespace Rhea.Business.Estate
         public byte[] Export()
         {
             StringBuilder sb = new StringBuilder();
-            List<BsonDocument> docs = this.context.FindAll(EstateCollection.BuildingGroup);
+            var docs = this.context.FindAll(EstateCollection.BuildingGroup);
 
             sb.AppendLine(string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}," +
                 "{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27},{28}",
                 "Id", "名称", "图片", "局部导航", "所属校区", "楼宇栋数", "面积系数", "建筑面积", "使用面积", "占地面积",
                 "建造方式", "建筑结构", "建筑物造价", "折旧后现值", "建筑物产别", "建筑物经费科目", "建筑物产权证号",
-                "建成日期", "使用年限", "建筑设计单位", "建筑物施工单位", "建筑物房管形式", "使用类型", "排序", "备注", 
+                "建成日期", "使用年限", "建筑设计单位", "建筑物施工单位", "建筑物房管形式", "使用类型", "排序", "备注",
                 "编辑人", "编辑时间", "编辑类型", "状态"));
 
             foreach (var doc in docs)

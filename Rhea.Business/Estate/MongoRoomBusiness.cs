@@ -26,6 +26,11 @@ namespace Rhea.Business.Estate
         /// 备份接口
         /// </summary>
         private IBackupBusiness backupBusiness;
+
+        /// <summary>
+        /// 归档接口
+        /// </summary>
+        private IArchiveBusiness archiveBusiness;
         #endregion //Field
 
         #region Constructor
@@ -36,6 +41,7 @@ namespace Rhea.Business.Estate
         {
             this.context = new RheaMongoContext(RheaServer.EstateDatabase);
             this.backupBusiness = new EstateBackupBusiness();
+            this.archiveBusiness = new EstateArchiveBusiness();
         }
         #endregion //Constructor
 
@@ -121,7 +127,7 @@ namespace Rhea.Business.Estate
         public List<Room> GetList()
         {
             List<Room> data = new List<Room>();
-            List<BsonDocument> docs = this.context.FindAll(EstateCollection.Room);
+            var docs = this.context.FindAll(EstateCollection.Room);
 
             foreach (BsonDocument doc in docs)
             {
@@ -336,7 +342,7 @@ namespace Rhea.Business.Estate
                 { "roomStatus", data.RoomStatus },
                 { "remark", data.Remark ?? "" },
                 { "editor.id", user._id },
-                { "editor.name", user.UserName },
+                { "editor.name", user.Name },
                 { "editor.time", DateTime.Now },
                 { "editor.type", 1 },
                 { "status", 0 },
@@ -399,7 +405,7 @@ namespace Rhea.Business.Estate
                 .Set("roomStatus", data.RoomStatus)
                 .Set("remark", data.Remark ?? "")
                 .Set("editor.id", user._id)
-                .Set("editor.name", user.UserName)
+                .Set("editor.name", user.Name)
                 .Set("editor.time", DateTime.Now)
                 .Set("editor.type", 2)
                 .Set("heating", (BsonValue)data.Heating)
@@ -440,7 +446,7 @@ namespace Rhea.Business.Estate
             var query = Query.EQ("id", id);
             var update = Update.Set("status", 1)
                 .Set("editor.id", user._id)
-                .Set("editor.name", user.UserName)
+                .Set("editor.name", user.Name)
                 .Set("editor.time", DateTime.Now)
                 .Set("editor.type", 3);
 
@@ -536,7 +542,7 @@ namespace Rhea.Business.Estate
         public byte[] Export()
         {
             StringBuilder sb = new StringBuilder();
-            List<BsonDocument> docs = this.context.FindAll(EstateCollection.Room);
+            var docs = this.context.FindAll(EstateCollection.Room);
 
             sb.AppendLine(string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}," +
                 "{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27},{28},{29},{30},{31},{32}," +
@@ -617,6 +623,35 @@ namespace Rhea.Business.Estate
         }
 
         /// <summary>
+        /// 归档房间
+        /// </summary>
+        /// <param name="user">相关用户</param>
+        /// <param name="date">归档日期</param>
+        /// <returns></returns>
+        public bool Archive(UserProfile user, DateTime date)
+        {
+            var docs = this.context.FindAll(EstateCollection.Room);
+            List<BsonDocument> newDocs = new List<BsonDocument>();
+
+            foreach (BsonDocument doc in docs)
+            {
+                doc.Remove("_id");
+                doc.Remove("editor");
+                doc.Add("editor", new BsonDocument
+                {
+                    { "id", user._id },
+                    { "name", user.Name },
+                    { "time", date },
+                    { "type", 8 }
+                });
+                newDocs.Add(doc);
+            }
+
+            bool result = this.archiveBusiness.Archive(EstateCollection.RoomArchive, newDocs);
+            return result;
+        }
+
+        /// <summary>
         /// 分配房间
         /// </summary>
         /// <param name="id">房间ID</param>
@@ -628,7 +663,7 @@ namespace Rhea.Business.Estate
             var query = Query.EQ("id", id);
             var update = Update.Set("departmentId", newDepartmentId)
                 .Set("editor.id", user._id)
-                .Set("editor.name", user.UserName)
+                .Set("editor.name", user.Name)
                 .Set("editor.time", DateTime.Now)
                 .Set("editor.type", 7);
 

@@ -17,6 +17,24 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// 导出任务
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Export()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 归档任务
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Archive()
+        {
+            return View();
+        }
         #endregion //Action
     }
 }

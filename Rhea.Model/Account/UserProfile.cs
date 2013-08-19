@@ -34,9 +34,9 @@ namespace Rhea.Model.Account
         public string UserId { get; set; }
 
         /// <summary>
-        /// 用户名
+        /// 登录名
         /// </summary>
-        [Display(Name = "用户名")]
+        [Display(Name = "登录名")]
         public string UserName { get; set; }
 
         /// <summary>
@@ -45,6 +45,12 @@ namespace Rhea.Model.Account
         [DataType(DataType.Password)]
         [Display(Name = "密码")]
         public string Password { get; set; }
+
+        /// <summary>
+        /// 姓名
+        /// </summary>
+        [Display(Name = "姓名")]
+        public string Name { get; set; }
 
         /// <summary>
         /// 用户组ID

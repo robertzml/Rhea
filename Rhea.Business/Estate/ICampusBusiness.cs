@@ -36,5 +36,12 @@ namespace Rhea.Business.Estate
         /// </summary>
         /// <returns></returns>
         int Count();
+
+        /// <summary>
+        /// 备份校区
+        /// </summary>
+        /// <param name="id">校区ID</param>
+        /// <returns></returns>
+        bool Backup(int id);
     }
 }

@@ -48,6 +48,12 @@ namespace Rhea.Data.Server
         public static readonly string Misc = "misc";
 
         /// <summary>
+        /// 校区备份表
+        /// campusBackup
+        /// </summary>
+        public static readonly string CampusBackup = "campusBackup";
+
+        /// <summary>
         /// 楼群备份表
         /// buildingGroupBackup
         /// </summary>
@@ -64,6 +70,12 @@ namespace Rhea.Data.Server
         /// roomBackup
         /// </summary>
         public static readonly string RoomBackup = "roomBackup";
+
+        /// <summary>
+        /// 房间归档表
+        /// roomArchive
+        /// </summary>
+        public static readonly string RoomArchive = "roomArchive";
         #endregion //Field
     }
 }
