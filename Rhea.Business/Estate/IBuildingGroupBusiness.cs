@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Rhea.Model.Account;
+using Rhea.Model;
 using Rhea.Model.Estate;
 
 namespace Rhea.Business.Estate
@@ -51,26 +51,23 @@ namespace Rhea.Business.Estate
         /// <summary>
         /// 添加楼群
         /// </summary>
-        /// <param name="data">楼群数据</param>
-        /// <param name="user">相关用户</param>
+        /// <param name="data">楼群数据</param>    
         /// <returns>楼群ID</returns>
-        int Create(BuildingGroup data, UserProfile user);
+        int Create(BuildingGroup data);
 
         /// <summary>
         /// 更新楼群
         /// </summary>
-        /// <param name="data">楼群数据</param>
-        /// <param name="user">相关用户</param>
+        /// <param name="data">楼群数据</param>    
         /// <returns></returns>
-        bool Edit(BuildingGroup data, UserProfile user);
+        bool Edit(BuildingGroup data);
 
         /// <summary>
         /// 删除楼群
         /// </summary>
-        /// <param name="id">楼群ID</param>
-        /// <param name="user">相关用户</param>
+        /// <param name="id">楼群ID</param>  
         /// <returns></returns>
-        bool Delete(int id, UserProfile user);
+        bool Delete(int id);
 
         /// <summary>
         /// 获取总数
@@ -97,5 +94,13 @@ namespace Rhea.Business.Estate
         /// <param name="id">楼群ID</param>
         /// <returns></returns>
         bool Backup(int id);
+
+        /// <summary>
+        /// 记录日志
+        /// </summary>
+        /// <param name="id">楼群ID</param>
+        /// <param name="log">日志内容</param>
+        /// <returns></returns>
+        bool Log(int id, Log log);
     }
 }

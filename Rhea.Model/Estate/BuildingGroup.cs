@@ -14,7 +14,7 @@ namespace Rhea.Model.Estate
         #region Constructor
         public BuildingGroup()
         {
-            this.Editor = new ModelEditor();
+            this.Log = new Log();
         }
         #endregion //Constructor
 
@@ -192,13 +192,13 @@ namespace Rhea.Model.Estate
         [StringLength(1000)]
         [DataType(DataType.MultilineText)]
         [Display(Name = "备注")]
-        public string Remark { get; set; }
+        public string Remark { get; set; }      
 
         /// <summary>
-        /// 编辑属性
+        /// 日志属性
         /// </summary>
-        [Display(Name = "编辑属性")]
-        public ModelEditor Editor { get; set; }
+        [Display(Name = "日志属性")]
+        public Log Log { get; set; }
 
         /// <summary>
         /// 状态
@@ -242,5 +242,11 @@ namespace Rhea.Model.Estate
         /// </summary>
         [Display(Name = "编辑类型")]
         public int Type { get; set; }
+
+        /// <summary>
+        /// 编辑标记
+        /// </summary>
+        [Display(Name = "编辑标记")]
+        public string Tag { get; set; }
     }   
 }

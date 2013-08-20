@@ -22,6 +22,12 @@ namespace Rhea.Data.Server
         /// user
         /// </summary>
         public static readonly string User = "user";
+
+        /// <summary>
+        /// 日志表
+        /// log
+        /// </summary>
+        public static readonly string Log = "log";
         #endregion //Field
     }
 }

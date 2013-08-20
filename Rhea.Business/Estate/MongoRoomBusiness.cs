@@ -110,6 +110,7 @@ namespace Rhea.Business.Estate
                 room.Editor.Name = editor["name"].AsString;
                 room.Editor.Time = editor["time"].AsBsonDateTime.ToLocalTime();
                 room.Editor.Type = editor["type"].AsInt32;
+                room.Editor.Tag = editor.GetValue("tag", "").AsString;
             }
 
             if (room.StartDate != null)
@@ -345,6 +346,7 @@ namespace Rhea.Business.Estate
                 { "editor.name", user.Name },
                 { "editor.time", DateTime.Now },
                 { "editor.type", 1 },
+                { "editor.tag", "" },
                 { "status", 0 },
                 { "heating", (BsonValue)data.Heating },
                 { "fireControl", data.FireControl ?? "" },
@@ -408,6 +410,7 @@ namespace Rhea.Business.Estate
                 .Set("editor.name", user.Name)
                 .Set("editor.time", DateTime.Now)
                 .Set("editor.type", 2)
+                .Set("editor.tag", "")
                 .Set("heating", (BsonValue)data.Heating)
                 .Set("fireControl", data.FireControl ?? "")
                 .Set("height", (BsonValue)data.Height)
@@ -448,7 +451,8 @@ namespace Rhea.Business.Estate
                 .Set("editor.id", user._id)
                 .Set("editor.name", user.Name)
                 .Set("editor.time", DateTime.Now)
-                .Set("editor.type", 3);
+                .Set("editor.type", 3)
+                .Set("editor.tag", "");
 
             WriteConcernResult result = this.context.Update(EstateCollection.Room, query, update);
 
@@ -665,7 +669,8 @@ namespace Rhea.Business.Estate
                 .Set("editor.id", user._id)
                 .Set("editor.name", user.Name)
                 .Set("editor.time", DateTime.Now)
-                .Set("editor.type", 7);
+                .Set("editor.type", 7)
+                .Set("editor.tag", "");
 
             WriteConcernResult result = this.context.Update(EstateCollection.Room, query, update);
 

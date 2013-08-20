@@ -96,6 +96,7 @@ namespace Rhea.Business.Estate
                 building.Editor.Name = editor["name"].AsString;
                 building.Editor.Time = editor["time"].AsBsonDateTime.ToLocalTime();
                 building.Editor.Type = editor["type"].AsInt32;
+                building.Editor.Tag = editor.GetValue("tag", "").AsString;
             }
 
             return building;
@@ -256,6 +257,7 @@ namespace Rhea.Business.Estate
                 { "editor.name", user.Name },
                 { "editor.time", DateTime.Now },
                 { "editor.type", 1 },
+                { "editor.tag", "" },
                 { "status", 0 }
             };
 
@@ -291,7 +293,8 @@ namespace Rhea.Business.Estate
                 .Set("editor.id", user._id)
                 .Set("editor.name", user.Name)
                 .Set("editor.time", DateTime.Now)
-                .Set("editor.type", 2);
+                .Set("editor.type", 2)
+                .Set("editor.tag", "");
 
             WriteConcernResult result = this.context.Update(EstateCollection.Building, query, update);
 
@@ -314,7 +317,8 @@ namespace Rhea.Business.Estate
                 .Set("editor.id", user._id)
                 .Set("editor.name", user.Name)
                 .Set("editor.time", DateTime.Now)
-                .Set("editor.type", 3);
+                .Set("editor.type", 3)
+                .Set("editor.tag", "");
 
             WriteConcernResult result = this.context.Update(EstateCollection.Building, query, update);
 
@@ -399,7 +403,8 @@ namespace Rhea.Business.Estate
                 .Set("editor.id", user._id)
                 .Set("editor.name", user.Name)
                 .Set("editor.time", DateTime.Now)
-                .Set("editor.type", 4);
+                .Set("editor.type", 4)
+                .Set("editor.tag", "");
 
             WriteConcernResult result = this.context.Update(EstateCollection.Building, query, update);
             if (result.HasLastErrorMessage)
@@ -428,7 +433,8 @@ namespace Rhea.Business.Estate
                 .Set("editor.id", user._id)
                 .Set("editor.name", user.Name)
                 .Set("editor.time", DateTime.Now)
-                .Set("editor.type", 5);
+                .Set("editor.type", 5)
+                .Set("editor.tag", "");
 
             WriteConcernResult result = this.context.Update(EstateCollection.Building, query, update);
 
@@ -453,7 +459,8 @@ namespace Rhea.Business.Estate
                 .Set("editor.id", user._id)
                 .Set("editor.name", user.Name)
                 .Set("editor.time", DateTime.Now)
-                .Set("editor.type", 6);
+                .Set("editor.type", 6)
+                .Set("editor.tag", "");
 
             WriteConcernResult result = this.context.Update(EstateCollection.Building, query, update);
 
