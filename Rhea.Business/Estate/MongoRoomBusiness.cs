@@ -505,7 +505,7 @@ namespace Rhea.Business.Estate
         /// <returns></returns>
         public int CountByBuilding(int buildingId)
         {
-            var query = Query.EQ("buildingId", buildingId);
+            var query = Query.And(Query.EQ("buildingId", buildingId), Query.NE("status", 1));
             long count = this.context.Count(EstateCollection.Room, query);
             return (int)count;
         }
@@ -518,7 +518,7 @@ namespace Rhea.Business.Estate
         /// <returns></returns>
         public int CountByFloor(int buildingId, int floor)
         {
-            var query = Query.And(Query.EQ("buildingId", buildingId), Query.EQ("floor", floor));
+            var query = Query.And(Query.EQ("buildingId", buildingId), Query.EQ("floor", floor), Query.NE("status", 1));
             long count = this.context.Count(EstateCollection.Room, query);
             return (int)count;
         }
@@ -530,7 +530,7 @@ namespace Rhea.Business.Estate
         /// <returns></returns>
         public int CountByDepartment(int departmentId)
         {
-            var query = Query.EQ("departmentId", departmentId);
+            var query = Query.And(Query.EQ("departmentId", departmentId), Query.NE("status", 1));
             long count = this.context.Count(EstateCollection.Room, query);
             return (int)count;
         }

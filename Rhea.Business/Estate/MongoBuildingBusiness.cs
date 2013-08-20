@@ -182,8 +182,10 @@ namespace Rhea.Business.Estate
             {
                 int bid = doc["_id"].AsInt32;
                 BsonDocument d = this.context.FindOne(EstateCollection.Building, "id", bid);
-                Building building = ModelBind(d);
+                if (d.GetValue("status", 0).AsInt32 == 1)
+                    continue;
 
+                Building building = ModelBind(d);
                 buildings.Add(building);
             }
 

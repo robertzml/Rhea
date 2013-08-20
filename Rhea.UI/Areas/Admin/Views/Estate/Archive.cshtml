@@ -10,9 +10,27 @@
     </div>
 
     <div class="box-content">
-        <p>
-            <a class="btn btn-primary" href="@Url.Action("Archive", new { controller = "Room", area = "Admin" })"><i class="icon-download icon-white"></i>归档房间</a>
-        </p>
+        <div class="row-fluid">
+            <div class="span12">
+            @using (Html.BeginForm(new { action = "Archive", controller = "Room", area = "Admin" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <fieldset>
+                    <legend>归档房间</legend>
+
+                    <label>选择日期</label>
+                    <input type="text" name="archiveDate" id="archiveDate" />
+
+                    <p>
+                        <button type="submit" class="btn btn-primary">保存</button>                       
+                    </p>
+                </fieldset>
+            }
+            </div>
+        </div>
+        
     </div>
 </div>
 
@@ -21,5 +39,7 @@
     $(function () {
         var menu = $('a#archive-task');
         menuNavActive(menu);
+
+        $('#archiveDate').datepicker({ format: 'yyyy-mm-dd' });
     });
 </script>

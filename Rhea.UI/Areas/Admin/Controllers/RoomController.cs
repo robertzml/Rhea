@@ -341,11 +341,16 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// <summary>
         /// 归档房间
         /// </summary>
-        /// <returns></returns>
+        /// <returns></returns>        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Archive()
         {
+            string sdate = Request.Form["archiveDate"];
+            
+            DateTime date = Convert.ToDateTime(sdate);
             var user = GetUser();
-            DateTime date = new DateTime(2013, 7, 15);
+
             this.roomBusiness.Archive(user, date);
 
             return RedirectToAction("Archive", new { controller = "Estate", area = "Admin" });

@@ -20,6 +20,14 @@ namespace Rhea.Business.Estate
         List<BuildingGroup> GetList(bool sort = false);
 
         /// <summary>
+        /// 得到楼群完整列表
+        /// </summary>
+        /// <param name="sort">是否按sort排序</param>
+        /// <remarks>包括已删除</remarks>
+        /// <returns></returns>
+        List<BuildingGroup> GetFullList(bool sort);
+
+        /// <summary>
         /// 得到楼群简单列表
         /// </summary>
         /// <param name="sort">是否按sort排序</param>

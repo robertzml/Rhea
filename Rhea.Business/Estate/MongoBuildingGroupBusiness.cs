@@ -129,6 +129,31 @@ namespace Rhea.Business.Estate
         }
 
         /// <summary>
+        /// 得到楼群完整列表
+        /// </summary>
+        /// <param name="sort">是否按sort排序</param>
+        /// <remarks>包括已删除</remarks>
+        /// <returns></returns>
+        public List<BuildingGroup> GetFullList(bool sort)
+        {
+            List<BuildingGroup> buildingGroups = new List<BuildingGroup>();
+            var docs = this.context.FindAll(EstateCollection.BuildingGroup);
+
+            foreach (var doc in docs)
+            {
+                BuildingGroup buildingGroup = ModelBind(doc);
+                buildingGroups.Add(buildingGroup);
+            }
+
+            if (sort)
+                buildingGroups = buildingGroups.OrderBy(r => r.Sort).ToList();
+            else
+                buildingGroups = buildingGroups.OrderBy(r => r.Id).ToList();
+
+            return buildingGroups;
+        }
+
+        /// <summary>
         /// 得到楼群简单列表
         /// </summary>
         /// <param name="sort">是否按sort排序</param>
