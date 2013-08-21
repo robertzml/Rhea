@@ -11,7 +11,7 @@
         <h2><i class="icon-tasks"></i>@ViewBag.Title</h2>
     </div>
 
-    <div class="box-content">    
+    <div class="box-content">
         <div class="page-header">
             <h2>
                 @Model.UserName <small>Id: @Model.Id</small></h2>
@@ -54,7 +54,15 @@
                             <td>
                                 @Model.UserName
                             </td>
-                        </tr>                       
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Name)
+                            </td>
+                            <td>
+                                @Model.Name
+                            </td>
+                        </tr>
                         <tr>
                             <td>
                                 @Html.DisplayNameFor(model => model.UserGroupId)
