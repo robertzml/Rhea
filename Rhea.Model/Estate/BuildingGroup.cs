@@ -213,40 +213,5 @@ namespace Rhea.Model.Estate
         /// </summary>
         public List<Building> Buildings { get; set; }
         #endregion //Additional Property
-    }
-   
-    /// <summary>
-    /// 实体编辑属性类
-    /// </summary>
-    public class ModelEditor
-    {
-        /// <summary>
-        /// 编辑用户ID
-        /// </summary>
-        public string Id { get; set; }
-
-        /// <summary>
-        /// 编辑用户名
-        /// </summary>
-        [Display(Name = "编辑用户")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// 编辑时间
-        /// </summary>
-        [Display(Name = "编辑时间")]
-        public DateTime Time { get; set; }
-
-        /// <summary>
-        /// 编辑类型
-        /// </summary>
-        [Display(Name = "编辑类型")]
-        public int Type { get; set; }
-
-        /// <summary>
-        /// 编辑标记
-        /// </summary>
-        [Display(Name = "编辑标记")]
-        public string Tag { get; set; }
     }   
 }

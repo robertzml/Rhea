@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Rhea.Model.Account;
+using Rhea.Model;
 using Rhea.Model.Estate;
 
 namespace Rhea.Business.Estate
@@ -58,26 +58,23 @@ namespace Rhea.Business.Estate
         /// <summary>
         /// 添加楼宇
         /// </summary>
-        /// <param name="data">楼宇数据</param>
-        /// <param name="user">相关用户</param>
+        /// <param name="data">楼宇数据</param>   
         /// <returns>楼宇ID,0:添加失败</returns>
-        int Create(Building data, UserProfile user);
+        int Create(Building data);
 
         /// <summary>
         /// 编辑楼宇
         /// </summary>
-        /// <param name="data">楼宇数据</param>
-        /// <param name="user">相关用户</param>
+        /// <param name="data">楼宇数据</param>   
         /// <returns></returns>
-        bool Edit(Building data, UserProfile user);
+        bool Edit(Building data);
 
         /// <summary>
         /// 删除楼宇
         /// </summary>
         /// <param name="id">楼宇ID</param>
-        /// <param name="user">相关用户</param>
         /// <returns></returns>
-        bool Delete(int id, UserProfile user);
+        bool Delete(int id);
 
         /// <summary>
         /// 添加楼层
@@ -85,7 +82,7 @@ namespace Rhea.Business.Estate
         /// <param name="buildingId">楼宇ID</param>
         /// <param name="floor">楼层数据</param>
         /// <returns></returns>
-        int CreateFloor(int buildingId, Floor floor, UserProfile user);
+        int CreateFloor(int buildingId, Floor floor);
 
         /// <summary>
         /// 编辑楼层
@@ -93,7 +90,7 @@ namespace Rhea.Business.Estate
         /// <param name="buildingId">楼宇ID</param>
         /// <param name="floor">楼层数据</param>
         /// <returns></returns>
-        bool EditFloor(int buildingId, Floor floor, UserProfile user);
+        bool EditFloor(int buildingId, Floor floor);
 
         /// <summary>
         /// 删除楼层
@@ -101,7 +98,7 @@ namespace Rhea.Business.Estate
         /// <param name="buildingId">楼宇ID</param>
         /// <param name="floorId">楼层ID</param>
         /// <returns></returns>
-        bool DeleteFloor(int buildingId, int floorId, UserProfile user);
+        bool DeleteFloor(int buildingId, int floorId);
 
         /// <summary>
         /// 获取楼宇总数
@@ -136,6 +133,14 @@ namespace Rhea.Business.Estate
         /// <param name="id">楼宇ID</param>   
         /// <returns></returns>
         bool Backup(int id);
+
+        /// <summary>
+        /// 记录日志
+        /// </summary>
+        /// <param name="id">楼宇ID</param>
+        /// <param name="log">日志对象</param>
+        /// <returns></returns>
+        bool Log(int id, Log log);
 
         /// <summary>
         /// 导出楼宇

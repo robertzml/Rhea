@@ -15,7 +15,7 @@ namespace Rhea.Model.Estate
         public Room()
         {
             this.Function = new RoomFunction();
-            this.Editor = new ModelEditor();
+            this.Log = new Log();
         }
         #endregion //Constructor
 
@@ -146,10 +146,10 @@ namespace Rhea.Model.Estate
         public string Remark { get; set; }
 
         /// <summary>
-        /// 编辑属性
+        /// 日志属性
         /// </summary>
-        [Display(Name = "编辑属性")]
-        public ModelEditor Editor { get; set; }
+        [Display(Name = "日志属性")]
+        public Log Log { get; set; }
 
         /// <summary>
         /// 状态

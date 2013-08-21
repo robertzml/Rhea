@@ -33,19 +33,6 @@ namespace Rhea.Business.Estate
             else
                 return false;
         }
-
-        public void GetGroup(string collectionName)
-        {
-            BsonDocument[] pipeline = {
-                new BsonDocument {
-                    { "$group", new BsonDocument {
-                        { "_id", "$editor.time" }
-                    }}
-                }
-            };
-
-
-        }
         #endregion //Method
     }
 }

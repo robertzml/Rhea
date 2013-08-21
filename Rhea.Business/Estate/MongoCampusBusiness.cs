@@ -52,13 +52,13 @@ namespace Rhea.Business.Estate
             campus.Remark = doc.GetValue("remark", "").AsString;
             campus.Status = doc.GetValue("status", 0).AsInt32;
 
-            if (doc.Contains("editor"))
+            if (doc.Contains("log"))
             {
-                BsonDocument editor = doc["editor"].AsBsonDocument;
-                campus.Editor.Id = editor["id"].AsObjectId.ToString();
-                campus.Editor.Name = editor["name"].AsString;
-                campus.Editor.Time = editor["time"].AsBsonDateTime.ToLocalTime();
-                campus.Editor.Type = editor["type"].AsInt32;
+                BsonDocument log = doc["log"].AsBsonDocument;
+                campus.Log._id = log["id"].AsObjectId;
+                campus.Log.UserName = log["name"].AsString;
+                campus.Log.Time = log["time"].AsBsonDateTime.ToLocalTime();
+                campus.Log.Type = log["type"].AsInt32;
             }
 
             return campus;

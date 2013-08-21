@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Rhea.Model.Account;
+using Rhea.Model;
 using Rhea.Model.Estate;
 
 namespace Rhea.Business.Estate
@@ -72,26 +72,23 @@ namespace Rhea.Business.Estate
         /// <summary>
         /// 添加房间
         /// </summary>
-        /// <param name="data">房间数据</param>
-        /// <param name="user">相关用户</param>
+        /// <param name="data">房间数据</param>    
         /// <returns>房间ID，0:添加失败</returns>
-        int Create(Room data, UserProfile user);
+        int Create(Room data);
 
         /// <summary>
         /// 编辑房间
         /// </summary>
-        /// <param name="data">房间数据</param>
-        /// <param name="user">相关用户</param>
+        /// <param name="data">房间数据</param>     
         /// <returns></returns>
-        bool Edit(Room data, UserProfile user);
+        bool Edit(Room data);
 
         /// <summary>
         /// 删除房间
         /// </summary>
-        /// <param name="id">房间ID</param>
-        /// <param name="user">相关用户</param>
+        /// <param name="id">房间ID</param>  
         /// <returns></returns>
-        bool Delete(int id, UserProfile user);
+        bool Delete(int id);
 
         /// <summary>
         /// 获取房间属性列表
@@ -141,21 +138,27 @@ namespace Rhea.Business.Estate
         bool Backup(int id);
 
         /// <summary>
+        /// 记录日志
+        /// </summary>
+        /// <param name="id">房间ID</param>
+        /// <param name="log">日志对象</param>
+        /// <returns></returns>
+        bool Log(int id, Log log);
+
+        /// <summary>
         /// 归档房间
         /// </summary>
-        /// <param name="user">相关用户</param>
-        /// <param name="date">归档日期</param>
+        /// <param name="log">相关日志</param>  
         /// <returns></returns>
-        bool Archive(UserProfile user, DateTime date);
+        bool Archive(Log log);
 
         /// <summary>
         /// 分配房间
         /// </summary>
         /// <param name="id">房间ID</param>
         /// <param name="newDepartmentId">新部门ID</param>
-        /// <param name="user">相关用户</param>
         /// <returns></returns>
-        bool Assign(int id, int newDepartmentId, UserProfile user);
+        bool Assign(int id, int newDepartmentId);
 
         /// <summary>
         /// 查找分配历史

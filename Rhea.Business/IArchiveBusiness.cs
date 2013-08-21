@@ -18,7 +18,5 @@ namespace Rhea.Business
         /// <param name="docs">数据</param>
         /// <returns></returns>
         bool Archive(string collectionName, IEnumerable<BsonDocument> docs);
-
-
     }
 }

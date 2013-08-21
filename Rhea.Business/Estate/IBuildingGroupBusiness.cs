@@ -99,7 +99,7 @@ namespace Rhea.Business.Estate
         /// 记录日志
         /// </summary>
         /// <param name="id">楼群ID</param>
-        /// <param name="log">日志内容</param>
+        /// <param name="log">日志对象</param>
         /// <returns></returns>
         bool Log(int id, Log log);
     }

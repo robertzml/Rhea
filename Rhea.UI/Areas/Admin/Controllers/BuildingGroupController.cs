@@ -102,7 +102,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 Log log = new Log
                 {
                     Title = "添加楼群",
-                    Content = string.Format("添加楼群, id:{0}, 名称:{1}", bid, model.Name),
+                    Content = string.Format("添加楼群, ID:{0}, 名称:{1}.", bid, model.Name),
                     Time = DateTime.Now,
                     UserId = user._id,
                     UserName = user.Name,
@@ -168,7 +168,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 Log log = new Log
                 {
                     Title = "编辑楼群",
-                    Content = string.Format("编辑楼群, id:{0}, 名称:{1}", model.Id, model.Name),
+                    Content = string.Format("编辑楼群, ID:{0}, 名称:{1}.", model.Id, model.Name),
                     Time = DateTime.Now,
                     UserId = user._id,
                     UserName = user.Name,
@@ -232,7 +232,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
             Log log = new Log
             {
                 Title = "删除楼群",
-                Content = string.Format("删除楼群, id:{0}", id),
+                Content = string.Format("删除楼群, ID:{0}.", id),
                 Time = DateTime.Now,
                 UserId = user._id,
                 UserName = user.Name,

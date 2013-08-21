@@ -7,6 +7,7 @@ using System.Web.Routing;
 using Rhea.Business.Account;
 using Rhea.Business.Estate;
 using Rhea.Business.Personnel;
+using Rhea.Model;
 using Rhea.Model.Account;
 using Rhea.Model.Estate;
 using Rhea.UI.Filters;
@@ -184,15 +185,16 @@ namespace Rhea.UI.Areas.Estate.Controllers
                 return RedirectToAction("ShowMessage", new { controller = "Common", area = "", msg = msg, title = title });
             }
 
-            int departmentId = Convert.ToInt32(Request.Form["DepartmentId"]);
-            int currentDepartmentId = Convert.ToInt32(Request.Form["CurrentDepartmentId"]);
+            int departmentId = Convert.ToInt32(Request.Form["DepartmentId"]);   //新部门
+            int currentDepartmentId = Convert.ToInt32(Request.Form["CurrentDepartmentId"]); //原部门
 
             if (departmentId == currentDepartmentId)
             {
                 msg = "当前部门与新部门相同";
                 return RedirectToAction("ShowMessage", new { controller = "Common", area = "", msg = msg, title = title });
             }
-         
+
+            //backup
             bool backok = this.roomBusiness.Backup(roomId);
             if (!backok)
             {
@@ -200,19 +202,34 @@ namespace Rhea.UI.Areas.Estate.Controllers
                 return RedirectToAction("ShowMessage", new { controller = "Common", area = "", msg = msg, title = title });
             }
 
-            var user = GetUser();
-            bool result = this.roomBusiness.Assign(roomId, departmentId, user);
-
-            if (result)
-            {
-                msg = "分配房间成功";
-                return RedirectToAction("ShowMessage", new { controller = "Common", area = "", msg = msg, title = title });
-            }
-            else
+            //assign
+            bool result = this.roomBusiness.Assign(roomId, departmentId);
+            if (!result)
             {
                 msg = "分配房间失败";
                 return RedirectToAction("ShowMessage", new { controller = "Common", area = "", msg = msg, title = title });
             }
+
+            //log
+            var user = GetUser();
+            Log log = new Log
+            {
+                Title = "分配房间",
+                Content = string.Format("分配房间, 房间ID:{0}, 原部门:{1}, 新部门:{2}.", roomId, currentDepartmentId, departmentId),
+                Time = DateTime.Now,
+                UserId = user._id,
+                UserName = user.Name,
+                Type = 10
+            };
+            bool logok = this.roomBusiness.Log(roomId, log);
+            if (!logok)
+            {
+                msg = "记录日志失败";
+                return RedirectToAction("ShowMessage", new { controller = "Common", area = "", msg = msg, title = title });
+            }
+
+            msg = "分配房间成功";
+            return RedirectToAction("ShowMessage", new { controller = "Common", area = "", msg = msg, title = title });
         }
 
         /// <summary>

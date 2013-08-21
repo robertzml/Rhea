@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using MongoDB.Driver.Builders;
 using Rhea.Data.Server;
 using Rhea.Model;
 
@@ -17,6 +18,29 @@ namespace Rhea.Business
         /// </summary>
         private RheaMongoContext context = new RheaMongoContext(RheaServer.RheaDatabase);
         #endregion //Field
+
+        #region Function
+        /// <summary>
+        /// 模型绑定
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <returns></returns>
+        private Log ModelBind(BsonDocument doc)
+        {
+            Log log = new Log();
+            log._id = doc["_id"].AsObjectId;
+            log.Title = doc["title"].AsString;
+            log.Content = doc.GetValue("content", "").AsString;
+            log.Time = doc["time"].AsBsonDateTime.ToLocalTime();
+            log.UserId = doc["userId"].AsObjectId;
+            log.UserName = doc["userName"].AsString;
+            log.Type = doc["type"].AsInt32;
+            log.RelateTime = (DateTime?)doc.GetValue("relateTime", null);
+
+            return log;
+        }
+
+        #endregion //Function
 
         #region Method
         /// <summary>
@@ -45,6 +69,46 @@ namespace Rhea.Business
             }
             else
                 return null;
+        }
+
+        /// <summary>
+        /// 显示所有日志
+        /// </summary>
+        /// <returns></returns>
+        public List<Log> GetList()
+        {
+            List<Log> data = new List<Log>();
+
+            var docs = this.context.FindAll(RheaCollection.Log);
+
+            foreach (BsonDocument doc in docs)
+            {
+                Log log = ModelBind(doc);
+                data.Add(log);
+            }
+
+            return data;
+        }
+
+        /// <summary>
+        /// 显示所有日志
+        /// </summary>
+        /// <param name="type">日志类型</param>
+        /// <returns></returns>
+        public List<Log> GetList(int type)
+        {
+            List<Log> data = new List<Log>();
+
+            var query = Query.EQ("type", type);
+            var docs = this.context.Find(RheaCollection.Log, query).SetSortOrder(SortBy.Ascending("time"));
+
+            foreach (BsonDocument doc in docs)
+            {
+                Log log = ModelBind(doc);
+                data.Add(log);
+            }
+
+            return data;
         }
         #endregion //Method
     }

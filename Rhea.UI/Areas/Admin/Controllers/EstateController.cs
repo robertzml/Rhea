@@ -35,7 +35,21 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult Archive()
         {
-            return View();
+            ILogBusiness logBusiness = new MongoLogBusiness();
+            var data = logBusiness.GetList(20);
+            return View(data);
+        }
+
+        /// <summary>
+        /// 日志列表
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult LogList()
+        {
+            ILogBusiness logBusiness = new MongoLogBusiness();
+            var data = logBusiness.GetList().OrderBy(r => r.Time);
+
+            return View(data);
         }
         #endregion //Action
     }

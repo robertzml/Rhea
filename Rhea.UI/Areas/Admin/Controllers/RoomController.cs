@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Rhea.Business.Account;
 using Rhea.Business.Estate;
+using Rhea.Model;
 using Rhea.Model.Account;
 using Rhea.Model.Estate;
 using Rhea.UI.Areas.Admin.Models;
@@ -219,19 +220,37 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                //create
                 Room room = ModelTranslate(model);
-                var user = GetUser();
-                int result = this.roomBusiness.Create(room, user);
 
-                if (result != 0)
+                int rid = this.roomBusiness.Create(room);
+                if (rid == 0)
                 {
-                    TempData["Message"] = "添加成功";
-                    return RedirectToAction("Details", "Room", new { area = "Admin", id = result });
+                    ModelState.AddModelError("", "添加失败");
+                    return View(model);
                 }
-                else
+
+                //log
+                var user = GetUser();
+                Log log = new Log
                 {
-                    ModelState.AddModelError("", "保存失败");
+                    Title = "添加房间",
+                    Content = string.Format("添加房间, ID:{0}, 名称:{1}.", rid, model.Name),
+                    Time = DateTime.Now,
+                    UserId = user._id,
+                    UserName = user.Name,
+                    Type = 2
+                };
+
+                bool logok = this.roomBusiness.Log(rid, log);
+                if (!logok)
+                {
+                    ModelState.AddModelError("", "记录日志失败");
+                    return View(model);
                 }
+
+                TempData["Message"] = "添加成功";
+                return RedirectToAction("Details", "Room", new { area = "Admin", id = rid });
             }
 
             return View(model);
@@ -264,8 +283,8 @@ namespace Rhea.UI.Areas.Admin.Controllers
             {
                 Room room = ModelTranslate(model);
                 room.Id = model.Id;
-                var user = GetUser();
-              
+
+                //backup
                 bool backok = this.roomBusiness.Backup(room.Id);
                 if (!backok)
                 {
@@ -273,16 +292,35 @@ namespace Rhea.UI.Areas.Admin.Controllers
                     return View(model);
                 }
 
-                bool result = this.roomBusiness.Edit(room, user);
-                if (result)
-                {
-                    TempData["Message"] = "编辑成功";
-                    return RedirectToAction("Details", "Room", new { area = "Admin", id = room.Id });
-                }
-                else
+                //edit
+                bool result = this.roomBusiness.Edit(room);
+                if (!result)
                 {
                     ModelState.AddModelError("", "保存失败");
+                    return View(model);
                 }
+
+                //log
+                var user = GetUser();
+                Log log = new Log
+                {
+                    Title = "编辑房间",
+                    Content = string.Format("编辑房间, ID:{0}, 名称:{1}.", room.Id, room.Name),
+                    Time = DateTime.Now,
+                    UserId = user._id,
+                    UserName = user.Name,
+                    Type = 3
+                };
+
+                bool logok = this.roomBusiness.Log(room.Id, log);
+                if (!logok)
+                {
+                    ModelState.AddModelError("", "记录日志失败");
+                    return View(model);
+                }
+
+                TempData["Message"] = "编辑成功";
+                return RedirectToAction("Details", "Room", new { area = "Admin", id = room.Id });
             }
 
             return View(model);
@@ -309,23 +347,43 @@ namespace Rhea.UI.Areas.Admin.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirm(int id)
         {
-            var user = GetUser();
-
+            //backup
             bool backok = this.roomBusiness.Backup(id);
             if (!backok)
             {
-                ModelState.AddModelError("", "备份失败");
+                TempData["Message"] = "备份失败";
                 return View("Delete", id);
             }
 
-            bool result = this.roomBusiness.Delete(id, user);
-            if (result)
+            //delete
+            bool result = this.roomBusiness.Delete(id);
+            if (!result)
             {
-                TempData["Message"] = "删除成功";
-                return RedirectToAction("Index", "Room", new { area = "Admin" });
-            }
-            else
+                TempData["Message"] = "删除失败";
                 return View("Delete", id);
+            }
+
+            //log
+            var user = GetUser();
+            Log log = new Log
+            {
+                Title = "删除房间",
+                Content = string.Format("删除房间, ID:{0}.", id),
+                Time = DateTime.Now,
+                UserId = user._id,
+                UserName = user.Name,
+                Type = 4
+            };
+
+            bool logok = this.roomBusiness.Log(id, log);
+            if (!logok)
+            {
+                TempData["Message"] = "记录日志失败";
+                return View("Delete", id);
+            }
+
+            TempData["Message"] = "删除成功";
+            return RedirectToAction("Index", "Room", new { area = "Admin" });
         }
 
         /// <summary>
@@ -347,11 +405,22 @@ namespace Rhea.UI.Areas.Admin.Controllers
         public ActionResult Archive()
         {
             string sdate = Request.Form["archiveDate"];
-            
+
+            //log
             DateTime date = Convert.ToDateTime(sdate);
             var user = GetUser();
+            Log log = new Log
+            {
+                Title = "归档房间",
+                Content = string.Format("归档房间, 日期:{0}.", date.ToShortDateString()),
+                Time = DateTime.Now,
+                UserId = user._id,
+                UserName = user.Name,
+                Type = 20,
+                RelateTime = date
+            };           
 
-            this.roomBusiness.Archive(user, date);
+            this.roomBusiness.Archive(log);
 
             return RedirectToAction("Archive", new { controller = "Estate", area = "Admin" });
         }

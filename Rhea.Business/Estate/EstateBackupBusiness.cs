@@ -45,7 +45,7 @@ namespace Rhea.Business.Estate
         {
             var query = Query.EQ("id", id);
             var data = this.context.Find(collectionName, query);
-            data = data.SetSortOrder(SortBy.Ascending("editor.time")).SetLimit(1);
+            data = data.SetSortOrder(SortBy.Ascending("log.time")).SetLimit(1);
 
             if (data.Count() == 0)
                 return null;
@@ -75,9 +75,9 @@ namespace Rhea.Business.Estate
         public List<BsonDocument> FindBackup(string collectionName, BsonValue id, int type)
         {
             var query = Query.And(Query.EQ("id", id),
-                Query.EQ("editor.type", type));
+                Query.EQ("log.type", type));
 
-            var data = this.context.Find(collectionName, query).SetSortOrder(SortBy.Descending("editor.time"));
+            var data = this.context.Find(collectionName, query).SetSortOrder(SortBy.Descending("log.time"));
             return data.ToList();
         }
         #endregion //Method

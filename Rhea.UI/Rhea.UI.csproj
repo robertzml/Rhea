@@ -1707,6 +1707,7 @@
     <Content Include="Areas\Estate\Views\Room\AssignHistory.cshtml" />
     <Content Include="Areas\Admin\Views\Estate\Export.cshtml" />
     <Content Include="Areas\Admin\Views\Estate\Archive.cshtml" />
+    <Content Include="Areas\Admin\Views\Estate\LogList.cshtml" />
     <None Include="Content\fonts\icomoon.eot" />
     <None Include="Content\fonts\icomoon.ttf" />
     <None Include="Content\fonts\icomoon.woff" />

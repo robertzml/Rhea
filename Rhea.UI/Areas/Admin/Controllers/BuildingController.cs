@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Rhea.Business.Account;
 using Rhea.Business.Estate;
+using Rhea.Model;
 using Rhea.Model.Account;
 using Rhea.Model.Estate;
 
@@ -95,18 +96,35 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = GetUser();
-                int result = this.buildingBusiness.Create(model, user);
+                //create
+                int bid = this.buildingBusiness.Create(model);
+                if (bid == 0)
+                {
+                    ModelState.AddModelError("", "添加失败");
+                    return View(model);
+                }
 
-                if (result != 0)
+                //log
+                var user = GetUser();
+                Log log = new Log
                 {
-                    TempData["Message"] = "添加成功";
-                    return RedirectToAction("Details", "Building", new { area = "Admin", id = result });
-                }
-                else
+                    Title = "添加楼宇",
+                    Content = string.Format("添加楼宇, ID:{0}, 名称:{1}.", bid, model.Name),
+                    Time = DateTime.Now,
+                    UserId = user._id,
+                    UserName = user.Name,
+                    Type = 2
+                };
+
+                bool logok = this.buildingBusiness.Log(bid, log);
+                if (!logok)
                 {
-                    ModelState.AddModelError("", "保存失败");
+                    ModelState.AddModelError("", "记录日志失败");
+                    return View(model);
                 }
+
+                TempData["Message"] = "添加成功";
+                return RedirectToAction("Details", "Building", new { area = "Admin", id = bid });
             }
 
             return View(model);
@@ -135,8 +153,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = GetUser();
-                   
+                //backup
                 bool backok = this.buildingBusiness.Backup(model.Id);
                 if (!backok)
                 {
@@ -144,16 +161,35 @@ namespace Rhea.UI.Areas.Admin.Controllers
                     return View(model);
                 }
 
-                bool result = this.buildingBusiness.Edit(model, user);
-                if (result)
-                {
-                    TempData["Message"] = "编辑成功";
-                    return RedirectToAction("Details", "Building", new { area = "Admin", id = model.Id });
-                }
-                else
+                //edit
+                bool result = this.buildingBusiness.Edit(model);
+                if (!result)
                 {
                     ModelState.AddModelError("", "保存失败");
+                    return View(model);
                 }
+
+                //log
+                var user = GetUser();
+                Log log = new Log
+                {
+                    Title = "编辑楼宇",
+                    Content = string.Format("编辑楼宇, ID:{0}, 名称:{1}.", model.Id, model.Name),
+                    Time = DateTime.Now,
+                    UserId = user._id,
+                    UserName = user.Name,
+                    Type = 3
+                };
+
+                bool logok = this.buildingBusiness.Log(model.Id, log);
+                if (!logok)
+                {
+                    ModelState.AddModelError("", "记录日志失败");
+                    return View(model);
+                }
+
+                TempData["Message"] = "编辑成功";
+                return RedirectToAction("Details", "Building", new { area = "Admin", id = model.Id });
             }
 
             return View(model);
@@ -181,24 +217,43 @@ namespace Rhea.UI.Areas.Admin.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirm(int id)
         {
-            var user = GetUser();
-
+            //backup
             bool backok = this.buildingBusiness.Backup(id);
             if (!backok)
             {
-                ModelState.AddModelError("", "备份失败");
+                TempData["Message"] = "备份失败";
                 return View("Delete", id);
             }
 
-            bool result = this.buildingBusiness.Delete(id, user);
-
-            if (result)
+            //delete
+            bool result = this.buildingBusiness.Delete(id);
+            if (!result)
             {
-                TempData["Message"] = "删除成功";
-                return RedirectToAction("List", "Building", new { area = "Admin" });
-            }
-            else
+                TempData["Message"] = "删除失败";
                 return View("Delete", id);
+            }
+
+            //log
+            var user = GetUser();
+            Log log = new Log
+            {
+                Title = "删除楼宇",
+                Content = string.Format("删除楼宇, ID:{0}.", id),
+                Time = DateTime.Now,
+                UserId = user._id,
+                UserName = user.Name,
+                Type = 4
+            };
+
+            bool logok = this.buildingBusiness.Log(id, log);
+            if (!logok)
+            {
+                TempData["Message"] = "记录日志失败";
+                return View("Delete", id);
+            }
+
+            TempData["Message"] = "删除成功";
+            return RedirectToAction("List", "Building", new { area = "Admin" });
         }
 
         /// <summary>
@@ -225,26 +280,46 @@ namespace Rhea.UI.Areas.Admin.Controllers
             int buildingId = Convert.ToInt32(Request.Form["BuildingId"]);
             if (ModelState.IsValid)
             {
-                var user = GetUser();
-   
+                //backup
                 bool backok = this.buildingBusiness.Backup(buildingId);
                 if (!backok)
                 {
                     ModelState.AddModelError("", "备份失败");
+                    ViewBag.BuildingId = buildingId;
                     return View(model);
                 }
 
-                int result = this.buildingBusiness.CreateFloor(buildingId, model, user);
+                //create
+                int fid = this.buildingBusiness.CreateFloor(buildingId, model);
+                if (fid == 0)
+                {
+                    ModelState.AddModelError("", "添加失败");
+                    ViewBag.BuildingId = buildingId;
+                    return View(model);
+                }
 
-                if (result != 0)
+                //log
+                var user = GetUser();
+                Log log = new Log
                 {
-                    TempData["Message"] = "添加成功";
-                    return RedirectToAction("Details", "Building", new { area = "Admin", id = buildingId });
-                }
-                else
+                    Title = "添加楼层",
+                    Content = string.Format("添加楼层, ID:{0}, 名称:{1}, 楼宇ID:{2}.", fid, model.Name, buildingId),
+                    Time = DateTime.Now,
+                    UserId = user._id,
+                    UserName = user.Name,
+                    Type = 5
+                };
+
+                bool logok = this.buildingBusiness.Log(buildingId, log);
+                if (!logok)
                 {
-                    ModelState.AddModelError("", "保存失败");
+                    ModelState.AddModelError("", "记录日志失败");
+                    ViewBag.BuildingId = buildingId;
+                    return View(model);
                 }
+
+                TempData["Message"] = "添加成功";
+                return RedirectToAction("Details", "Building", new { area = "Admin", id = buildingId });
             }
 
             ViewBag.BuildingId = buildingId;
@@ -277,26 +352,46 @@ namespace Rhea.UI.Areas.Admin.Controllers
             int buildingId = Convert.ToInt32(Request.Form["BuildingId"]);
             if (ModelState.IsValid)
             {
-                var user = GetUser();
-                    
+                //backup
                 bool backok = this.buildingBusiness.Backup(buildingId);
                 if (!backok)
                 {
                     ModelState.AddModelError("", "备份失败");
+                    ViewBag.BuildingId = buildingId;
                     return View(model);
                 }
 
-                bool result = this.buildingBusiness.EditFloor(buildingId, model, user);
-
-                if (result)
-                {
-                    TempData["Message"] = "编辑成功";
-                    return RedirectToAction("Details", "Building", new { area = "Admin", id = buildingId });
-                }
-                else
+                //edit
+                bool result = this.buildingBusiness.EditFloor(buildingId, model);
+                if (!result)
                 {
                     ModelState.AddModelError("", "保存失败");
+                    ViewBag.BuildingId = buildingId;
+                    return View(model);
                 }
+
+                //log
+                var user = GetUser();
+                Log log = new Log
+                {
+                    Title = "编辑楼层",
+                    Content = string.Format("编辑楼层, ID:{0}, 名称:{1}, 楼宇ID:{2}.", model.Id, model.Name, buildingId),
+                    Time = DateTime.Now,
+                    UserId = user._id,
+                    UserName = user.Name,
+                    Type = 6
+                };
+
+                bool logok = this.buildingBusiness.Log(buildingId, log);
+                if (!logok)
+                {
+                    ModelState.AddModelError("", "记录日志失败");
+                    ViewBag.BuildingId = buildingId;
+                    return View(model);
+                }
+
+                TempData["Message"] = "编辑成功";
+                return RedirectToAction("Details", "Building", new { area = "Admin", id = buildingId });
             }
 
             ViewBag.BuildingId = buildingId;
@@ -328,24 +423,44 @@ namespace Rhea.UI.Areas.Admin.Controllers
         public ActionResult DeleteFloorConfirm(int id)
         {
             int buildingId = Convert.ToInt32(Request.Form["BuildingId"]);
-            var user = GetUser();
-                        
+
+            //backup
             bool backok = this.buildingBusiness.Backup(buildingId);
             if (!backok)
             {
-                ModelState.AddModelError("", "备份失败");
+                TempData["Message"] = "备份失败";
                 return View("DeleteFloor", new { buildingId = buildingId, floorId = id });
             }
 
-            bool result = this.buildingBusiness.DeleteFloor(buildingId, id, user);
-
-            if (result)
+            //delete
+            bool result = this.buildingBusiness.DeleteFloor(buildingId, id);
+            if (!result)
             {
-                TempData["Message"] = "删除成功";
-                return RedirectToAction("Details", "Building", new { area = "Admin", id = buildingId });
-            }
-            else
+                TempData["Message"] = "删除失败";
                 return View("DeleteFloor", new { buildingId = buildingId, floorId = id });
+            }
+
+            //log
+            var user = GetUser();
+            Log log = new Log
+            {
+                Title = "删除楼层",
+                Content = string.Format("删除楼层, ID:{0}, 楼宇ID:{1}.", id, buildingId),
+                Time = DateTime.Now,
+                UserId = user._id,
+                UserName = user.Name,
+                Type = 7
+            };
+
+            bool logok = this.buildingBusiness.Log(buildingId, log);
+            if (!logok)
+            {
+                TempData["Message"] = "记录日志失败";
+                return View("DeleteFloor", new { buildingId = buildingId, floorId = id });
+            }
+
+            TempData["Message"] = "删除成功";
+            return RedirectToAction("Details", "Building", new { area = "Admin", id = buildingId });
         }
 
         /// <summary>

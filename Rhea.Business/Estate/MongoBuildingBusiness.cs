@@ -6,7 +6,7 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using Rhea.Data.Server;
-using Rhea.Model.Account;
+using Rhea.Model;
 using Rhea.Model.Estate;
 
 namespace Rhea.Business.Estate
@@ -26,6 +26,11 @@ namespace Rhea.Business.Estate
         /// 备份接口
         /// </summary>
         private IBackupBusiness backupBusiness;
+
+        /// <summary>
+        /// 日志接口
+        /// </summary>
+        private ILogBusiness logBusiness;
         #endregion //Field
 
         #region Constructor
@@ -36,6 +41,7 @@ namespace Rhea.Business.Estate
         {
             this.context = new RheaMongoContext(RheaServer.EstateDatabase);
             this.backupBusiness = new EstateBackupBusiness();
+            this.logBusiness = new MongoLogBusiness();
         }
         #endregion //Constructor
 
@@ -89,14 +95,13 @@ namespace Rhea.Business.Estate
                 }
             }
 
-            if (doc.Contains("editor"))
+            if (doc.Contains("log"))
             {
-                BsonDocument editor = doc["editor"].AsBsonDocument;
-                building.Editor.Id = editor["id"].AsObjectId.ToString();
-                building.Editor.Name = editor["name"].AsString;
-                building.Editor.Time = editor["time"].AsBsonDateTime.ToLocalTime();
-                building.Editor.Type = editor["type"].AsInt32;
-                building.Editor.Tag = editor.GetValue("tag", "").AsString;
+                BsonDocument log = doc["log"].AsBsonDocument;
+                building.Log._id = log["id"].AsObjectId;
+                building.Log.UserName = log["name"].AsString;
+                building.Log.Time = log["time"].AsBsonDateTime.ToLocalTime();
+                building.Log.Type = log["type"].AsInt32;             
             }
 
             return building;
@@ -232,14 +237,13 @@ namespace Rhea.Business.Estate
         /// <summary>
         /// 添加楼宇
         /// </summary>
-        /// <param name="data">楼宇数据</param>
-        /// <param name="user">相关用户</param>
+        /// <param name="data">楼宇数据</param>      
         /// <returns>楼宇ID,0:添加失败</returns>
-        public int Create(Building data, UserProfile user)
+        public int Create(Building data)
         {
             data.Id = this.context.FindSequenceIndex(EstateCollection.Building) + 1;
 
-            BsonDocument doc = new BsonDocument
+            BsonDocument doc = new BsonDocument //13
             {
                 { "id", data.Id },                
                 { "name" , data.Name },                
@@ -252,12 +256,7 @@ namespace Rhea.Business.Estate
                 { "useType", data.UseType },
                 { "parMapUrl", data.PartMapUrl ?? "" },
                 { "remark", data.Remark ?? "" },
-                { "sort", data.Sort },
-                { "editor.id", user._id },
-                { "editor.name", user.Name },
-                { "editor.time", DateTime.Now },
-                { "editor.type", 1 },
-                { "editor.tag", "" },
+                { "sort", data.Sort },           
                 { "status", 0 }
             };
 
@@ -273,13 +272,12 @@ namespace Rhea.Business.Estate
         /// 编辑楼宇
         /// </summary>
         /// <param name="data">楼宇数据</param>
-        /// <param name="user">相关用户</param>
         /// <returns></returns>
-        public bool Edit(Building data, UserProfile user)
+        public bool Edit(Building data)
         {
             var query = Query.EQ("id", data.Id);
 
-            var update = Update.Set("name", data.Name)
+            var update = Update.Set("name", data.Name)  //11
                 .Set("imageUrl", data.ImageUrl ?? "")
                 .Set("buildingGroupId", data.BuildingGroupId)
                 .Set("buildArea", (BsonValue)data.BuildArea)
@@ -289,12 +287,7 @@ namespace Rhea.Business.Estate
                 .Set("useType", data.UseType)
                 .Set("partMapUrl", data.PartMapUrl ?? "")
                 .Set("sort", data.Sort)
-                .Set("remark", data.Remark ?? "")
-                .Set("editor.id", user._id)
-                .Set("editor.name", user.Name)
-                .Set("editor.time", DateTime.Now)
-                .Set("editor.type", 2)
-                .Set("editor.tag", "");
+                .Set("remark", data.Remark ?? "");
 
             WriteConcernResult result = this.context.Update(EstateCollection.Building, query, update);
 
@@ -307,18 +300,12 @@ namespace Rhea.Business.Estate
         /// <summary>
         /// 删除楼宇
         /// </summary>
-        /// <param name="id">楼宇ID</param>
-        /// <param name="user">相关用户</param>
+        /// <param name="id">楼宇ID</param>    
         /// <returns></returns>
-        public bool Delete(int id, UserProfile user)
+        public bool Delete(int id)
         {
             var query = Query.EQ("id", id);
-            var update = Update.Set("status", 1)
-                .Set("editor.id", user._id)
-                .Set("editor.name", user.Name)
-                .Set("editor.time", DateTime.Now)
-                .Set("editor.type", 3)
-                .Set("editor.tag", "");
+            var update = Update.Set("status", 1);
 
             WriteConcernResult result = this.context.Update(EstateCollection.Building, query, update);
 
@@ -355,7 +342,7 @@ namespace Rhea.Business.Estate
         /// <param name="buildingId">楼宇ID</param>
         /// <param name="floor">楼层数据</param>
         /// <returns></returns>
-        public int CreateFloor(int buildingId, Floor floor, UserProfile user)
+        public int CreateFloor(int buildingId, Floor floor)
         {
             BsonDocument[] pipeline = {
                 new BsonDocument {
@@ -399,12 +386,7 @@ namespace Rhea.Business.Estate
             };
 
             var query = Query.EQ("id", buildingId);
-            var update = Update.Push("floors", doc)
-                .Set("editor.id", user._id)
-                .Set("editor.name", user.Name)
-                .Set("editor.time", DateTime.Now)
-                .Set("editor.type", 4)
-                .Set("editor.tag", "");
+            var update = Update.Push("floors", doc);
 
             WriteConcernResult result = this.context.Update(EstateCollection.Building, query, update);
             if (result.HasLastErrorMessage)
@@ -419,7 +401,7 @@ namespace Rhea.Business.Estate
         /// <param name="buildingId">楼宇ID</param>
         /// <param name="floor">楼层数据</param>
         /// <returns></returns>
-        public bool EditFloor(int buildingId, Floor floor, UserProfile user)
+        public bool EditFloor(int buildingId, Floor floor)
         {
             var query = Query.And(Query.EQ("id", buildingId),
                Query.EQ("floors.id", floor.Id));
@@ -429,12 +411,7 @@ namespace Rhea.Business.Estate
                 .Set("floors.$.buildArea", (BsonValue)floor.BuildArea)
                 .Set("floors.$.usableArea", (BsonValue)floor.UsableArea)
                 .Set("floors.$.imageUrl", floor.ImageUrl ?? "")
-                .Set("floors.$.remark", floor.Remark ?? "")
-                .Set("editor.id", user._id)
-                .Set("editor.name", user.Name)
-                .Set("editor.time", DateTime.Now)
-                .Set("editor.type", 5)
-                .Set("editor.tag", "");
+                .Set("floors.$.remark", floor.Remark ?? "");
 
             WriteConcernResult result = this.context.Update(EstateCollection.Building, query, update);
 
@@ -450,17 +427,12 @@ namespace Rhea.Business.Estate
         /// <param name="buildingId">楼宇ID</param>
         /// <param name="floorId">楼层ID</param>
         /// <returns></returns>
-        public bool DeleteFloor(int buildingId, int floorId, UserProfile user)
+        public bool DeleteFloor(int buildingId, int floorId)
         {
             var query = Query.And(Query.EQ("id", buildingId),
                 Query.EQ("floors.id", floorId));
 
-            var update = Update.Set("floors.$.status", 1)
-                .Set("editor.id", user._id)
-                .Set("editor.name", user.Name)
-                .Set("editor.time", DateTime.Now)
-                .Set("editor.type", 6)
-                .Set("editor.tag", "");
+            var update = Update.Set("floors.$.status", 1);
 
             WriteConcernResult result = this.context.Update(EstateCollection.Building, query, update);
 
@@ -589,6 +561,32 @@ namespace Rhea.Business.Estate
                 return Math.Round(doc["area"].AsDouble, 2);
             else
                 return 0;
+        }
+
+        /// <summary>
+        /// 记录日志
+        /// </summary>
+        /// <param name="id">楼宇ID</param>
+        /// <param name="log">日志对象</param>
+        /// <returns></returns>
+        public bool Log(int id, Log log)
+        {
+            log = this.logBusiness.Insert(log);
+            if (log == null)
+                return false;
+
+            var query = Query.EQ("id", id);
+            var update = Update.Set("log.id", log._id)
+                .Set("log.name", log.UserName)
+                .Set("log.time", log.Time)
+                .Set("log.type", log.Type);
+
+            WriteConcernResult result = this.context.Update(EstateCollection.Building, query, update);
+
+            if (result.HasLastErrorMessage)
+                return false;
+            else
+                return true;
         }
 
         /// <summary>
