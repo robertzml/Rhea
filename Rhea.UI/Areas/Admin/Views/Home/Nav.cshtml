@@ -5,27 +5,39 @@
 }
 
 <div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container-fluid">
-            <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar"
-                type="button">
-                <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar">
-                </span>
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
             </button>
-            <a href="@Url.Action("Index", new { controller = "Home", area = "Admin" })" class="brand" id="logo">房产系统后台管理</a>
-            <div class="nav-collapse collapse">                
-                <ul class="nav">
-                    <li><a href="@Url.Action("Index", new { controller = "Estate", area = "Admin" })">房产管理</a></li>
-                    @if (rank >= 900)
-                    {
-                    <li><a href="@Url.Action("Index", new { controller = "Department", area = "Admin" })">部门管理</a></li>                    
-                    <li><a href="@Url.Action("Index", new { controller = "Account", area = "Admin" })">用户管理</a></li>
-                    }
-                    <li><a href="@Url.Action("Index", new { controller = "Home", area = "" })">回主页</a></li>
-                    <li><a href="@Url.Action("Logout", new { controller = "Account", area = "" })">注销</a></li>
-                </ul>
-            </div>
-            <!--/.nav-collapse -->
+            <a class="navbar-brand" href="@Url.Action("Index", new { controller = "Home", area = "Admin" })" id="logo">房产系统后台管理</a>
         </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="@Url.Action("Index", new { controller = "Estate", area = "Admin" })">房产管理</a></li>
+                @if (rank >= 900)
+                {
+                <li><a href="@Url.Action("Index", new { controller = "Department", area = "Admin" })">部门管理</a></li>
+                <li><a href="@Url.Action("Index", new { controller = "Account", area = "Admin" })">用户管理</a></li>
+                }
+                <li><a href="@Url.Action("Index", new { controller = "Home", area = "" })">回主页</a></li>
+                <li><a href="@Url.Action("Logout", new { controller = "Account", area = "" })">注销</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Nav header</li>
+                        <li><a href="#">Separated link</a></li>
+                        <li><a href="#">One more separated link</a></li>
+                    </ul>
+                </li>
+            </ul>         
+        </div><!--/.navbar-collapse -->
     </div>
 </div>
+

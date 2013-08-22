@@ -31,6 +31,11 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             return View();
         }
+
+        public ActionResult Test()
+        {
+            return View();
+        }
         #endregion //Action
     }
 }

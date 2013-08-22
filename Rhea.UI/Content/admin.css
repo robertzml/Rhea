@@ -1,0 +1,14 @@
+/* The css file for the admin area */
+
+body {
+	padding-top: 50px;
+	padding-bottom: 20px;
+}
+
+a#logo, .navbar-inverse .nav > li > a {
+	font-family: 微软雅黑;
+	color:#FFFFFF;
+}
+.navbar-inverse .nav > li > a:hover {
+	color:#FBE733;
+}
