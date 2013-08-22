@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Rhea.Model;
 using Rhea.Model.Estate;
 
 namespace Rhea.Business.Estate
@@ -43,5 +44,20 @@ namespace Rhea.Business.Estate
         /// <param name="id">校区ID</param>
         /// <returns></returns>
         bool Backup(int id);
+
+        /// <summary>
+        /// 记录日志
+        /// </summary>
+        /// <param name="id">校区ID</param>
+        /// <param name="log">日志对象</param>
+        /// <returns></returns>
+        bool Log(int id, Log log);
+
+        /// <summary>
+        /// 归档校区
+        /// </summary>
+        /// <param name="log">相关日志</param>
+        /// <returns></returns>
+        bool Archive(Log log);
     }
 }

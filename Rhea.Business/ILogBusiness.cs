@@ -27,5 +27,12 @@ namespace Rhea.Business
         /// <param name="type">日志类型</param>
         /// <returns></returns>
         List<Log> GetList(int type);
+
+        /// <summary>
+        /// 显示所有日志
+        /// </summary>
+        /// <param name="type">日志类型</param>
+        /// <returns></returns>
+        List<Log> GetList(int[] type);
     }
 }

@@ -143,6 +143,13 @@ namespace Rhea.Business.Estate
         bool Log(int id, Log log);
 
         /// <summary>
+        /// 归档楼宇
+        /// </summary>
+        /// <param name="log">相关日志</param>
+        /// <returns></returns>
+        bool Archive(Log log);
+
+        /// <summary>
         /// 导出楼宇
         /// </summary>
         /// <returns></returns>

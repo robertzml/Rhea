@@ -31,6 +31,11 @@ namespace Rhea.Business.Estate
         /// 日志接口
         /// </summary>
         private ILogBusiness logBusiness;
+
+        /// <summary>
+        /// 归档接口
+        /// </summary>
+        private IArchiveBusiness archiveBusiness;
         #endregion //Field
 
         #region Constructor
@@ -42,6 +47,7 @@ namespace Rhea.Business.Estate
             this.context = new RheaMongoContext(RheaServer.EstateDatabase);
             this.backupBusiness = new EstateBackupBusiness();
             this.logBusiness = new MongoLogBusiness();
+            this.archiveBusiness = new EstateArchiveBusiness();
         }
         #endregion //Constructor
 
@@ -98,7 +104,7 @@ namespace Rhea.Business.Estate
                 buildingGroup.Log._id = log["id"].AsObjectId;
                 buildingGroup.Log.UserName = log["name"].AsString;
                 buildingGroup.Log.Time = log["time"].AsBsonDateTime.ToLocalTime();
-                buildingGroup.Log.Type = log["type"].AsInt32;            
+                buildingGroup.Log.Type = log["type"].AsInt32;
             }
 
             if (buildingGroup.BuildDate != null)
@@ -306,7 +312,7 @@ namespace Rhea.Business.Estate
                 .Set("manageType", data.ManageType ?? "")
                 .Set("sort", data.Sort)
                 .Set("useType", data.UseType)
-                .Set("remark", data.Remark ?? "");              
+                .Set("remark", data.Remark ?? "");
 
             WriteConcernResult result = this.context.Update(EstateCollection.BuildingGroup, query, update);
 
@@ -325,7 +331,7 @@ namespace Rhea.Business.Estate
         public bool Delete(int id)
         {
             var query = Query.EQ("id", id);
-            var update = Update.Set("status", 1);           
+            var update = Update.Set("status", 1);
 
             WriteConcernResult result = this.context.Update(EstateCollection.BuildingGroup, query, update);
 
@@ -428,6 +434,38 @@ namespace Rhea.Business.Estate
                 return Math.Round(doc["area"].AsDouble, 2);
             else
                 return 0;
+        }
+
+        /// <summary>
+        /// 归档楼群
+        /// </summary>
+        /// <param name="log">相关日志</param>
+        /// <returns></returns>
+        public bool Archive(Log log)
+        {
+            log = this.logBusiness.Insert(log);
+            if (log == null)
+                return false;
+
+            var docs = this.context.FindAll(EstateCollection.BuildingGroup);
+            List<BsonDocument> newDocs = new List<BsonDocument>();
+
+            foreach (BsonDocument doc in docs)
+            {
+                doc.Remove("_id");
+                doc.Remove("log");
+                doc.Add("log", new BsonDocument
+                {
+                    { "id", log._id },
+                    { "name", log.UserName },
+                    { "time", log.RelateTime },
+                    { "type", log.Type }
+                });
+                newDocs.Add(doc);
+            }
+
+            bool result = this.archiveBusiness.Archive(EstateCollection.BuildingGroupBackup, newDocs);
+            return result;
         }
 
         /// <summary>

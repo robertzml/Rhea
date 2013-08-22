@@ -13,7 +13,10 @@ using Rhea.UI.Filters;
 
 namespace Rhea.UI.Areas.Admin.Controllers
 {
-    [EnhancedAuthorize]
+    /// <summary>
+    /// 后台管理 - 楼群管理
+    /// </summary>
+    [EnhancedAuthorize(Rank = 600)]
     public class BuildingGroupController : Controller
     {
         #region Field
@@ -53,7 +56,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult List()
         {
-            List<BuildingGroup> data = this.buildingGroupBusiness.GetList().OrderBy(r => r.Id).ToList();
+            var data = this.buildingGroupBusiness.GetList().OrderBy(r => r.Id);
             return View(data);
         }
 

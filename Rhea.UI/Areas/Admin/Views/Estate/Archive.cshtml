@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Rhea.Model.Log>
+﻿@model Rhea.UI.Areas.Admin.Models.ArchiveModel
 @{
     ViewBag.Title = "归档数据";
     Layout = "~/Areas/Admin/Views/Shared/_Layout_Estate.cshtml";
@@ -13,75 +13,54 @@
     <div class="box-content">
         <div class="row-fluid">
             <div class="span12">
-            @using (Html.BeginForm(new { action = "Archive", controller = "Room", area = "Admin" }))
+            @using (Html.BeginForm("Archive", "Estate", new { area = "Admin" }, FormMethod.Post, new { @class = "form-horizontal" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
 
                 <fieldset>
-                    <legend>归档房间</legend>
+                    <legend>信息输入</legend>
 
-                    <label>选择日期</label>
-                    <input type="text" name="archiveDate" id="archiveDate" />
+                    <div class="control-group">
+                        <label class="control-label" for="ArchiveType">选择数据</label>
+                        <div class="controls">
+                            <select name="ArchiveType" id="ArchiveType">
+                                <option value="1">校区</option>
+                                <option value="2">楼群</option>
+                                <option value="3">楼宇</option>
+                                <option value="4">房间</option>
+                            </select>                            
+                        </div>
+                    </div>
 
-                    <p>
-                        <button type="submit" class="btn btn-primary">保存</button>
-                    </p>
+                    <div class="control-group">
+                        <label class="control-label" for="ArchiveDate">选择日期</label>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.ArchiveDate)
+                            @Html.ValidationMessageFor(model => model.ArchiveDate)
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="ArchiveContent">备注内容</label>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.ArchiveContent)
+                            @Html.ValidationMessageFor(model => model.ArchiveContent)
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="controls">
+                            <button type="submit" class="btn btn-primary">保存</button>
+                        </div>
+                    </div>
                 </fieldset>
             }
             </div>
         </div>
-
-        <div class="row-fluid">
-            <div class="span12">
-                <p>归档历史</p>
-                <table id="log-list" class="table table-striped table-bordered bootstrap-datatable datatable">
-            <thead>
-                <tr>
-                    <th>
-                        标题
-                    </th>
-                    <th>
-                        内容
-                    </th>
-                    <th>
-                        时间
-                    </th>
-                    <th>
-                        操作用户
-                    </th>
-                    <th>
-                        日志类型
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @item.Title
-                    </td>
-                    <td>
-                        @item.Content
-                    </td>
-                    <td>
-                        @item.Time
-                    </td>
-                    <td>
-                        @item.UserName
-                    </td>
-                    <td>
-                        @item.Type
-                    </td>
-                </tr>
-            }
-            </tbody>
-        </table>
-            </div>
-        </div>
     </div>
 </div>
+
 
 
 <script type="text/javascript">
@@ -89,6 +68,6 @@
         var menu = $('a#archive-task');
         menuNavActive(menu);
 
-        $('#archiveDate').datepicker({ format: 'yyyy-mm-dd' });
+        $('#ArchiveDate').datepicker({ format: 'yyyy-mm-dd' });
     });
 </script>

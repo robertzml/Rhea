@@ -78,6 +78,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// 用户组添加
         /// </summary>
         /// <returns></returns>
+        [EnhancedAuthorize(Roles="Root")]
         public ActionResult Create()
         {
             return View();
@@ -88,6 +89,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
+        [EnhancedAuthorize(Roles = "Root")]
         [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult Create(UserGroup model)

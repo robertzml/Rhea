@@ -31,6 +31,11 @@ namespace Rhea.Business.Estate
         /// 日志接口
         /// </summary>
         private ILogBusiness logBusiness;
+
+        /// <summary>
+        /// 归档接口
+        /// </summary>
+        private IArchiveBusiness archiveBusiness;
         #endregion //Field
 
         #region Constructor
@@ -42,6 +47,7 @@ namespace Rhea.Business.Estate
             this.context = new RheaMongoContext(RheaServer.EstateDatabase);
             this.backupBusiness = new EstateBackupBusiness();
             this.logBusiness = new MongoLogBusiness();
+            this.archiveBusiness = new EstateArchiveBusiness();
         }
         #endregion //Constructor
 
@@ -101,7 +107,7 @@ namespace Rhea.Business.Estate
                 building.Log._id = log["id"].AsObjectId;
                 building.Log.UserName = log["name"].AsString;
                 building.Log.Time = log["time"].AsBsonDateTime.ToLocalTime();
-                building.Log.Type = log["type"].AsInt32;             
+                building.Log.Type = log["type"].AsInt32;
             }
 
             return building;
@@ -587,6 +593,38 @@ namespace Rhea.Business.Estate
                 return false;
             else
                 return true;
+        }
+
+        /// <summary>
+        /// 归档楼宇
+        /// </summary>
+        /// <param name="log">相关日志</param>
+        /// <returns></returns>
+        public bool Archive(Log log)
+        {
+            log = this.logBusiness.Insert(log);
+            if (log == null)
+                return false;
+
+            var docs = this.context.FindAll(EstateCollection.Building);
+            List<BsonDocument> newDocs = new List<BsonDocument>();
+
+            foreach (BsonDocument doc in docs)
+            {
+                doc.Remove("_id");
+                doc.Remove("log");
+                doc.Add("log", new BsonDocument
+                {
+                    { "id", log._id },
+                    { "name", log.UserName },
+                    { "time", log.RelateTime },
+                    { "type", log.Type }
+                });
+                newDocs.Add(doc);
+            }
+
+            bool result = this.archiveBusiness.Archive(EstateCollection.BuildingBackup, newDocs);
+            return result;
         }
 
         /// <summary>

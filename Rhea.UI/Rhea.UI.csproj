@@ -179,6 +179,7 @@
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoomController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserGroupController.cs" />
+    <Compile Include="Areas\Admin\Models\EstateModels.cs" />
     <Compile Include="Areas\Admin\Models\RoomModels.cs" />
     <Compile Include="Areas\Estate\Controllers\BuildingController.cs" />
     <Compile Include="Areas\Estate\Controllers\BuildingGroupController.cs" />
@@ -1710,6 +1711,7 @@
     <Content Include="Areas\Admin\Views\Estate\Export.cshtml" />
     <Content Include="Areas\Admin\Views\Estate\Archive.cshtml" />
     <Content Include="Areas\Admin\Views\Estate\LogList.cshtml" />
+    <Content Include="Areas\Admin\Views\Estate\ArchiveList.cshtml" />
     <None Include="Content\fonts\icomoon.eot" />
     <None Include="Content\fonts\icomoon.ttf" />
     <None Include="Content\fonts\icomoon.woff" />

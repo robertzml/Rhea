@@ -7,7 +7,10 @@ using Rhea.UI.Filters;
 
 namespace Rhea.UI.Areas.Admin.Controllers
 {
-    [EnhancedAuthorize(Rank = 510)]
+    /// <summary>
+    /// 后台管理控制器
+    /// </summary>
+    [EnhancedAuthorize(Rank = 600)]
     public class HomeController : Controller
     {
         #region Action

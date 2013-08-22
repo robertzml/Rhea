@@ -110,6 +110,31 @@ namespace Rhea.Business
 
             return data;
         }
+
+        /// <summary>
+        /// 显示所有日志
+        /// </summary>
+        /// <param name="type">日志类型</param>
+        /// <returns></returns>
+        public List<Log> GetList(int[] type)
+        {
+            List<Log> data = new List<Log>();
+
+            BsonArray array = new BsonArray();
+            array.AddRange(type);
+
+            var query = Query.In("type", array);
+            //var query = Query.EQ("type", type);
+            var docs = this.context.Find(RheaCollection.Log, query).SetSortOrder(SortBy.Ascending("time"));
+
+            foreach (BsonDocument doc in docs)
+            {
+                Log log = ModelBind(doc);
+                data.Add(log);
+            }
+
+            return data;
+        }
         #endregion //Method
     }
 }

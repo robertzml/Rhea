@@ -102,5 +102,12 @@ namespace Rhea.Business.Estate
         /// <param name="log">日志对象</param>
         /// <returns></returns>
         bool Log(int id, Log log);
+
+        /// <summary>
+        /// 归档楼群
+        /// </summary>
+        /// <param name="log">相关日志</param>
+        /// <returns></returns>
+        bool Archive(Log log);
     }
 }
