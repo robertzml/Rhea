@@ -1,7 +1,13 @@
 /* The css file for the admin area */
 
+@media (min-width: 1200px) {
+  .container {
+    max-width: none;
+  }
+}
+  
 body {
-	padding-top: 50px;
+	padding-top: 60px;
 	padding-bottom: 20px;
 }
 

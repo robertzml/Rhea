@@ -207,6 +207,7 @@
     <Compile Include="Services\IFormsAuthenticationService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\admin.css" />
     <Content Include="Content\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -352,6 +353,13 @@
     <Content Include="Images\search.png" />
     <Content Include="Images\spinner.png" />
     <Content Include="Images\ui.totop.png" />
+    <Content Include="Plugins\bootstrap3\css\bootstrap-theme.css" />
+    <Content Include="Plugins\bootstrap3\css\bootstrap-theme.min.css" />
+    <Content Include="Plugins\bootstrap3\css\bootstrap.css" />
+    <Content Include="Plugins\bootstrap3\css\bootstrap.min.css" />
+    <Content Include="Plugins\bootstrap3\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Plugins\bootstrap3\js\bootstrap.js" />
+    <Content Include="Plugins\bootstrap3\js\bootstrap.min.js" />
     <Content Include="Plugins\charts\highcharts\highcharts-more.js" />
     <Content Include="Plugins\charts\highcharts\highcharts.js" />
     <Content Include="Plugins\charts\highcharts\modules\annotations.js" />
@@ -1341,6 +1349,8 @@
     <Content Include="Scripts\jquery-1.8.3-vsdoc.js" />
     <Content Include="Scripts\jquery-1.8.3.js" />
     <Content Include="Scripts\jquery-1.8.3.min.js" />
+    <Content Include="Scripts\jquery-2.0.3.js" />
+    <Content Include="Scripts\jquery-2.0.3.min.js" />
     <Content Include="Scripts\jquery-ui-1.10.3.all.js" />
     <Content Include="Scripts\jquery-ui-1.10.3.all.min.js" />
     <Content Include="Scripts\jquery-ui-1.10.3.js" />
@@ -1716,6 +1726,9 @@
     <None Include="Content\fonts\icomoon.eot" />
     <None Include="Content\fonts\icomoon.ttf" />
     <None Include="Content\fonts\icomoon.woff" />
+    <None Include="Plugins\bootstrap3\fonts\glyphicons-halflings-regular.eot" />
+    <None Include="Plugins\bootstrap3\fonts\glyphicons-halflings-regular.ttf" />
+    <None Include="Plugins\bootstrap3\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Plugins\misc\search\tipuesearch_content.json" />
     <Content Include="Views\Common\Heading.cshtml" />
     <Content Include="Views\Common\SearchInline.cshtml" />
