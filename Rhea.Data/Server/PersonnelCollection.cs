@@ -22,6 +22,12 @@ namespace Rhea.Data.Server
         /// dictionary
         /// </summary>
         public static readonly string Dictionary = "dictionary";
+
+        /// <summary>
+        /// 部门备份表
+        /// departmentBackup
+        /// </summary>
+        public static readonly string DepartmentBackup = "departmentBackup";
         #endregion //Field
     }
 }

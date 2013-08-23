@@ -39,7 +39,6 @@ namespace Rhea.Business
 
             return log;
         }
-
         #endregion //Function
 
         #region Method

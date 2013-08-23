@@ -1712,6 +1712,7 @@
     <Content Include="Areas\Admin\Views\Estate\Archive.cshtml" />
     <Content Include="Areas\Admin\Views\Estate\LogList.cshtml" />
     <Content Include="Areas\Admin\Views\Estate\ArchiveList.cshtml" />
+    <Content Include="Areas\Admin\Views\Department\Archive.cshtml" />
     <None Include="Content\fonts\icomoon.eot" />
     <None Include="Content\fonts\icomoon.ttf" />
     <None Include="Content\fonts\icomoon.woff" />

@@ -1,8 +1,10 @@
 ﻿@model Rhea.UI.Areas.Admin.Models.ArchiveModel
+
 @{
-    ViewBag.Title = "归档数据";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout_Estate.cshtml";
+    ViewBag.Title = "归档部门";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Department.cshtml";
 }
+
 
 <div class="box">
     <div class="box-header well" data-original-title>
@@ -13,25 +15,13 @@
     <div class="box-content">
         <div class="row-fluid">
             <div class="span12">
-            @using (Html.BeginForm("Archive", "Estate", new { area = "Admin" }, FormMethod.Post, new { @class = "form-horizontal" }))
+            @using (Html.BeginForm("Archive", "Department", new { area = "Admin" }, FormMethod.Post, new { @class = "form-horizontal" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
 
                 <fieldset>
-                    <legend>信息输入</legend>
-
-                    <div class="control-group">
-                        <label class="control-label" for="ArchiveType">选择数据</label>
-                        <div class="controls">
-                            <select name="ArchiveType" id="ArchiveType">
-                                <option value="1">校区</option>
-                                <option value="2">楼群</option>
-                                <option value="3">楼宇</option>
-                                <option value="4">房间</option>
-                            </select>
-                        </div>
-                    </div>
+                    <legend>信息输入</legend>                  
 
                     <div class="control-group">
                         <label class="control-label" for="ArchiveDate">选择日期</label>

@@ -31,11 +31,6 @@ namespace Rhea.Business.Estate
         /// 日志接口
         /// </summary>
         private ILogBusiness logBusiness;
-
-        /// <summary>
-        /// 归档接口
-        /// </summary>
-        private IArchiveBusiness archiveBusiness;
         #endregion //Field
 
         #region Constructor
@@ -47,7 +42,6 @@ namespace Rhea.Business.Estate
             this.context = new RheaMongoContext(RheaServer.EstateDatabase);
             this.backupBusiness = new EstateBackupBusiness();
             this.logBusiness = new MongoLogBusiness();
-            this.archiveBusiness = new EstateArchiveBusiness();
         }
         #endregion //Constructor
 
@@ -215,7 +209,7 @@ namespace Rhea.Business.Estate
                 newDocs.Add(doc);
             }
 
-            bool result = this.archiveBusiness.Archive(EstateCollection.CampusBackup, newDocs);
+            bool result = this.backupBusiness.Archive(EstateCollection.CampusBackup, newDocs);
             return result;
         }
         #endregion //Method

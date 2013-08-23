@@ -80,6 +80,22 @@ namespace Rhea.Business.Estate
             var data = this.context.Find(collectionName, query).SetSortOrder(SortBy.Descending("log.time"));
             return data.ToList();
         }
+
+        /// <summary>
+        /// 归档数据
+        /// </summary>
+        /// <param name="collectionName">collection名称</param>
+        /// <param name="docs">数据</param>
+        /// <returns></returns>
+        public bool Archive(string collectionName, IEnumerable<BsonDocument> docs)
+        {
+            IEnumerable<WriteConcernResult> result = this.context.InsertBatch(collectionName, docs);
+
+            if (result.All(r => r.Ok == true))
+                return true;
+            else
+                return false;
+        }
         #endregion //Method
     }
 }

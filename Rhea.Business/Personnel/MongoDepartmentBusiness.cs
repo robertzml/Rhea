@@ -7,6 +7,7 @@ using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using Rhea.Data.Personnel;
 using Rhea.Data.Server;
+using Rhea.Model;
 using Rhea.Model.Personnel;
 
 namespace Rhea.Business.Personnel
@@ -20,8 +21,30 @@ namespace Rhea.Business.Personnel
         /// <summary>
         /// 数据库连接
         /// </summary>
-        private RheaMongoContext context = new RheaMongoContext(RheaServer.PersonnelDatabase);
+        private RheaMongoContext context;
+
+        /// <summary>
+        /// 备份接口
+        /// </summary>
+        private IBackupBusiness backupBusiness;
+
+        /// <summary>
+        /// 日志接口
+        /// </summary>
+        private ILogBusiness logBusiness;
         #endregion //Field
+
+        #region Constructor
+        /// <summary>
+        /// 部门业务类
+        /// </summary>
+        public MongoDepartmentBusiness()
+        {
+            this.context = new RheaMongoContext(RheaServer.PersonnelDatabase);
+            this.backupBusiness = new PersonnelBackupBusiness();
+            this.logBusiness = new MongoLogBusiness();
+        }
+        #endregion //Constructor
 
         #region Function
         /// <summary>
@@ -246,10 +269,10 @@ namespace Rhea.Business.Personnel
 
             WriteConcernResult result = this.context.Insert(PersonnelCollection.Department, doc);
 
-            if (result.HasLastErrorMessage)
-                return 0;
-            else
+            if (result.Ok)
                 return data.Id;
+            else
+                return 0;
         }
 
         /// <summary>
@@ -269,10 +292,10 @@ namespace Rhea.Business.Personnel
 
             WriteConcernResult result = this.context.Update(PersonnelCollection.Department, query, update);
 
-            if (result.HasLastErrorMessage)
-                return false;
-            else
+            if (result.Ok)
                 return true;
+            else
+                return false;
         }
 
         /// <summary>
@@ -287,10 +310,10 @@ namespace Rhea.Business.Personnel
 
             WriteConcernResult result = this.context.Update(PersonnelCollection.Department, query, update);
 
-            if (result.HasLastErrorMessage)
-                return false;
-            else
+            if (result.Ok)
                 return true;
+            else
+                return false;
         }
 
         /// <summary>
@@ -334,10 +357,10 @@ namespace Rhea.Business.Personnel
 
             WriteConcernResult result = this.context.Update(PersonnelCollection.Department, query, update);
 
-            if (result.HasLastErrorMessage)
-                return false;
-            else
+            if (result.Ok)
                 return true;
+            else
+                return false;
         }
 
         /// <summary>
@@ -357,10 +380,10 @@ namespace Rhea.Business.Personnel
 
             WriteConcernResult result = this.context.Update(PersonnelCollection.Department, query, update);
 
-            if (result.HasLastErrorMessage)
-                return false;
-            else
+            if (result.Ok)
                 return true;
+            else
+                return false;
         }
 
         /// <summary>
@@ -381,10 +404,68 @@ namespace Rhea.Business.Personnel
 
             WriteConcernResult result = this.context.Update(PersonnelCollection.Department, query, update);
 
-            if (result.HasLastErrorMessage)
-                return false;
-            else
+            if (result.Ok)
                 return true;
+            else
+                return false;
+        }
+
+        /// <summary>
+        /// 记录日志
+        /// </summary>
+        /// <param name="id">部门ID</param>
+        /// <param name="log">日志对象</param>
+        /// <returns></returns>
+        public bool Log(int id, Log log)
+        {
+            log = this.logBusiness.Insert(log);
+            if (log == null)
+                return false;
+
+            var query = Query.EQ("id", id);
+            var update = Update.Set("log.id", log._id)
+                .Set("log.name", log.UserName)
+                .Set("log.time", log.Time)
+                .Set("log.type", log.Type);
+
+            WriteConcernResult result = this.context.Update(PersonnelCollection.Department, query, update);
+
+            if (result.Ok)
+                return true;
+            else
+                return false;
+        }
+
+        /// <summary>
+        /// 归档部门
+        /// </summary>
+        /// <param name="log">相关日志</param>
+        /// <returns></returns>
+        public bool Archive(Log log)
+        {
+            log = this.logBusiness.Insert(log);
+            if (log == null)
+                return false;
+
+            var docs = this.context.FindAll(PersonnelCollection.Department);
+            List<BsonDocument> newDocs = new List<BsonDocument>();
+
+            foreach (BsonDocument doc in docs)
+            {
+                doc.Remove("_id");
+                doc.Remove("log");
+                doc.Add("log", new BsonDocument
+                {
+                    { "id", log._id },
+                    { "name", log.UserName },
+                    { "time", log.RelateTime },
+                    { "type", log.Type }
+                });
+                newDocs.Add(doc);
+            }
+
+            bool result = this.backupBusiness.Archive(PersonnelCollection.DepartmentBackup, newDocs);
+            return result;
         }
         #endregion //Method
     }

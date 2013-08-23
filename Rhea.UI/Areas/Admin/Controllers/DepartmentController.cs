@@ -4,9 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Rhea.Business.Account;
 using Rhea.Business.Personnel;
 using Rhea.Data.Personnel;
+using Rhea.Model;
+using Rhea.Model.Account;
 using Rhea.Model.Personnel;
+using Rhea.UI.Areas.Admin.Models;
 using Rhea.UI.Filters;
 
 namespace Rhea.UI.Areas.Admin.Controllers
@@ -30,6 +34,17 @@ namespace Rhea.UI.Areas.Admin.Controllers
             }
 
             base.Initialize(requestContext);
+        }
+
+        /// <summary>
+        /// 获取当前用户
+        /// </summary>
+        /// <returns></returns>
+        private UserProfile GetUser()
+        {
+            IAccountBusiness accountBusiness = new MongoAccountBusiness();
+            UserProfile user = accountBusiness.GetByUserName(User.Identity.Name);
+            return user;
         }
         #endregion //Function
 
@@ -200,6 +215,54 @@ namespace Rhea.UI.Areas.Admin.Controllers
             }
             else
                 return View("Delete", id);
+        }
+
+        /// <summary>
+        /// 部门归档
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Archive()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 归档任务
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Archive(ArchiveModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = GetUser();
+                Log log = new Log
+                {
+                    Title = "归档部门",
+                    Content = model.ArchiveContent,
+                    Time = DateTime.Now,
+                    UserId = user._id,
+                    UserName = user.Name,
+                    RelateTime = model.ArchiveDate,
+                    Type = 24
+                };
+
+                bool result = this.departmentBusiness.Archive(log);
+
+                if (!result)
+                {
+                    ModelState.AddModelError("", "归档失败");
+                }
+                else
+                {
+                    TempData["Message"] = "归档成功";
+                    return RedirectToAction("ArchiveList");
+                }
+            }
+
+            return View(model);
         }
         #endregion //Action
     }

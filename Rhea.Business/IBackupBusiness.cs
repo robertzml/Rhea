@@ -43,5 +43,13 @@ namespace Rhea.Business
         /// <param name="type">信息编辑类型</param>
         /// <returns></returns>
         List<BsonDocument> FindBackup(string collectionName, BsonValue id, int type);
+
+        /// <summary>
+        /// 归档数据
+        /// </summary>
+        /// <param name="collectionName">collection名称</param>
+        /// <param name="docs">数据</param>
+        /// <returns></returns>
+        bool Archive(string collectionName, IEnumerable<BsonDocument> docs);
     }
 }

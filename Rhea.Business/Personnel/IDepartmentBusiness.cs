@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Rhea.Data.Personnel;
+using Rhea.Model;
 using Rhea.Model.Personnel;
 
 namespace Rhea.Business.Personnel
@@ -81,5 +82,20 @@ namespace Rhea.Business.Personnel
         /// <param name="data">部门数据</param>
         /// <returns></returns>
         bool EditSpecialArea(Department data);
+
+        /// <summary>
+        /// 记录日志
+        /// </summary>
+        /// <param name="id">部门ID</param>
+        /// <param name="log">日志对象</param>
+        /// <returns></returns>
+        bool Log(int id, Log log);
+
+        /// <summary>
+        /// 归档部门
+        /// </summary>
+        /// <param name="log">相关日志</param>
+        /// <returns></returns>
+        bool Archive(Log log);
     }
 }
