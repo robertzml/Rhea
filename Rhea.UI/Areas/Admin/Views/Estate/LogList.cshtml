@@ -16,9 +16,6 @@
             <thead>
                 <tr>
                     <th>
-                        ID
-                    </th>
-                    <th>
                         标题
                     </th>
                     <th>
@@ -39,9 +36,6 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>
-                        @item._id.ToString()
-                    </td>
                     <td>
                         @item.Title
                     </td>
@@ -66,6 +60,8 @@
 
 <script type="text/javascript">
     $(function () {
+        var dom = $('table#log-list');
+        initDataTable(dom);
 
         var menu = $('a#log-list');
         menuNavActive(menu);

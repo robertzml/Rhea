@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Rhea.Business;
 using Rhea.Business.Account;
 using Rhea.Business.Personnel;
 using Rhea.Data.Personnel;
@@ -263,6 +264,17 @@ namespace Rhea.UI.Areas.Admin.Controllers
             }
 
             return View(model);
+        }
+
+        /// <summary>
+        /// 归档列表
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ArchiveList()
+        {
+            ILogBusiness logBusiness = new MongoLogBusiness();
+            var data = logBusiness.GetList(24);
+            return View(data);
         }
         #endregion //Action
     }

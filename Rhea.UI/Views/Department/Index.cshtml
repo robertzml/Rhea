@@ -155,26 +155,22 @@
                 </div>
 
                 <div class="secbar-widget">
-                    <h4 class="title">基本数据</h4>
+                    <h4 class="title">历史数据</h4>
                     <div class="content sparkStats">
                         <ul class="unstyled">
                             <li><span class="sparkLine1 "></span> 总人数: <span class="number">509</span></li>
                             <li>
                                 <span class="sparkLine2"></span>
-                                教授: 
+                                面积: 
                                 <span class="number">389</span>
                             </li>
                             <li><span class="sparkLine3"></span> 
-                                副教授: 
+                                房间: 
                                 <span class="number">731</span>
                             </li>
                             <li><span class="sparkLine4"></span>
                                 人均: 
                                 <span class="number">1.44</span>
-                            </li>
-                            <li><span class="sparkLine5"></span>
-                                时间: 
-                                <span class="number">00:01:21</span>
                             </li>
                         </ul>
                     </div><!-- End .sparkStats -->
@@ -256,7 +252,7 @@
         }
 
         //sparklines (making loop with random data for all 7 sparkline)
-        for (var i = 1; i < 6; i++) {
+        for (var i = 1; i < 5; i++) {
             var data = [[1, 3 + randNum()], [2, 5 + randNum()], [3, 8 + randNum()], [4, 11 + randNum()], [5, 14 + randNum()], [6, 17 + randNum()], [7, 20 + randNum()], [8, 15 + randNum()], [9, 18 + randNum()], [10, 22 + randNum()]];
             placeholder = '.sparkLine' + i;
             $(placeholder).sparkline(data, {
