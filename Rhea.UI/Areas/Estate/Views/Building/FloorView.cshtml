@@ -46,15 +46,9 @@
 
         loadSvg('@Model.SvgPath');
 
-        /*$("#svgwrapper").niceScroll({
-            cursoropacitymax: 0.7,
-            cursorborderradius: 6,
-            cursorwidth: "7px"
-        });*/
         setBoxAction();
 
-        function loadSvg(svgFile) {
-            //var svgFile = '/Attachment/svg/300173.svg';
+        function loadSvg(svgFile) {          
 
             if (svgFile != '') {
                 $('div#svg').load(svgFile, function (response, status, xhr) {

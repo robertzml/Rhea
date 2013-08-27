@@ -17,13 +17,14 @@ namespace Rhea.UI.Controllers
     [EnhancedAuthorize]
     public class HomeController : Controller
     {
+        #region Action
         /// <summary>
         /// 主页地图
         /// </summary>
         /// <returns></returns>
         public ActionResult Index()
         {
-            return View();
+            return View("Map");
         }
 
         /// <summary>
@@ -36,7 +37,7 @@ namespace Rhea.UI.Controllers
         }
 
         /// <summary>
-        /// 地图
+        /// 地图导航
         /// </summary>
         /// <returns></returns>
         public ActionResult Map()
@@ -95,5 +96,41 @@ namespace Rhea.UI.Controllers
 
             return View();
         }
+        #endregion //Action
+
+        #region Json
+        public JsonResult MapPointsData()
+        {
+            List<MapPointModel> data = new List<MapPointModel>();
+
+            MapPointModel p1 = new MapPointModel
+            {
+                Id = "100023",
+                Name = "物联网学院楼",
+                Content = "物联网学院楼，共四个分区。",
+                PointX = 241,
+                PointY = 175,
+                Zoom = 3,
+                Pin = "pin-green",
+                Symbol = "symbol-airport"
+            };
+            data.Add(p1);
+
+            MapPointModel p2 = new MapPointModel
+            {
+                Id = "100006",
+                Name = "纺服楼",
+                Content = "纺织与服装工程学院。",
+                PointX = 249,
+                PointY = 148,
+                Zoom = 3,
+                Pin = "pin-blue",
+                Symbol = "symbol-airport"
+            };
+            data.Add(p2);
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        #endregion //Json
     }
 }

@@ -20,7 +20,7 @@
                 @Html.ValidationSummary(true)
                 <fieldset>
                     <legend>@ViewBag.Title</legend>
-                 
+
                     @Html.HiddenFor(model => model.Id)
 
                     <table class="table table-bordered table-striped">
@@ -70,7 +70,7 @@
                                     @Html.ValidationMessageFor(model => model.UserGroupId)
                                 </td>
                             </tr>
-                            @if (Model.UserGroupId == 100004)
+                            @if (Model.UserGroupId == 100005)
                             {
                             <tr>
                                 <td>
@@ -87,7 +87,7 @@
 
                     <div class="form-actions">
                         <button type="submit" class="btn btn-primary">保存</button>
-                        <a class="btn" href="@Url.Action("Details", new { controller = "Account", id = Model.Id, area = "Admin" })">取消</a> 
+                        <a class="btn" href="@Url.Action("Details", new { controller = "Account", id = Model.Id, area = "Admin" })">取消</a>
                         <a class="btn" href="@Url.Action("List", new { controller = "Account", area = "Admin" })">回到列表</a>
                     </div>
                 </fieldset>
