@@ -1663,9 +1663,6 @@
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\UserGroupDropDownList.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\ManagerGroupDropDownList.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Areas\Admin\Views\Account\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -1715,6 +1712,7 @@
     <Content Include="Areas\Admin\Views\Estate\ArchiveList.cshtml" />
     <Content Include="Areas\Admin\Views\Department\Archive.cshtml" />
     <Content Include="Areas\Admin\Views\Department\ArchiveList.cshtml" />
+    <Content Include="Areas\Admin\Views\Estate\FunctionCode.cshtml" />
     <None Include="Content\fonts\icomoon.eot" />
     <None Include="Content\fonts\icomoon.ttf" />
     <None Include="Content\fonts\icomoon.woff" />

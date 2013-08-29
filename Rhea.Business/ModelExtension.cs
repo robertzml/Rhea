@@ -56,7 +56,7 @@ namespace Rhea.Business
         /// <returns></returns>
         public static string SubjectTypeName(this Department department)
         {
-            IDictionaryBusiness dictionaryBusiness = new PersonnelDictionaryBusiness();
+            PersonnelDictionaryBusiness dictionaryBusiness = new PersonnelDictionaryBusiness();
             string name = dictionaryBusiness.GetItemValue("SubjectType", department.SubjectType);
             return name;
         }

@@ -8,8 +8,10 @@ using Rhea.Business.Account;
 using Rhea.Business.Estate;
 using Rhea.Model;
 using Rhea.Model.Account;
+using Rhea.Model.Estate;
 using Rhea.UI.Areas.Admin.Models;
 using Rhea.UI.Filters;
+using System.Text.RegularExpressions;
 
 namespace Rhea.UI.Areas.Admin.Controllers
 {
@@ -36,6 +38,81 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
+            return View();
+        }
+
+        /// <summary>
+        /// 房间功能
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult FunctionCode()
+        {
+            EstateDictionaryBusiness dictionaryBusiness = new EstateDictionaryBusiness();
+            var codes = dictionaryBusiness.GetRoomFunctionCode();
+
+            string data = "";
+            foreach (var item in codes)
+            {
+                data += item.FirstCode + "|" + item.SecondCode + "|" + item.ClassifyName + "|" + item.FunctionProperty
+                    + "|" + item.Remark + "\r\n";
+            }
+            ViewBag.Codes = data;
+
+            return View();
+        }
+
+        /// <summary>
+        /// 房间功能
+        /// </summary>
+        /// <param name="functionCodeText">功能内容</param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult FunctionCode(string functionCodeText)
+        {
+            try
+            {
+                string[] codes = Regex.Split(functionCodeText, "\r\n");
+
+                List<RoomFunctionCode> functionCodes = new List<RoomFunctionCode>();
+                foreach (string code in codes)
+                {
+                    if (code.Trim().Length == 0)
+                        continue;
+
+                    string[] items = code.Split('|');
+                    RoomFunctionCode fc = new RoomFunctionCode
+                    {
+                        CodeId = items[0] + "." + items[1],
+                        FirstCode = Convert.ToInt32(items[0]),
+                        SecondCode = Convert.ToInt32(items[1]),
+                        ClassifyName = items[2],
+                        FunctionProperty = items[3],
+                        Remark = items[4]
+                    };
+
+                    functionCodes.Add(fc);
+                }
+
+                EstateDictionaryBusiness dictionaryBusiness = new EstateDictionaryBusiness();
+                bool result = dictionaryBusiness.EditRoomFunctionCode(functionCodes);
+                if (result)
+                {
+                    TempData["Message"] = "编辑房间功能属性成功。";
+                    RedirectToAction("FunctionCode");
+                }
+                else
+                {
+                    TempData["Message"] = "编辑房间功能属性失败。";
+                    RedirectToAction("FunctionCode");
+                }
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "输入格式有误。");
+                return View();
+            }
+
             return View();
         }
 

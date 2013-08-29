@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using MongoDB.Driver.Builders;
 using Rhea.Data.Server;
 using Rhea.Model.Estate;
 
@@ -12,79 +13,82 @@ namespace Rhea.Business.Estate
     /// <summary>
     /// 房产字典
     /// </summary>
-    public class EstateDictionaryBusiness : IDictionaryBusiness
+    public class EstateDictionaryBusiness : DictionaryBusiness
     {
-        #region Field
-        /// <summary>
-        /// 数据库连接
-        /// </summary>
-        private RheaMongoContext context = new RheaMongoContext(RheaServer.EstateDatabase);
+        #region Field        
         #endregion //Field
+
+        #region Constructor
+        /// <summary>
+        /// 房产字典
+        /// </summary>
+        public EstateDictionaryBusiness()
+            :base(RheaServer.EstateDatabase, EstateCollection.Dictionary)
+        {
+        }
+        #endregion //Constructor
 
         #region Method
         /// <summary>
-        /// 得到字典集
+        /// 得到房间功能列表
         /// </summary>
-        /// <param name="name">字典名称</param>
         /// <returns></returns>
-        public Dictionary<int, string> GetCombineDict(string name)
+        public List<RoomFunctionCode> GetRoomFunctionCode()
         {
-            BsonDocument doc = this.context.FindOne(EstateCollection.Dictionary, "name", name);
+            BsonDocument doc = this.context.FindOne(EstateCollection.Dictionary, "name", "RoomFunctionCode");
 
-            if (doc == null)
-                return null;
+            List<RoomFunctionCode> data = new List<RoomFunctionCode>();
 
             BsonArray array = doc["property"].AsBsonArray;
-            Dictionary<int, string> data = new Dictionary<int, string>();
-
-            foreach (var item in array)
-            {
-                data.Add(item["id"].AsInt32, item["value"].AsString);
-            }
-
-            return data;
-        }
-
-        /// <summary>
-        /// 得到非组合字典集
-        /// </summary>
-        /// <param name="name">字典名称</param>
-        /// <returns></returns>
-        public string[] GetDict(string name)
-        {
-            BsonDocument doc = this.context.FindOne(EstateCollection.Dictionary, "name", name);
-
-            if (doc == null)
-                return null;
-
-            BsonArray array = doc["property"].AsBsonArray;
-            string[] data = new string[array.Count];
-
             for (int i = 0; i < array.Count; i++)
             {
-                data[i] = array[i].AsString;
+                BsonDocument d = array[i].AsBsonDocument;
+                RoomFunctionCode code = new RoomFunctionCode
+                {
+                    CodeId = d["codeId"].AsString,
+                    FirstCode = d["firstCode"].AsInt32,
+                    SecondCode = d["secondCode"].AsInt32,
+                    ClassifyName = d["classifyName"].AsString,
+                    FunctionProperty = d["functionProperty"].AsString,
+                    Remark = d["remark"].AsString
+                };
+                data.Add(code);
             }
 
             return data;
         }
 
         /// <summary>
-        /// 得到字典项值
+        /// 更新房间功能列表
         /// </summary>
-        /// <param name="dictName">字典名称</param>
-        /// <param name="id">字典项ID</param>
+        /// <param name="data">功能属性</param>
         /// <returns></returns>
-        public string GetItemValue(string dictName, int id)
+        public bool EditRoomFunctionCode(List<RoomFunctionCode> data)
         {
-            BsonDocument doc = this.context.FindOne(EstateCollection.Dictionary, "name", dictName);
+            BsonArray array = new BsonArray();
+            foreach (var code in data)
+            {
+                BsonDocument doc = new BsonDocument
+                {
+                    { "codeId", code.CodeId },
+                    { "firstCode", code.FirstCode },
+                    { "secondCode", code.SecondCode },
+                    { "classifyName", code.ClassifyName },
+                    { "functionProperty", code.FunctionProperty },
+                    { "remark", code.Remark }
+                };
+                array.Add(doc);
+            }
 
-            if (doc == null)
-                return null;
+            var query = Query.EQ("name", "RoomFunctionCode");
+            var update = Update.Set("property", array);
 
-            BsonArray array = doc["property"].AsBsonArray;
-            BsonValue item = array.First(r => r["id"].AsInt32 == id);
-            string value = item["value"].AsString;
-            return value;
+            WriteConcernResult result = this.context.Update(EstateCollection.Dictionary, query, update);
+
+            if (result.Ok)
+                return true;
+            else
+                return false;
         }
         #endregion //Method
     }

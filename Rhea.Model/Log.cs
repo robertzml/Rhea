@@ -47,7 +47,7 @@ namespace Rhea.Model
         /// <summary>
         /// 用户名
         /// </summary>
-        [Display(Name = "用户名")]
+        [Display(Name = "编辑人")]
         public string UserName { get; set; }
 
         /// <summary>

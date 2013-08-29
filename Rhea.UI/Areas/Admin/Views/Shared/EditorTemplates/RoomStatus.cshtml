@@ -4,7 +4,7 @@
 <select id="RoomStatus" name="RoomStatus">
     <option value="">-- 请选择 --</option>
     @{
-        IDictionaryBusiness business = new EstateDictionaryBusiness();
+        EstateDictionaryBusiness business = new EstateDictionaryBusiness();
         var dict = business.GetDict("RoomStatus");
         
         foreach(string item in dict)

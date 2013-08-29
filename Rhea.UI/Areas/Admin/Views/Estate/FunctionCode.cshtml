@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "房间功能";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Estate.cshtml";
+}
+
+<div class="box">
+    <div class="box-header well" data-original-title>
+        <h2>
+            <i class="icon-tasks"></i>@ViewBag.Title</h2>
+    </div>
+
+    <div class="box-content">
+        <div class="row-fluid">
+            <div class="span12">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                
+                <fieldset>
+                    <legend>请输入信息</legend>
+                    <p>输入规则为：一级编码|二级编码|一级分类名|二级分类名|备注</p>
+                   
+                    <textarea class="text-box multi-line" style="width:550px;height:400px;" id="functionCodeText" name="functionCodeText">@ViewBag.Codes</textarea>
+
+                    <br />
+
+                    <button type="submit" class="btn btn-primary">保存</button>
+                </fieldset>
+            }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        var menu = $('a#room-function');
+        menuNavActive(menu);
+    });
+</script>

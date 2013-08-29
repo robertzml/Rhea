@@ -15,6 +15,12 @@
                     <li>
                         <a href="@Url.Action("Setting", new { controller = "Account", area = "" })"><span class="icon16 icomoon-icon-cog-2"></span>设置</a>
                     </li>
+                    @if (User.Rank() >= 600)
+                    {
+                    <li>
+                        <a href="@Url.Action("Index", new { controller = "Home", area = "Admin" })"><span class="icon16 icomoon-icon-cog-2"></span>后台</a>
+                    </li>
+                    }
                     <li>
                         <a href="@Url.Action("Logout", new { controller = "Account", area = "" })"><span class="icon16 icomoon-icon-exit"></span>注销</a>
                     </li>

@@ -4,7 +4,7 @@
 <select id="Orientation" name="Orientation">
     <option value="">-- 请选择 --</option>
     @{
-        IDictionaryBusiness business = new EstateDictionaryBusiness();
+        EstateDictionaryBusiness business = new EstateDictionaryBusiness();
         var dict = business.GetDict("Orientation");
         
         foreach(string item in dict)

@@ -232,10 +232,11 @@ namespace Rhea.UI.Areas.Admin.Controllers
 
             //log
             var user = GetUser();
+            string bgName = this.buildingGroupBusiness.GetName(id);
             Log log = new Log
             {
                 Title = "删除楼群",
-                Content = string.Format("删除楼群, ID:{0}.", id),
+                Content = string.Format("删除楼群, ID:{0}, 名称:{1}.", id, bgName),
                 Time = DateTime.Now,
                 UserId = user._id,
                 UserName = user.Name,

@@ -4,7 +4,7 @@
 <select id="SubjectType" name="SubjectType">
     <option value="">-- 请选择 --</option>
     @{
-        IDictionaryBusiness business = new PersonnelDictionaryBusiness();
+        PersonnelDictionaryBusiness business = new PersonnelDictionaryBusiness();
         var dict = business.GetCombineDict("SubjectType");
 
         foreach (var item in dict)

@@ -246,12 +246,7 @@ namespace Rhea.Business
                 DepartmentName = department.Name
             };
 
-            data.FirstClassify = new List<RoomFirstClassifyAreaModel>();
-
-            //data.FirstClassify.Add(GetFirstClassifyArea("departmentId", departmentId, 1, "办公用房", functionCodes, sortByFirstArea));
-            //data.FirstClassify.Add(GetFirstClassifyArea("departmentId", departmentId, 2, "教学用房", functionCodes, sortByFirstArea));
-            //data.FirstClassify.Add(GetFirstClassifyArea("departmentId", departmentId, 3, "实验用房", functionCodes, sortByFirstArea));
-            //data.FirstClassify.Add(GetFirstClassifyArea("departmentId", departmentId, 4, "科研用房", functionCodes, sortByFirstArea));
+            data.FirstClassify = new List<RoomFirstClassifyAreaModel>();        
 
             var fc = functionCodes.GroupBy(r => new { r.FirstCode, r.ClassifyName }).Select(g => new { g.Key.FirstCode, g.Key.ClassifyName });
 
