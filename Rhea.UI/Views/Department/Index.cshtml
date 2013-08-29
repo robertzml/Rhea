@@ -36,7 +36,7 @@
                     {          
                         <div class="circular-item tip" title="办公用房比例">
                             <span class="icon icomoon-icon-license"></span>
-                            <input type="text" value="@Model.OfficeAreaRatio" class="redCircle" />
+                            <input type="text" value="@Model.OfficeAreaRatio" class="orangeCircle" />
                         </div>
                         <div class="circular-item tip" title="实验用房比例">
                             <span class="icon icomoon-icon-target-2"></span>
@@ -51,13 +51,23 @@
                     {
                         <div class="circular-item tip" title="办公用房比例">
                             <span class="icon icomoon-icon-license"></span>
-                            <input type="text" value="@Model.OfficeAreaRatio" class="redCircle" />
+                            <input type="text" value="@Model.OfficeAreaRatio" class="orangeCircle" />
                         </div>
                     }
+                    @if (Model.Overproof > 100)
+                    {
+                        <div class="circular-item tip" title="定额率">
+                            <span class="icon icomoon-icon-target-2"></span>
+                            <input type="text" value="@Convert.ToInt32(Model.Overproof)" class="redCircle" />
+                        </div>
+                    }
+                    else
+                    {
                         <div class="circular-item tip" title="定额率">
                             <span class="icon icomoon-icon-target-2"></span>
                             <input type="text" value="@Model.Overproof" class="greenCircle" />
                         </div>
+                    }
                     </div>
                 </div>
                 </div>
@@ -199,13 +209,13 @@
         $('.tip').tooltip();
 
         //circular progrress bar
-        $(".redCircle").knob({
+        $(".orangeCircle").knob({
             'min': 0,
             'max': 100,
             'readOnly': true,
             'width': 100,
             'height': 100,
-            'fgColor': '#ED7A53',
+            'fgColor': '#F49005',
             'dynamicDraw': true,
             'thickness': 0.2,
             'tickColorizeValues': true
@@ -239,6 +249,17 @@
             'width': 100,
             'height': 100,
             'fgColor': '#9FC569',
+            'dynamicDraw': true,
+            'thickness': 0.2,
+            'tickColorizeValues': true
+        });
+        $(".redCircle").knob({
+            'min': 0,
+            'max': '@Convert.ToInt32(Model.Overproof)',
+            'readOnly': true,
+            'width': 100,
+            'height': 100,
+            'fgColor': '#F60B07',
             'dynamicDraw': true,
             'thickness': 0.2,
             'tickColorizeValues': true

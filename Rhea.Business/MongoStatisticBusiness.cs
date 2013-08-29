@@ -237,8 +237,8 @@ namespace Rhea.Business
             Department department = departmentBusiness.Get(departmentId);
 
             //get codes
-            IRoomBusiness roomBusiness = new MongoRoomBusiness();
-            var functionCodes = roomBusiness.GetFunctionCodeList();
+            EstateDictionaryBusiness dictionaryBusiness = new EstateDictionaryBusiness();
+            var functionCodes = dictionaryBusiness.GetRoomFunctionCode();
 
             DepartmentClassifyAreaModel data = new DepartmentClassifyAreaModel
             {
@@ -276,8 +276,8 @@ namespace Rhea.Business
             Building building = buildingBusiness.Get(buildingId);
 
             //get codes
-            IRoomBusiness roomBusiness = new MongoRoomBusiness();
-            var functionCodes = roomBusiness.GetFunctionCodeList();
+            EstateDictionaryBusiness dictionaryBusiness = new EstateDictionaryBusiness();
+            var functionCodes = dictionaryBusiness.GetRoomFunctionCode();
 
             BuildingClassifyAreaModel data = new BuildingClassifyAreaModel
             {
@@ -361,8 +361,8 @@ namespace Rhea.Business
             model.UsableArea = Convert.ToDouble(buildingGroup.UsableArea);
 
             //get codes
-            IRoomBusiness roomBusiness = new MongoRoomBusiness();
-            var functionCodes = roomBusiness.GetFunctionCodeList();
+            EstateDictionaryBusiness dictionaryBusiness = new EstateDictionaryBusiness();
+            var functionCodes = dictionaryBusiness.GetRoomFunctionCode();
 
             //get classify            
             model.FirstClassify = new List<RoomFirstClassifyAreaModel>();

@@ -90,7 +90,8 @@ namespace Rhea.UI.Areas.Admin.Controllers
             room.HasTestBed = model.HasTestBed;
             room.UsageCharge = model.UsageCharge;
 
-            RoomFunctionCode code = this.roomBusiness.GetFunctionCodeList().First(r => r.CodeId == model.FunctionCodeId);
+            EstateDictionaryBusiness dictionaryBusiness = new EstateDictionaryBusiness(); 
+            RoomFunctionCode code = dictionaryBusiness.GetRoomFunctionCode().First(r => r.CodeId == model.FunctionCodeId);
             room.Function = new Room.RoomFunction
             {
                 FirstCode = code.FirstCode,

@@ -445,8 +445,8 @@ namespace Rhea.UI.Controllers
             var departments = departmentBusiness.GetList().Where(r => r.Type != 1);
 
             //get codes
-            IRoomBusiness roomBusiness = new MongoRoomBusiness();
-            var functionCodes = roomBusiness.GetFunctionCodeList();
+            EstateDictionaryBusiness dictionaryBusiness = new EstateDictionaryBusiness();
+            var functionCodes = dictionaryBusiness.GetRoomFunctionCode();
 
             List<DepartmentAverageAreaModel> data = new List<DepartmentAverageAreaModel>();
 

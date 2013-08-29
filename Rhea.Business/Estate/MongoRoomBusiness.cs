@@ -444,35 +444,6 @@ namespace Rhea.Business.Estate
         }
 
         /// <summary>
-        /// 获取房间属性列表
-        /// </summary>
-        /// <returns></returns>
-        public List<RoomFunctionCode> GetFunctionCodeList()
-        {
-            BsonDocument doc = this.context.FindOne(EstateCollection.Dictionary, "name", "RoomFunctionCode");
-
-            List<RoomFunctionCode> data = new List<RoomFunctionCode>();
-
-            BsonArray array = doc["property"].AsBsonArray;
-            for (int i = 0; i < array.Count; i++)
-            {
-                BsonDocument d = array[i].AsBsonDocument;
-                RoomFunctionCode code = new RoomFunctionCode
-                {
-                    CodeId = d["codeId"].AsString,
-                    FirstCode = d["firstCode"].AsInt32,
-                    SecondCode = d["secondCode"].AsInt32,
-                    ClassifyName = d["classifyName"].AsString,
-                    FunctionProperty = d["functionProperty"].AsString,
-                    Remark = d["remark"].AsString
-                };
-                data.Add(code);
-            }
-
-            return data;
-        }
-
-        /// <summary>
         /// 获取总数
         /// </summary>
         /// <returns></returns>

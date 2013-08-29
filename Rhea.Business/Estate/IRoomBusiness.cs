@@ -88,13 +88,7 @@ namespace Rhea.Business.Estate
         /// </summary>
         /// <param name="id">房间ID</param>  
         /// <returns></returns>
-        bool Delete(int id);
-
-        /// <summary>
-        /// 获取房间属性列表
-        /// </summary>
-        /// <returns></returns>
-        List<RoomFunctionCode> GetFunctionCodeList();
+        bool Delete(int id); 
 
         /// <summary>
         /// 获取总数

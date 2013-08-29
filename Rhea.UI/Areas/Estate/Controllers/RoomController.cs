@@ -145,7 +145,8 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         public ActionResult RoomFunction()
         {
-            var data = this.roomBusiness.GetFunctionCodeList();
+            EstateDictionaryBusiness dictionaryBusiness = new EstateDictionaryBusiness();
+            var data = dictionaryBusiness.GetRoomFunctionCode();
             return View(data);
         }
 
@@ -252,7 +253,8 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         public JsonResult GetSecondClassify(int firstCode)
         {
-            var data = this.roomBusiness.GetFunctionCodeList();
+            EstateDictionaryBusiness dictionaryBusiness = new EstateDictionaryBusiness();
+            var data = dictionaryBusiness.GetRoomFunctionCode();
             data = data.Where(r => r.FirstCode == firstCode).ToList();
             return Json(data, JsonRequestBehavior.AllowGet);
         }

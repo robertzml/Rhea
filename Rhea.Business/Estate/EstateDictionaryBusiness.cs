@@ -59,6 +59,39 @@ namespace Rhea.Business.Estate
         }
 
         /// <summary>
+        /// 得到学院房间功能列表
+        /// </summary>
+        /// <remarks>1-7类</remarks>
+        /// <returns></returns>
+        public List<RoomFunctionCode> GetCollegeRoomFunctionCode()
+        {
+            BsonDocument doc = this.context.FindOne(EstateCollection.Dictionary, "name", "RoomFunctionCode");
+
+            List<RoomFunctionCode> data = new List<RoomFunctionCode>();
+
+            BsonArray array = doc["property"].AsBsonArray;
+            for (int i = 0; i < array.Count; i++)
+            {               
+                BsonDocument d = array[i].AsBsonDocument;
+                if (d["firstCode"].AsInt32 > 7)
+                    continue;
+
+                RoomFunctionCode code = new RoomFunctionCode
+                {
+                    CodeId = d["codeId"].AsString,
+                    FirstCode = d["firstCode"].AsInt32,
+                    SecondCode = d["secondCode"].AsInt32,
+                    ClassifyName = d["classifyName"].AsString,
+                    FunctionProperty = d["functionProperty"].AsString,
+                    Remark = d["remark"].AsString
+                };
+                data.Add(code);
+            }
+
+            return data;
+        }
+
+        /// <summary>
         /// 更新房间功能列表
         /// </summary>
         /// <param name="data">功能属性</param>
