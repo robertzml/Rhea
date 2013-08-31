@@ -15,7 +15,7 @@
                 <a href="#" class="minimize">Minimize</a>
             </div>
             <div class="content noPad">
-                <table class="table table-bordered table-striped">
+                <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th style="width:100px">
@@ -33,67 +33,67 @@
                     @if (ViewBag.Type == (int)Rhea.Data.Personnel.DepartmentType.Type1)
                     {
                         <tr>
-                            <td>1</td>
+                            <td>1-1</td>
                             <td>@Html.DisplayNameFor(model => model.OfficeArea)</td>
                             <td>@Model.OfficeArea</td>
                         </tr>
                         <tr>
-                            <td>2</td>
+                            <td>1-2</td>
                             <td>@Html.DisplayNameFor(model => model.FlexibleArea)</td>
                             <td>@Model.FlexibleArea</td>
                         </tr>
                         <tr>
-                            <td>3</td>
+                            <td>2</td>
                             <td>@Html.DisplayNameFor(model => model.ExperimentArea)</td>
                             <td>@Model.ExperimentArea</td>
                         </tr>
                         <tr>
-                            <td>4</td>
+                            <td>3</td>
                             <td>@Html.DisplayNameFor(model => model.GraduateArea)</td>
                             <td>@Model.GraduateArea</td>
                         </tr>
                         <tr>
-                            <td>5</td>
+                            <td>4</td>
                             <td>@Html.DisplayNameFor(model => model.DoctorArea)</td>
                             <td>@Model.DoctorArea</td>
                         </tr>
                         <tr>
-                            <td>6</td>
+                            <td>5</td>
                             <td>@Html.DisplayNameFor(model => model.MasterOfEngineerArea)</td>
                             <td>@Model.MasterOfEngineerArea</td>
                         </tr>
                         <tr>
-                            <td>7</td>
+                            <td>6</td>
                             <td>@Html.DisplayNameFor(model => model.ResearchArea)</td>
                             <td>@Model.ResearchArea</td>
                         </tr>
                         <tr>
-                            <td>8</td>
+                            <td>7</td>
                             <td>@Html.DisplayNameFor(model => model.PublicArea)</td>
                             <td>@Model.PublicArea</td>
                         </tr>
                         <tr>
-                            <td>9</td>
+                            <td>8</td>
                             <td>@Html.DisplayNameFor(model => model.EducationBonusArea)</td>
                             <td>@Model.EducationBonusArea</td>
                         </tr>
                         <tr>
-                            <td>10</td>
+                            <td>9</td>
                             <td>@Html.DisplayNameFor(model => model.TalentArea)</td>
                             <td>@Model.TalentArea</td>
                         </tr>
                         <tr>
-                            <td>11</td>
+                            <td>10</td>
                             <td>@Html.DisplayNameFor(model => model.ResearchBonusArea)</td>
                             <td>@Model.ResearchBonusArea</td>
                         </tr>
                         <tr>
-                            <td>12</td>
+                            <td>11</td>
                             <td>@Html.DisplayNameFor(model => model.ExperimentBonusArea)</td>
                             <td>@Model.ExperimentBonusArea</td>
                         </tr>
                         <tr>
-                            <td>13</td>
+                            <td>12</td>
                             <td>@Html.DisplayNameFor(model => model.AdjustArea)</td>
                             <td>@Model.AdjustArea</td>
                         </tr>
@@ -116,17 +116,17 @@
                             <td>@Model.BusinessArea</td>
                         </tr>
                     }
-                        <tr>
+                        <tr class="success">
                             <td>&nbsp;</td>
                             <td>@Html.DisplayNameFor(model => model.DeservedArea)</td>
                             <td>@Model.DeservedArea</td>
                         </tr>
-                        <tr>
+                        <tr class="success">
                             <td>&nbsp;</td>
                             <td>@Html.DisplayNameFor(model => model.ExistingArea)</td>
                             <td>@Model.ExistingArea</td>
                         </tr>
-                        <tr>
+                        <tr class="info">
                             <td>&nbsp;</td>
                             <td>定额率</td>
                             <td>@Model.Overproof%</td>

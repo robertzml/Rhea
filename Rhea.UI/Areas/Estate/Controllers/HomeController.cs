@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Rhea.Business;
 using Rhea.Business.Estate;
 using Rhea.UI.Areas.Estate.Models;
 using Rhea.UI.Filters;
@@ -47,23 +48,17 @@ namespace Rhea.UI.Areas.Estate.Controllers
         }
 
         /// <summary>
-        /// 楼群列表
+        /// 土地证
         /// </summary>
         /// <returns></returns>
-        public ActionResult BuildingGroupList()
+        public ActionResult LandCertificate()
         {
+            EstateMiscBusiness business = new EstateMiscBusiness();
+            var data = business.GetLandCertificate();
+            ViewBag.LandCertificate = data;
             return View();
         }
-
-        /// <summary>
-        /// 部门列表
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult DepartmentList()
-        {
-            return View();
-        }
-
+   
         /// <summary>
         /// 展示
         /// </summary>
@@ -75,5 +70,18 @@ namespace Rhea.UI.Areas.Estate.Controllers
             return View(data);
         }
         #endregion //Action
+
+        #region Json
+        /// <summary>
+        /// 土地类型数据
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult LandTypeData()
+        {
+            EstateMiscBusiness business = new EstateMiscBusiness();
+            var data = business.GetLandType();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        #endregion //Json
     }
 }

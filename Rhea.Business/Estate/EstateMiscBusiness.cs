@@ -45,6 +45,41 @@ namespace Rhea.Business.Estate
 
             return data;
         }
+
+        /// <summary>
+        /// 得到土地证
+        /// </summary>
+        /// <returns></returns>
+        public string GetLandCertificate()
+        {
+            BsonDocument doc = this.context.FindOne(EstateCollection.Misc, "name", "landCertificate");
+            string url = RheaConstant.ImagesRoot + doc["value"].AsString;
+            return url;
+        }
+
+        /// <summary>
+        /// 得到土地类型
+        /// </summary>
+        /// <returns></returns>
+        public List<LandTypeModel> GetLandType()
+        {
+            BsonDocument doc = this.context.FindOne(EstateCollection.Misc, "name", "landType");
+            BsonArray array = doc["value"].AsBsonArray;
+
+            List<LandTypeModel> data = new List<LandTypeModel>();
+            foreach (var item in array)
+            {
+                LandTypeModel model = new LandTypeModel
+                {
+                    Name = item["name"].AsString,
+                    Title = item["title"].AsString,
+                    Area = item["value"].AsDouble
+                };
+                data.Add(model);
+            }
+
+            return data;
+        }
         #endregion //Method
     }
 }

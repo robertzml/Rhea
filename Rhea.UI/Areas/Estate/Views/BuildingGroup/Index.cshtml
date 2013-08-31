@@ -46,6 +46,10 @@
                                 <span class="icon icomoon-icon-announcement"></span>
                                 <input type="text" value="@Model.ResearchAreaRatio" class="yellowCircle" />
                             </div>
+                            <div class="circular-item tip" title="其它用房比例">
+                                <span class="icon icomoon-icon-atom"></span>
+                                <input type="text" value="@Model.OtherAreaRatio" class="orangeCircle" />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -167,6 +171,17 @@
             'width': 100,
             'height': 100,
             'fgColor': '#F4DC41',
+            'dynamicDraw': true,
+            'thickness': 0.2,
+            'tickColorizeValues': true
+        });
+        $(".orangeCircle").knob({
+            'min': 0,
+            'max': 100,
+            'readOnly': true,
+            'width': 100,
+            'height': 100,
+            'fgColor': '#F49005',
             'dynamicDraw': true,
             'thickness': 0.2,
             'tickColorizeValues': true

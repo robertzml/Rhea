@@ -1463,9 +1463,6 @@
     <Content Include="Areas\Estate\Views\Home\Summary.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Statistic\LandType.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Areas\Estate\Views\BuildingGroup\Department.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -1681,8 +1678,6 @@
     <Content Include="Views\Statistic\DepartmentClassifyAreaCompare.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Estate\Views\Home\BuildingGroupList.cshtml" />
-    <Content Include="Areas\Estate\Views\Home\DepartmentList.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Nav.cshtml" />
     <Content Include="Areas\Estate\Views\Building\Department.cshtml" />
     <Content Include="Areas\Estate\Views\Room\ListByBuilding.cshtml" />
@@ -1713,6 +1708,7 @@
     <Content Include="Areas\Admin\Views\Department\Archive.cshtml" />
     <Content Include="Areas\Admin\Views\Department\ArchiveList.cshtml" />
     <Content Include="Areas\Admin\Views\Estate\FunctionCode.cshtml" />
+    <Content Include="Areas\Estate\Views\Home\LandCertificate.cshtml" />
     <None Include="Content\fonts\icomoon.eot" />
     <None Include="Content\fonts\icomoon.ttf" />
     <None Include="Content\fonts\icomoon.woff" />

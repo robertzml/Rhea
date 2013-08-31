@@ -74,16 +74,7 @@ namespace Rhea.UI.Controllers
         public ActionResult TotalUseTypeArea()
         {
             return View();
-        }
-
-        /// <summary>
-        /// 土地类型
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult LandType()
-        {
-            return View();
-        }
+        }       
 
         /// <summary>
         /// 楼群使用面积比较

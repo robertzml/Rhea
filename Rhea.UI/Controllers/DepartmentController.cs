@@ -76,8 +76,8 @@ namespace Rhea.UI.Controllers
 
             if (department.Type == (int)DepartmentType.Type1)   //院系
             {
-                var droom = rooms.Where(r => r.Function.FirstCode == 1 || r.Function.FirstCode == 2 || r.Function.FirstCode == 3 || r.Function.FirstCode == 4);
-                data.ExistingArea = Convert.ToDouble(droom.Sum(r => r.UsableArea));
+                //var droom = rooms.Where(r => r.Function.FirstCode == 1 || r.Function.FirstCode == 2 || r.Function.FirstCode == 3 || r.Function.FirstCode == 4);
+                data.ExistingArea = Convert.ToDouble(rooms.Sum(r => r.UsableArea));
                 data.DeservedArea = indicator.DeservedArea;
                 if (data.DeservedArea == 0)
                     data.Overproof = 0;
@@ -201,16 +201,7 @@ namespace Rhea.UI.Controllers
 
             IRoomBusiness roomBusiness = new MongoRoomBusiness();
             var rooms = roomBusiness.GetListByDepartment(id);
-
-            if (department.Type == (int)DepartmentType.Type1)
-            {
-                var droom = rooms.Where(r => r.Function.FirstCode == 1 || r.Function.FirstCode == 2 || r.Function.FirstCode == 3 || r.Function.FirstCode == 4);
-                data.ExistingArea = Convert.ToDouble(droom.Sum(r => r.UsableArea));
-            }
-            else
-            {
-                data.ExistingArea = Convert.ToDouble(rooms.Sum(r => r.UsableArea));
-            }
+            data.ExistingArea = Convert.ToDouble(rooms.Sum(r => r.UsableArea));            
 
             if (data.DeservedArea == 0)
                 data.Overproof = 0;
@@ -268,6 +259,13 @@ namespace Rhea.UI.Controllers
         {
             IStatisticBusiness statisticBusiness = new MongoStatisticBusiness();
             DepartmentClassifyAreaModel data = statisticBusiness.GetDepartmentClassifyArea(id, false);
+
+            var department = this.departmentBusiness.Get(id);
+            if (department.Type == (int)DepartmentType.Type1)
+                data.FirstClassify = data.FirstClassify.Where(r => r.FunctionFirstCode <= 7).ToList();
+            else
+                data.FirstClassify = data.FirstClassify.Where(r => r.FunctionFirstCode <= 7).ToList();
+
             return View(data);
         }
 

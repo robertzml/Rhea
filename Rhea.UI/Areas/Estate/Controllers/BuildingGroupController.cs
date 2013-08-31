@@ -85,6 +85,10 @@ namespace Rhea.UI.Areas.Estate.Controllers
             double resArea = Convert.ToDouble(rooms.Where(r => r.Function.FirstCode == 4).Sum(r => r.UsableArea));
             data.ResearchAreaRatio = Math.Round(resArea / totArea * 100, 2);
 
+            data.OtherAreaRatio = 100 - data.OfficeAreaRatio - data.EducationAreaRatio - data.ExperimentAreaRatio - data.ResearchAreaRatio;
+            if (data.OtherAreaRatio < 0)
+                data.OtherAreaRatio = 0;
+
             data.RoomCount = rooms.Count;
 
             return View(data);

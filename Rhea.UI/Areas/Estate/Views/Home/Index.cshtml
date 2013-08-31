@@ -38,7 +38,7 @@
         <div class="mainnav">
             <ul>
                 <li><a href="#" id="summary"><span class="icon16 icomoon-icon-newspaper"></span>摘要</a></li>
-                <li><a href="#"><span class="icon16 icomoon-icon-font"></span>土地证</a></li>
+                <li><a href="#" id="land-certificate"><span class="icon16 icomoon-icon-font"></span>土地证</a></li>
                 <li><a href="#" id="gallery"><span class="icon16 icomoon-icon-film-2"></span>展示</a></li>
             </ul>
         </div>
@@ -106,6 +106,11 @@
 
         $('a#summary').click(function() {
             ajaxLoadPage("Summary", "Home", "Estate", {});
+            return false;
+        });
+
+        $('a#land-certificate').click(function () {
+            ajaxLoadPage("LandCertificate", "Home", "Estate", {});
             return false;
         });
 

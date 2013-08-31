@@ -1,7 +1,7 @@
 html {height: 100%;}body {	background: #fff;	-webkit-font-smoothing: antialiased;	overflow-x:	hidden;	background: url(../images/patterns/5.png) repeat;	height: 100%;}#top-nav a, h1,h2,h3,h4,h5,h6 {font-family: 微软雅黑, sans-serif;}
 body, p {font-family: 新宋体, Helvetica, Arial, sans-serif;}#header, #sidebar { font-family:微软雅黑;}.page-header { position:relative; }.heading {margin-bottom:19px;}.sidenav {width: 100%; margin-left:0;}.navbar-inner {background:transparent; }.modal-body { max-height:500px; }.tooltip { z-index:3000; font-family:微软雅黑; font-size: 12px; position:fixed;}.tooltip-inner { background-color:#3f3f3f; z-index:3000;}/*Infoview*/
 .infoview {position: relative; margin-bottom: 25px;}
-	.infoview h4 {border-bottom: 1px solid #c4c4c4; padding-bottom: 3px; margin-bottom:0px; line-height: 37px; position: relative;}
+	.infoview h4 {border-bottom: 1px solid #c4c4c4; padding-bottom: 0px; margin-bottom:0px; line-height: 37px; position: relative;}
 	.infoview ul {list-style: none; margin:0;}
 	.infoview li {margin-bottom:0; padding-top: 10px; padding-bottom:10px; border-bottom: 1px solid #ebebeb;}
 		.infoview ul li .icon {

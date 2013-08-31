@@ -76,5 +76,10 @@ namespace Rhea.UI.Areas.Estate.Models
         /// 科研用房面积比例
         /// </summary>
         public double ResearchAreaRatio { get; set; }
+
+        /// <summary>
+        /// 其它用房比例
+        /// </summary>
+        public double OtherAreaRatio { get; set; }
     }
 }
