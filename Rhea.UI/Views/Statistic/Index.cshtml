@@ -58,12 +58,14 @@
                         <li><a href="#" id="department-avgoffice-area-compare"><span class="icon16 icomoon-icon-accessibility"></span>人均办公用房面积比较</a></li>
                         <li><a href="#" id="department-avgresearch-area-compare"><span class="icon16 icomoon-icon-reading"></span>人均科研用房面积比较</a></li>
                         <li><a href="#" id="department-avgfunds-area-compare"><span class="icon16 icomoon-icon-coins"></span>科研经费用房面积比较</a></li>
+                        <li><a href="#" id="department-indicator-compare"><span class="icon16 icomoon-icon-rulers"></span>用房指标比较</a></li>
                     </ul>
                 </li>
                 <li><a href="#"><span class="icon16 icomoon-icon-equalizer-2"></span>行政机关房屋数据</a>
                     <ul class="sub">
                         <li><a href="#" id="institution-office-area-compare"><span class="icon16 icomoon-icon-stats-up"></span>办公用房面积比较</a></li>
                         <li><a href="#" id="institution-avgoffice-area-compare"><span class="icon16 icomoon-icon-accessibility"></span>人均办公用房面积比较</a></li>
+                        <li><a href="#" id="institution-indicator-compare"><span class="icon16 icomoon-icon-rulers"></span>用房指标比较</a></li>
                     </ul>
                 </li>
             </ul>
@@ -72,7 +74,7 @@
     <!-- End sidenav -->
     <div class="sidebar-widget">
         <h5 class="title">
-            附加显示数据1</h5>
+            校控房比例</h5>
         <div class="content">
             <span class="icon16 icomoon-icon-loop left"></span>
             <div class="progress progress-mini progress-danger left tip" title="87%">
@@ -119,6 +121,7 @@
 <script type="text/javascript">
     $(function () {
         $('.navbar .nav #nav-statistic').parent().addClass('active');
+        $('.tip').tooltip();
 
         $('a#building-group-usable-area-compare').click(function () {
             ajaxLoadPage2("BuildingGroupUsableAreaCompare", "Statistic", {});
@@ -170,6 +173,11 @@
             return false;
         });
 
+        $('a#department-indicator-compare').click(function () {
+            ajaxLoadPage2("DepartmentIndicatorCompare", "Statistic", {});
+            return false;
+        });
+
         $('a#institution-office-area-compare').click(function () {
             ajaxLoadPage2("InstitutionOfficeAreaCompare", "Statistic", {});
             return false;
@@ -177,6 +185,11 @@
 
         $('a#institution-avgoffice-area-compare').click(function () {
             ajaxLoadPage2("InstitutionAverageOfficeAreaCompare", "Statistic", {});
+            return false;
+        });
+
+        $('a#institution-indicator-compare').click(function () {
+            ajaxLoadPage2("InstitutionIndicatorCompare", "Statistic", {});
             return false;
         });
     });

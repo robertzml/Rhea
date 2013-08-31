@@ -20,7 +20,10 @@
                     {
                     <li><a href="@Url.Action("Department", new { controller = "Home", area = "" })" id="nav-department"><span class="icon16 icomoon-icon-screen-2"></span> 部门</a></li>
                     }
+                    @if (rank >= 450)
+                    {
                     <li><a href="@Url.Action("Index", new { controller = "Statistic", area = "" })" id="nav-statistic"><span class="icon16 icomoon-icon-graph"></span> 统计</a></li>
+                    }
                 </ul>
 
                 <ul class="nav pull-right usernav">

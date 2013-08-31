@@ -492,6 +492,38 @@ namespace Rhea.Business.Estate
         }
 
         /// <summary>
+        /// 部门房间使用总面积
+        /// </summary>
+        /// <param name="departmentId">部门ID</param>
+        /// <returns></returns>
+        public double DepartmentRoomArea(int departmentId)
+        {
+            BsonDocument[] pipeline = {
+                new BsonDocument {
+                    { "$match", new BsonDocument {
+                        { "departmentId", departmentId }
+                    }}
+                },
+                new BsonDocument {
+                    { "$group", new BsonDocument {
+                        { "_id", "$departmentId" },
+                        { "area", new BsonDocument {
+                            { "$sum", "$usableArea" }
+                        }}
+                    }}
+                }
+            };
+
+            AggregateResult result = this.context.Aggregate(EstateCollection.Room, pipeline);
+            if (result.ResultDocuments.Count() != 1)
+                return 0;
+
+            BsonDocument doc = result.ResultDocuments.First();
+            double area = doc["area"].AsDouble;
+            return area;
+        }
+
+        /// <summary>
         /// 导出房间
         /// </summary>
         /// <returns></returns>

@@ -216,9 +216,9 @@ namespace Rhea.Data.Personnel
         public double ExistingArea { get; set; }
 
         /// <summary>
-        /// 超标比值
+        /// 定额率
         /// </summary>
-        [Display(Name = "超标比值")]
+        [Display(Name = "定额率")]
         public double Overproof { get; set; }
     }
 }

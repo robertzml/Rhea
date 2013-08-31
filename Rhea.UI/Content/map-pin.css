@@ -1,0 +1,8 @@
+/* The css file for map pins and symbols */
+
+.pins { background: no-repeat scroll 0 0 transparent; } 
+
+.pin-green { background-image: url("../Images/map/pins/pin1.png"), url("../Images/map/symbols/airport.png"); }
+.pin-blue { background-image: url("../Images/map/pins/pin2.png"); }
+
+.symbol-airport { background-image: url("../Images/map/symbols/airport.png"); }

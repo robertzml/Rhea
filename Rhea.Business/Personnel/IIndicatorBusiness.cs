@@ -13,7 +13,7 @@ namespace Rhea.Business.Personnel
     public interface IIndicatorBusiness
     {
         /// <summary>
-        /// 部门指标计算(限学院)
+        /// 部门指标计算
         /// </summary>
         /// <param name="department">部门数据</param>
         /// <returns></returns>

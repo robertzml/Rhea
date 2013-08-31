@@ -199,7 +199,7 @@ namespace Rhea.Business.Personnel
 
         #region Method
         /// <summary>
-        /// 部门指标计算(限学院)
+        /// 部门指标计算
         /// </summary>
         /// <param name="department">部门数据</param>
         /// <returns></returns>

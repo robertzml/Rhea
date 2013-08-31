@@ -145,7 +145,7 @@
                 }]
             };
 
-            var tcolor = [colors[1], colors[0], colors[2]];
+            var tcolor = [colors[1], colors[0]];
             $.each(data, function (i, item) {
                 option.series[0].data.push({ name: item.Title, y: parseFloat(item.Area), color: tcolor[i] });
             });

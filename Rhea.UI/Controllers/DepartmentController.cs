@@ -75,8 +75,7 @@ namespace Rhea.UI.Controllers
             DepartmentIndicatorModel indicator = indicatorBusiness.GetDepartmentIndicator(department);
 
             if (department.Type == (int)DepartmentType.Type1)   //院系
-            {
-                //var droom = rooms.Where(r => r.Function.FirstCode == 1 || r.Function.FirstCode == 2 || r.Function.FirstCode == 3 || r.Function.FirstCode == 4);
+            {             
                 data.ExistingArea = Convert.ToDouble(rooms.Sum(r => r.UsableArea));
                 data.DeservedArea = indicator.DeservedArea;
                 if (data.DeservedArea == 0)
@@ -85,7 +84,7 @@ namespace Rhea.UI.Controllers
                     data.Overproof = Math.Round(data.ExistingArea / data.DeservedArea * 100, 2);
 
                 double offArea = Convert.ToDouble(rooms.Where(r => r.Function.FirstCode == 1).Sum(r => r.UsableArea));
-                data.OfficeAreaRatio = Math.Round(offArea / data.TotalArea * 100, 2);          
+                data.OfficeAreaRatio = Math.Round(offArea / data.TotalArea * 100, 2);
 
                 double expArea = Convert.ToDouble(rooms.Where(r => r.Function.FirstCode == 3).Sum(r => r.UsableArea));
                 data.ExperimentAreaRatio = Math.Round(expArea / data.TotalArea * 100, 2);
@@ -105,9 +104,9 @@ namespace Rhea.UI.Controllers
                     data.Overproof = Math.Round(data.ExistingArea / data.DeservedArea * 100, 2);
 
                 double offArea = Convert.ToDouble(rooms.Where(r => r.Function.FirstCode == 1).Sum(r => r.UsableArea));
-                data.OfficeAreaRatio = Math.Round(offArea / data.TotalArea * 100, 2);    
+                data.OfficeAreaRatio = Math.Round(offArea / data.TotalArea * 100, 2);
             }
-            
+
             return View(data);
         }
 
@@ -201,7 +200,7 @@ namespace Rhea.UI.Controllers
 
             IRoomBusiness roomBusiness = new MongoRoomBusiness();
             var rooms = roomBusiness.GetListByDepartment(id);
-            data.ExistingArea = Convert.ToDouble(rooms.Sum(r => r.UsableArea));            
+            data.ExistingArea = Convert.ToDouble(rooms.Sum(r => r.UsableArea));
 
             if (data.DeservedArea == 0)
                 data.Overproof = 0;

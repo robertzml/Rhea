@@ -74,7 +74,7 @@ namespace Rhea.UI.Controllers
         public ActionResult TotalUseTypeArea()
         {
             return View();
-        }       
+        }
 
         /// <summary>
         /// 楼群使用面积比较
@@ -167,6 +167,15 @@ namespace Rhea.UI.Controllers
         }
 
         /// <summary>
+        /// 学院用房指标比较
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult DepartmentIndicatorCompare()
+        {
+            return View();
+        }
+
+        /// <summary>
         /// 行政机关办公用房面积比较
         /// </summary>
         /// <returns></returns>
@@ -180,6 +189,15 @@ namespace Rhea.UI.Controllers
         /// </summary>
         /// <returns></returns>
         public ActionResult InstitutionAverageOfficeAreaCompare()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 行政机关指标比较
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult InstitutionIndicatorCompare()
         {
             return View();
         }
@@ -422,6 +440,55 @@ namespace Rhea.UI.Controllers
             }
 
             data = data.OrderByDescending(r => r.AverageArea).ToList();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 部门用房指标
+        /// </summary>
+        /// <param name="type">部门类型，1:学院, 2:其它</param>
+        /// <returns></returns>
+        public JsonResult DepartmentIndicatorCompareData(int type)
+        {
+            IDepartmentBusiness departmentBusiness = new MongoDepartmentBusiness();
+            IRoomBusiness roomBusiness = new MongoRoomBusiness();
+            IIndicatorBusiness indicatorBusiness = new MongoIndicatorBusiness();
+            List<DepartmentIndicatorModel> data = new List<DepartmentIndicatorModel>();
+
+            if (type == 1)
+            {
+                var departments = departmentBusiness.GetList().Where(r => r.Type == 1);
+                foreach (var department in departments)
+                {
+                    Department d = departmentBusiness.Get(department.Id, DepartmentAdditionType.ScaleData | DepartmentAdditionType.ResearchData | DepartmentAdditionType.SpecialAreaData);
+                    var indicator = indicatorBusiness.GetDepartmentIndicator(d);
+                    indicator.ExistingArea = roomBusiness.DepartmentRoomArea(department.Id);
+                    if (indicator.DeservedArea == 0)
+                        indicator.Overproof = 0;
+                    else
+                        indicator.Overproof = Math.Round(indicator.ExistingArea / indicator.DeservedArea * 100, 2);
+
+                    data.Add(indicator);
+                }
+            }
+            else
+            {
+                var departments = departmentBusiness.GetList().Where(r => r.Type != 1);
+                foreach (var department in departments)
+                {
+                    Department d = departmentBusiness.Get(department.Id, DepartmentAdditionType.ScaleData | DepartmentAdditionType.ResearchData | DepartmentAdditionType.SpecialAreaData);                  
+                    var indicator = indicatorBusiness.GetDepartmentIndicator(d);
+                    indicator.ExistingArea = roomBusiness.DepartmentRoomArea(department.Id);
+                    if (indicator.DeservedArea == 0)
+                        indicator.Overproof = 0;
+                    else
+                        indicator.Overproof = Math.Round(indicator.ExistingArea / indicator.DeservedArea * 100, 2);
+
+                    data.Add(indicator);
+                }
+            }
+
+            data = data.OrderByDescending(r => r.Overproof).ToList();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
