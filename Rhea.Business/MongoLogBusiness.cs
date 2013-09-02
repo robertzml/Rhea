@@ -35,7 +35,12 @@ namespace Rhea.Business
             log.UserId = doc["userId"].AsObjectId;
             log.UserName = doc["userName"].AsString;
             log.Type = doc["type"].AsInt32;
-            log.RelateTime = (DateTime?)doc.GetValue("relateTime", null);
+
+            BsonValue rtime = doc.GetValue("relateTime", null);
+            if (rtime == null || rtime.IsBsonNull)
+                log.RelateTime = null;
+            else
+                log.RelateTime = rtime.AsBsonDateTime.ToLocalTime();         
 
             return log;
         }
@@ -64,6 +69,24 @@ namespace Rhea.Business
             if (result.Ok)
             {
                 log._id = doc["_id"].AsObjectId;
+                return log;
+            }
+            else
+                return null;
+        }
+
+        /// <summary>
+        /// 得到日志
+        /// </summary>
+        /// <param name="id">日志ID</param>
+        /// <returns></returns>
+        public Log Get(string id)
+        {
+            ObjectId _id = new ObjectId(id);
+            var doc = this.context.FindByKey(RheaCollection.Log, _id);
+            if (doc != null)
+            {
+                Log log = ModelBind(doc);
                 return log;
             }
             else
@@ -123,7 +146,6 @@ namespace Rhea.Business
             array.AddRange(type);
 
             var query = Query.In("type", array);
-            //var query = Query.EQ("type", type);
             var docs = this.context.Find(RheaCollection.Log, query).SetSortOrder(SortBy.Ascending("time"));
 
             foreach (BsonDocument doc in docs)

@@ -1451,6 +1451,7 @@
     <Content Include="Areas\Admin\Views\Department\ArchiveList.cshtml" />
     <Content Include="Areas\Admin\Views\Estate\FunctionCode.cshtml" />
     <Content Include="Areas\Estate\Views\Home\LandCertificate.cshtml" />
+    <Content Include="Areas\Admin\Views\Estate\LogDetails.cshtml" />
     <None Include="Content\fonts\icomoon.eot" />
     <None Include="Content\fonts\icomoon.ttf" />
     <None Include="Content\fonts\icomoon.woff" />

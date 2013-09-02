@@ -7,6 +7,7 @@ using System.Web.Routing;
 using Rhea.Business.Account;
 using Rhea.Business.Estate;
 using Rhea.Business.Personnel;
+using Rhea.Data;
 using Rhea.Model;
 using Rhea.Model.Account;
 using Rhea.Model.Estate;
@@ -213,15 +214,21 @@ namespace Rhea.UI.Areas.Estate.Controllers
 
             //log
             var user = GetUser();
+            var room = this.roomBusiness.Get(roomId);
+            IDepartmentBusiness departmentBusiness = new MongoDepartmentBusiness();
+            string oldName = departmentBusiness.GetName(currentDepartmentId);
+            string newName = departmentBusiness.GetName(departmentId);
             Log log = new Log
             {
                 Title = "分配房间",
-                Content = string.Format("分配房间, 房间ID:{0}, 原部门:{1}, 新部门:{2}.", roomId, currentDepartmentId, departmentId),
+                Content = string.Format("分配房间, 房间ID:{0}, 房间名称:{1}, 房间编号:{2}, 原部门ID:{3}, 原部门名称:{4}, 新部门ID:{5}, 新部门名称:{6}.",
+                    roomId, room.Name, room.Number, currentDepartmentId, oldName, departmentId, newName),
                 Time = DateTime.Now,
                 UserId = user._id,
                 UserName = user.Name,
-                Type = 10
+                Type = (int)LogType.RoomAssign
             };
+
             bool logok = this.roomBusiness.Log(roomId, log);
             if (!logok)
             {

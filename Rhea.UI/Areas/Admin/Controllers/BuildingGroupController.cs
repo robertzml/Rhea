@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Rhea.Business.Account;
 using Rhea.Business.Estate;
+using Rhea.Data;
 using Rhea.Model;
 using Rhea.Model.Account;
 using Rhea.Model.Estate;
@@ -109,7 +110,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
                     Time = DateTime.Now,
                     UserId = user._id,
                     UserName = user.Name,
-                    Type = 2
+                    Type = (int)LogType.BuildingGroupCreate
                 };
 
                 bool logok = this.buildingGroupBusiness.Log(bid, log);
@@ -175,7 +176,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
                     Time = DateTime.Now,
                     UserId = user._id,
                     UserName = user.Name,
-                    Type = 3
+                    Type = (int)LogType.BuildingGroupEdit
                 };
 
                 bool logok = this.buildingGroupBusiness.Log(model.Id, log);
@@ -240,7 +241,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 Time = DateTime.Now,
                 UserId = user._id,
                 UserName = user.Name,
-                Type = 4
+                Type = (int)LogType.BuildingGroupDelete
             };
 
             bool logok = this.buildingGroupBusiness.Log(id, log);

@@ -7,6 +7,7 @@ using System.Web.Routing;
 using Rhea.Business;
 using Rhea.Business.Account;
 using Rhea.Business.Estate;
+using Rhea.Data;
 using Rhea.Model;
 using Rhea.Model.Account;
 using Rhea.Model.Estate;
@@ -241,7 +242,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
                     Time = DateTime.Now,
                     UserId = user._id,
                     UserName = user.Name,
-                    Type = 2
+                    Type = (int)LogType.RoomCreate
                 };
 
                 bool logok = this.roomBusiness.Log(rid, log);
@@ -311,7 +312,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
                     Time = DateTime.Now,
                     UserId = user._id,
                     UserName = user.Name,
-                    Type = 3
+                    Type = (int)LogType.RoomEdit
                 };
 
                 bool logok = this.roomBusiness.Log(room.Id, log);
@@ -375,7 +376,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 Time = DateTime.Now,
                 UserId = user._id,
                 UserName = user.Name,
-                Type = 4
+                Type = (int)LogType.RoomDelete
             };
 
             bool logok = this.roomBusiness.Log(id, log);

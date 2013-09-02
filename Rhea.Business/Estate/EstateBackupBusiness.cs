@@ -9,6 +9,9 @@ using Rhea.Data.Server;
 
 namespace Rhea.Business.Estate
 {
+    /// <summary>
+    /// 房产备份类
+    /// </summary>
     public class EstateBackupBusiness : IBackupBusiness
     {
         #region Field

@@ -8,6 +8,9 @@ using Rhea.Data.Server;
 
 namespace Rhea.Business.Personnel
 {
+    /// <summary>
+    /// 人事备份类
+    /// </summary>
     public class PersonnelBackupBusiness : IBackupBusiness
     {
         #region Field
@@ -26,7 +29,12 @@ namespace Rhea.Business.Personnel
         /// <returns></returns>
         public bool Backup(string collectionName, BsonDocument doc)
         {
-            throw new NotImplementedException();
+            WriteConcernResult result = this.context.Insert(collectionName, doc);
+
+            if (result.Ok)
+                return true;
+            else
+                return false;
         }
 
         public BsonDocument FindFirstBackup(string collectionName, BsonValue id)

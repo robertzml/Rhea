@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
+using MongoDB.Bson;
 using Rhea.Business;
 using Rhea.Business.Account;
 using Rhea.Business.Estate;
+using Rhea.Data;
 using Rhea.Model;
 using Rhea.Model.Account;
 using Rhea.Model.Estate;
 using Rhea.UI.Areas.Admin.Models;
 using Rhea.UI.Filters;
-using System.Text.RegularExpressions;
 
 namespace Rhea.UI.Areas.Admin.Controllers
 {
@@ -160,25 +162,25 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 {
                     case 1:
                         log.Title = "归档校区";
-                        log.Type = 23;
+                        log.Type = (int)LogType.CampusArchive;
                         ICampusBusiness campusBusiness = new MongoCampusBusiness();
                         result = campusBusiness.Archive(log);
                         break;
                     case 2:
                         log.Title = "归档楼群";
-                        log.Type = 22;
+                        log.Type = (int)LogType.BuildingGroupArchive;
                         IBuildingGroupBusiness buildingGroupBusiness = new MongoBuildingGroupBusiness();
                         result = buildingGroupBusiness.Archive(log);
                         break;
                     case 3:
                         log.Title = "归档楼宇";
-                        log.Type = 21;
+                        log.Type = (int)LogType.BuildingArchive;
                         IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
                         result = buildingBusiness.Archive(log);
                         break;
                     case 4:
                         log.Title = "归档房间";
-                        log.Type = 20;
+                        log.Type = (int)LogType.RoomArchive;
                         IRoomBusiness roomBusiness = new MongoRoomBusiness();
                         result = roomBusiness.Archive(log);
                         break;
@@ -205,7 +207,8 @@ namespace Rhea.UI.Areas.Admin.Controllers
         public ActionResult ArchiveList()
         {
             ILogBusiness logBusiness = new MongoLogBusiness();
-            int[] types = { 20, 21, 22, 23 };
+            int[] types = { (int)LogType.CampusArchive, (int)LogType.BuildingGroupArchive, 
+                              (int)LogType.BuildingArchive, (int)LogType.RoomArchive };
             var data = logBusiness.GetList(types);
             return View(data);
         }
@@ -219,6 +222,19 @@ namespace Rhea.UI.Areas.Admin.Controllers
             ILogBusiness logBusiness = new MongoLogBusiness();
             var data = logBusiness.GetList().OrderByDescending(r => r.Time);
 
+            return View(data);
+        }
+
+        /// <summary>
+        /// 日志详细
+        /// </summary>
+        /// <param name="id">日志ID</param>
+        /// <returns></returns>
+        public ActionResult LogDetails(string id)
+        {
+            ILogBusiness logBusiness = new MongoLogBusiness();
+            var data = logBusiness.Get(id);
+            
             return View(data);
         }
         #endregion //Action

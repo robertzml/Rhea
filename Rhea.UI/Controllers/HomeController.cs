@@ -83,9 +83,13 @@ namespace Rhea.UI.Controllers
                 IAccountBusiness accountBusiness = new MongoAccountBusiness();
                 var user = accountBusiness.GetByUserName(User.Identity.Name);
                 data.Single = departmentBusiness.Get(user.DepartmentId);
+                data.Single.ShortName = data.Single.ShortName == "" ? data.Single.Name : data.Single.ShortName;
             }
             else
+            {
                 data.Departments = departmentBusiness.GetList();
+                data.Departments.ForEach(r => r.ShortName = (r.ShortName == "" ? r.Name : r.ShortName));
+            }
 
             return View(data);
         }

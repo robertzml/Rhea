@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MongoDB.Bson;
 using Rhea.Model;
 
 namespace Rhea.Business
@@ -14,6 +15,13 @@ namespace Rhea.Business
         /// <param name="log">日志对象</param>
         /// <returns></returns>
         Log Insert(Log log);
+
+        /// <summary>
+        /// 得到日志
+        /// </summary>
+        /// <param name="id">日志ID</param>
+        /// <returns></returns>
+        Log Get(string id);
 
         /// <summary>
         /// 显示所有日志

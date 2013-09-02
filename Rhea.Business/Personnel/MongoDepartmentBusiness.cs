@@ -125,7 +125,7 @@ namespace Rhea.Business.Personnel
 
             department.TalentArea = doc.GetValue("talentArea", 0.0).AsDouble;
             department.ResearchBonusArea = doc.GetValue("researchBonusArea", 0.0).AsDouble;
-            department.ExperimentBonusArea = doc.GetValue("ExperimentBonusArea", 0.0).AsDouble;
+            department.ExperimentBonusArea = doc.GetValue("experimentBonusArea", 0.0).AsDouble;
             department.AdjustArea = doc.GetValue("adjustArea", 0.0).AsDouble;
 
             return;
@@ -434,6 +434,20 @@ namespace Rhea.Business.Personnel
                 return true;
             else
                 return false;
+        }
+
+        /// <summary>
+        /// 备份部门
+        /// </summary>
+        /// <param name="id">部门ID</param>
+        /// <returns></returns>
+        public bool Backup(int id)
+        {
+            BsonDocument doc = this.context.FindOne(PersonnelCollection.Department, "id", id);
+            doc.Remove("_id");
+
+            bool result = this.backupBusiness.Backup(PersonnelCollection.DepartmentBackup, doc);
+            return result;
         }
 
         /// <summary>

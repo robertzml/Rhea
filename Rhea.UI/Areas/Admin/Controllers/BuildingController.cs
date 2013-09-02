@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Rhea.Business.Account;
 using Rhea.Business.Estate;
+using Rhea.Data;
 using Rhea.Model;
 using Rhea.Model.Account;
 using Rhea.Model.Estate;
@@ -54,7 +55,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             if (buildingGroupId == null)
             {
-                var data = this.buildingBusiness.GetList(true);
+                var data = this.buildingBusiness.GetList().OrderBy(r => r.Id);
                 return View(data);
             }
             else
@@ -113,7 +114,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
                     Time = DateTime.Now,
                     UserId = user._id,
                     UserName = user.Name,
-                    Type = 2
+                    Type = (int)LogType.BuildingCreate
                 };
 
                 bool logok = this.buildingBusiness.Log(bid, log);
@@ -178,7 +179,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
                     Time = DateTime.Now,
                     UserId = user._id,
                     UserName = user.Name,
-                    Type = 3
+                    Type = (int)LogType.BuildingEdit
                 };
 
                 bool logok = this.buildingBusiness.Log(model.Id, log);
@@ -243,7 +244,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 Time = DateTime.Now,
                 UserId = user._id,
                 UserName = user.Name,
-                Type = 4
+                Type = (int)LogType.BuildingDelete
             };
 
             bool logok = this.buildingBusiness.Log(id, log);
@@ -309,7 +310,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
                     Time = DateTime.Now,
                     UserId = user._id,
                     UserName = user.Name,
-                    Type = 5
+                    Type = (int)LogType.FloorCreate
                 };
 
                 bool logok = this.buildingBusiness.Log(buildingId, log);
@@ -382,7 +383,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
                     Time = DateTime.Now,
                     UserId = user._id,
                     UserName = user.Name,
-                    Type = 6
+                    Type = (int)LogType.FloorEdit
                 };
 
                 bool logok = this.buildingBusiness.Log(buildingId, log);
@@ -453,7 +454,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 Time = DateTime.Now,
                 UserId = user._id,
                 UserName = user.Name,
-                Type = 7
+                Type = (int)LogType.FloorDelete
             };
 
             bool logok = this.buildingBusiness.Log(buildingId, log);

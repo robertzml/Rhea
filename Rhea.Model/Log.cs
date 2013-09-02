@@ -39,9 +39,9 @@ namespace Rhea.Model
         public DateTime Time { get; set; }
 
         /// <summary>
-        /// 用户ID
+        /// 编辑人ID
         /// </summary>
-        [Display(Name = "用户ID")]
+        [Display(Name = "编辑人ID")]
         public ObjectId UserId { get; set; }
 
         /// <summary>

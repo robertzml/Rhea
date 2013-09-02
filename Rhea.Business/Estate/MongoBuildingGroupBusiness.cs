@@ -268,10 +268,10 @@ namespace Rhea.Business.Estate
 
             WriteConcernResult result = this.context.Insert(EstateCollection.BuildingGroup, doc);
 
-            if (result.HasLastErrorMessage)
-                return 0;
-            else
+            if (result.Ok)
                 return data.Id;
+            else
+                return 0;
         }
 
         /// <summary>
@@ -310,10 +310,10 @@ namespace Rhea.Business.Estate
 
             WriteConcernResult result = this.context.Update(EstateCollection.BuildingGroup, query, update);
 
-            if (result.HasLastErrorMessage)
-                return false;
-            else
+            if (result.Ok)
                 return true;
+            else
+                return false;
         }
 
         /// <summary>
@@ -329,10 +329,10 @@ namespace Rhea.Business.Estate
 
             WriteConcernResult result = this.context.Update(EstateCollection.BuildingGroup, query, update);
 
-            if (result.HasLastErrorMessage)
-                return false;
-            else
+            if (result.Ok)
                 return true;
+            else
+                return false;
         }
 
         /// <summary>
@@ -369,10 +369,10 @@ namespace Rhea.Business.Estate
 
             WriteConcernResult result = this.context.Update(EstateCollection.BuildingGroup, query, update);
 
-            if (result.HasLastErrorMessage)
-                return false;
-            else
+            if (result.Ok)
                 return true;
+            else
+                return false;
         }
 
         /// <summary>

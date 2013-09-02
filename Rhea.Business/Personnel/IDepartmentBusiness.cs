@@ -92,6 +92,13 @@ namespace Rhea.Business.Personnel
         bool Log(int id, Log log);
 
         /// <summary>
+        /// 备份部门
+        /// </summary>
+        /// <param name="id">部门ID</param>
+        /// <returns></returns>
+        bool Backup(int id);
+
+        /// <summary>
         /// 归档部门
         /// </summary>
         /// <param name="log">相关日志</param>

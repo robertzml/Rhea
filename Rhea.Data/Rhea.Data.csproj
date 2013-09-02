@@ -56,6 +56,7 @@
     <Compile Include="Estate\BuildingModels.cs" />
     <Compile Include="Estate\MiscModels.cs" />
     <Compile Include="Estate\StatisticModels.cs" />
+    <Compile Include="LogType.cs" />
     <Compile Include="Personnel\DepartmentModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server\EstateCollection.cs" />

@@ -755,7 +755,7 @@ namespace Rhea.Business.Estate
         public List<Room> GetAssignHistory(int id)
         {
             List<Room> data = new List<Room>();
-            int assignType = 10;
+            int assignType = (int)Rhea.Data.LogType.RoomAssign;
 
             var currentDoc = this.context.FindOne(EstateCollection.Room, "id", id);
             Room current = ModelBind(currentDoc);
