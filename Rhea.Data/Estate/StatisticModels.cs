@@ -6,6 +6,27 @@ using System.Text;
 namespace Rhea.Data.Estate
 {
     /// <summary>
+    /// 统计主页模型
+    /// </summary>
+    public class StatisticHomeModel
+    {
+        /// <summary>
+        /// 校控房面积
+        /// </summary>
+        public double UniversityControlArea { get; set; }
+
+        /// <summary>
+        /// 校控房比例
+        /// </summary>
+        public double UniversityControlPercentage { get; set; }
+
+        /// <summary>
+        /// 总面积
+        /// </summary>
+        public double TotalArea { get; set; }
+    }
+
+    /// <summary>
     /// 建筑分类面积
     /// </summary>
     public class UseTypeAreaModel

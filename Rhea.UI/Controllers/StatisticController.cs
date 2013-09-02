@@ -43,7 +43,13 @@ namespace Rhea.UI.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-            return View();
+            StatisticHomeModel data = new StatisticHomeModel();
+            IRoomBusiness roomBusiness = new MongoRoomBusiness();
+            data.TotalArea = Math.Round(roomBusiness.TotalArea());
+            data.UniversityControlArea = roomBusiness.FunctionRoomArea(6, 2);
+            data.UniversityControlPercentage = Math.Round(data.UniversityControlArea / data.TotalArea, 3) * 100;
+
+            return View(data);
         }
 
         /// <summary>
@@ -476,7 +482,7 @@ namespace Rhea.UI.Controllers
                 var departments = departmentBusiness.GetList().Where(r => r.Type != 1);
                 foreach (var department in departments)
                 {
-                    Department d = departmentBusiness.Get(department.Id, DepartmentAdditionType.ScaleData | DepartmentAdditionType.ResearchData | DepartmentAdditionType.SpecialAreaData);                  
+                    Department d = departmentBusiness.Get(department.Id, DepartmentAdditionType.ScaleData | DepartmentAdditionType.ResearchData | DepartmentAdditionType.SpecialAreaData);
                     var indicator = indicatorBusiness.GetDepartmentIndicator(d);
                     indicator.ExistingArea = roomBusiness.DepartmentRoomArea(department.Id);
                     if (indicator.DeservedArea == 0)

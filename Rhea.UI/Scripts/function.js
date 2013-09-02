@@ -14,7 +14,7 @@ function ajaxLoadPage(action, controller, area, request) {
 		data: request,
 		success: function (response) {
 			$('#ajax-content1').parent().removeClass('content1-loadstate');
-			$('#ajax-content1').html(response);				
+			$('#ajax-content1').html(response);
 		},
 		error: function (response) {
 			$('#ajax-content1').parent().removeClass('content1-loadstate');
@@ -27,14 +27,14 @@ function ajaxLoadPage(action, controller, area, request) {
 }
 
 function ajaxLoadPage2(action, controller, request) {
-	$('#ajax-content1').parent().addClass('content1-loadstate');	
+	$('#ajax-content1').parent().addClass('content1-loadstate');
 	$.ajax({
 		url: "/" + controller + "/" + action,
 		type: 'get',
 		data: request,
 		success: function (response) {
 			$('#ajax-content1').parent().removeClass('content1-loadstate');
-			$('#ajax-content1').html(response);			
+			$('#ajax-content1').html(response);
 		},
 		error: function (response) {
 			$('#ajax-content1').parent().removeClass('content1-loadstate');
@@ -46,18 +46,18 @@ function ajaxLoadPage2(action, controller, request) {
 	});
 }
 
-function ajaxContentLoadPage(action, controller, area, request, $dom) {	
-	$dom.parent().addClass('content2-loadstate');	
+function ajaxContentLoadPage(action, controller, area, request, $dom) {
+	$dom.parent().addClass('content2-loadstate');
 	$.ajax({
 		url: "/" + area + "/" + controller + "/" + action,
 		type: 'get',
 		data: request,
-		success: function (response) {	
+		success: function (response) {
 			$dom.html(response);
 			$dom.parent().removeClass('content2-loadstate');
 		},
 		error: function (response) {
-			$dom.parent().removeClass('content2-loadstate');	
+			$dom.parent().removeClass('content2-loadstate');
 			noty({
 				text: 'ajax error',
 				type: 'error'
@@ -86,26 +86,27 @@ function ajaxContentLoadPage2(action, controller, request, $dom) {
 	});
 }
 
-function initDataTable($dom) {	
+function initDataTable($dom) {
 	var dt = $dom.dataTable({
 		"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span4'i><'span8'p>>",
-			"sPaginationType": "full_numbers",
-			"bJQueryUI": false,
-			"bAutoWidth": false,
-			"oLanguage": {
-				"sLengthMenu": "每页 _MENU_ 条记录",
-				"sInfo": "显示 _START_ 至 _END_ 共有 _TOTAL_ 条记录",
-				"sInfoEmpty": "记录为空",
-				"sInfoFiltered": " - 从 _MAX_ 条记录中",
-				"sZeroRecords": "结果为空",
-				"sSearch": "搜索:",
-				"oPaginate": {
-					"sFirst": "首页",
-					"sLast": "末页",
-					"sPrevious": "前页",
-					"sNext": "下页"					
-				}				
-			}		
+		"sPaginationType": "full_numbers",
+		"bJQueryUI": false,
+		"bAutoWidth": false,
+		"oLanguage": {
+			"sLengthMenu": "每页 _MENU_ 条记录",
+			"sInfo": "显示 _START_ 至 _END_ 共有 _TOTAL_ 条记录",
+			"sInfoEmpty": "记录为空",
+			"sInfoFiltered": " - 从 _MAX_ 条记录中",
+			"sZeroRecords": "结果为空",
+			"sSearch": "搜索:",
+			"oPaginate": {
+				"sFirst": "首页",
+				"sLast": "末页",
+				"sPrevious": "前页",
+				"sNext": "下页"
+			}
+		},
+		"aaSorting": []		
 	});
 	return dt;
 }
@@ -152,17 +153,17 @@ function setBoxAction() {
 
 	//show minimize and maximize icons
 	widget.hover(function() {
-		    $(this).find('.title>a').show(50);	
+		    $(this).find('.title>a').show(50);
 		}
 		, function(){
-			$(this).find('.title>a').hide();	
+			$(this).find('.title>a').hide();
 	});
 
 	//add shadow if hover box
 	widget.not('.drag').hover(function() {
-		    $(this).addClass('hover');	
+		    $(this).addClass('hover');
 		}
 		, function(){
-			$(this).removeClass('hover');	
+			$(this).removeClass('hover');
 	});
 }

@@ -492,6 +492,32 @@ namespace Rhea.Business.Estate
         }
 
         /// <summary>
+        /// 房间总面积
+        /// </summary>
+        /// <returns></returns>
+        public double TotalArea()
+        {
+            BsonDocument[] pipeline = {              
+                new BsonDocument {
+                    { "$group", new BsonDocument {
+                        { "_id", "1" },
+                        { "area", new BsonDocument {
+                            { "$sum", "$usableArea" }
+                        }}
+                    }}
+                }
+            };
+
+            AggregateResult result = this.context.Aggregate(EstateCollection.Room, pipeline);
+            if (result.ResultDocuments.Count() != 1)
+                return 0;
+
+            BsonDocument doc = result.ResultDocuments.First();
+            double area = doc["area"].AsDouble;
+            return area;
+        }
+
+        /// <summary>
         /// 部门房间使用总面积
         /// </summary>
         /// <param name="departmentId">部门ID</param>
@@ -507,6 +533,40 @@ namespace Rhea.Business.Estate
                 new BsonDocument {
                     { "$group", new BsonDocument {
                         { "_id", "$departmentId" },
+                        { "area", new BsonDocument {
+                            { "$sum", "$usableArea" }
+                        }}
+                    }}
+                }
+            };
+
+            AggregateResult result = this.context.Aggregate(EstateCollection.Room, pipeline);
+            if (result.ResultDocuments.Count() != 1)
+                return 0;
+
+            BsonDocument doc = result.ResultDocuments.First();
+            double area = doc["area"].AsDouble;
+            return area;
+        }
+
+        /// <summary>
+        /// 分功能房间使用面积
+        /// </summary>
+        /// <param name="firstCode">一级编码</param>
+        /// <param name="secondCode">二级编码</param>
+        /// <returns></returns>
+        public double FunctionRoomArea(int firstCode, int secondCode)
+        {
+            BsonDocument[] pipeline = {
+                new BsonDocument {
+                    { "$match", new BsonDocument {
+                        { "function.firstCode", firstCode },
+                        { "function.secondCode", secondCode }
+                    }}
+                },
+                new BsonDocument {
+                    { "$group", new BsonDocument {
+                        { "_id", "$function.firstCode" },
                         { "area", new BsonDocument {
                             { "$sum", "$usableArea" }
                         }}

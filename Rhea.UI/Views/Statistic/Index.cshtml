@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Rhea.Data.Estate.StatisticHomeModel
+@{
     ViewBag.Title = "房产统计";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -10,7 +11,7 @@
 
 <!--Left Sidebar collapse button-->
 <div class="collapseBtn leftbar">
-    <a href="#" class="tipR" title="Hide Left Sidebar"><span class="icon12 icomoon-icon-arrow-first">
+    <a href="#" class="tip" title="Hide Left Sidebar"><span class="icon12 icomoon-icon-arrow-first">
     </span></a>
 </div>
 
@@ -77,13 +78,12 @@
             校控房比例</h5>
         <div class="content">
             <span class="icon16 icomoon-icon-loop left"></span>
-            <div class="progress progress-mini progress-danger left tip" title="87%">
-                <div class="bar" style="width: 87%;">
+            <div class="progress progress-mini progress-danger left tip" title="@Model.UniversityControlPercentage%">
+                <div class="bar" style="width: @Model.UniversityControlPercentage%;">
                 </div>
             </div>
-            <span class="percent">87%</span>
-            <div class="stat">
-                19419.94 / 12000 MB</div>
+            <span class="percent">@Model.UniversityControlPercentage%</span>
+            <div class="stat">@Model.UniversityControlArea / @Model.TotalArea m<sup>2</sup></div>
         </div>
     </div>
     <!-- End .sidenav-widget -->
@@ -97,8 +97,7 @@
                 </div>
             </div>
             <span class="percent">16%</span>
-            <div class="stat">
-                304.44 / 8000 MB</div>
+            <div class="stat">304.44 / 8000 MB</div>
         </div>
     </div>
     <!-- End .sidenav-widget -->
@@ -128,32 +127,32 @@
             return false;
         });
 
-        $('a#building-group-build-area-compare').click(function () {           
+        $('a#building-group-build-area-compare').click(function () {
             ajaxLoadPage2("BuildingGroupBuildAreaCompare", "Statistic", {});
             return false;
         });
 
-        $('a#department-usable-area-compare').click(function () {           
+        $('a#department-usable-area-compare').click(function () {
             ajaxLoadPage2("DepartmentUsableAreaCompare", "Statistic", {});
             return false;
         });
 
-        $('a#department-build-area-compare').click(function () {           
+        $('a#department-build-area-compare').click(function () {
             ajaxLoadPage2("DepartmentBuildAreaCompare", "Statistic", {});
             return false;
         });
 
-        $('a#department-building-area-statistic').click(function () {         
+        $('a#department-building-area-statistic').click(function () {
             ajaxLoadPage2("DepartmentBuildingAreaStatistic", "Statistic", {});
             return false;
         });
 
-        $('a#department-classify-area-statistic').click(function () {         
+        $('a#department-classify-area-statistic').click(function () {
             ajaxLoadPage2("DepartmentClassifyAreaStatistic", "Statistic", {});
             return false;
         });
 
-        $('a#department-classify-area-compare').click(function () {          
+        $('a#department-classify-area-compare').click(function () {
             ajaxLoadPage2("DepartmentClassifyAreaCompare", "Statistic", {});
             return false;
         });

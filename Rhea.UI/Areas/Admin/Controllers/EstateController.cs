@@ -217,7 +217,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
         public ActionResult LogList()
         {
             ILogBusiness logBusiness = new MongoLogBusiness();
-            var data = logBusiness.GetList().OrderBy(r => r.Time);
+            var data = logBusiness.GetList().OrderByDescending(r => r.Time);
 
             return View(data);
         }

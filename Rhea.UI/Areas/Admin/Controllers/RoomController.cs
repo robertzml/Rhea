@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Rhea.Business;
 using Rhea.Business.Account;
 using Rhea.Business.Estate;
 using Rhea.Model;
@@ -90,7 +91,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
             room.HasTestBed = model.HasTestBed;
             room.UsageCharge = model.UsageCharge;
 
-            EstateDictionaryBusiness dictionaryBusiness = new EstateDictionaryBusiness(); 
+            EstateDictionaryBusiness dictionaryBusiness = new EstateDictionaryBusiness();
             RoomFunctionCode code = dictionaryBusiness.GetRoomFunctionCode().First(r => r.CodeId == model.FunctionCodeId);
             room.Function = new Room.RoomFunction
             {
@@ -236,7 +237,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 Log log = new Log
                 {
                     Title = "添加房间",
-                    Content = string.Format("添加房间, ID:{0}, 名称:{1}.", rid, model.Name),
+                    Content = string.Format("添加房间, ID:{0}, 名称:{1}, 编号:{2}, 所属楼宇:{3}.", rid, room.Name, room.Number, room.BuildingName()),
                     Time = DateTime.Now,
                     UserId = user._id,
                     UserName = user.Name,
@@ -306,7 +307,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 Log log = new Log
                 {
                     Title = "编辑房间",
-                    Content = string.Format("编辑房间, ID:{0}, 名称:{1}.", room.Id, room.Name),
+                    Content = string.Format("编辑房间, ID:{0}, 名称:{1}, 编号:{2}, 所属楼宇:{3}.", room.Id, room.Name, room.Number, room.BuildingName()),
                     Time = DateTime.Now,
                     UserId = user._id,
                     UserName = user.Name,
@@ -366,10 +367,11 @@ namespace Rhea.UI.Areas.Admin.Controllers
 
             //log
             var user = GetUser();
+            var room = this.roomBusiness.Get(id);
             Log log = new Log
             {
                 Title = "删除房间",
-                Content = string.Format("删除房间, ID:{0}.", id),
+                Content = string.Format("删除房间, ID:{0}, 名称:{1}, 编号:{2}, 所属楼宇:{3}.", id, room.Name, room.Number, room.BuildingName()),
                 Time = DateTime.Now,
                 UserId = user._id,
                 UserName = user.Name,
@@ -419,7 +421,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 UserName = user.Name,
                 Type = 20,
                 RelateTime = date
-            };           
+            };
 
             this.roomBusiness.Archive(log);
 

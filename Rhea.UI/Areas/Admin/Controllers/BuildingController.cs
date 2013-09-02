@@ -235,10 +235,11 @@ namespace Rhea.UI.Areas.Admin.Controllers
 
             //log
             var user = GetUser();
+            string bdName = this.buildingBusiness.GetName(id);
             Log log = new Log
             {
                 Title = "删除楼宇",
-                Content = string.Format("删除楼宇, ID:{0}.", id),
+                Content = string.Format("删除楼宇, ID:{0}, 名称:{1}.", id, bdName),
                 Time = DateTime.Now,
                 UserId = user._id,
                 UserName = user.Name,
@@ -300,10 +301,11 @@ namespace Rhea.UI.Areas.Admin.Controllers
 
                 //log
                 var user = GetUser();
+                string bdName = this.buildingBusiness.GetName(buildingId);
                 Log log = new Log
                 {
                     Title = "添加楼层",
-                    Content = string.Format("添加楼层, ID:{0}, 名称:{1}, 楼宇ID:{2}.", fid, model.Name, buildingId),
+                    Content = string.Format("添加楼层, ID:{0}, 名称:{1}, 楼宇ID:{2}, 楼宇名称:{3}.", fid, model.Name, buildingId, bdName),
                     Time = DateTime.Now,
                     UserId = user._id,
                     UserName = user.Name,
@@ -372,10 +374,11 @@ namespace Rhea.UI.Areas.Admin.Controllers
 
                 //log
                 var user = GetUser();
+                string bdName = this.buildingBusiness.GetName(buildingId);
                 Log log = new Log
                 {
                     Title = "编辑楼层",
-                    Content = string.Format("编辑楼层, ID:{0}, 名称:{1}, 楼宇ID:{2}.", model.Id, model.Name, buildingId),
+                    Content = string.Format("编辑楼层, ID:{0}, 名称:{1}, 楼宇ID:{2}, 楼宇名称:{3}.", model.Id, model.Name, buildingId, bdName),
                     Time = DateTime.Now,
                     UserId = user._id,
                     UserName = user.Name,
@@ -442,10 +445,11 @@ namespace Rhea.UI.Areas.Admin.Controllers
 
             //log
             var user = GetUser();
+            string bdName = this.buildingBusiness.GetName(buildingId);
             Log log = new Log
             {
                 Title = "删除楼层",
-                Content = string.Format("删除楼层, ID:{0}, 楼宇ID:{1}.", id, buildingId),
+                Content = string.Format("删除楼层, ID:{0}, 楼宇ID:{1}, 楼宇名称:{2}.", id, buildingId, bdName),
                 Time = DateTime.Now,
                 UserId = user._id,
                 UserName = user.Name,

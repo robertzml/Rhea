@@ -20,7 +20,16 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-            return View();
+            EstateHomeModel data = new EstateHomeModel();
+
+            EstateMiscBusiness miscBusiness = new EstateMiscBusiness();
+            var lands = miscBusiness.GetLandType();
+            data.LandArea = lands.Single(r => r.Name == "landArea").Area;
+            data.WaterArea = lands.Single(r => r.Name == "waterArea").Area;
+
+            data.LandPercentage = Math.Round(data.LandArea / (data.LandArea + data.WaterArea), 2) * 100;
+
+            return View(data);
         }
 
         /// <summary>

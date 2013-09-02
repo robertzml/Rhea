@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Rhea.UI.Areas.Estate.Models.EstateHomeModel
+@{
     ViewBag.Title = "房产概况";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -9,8 +10,8 @@
 <div class="resBtn">
     <a href="#"><span class="icon16 icomoon-icon-list-view-2"></span></a>
 </div>
-        
-<!--Left Sidebar collapse button-->  
+
+<!--Left Sidebar collapse button-->
 <div class="collapseBtn leftbar">
     <a href="#" class="tip" data-placement="bottom" data-toggle="tooltip" title="Hide"><span class="icon12 icomoon-icon-arrow-first"></span></a>
 </div>
@@ -45,16 +46,15 @@
     </div><!-- End sidenav -->
 
     <div class="sidebar-widget">
-        <h5 class="title">附加显示数据1</h5>
+        <h5 class="title">陆地面积</h5>
         <div class="content">
             <span class="icon16 icomoon-icon-loop left"></span>
-            <div class="progress progress-mini progress-danger left tip" title="87%">
-                <div class="bar" style="width: 87%;"></div>
+            <div class="progress progress-mini progress-danger left tip" title="@Model.LandPercentage%">
+                <div class="bar" style="width: @Model.LandPercentage%;"></div>
             </div>
-            <span class="percent">87%</span>
-            <div class="stat">19419.94 / 12000 MB</div>
+            <span class="percent">@Model.LandPercentage%</span>
+            <div class="stat">@Model.LandArea / @(Model.LandArea + Model.WaterArea) m<sup>2</sup></div>
         </div>
-
     </div><!-- End .sidenav-widget -->
 
     <div class="sidebar-widget">
@@ -69,31 +69,16 @@
         </div>
     </div><!-- End .sidenav-widget -->
 
-    <div class="sidebar-widget">
-        <h5 class="title">附加显示数据3</h5>
-        <div class="content">
-            <div class="rightnow">
-                <ul class="unstyled">
-                    <li><span class="number">34</span><span class="icon16 icomoon-icon-new-2"></span>Posts</li>
-                    <li><span class="number">7</span><span class="icon16 icomoon-icon-file"></span>Pages</li>
-                    <li><span class="number">14</span><span class="icon16 icomoon-icon-list-view"></span>Categories</li>
-                    <li><span class="number">201</span><span class="icon16 icomoon-icon-tag"></span>Tags</li>
-                </ul>
-            </div>
-        </div>
-    </div><!-- End .sidenav-widget -->
-
 </div><!-- End #sidebar -->
 
 <!--Body content-->
 <div id="content" class="clearfix">
-    <div class="contentwrapper">        
+    <div class="contentwrapper">
         <!-- Build page from here: -->
-        <div id="ajax-content1">            
+        <div id="ajax-content1">
             @Html.Action("Summary", new { controller = "Home", area = "Estate" })
         </div>
         <!--End page -->
-                
     </div>
 </div><!-- End #content -->
 

@@ -119,11 +119,25 @@ namespace Rhea.Business.Estate
         int CountByDepartment(int departmentId);
 
         /// <summary>
+        /// 房间总面积
+        /// </summary>
+        /// <returns></returns>
+        double TotalArea();
+
+        /// <summary>
         /// 部门房间使用总面积
         /// </summary>
         /// <param name="departmentId">部门ID</param>
         /// <returns></returns>
         double DepartmentRoomArea(int departmentId);
+
+        /// <summary>
+        /// 分功能房间使用面积
+        /// </summary>
+        /// <param name="firstCode">一级编码</param>
+        /// <param name="secondCode">二级编码</param>
+        /// <returns></returns>
+        double FunctionRoomArea(int firstCode, int secondCode);
 
         /// <summary>
         /// 导出房间
