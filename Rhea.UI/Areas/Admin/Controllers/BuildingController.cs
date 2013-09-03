@@ -469,6 +469,76 @@ namespace Rhea.UI.Areas.Admin.Controllers
         }
 
         /// <summary>
+        /// 上传平面图
+        /// </summary>
+        /// <param name="buildingId">楼宇ID</param>
+        /// <param name="floorId">楼层ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult UploadSvg(int buildingId, int floorId)
+        {
+            ViewBag.BuildingId = buildingId;
+            var data = this.buildingBusiness.GetFloor(floorId);
+
+            return View(data);
+        }
+
+        /// <summary>
+        /// 上传平面图
+        /// </summary>
+        /// <param name="model">楼层模型</param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult UploadSvg(Floor model)
+        {
+            int buildingId = Convert.ToInt32(Request.Form["BuildingId"]);
+            string oldSvg = Request.Form["OldSvg"];
+            ViewBag.BuildingId = buildingId;
+
+            //backup
+            bool backok = this.buildingBusiness.Backup(buildingId);
+            if (!backok)
+            {
+                ModelState.AddModelError("", "备份失败");               
+                return View(model);
+            }
+
+            //edit
+            bool editok = this.buildingBusiness.EditFloorSvg(buildingId, model.Id, model.ImageUrl);
+            if (!editok)
+            {
+                ModelState.AddModelError("", "修改失败");               
+                return View(model);
+            }
+
+            //log
+            var user = GetUser();
+            string bdName = this.buildingBusiness.GetName(buildingId);
+            Log log = new Log
+            {
+                Title = "上传楼层平面图",
+                Content = string.Format("上传楼层平面图, ID:{0}, 名称:{1}, 楼宇ID:{2}, 楼宇名称:{3}，原平面图:{4}, 新平面图:{5}.", 
+                    model.Id, model.Name, buildingId, bdName, oldSvg, model.ImageUrl),
+                Time = DateTime.Now,
+                UserId = user._id,
+                UserName = user.Name,
+                Type = (int)LogType.FloorSvgUpload
+            };
+
+            bool logok = this.buildingBusiness.Log(buildingId, log);
+            if (!logok)
+            {
+                ModelState.AddModelError("", "记录日志失败");
+                ViewBag.BuildingId = buildingId;
+                return View(model);
+            }
+
+
+            TempData["Message"] = "修改平面图成功";
+            return RedirectToAction("Details", "Building", new { area = "Admin", id = buildingId });
+        }
+
+        /// <summary>
         /// 导出楼宇
         /// </summary>
         /// <returns></returns>

@@ -1,0 +1,154 @@
+﻿@model Rhea.Model.Estate.Floor
+
+@{
+    ViewBag.Title = "上传平面图";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Estate.cshtml";
+}
+
+<link rel="stylesheet" href="/Plugins/files/fileupload/css/jquery.fileupload-ui.css">
+
+<div class="box">
+    <div class="box-header well" data-original-title>
+        <h2>
+            <i class="icon-tasks"></i>楼层编辑</h2>
+    </div>
+
+    <div class="box-content">
+        <div class="row-fluid">
+            <div class="span12">
+
+                @using (Html.BeginForm("UploadSvg", "Building", new { area = "Admin" }, FormMethod.Post, new { @class = "form-horizontal" }))
+                {    
+                    @Html.ValidationSummary(true)
+                    <fieldset>
+                        <legend>@ViewBag.Title</legend>
+
+                        @Html.HiddenFor(model => model.Id)
+                        @Html.Hidden("BuildingId")
+                        @Html.Hidden("OldSvg", Model.ImageUrl)
+
+                        <div class="control-group">
+                            <label class="control-label" for="Number">楼层编号</label>
+                            <div class="controls">
+                                @Html.TextBoxFor(model => model.Number, new { @readonly = "readonly" })
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label" for="Name">楼层名称</label>
+                            <div class="controls">
+                                @Html.TextBoxFor(model => model.Name, new { @readonly = "readonly" })
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label" for="ImageUrl">平面图</label>
+                            <div class="controls">
+                                @Html.TextBoxFor(model => model.ImageUrl, new { @readonly = "readonly" })
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <div class="controls">
+                                <button type="submit" class="btn btn-primary">保存</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                }
+
+                <span class="btn btn-success fileinput-button">
+                    <i class="icon-upload"></i>
+                    <span>选择文件</span>
+                    <!-- The file input field used as target for the file upload widget -->
+                    <input id="fileupload" type="file" name="files[]" multiple>
+                </span>
+                <br /><br />
+
+                <!-- The global progress bar -->
+                <div id="progress" class="progress progress-striped">
+                    <div class="bar"></div>
+                </div>
+
+                <!-- The container for the uploaded files -->
+                <div id="files" class="files"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+<script src="/Plugins/files/fileupload/js/jquery.iframe-transport.js" type="text/javascript"></script>
+<!-- The basic File Upload plugin -->
+<script src="/Plugins/files/fileupload/js/jquery.fileupload.js" type="text/javascript"></script>
+<script src="/Plugins/files/fileupload/js/jquery.fileupload-process.js" type="text/javascript"></script>
+<script src="/Plugins/files/fileupload/js/jquery.fileupload-validate.js" type="text/javascript"></script>
+<script src="/Plugins/files/fileupload/js/jquery.fileupload-ui.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        var menu = $('a#building-manage');
+        menuNavActive(menu);
+
+        var uploadButton = $('<button/>')
+                .addClass('btn btn-info')
+                .prop('disabled', true)
+                .text('处理中...')
+                .on('click', function () {
+                    var $this = $(this),
+                    data = $this.data();
+                    $this.off('click').text('中止').on('click', function () {
+                        $this.remove();
+                        data.abort();
+                    });
+                    data.submit().always(function () {
+                        $this.remove();
+                    });
+                });
+
+        $('#fileupload').fileupload({
+            url: "/Services/UploadHandler.ashx",
+            dataType: 'json',
+            acceptFileTypes: /(\.|\/)(svg)$/i,  // /(\.|\/)(gif|jpe?g|png)$/i,
+            autoUpload: false,
+            maxNumberOfFiles: 1
+        }).on('fileuploadadd', function (e, data) {
+            data.context = $('<div/>').appendTo('#files');
+            $.each(data.files, function (index, file) {
+                var node = $('<p/>').append($('<span/>').text(file.name));
+                if (!index) {
+                    node.append('<br>').append(uploadButton.clone(true).data(data));
+                }
+                node.appendTo(data.context);
+            });
+        }).on('fileuploadprocessalways', function (e, data) {
+            var index = data.index,
+                file = data.files[index],
+                node = $(data.context.children()[index]);
+            if (file.preview) {
+                node.prepend('<br>').prepend(file.preview);
+            }
+            if (file.error) {
+                node.append('<br>').append(file.error);
+            }
+            if (index + 1 === data.files.length) {
+                data.context.find('button').text('上传').prop('disabled', !!data.files.error);
+            }
+        }).on('fileuploadprogressall', function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $('#progress .bar').css(
+                'width', progress + '%'
+            );
+        }).on('fileuploaddone', function (e, data) {
+            $.each(data.result, function (index, file) {
+                $('<p/>').text(file.name + ", 上传完成!").appendTo('#files');
+                $('#ImageUrl').val(file.name);
+            });
+        }).on('fileuploadfail', function (e, data) {
+            $.each(data.result, function (index, file) {
+                var error = $('<span/>').text(file.error);
+                $(data.context.children()[index]).append('<br>').append(error);
+            });
+        });
+
+    });
+</script>
+}

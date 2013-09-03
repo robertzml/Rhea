@@ -203,8 +203,12 @@
     <Compile Include="Models\NavModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ContextExtension.cs" />
+    <Compile Include="Services\FilesStatus.cs" />
     <Compile Include="Services\FormsAuthenticationService.cs" />
     <Compile Include="Services\IFormsAuthenticationService.cs" />
+    <Compile Include="Services\UploadHandler.ashx.cs">
+      <DependentUpon>UploadHandler.ashx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-responsive.css" />
@@ -370,39 +374,18 @@
     <Content Include="Plugins\charts\sparkline\index.html" />
     <Content Include="Plugins\charts\sparkline\jquery.sparkline.js" />
     <Content Include="Plugins\charts\sparkline\jquery.sparkline.min.js" />
-    <Content Include="Plugins\files\elfinder\elfinder.css" />
-    <Content Include="Plugins\files\elfinder\elfinder.min.js" />
-    <Content Include="Plugins\files\elfinder\i18n\elfinder.ar.js" />
-    <Content Include="Plugins\files\elfinder\i18n\elfinder.bg.js" />
-    <Content Include="Plugins\files\elfinder\i18n\elfinder.ca.js" />
-    <Content Include="Plugins\files\elfinder\i18n\elfinder.cs.js" />
-    <Content Include="Plugins\files\elfinder\i18n\elfinder.de.js" />
-    <Content Include="Plugins\files\elfinder\i18n\elfinder.es.js" />
-    <Content Include="Plugins\files\elfinder\i18n\elfinder.fr.js" />
-    <Content Include="Plugins\files\elfinder\i18n\elfinder.hu.js" />
-    <Content Include="Plugins\files\elfinder\i18n\elfinder.jp.js" />
-    <Content Include="Plugins\files\elfinder\i18n\elfinder.LANG.js" />
-    <Content Include="Plugins\files\elfinder\i18n\elfinder.nl.js" />
-    <Content Include="Plugins\files\elfinder\i18n\elfinder.no.js" />
-    <Content Include="Plugins\files\elfinder\i18n\elfinder.pl.js" />
-    <Content Include="Plugins\files\elfinder\i18n\elfinder.pt_BR.js" />
-    <Content Include="Plugins\files\elfinder\i18n\elfinder.ru.js" />
-    <Content Include="Plugins\files\elfinder\i18n\elfinder.zh_CN.js" />
-    <Content Include="Plugins\files\elfinder\images\arrows-active.png" />
-    <Content Include="Plugins\files\elfinder\images\arrows-normal.png" />
-    <Content Include="Plugins\files\elfinder\images\crop.gif" />
-    <Content Include="Plugins\files\elfinder\images\dialogs.png" />
-    <Content Include="Plugins\files\elfinder\images\icons-big.png" />
-    <Content Include="Plugins\files\elfinder\images\icons-small.png" />
-    <Content Include="Plugins\files\elfinder\images\logo.png" />
-    <Content Include="Plugins\files\elfinder\images\progress.gif" />
-    <Content Include="Plugins\files\elfinder\images\quicklook-bg.png" />
-    <Content Include="Plugins\files\elfinder\images\quicklook-icons.png" />
-    <Content Include="Plugins\files\elfinder\images\resize.png" />
-    <Content Include="Plugins\files\elfinder\images\spinner-mini.gif" />
-    <Content Include="Plugins\files\elfinder\images\toolbar.png" />
-    <Content Include="Plugins\files\elfinder\proxy\elFinderSupportVer1.js" />
-    <Content Include="Plugins\files\elfinder\theme.css" />
+    <Content Include="Plugins\files\fileupload\css\jquery.fileupload-ui.css" />
+    <Content Include="Plugins\files\fileupload\img\loading.gif" />
+    <Content Include="Plugins\files\fileupload\img\progressbar.gif" />
+    <Content Include="Plugins\files\fileupload\js\jquery.fileupload-audio.js" />
+    <Content Include="Plugins\files\fileupload\js\jquery.fileupload-image.js" />
+    <Content Include="Plugins\files\fileupload\js\jquery.fileupload-jquery-ui.js" />
+    <Content Include="Plugins\files\fileupload\js\jquery.fileupload-process.js" />
+    <Content Include="Plugins\files\fileupload\js\jquery.fileupload-ui.js" />
+    <Content Include="Plugins\files\fileupload\js\jquery.fileupload-validate.js" />
+    <Content Include="Plugins\files\fileupload\js\jquery.fileupload-video.js" />
+    <Content Include="Plugins\files\fileupload\js\jquery.fileupload.js" />
+    <Content Include="Plugins\files\fileupload\js\jquery.iframe-transport.js" />
     <Content Include="Plugins\files\plupload\i18n\cs.js" />
     <Content Include="Plugins\files\plupload\i18n\da.js" />
     <Content Include="Plugins\files\plupload\i18n\de.js" />
@@ -973,40 +956,12 @@
     <Content Include="Plugins\map\smartmap\images\map\setup.png" />
     <Content Include="Plugins\map\smartmap\jquery.mapbox.js" />
     <Content Include="Plugins\map\smartmap\smartmap.js" />
-    <Content Include="Plugins\misc\animated-progress-bar\jquery.progressbar.js" />
     <Content Include="Plugins\misc\fullcalendar\fullcalendar.css" />
     <Content Include="Plugins\misc\fullcalendar\fullcalendar.js" />
     <Content Include="Plugins\misc\fullcalendar\fullcalendar.min.js" />
     <Content Include="Plugins\misc\fullcalendar\fullcalendar.print.css" />
     <Content Include="Plugins\misc\fullcalendar\gcal.js" />
     <Content Include="Plugins\misc\fullcalendar\index.html" />
-    <Content Include="Plugins\misc\jqueryFileTree\images\application.png" />
-    <Content Include="Plugins\misc\jqueryFileTree\images\code.png" />
-    <Content Include="Plugins\misc\jqueryFileTree\images\css.png" />
-    <Content Include="Plugins\misc\jqueryFileTree\images\db.png" />
-    <Content Include="Plugins\misc\jqueryFileTree\images\directory.png" />
-    <Content Include="Plugins\misc\jqueryFileTree\images\doc.png" />
-    <Content Include="Plugins\misc\jqueryFileTree\images\file.png" />
-    <Content Include="Plugins\misc\jqueryFileTree\images\film.png" />
-    <Content Include="Plugins\misc\jqueryFileTree\images\flash.png" />
-    <Content Include="Plugins\misc\jqueryFileTree\images\folder_open.png" />
-    <Content Include="Plugins\misc\jqueryFileTree\images\html.png" />
-    <Content Include="Plugins\misc\jqueryFileTree\images\java.png" />
-    <Content Include="Plugins\misc\jqueryFileTree\images\linux.png" />
-    <Content Include="Plugins\misc\jqueryFileTree\images\music.png" />
-    <Content Include="Plugins\misc\jqueryFileTree\images\pdf.png" />
-    <Content Include="Plugins\misc\jqueryFileTree\images\php.png" />
-    <Content Include="Plugins\misc\jqueryFileTree\images\picture.png" />
-    <Content Include="Plugins\misc\jqueryFileTree\images\ppt.png" />
-    <Content Include="Plugins\misc\jqueryFileTree\images\psd.png" />
-    <Content Include="Plugins\misc\jqueryFileTree\images\ruby.png" />
-    <Content Include="Plugins\misc\jqueryFileTree\images\script.png" />
-    <Content Include="Plugins\misc\jqueryFileTree\images\spinner.gif" />
-    <Content Include="Plugins\misc\jqueryFileTree\images\txt.png" />
-    <Content Include="Plugins\misc\jqueryFileTree\images\xls.png" />
-    <Content Include="Plugins\misc\jqueryFileTree\images\zip.png" />
-    <Content Include="Plugins\misc\jqueryFileTree\jqueryFileTree.css" />
-    <Content Include="Plugins\misc\jqueryFileTree\jqueryFileTree.js" />
     <Content Include="Plugins\misc\nicescroll\jquery.nicescroll.js" />
     <Content Include="Plugins\misc\nicescroll\jquery.nicescroll.min.js" />
     <Content Include="Plugins\misc\nicescroll\zoomico.png" />
@@ -1025,9 +980,6 @@
     <Content Include="Plugins\misc\noty\layouts\topRight.js" />
     <Content Include="Plugins\misc\noty\promise.js" />
     <Content Include="Plugins\misc\noty\themes\default.js" />
-    <Content Include="Plugins\misc\pnotify\jquery.pnotify.default.css" />
-    <Content Include="Plugins\misc\pnotify\jquery.pnotify.js" />
-    <Content Include="Plugins\misc\pnotify\jquery.pnotify.min.js" />
     <Content Include="Plugins\misc\prettify\lang-apollo.js" />
     <Content Include="Plugins\misc\prettify\lang-clj.js" />
     <Content Include="Plugins\misc\prettify\lang-css.js" />
@@ -1452,6 +1404,7 @@
     <Content Include="Areas\Admin\Views\Estate\FunctionCode.cshtml" />
     <Content Include="Areas\Estate\Views\Home\LandCertificate.cshtml" />
     <Content Include="Areas\Admin\Views\Estate\LogDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\Building\UploadSvg.cshtml" />
     <None Include="Content\fonts\icomoon.eot" />
     <None Include="Content\fonts\icomoon.ttf" />
     <None Include="Content\fonts\icomoon.woff" />
@@ -1474,6 +1427,7 @@
     <Content Include="Views\Home\Map.cshtml" />
     <Content Include="Views\Statistic\DepartmentIndicatorCompare.cshtml" />
     <Content Include="Views\Statistic\InstitutionIndicatorCompare.cshtml" />
+    <Content Include="Services\UploadHandler.ashx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -213,7 +213,7 @@ namespace Rhea.Model.Personnel
         /// <summary>
         /// 副校长(书记)
         /// </summary>
-        [Display(Name = "正校长(书记)")]
+        [Display(Name = "副校长(书记)")]
         public int VicePresidentCount { get; set; }
 
         /// <summary>

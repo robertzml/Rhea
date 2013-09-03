@@ -101,6 +101,15 @@ namespace Rhea.Business.Estate
         bool DeleteFloor(int buildingId, int floorId);
 
         /// <summary>
+        /// 编辑楼层平面图
+        /// </summary>
+        /// <param name="buildingId">楼宇ID</param>
+        /// <param name="floorId">楼层ID</param>
+        /// <param name="svgUrl">平面图路径</param>
+        /// <returns></returns>
+        bool EditFloorSvg(int buildingId, int floorId, string svgUrl);
+
+        /// <summary>
         /// 获取楼宇总数
         /// </summary>
         /// <returns></returns>

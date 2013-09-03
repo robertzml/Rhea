@@ -90,6 +90,12 @@ namespace Rhea.Data
         FloorDelete = 35,
 
         /// <summary>
+        /// 上传楼层平面图
+        /// </summary>
+        [Display(Name = "上传楼层平面图")]
+        FloorSvgUpload = 36,
+
+        /// <summary>
         /// 房间添加
         /// </summary>
         [Display(Name = "房间添加")]

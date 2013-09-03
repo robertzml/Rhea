@@ -169,6 +169,7 @@
                                 @item.ImageUrl
                             </td>
                             <td>
+                                <a class="btn btn-info btn-small" href="@Url.Action("UploadSvg", new { controller = "Building", buildingId = Model.Id, floorId = item.Id, area = "Admin" })"><i class="icon-upload icon-white"></i> 上传平面图</a>
                                 <a class="btn btn-warning btn-small" href="@Url.Action("EditFloor", new { controller = "Building", buildingId = Model.Id, floorId = item.Id, area = "Admin" })"><i class="icon-edit icon-white"></i> 编辑</a> 
                                 <a class="btn btn-danger btn-small" href="@Url.Action("DeleteFloor", new { controller = "Building", buildingId = Model.Id, floorId = item.Id, area = "Admin" })"><i class="icon-remove icon-white"></i> 删除</a>
                             </td>
@@ -181,9 +182,11 @@
     </div>
 </div>
 
+@section scripts {
 <script type="text/javascript">
     $(function () {
         var menu = $('a#building-manage');
         menuNavActive(menu);
     });
 </script>
+}

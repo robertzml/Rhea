@@ -415,10 +415,10 @@ namespace Rhea.Business.Estate
 
             WriteConcernResult result = this.context.Update(EstateCollection.Building, query, update);
 
-            if (result.HasLastErrorMessage)
-                return false;
-            else
+            if (result.Ok)
                 return true;
+            else
+                return false;
         }
 
         /// <summary>
@@ -436,10 +436,32 @@ namespace Rhea.Business.Estate
 
             WriteConcernResult result = this.context.Update(EstateCollection.Building, query, update);
 
-            if (result.HasLastErrorMessage)
-                return false;
-            else
+            if (result.Ok)
                 return true;
+            else
+                return false;
+        }
+
+        /// <summary>
+        /// 编辑楼层平面图
+        /// </summary>
+        /// <param name="buildingId">楼宇ID</param>
+        /// <param name="floorId">楼层ID</param>
+        /// <param name="svgUrl">平面图路径</param>
+        /// <returns></returns>
+        public bool EditFloorSvg(int buildingId, int floorId, string svgUrl)
+        {
+            var query = Query.And(Query.EQ("id", buildingId),
+                Query.EQ("floors.id", floorId));
+
+            var update = Update.Set("floors.$.imageUrl", svgUrl);
+
+            WriteConcernResult result = this.context.Update(EstateCollection.Building, query, update);
+
+            if (result.Ok)
+                return true;
+            else
+                return false;
         }
 
         /// <summary>
