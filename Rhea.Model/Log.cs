@@ -61,5 +61,11 @@ namespace Rhea.Model
         /// </summary>
         [Display(Name = "相关时间")]
         public DateTime? RelateTime { get; set; }
+
+        /// <summary>
+        /// 附属标记
+        /// </summary>
+        [Display(Name = "附属标记")]
+        public string Tag { get; set; }
     }
 }

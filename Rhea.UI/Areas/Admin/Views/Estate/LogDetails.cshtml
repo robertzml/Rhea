@@ -7,10 +7,10 @@
 
 <div class="box">
     <div class="box-header well" data-original-title>
-        <h2><i class="icon-tasks"></i>@ViewBag.Title</h2>    
+        <h2><i class="icon-tasks"></i>@ViewBag.Title</h2>
     </div>
 
-    <div class="box-content">    
+    <div class="box-content">
         <div class="page-header">
             <h2>
                 @Model.Title <small>Id: @Model._id</small></h2>
@@ -88,6 +88,14 @@
                         </tr>
                         <tr>
                             <td>
+                                @Html.DisplayNameFor(model => model.Tag)
+                            </td>
+                            <td>
+                                @Model.Tag
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 @Html.DisplayNameFor(model => model.Type)
                             </td>
                             <td>
@@ -100,7 +108,7 @@
         </div>
 
         <p>
-            <a class="btn btn-success" href="@Url.Action("LogList", new { controller = "Estate", area = "Admin" })"><i class="icon-list icon-white"></i> 日志列表</a> 
+            <a class="btn btn-success" href="@Url.Action("LogList", new { controller = "Estate", area = "Admin" })"><i class="icon-list icon-white"></i> 日志列表</a>
         </p>
     </div>
 </div>

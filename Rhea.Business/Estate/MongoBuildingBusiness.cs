@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using MongoDB.Bson;
@@ -465,6 +466,36 @@ namespace Rhea.Business.Estate
         }
 
         /// <summary>
+        /// 备份楼层平面图
+        /// </summary>
+        /// <param name="baseFolder">网站根目录</param>
+        /// <param name="svgFileName">原平面图名称</param>
+        /// <returns>备份SVG文件名</returns>
+        public string BackupFloorSvg(string baseFolder, string svgFileName)
+        {
+            string oldFilePath = baseFolder + RheaConstant.SvgRoot + svgFileName;
+
+            if (!File.Exists(oldFilePath))
+                return "";
+
+            string name = svgFileName.Substring(0, svgFileName.LastIndexOf('.'));
+            string ext = svgFileName.Substring(svgFileName.LastIndexOf('.') + 1);
+            DateTime now = DateTime.Now;
+            string newFileName = string.Format("{0}-{1}{2}{3}{4}{5}{6}.{7}", name, now.Year, now.Month, now.Day,
+                now.Hour, now.Minute, now.Second, ext);
+
+            try
+            {
+                File.Copy(oldFilePath, baseFolder + RheaConstant.SvgBackup + newFileName);
+            }
+            catch (Exception)
+            {
+                return "";
+            }
+            return newFileName;
+        }
+
+        /// <summary>
         /// 备份楼宇
         /// </summary>
         /// <param name="id">楼宇ID</param>    
@@ -605,10 +636,10 @@ namespace Rhea.Business.Estate
 
             WriteConcernResult result = this.context.Update(EstateCollection.Building, query, update);
 
-            if (result.HasLastErrorMessage)
-                return false;
-            else
+            if (result.Ok)
                 return true;
+            else
+                return false;
         }
 
         /// <summary>

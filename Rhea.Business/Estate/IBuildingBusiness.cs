@@ -110,6 +110,14 @@ namespace Rhea.Business.Estate
         bool EditFloorSvg(int buildingId, int floorId, string svgUrl);
 
         /// <summary>
+        /// 备份楼层平面图
+        /// </summary>
+        /// <param name="baseFolder">网站根目录</param>
+        /// <param name="svgFileName">原平面图名称</param>
+        /// <returns>备份SVG文件名</returns>
+        string BackupFloorSvg(string baseFolder, string svgFileName);
+
+        /// <summary>
         /// 获取楼宇总数
         /// </summary>
         /// <returns></returns>

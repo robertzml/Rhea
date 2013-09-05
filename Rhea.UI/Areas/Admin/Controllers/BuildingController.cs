@@ -496,10 +496,17 @@ namespace Rhea.UI.Areas.Admin.Controllers
             ViewBag.BuildingId = buildingId;
 
             //backup
+            string backsvg = this.buildingBusiness.BackupFloorSvg(Request.MapPath("~"), oldSvg);
+            if (string.IsNullOrEmpty(backsvg))
+            {
+                ModelState.AddModelError("", "备份SVG失败");
+                return View(model);
+            }
+
             bool backok = this.buildingBusiness.Backup(buildingId);
             if (!backok)
             {
-                ModelState.AddModelError("", "备份失败");               
+                ModelState.AddModelError("", "备份失败");
                 return View(model);
             }
 
@@ -507,7 +514,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
             bool editok = this.buildingBusiness.EditFloorSvg(buildingId, model.Id, model.ImageUrl);
             if (!editok)
             {
-                ModelState.AddModelError("", "修改失败");               
+                ModelState.AddModelError("", "修改失败");
                 return View(model);
             }
 
@@ -517,12 +524,13 @@ namespace Rhea.UI.Areas.Admin.Controllers
             Log log = new Log
             {
                 Title = "上传楼层平面图",
-                Content = string.Format("上传楼层平面图, ID:{0}, 名称:{1}, 楼宇ID:{2}, 楼宇名称:{3}，原平面图:{4}, 新平面图:{5}.", 
-                    model.Id, model.Name, buildingId, bdName, oldSvg, model.ImageUrl),
+                Content = string.Format("上传楼层平面图, ID:{0}, 名称:{1}, 楼宇ID:{2}, 楼宇名称:{3}，备份平面图:{4}, 新平面图:{5}.",
+                    model.Id, model.Name, buildingId, bdName, backsvg, model.ImageUrl),
                 Time = DateTime.Now,
                 UserId = user._id,
                 UserName = user.Name,
-                Type = (int)LogType.FloorSvgUpload
+                Type = (int)LogType.FloorSvgUpload,
+                Tag = backsvg
             };
 
             bool logok = this.buildingBusiness.Log(buildingId, log);
@@ -532,7 +540,6 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 ViewBag.BuildingId = buildingId;
                 return View(model);
             }
-
 
             TempData["Message"] = "修改平面图成功";
             return RedirectToAction("Details", "Building", new { area = "Admin", id = buildingId });

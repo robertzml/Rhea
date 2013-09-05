@@ -35,6 +35,7 @@ namespace Rhea.Business
             log.UserId = doc["userId"].AsObjectId;
             log.UserName = doc["userName"].AsString;
             log.Type = doc["type"].AsInt32;
+            log.Tag = doc.GetValue("tag", "").AsString;
 
             BsonValue rtime = doc.GetValue("relateTime", null);
             if (rtime == null || rtime.IsBsonNull)
@@ -62,7 +63,8 @@ namespace Rhea.Business
                 { "userId", log.UserId },
                 { "userName", log.UserName },
                 { "type", log.Type },
-                { "relateTime", (BsonValue)log.RelateTime }
+                { "relateTime", (BsonValue)log.RelateTime },
+                { "tag", log.Tag }
             };
 
             WriteConcernResult result = this.context.Insert(RheaCollection.Log, doc);
