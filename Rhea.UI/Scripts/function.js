@@ -102,11 +102,11 @@ function initDataTable($dom) {
 			"oPaginate": {
 				"sFirst": "首页",
 				"sLast": "末页",
-				"sPrevious": "前页",
+				"sPrevious": "上页",
 				"sNext": "下页"
 			}
 		},
-		"aaSorting": []		
+		"aaSorting": []
 	});
 	return dt;
 }

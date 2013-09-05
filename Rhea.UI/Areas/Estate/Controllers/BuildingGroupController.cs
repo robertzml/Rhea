@@ -62,7 +62,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
             data.BuildingGroupId = id;
             data.BuildingGroupName = buildingGroup.Name;
             data.BuildArea = Convert.ToInt32(buildingGroup.BuildArea);
-            data.UsableArea = Convert.ToInt32(this.buildingGroupBusiness.GetUsableArea(id));//Convert.ToInt32(buildingGroup.UsableArea);
+            data.UsableArea = Convert.ToInt32(this.buildingGroupBusiness.GetUsableArea(id));
 
             IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
             var buildings = buildingBusiness.GetListByBuildingGroup(id, true);
@@ -106,6 +106,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
                 data.ImageUrl = RheaConstant.ImagesRoot + data.ImageUrl;
             if (!string.IsNullOrEmpty(data.PartMapUrl))
                 data.PartMapUrl = RheaConstant.ImagesRoot + data.PartMapUrl;
+            data.UsableArea = this.buildingGroupBusiness.GetUsableArea(id);
 
             return View(data);
         }
@@ -118,6 +119,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         public ActionResult Details(int id)
         {
             BuildingGroup data = this.buildingGroupBusiness.Get(id);
+            data.UsableArea = this.buildingGroupBusiness.GetUsableArea(id);
             return View(data);
         }
 
@@ -128,6 +130,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         public ActionResult List()
         {
             List<BuildingGroup> data = this.buildingGroupBusiness.GetList(true);
+            data.ForEach(r => r.UsableArea = this.buildingGroupBusiness.GetUsableArea(r.Id));
             return View(data);
         }
 

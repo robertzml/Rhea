@@ -43,7 +43,7 @@
                     text: null
                 },
                 tooltip: {
-                    pointFormat: '{series.name}: <b>{point.y:.2f}m<sup>2</sup></b>',
+                    pointFormat: '{series.name}: <b>{point.y}m<sup>2</sup></b>',
                     percentageDecimals: 2,
                     style: {
                         fontSize: '14px'
@@ -67,18 +67,13 @@
                 series: [{
                     type: 'pie',
                     name: '建筑面积',
-                    data: [
-                        ['学院楼宇', 4235.0],
-                        ['办公楼宇', 3054.8],
-                        ['教学楼宇', 2008.7],
-                        ['宿舍楼宇', 4493.4]
-                    ]
+                    data: []
                 }]
             };
 
-            /*$.each(data, function (i, item) {
-            option.series[0].data.push([item.TypeName, parseFloat(item.BuildArea)]);
-            });*/
+            $.each(data, function (i, item) {
+                option.series[0].data.push([item.TypeName, parseFloat(item.BuildArea)]);
+            });
 
             var chart1 = new Highcharts.Chart(option);
         }

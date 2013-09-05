@@ -121,15 +121,14 @@ namespace Rhea.Business
 
         #region Method
         /// <summary>
-        /// 根据使用类型得到楼宇建筑面积
+        /// 根据使用类型得到楼群建筑面积
         /// </summary>
-        /// <param name="useType">楼宇使用类型</param>
+        /// <param name="useType">楼群使用类型</param>
         /// <returns></returns>
         public double GetBuildingAreaByType(int useType)
         {
-            IBuildingBusiness buildingService = new MongoBuildingBusiness();
-            double result = Convert.ToDouble(buildingService.GetList().Where(r => r.UseType == useType).Sum(r => r.BuildArea));
-            result = Math.Round(result, 3);
+            IBuildingGroupBusiness buildingGroupBusiness = new MongoBuildingGroupBusiness();
+            double result = Convert.ToDouble(buildingGroupBusiness.GetList().Where(r => r.UseType == useType).Sum(r => r.BuildArea));         
 
             return result;
         }

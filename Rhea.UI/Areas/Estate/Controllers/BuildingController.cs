@@ -54,7 +54,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
             data.BuildingId = building.Id;
             data.BuildingName = building.Name;
             data.BuildArea = Convert.ToInt32(building.BuildArea);
-            data.UsableArea = Convert.ToInt32(building.UsableArea);
+            data.UsableArea = Convert.ToInt32(this.buildingBusiness.GetUsableArea(id));
             data.Floors = building.Floors;
             data.BuildingGroupId = building.BuildingGroupId;
 
@@ -72,6 +72,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         public ActionResult ListByBuildingGroup(int buildingGroupId)
         {
             var data = this.buildingBusiness.GetListByBuildingGroup(buildingGroupId, true);
+            data.ForEach(r => r.UsableArea = this.buildingBusiness.GetUsableArea(r.Id));
             return View(data);
         }
 
@@ -86,6 +87,9 @@ namespace Rhea.UI.Areas.Estate.Controllers
             ViewBag.RoomCount = roomBusiness.CountByBuilding(id);
 
             Building data = this.buildingBusiness.Get(id);
+            data.UsableArea = this.buildingBusiness.GetUsableArea(id);
+            data.Floors.ForEach(r => r.UsableArea = this.buildingBusiness.GetFloorUsableArea(id, r.Number));
+
             return View(data);
         }
 
@@ -105,6 +109,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
                 data.ImageUrl = RheaConstant.ImagesRoot + data.ImageUrl;
             if (!string.IsNullOrEmpty(data.PartMapUrl))
                 data.PartMapUrl = RheaConstant.ImagesRoot + data.PartMapUrl;
+            data.UsableArea = this.buildingBusiness.GetUsableArea(id);
 
             return View(data);
         }
@@ -161,7 +166,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
                 Number = data.Number,
                 Name = data.Name,
                 BuildArea = Convert.ToDouble(data.BuildArea),
-                UsableArea = Convert.ToDouble(data.UsableArea),
+                UsableArea = this.buildingBusiness.GetFloorUsableArea(id, floor),
                 AboveGroundFloor = Convert.ToInt32(building.AboveGroundFloor)
             };
 
@@ -190,7 +195,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
                 Number = data.Number,
                 Name = data.Name,
                 BuildArea = Convert.ToDouble(data.BuildArea),
-                UsableArea = Convert.ToDouble(data.UsableArea)
+                UsableArea = this.buildingBusiness.GetFloorUsableArea(id, floor)
             };
 
             IRoomBusiness roomBusiness = new MongoRoomBusiness();

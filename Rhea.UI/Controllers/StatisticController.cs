@@ -229,7 +229,7 @@ namespace Rhea.UI.Controllers
                     BuildingGroupId = buildingGroup.Id,
                     BuildingGroupName = buildingGroup.Name,
                     BuildArea = Math.Round(Convert.ToDouble(buildingGroup.BuildArea), RheaConstant.AreaDecimalDigits),
-                    UsableArea = Math.Round(Convert.ToDouble(buildingGroup.UsableArea), RheaConstant.AreaDecimalDigits)
+                    UsableArea = Math.Round(buildingGroupBusiness.GetUsableArea(buildingGroup.Id), RheaConstant.AreaDecimalDigits)
                 };
                 data.Add(model);
             }
@@ -251,7 +251,7 @@ namespace Rhea.UI.Controllers
         {
             List<UseTypeAreaModel> model = new List<UseTypeAreaModel>();
 
-            for (int i = 1; i <= 4; i++)
+            for (int i = 1; i <= 5; i++)
             {
                 UseTypeAreaModel data = new UseTypeAreaModel();
                 data.BuildArea = this.statisticBusiness.GetBuildingAreaByType(i);

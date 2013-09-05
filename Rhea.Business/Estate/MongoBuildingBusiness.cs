@@ -576,7 +576,7 @@ namespace Rhea.Business.Estate
             var doc = result.ResultDocuments.SingleOrDefault();
 
             if (doc != null)
-                return Math.Round(doc["area"].AsDouble, 2);
+                return doc["area"].AsDouble;
             else
                 return 0;
         }
