@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MongoDB.Bson;
+using MongoDB.Driver;
+using MongoDB.Driver.Builders;
 
 namespace Rhea.Business
 {
@@ -43,6 +45,14 @@ namespace Rhea.Business
         /// <param name="type">信息编辑类型</param>
         /// <returns></returns>
         List<BsonDocument> FindBackup(string collectionName, BsonValue id, int type);
+
+        /// <summary>
+        /// 查找备份
+        /// </summary>
+        /// <param name="collectionName">目标collection</param>
+        /// <param name="query">查找条件</param>
+        /// <returns></returns>
+        MongoCursor<BsonDocument> FindBackup(string collectionName, IMongoQuery query);
 
         /// <summary>
         /// 归档数据

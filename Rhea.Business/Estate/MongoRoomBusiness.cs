@@ -5,6 +5,7 @@ using System.Text;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
+using Rhea.Data;
 using Rhea.Data.Server;
 using Rhea.Model;
 using Rhea.Model.Estate;
@@ -309,7 +310,7 @@ namespace Rhea.Business.Estate
         /// <summary>
         /// 添加房间
         /// </summary>
-        /// <param name="data">房间数据</param>   
+        /// <param name="data">房间数据</param>
         /// <returns>房间ID，0:添加失败</returns>
         public int Create(Room data)
         {
@@ -372,7 +373,7 @@ namespace Rhea.Business.Estate
         /// <summary>
         /// 编辑房间
         /// </summary>
-        /// <param name="data">房间数据</param>     
+        /// <param name="data">房间数据</param>
         /// <returns></returns>
         public bool Edit(Room data)
         {
@@ -659,7 +660,7 @@ namespace Rhea.Business.Estate
         /// <summary>
         /// 备份房间
         /// </summary>
-        /// <param name="id">房间ID</param>   
+        /// <param name="id">房间ID</param>
         /// <returns></returns>
         public bool Backup(int id)
         {
@@ -775,6 +776,30 @@ namespace Rhea.Business.Estate
                 Room firstRoom = ModelBind(first);
                 if (firstRoom.Log.Type != assignType)
                     data.Add(firstRoom);
+            }
+
+            return data;
+        }
+
+        /// <summary>
+        /// 按部门得到归档房间列表
+        /// </summary>
+        /// <param name="departmentId">部门ID</param>
+        /// <param name="logId">日志ID</param>
+        /// <returns></returns>
+        public List<Room> GetArchiveListByDepartment(int departmentId, string logId)
+        {
+            List<Room> data = new List<Room>();
+            ObjectId oid = new ObjectId(logId);
+
+            var query = Query.And(Query.EQ("departmentId", departmentId),
+                Query.EQ("log.id", logId));
+
+            var result = this.backupBusiness.FindBackup(EstateCollection.RoomArchive, query);
+            foreach (BsonDocument doc in result)
+            {
+                Room room = ModelBind(doc);
+                data.Add(room);
             }
 
             return data;

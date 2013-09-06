@@ -42,7 +42,7 @@ namespace Rhea.Business.Estate
         /// 查找首次备份
         /// </summary>
         /// <param name="collectionName">目标collection</param>
-        /// <param name="id">备份对象ID</param>    
+        /// <param name="id">备份对象ID</param>
         /// <returns></returns>
         public BsonDocument FindFirstBackup(string collectionName, BsonValue id)
         {
@@ -60,7 +60,7 @@ namespace Rhea.Business.Estate
         /// 查找备份
         /// </summary>
         /// <param name="collectionName">目标collection</param>
-        /// <param name="id">备份对象ID</param>    
+        /// <param name="id">备份对象ID</param>
         /// <returns></returns>
         public List<BsonDocument> FindBackup(string collectionName, BsonValue id)
         {
@@ -82,6 +82,18 @@ namespace Rhea.Business.Estate
 
             var data = this.context.Find(collectionName, query).SetSortOrder(SortBy.Descending("log.time"));
             return data.ToList();
+        }
+
+        /// <summary>
+        /// 查找备份
+        /// </summary>
+        /// <param name="collectionName">目标collection</param>
+        /// <param name="query">查找条件</param>
+        /// <returns></returns>
+        public MongoCursor<BsonDocument> FindBackup(string collectionName, IMongoQuery query)
+        {
+            var data = this.context.Find(collectionName, query);
+            return data;
         }
 
         /// <summary>

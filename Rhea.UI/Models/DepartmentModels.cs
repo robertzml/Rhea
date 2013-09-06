@@ -76,4 +76,25 @@ namespace Rhea.UI.Models
         /// </summary>
         public double ResearchAreaRatio { get; set; }
     }
+
+    /// <summary>
+    /// 部门历史数据
+    /// </summary>
+    public class DepartmentHistoryModel
+    {
+        /// <summary>
+        /// 部门ID
+        /// </summary>
+        public int DepartmentId { get; set; }
+
+        /// <summary>
+        /// 部门名称
+        /// </summary>
+        public string DepartmentName { get; set; }
+
+        /// <summary>
+        /// 部门类型
+        /// </summary>
+        public int DepartmentType { get; set; }
+    }
 }

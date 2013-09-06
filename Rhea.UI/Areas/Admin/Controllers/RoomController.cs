@@ -399,35 +399,6 @@ namespace Rhea.UI.Areas.Admin.Controllers
             byte[] fileContents = this.roomBusiness.Export();
             return File(fileContents, "application/ms-excel", "room.csv");
         }
-
-        /// <summary>
-        /// 归档房间
-        /// </summary>
-        /// <returns></returns>        
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Archive()
-        {
-            string sdate = Request.Form["archiveDate"];
-
-            //log
-            DateTime date = Convert.ToDateTime(sdate);
-            var user = GetUser();
-            Log log = new Log
-            {
-                Title = "归档房间",
-                Content = string.Format("归档房间, 日期:{0}.", date.ToShortDateString()),
-                Time = DateTime.Now,
-                UserId = user._id,
-                UserName = user.Name,
-                Type = 20,
-                RelateTime = date
-            };
-
-            this.roomBusiness.Archive(log);
-
-            return RedirectToAction("Archive", new { controller = "Estate", area = "Admin" });
-        }
         #endregion //Action
     }
 }

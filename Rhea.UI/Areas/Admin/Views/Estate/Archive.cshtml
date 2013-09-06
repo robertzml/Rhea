@@ -19,7 +19,15 @@
                 @Html.ValidationSummary(true)
 
                 <fieldset>
-                    <legend>信息输入</legend>
+                    <legend>归档设置</legend>
+
+                    <div class="control-group">
+                        <label class="control-label" for="ArchiveSingle">归档方式</label>
+                        <div class="controls">
+                            <input type="radio" name="ArchiveSingle" checked="checked" value="1" />单独归档 &nbsp;
+                            <input type="radio" name="ArchiveSingle" value="0" />全部归档(包括房产、部门数据)
+                        </div>
+                    </div>
 
                     <div class="control-group">
                         <label class="control-label" for="ArchiveType">选择数据</label>
@@ -57,7 +65,7 @@
                 </fieldset>
             }
             </div>
-        </div>
+        </div>     
     </div>
 </div>
 
@@ -66,6 +74,6 @@
         var menu = $('a#archive-task');
         menuNavActive(menu);
 
-        $('#ArchiveDate').datepicker({ format: 'yyyy-mm-dd' });
+        var arch = $('#ArchiveDate').datepicker({ format: 'yyyy-mm-dd' });
     });
 </script>

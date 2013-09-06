@@ -155,6 +155,12 @@
                             </a>
                         </li>
                         <li>
+                            <a href="#" id="department-history">
+                                <span class="icon icomoon-icon-storage"></span>
+                                <span class="txt">历史数据</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="#" class="pattern">
                                 <span class="icon icomoon-icon-comments-2"></span>
                                 <span class="txt">消息</span>
@@ -312,6 +318,11 @@
 
         $('a#department-classify').click(function () {
             ajaxContentLoadPage2("Classify", "Department", { id: '@Model.DepartmentId' }, $('#ajax-content2'));
+            return false;
+        });
+
+        $('a#department-history').click(function () {
+            ajaxContentLoadPage2("History", "Department", { id: '@Model.DepartmentId' }, $('#ajax-content2'));
             return false;
         });
 

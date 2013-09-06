@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MongoDB.Bson;
 using Rhea.Model;
 using Rhea.Model.Estate;
 
@@ -72,21 +73,21 @@ namespace Rhea.Business.Estate
         /// <summary>
         /// 添加房间
         /// </summary>
-        /// <param name="data">房间数据</param>    
+        /// <param name="data">房间数据</param>
         /// <returns>房间ID，0:添加失败</returns>
         int Create(Room data);
 
         /// <summary>
         /// 编辑房间
         /// </summary>
-        /// <param name="data">房间数据</param>     
+        /// <param name="data">房间数据</param>
         /// <returns></returns>
         bool Edit(Room data);
 
         /// <summary>
         /// 删除房间
         /// </summary>
-        /// <param name="id">房间ID</param>  
+        /// <param name="id">房间ID</param>
         /// <returns></returns>
         bool Delete(int id); 
 
@@ -163,7 +164,7 @@ namespace Rhea.Business.Estate
         /// <summary>
         /// 归档房间
         /// </summary>
-        /// <param name="log">相关日志</param>  
+        /// <param name="log">相关日志</param>
         /// <returns></returns>
         bool Archive(Log log);
 
@@ -181,5 +182,13 @@ namespace Rhea.Business.Estate
         /// <param name="id">房间ID</param>
         /// <returns></returns>
         List<Room> GetAssignHistory(int id);
+
+        /// <summary>
+        /// 按部门得到归档房间列表
+        /// </summary>
+        /// <param name="departmentId">部门ID</param>
+        /// <param name="logId">日志ID</param>
+        /// <returns></returns>
+        List<Room> GetArchiveListByDepartment(int departmentId, string logId);
     }
 }

@@ -8,6 +8,7 @@ using MongoDB.Bson;
 using Rhea.Business;
 using Rhea.Business.Account;
 using Rhea.Business.Estate;
+using Rhea.Business.Personnel;
 using Rhea.Data;
 using Rhea.Model;
 using Rhea.Model.Account;
@@ -158,32 +159,63 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 };
 
                 bool result = false;
-                switch (model.ArchiveType)
+                if (model.ArchiveSingle == 1)
                 {
-                    case 1:
-                        log.Title = "归档校区";
-                        log.Type = (int)LogType.CampusArchive;
-                        ICampusBusiness campusBusiness = new MongoCampusBusiness();
-                        result = campusBusiness.Archive(log);
-                        break;
-                    case 2:
-                        log.Title = "归档楼群";
-                        log.Type = (int)LogType.BuildingGroupArchive;
-                        IBuildingGroupBusiness buildingGroupBusiness = new MongoBuildingGroupBusiness();
-                        result = buildingGroupBusiness.Archive(log);
-                        break;
-                    case 3:
-                        log.Title = "归档楼宇";
-                        log.Type = (int)LogType.BuildingArchive;
-                        IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
-                        result = buildingBusiness.Archive(log);
-                        break;
-                    case 4:
-                        log.Title = "归档房间";
-                        log.Type = (int)LogType.RoomArchive;
-                        IRoomBusiness roomBusiness = new MongoRoomBusiness();
-                        result = roomBusiness.Archive(log);
-                        break;
+                    switch (model.ArchiveType)
+                    {
+                        case 1:
+                            log.Title = "归档校区";
+                            log.Type = (int)LogType.CampusArchive;
+                            ICampusBusiness campusBusiness = new MongoCampusBusiness();
+                            result = campusBusiness.Archive(log);
+                            break;
+                        case 2:
+                            log.Title = "归档楼群";
+                            log.Type = (int)LogType.BuildingGroupArchive;
+                            IBuildingGroupBusiness buildingGroupBusiness = new MongoBuildingGroupBusiness();
+                            result = buildingGroupBusiness.Archive(log);
+                            break;
+                        case 3:
+                            log.Title = "归档楼宇";
+                            log.Type = (int)LogType.BuildingArchive;
+                            IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
+                            result = buildingBusiness.Archive(log);
+                            break;
+                        case 4:
+                            log.Title = "归档房间";
+                            log.Type = (int)LogType.RoomArchive;
+                            IRoomBusiness roomBusiness = new MongoRoomBusiness();
+                            result = roomBusiness.Archive(log);
+                            break;
+                    }
+                }
+                else //全部归档
+                {
+                    log.Title = "归档校区";
+                    log.Type = (int)LogType.CampusArchive;
+                    ICampusBusiness campusBusiness = new MongoCampusBusiness();
+                    result = campusBusiness.Archive(log);
+
+                    log.Title = "归档楼群";
+                    log.Type = (int)LogType.BuildingGroupArchive;
+                    IBuildingGroupBusiness buildingGroupBusiness = new MongoBuildingGroupBusiness();
+                    result = buildingGroupBusiness.Archive(log);
+
+                    log.Title = "归档楼宇";
+                    log.Type = (int)LogType.BuildingArchive;
+                    IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
+                    result = buildingBusiness.Archive(log);
+
+                    log.Title = "归档房间";
+                    log.Type = (int)LogType.RoomArchive;
+                    IRoomBusiness roomBusiness = new MongoRoomBusiness();
+                    result = roomBusiness.Archive(log);
+
+                    log.Title = "归档部门";
+                    log.Type = (int)LogType.DepartmentArchive;
+                    IDepartmentBusiness departmentBusiness = new MongoDepartmentBusiness();
+                    result = departmentBusiness.Archive(log);
+                    
                 }
 
                 if (!result)
@@ -198,7 +230,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
             }
 
             return View(model);
-        }
+        }        
 
         /// <summary>
         /// 归档列表

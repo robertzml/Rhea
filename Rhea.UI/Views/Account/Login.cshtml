@@ -38,6 +38,7 @@
             }      
             .form-signin .checkbox {
                 margin-bottom: 10px;
+                display:inline-block;
             }
             .form-signin-heading { font-family:微软雅黑; margin-bottom:20px; }
             .form-signin input[type="text"],
@@ -47,6 +48,9 @@
                 margin-bottom: 15px;
                 padding: 0px 9px;
                 width:220px;
+            }
+            .form-signin #login-btn {
+                margin-left:120px;
             }
         </style>
         <link href="@Url.Content("~/Content/bootstrap-responsive.css")" type="text/css" rel="stylesheet">
@@ -84,7 +88,7 @@
                 <label class="checkbox">
                     @Html.CheckBoxFor(m => m.RememberMe) 记住我
                 </label>
-                <button type="submit" class="btn btn-primary">登 录</button>
+                <button id="login-btn" type="submit" class="btn btn-primary">登 录</button>
             }
         </div> <!-- /container --> 
 

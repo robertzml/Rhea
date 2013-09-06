@@ -280,6 +280,16 @@ namespace Rhea.UI.Controllers
         }
 
         /// <summary>
+        /// 部门历史数据
+        /// </summary>
+        /// <param name="id">部门ID</param>
+        /// <returns></returns>
+        public ActionResult History(int id)
+        {
+            return View();
+        }
+
+        /// <summary>
         /// 部门下拉选择框
         /// </summary>
         /// <returns></returns>
