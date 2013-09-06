@@ -793,7 +793,7 @@ namespace Rhea.Business.Estate
             ObjectId oid = new ObjectId(logId);
 
             var query = Query.And(Query.EQ("departmentId", departmentId),
-                Query.EQ("log.id", logId));
+                Query.EQ("log.id", oid));
 
             var result = this.backupBusiness.FindBackup(EstateCollection.RoomArchive, query);
             foreach (BsonDocument doc in result)

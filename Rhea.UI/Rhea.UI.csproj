@@ -1075,6 +1075,7 @@
     <Content Include="Views\Statistic\DepartmentIndicatorCompare.cshtml" />
     <Content Include="Views\Statistic\InstitutionIndicatorCompare.cshtml" />
     <Content Include="Services\UploadHandler.ashx" />
+    <Content Include="Views\Department\History.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

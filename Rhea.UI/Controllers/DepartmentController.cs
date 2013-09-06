@@ -7,12 +7,14 @@ using System.Web.Routing;
 using Rhea.Business;
 using Rhea.Business.Estate;
 using Rhea.Business.Personnel;
+using Rhea.Data;
 using Rhea.Data.Estate;
 using Rhea.Data.Personnel;
+using Rhea.Model;
 using Rhea.Model.Estate;
 using Rhea.Model.Personnel;
-using Rhea.UI.Models;
 using Rhea.UI.Filters;
+using Rhea.UI.Models;
 
 namespace Rhea.UI.Controllers
 {
@@ -286,7 +288,17 @@ namespace Rhea.UI.Controllers
         /// <returns></returns>
         public ActionResult History(int id)
         {
-            return View();
+            DepartmentHistoryModel data = new DepartmentHistoryModel();
+
+            var department = this.departmentBusiness.Get(id);
+            data.DepartmentId = id;
+            data.DepartmentName = department.Name;
+            data.DepartmentType = department.Type;
+
+            ILogBusiness logBusiness = new MongoLogBusiness();
+            data.ArchiveList = logBusiness.GetList((int)LogType.RoomArchive);
+
+            return View(data);
         }
 
         /// <summary>
@@ -349,6 +361,20 @@ namespace Rhea.UI.Controllers
             {
                 Area = Math.Round(Convert.ToDouble(drooms.Sum(r => r.UsableArea)), 2)
             };
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 得到归档房间
+        /// </summary>
+        /// <param name="id">部门ID</param>
+        /// <param name="logId">日志ID</param>
+        /// <returns></returns>
+        public JsonResult GetArchiveRoom(int id, string logId)
+        {
+            IRoomBusiness roomBusiness = new MongoRoomBusiness();
+            var data = roomBusiness.GetArchiveListByDepartment(id, logId);
 
             return Json(data, JsonRequestBehavior.AllowGet);
         }

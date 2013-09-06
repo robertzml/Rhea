@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Rhea.Model.Estate;
+using Rhea.Model;
 
 namespace Rhea.UI.Models
 {
@@ -64,7 +65,7 @@ namespace Rhea.UI.Models
         /// <summary>
         /// 办公用房面积比例
         /// </summary>
-        public double OfficeAreaRatio { get; set; }        
+        public double OfficeAreaRatio { get; set; }
 
         /// <summary>
         /// 实验用房面积比例
@@ -96,5 +97,10 @@ namespace Rhea.UI.Models
         /// 部门类型
         /// </summary>
         public int DepartmentType { get; set; }
+
+        /// <summary>
+        /// 归档列表
+        /// </summary>
+        public List<Log> ArchiveList { get; set; }
     }
 }

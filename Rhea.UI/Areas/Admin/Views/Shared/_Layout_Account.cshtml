@@ -17,3 +17,7 @@
 <div class="span10">
     @RenderBody()
 </div>
+
+@section scripts {
+@RenderSection("scripts", required: false)
+}
