@@ -12,8 +12,8 @@
 <div class="row-fluid">
     <div class="span12">
         <select id="archive-list">
-            <option value="">-- 请选择 --</option>
-        @foreach (var item in Model.ArchiveList)
+            <option value="">--- 当前 ---</option>
+        @foreach (var item in Model.DepartmentArchiveList)
         {
             <option value="@item._id.ToString()">@item.RelateTime.Value.ToLongDateString()</option>
         }
@@ -30,24 +30,44 @@
                     <td id="room-count"></td>
                 </tr>
                 <tr>
-                    <td>总面积</td>
-                    <td></td>
+                    <td>总面积(m<sup>2</sup>)</td>
+                    <td id="total-area"></td>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
 
+<div id="department-archive">
+</div>
+
+
 <script type="text/javascript">
     $(function () {
+        var departmentId = '@Model.DepartmentId';
+        loadArchiveDepartment(departmentId, "");
+
         $('#archive-list').change(function () {
             var aid = $(this).val();
-            if (aid == "")
-                return false;
 
-            $.getJSON('/Department/GetArchiveRoom', { id: '@Model.DepartmentId', logId: aid }, function (response) {
-                $('#room-count').text(response.length);
-            });
+            loadArchiveDepartment(departmentId, aid);
         });
+
+        function loadArchiveRoom(departmentId, logId) {
+            $.getJSON('/Department/GetArchiveRoom', { id: departmentId, logId: logId }, function (response) {
+                $('#room-count').text(response.length);
+                var totalArea = 0.0;
+                $.each(response, function (i, item) {
+                    totalArea = totalArea + item.UsableArea;
+                });
+                $('#total-area').text(totalArea.toFixed(2));
+            });
+        }
+
+        function loadArchiveDepartment(departmentId, logId) {
+            $.get('/Department/GetArchiveDepartment', { id: departmentId, logId: logId }, function (response) {
+                $('#department-archive').html(response);
+            });
+        }
     });
 </script>

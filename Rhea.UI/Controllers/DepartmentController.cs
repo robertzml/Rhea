@@ -77,7 +77,7 @@ namespace Rhea.UI.Controllers
             DepartmentIndicatorModel indicator = indicatorBusiness.GetDepartmentIndicator(department);
 
             if (department.Type == (int)DepartmentType.Type1)   //院系
-            {             
+            {
                 data.ExistingArea = Convert.ToDouble(rooms.Sum(r => r.UsableArea));
                 data.DeservedArea = indicator.DeservedArea;
                 if (data.DeservedArea == 0)
@@ -296,9 +296,28 @@ namespace Rhea.UI.Controllers
             data.DepartmentType = department.Type;
 
             ILogBusiness logBusiness = new MongoLogBusiness();
-            data.ArchiveList = logBusiness.GetList((int)LogType.RoomArchive);
+            //data.RoomArchiveList = logBusiness.GetList((int)LogType.RoomArchive);
+            data.DepartmentArchiveList = logBusiness.GetList((int)LogType.DepartmentArchive)
+                .OrderByDescending(r => r.RelateTime).ToList();            
 
             return View(data);
+        }
+
+        /// <summary>
+        /// 得到归档部门信息
+        /// </summary>
+        /// <param name="id">部门ID</param>
+        /// <param name="logId">日志ID</param>
+        /// <returns></returns>
+        public ActionResult GetArchiveDepartment(int id, string logId)
+        {
+            Department data;
+            if (string.IsNullOrEmpty(logId))
+                data = this.departmentBusiness.Get(id, DepartmentAdditionType.ScaleData | DepartmentAdditionType.ResearchData | DepartmentAdditionType.SpecialAreaData);
+            else
+                data = this.departmentBusiness.GetArchive(id, logId);
+
+            return View("Details", data);
         }
 
         /// <summary>
@@ -374,7 +393,32 @@ namespace Rhea.UI.Controllers
         public JsonResult GetArchiveRoom(int id, string logId)
         {
             IRoomBusiness roomBusiness = new MongoRoomBusiness();
-            var data = roomBusiness.GetArchiveListByDepartment(id, logId);
+            List<Room> data;
+
+            if (string.IsNullOrEmpty(logId))
+            {
+                data = roomBusiness.GetListByDepartment(id);
+            }
+            else
+            {
+                data = roomBusiness.GetArchiveListByDepartment(id, logId);
+            }
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 得到归档部门信息
+        /// </summary>
+        /// <param name="id">部门ID</param>
+        /// <param name="logId">日志ID</param>
+        /// <returns></returns>
+        public JsonResult GetArchiveDepartmentData(int id, string logId)
+        {
+            Department data;
+            if (string.IsNullOrEmpty(logId))
+                data = this.departmentBusiness.Get(id, DepartmentAdditionType.ScaleData | DepartmentAdditionType.ResearchData | DepartmentAdditionType.SpecialAreaData);
+            else
+                data = this.departmentBusiness.GetArchive(id, logId);
 
             return Json(data, JsonRequestBehavior.AllowGet);
         }

@@ -99,7 +99,17 @@ namespace Rhea.UI.Models
         public int DepartmentType { get; set; }
 
         /// <summary>
-        /// 归档列表
+        /// 房间归档列表
+        /// </summary>
+        public List<Log> RoomArchiveList { get; set; }
+
+        /// <summary>
+        /// 部门归档列表
+        /// </summary>
+        public List<Log> DepartmentArchiveList { get; set; }
+
+        /// <summary>
+        /// 归档列表交集
         /// </summary>
         public List<Log> ArchiveList { get; set; }
     }

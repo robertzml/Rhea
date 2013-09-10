@@ -497,12 +497,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
 
             //backup
             string backsvg = this.buildingBusiness.BackupFloorSvg(Request.MapPath("~"), oldSvg);
-            if (string.IsNullOrEmpty(backsvg))
-            {
-                ModelState.AddModelError("", "备份SVG失败");
-                return View(model);
-            }
-
+            
             bool backok = this.buildingBusiness.Backup(buildingId);
             if (!backok)
             {

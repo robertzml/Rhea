@@ -104,5 +104,13 @@ namespace Rhea.Business.Personnel
         /// <param name="log">相关日志</param>
         /// <returns></returns>
         bool Archive(Log log);
+
+        /// <summary>
+        /// 得到归档部门数据
+        /// </summary>
+        /// <param name="id">部门ID</param>
+        /// <param name="logId">日志ID</param>
+        /// <returns></returns>
+        Department GetArchive(int id, string logId);
     }
 }

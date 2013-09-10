@@ -12,12 +12,6 @@ namespace Rhea.UI.Areas.Admin.Models
     public class ArchiveModel
     {
         /// <summary>
-        /// 单独归档
-        /// </summary>
-        [Display(Name = "单独归档")]
-        public int ArchiveSingle { get; set; }
-
-        /// <summary>
         /// 数据类型
         /// </summary>
         [Display(Name = "选择数据")]

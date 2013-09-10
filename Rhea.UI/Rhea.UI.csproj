@@ -1052,6 +1052,7 @@
     <Content Include="Areas\Estate\Views\Home\LandCertificate.cshtml" />
     <Content Include="Areas\Admin\Views\Estate\LogDetails.cshtml" />
     <Content Include="Areas\Admin\Views\Building\UploadSvg.cshtml" />
+    <Content Include="Areas\Admin\Views\Estate\ArchiveSingle.cshtml" />
     <None Include="Content\fonts\icomoon.eot" />
     <None Include="Content\fonts\icomoon.ttf" />
     <None Include="Content\fonts\icomoon.woff" />

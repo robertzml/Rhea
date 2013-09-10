@@ -298,6 +298,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// 部门归档
         /// </summary>
         /// <returns></returns>
+        [EnhancedAuthorize(Roles = "Root")]
         [HttpGet]
         public ActionResult Archive()
         {
@@ -309,6 +310,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
+        [EnhancedAuthorize(Roles = "Root")]
         [HttpPost]
         public ActionResult Archive(ArchiveModel model)
         {

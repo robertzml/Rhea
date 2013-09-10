@@ -481,6 +481,39 @@ namespace Rhea.Business.Personnel
             bool result = this.backupBusiness.Archive(PersonnelCollection.DepartmentBackup, newDocs);
             return result;
         }
+
+        /// <summary>
+        /// 得到归档部门数据
+        /// </summary>
+        /// <param name="id">部门ID</param>
+        /// <param name="logId">日志ID</param>
+        /// <returns></returns>
+        public Department GetArchive(int id, string logId)
+        {
+            ObjectId oid = new ObjectId(logId);
+
+            var query = Query.And(Query.EQ("id", id),
+                Query.EQ("log.id", oid));
+
+            var result = this.backupBusiness.FindBackup(PersonnelCollection.DepartmentBackup, query);
+            if (result.Count() == 0)
+                return null;
+
+            BsonDocument doc = result.First();
+            Department department = ModelBind(doc);
+            if (department.Type == (int)DepartmentType.Type1)   //教学院系
+            {
+                BindCollegeScale(doc, ref department);
+                BindCollegeResearch(doc, ref department);
+                BindCollegeSpecialArea(doc, ref department);
+            }
+            else
+            {
+                BindDepartmentScale(doc, ref department);
+            }
+
+            return department;
+        }
         #endregion //Method
     }
 }

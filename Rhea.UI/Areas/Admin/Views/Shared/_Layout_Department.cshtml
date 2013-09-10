@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "_Layout_Department";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    bool isRoot = User.IsInRole2("Root");
 }
 
 <div class="span2">
@@ -10,7 +11,10 @@
             <li class="active"><a href="@Url.Action("Index", new { controller = "Department", area = "Admin" })">主页</a></li>
             <li><a href="@Url.Action("List", new { controller = "Department", area = "Admin" })" id="department-manage">部门列表</a></li>
             <li class="nav-header">任务</li>
+            @if (isRoot)
+            {
             <li><a href="@Url.Action("Archive", new { controller = "Department", area = "Admin" })" id="archive-task">归档数据</a></li>
+            }
             <li><a href="@Url.Action("ArchiveList", new { controller = "Department", area = "Admin" })" id="archive-list">归档历史</a></li>
         </ul>
     </div>

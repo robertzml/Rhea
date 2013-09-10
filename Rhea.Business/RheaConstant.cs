@@ -42,7 +42,7 @@ namespace Rhea.Business
         /// <summary>
         /// 面积小数位数
         /// </summary>
-        public static readonly int AreaDecimalDigits = 2;
+        public static readonly int AreaDecimalDigits = 2;        
         #endregion //Field
     }
 }
