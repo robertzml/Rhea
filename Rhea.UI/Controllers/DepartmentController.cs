@@ -211,7 +211,7 @@ namespace Rhea.UI.Controllers
 
             ViewBag.Type = department.Type;
             return View(data);
-        }
+        }        
 
         /// <summary>
         /// 部门分楼宇信息
@@ -295,8 +295,7 @@ namespace Rhea.UI.Controllers
             data.DepartmentName = department.Name;
             data.DepartmentType = department.Type;
 
-            ILogBusiness logBusiness = new MongoLogBusiness();
-            //data.RoomArchiveList = logBusiness.GetList((int)LogType.RoomArchive);
+            ILogBusiness logBusiness = new MongoLogBusiness();          
             data.DepartmentArchiveList = logBusiness.GetList((int)LogType.DepartmentArchive)
                 .OrderByDescending(r => r.RelateTime).ToList();            
 
@@ -317,7 +316,75 @@ namespace Rhea.UI.Controllers
             else
                 data = this.departmentBusiness.GetArchive(id, logId);
 
+            //return View("Details", data);
+
+            //var data = this.departmentBusiness.Get(id, DepartmentAdditionType.ScaleData | DepartmentAdditionType.ResearchData | DepartmentAdditionType.SpecialAreaData);
+
+            if (data.Type == (int)DepartmentType.Type1)
+            {
+                IStatisticBusiness statisticBusiness = new MongoStatisticBusiness();
+                DepartmentClassifyAreaModel area = statisticBusiness.GetDepartmentClassifyArea(id);
+
+                double officeArea = area.FirstClassify.Single(r => r.FunctionFirstCode == 1).Area;
+                if (data.StaffCount == 0)
+                    ViewBag.AvgOfficeArea = 0;
+                else
+                    ViewBag.AvgOfficeArea = Math.Round(officeArea / data.StaffCount, 2);
+
+                double researchArea = area.FirstClassify.Single(r => r.FunctionFirstCode == 4).Area;
+                if (data.GraduateCount + data.DoctorCount == 0)
+                    ViewBag.AvgResearchArea = 0;
+                else
+                    ViewBag.AvgResearchArea = Math.Round(researchArea / (data.GraduateCount + data.DoctorCount), 2);
+
+                ViewBag.OfficeArea = officeArea;
+                ViewBag.EducationArea = area.FirstClassify.Single(r => r.FunctionFirstCode == 2).Area;
+                ViewBag.ExperimentArea = area.FirstClassify.Single(r => r.FunctionFirstCode == 3).Area;
+                ViewBag.ResearchArea = researchArea;
+
+                if (researchArea == 0d)
+                    ViewBag.AvgFundsArea = 0;
+                else
+                    ViewBag.AvgFundsArea = Math.Round((data.LongitudinalFunds + data.TransverseFunds + data.CompanyFunds) / researchArea, 2);
+            }
+            else
+            {
+                IRoomBusiness roomBusiness = new MongoRoomBusiness();
+                var rooms = roomBusiness.GetListByDepartment(id);
+
+                ViewBag.TotalArea = Math.Round(Convert.ToDouble(rooms.Sum(r => r.UsableArea)), 2);
+
+                int totalPerson = data.PresidentCount + data.VicePresidentCount + data.ChiefCount + data.ViceChiefCount + data.MemberCount;
+                if (totalPerson == 0)
+                    ViewBag.AvgArea = 0;
+                else
+                    ViewBag.AvgArea = Math.Round(ViewBag.TotalArea / totalPerson, 2);
+            }
+
             return View("Details", data);
+        }
+
+        /// <summary>
+        /// 得到归档部门指标信息
+        /// </summary>
+        /// <param name="id">部门ID</param>
+        /// <param name="logId">日志ID</param>
+        /// <returns></returns>
+        public ActionResult GetArchiveIndicator(int id, string logId)
+        {
+            Department department;
+            if (string.IsNullOrEmpty(logId))
+                department = this.departmentBusiness.Get(id, DepartmentAdditionType.ScaleData | DepartmentAdditionType.ResearchData | DepartmentAdditionType.SpecialAreaData);
+            else
+                department = this.departmentBusiness.GetArchive(id, logId);
+
+            ILogBusiness logBusiness = new MongoLogBusiness();
+            Log log = logBusiness.Get(logId);
+
+            IIndicatorBusiness indicatorBusiness = new MongoIndicatorBusiness();
+            DepartmentIndicatorModel data = indicatorBusiness.GetDepartmentIndicator(department);
+
+            return View("IndicatorSummary", data);
         }
 
         /// <summary>

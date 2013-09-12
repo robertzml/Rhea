@@ -29,6 +29,9 @@
                         使用面积 (m<sup>2</sup>)
                     </th>
                     <th>
+                        排序
+                    </th>
+                    <th style="width:280px;">
                         操作
                     </th>
                 </tr>
@@ -42,6 +45,7 @@
                     <td>@item.BuildingCount</td>
                     <td>@item.BuildArea</td>
                     <td>@item.UsableArea</td>
+                    <td>@item.Sort</td>
                     <td>
                         <a class="btn btn-success btn-small" href="@Url.Action("Details", new { controller = "BuildingGroup", id = item.Id, area = "Admin" })"><i class="icon-zoom-in icon-white"></i>查看</a> 
                         <a class="btn btn-warning btn-small" href="@Url.Action("Edit", new { controller = "BuildingGroup", id = item.Id, area = "Admin" })"><i class="icon-edit icon-white"></i>编辑</a> 

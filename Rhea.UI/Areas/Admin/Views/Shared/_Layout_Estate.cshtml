@@ -2,6 +2,7 @@
     ViewBag.Title = "_Layout_Estate";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
     bool isRoot = User.IsInRole2("Root");
+    int rank = User.Rank();
 }
 
 <div class="span2">
@@ -14,19 +15,25 @@
             <li><a href="@Url.Action("Index", new { controller = "Room", area = "Admin" })" id="room-manage">房间管理</a></li>
             <li class="nav-header">任务</li>
             <li><a href="@Url.Action("Export", new { controller = "Estate", area = "Admin" })" id="export-task">导出数据</a></li>
-            <li><a href="@Url.Action("Archive", new { controller = "Estate", area = "Admin" })" id="archive-task">归档数据</a></li>
             @if (isRoot)
             {
             <li><a href="@Url.Action("ArchiveSingle", new { controller = "Estate", area = "Admin" })" id="archive-single">单独归档</a></li>
             }
+            @if (rank >= 900)
+            {
+            <li><a href="@Url.Action("Archive", new { controller = "Estate", area = "Admin" })" id="archive-task">归档数据</a></li>
             <li><a href="@Url.Action("ArchiveList", new { controller = "Estate", area = "Admin" })" id="archive-list">归档历史</a></li>
+            }
             @if (isRoot)
             {
             <li class="nav-header">字典</li>
             <li><a href="@Url.Action("FunctionCode", new { controller = "Estate", area = "Admin" })" id="room-function">房间功能</a></li>
             }
+            @if (rank >= 900)
+            {
             <li class="nav-header">日志</li>
             <li><a href="@Url.Action("LogList", new { controller = "Estate", area = "Admin" })" id="log-list">列表</a></li>
+            }
         </ul>
     </div>
 </div>

@@ -183,7 +183,7 @@ namespace Rhea.Data.Personnel
         public double AdjustArea { get; set; }
         #endregion //College
 
-        #region Department
+        #region Institution
         /// <summary>
         /// 校长面积
         /// </summary>
@@ -201,7 +201,13 @@ namespace Rhea.Data.Personnel
         /// </summary>
         [Display(Name = "业务面积")]
         public double BusinessArea { get; set; }
-        #endregion //Department
+        #endregion //Institution
+
+        /// <summary>
+        /// 房间数量
+        /// </summary>
+        [Display(Name = "房间数量")]
+        public int RoomCount { get; set; }
 
         /// <summary>
         /// 应有面积

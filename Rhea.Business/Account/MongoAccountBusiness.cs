@@ -21,6 +21,8 @@ namespace Rhea.Business.Account
         /// 数据库连接
         /// </summary>
         private RheaMongoContext context = new RheaMongoContext(RheaServer.RheaDatabase);
+
+        private DateTime defaultLoginTime = new DateTime(2005, 1, 1);
         #endregion //Field
 
         #region Function
@@ -74,8 +76,8 @@ namespace Rhea.Business.Account
             user.UserId = doc.GetValue("userId", "").AsString;
             user.UserGroupId = doc["userGroupId"].AsInt32;
             user.Name = doc.GetValue("name", "").AsString;
-            user.LastLoginTime = doc.GetValue("lastLoginTime", DateTime.Now).ToLocalTime();
-            user.CurrentLoginTime = doc.GetValue("currentLoginTime", DateTime.Now).ToLocalTime();
+            user.LastLoginTime = doc.GetValue("lastLoginTime", defaultLoginTime).ToLocalTime();
+            user.CurrentLoginTime = doc.GetValue("currentLoginTime", defaultLoginTime).ToLocalTime();
             user.IsSystem = doc.GetValue("isSystem", false).AsBoolean;
             user.DepartmentId = doc.GetValue("departmentId", 0).AsInt32;
             user.Status = doc.GetValue("status", 0).AsInt32;

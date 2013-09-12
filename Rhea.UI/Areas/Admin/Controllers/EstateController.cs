@@ -132,6 +132,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// 归档任务
         /// </summary>
         /// <returns></returns>
+        [EnhancedAuthorize(Rank = 900)]
         [HttpGet]
         public ActionResult Archive()
         {
@@ -143,6 +144,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
+        [EnhancedAuthorize(Rank = 900)]
         [HttpPost]
         public ActionResult Archive(ArchiveModel model)
         {
@@ -203,6 +205,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// 归档数据
         /// </summary>
         /// <returns></returns>
+        [EnhancedAuthorize(Roles = "Root")]
         [HttpGet]
         public ActionResult ArchiveSingle()
         {
@@ -214,6 +217,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
+        [EnhancedAuthorize(Roles = "Root")]
         [HttpPost]
         public ActionResult ArchiveSingle(ArchiveModel model)
         {
@@ -289,6 +293,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// 日志列表
         /// </summary>
         /// <returns></returns>
+        [EnhancedAuthorize(Roles = "Root,Administrator")]
         public ActionResult LogList()
         {
             ILogBusiness logBusiness = new MongoLogBusiness();
@@ -302,6 +307,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// </summary>
         /// <param name="id">日志ID</param>
         /// <returns></returns>
+        [EnhancedAuthorize(Roles = "Root,Administrator")]
         public ActionResult LogDetails(string id)
         {
             ILogBusiness logBusiness = new MongoLogBusiness();
