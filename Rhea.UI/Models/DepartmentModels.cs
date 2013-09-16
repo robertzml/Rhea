@@ -107,10 +107,5 @@ namespace Rhea.UI.Models
         /// 部门归档列表
         /// </summary>
         public List<Log> DepartmentArchiveList { get; set; }
-
-        /// <summary>
-        /// 归档列表交集
-        /// </summary>
-        public List<Log> ArchiveList { get; set; }
     }
 }

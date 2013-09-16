@@ -67,7 +67,7 @@ namespace Rhea.UI.Controllers
             IRoomBusiness roomBusiness = new MongoRoomBusiness();
             var rooms = roomBusiness.GetListByDepartment(id);
             data.RoomCount = rooms.Count;
-            data.TotalArea = Convert.ToDouble(rooms.Sum(r => r.UsableArea));
+            data.TotalArea = rooms.Sum(r => r.UsableArea.Value);
             data.DepartmentType = department.Type;
 
             IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
@@ -143,27 +143,26 @@ namespace Rhea.UI.Controllers
         public ActionResult Details(int id)
         {
             var data = this.departmentBusiness.Get(id, DepartmentAdditionType.ScaleData | DepartmentAdditionType.ResearchData | DepartmentAdditionType.SpecialAreaData);
+            IRoomBusiness roomBusiness = new MongoRoomBusiness();
+            var rooms = roomBusiness.GetListByDepartment(id);
 
             if (data.Type == (int)DepartmentType.Type1)
             {
-                IStatisticBusiness statisticBusiness = new MongoStatisticBusiness();
-                DepartmentClassifyAreaModel area = statisticBusiness.GetDepartmentClassifyArea(id);
-
-                double officeArea = area.FirstClassify.Single(r => r.FunctionFirstCode == 1).Area;
+                double officeArea = rooms.Where(r => r.Function.FirstCode == 1).Sum(r => r.UsableArea.Value);
                 if (data.StaffCount == 0)
                     ViewBag.AvgOfficeArea = 0;
                 else
                     ViewBag.AvgOfficeArea = Math.Round(officeArea / data.StaffCount, 2);
 
-                double researchArea = area.FirstClassify.Single(r => r.FunctionFirstCode == 4).Area;
+                double researchArea = rooms.Where(r => r.Function.FirstCode == 4).Sum(r => r.UsableArea.Value);
                 if (data.GraduateCount + data.DoctorCount == 0)
                     ViewBag.AvgResearchArea = 0;
                 else
                     ViewBag.AvgResearchArea = Math.Round(researchArea / (data.GraduateCount + data.DoctorCount), 2);
 
                 ViewBag.OfficeArea = officeArea;
-                ViewBag.EducationArea = area.FirstClassify.Single(r => r.FunctionFirstCode == 2).Area;
-                ViewBag.ExperimentArea = area.FirstClassify.Single(r => r.FunctionFirstCode == 3).Area;
+                ViewBag.EducationArea = rooms.Where(r => r.Function.FirstCode == 2).Sum(r => r.UsableArea.Value);
+                ViewBag.ExperimentArea = rooms.Where(r => r.Function.FirstCode == 3).Sum(r => r.UsableArea.Value);
                 ViewBag.ResearchArea = researchArea;
 
                 if (researchArea == 0d)
@@ -173,9 +172,6 @@ namespace Rhea.UI.Controllers
             }
             else
             {
-                IRoomBusiness roomBusiness = new MongoRoomBusiness();
-                var rooms = roomBusiness.GetListByDepartment(id);
-
                 ViewBag.TotalArea = Math.Round(Convert.ToDouble(rooms.Sum(r => r.UsableArea)), 2);
 
                 int totalPerson = data.PresidentCount + data.VicePresidentCount + data.ChiefCount + data.ViceChiefCount + data.MemberCount;
@@ -211,7 +207,7 @@ namespace Rhea.UI.Controllers
 
             ViewBag.Type = department.Type;
             return View(data);
-        }        
+        }
 
         /// <summary>
         /// 部门分楼宇信息
@@ -295,9 +291,9 @@ namespace Rhea.UI.Controllers
             data.DepartmentName = department.Name;
             data.DepartmentType = department.Type;
 
-            ILogBusiness logBusiness = new MongoLogBusiness();          
+            ILogBusiness logBusiness = new MongoLogBusiness();
             data.DepartmentArchiveList = logBusiness.GetList((int)LogType.DepartmentArchive)
-                .OrderByDescending(r => r.RelateTime).ToList();            
+                .OrderByDescending(r => r.RelateTime).ToList();
 
             return View(data);
         }
@@ -311,35 +307,42 @@ namespace Rhea.UI.Controllers
         public ActionResult GetArchiveDepartment(int id, string logId)
         {
             Department data;
+            List<Room> rooms;
+            IRoomBusiness roomBusiness = new MongoRoomBusiness();
+
             if (string.IsNullOrEmpty(logId))
+            {
                 data = this.departmentBusiness.Get(id, DepartmentAdditionType.ScaleData | DepartmentAdditionType.ResearchData | DepartmentAdditionType.SpecialAreaData);
+                rooms = roomBusiness.GetListByDepartment(id);
+            }
             else
+            {
                 data = this.departmentBusiness.GetArchive(id, logId);
 
-            //return View("Details", data);
-
-            //var data = this.departmentBusiness.Get(id, DepartmentAdditionType.ScaleData | DepartmentAdditionType.ResearchData | DepartmentAdditionType.SpecialAreaData);
+                ILogBusiness logBusiness = new MongoLogBusiness();
+                Log departmentlog = logBusiness.Get(logId);
+                DateTime archiveDate = departmentlog.RelateTime.Value;
+                Log roomLog = logBusiness.Get(archiveDate, (int)LogType.RoomArchive);
+                rooms = roomBusiness.GetArchiveListByDepartment(id, roomLog._id.ToString());
+            }
 
             if (data.Type == (int)DepartmentType.Type1)
             {
-                IStatisticBusiness statisticBusiness = new MongoStatisticBusiness();
-                DepartmentClassifyAreaModel area = statisticBusiness.GetDepartmentClassifyArea(id);
-
-                double officeArea = area.FirstClassify.Single(r => r.FunctionFirstCode == 1).Area;
+                double officeArea = rooms.Where(r => r.Function.FirstCode == 1).Sum(r => r.UsableArea.Value);
                 if (data.StaffCount == 0)
                     ViewBag.AvgOfficeArea = 0;
                 else
                     ViewBag.AvgOfficeArea = Math.Round(officeArea / data.StaffCount, 2);
 
-                double researchArea = area.FirstClassify.Single(r => r.FunctionFirstCode == 4).Area;
+                double researchArea = rooms.Where(r => r.Function.FirstCode == 4).Sum(r => r.UsableArea.Value);
                 if (data.GraduateCount + data.DoctorCount == 0)
                     ViewBag.AvgResearchArea = 0;
                 else
                     ViewBag.AvgResearchArea = Math.Round(researchArea / (data.GraduateCount + data.DoctorCount), 2);
 
                 ViewBag.OfficeArea = officeArea;
-                ViewBag.EducationArea = area.FirstClassify.Single(r => r.FunctionFirstCode == 2).Area;
-                ViewBag.ExperimentArea = area.FirstClassify.Single(r => r.FunctionFirstCode == 3).Area;
+                ViewBag.EducationArea = rooms.Where(r => r.Function.FirstCode == 2).Sum(r => r.UsableArea.Value);
+                ViewBag.ExperimentArea = rooms.Where(r => r.Function.FirstCode == 3).Sum(r => r.UsableArea.Value);
                 ViewBag.ResearchArea = researchArea;
 
                 if (researchArea == 0d)
@@ -349,10 +352,7 @@ namespace Rhea.UI.Controllers
             }
             else
             {
-                IRoomBusiness roomBusiness = new MongoRoomBusiness();
-                var rooms = roomBusiness.GetListByDepartment(id);
-
-                ViewBag.TotalArea = Math.Round(Convert.ToDouble(rooms.Sum(r => r.UsableArea)), 2);
+                ViewBag.TotalArea = Math.Round(rooms.Sum(r => r.UsableArea.Value), 2);
 
                 int totalPerson = data.PresidentCount + data.VicePresidentCount + data.ChiefCount + data.ViceChiefCount + data.MemberCount;
                 if (totalPerson == 0)
@@ -377,7 +377,7 @@ namespace Rhea.UI.Controllers
             if (string.IsNullOrEmpty(logId))
             {
                 department = this.departmentBusiness.Get(id, DepartmentAdditionType.ScaleData | DepartmentAdditionType.ResearchData | DepartmentAdditionType.SpecialAreaData);
-                
+
                 IIndicatorBusiness indicatorBusiness = new MongoIndicatorBusiness();
                 data = indicatorBusiness.GetDepartmentIndicator(department);
             }
