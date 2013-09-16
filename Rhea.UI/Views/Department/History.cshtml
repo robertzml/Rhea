@@ -21,7 +21,7 @@
     </div>
 </div>
 
-<div id="department-indicator">
+<div id="department-archive-indicator">
 </div>
 
 <div id="department-archive">
@@ -31,11 +31,13 @@
 <script type="text/javascript">
     $(function () {
         var departmentId = '@Model.DepartmentId';
+        loadArchiveIndicator(departmentId, "");
         loadArchiveDepartment(departmentId, "");
 
         $('#archive-list').change(function () {
             var aid = $(this).val();
 
+            loadArchiveIndicator(departmentId, aid);
             loadArchiveDepartment(departmentId, aid);
         });
 
@@ -49,6 +51,13 @@
                 $('#total-area').text(totalArea.toFixed(2));
             });
         }
+
+        function loadArchiveIndicator(departmentId, logId) {
+            $.get('/Department/GetArchiveIndicator', { id: departmentId, logId: logId }, function (response) {
+                $('#department-archive-indicator').html(response);
+            });
+        }
+
 
         function loadArchiveDepartment(departmentId, logId) {
             $.get('/Department/GetArchiveDepartment', { id: departmentId, logId: logId }, function (response) {

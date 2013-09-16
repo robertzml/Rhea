@@ -1,6 +1,7 @@
 ﻿@model Rhea.Data.Personnel.DepartmentIndicatorModel
 
 @{
+    Layout = null;
     ViewBag.Title = "用户指标";
 }
 
@@ -13,13 +14,14 @@
         <table class="responsive table table-bordered table-striped">
             <thead>
                 <tr>
-                    <td>属性</td><td>值</td>
+                    <td style="width:25%;">属性</td>
+                    <td>值</td>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>房间总数</td>
-                    <td>@ViewBag.RoomCount</td>
+                    <td>@Model.RoomCount</td>
                 </tr>
                 <tr>
                     <td>应有面积(m<sup>2</sup>)</td>

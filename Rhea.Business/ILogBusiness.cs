@@ -42,5 +42,14 @@ namespace Rhea.Business
         /// <param name="type">日志类型</param>
         /// <returns></returns>
         List<Log> GetList(int[] type);
+
+        /// <summary>
+        /// 得到日志
+        /// </summary>
+        /// <param name="relateTime">相关时间</param>
+        /// <param name="type">日志类型</param> 
+        /// <returns></returns>
+        /// <remarks>通过归档日期找到相关日志</remarks>
+        Log Get(DateTime relateTime, int type);
     }
 }

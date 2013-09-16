@@ -96,6 +96,27 @@ namespace Rhea.Business
         }
 
         /// <summary>
+        /// 得到日志
+        /// </summary>
+        /// <param name="relateTime">相关时间</param>
+        /// <param name="type">日志类型</param> 
+        /// <returns></returns>
+        /// <remarks>通过归档日期找到相关日志</remarks>
+        public Log Get(DateTime relateTime, int type)
+        {
+            var query = Query.And(Query.EQ("type", type), Query.EQ("relateTime", relateTime));
+            var result = this.context.Find(RheaCollection.Log, query);
+
+            if (result.Count() == 0)
+                return null;
+            else
+            {
+                Log log = ModelBind(result.First());
+                return log;
+            }
+        }
+
+        /// <summary>
         /// 显示所有日志
         /// </summary>
         /// <returns></returns>

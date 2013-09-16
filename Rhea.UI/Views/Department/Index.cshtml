@@ -169,28 +169,6 @@
                         </li>
                     </ul>
                 </div>
-
-                <div class="secbar-widget">
-                    <h4 class="title">历史数据</h4>
-                    <div class="content sparkStats">
-                        <ul class="unstyled">
-                            <li><span class="sparkLine1 "></span> 总人数: <span class="number">509</span></li>
-                            <li>
-                                <span class="sparkLine2"></span>
-                                面积: 
-                                <span class="number">389</span>
-                            </li>
-                            <li><span class="sparkLine3"></span> 
-                                房间: 
-                                <span class="number">731</span>
-                            </li>
-                            <li><span class="sparkLine4"></span>
-                                人均: 
-                                <span class="number">1.44</span>
-                            </li>
-                        </ul>
-                    </div><!-- End .sparkStats -->
-                </div>
             </div>
         </div>
     </div>
@@ -270,31 +248,6 @@
             'thickness': 0.2,
             'tickColorizeValues': true
         });
-       
-
-        //generate random number for charts
-        randNum = function () {
-            //return Math.floor(Math.random()*101);
-            return (Math.floor(Math.random() * (1 + 40 - 20))) + 20;
-        }
-
-        //sparklines (making loop with random data for all 7 sparkline)
-        for (var i = 1; i < 5; i++) {
-            var data = [[1, 3 + randNum()], [2, 5 + randNum()], [3, 8 + randNum()], [4, 11 + randNum()], [5, 14 + randNum()], [6, 17 + randNum()], [7, 20 + randNum()], [8, 15 + randNum()], [9, 18 + randNum()], [10, 22 + randNum()]];
-            placeholder = '.sparkLine' + i;
-            $(placeholder).sparkline(data, {
-                width: 100, //Width of the chart - Defaults to 'auto' - May be any valid css width - 1.5em, 20px, etc (using a number without a unit specifier won't do what you want) - This option does nothing for bar and tristate chars (see barWidth)
-                height: 30, //Height of the chart - Defaults to 'auto' (line height of the containing tag)
-                lineColor: '#88bbc8', //Used by line and discrete charts to specify the colour of the line drawn as a CSS values string
-                fillColor: '#f2f7f9', //Specify the colour used to fill the area under the graph as a CSS value. Set to false to disable fill
-                spotColor: '#467e8c', //The CSS colour of the final value marker. Set to false or an empty string to hide it
-                maxSpotColor: '#9FC569', //The CSS colour of the marker displayed for the maximum value. Set to false or an empty string to hide it
-                minSpotColor: '#ED7A53', //The CSS colour of the marker displayed for the mimum value. Set to false or an empty string to hide it
-                spotRadius: 3, //Radius of all spot markers, In pixels (default: 1.5) - Integer
-                lineWidth: 2//In pixels (default: 1) - Integer
-            });
-        }
-
 
         $('button#department-intro').click(function () {
             ajaxContentLoadPage2("Intro", "Department", { id: '@Model.DepartmentId' }, $('#ajax-content2'));

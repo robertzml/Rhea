@@ -200,14 +200,14 @@ namespace Rhea.UI.Controllers
             var department = this.departmentBusiness.Get(id, DepartmentAdditionType.ScaleData | DepartmentAdditionType.ResearchData | DepartmentAdditionType.SpecialAreaData);
             DepartmentIndicatorModel data = indicatorBusiness.GetDepartmentIndicator(department);
 
-            IRoomBusiness roomBusiness = new MongoRoomBusiness();
-            var rooms = roomBusiness.GetListByDepartment(id);
-            data.ExistingArea = Convert.ToDouble(rooms.Sum(r => r.UsableArea));
+            //IRoomBusiness roomBusiness = new MongoRoomBusiness();
+            //var rooms = roomBusiness.GetListByDepartment(id);
+            //data.ExistingArea = Convert.ToDouble(rooms.Sum(r => r.UsableArea));
 
-            if (data.DeservedArea == 0)
-                data.Overproof = 0;
-            else
-                data.Overproof = Math.Round(data.ExistingArea / data.DeservedArea * 100, 2);
+            //if (data.DeservedArea == 0)
+            //    data.Overproof = 0;
+            //else
+            //    data.Overproof = Math.Round(data.ExistingArea / data.DeservedArea * 100, 2);
 
             ViewBag.Type = department.Type;
             return View(data);
@@ -373,16 +373,29 @@ namespace Rhea.UI.Controllers
         public ActionResult GetArchiveIndicator(int id, string logId)
         {
             Department department;
+            DepartmentIndicatorModel data;
             if (string.IsNullOrEmpty(logId))
+            {
                 department = this.departmentBusiness.Get(id, DepartmentAdditionType.ScaleData | DepartmentAdditionType.ResearchData | DepartmentAdditionType.SpecialAreaData);
+                
+                IIndicatorBusiness indicatorBusiness = new MongoIndicatorBusiness();
+                data = indicatorBusiness.GetDepartmentIndicator(department);
+            }
             else
+            {
                 department = this.departmentBusiness.GetArchive(id, logId);
 
-            ILogBusiness logBusiness = new MongoLogBusiness();
-            Log log = logBusiness.Get(logId);
+                ILogBusiness logBusiness = new MongoLogBusiness();
+                Log log = logBusiness.Get(logId);
+                DateTime archiveDate = log.RelateTime.Value;
+                Log roomLog = logBusiness.Get(archiveDate, (int)LogType.RoomArchive);
 
-            IIndicatorBusiness indicatorBusiness = new MongoIndicatorBusiness();
-            DepartmentIndicatorModel data = indicatorBusiness.GetDepartmentIndicator(department);
+                IRoomBusiness roomBusiness = new MongoRoomBusiness();
+                var rooms = roomBusiness.GetArchiveListByDepartment(id, roomLog._id.ToString());
+
+                IIndicatorBusiness indicatorBusiness = new MongoIndicatorBusiness();
+                data = indicatorBusiness.GetDepartmentIndicator(department, rooms);
+            }
 
             return View("IndicatorSummary", data);
         }
