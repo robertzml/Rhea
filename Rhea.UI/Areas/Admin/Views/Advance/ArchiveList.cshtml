@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "归档历史";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout_Estate.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Advance.cshtml";
 }
 
 
@@ -63,9 +63,14 @@
     </div>
 </div>
 
+@section scripts {
 <script type="text/javascript">
     $(function () {
         var menu = $('a#archive-list');
         menuNavActive(menu);
+
+        var dom = $('table#log-list');
+        initDataTable(dom);
     });
 </script>
+}

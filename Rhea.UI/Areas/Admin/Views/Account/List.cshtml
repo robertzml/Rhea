@@ -77,12 +77,14 @@
     </div>
 </div>
 
+@section scripts {
 <script type="text/javascript">
     $(function () {
-        var dom = $('table#user-list');
-        initDataTable(dom);
-
         var menu = $('a#user-manage');
         menuNavActive(menu);
+
+        var dom = $('table#user-list');
+        initDataTable(dom);
     });
 </script>
+}

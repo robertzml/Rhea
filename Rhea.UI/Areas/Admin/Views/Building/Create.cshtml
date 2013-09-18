@@ -19,8 +19,8 @@
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
                 <fieldset>
-                    <legend>楼宇添加</legend>                
-            
+                    <legend>楼宇添加</legend>
+
                     <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
@@ -125,9 +125,9 @@
                             </tr>
                         </tbody>
                     </table>
-            
+
                     <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">保存</button>                       
+                        <button type="submit" class="btn btn-primary">保存</button>
                         <a class="btn" href="@Url.Action("List", new { controller = "Building", area = "Admin" })">回到列表</a> 
                     </div>
                 </fieldset>
@@ -137,9 +137,11 @@
     </div>
 </div>
 
+@section scripts {
 <script type="text/javascript">
     $(function () {
         var menu = $('a#building-manage');
         menuNavActive(menu);
     });
 </script>
+}

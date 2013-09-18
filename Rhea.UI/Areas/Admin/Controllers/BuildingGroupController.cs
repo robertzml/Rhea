@@ -57,7 +57,8 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult List()
         {
-            var data = this.buildingGroupBusiness.GetList().OrderBy(r => r.Id);
+            var data = this.buildingGroupBusiness.GetList();
+            data.ForEach(r => r.UsableArea = this.buildingGroupBusiness.GetUsableArea(r.Id));
             return View(data);
         }
 

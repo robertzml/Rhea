@@ -167,7 +167,8 @@ namespace Rhea.UI.Areas.Estate.Controllers
                 Name = data.Name,
                 BuildArea = Convert.ToDouble(data.BuildArea),
                 UsableArea = this.buildingBusiness.GetFloorUsableArea(id, floor),
-                AboveGroundFloor = Convert.ToInt32(building.AboveGroundFloor)
+                AboveGroundFloor = Convert.ToInt32(building.AboveGroundFloor),
+                Remark = data.Remark
             };
 
             IRoomBusiness roomBusiness = new MongoRoomBusiness();

@@ -28,6 +28,12 @@ namespace Rhea.Data.Server
         /// log
         /// </summary>
         public static readonly string Log = "log";
+
+        /// <summary>
+        /// 地图点表
+        /// mapPoint
+        /// </summary>
+        public static readonly string MapPoint = "mapPoint";
         #endregion //Field
     }
 }

@@ -31,5 +31,5 @@ namespace Rhea.UI.Areas.Admin.Models
         [DataType(DataType.MultilineText)]
         [Display(Name = "备注内容")]
         public string ArchiveContent { get; set; }
-    }
+    }    
 }

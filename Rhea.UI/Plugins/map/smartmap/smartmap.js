@@ -1670,11 +1670,11 @@ FUI.Map = function (container, config) {
                         var mapX = Math.round(mapPoint.data[id].left * mapScale + 16 * (mapScale - 1));
                         var mapY = Math.round(mapPoint.data[id].top * mapScale + 32 * (mapScale - 1));
 
-                        $("#layer" + i).append('<div class="map-point pins ' + (cfg.active ? 'active ' : '') + cfg.icon + ' ' + cfg.color + '" id="'
+                        $("#layer" + i).append('<div class="map-point ' + (cfg.active ? 'active ' : '') + cfg.icon + '_' + cfg.color + '" id="'
                             + id + '" style="position:absolute;top:' + mapY + 'px;left:' + mapX + 'px;"><div class="tip" style="width:' + cfg.width + 'px;left:' + (-(cfg.width / 2 - 5)) + 'px">' + cfg.html + '</div><span class="pointer"></span></div>');
                     }
                     else {
-                        $("#layer" + i).append('<div class="map-point pins ' + (cfg.active ? 'active ' : '') + cfg.icon + ' ' + cfg.color + '" id="'
+                        $("#layer" + i).append('<div class="map-point ' + (cfg.active ? 'active ' : '') + cfg.icon + '_' + cfg.color + '" id="'
                             + id + '" style="position:absolute;top:' + mapPoint.data[id].top + 'px;left:' + mapPoint.data[id].left + 'px;"><div class="tip" style="width:' + cfg.width + 'px;left:' + (-(cfg.width / 2 - 5)) + 'px">' + cfg.html + '</div><span class="pointer"></span></div>');
                     }
 

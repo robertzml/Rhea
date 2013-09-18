@@ -6,8 +6,7 @@ using System.Web.Mvc;
 using Rhea.Business.Account;
 using Rhea.Business.Estate;
 using Rhea.Business.Personnel;
-using Rhea.Model.Estate;
-using Rhea.Model.Personnel;
+using Rhea.Model;
 using Rhea.UI.Filters;
 using Rhea.UI.Models;
 using Rhea.UI.Services;
@@ -105,33 +104,46 @@ namespace Rhea.UI.Controllers
         #region Json
         public JsonResult MapPointsData()
         {
-            List<MapPointModel> data = new List<MapPointModel>();
+            List<MapPoint> data = new List<MapPoint>();
 
-            MapPointModel p1 = new MapPointModel
+            MapPoint p1 = new MapPoint
             {
-                Id = "100023",
+                TargetId = 100023,
                 Name = "物联网学院楼",
                 Content = "物联网学院楼，共四个分区。",
                 PointX = 241,
                 PointY = 175,
                 Zoom = 3,
-                Pin = "pin-green",
+                Pin = "pin",
                 Symbol = "symbol-airport"
             };
             data.Add(p1);
 
-            MapPointModel p2 = new MapPointModel
+            MapPoint p2 = new MapPoint
             {
-                Id = "100006",
+                TargetId = 100006,
                 Name = "纺服楼",
                 Content = "纺织与服装工程学院。",
                 PointX = 249,
                 PointY = 148,
                 Zoom = 3,
-                Pin = "pin-blue",
+                Pin = "pin",
                 Symbol = "symbol-airport"
             };
             data.Add(p2);
+
+            MapPoint p3 = new MapPoint
+            {
+                TargetId = 100015,
+                Name = "生工楼",
+                Content = "生物工程学院。",
+                PointX = 130,
+                PointY = 200,
+                Zoom = 3,
+                Pin = "pin",
+                Symbol = "symbol-airport"
+            };
+            data.Add(p3);
 
             return Json(data, JsonRequestBehavior.AllowGet);
         }

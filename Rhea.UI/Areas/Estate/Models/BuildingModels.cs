@@ -60,6 +60,12 @@ namespace Rhea.UI.Areas.Estate.Models
         public int RoomCount { get; set; }
 
         /// <summary>
+        /// 备注
+        /// </summary>
+        [Display(Name = "备注")]
+        public string Remark { get; set; }
+
+        /// <summary>
         /// 楼宇地上楼层数
         /// </summary>
         [Display(Name = "楼宇地上楼层数")]

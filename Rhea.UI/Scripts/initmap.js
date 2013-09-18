@@ -12,7 +12,7 @@ $(function () {
                 }
             },
             pin: function (config, x, y, zoom) {	//手工标注
-				$('#point-show').html("x:" + x + "; y:" + y);
+				$('#point-show').html("x:" + x + "; y:" + y);				
             }
         });
 

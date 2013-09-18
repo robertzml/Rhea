@@ -1,0 +1,121 @@
+﻿@model Rhea.Model.MapPoint
+
+@{
+    ViewBag.Title = "添加地图点";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Advance.cshtml";
+}
+
+<div class="box">
+    <div class="box-header well" data-original-title>
+        <h2>
+            <i class="icon-th-list"></i>标记点信息</h2>
+    </div>
+
+    <div class="box-content">
+        <div class="row-fluid">
+            <div class="span12">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <fieldset>
+                    <legend>@ViewBag.Title</legend>
+
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th style="width: 20%">
+                                    属性
+                                </th>
+                                <th style="width: 80%">
+                                    值
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.TargetId)
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.TargetId)
+                                    @Html.ValidationMessageFor(model => model.TargetId)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.Name)
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.Name)
+                                    @Html.ValidationMessageFor(model => model.Name)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.Content)
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.Content)
+                                    @Html.ValidationMessageFor(model => model.Content)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.PointX)
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.PointX)
+                                    @Html.ValidationMessageFor(model => model.PointX)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.PointY)
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.PointY)
+                                    @Html.ValidationMessageFor(model => model.PointY)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.Zoom)
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.Zoom)
+                                    @Html.ValidationMessageFor(model => model.Zoom)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.Pin)
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.Pin)
+                                    @Html.ValidationMessageFor(model => model.Pin)
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">保存</button>
+                        <a class="btn" href="@Url.Action("MapPointList", new { controller = "Advance", area = "Admin" })">回到列表</a> 
+                    </div>
+                </fieldset>
+            }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+<script type="text/javascript">
+    $(function () {
+        var menu = $('a#map-point-list');
+        menuNavActive(menu);
+    });
+</script>
+}

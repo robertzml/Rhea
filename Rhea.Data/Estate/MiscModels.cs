@@ -36,5 +36,5 @@ namespace Rhea.Data.Estate
         /// 面积值
         /// </summary>
         public double Area { get; set; }
-    }
+    }    
 }

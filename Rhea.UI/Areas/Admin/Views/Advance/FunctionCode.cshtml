@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "房间功能";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout_Estate.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Advance.cshtml";
 }
 
 <div class="box">
@@ -33,9 +33,11 @@
     </div>
 </div>
 
+@section scripts {
 <script type="text/javascript">
     $(function () {
         var menu = $('a#room-function');
         menuNavActive(menu);
     });
 </script>
+}

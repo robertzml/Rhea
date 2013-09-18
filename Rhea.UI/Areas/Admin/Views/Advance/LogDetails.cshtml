@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "日志详细";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout_Estate.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Advance.cshtml";
 }
 
 <div class="box">
@@ -108,7 +108,16 @@
         </div>
 
         <p>
-            <a class="btn btn-success" href="@Url.Action("LogList", new { controller = "Estate", area = "Admin" })"><i class="icon-list icon-white"></i> 日志列表</a>
+            <a class="btn btn-success" href="@Url.Action("LogList", new { controller = "Advance", area = "Admin" })"><i class="icon-list icon-white"></i> 日志列表</a>
         </p>
     </div>
 </div>
+
+@section scripts {
+<script type="text/javascript">
+    $(function () {
+        var menu = $('a#log-list');
+        menuNavActive(menu);
+    });
+</script>
+}

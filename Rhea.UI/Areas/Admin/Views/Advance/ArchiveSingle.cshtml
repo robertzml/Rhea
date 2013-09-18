@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "归档数据";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout_Estate.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Advance.cshtml";
 }
 
 
@@ -15,7 +15,7 @@
     <div class="box-content">
         <div class="row-fluid">
             <div class="span12">
-            @using (Html.BeginForm("ArchiveSingle", "Estate", new { area = "Admin" }, FormMethod.Post, new { @class = "form-horizontal" }))
+            @using (Html.BeginForm("ArchiveSingle", "Advance", new { area = "Admin" }, FormMethod.Post, new { @class = "form-horizontal" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
@@ -63,6 +63,7 @@
     </div>
 </div>
 
+@section scripts {
 <script type="text/javascript">
     $(function () {
         var menu = $('a#archive-single');
@@ -71,4 +72,4 @@
         var arch = $('#ArchiveDate').datepicker({ format: 'yyyy-mm-dd' });
     });
 </script>
-
+}

@@ -397,7 +397,7 @@ namespace Rhea.Business.Estate
                 .Set("fixedYear", (BsonValue)data.FixedYear)
                 //.Set("manager", data.Manager ?? "")
                 .Set("personNumber", (BsonValue)data.PersonNumber)
-                .Set("roomStatus", data.RoomStatus)
+                .Set("roomStatus", data.RoomStatus ?? "")
                 .Set("remark", data.Remark ?? "")
                 .Set("heating", (BsonValue)data.Heating)
                 .Set("fireControl", data.FireControl ?? "")

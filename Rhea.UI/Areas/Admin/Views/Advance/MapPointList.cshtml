@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Rhea.Model.MapPoint>
+
+@{
+    ViewBag.Title = "地图标记点";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Advance.cshtml";
+}
+
+
+<div class="box">
+    <div class="box-header well" data-original-title>
+        <h2>
+            <i class="icon-tasks"></i>@ViewBag.Title</h2>
+    </div>
+
+    <div class="box-content">
+        <table id="log-tlist" class="table table-striped table-bordered bootstrap-datatable datatable">
+            <thead>
+                <tr>
+                    <th>
+                        ID
+                    </th>
+                    <th>
+                        名称
+                    </th>
+                    <th>
+                        内容
+                    </th>
+                    <th>
+                        X坐标
+                    </th>
+                    <th>
+                        Y坐标
+                    </th>
+                    <th>
+                        缩放级别
+                    </th>
+                    <th style="width:80px;">
+                        操作
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.TargetId
+                    </td>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.Content
+                    </td>
+                    <td>
+                        @item.PointX
+                    </td>
+                    <td>
+                        @item.PointY
+                    </td>
+                    <td>
+                        @item.Zoom
+                    </td>
+                    <td>
+                        <a class="btn btn-success btn-small" href="@Url.Action("MapPointDetails", new { controller = "Advance", id = item._id.ToString(), area = "Admin" })">
+                        <span class="icon-zoom-in icon-white"></span> 查看</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+
+        <p>
+            <a class="btn btn-primary" href="@Url.Action("AddMapPoint", new { controller = "Advance", area = "Admin" })"><i class="icon-plus icon-white"></i>添加点</a> 
+        </p>
+    </div>
+</div>
+
+@section scripts {
+<script type="text/javascript">
+    $(function () {
+        var menu = $('a#map-point-list');
+        menuNavActive(menu);
+    });
+</script>
+}

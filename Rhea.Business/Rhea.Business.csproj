@@ -72,9 +72,11 @@
     <Compile Include="IBackupBusiness.cs" />
     <Compile Include="DictionaryBusiness.cs" />
     <Compile Include="ILogBusiness.cs" />
+    <Compile Include="IMapBusiness.cs" />
     <Compile Include="IStatisticBusiness.cs" />
     <Compile Include="ModelExtension.cs" />
     <Compile Include="MongoLogBusiness.cs" />
+    <Compile Include="MongoMapBusiness.cs" />
     <Compile Include="MongoStatisticBusiness.cs" />
     <Compile Include="Personnel\IIndicatorBusiness.cs" />
     <Compile Include="Personnel\MongoIndicatorBusiness.cs" />
