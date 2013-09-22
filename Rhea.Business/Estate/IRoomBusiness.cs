@@ -98,6 +98,13 @@ namespace Rhea.Business.Estate
         int Count();
 
         /// <summary>
+        /// 楼群内房间数量
+        /// </summary>
+        /// <param name="buildingGroupId">楼群ID</param>
+        /// <returns></returns>
+        int CountByBuildingGroup(int buildingGroupId);
+
+        /// <summary>
         /// 楼宇内房间数量
         /// </summary>
         /// <param name="buildingId">楼宇ID</param>

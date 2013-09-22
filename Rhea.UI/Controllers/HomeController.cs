@@ -8,6 +8,7 @@ using Rhea.Business.Account;
 using Rhea.Business.Estate;
 using Rhea.Business.Personnel;
 using Rhea.Model;
+using Rhea.Model.Estate;
 using Rhea.UI.Filters;
 using Rhea.UI.Models;
 using Rhea.UI.Services;
@@ -111,6 +112,18 @@ namespace Rhea.UI.Controllers
         {
             IMapBusiness mapBusiness = new MongoMapBusiness();
             var data = mapBusiness.GetPointList(type: 1);
+
+            IRoomBusiness roomBusiness = new MongoRoomBusiness();
+            IBuildingGroupBusiness buildingGroupBusiness = new MongoBuildingGroupBusiness();
+            var bgs = buildingGroupBusiness.GetList(false);
+
+            foreach (var item in data)
+            {
+                BuildingGroup bg = bgs.Single(r => r.Id == item.TargetId);
+                string c = string.Format("<p>建筑面积:{0} m<sup>2</sup><br />使用面积:{1} m<sup>2</sup><br />房间数量:{2}</p>", 
+                    bg.BuildArea, buildingGroupBusiness.GetUsableArea(bg.Id), roomBusiness.CountByBuildingGroup(bg.Id));
+                item.Content += c;
+            }
 
             return Json(data, JsonRequestBehavior.AllowGet);
         }

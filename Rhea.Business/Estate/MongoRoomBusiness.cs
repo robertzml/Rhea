@@ -456,6 +456,28 @@ namespace Rhea.Business.Estate
         }
 
         /// <summary>
+        /// 楼群内房间数量
+        /// </summary>
+        /// <param name="buildingGroupId">楼群ID</param>
+        /// <returns></returns>
+        public int CountByBuildingGroup(int buildingGroupId)
+        {
+            var query = Query.EQ("buildingGroupId", buildingGroupId);
+            var buildings = this.context.Find(EstateCollection.Building, query).SetFields("id");
+
+            BsonArray bids = new BsonArray();
+            foreach (var building in buildings)
+            {
+                bids.Add(building["id"]);
+            }
+
+            query = Query.And(Query.In("buildingId", bids), Query.NE("status", 1));
+            long count = this.context.Count(EstateCollection.Room, query);
+
+            return (int)count;
+        }
+
+        /// <summary>
         /// 楼宇内房间数量
         /// </summary>
         /// <param name="buildingId">楼宇ID</param>

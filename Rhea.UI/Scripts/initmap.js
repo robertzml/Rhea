@@ -19,10 +19,10 @@ $(function () {
 		
 			$.getJSON('/Home/MapPointsData', function(response) {
 				$.each(response, function(i, item) {
-					var tag = item.Id;
+					var tag = item.TargetId;
 					var cfg = {
 						name: item.Name,
-						html: '<h3>' + item.Content + '</h3>',
+						html: item.Content,
 						mapX: item.PointX,
 						mapY: item.PointY,
 						mapZoom: item.Zoom,
@@ -31,7 +31,7 @@ $(function () {
 						width: 160,
 						active: false,
 						fn: function (point, tag) {
-							alert('ok');
+							alert('ok' + tag);
 						}
 					};
 					
