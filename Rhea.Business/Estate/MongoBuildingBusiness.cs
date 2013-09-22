@@ -689,7 +689,7 @@ namespace Rhea.Business.Estate
 
             foreach (var doc in docs)
             {
-                BsonDocument editor = doc["editor"].AsBsonDocument;
+                BsonDocument log = doc["log"].AsBsonDocument;
 
                 sb.AppendLine(string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}",
                     doc["id"],
@@ -704,9 +704,9 @@ namespace Rhea.Business.Estate
                     doc.GetValue("partMapUrl", ""),
                     doc.GetValue("sort"),
                     doc.GetValue("remark", ""),
-                    editor.GetValue("name", ""),
-                    editor.GetValue("time", null),
-                    editor.GetValue("type", null),
+                    log.GetValue("name", ""),
+                    log.GetValue("time", null),
+                    log.GetValue("type", null),
                     doc.GetValue("status", 0)
                 ));
             }

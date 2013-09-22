@@ -20,6 +20,9 @@
                         ID
                     </th>
                     <th>
+                        类型
+                    </th>
+                    <th>
                         名称
                     </th>
                     <th>
@@ -47,6 +50,9 @@
                         @item.TargetId
                     </td>
                     <td>
+                        @item.TargetType
+                    </td>
+                    <td>
                         @item.Name
                     </td>
                     <td>
@@ -62,8 +68,8 @@
                         @item.Zoom
                     </td>
                     <td>
-                        <a class="btn btn-success btn-small" href="@Url.Action("MapPointDetails", new { controller = "Advance", id = item._id.ToString(), area = "Admin" })">
-                        <span class="icon-zoom-in icon-white"></span> 查看</a>
+                        <a class="btn btn-success btn-small" href="@Url.Action("MapPointDetails", new { controller = "Advance", id = item._id.ToString(), area = "Admin" })"><span class="icon-zoom-in icon-white"></span> 查看</a>
+                        <a class="btn btn-warning btn-small" href="@Url.Action("MapPointEdit", new { controller = "Advance", id = item._id.ToString(), area = "Admin" })"><span class="icon-edit icon-white"></span> 编辑</a>
                     </td>
                 </tr>
             }
@@ -71,7 +77,7 @@
         </table>
 
         <p>
-            <a class="btn btn-primary" href="@Url.Action("AddMapPoint", new { controller = "Advance", area = "Admin" })"><i class="icon-plus icon-white"></i>添加点</a> 
+            <a class="btn btn-primary" href="@Url.Action("MapPointCreate", new { controller = "Advance", area = "Admin" })"><i class="icon-plus icon-white"></i>添加点</a> 
         </p>
     </div>
 </div>

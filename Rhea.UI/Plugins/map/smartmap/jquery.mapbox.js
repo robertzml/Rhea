@@ -6,6 +6,18 @@
  * Released with the MIT License: http://www.opensource.org/licenses/mit-license.php
  */
 /// <reference path="../CoreExt/fui/base.js" />
+function getPageCoord(element)    //计算从触发到root间所有元素的offsetLeft值之和。
+{
+  var coord = {x: 0, y: 0};
+  while (element)
+  {
+    coord.x += element.offsetLeft;
+    coord.y += element.offsetTop;
+    element = element.offsetParent;
+  }
+  return coord;
+
+}
 
 (function ($) {// jQuery.noConflict compliant
     $.fn.mapbox = function (o, callback) {
@@ -259,7 +271,7 @@
                     }).after('<div class="map-layer-mask"></div>')
                 });
 
-                //�ӳټ���ͼƬ
+                //延迟加载图片
                 var mapImg = $(layers.eq(o.defaultLayer)[0]).find("img");
                 for (i = 0; i < mapImg.length; i++) {
                     mapImg[i].src = mapImg[i].alt;
@@ -311,10 +323,9 @@
 
                 $(this).bind(FUI.env.ua.clickEventDown, function (event) {
                     var layer = $(viewport).find(".current-map-layer");
-                    var x = -(layer[0].offsetLeft + layer[0].offsetParent.offsetParent.offsetLeft), y = -(layer[0].offsetTop + layer[0].offsetParent.offsetParent.offsetTop);
-                    //x = _makeCoords(x);
-                    //y = _makeCoords(y);
-
+					var x=-getPageCoord(layer[0]).x;
+					var y=-getPageCoord(layer[0]).y;
+ 
                     var e = event || window.event;
                     if (navigator.msMaxTouchPoints) {
                         e = event.originalEvent;
@@ -329,9 +340,10 @@
                     if (this.status == "select") {
                         mapmove = false;
                         $(this).append('<div class="map-layer-select"></div>');
+						//debugger;
                         $(this).find(".map-layer-select").css({
-                            top: e.clientY - layer[0].offsetParent.offsetParent.offsetTop,
-                            left: e.clientX - layer[0].offsetParent.offsetParent.offsetLeft
+                            top: e.clientY + y+layer[0].offsetTop,
+                            left: e.clientX + x+layer[0].offsetLeft
                         });
                     }
                     else {
@@ -347,9 +359,8 @@
                     $('.map-area').unbind(FUI.env.ua.clickEventMove);
                     //
                     var layer = $(viewport).find(".current-map-layer");
-                    var x = -(layer[0].offsetLeft + layer[0].offsetParent.offsetParent.offsetLeft), y = -(layer[0].offsetTop + layer[0].offsetParent.offsetParent.offsetTop);
-                    //x = _makeCoords(x);
-                    //y = _makeCoords(y);
+					var x=-getPageCoord(layer[0]).x;
+					var y=-getPageCoord(layer[0]).y;
 
                     var e = event || window.event;
                     if (navigator.msMaxTouchPoints) {
@@ -382,6 +393,9 @@
 
                 $(this).bind(FUI.env.ua.clickEventMove, function (event) {
                     var layer = $(viewport).find(".current-map-layer");
+					var x=-getPageCoord(layer[0]).x;
+					var y=-getPageCoord(layer[0]).y;
+
                     var e = event || window.event;
                     if (navigator.msMaxTouchPoints) {
                         e = event.originalEvent;
@@ -391,6 +405,12 @@
                         event.preventDefault();
                         e = event.originalEvent.touches[0] || event.originalEvent.changedTouches[0];
                     }
+					//
+					var xcoord = e.clientX + x, ycoord = e.clientY + y;
+                    var mapZoom = ($(layer).width() / o.mapconfig.initWidth) * o.mapconfig.initZoom;
+					var mapX = (xcoord - 16) / mapZoom;
+					var mapY = (ycoord - 32) / mapZoom;
+					$('.map-tipinfo').html("X坐标：&nbsp;"+FUI.Utils.formatNumber(mapX,"#0.000000")+"&nbsp;,Y坐标：&nbsp;"+FUI.Utils.formatNumber(mapY,"#0.000000")+"&nbsp;");
                     //
                     if (this.status == "select") {
 
@@ -398,8 +418,8 @@
                         var left = parseInt($(this).find(".map-layer-select").css('left'));
 
                         $(this).find(".map-layer-select").css({
-                            height: e.clientY - top - layer[0].offsetParent.offsetParent.offsetTop,
-                            width: e.clientX - left - layer[0].offsetParent.offsetParent.offsetLeft
+                            height: e.clientY - top + y + layer[0].offsetTop,
+                            width: e.clientX - left + x + layer[0].offsetLeft
                         });
                     }
                     //

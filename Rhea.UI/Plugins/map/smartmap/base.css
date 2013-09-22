@@ -14,6 +14,21 @@
     width: 60px;
 }
 
+
+.map-tipinfo{
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    height: 20px;   
+	padding:0 10px;
+	font-size:11px;
+	font-family:Î¢ÈíÑÅºÚ;
+	background-color: rgba(255, 255, 255, 0.4);
+	-webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
 .map-arrow{
     height: 60px;
     width: 60px;

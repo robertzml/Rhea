@@ -606,7 +606,7 @@ namespace Rhea.Business.Estate
             foreach (var doc in docs)
             {
                 BsonDocument function = doc["function"].AsBsonDocument;
-                BsonDocument editor = doc["editor"].AsBsonDocument;
+                BsonDocument log = doc["log"].AsBsonDocument;
 
                 sb.AppendLine(string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}," +
                     "{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27},{28},{29},{30},{31},{32}," +
@@ -646,9 +646,9 @@ namespace Rhea.Business.Estate
                     doc.GetValue("heatingInAeration", null),
                     doc.GetValue("hasTestBed", null),
                     doc.GetValue("usageCharge", null),
-                    editor.GetValue("name", ""),
-                    editor.GetValue("time", null),
-                    editor.GetValue("type", null),
+                    log.GetValue("name", ""),
+                    log.GetValue("time", null),
+                    log.GetValue("type", null),
                     doc.GetValue("status", 0)
                 ));
             }

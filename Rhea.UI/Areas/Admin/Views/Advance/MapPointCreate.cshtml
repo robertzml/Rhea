@@ -8,7 +8,7 @@
 <div class="box">
     <div class="box-header well" data-original-title>
         <h2>
-            <i class="icon-th-list"></i>标记点信息</h2>
+            <i class="icon-th-list"></i>地图点信息</h2>
     </div>
 
     <div class="box-content">
@@ -41,6 +41,15 @@
                                 <td>
                                     @Html.EditorFor(model => model.TargetId)
                                     @Html.ValidationMessageFor(model => model.TargetId)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.TargetType)
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.TargetType)
+                                    @Html.ValidationMessageFor(model => model.TargetType)
                                 </td>
                             </tr>
                             <tr>

@@ -305,7 +305,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
         }
 
         /// <summary>
-        /// 地图标点
+        /// 地图标点列表
         /// </summary>
         /// <returns></returns>
         public ActionResult MapPointList()
@@ -317,13 +317,92 @@ namespace Rhea.UI.Areas.Admin.Controllers
         }
 
         /// <summary>
+        /// 地图标点详细
+        /// </summary>
+        /// <param name="id">点ID</param>
+        /// <returns></returns>
+        public ActionResult MapPointDetails(string id)
+        {
+            IMapBusiness mapBusiness = new MongoMapBusiness();
+            var data = mapBusiness.GetPoint(id);
+
+            return View(data);
+        }
+
+        /// <summary>
         /// 添加地图点
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult AddMapPoint()
+        public ActionResult MapPointCreate()
         {
             return View();
+        }
+
+        /// <summary>
+        /// 添加地图点
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateInput(false)]
+        [HttpPost]
+        public ActionResult MapPointCreate(MapPoint model)
+        {
+            if (ModelState.IsValid)
+            {
+                IMapBusiness mapBusiness = new MongoMapBusiness();
+                bool result = mapBusiness.CreatePoint(model);
+
+                if (result)
+                {
+                    TempData["Message"] = "添加成功";
+                    return RedirectToAction("MapPointList");
+                }
+                else
+                    ModelState.AddModelError("", "添加失败");
+            }
+
+            return View(model);
+        }
+
+        /// <summary>
+        /// 编辑地图点
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult MapPointEdit(string id)
+        {
+            IMapBusiness mapBusiness = new MongoMapBusiness();
+            var data = mapBusiness.GetPoint(id);
+
+            return View(data);
+        }
+
+        /// <summary>
+        /// 编辑地图点
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateInput(false)]
+        [HttpPost]
+        public ActionResult MapPointEdit(MapPoint model)
+        {            
+            if (ModelState.IsValid)
+            {
+                IMapBusiness mapBusiness = new MongoMapBusiness();
+                bool result = mapBusiness.EditPoint(model);
+
+                if (result)
+                {
+                    TempData["Message"] = "编辑成功";
+                    return RedirectToAction("MapPointDetails", new { id = model._id.ToString() });
+                }
+                else
+                    ModelState.AddModelError("", "编辑失败");
+            }
+
+            return View(model);
         }
         #endregion //Action
     }

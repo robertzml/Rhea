@@ -100,7 +100,15 @@
                         @Html.DisplayNameFor(model => model.BuildCost)
                     </td>
                     <td>
-                        @Model.BuildCost
+                        ￥@Model.BuildCost
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.CurrentValue)
+                    </td>
+                    <td>
+                        @Model.CurrentValue
                     </td>
                 </tr>
             </tbody>
@@ -119,14 +127,6 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>
-                        @Html.DisplayNameFor(model => model.CurrentValue)
-                    </td>
-                    <td>
-                        @Model.CurrentValue
-                    </td>
-                </tr>
                 <tr>
                     <td>
                         @Html.DisplayNameFor(model => model.Classified)

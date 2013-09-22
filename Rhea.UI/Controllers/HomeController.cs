@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Rhea.Business;
 using Rhea.Business.Account;
 using Rhea.Business.Estate;
 using Rhea.Business.Personnel;
@@ -102,48 +103,14 @@ namespace Rhea.UI.Controllers
         #endregion //Action
 
         #region Json
+        /// <summary>
+        /// 地图点数据
+        /// </summary>
+        /// <returns></returns>
         public JsonResult MapPointsData()
         {
-            List<MapPoint> data = new List<MapPoint>();
-
-            MapPoint p1 = new MapPoint
-            {
-                TargetId = 100023,
-                Name = "物联网学院楼",
-                Content = "物联网学院楼，共四个分区。",
-                PointX = 241,
-                PointY = 175,
-                Zoom = 3,
-                Pin = "pin",
-                Symbol = "symbol-airport"
-            };
-            data.Add(p1);
-
-            MapPoint p2 = new MapPoint
-            {
-                TargetId = 100006,
-                Name = "纺服楼",
-                Content = "纺织与服装工程学院。",
-                PointX = 249,
-                PointY = 148,
-                Zoom = 3,
-                Pin = "pin",
-                Symbol = "symbol-airport"
-            };
-            data.Add(p2);
-
-            MapPoint p3 = new MapPoint
-            {
-                TargetId = 100015,
-                Name = "生工楼",
-                Content = "生物工程学院。",
-                PointX = 130,
-                PointY = 200,
-                Zoom = 3,
-                Pin = "pin",
-                Symbol = "symbol-airport"
-            };
-            data.Add(p3);
+            IMapBusiness mapBusiness = new MongoMapBusiness();
+            var data = mapBusiness.GetPointList(type: 1);
 
             return Json(data, JsonRequestBehavior.AllowGet);
         }

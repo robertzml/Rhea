@@ -16,13 +16,20 @@ namespace Rhea.Model
         /// 系统ID
         /// </summary>
         [Display(Name = "系统ID")]
-        public ObjectId _id { get; set; }
+        public string _id { get; set; }                
 
         /// <summary>
         /// 目标ID
         /// </summary>
         [Display(Name = "目标ID")]
         public int TargetId { get; set; }
+
+        /// <summary>
+        /// 目标类型
+        /// 1:楼群, 2:学院
+        /// </summary>
+        [Display(Name = "目标类型")]
+        public int TargetType { get; set; }
 
         /// <summary>
         /// 名称

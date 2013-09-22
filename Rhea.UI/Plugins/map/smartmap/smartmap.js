@@ -1424,7 +1424,7 @@ FUI.Map = function (container, config) {
             this.container = container;
             //初始化容器
             $('#' + this.container).html('<div class="viewport"></div>'
-                + '<div class="map-control">'
+                + '<div class="map-tipinfo"></div><div class="map-control">'
                 + '<div class="map-arrow"><a href="#left" class="left" title="向左平移">Left</a>'
                 + '<a href="#right" class="right" title="向右平移">Right</a>'
                 + '<a href="#center" class="center" title="居中">Center</a>'
@@ -1487,6 +1487,7 @@ FUI.Map = function (container, config) {
                     //
                     viewport.mapbox({
                         mousewheel: true,
+						mapconfig:mapConfig,
                         defaultLayer: (mapConfig.initZoom - 1),
                         layerSplit: result.layerSplit,
                         callAfter: function (layer, xcoord, ycoord, viewport) {
