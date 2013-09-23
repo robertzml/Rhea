@@ -1659,7 +1659,8 @@ FUI.Map = function (container, config) {
                         tag: tag,
                         name: cfg.name,
                         icon: cfg.icon,
-                        color: cfg.color
+                        color: cfg.color,
+						type: cfg.type
                     };
 
                     if (cfg.mapZoom >= mapZoom1 && cfg.mapZoom < mapZoom2) {

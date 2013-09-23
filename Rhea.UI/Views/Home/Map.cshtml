@@ -6,10 +6,24 @@
 <link href="@Url.Content("~/Content/map-pin.css")" type="text/css" rel="stylesheet" />
 <style type="text/css">
     #mapwraper { position:absolute; top:67px; left:0; right:0; bottom:2px; display:block; }
+    .modal-header { padding: 9px 15px;}
 </style>
 
 <div id="mapwraper">
     <div id="mapFrame" style="position: absolute;width:100%;height:100%;border:1px solid black">加载中...</div>
+</div>
+
+<div id="mapModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">基本信息</h3>
+    </div>
+    <div class="modal-body">
+    </div>
+    <div class="modal-footer">
+        <button id="map-point-enter" class="btn btn-success">详细</button>
+        <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">关闭</button>
+    </div>
 </div>
 
 @section scripts{

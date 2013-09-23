@@ -9,6 +9,7 @@ using Rhea.Business.Estate;
 using Rhea.Business.Personnel;
 using Rhea.Model;
 using Rhea.Model.Estate;
+using Rhea.UI.Areas.Estate.Models;
 using Rhea.UI.Filters;
 using Rhea.UI.Models;
 using Rhea.UI.Services;
@@ -47,11 +48,62 @@ namespace Rhea.UI.Controllers
         }
 
         /// <summary>
+        /// 地图点详细
+        /// </summary>
+        /// <param name="targetId">目标ID</param>
+        /// <param name="targetType">目标类型</param>
+        /// <returns></returns>
+        public ActionResult MapDetails(int targetId, int targetType)
+        {
+            MapPointDetailModel model = new MapPointDetailModel();
+            model.Id = targetId;
+            model.Type = targetType;
+
+            IBuildingGroupBusiness buildingGroupBusiness = new MongoBuildingGroupBusiness();
+            IDepartmentBusiness departmentBusiness = new MongoDepartmentBusiness();
+            IRoomBusiness roomBusiness = new MongoRoomBusiness();
+
+            if (targetType == 1)
+            {
+                var buildingGroup = buildingGroupBusiness.Get(targetId);
+
+                model.Title = buildingGroup.Name;
+                if (!string.IsNullOrEmpty(buildingGroup.ImageUrl))
+                    model.ImageUrl = RheaConstant.ImagesRoot + buildingGroup.ImageUrl;
+                model.BuildArea = buildingGroup.BuildArea.Value;
+                model.UsableArea = buildingGroupBusiness.GetUsableArea(model.Id);
+                model.BuildDate = buildingGroup.BuildDate.Value;
+
+                model.Departments = new List<BuildingGroupDepartmentModel>();
+                var roomList = roomBusiness.GetListByBuildingGroup(model.Id);
+
+                // get departments in one building
+                var dList = roomList.GroupBy(r => r.DepartmentId).Select(s => new { s.Key, Count = s.Count(), Area = s.Sum(r => r.UsableArea) });
+
+                foreach (var d in dList)
+                {
+                    BuildingGroupDepartmentModel dmodel = new BuildingGroupDepartmentModel
+                    {
+                        BuildingGroupId = model.Id,
+                        DepartmentId = d.Key,
+                        RoomCount = d.Count,
+                        TotalUsableArea = Convert.ToDouble(d.Area)
+                    };
+                    dmodel.DepartmentName = departmentBusiness.GetName(dmodel.DepartmentId);
+
+                    model.Departments.Add(dmodel);
+                }
+            }
+
+            return View(model);
+        }
+
+        /// <summary>
         /// 楼群导航
         /// </summary>
         /// <returns></returns>
         [EnhancedAuthorize(Rank = 450)]
-        public ActionResult Estate()
+        public ActionResult Estate(int? id)
         {
             EstateMenuModel data = new EstateMenuModel();
 
@@ -65,6 +117,8 @@ namespace Rhea.UI.Controllers
             {
                 bg.Buildings = buildings.Where(r => r.BuildingGroupId == bg.Id).ToList();
             }
+
+            ViewBag.BuildingGroupId = id;
 
             return View(data);
         }

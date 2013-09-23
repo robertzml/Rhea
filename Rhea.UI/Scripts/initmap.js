@@ -30,14 +30,21 @@ $(function () {
 						color: "red",
 						width: 160,
 						active: false,
+						type: item.TargetType,
 						fn: function (point, tag) {
-							alert('ok' + tag);
+							var url = "/Home/MapDetails?targetId=" + tag + "&targetType=" + cfg.type;
+							$('.modal-body').load(url);
+							$('#myModalLabel').text(cfg.name);
+							$('#mapModal').modal();
+							$('#map-point-enter').click(function() {
+								window.location.href = '/Home/Estate/' + tag;
+							});
 						}
 					};
 					
 					myAppMap.addPoint(tag, cfg);
 				});
-			});	                     
+			});
 
         }); //加载标注层
 

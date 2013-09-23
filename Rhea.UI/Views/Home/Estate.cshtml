@@ -173,6 +173,11 @@
                 horizrailenabled: false
             });
         }
+
+        var buildingGroupId = '@ViewBag.BuildingGroupId';
+        if (buildingGroupId != null) {
+            ajaxLoadPage("Index", "BuildingGroup", "Estate", { id: buildingGroupId });
+        }
     });
 </script>
 }
