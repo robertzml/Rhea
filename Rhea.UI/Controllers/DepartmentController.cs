@@ -78,12 +78,9 @@ namespace Rhea.UI.Controllers
 
             if (department.Type == (int)DepartmentType.Type1)   //院系
             {
-                data.ExistingArea = Convert.ToDouble(rooms.Sum(r => r.UsableArea));
+                data.ExistingArea = indicator.ExistingArea;
                 data.DeservedArea = indicator.DeservedArea;
-                if (data.DeservedArea == 0)
-                    data.Overproof = 0;
-                else
-                    data.Overproof = Math.Round(data.ExistingArea / data.DeservedArea * 100, 2);
+                data.Overproof = indicator.Overproof;
 
                 double offArea = Convert.ToDouble(rooms.Where(r => r.Function.FirstCode == 1).Sum(r => r.UsableArea));
                 data.OfficeAreaRatio = Math.Round(offArea / data.TotalArea * 100, 2);
@@ -98,12 +95,9 @@ namespace Rhea.UI.Controllers
             {
                 data.StaffCount = department.PresidentCount + department.VicePresidentCount + department.ChiefCount +
                     department.ViceChiefCount + department.MemberCount;
-                data.ExistingArea = data.TotalArea;
+                data.ExistingArea = indicator.ExistingArea;
                 data.DeservedArea = indicator.DeservedArea;
-                if (data.DeservedArea == 0)
-                    data.Overproof = 0;
-                else
-                    data.Overproof = Math.Round(data.ExistingArea / data.DeservedArea * 100, 2);
+                data.Overproof = indicator.Overproof;
 
                 double offArea = Convert.ToDouble(rooms.Where(r => r.Function.FirstCode == 1).Sum(r => r.UsableArea));
                 data.OfficeAreaRatio = Math.Round(offArea / data.TotalArea * 100, 2);

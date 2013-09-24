@@ -13,7 +13,7 @@
     </div>
 
     <div class="box-content">
-        <table id="log-tlist" class="table table-striped table-bordered bootstrap-datatable datatable">
+        <table id="map-point-tlist" class="table table-striped table-bordered bootstrap-datatable datatable">
             <thead>
                 <tr>
                     <th>
@@ -87,6 +87,9 @@
     $(function () {
         var menu = $('a#map-point-list');
         menuNavActive(menu);
+
+        var dom = $('table#map-point-tlist');
+        initDataTable(dom);
     });
 </script>
 }

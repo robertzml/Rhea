@@ -175,7 +175,7 @@
         }
 
         var buildingGroupId = '@ViewBag.BuildingGroupId';
-        if (buildingGroupId != null) {
+        if (buildingGroupId != null && buildingGroupId != '') {
             ajaxLoadPage("Index", "BuildingGroup", "Estate", { id: buildingGroupId });
         }
     });

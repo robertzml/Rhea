@@ -72,10 +72,12 @@ namespace Rhea.UI.Controllers
                     model.ImageUrl = RheaConstant.ImagesRoot + buildingGroup.ImageUrl;
                 model.BuildArea = buildingGroup.BuildArea.Value;
                 model.UsableArea = buildingGroupBusiness.GetUsableArea(model.Id);
-                model.BuildDate = buildingGroup.BuildDate.Value;
+                if (buildingGroup.BuildDate != null)
+                    model.BuildDate = buildingGroup.BuildDate.Value;
 
                 model.Departments = new List<BuildingGroupDepartmentModel>();
                 var roomList = roomBusiness.GetListByBuildingGroup(model.Id);
+                model.RoomCount = roomList.Count;
 
                 // get departments in one building
                 var dList = roomList.GroupBy(r => r.DepartmentId).Select(s => new { s.Key, Count = s.Count(), Area = s.Sum(r => r.UsableArea) });
@@ -174,8 +176,8 @@ namespace Rhea.UI.Controllers
             foreach (var item in data)
             {
                 BuildingGroup bg = bgs.Single(r => r.Id == item.TargetId);
-                string c = string.Format("<p>建筑面积:{0} m<sup>2</sup><br />使用面积:{1} m<sup>2</sup><br />房间数量:{2}</p>", 
-                    bg.BuildArea, buildingGroupBusiness.GetUsableArea(bg.Id), roomBusiness.CountByBuildingGroup(bg.Id));
+                string c = string.Format("<p>建筑面积:{0} m<sup>2</sup><br />使用面积:{1} m<sup>2</sup></p>",
+                    bg.BuildArea, buildingGroupBusiness.GetUsableArea(bg.Id));
                 item.Content += c;
             }
 

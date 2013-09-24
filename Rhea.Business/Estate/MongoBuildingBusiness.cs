@@ -94,6 +94,7 @@ namespace Rhea.Business.Estate
 
                     building.Floors.Add(f);
                 }
+                building.Floors = building.Floors.OrderBy(r => r.Number).ToList();
             }
 
             if (doc.Contains("log"))

@@ -54,6 +54,12 @@ namespace Rhea.UI.Models
         [Display(Name = "建成日期")]
         public DateTime BuildDate { get; set; }
 
+        /// <summary>
+        /// 房间数量
+        /// </summary>
+        [Display(Name = "房间数量")]
+        public int RoomCount { get; set; }
+
         public List<BuildingGroupDepartmentModel> Departments { get; set; }
     }
 }

@@ -820,6 +820,8 @@ namespace Rhea.Business.Estate
             var result = this.backupBusiness.FindBackup(EstateCollection.RoomArchive, query);
             foreach (BsonDocument doc in result)
             {
+                if (doc.GetValue("status", 0).AsInt32 == 1)
+                    continue;
                 Room room = ModelBind(doc);
                 data.Add(room);
             }

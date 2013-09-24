@@ -380,6 +380,7 @@
     border-bottom: 0;
     border-top: 10px solid rgba(250, 250, 250, 1);
     display:none;
+	z-index:10000;
 }
 
 .map-point:hover .pointer
@@ -418,6 +419,7 @@
 	-ms-transition: all 0.3s ease-in-out;
 	transition: all 0.3s ease-in-out;
     display:none;
+	z-index:10000;
 }
 
 .map-point:hover .tip
