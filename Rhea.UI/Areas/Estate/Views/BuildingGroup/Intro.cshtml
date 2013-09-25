@@ -14,7 +14,7 @@
                 <a href="#" class="minimize">Minimize</a>
             </div>
             <div class="content noPad">
-                <a id="building-group-pic" title="@Model.Name" href="@Model.ImageUrl">
+                <a class="colorbox-pic" id="building-group-pic" title="@Model.Name" href="@Model.ImageUrl">
                     <img src="@Model.ImageUrl" alt="楼群全景" />
                 </a>
             </div>
@@ -29,7 +29,9 @@
                 <a href="#" class="minimize">Minimize</a>
             </div>
             <div class="content noPad">
-                <img src="@Model.PartMapUrl" alt="局部地图" />
+                <a class="colorbox-pic" title="@Model.Name" href="@Model.PartMapUrl">
+                    <img src="@Model.PartMapUrl" alt="局部地图" />
+                </a>              
             </div>
         </div>
     </div>
@@ -120,6 +122,6 @@
 <script type="text/javascript">
     $(function () {
         setBoxAction();
-        $('a#building-group-pic').colorbox({ transition: "elastic", maxWidth: "95%", maxHeight: "95%" }); 
+        $('a.colorbox-pic').colorbox({ transition: "elastic", maxWidth: "95%", maxHeight: "95%" }); 
     });
 </script>

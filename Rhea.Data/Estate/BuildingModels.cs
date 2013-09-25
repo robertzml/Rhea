@@ -39,6 +39,12 @@ namespace Rhea.Data.Estate
         /// 辅助楼宇
         /// </summary>
         [Display(Name = "辅助楼宇")]
-        Auxiliary = 5
+        Auxiliary = 5,
+
+        /// <summary>
+        /// 基础设施
+        /// </summary>
+        [Display(Name = "基础设施")]
+        Infrastructure = 6
     }
 }
