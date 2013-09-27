@@ -87,7 +87,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
             ViewBag.RoomCount = roomBusiness.CountByBuilding(id);
 
             Building data = this.buildingBusiness.Get(id);
-            data.UsableArea = this.buildingBusiness.GetUsableArea(id);
+            data.UsableArea = Math.Round(this.buildingBusiness.GetUsableArea(id), RheaConstant.AreaDecimalDigits);
             data.Floors.ForEach(r => r.UsableArea = this.buildingBusiness.GetFloorUsableArea(id, r.Number));
 
             return View(data);
@@ -109,7 +109,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
                 data.ImageUrl = RheaConstant.ImagesRoot + data.ImageUrl;
             if (!string.IsNullOrEmpty(data.PartMapUrl))
                 data.PartMapUrl = RheaConstant.ImagesRoot + data.PartMapUrl;
-            data.UsableArea = this.buildingBusiness.GetUsableArea(id);
+            data.UsableArea = Math.Round(this.buildingBusiness.GetUsableArea(id), RheaConstant.AreaDecimalDigits);
 
             return View(data);
         }
@@ -138,7 +138,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
                     BuildingId = id,
                     DepartmentId = d.Key,
                     RoomCount = d.Count,
-                    TotalUsableArea = Convert.ToDouble(d.Area)
+                    TotalUsableArea = Math.Round(Convert.ToDouble(d.Area), RheaConstant.AreaDecimalDigits)
                 };
                 model.DepartmentName = departmentBusiness.GetName(model.DepartmentId);
 

@@ -74,6 +74,16 @@ namespace Rhea.UI.Controllers
         }
 
         /// <summary>
+        /// 楼群筛选
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public ActionResult BuildingGroupFilter(int? type)
+        {
+            return View();
+        }
+
+        /// <summary>
         /// 学校总体建筑分类面积
         /// </summary>
         /// <returns></returns>
@@ -229,7 +239,8 @@ namespace Rhea.UI.Controllers
                     BuildingGroupId = buildingGroup.Id,
                     BuildingGroupName = buildingGroup.Name,
                     BuildArea = Math.Round(Convert.ToDouble(buildingGroup.BuildArea), RheaConstant.AreaDecimalDigits),
-                    UsableArea = Math.Round(buildingGroupBusiness.GetUsableArea(buildingGroup.Id), RheaConstant.AreaDecimalDigits)
+                    UsableArea = Math.Round(buildingGroupBusiness.GetUsableArea(buildingGroup.Id), RheaConstant.AreaDecimalDigits),
+                    BuildingGroupType = buildingGroup.UseType
                 };
                 data.Add(model);
             }

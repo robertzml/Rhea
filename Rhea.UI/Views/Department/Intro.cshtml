@@ -15,7 +15,9 @@
                 <a href="#" class="minimize">Minimize</a>
             </div>
             <div class="content">
-                <img src="@Model.ImageUrl" alt="部门图片" />
+                <a class="colorbox-pic" id="department-pic" title="@Model.Name" href="@Model.ImageUrl">
+                    <img src="@Model.ImageUrl" alt="部门图片" />
+                </a>
             </div>
         </div>
     </div>
@@ -41,5 +43,6 @@
 <script type="text/javascript">
     $(function () {
         setBoxAction();
+        $('a.colorbox-pic').colorbox({ transition: "elastic", maxWidth: "95%", maxHeight: "95%" }); 
     });
 </script>

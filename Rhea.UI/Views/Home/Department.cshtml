@@ -5,6 +5,8 @@
     bool isDepartment = User.IsInRole2("Department");
 }
 
+<link href="@Url.Content("~/Plugins/gallery/colorbox/colorbox.css")" rel="stylesheet" type="text/css" /> 
+
 <!--Responsive navigation button-->
 <div class="resBtn">
     <a href="#"><span class="icon16 icomoon-icon-list-view-2"></span></a>
@@ -144,6 +146,8 @@
 <!-- End #content -->
 
 @section scripts {
+<script src="~/Plugins/gallery/colorbox/jquery.colorbox.js" type="text/javascript"></script>
+
 <script type="text/javascript">
     $(function () {
         $('.navbar .nav #nav-department').parent().addClass('active');

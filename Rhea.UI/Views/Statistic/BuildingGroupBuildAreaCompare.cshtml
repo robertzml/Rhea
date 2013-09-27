@@ -5,6 +5,8 @@
 
 @Html.Action("Heading", new { controller = "Common", area = "", title = ViewBag.Title, active = "房产统计" })
 
+@Html.Action("BuildingGroupFilter", new { controller = "Statistic", area = "", type = 1 })
+
 <div class="row-fluid">
     <div class="span12">
 
@@ -45,7 +47,7 @@
         $('button#compare').click(function () {
             var sel = [];
             $.each(dataList, function (i, item) {
-                var id = dataList[i].DepartmentId;
+                var id = dataList[i].BuildingGroupType;
                 var $input = $('#check-list input:checkbox[value=' + id.toString() + ']');
                 if ($input.prop('checked')) {
                     sel.push(dataList[i]);

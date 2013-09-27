@@ -211,6 +211,11 @@ namespace Rhea.Data.Estate
         public string BuildingGroupName { get; set; }
 
         /// <summary>
+        /// 楼群使用类型
+        /// </summary>
+        public int BuildingGroupType { get; set; }
+
+        /// <summary>
         /// 建筑面积
         /// </summary>
         public double BuildArea { get; set; }

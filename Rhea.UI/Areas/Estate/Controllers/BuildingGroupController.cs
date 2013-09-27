@@ -119,7 +119,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         public ActionResult Details(int id)
         {
             BuildingGroup data = this.buildingGroupBusiness.Get(id);
-            data.UsableArea = this.buildingGroupBusiness.GetUsableArea(id);
+            data.UsableArea = Math.Round(this.buildingGroupBusiness.GetUsableArea(id), RheaConstant.AreaDecimalDigits);
             return View(data);
         }
 
@@ -225,6 +225,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
             IRoomBusiness roomBusiness = new MongoRoomBusiness();
             IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
             var buildings = buildingBusiness.GetListByBuildingGroup(id).OrderBy(r => r.Id);
+            
             foreach (var building in buildings)
             {
                 BuildingTotalAreaModel m = new BuildingTotalAreaModel
@@ -232,7 +233,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
                     BuildingId = building.Id,
                     BuildingName = building.Name,
                     BuildArea = Convert.ToDouble(building.BuildArea),
-                    UsableArea = Convert.ToDouble(building.UsableArea)
+                    UsableArea = Math.Round(buildingBusiness.GetUsableArea(building.Id), 2)
                 };
 
                 m.RoomCount = roomBusiness.CountByBuilding(building.Id);
