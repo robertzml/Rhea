@@ -157,6 +157,38 @@ namespace Rhea.UI.Controllers
 
             return View();
         }
+
+        /// <summary>
+        /// FrontView远程调用页面
+        /// </summary>
+        /// <param name="id">部门ID</param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        public ActionResult Front(int id)
+        {
+            FrontPluginModel model = new FrontPluginModel();
+            model.Id = id;
+
+            IDepartmentBusiness departmentBusiness = new MongoDepartmentBusiness();
+            var department = departmentBusiness.Get(id,
+                Data.Personnel.DepartmentAdditionType.ResearchData | Data.Personnel.DepartmentAdditionType.ScaleData | Data.Personnel.DepartmentAdditionType.SpecialAreaData);
+
+            if (!string.IsNullOrEmpty(department.ImageUrl))
+                model.ImageUrl = RheaConstant.ImagesRoot + department.ImageUrl;
+            model.Description = department.Description;
+
+            IStatisticBusiness statisticBusiness = new MongoStatisticBusiness();
+            model.Area = statisticBusiness.GetDepartmentTotalArea(id);
+
+            IRoomBusiness roomBusiness = new MongoRoomBusiness();
+            var rooms = roomBusiness.GetListByDepartment(id);
+            model.OfficeArea = Math.Round(Convert.ToDouble(rooms.Where(r => r.Function.FirstCode == 1).Sum(r => r.UsableArea)), 2);
+            model.EducationArea = Math.Round(Convert.ToDouble(rooms.Where(r => r.Function.FirstCode == 2).Sum(r => r.UsableArea)), 2);
+            model.ExperimentArea = Math.Round(Convert.ToDouble(rooms.Where(r => r.Function.FirstCode == 3).Sum(r => r.UsableArea)), 2);
+            model.ResearchArea = Math.Round(Convert.ToDouble(rooms.Where(r => r.Function.FirstCode == 4).Sum(r => r.UsableArea)), 2);
+
+            return View(model);
+        }
         #endregion //Action
 
         #region Json
@@ -182,6 +214,34 @@ namespace Rhea.UI.Controllers
             }
 
             return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        [AllowAnonymous]
+        public JsonResult FrontData(int id)
+        {
+            FrontPluginModel model = new FrontPluginModel();
+            model.Id = id;
+
+            IDepartmentBusiness departmentBusiness = new MongoDepartmentBusiness();
+            var department = departmentBusiness.Get(id,
+                Data.Personnel.DepartmentAdditionType.ResearchData | Data.Personnel.DepartmentAdditionType.ScaleData | Data.Personnel.DepartmentAdditionType.SpecialAreaData);
+
+            if (!string.IsNullOrEmpty(department.ImageUrl))
+                model.ImageUrl = RheaConstant.ImagesRoot + department.ImageUrl;
+            model.Description = department.Description;
+
+            IStatisticBusiness statisticBusiness = new MongoStatisticBusiness();
+            model.Area = statisticBusiness.GetDepartmentTotalArea(id);
+
+            IRoomBusiness roomBusiness = new MongoRoomBusiness();
+            var rooms = roomBusiness.GetListByDepartment(id);
+            model.OfficeArea = Math.Round(Convert.ToDouble(rooms.Where(r => r.Function.FirstCode == 1).Sum(r => r.UsableArea)), 2);
+            model.EducationArea = Math.Round(Convert.ToDouble(rooms.Where(r => r.Function.FirstCode == 2).Sum(r => r.UsableArea)), 2);
+            model.ExperimentArea = Math.Round(Convert.ToDouble(rooms.Where(r => r.Function.FirstCode == 3).Sum(r => r.UsableArea)), 2);
+            model.ResearchArea = Math.Round(Convert.ToDouble(rooms.Where(r => r.Function.FirstCode == 4).Sum(r => r.UsableArea)), 2);
+
+
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
         #endregion //Json
     }

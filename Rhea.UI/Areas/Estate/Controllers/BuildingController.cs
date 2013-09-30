@@ -88,7 +88,9 @@ namespace Rhea.UI.Areas.Estate.Controllers
 
             Building data = this.buildingBusiness.Get(id);
             data.UsableArea = Math.Round(this.buildingBusiness.GetUsableArea(id), RheaConstant.AreaDecimalDigits);
-            data.Floors.ForEach(r => r.UsableArea = this.buildingBusiness.GetFloorUsableArea(id, r.Number));
+            data.Floors.ForEach(
+                r => r.UsableArea = Math.Round(this.buildingBusiness.GetFloorUsableArea(id, r.Number), RheaConstant.AreaDecimalDigits)
+            );
 
             return View(data);
         }

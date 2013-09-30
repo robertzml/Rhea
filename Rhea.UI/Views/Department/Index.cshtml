@@ -2,7 +2,7 @@
 @using Rhea.Data.Personnel
 @{
     ViewBag.Title = "部门主页";
-    Layout = null;    
+    Layout = null;
 }
 
 @Html.Action("Heading", new { controller = "Common", area = "", title = Model.DepartmentName, active = "部门导航" })
@@ -158,13 +158,6 @@
                             <a href="#" id="department-history">
                                 <span class="icon icomoon-icon-storage"></span>
                                 <span class="txt">历史数据</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="pattern">
-                                <span class="icon icomoon-icon-comments-2"></span>
-                                <span class="txt">消息</span>
-                                <span class="notification green">23</span>
                             </a>
                         </li>
                     </ul>

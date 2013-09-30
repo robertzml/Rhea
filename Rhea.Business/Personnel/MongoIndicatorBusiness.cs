@@ -165,7 +165,7 @@ namespace Rhea.Business.Personnel
             data.RoomCount = rooms.Count;
 
             //现有面积
-            data.ExistingArea = Convert.ToDouble(rooms.Sum(r => r.UsableArea));
+            data.ExistingArea = Math.Round(Convert.ToDouble(rooms.Sum(r => r.UsableArea)), 2);
 
             //定额率
             if (data.DeservedArea == 0)
@@ -272,7 +272,7 @@ namespace Rhea.Business.Personnel
                 data.ResearchArea = 500 * 2 * department.FactorK3 + (totalFunds - 500) * 0.8;
             else
                 data.ResearchArea = 500 * 2 * department.FactorK3 + 2500 * 0.8 + (totalFunds - 3000) * 0.4;
-            data.ResearchArea = Math.Round(data.ResearchArea, 2);           
+            data.ResearchArea = Math.Round(data.ResearchArea, 2);
 
             /*
              * 7 对公用房
@@ -316,12 +316,12 @@ namespace Rhea.Business.Personnel
             data.DeservedArea = (data.OfficeArea + data.FlexibleArea) * factorK2 + data.ExperimentArea +
                 data.GraduateArea + data.DoctorArea + data.MasterOfEngineerArea + data.ResearchArea + data.PublicArea +
                 data.EducationBonusArea + data.TalentArea + data.ResearchBonusArea + data.ExperimentBonusArea + data.AdjustArea;
-            
+
             //房间数量
             data.RoomCount = rooms.Count;
 
             //现有面积
-            data.ExistingArea = Convert.ToDouble(rooms.Sum(r => r.UsableArea));
+            data.ExistingArea = Math.Round(Convert.ToDouble(rooms.Sum(r => r.UsableArea)), 2);
 
             //定额率
             if (data.DeservedArea == 0)
@@ -361,7 +361,7 @@ namespace Rhea.Business.Personnel
                 data.BusinessArea = totalPerson * 2;
 
             data.DeservedArea = data.PresidentArea + data.SectionArea + data.BusinessArea;
-            
+
             IRoomBusiness roomBusiness = new MongoRoomBusiness();
             var rooms = roomBusiness.GetListByDepartment(department.Id);
 
@@ -369,7 +369,7 @@ namespace Rhea.Business.Personnel
             data.RoomCount = rooms.Count;
 
             //现有面积
-            data.ExistingArea = Convert.ToDouble(rooms.Sum(r => r.UsableArea));
+            data.ExistingArea = Math.Round(Convert.ToDouble(rooms.Sum(r => r.UsableArea)), 2);
 
             //定额率
             if (data.DeservedArea == 0)

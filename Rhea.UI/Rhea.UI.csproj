@@ -1088,6 +1088,7 @@
     <Content Include="Views\Department\IndicatorSummary.cshtml" />
     <Content Include="Views\Home\MapDetails.cshtml" />
     <Content Include="Views\Statistic\BuildingGroupFilter.cshtml" />
+    <Content Include="Views\Home\Front.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
