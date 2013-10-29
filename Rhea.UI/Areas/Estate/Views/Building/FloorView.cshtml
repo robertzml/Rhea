@@ -48,7 +48,7 @@
 
         setBoxAction();
 
-        function loadSvg(svgFile) {          
+        function loadSvg(svgFile) {
 
             if (svgFile != '') {
                 $('div#svg').load(svgFile, function (response, status, xhr) {
@@ -62,8 +62,8 @@
                     svg = $(this).children('svg');
 
                     $("svg g[id^='g']").click(function () {
-                        var id = $(this).attr('id').toString().substring(1);
-                        $("svg rect[class='room-select']").attr('class', 'fil0');
+                        var id = $(this).attr('id').toString().substring(1);                        
+                        $("svg *[class='room-select']").attr('class', 'fil0');
                         $(this).children('[ref=bound]').attr('class', 'room-select');
                         $('#room-summary').load('/Estate/Room/Summary', { id: id });
                     });

@@ -89,7 +89,7 @@ namespace Rhea.UI.Controllers
                         BuildingGroupId = model.Id,
                         DepartmentId = d.Key,
                         RoomCount = d.Count,
-                        TotalUsableArea = Convert.ToDouble(d.Area)
+                        TotalUsableArea = Math.Round(Convert.ToDouble(d.Area), RheaConstant.AreaDecimalDigits)
                     };
                     dmodel.DepartmentName = departmentBusiness.GetName(dmodel.DepartmentId);
 

@@ -67,7 +67,7 @@ namespace Rhea.UI.Controllers
             IRoomBusiness roomBusiness = new MongoRoomBusiness();
             var rooms = roomBusiness.GetListByDepartment(id);
             data.RoomCount = rooms.Count;
-            data.TotalArea = rooms.Sum(r => r.UsableArea.Value);
+            data.TotalArea = Convert.ToDouble(rooms.Sum(r => r.UsableArea));
             data.DepartmentType = department.Type;
 
             IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
