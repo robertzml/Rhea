@@ -617,9 +617,9 @@ namespace Rhea.Business.Estate
 
             sb.AppendLine(string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}," +
                 "{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27},{28},{29},{30},{31},{32}," +
-                "{33},{34},{35},{36},{37},{38}",
+                "{33},{34},{35},{36},{37},{38},{39},{40}",
                 "Id", "房间名称", "房间编号", "楼层", "跨数", "朝向", "建筑面积", "使用面积", "图片", "功能编码",
-                "所属楼宇", "所属部门", "开始使用日期", "使用期限", "房间总人数", "房间状态", "备注",
+                "所属楼宇ID", "所属楼宇名称", "所属部门ID", "所属部门名称", "开始使用日期", "使用期限", "房间总人数", "房间状态", "备注",
                 "供热情况", "消防情况", "房间高度", "房间东西长度", "房间南北长度", "国际分类编号", "教育部分类编号",
                 "供电情况", "空调情况", "是否有安全制度", "是否有危险化学品", "是否有废液处理", "是否有安全教育检查",
                 "压力容器数量", "钢瓶数量", "通风是否有取暖", "是否有试验台", "使用费用",
@@ -629,10 +629,16 @@ namespace Rhea.Business.Estate
             {
                 BsonDocument function = doc["function"].AsBsonDocument;
                 BsonDocument log = doc["log"].AsBsonDocument;
+                BsonDocument buildingtDoc = this.context.FindOne(EstateCollection.Building, "id", doc["buildingId"]);
+                string buildingName = buildingtDoc["name"].AsString;
+
+                RheaMongoContext pcontext = new RheaMongoContext(RheaServer.PersonnelDatabase);
+                BsonDocument departmentDoc = pcontext.FindOne(PersonnelCollection.Department, "id", doc["departmentId"]);
+                string departmentName = departmentDoc["name"].AsString;
 
                 sb.AppendLine(string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}," +
                     "{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27},{28},{29},{30},{31},{32}," +
-                    "{33},{34},{35},{36},{37},{38}",
+                    "{33},{34},{35},{36},{37},{38},{39},{40}",
                     doc["id"],
                     doc["name"],
                     doc["number"],
@@ -644,7 +650,9 @@ namespace Rhea.Business.Estate
                     doc.GetValue("imageUrl", ""),
                     function["firstCode"].ToString() + "." + function["secondCode"].ToString(),
                     doc["buildingId"],
+                    buildingName,
                     doc["departmentId"],
+                    departmentName,
                     doc.GetValue("startDate", null),
                     doc.GetValue("fixedYear", null),
                     doc.GetValue("personNumber", null),
