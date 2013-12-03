@@ -42,7 +42,7 @@ namespace Rhea.Model.Estate
 
         /// <summary>
         /// 楼层
-        /// </summary>        
+        /// </summary>
         [Required]
         [Display(Name = "楼层")]
         public int Floor { get; set; }

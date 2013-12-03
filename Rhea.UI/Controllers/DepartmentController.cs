@@ -142,7 +142,7 @@ namespace Rhea.UI.Controllers
 
             if (data.Type == (int)DepartmentType.Type1)
             {
-                double officeArea = rooms.Where(r => r.Function.FirstCode == 1).Sum(r => r.UsableArea.Value);
+                double officeArea = Math.Round(rooms.Where(r => r.Function.FirstCode == 1).Sum(r => r.UsableArea.Value), RheaConstant.AreaDecimalDigits);
                 if (data.StaffCount == 0)
                     ViewBag.AvgOfficeArea = 0;
                 else

@@ -362,7 +362,7 @@
         </div>
 
         <p>
-            <a class="btn btn-success" href="@Url.Action("Details", new { controller = "Building", buildingId = Model.BuildingId, area = "Admin" })"><i class="icon-chevron-left icon-white"></i> 回到楼宇</a> 
+            <a class="btn btn-success" href="@Url.Action("Details", new { controller = "Building", id = Model.BuildingId, area = "Admin" })"><i class="icon-chevron-left icon-white"></i> 回到楼宇</a> 
             <a class="btn btn-primary" href="@Url.Action("ListByBuilding", new { controller = "Room", buildingId = Model.BuildingId, area = "Admin" })"><i class="icon-list icon-white"></i> 房间列表</a>
             <a class="btn btn-warning" href="@Url.Action("Edit", new { controller = "Room", id = Model.Id, area = "Admin" })"><i class="icon-edit icon-white"></i> 编辑</a> 
             <a class="btn btn-danger" href="@Url.Action("Delete", new { controller = "Room", id = Model.Id, area = "Admin" })"><i class="icon-remove icon-white"></i> 删除</a>

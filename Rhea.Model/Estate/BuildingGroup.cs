@@ -8,7 +8,7 @@ namespace Rhea.Model.Estate
 {
     /// <summary>
     /// 楼群模型
-    /// </summary>    
+    /// </summary>
     public class BuildingGroup
     {
         #region Constructor
@@ -33,7 +33,7 @@ namespace Rhea.Model.Estate
 
         /// <summary>
         /// 图片路径
-        /// </summary>        
+        /// </summary>
         [Display(Name = "图片")]
         public string ImageUrl { get; set; }
 
@@ -52,20 +52,20 @@ namespace Rhea.Model.Estate
 
         /// <summary>
         /// 楼宇栋数
-        /// </summary>        
+        /// </summary>
         [Range(1, int.MaxValue)]
         [Display(Name = "楼宇栋数")]
         public int? BuildingCount { get; set; }
 
         /// <summary>
         /// 面积系数
-        /// </summary>        
+        /// </summary>
         [Display(Name = "面积系数")]
         public string AreaCoeffcient { get; set; }
 
         /// <summary>
         /// 建筑面积
-        /// </summary>        
+        /// </summary>
         [Range(0.0, double.MaxValue)]
         [Display(Name = "建筑面积")]
         public double? BuildArea { get; set; }
@@ -79,54 +79,54 @@ namespace Rhea.Model.Estate
 
         /// <summary>
         /// 占地面积
-        /// </summary>        
+        /// </summary>
         [Range(0.0, double.MaxValue)]
         [Display(Name = "占地面积")]
         public double? Floorage { get; set; }
 
         /// <summary>
         /// 建造方式
-        /// </summary>        
+        /// </summary>
         [UIHint("BuildType")]
         [Display(Name = "建造方式")]
         public string BuildType { get; set; }
 
         /// <summary>
         /// 建筑结构
-        /// </summary>        
+        /// </summary>
         [UIHint("BuildStructure")]
         [Display(Name = "建筑结构")]
         public string BuildStructure { get; set; }
 
         /// <summary>
         /// 建筑物造价
-        /// </summary>        
+        /// </summary>
         [Range(0.0, double.MaxValue)]
         [Display(Name = "建筑物造价")]
         public double? BuildCost { get; set; }
 
         /// <summary>
         /// 折旧后现值
-        /// </summary>        
+        /// </summary>
         [Display(Name = "折旧后现值")]
         public double? CurrentValue { get; set; }
 
         /// <summary>
         /// 建筑物产别
-        /// </summary>        
+        /// </summary>
         [Display(Name = "建筑物产别")]
         public string Classified { get; set; }
 
         /// <summary>
         /// 建筑物经费科目
-        /// </summary>        
+        /// </summary>
         [UIHint("FundsSubject")]
         [Display(Name = "建筑物经费科目")]
         public string FundsSubject { get; set; }
 
         /// <summary>
         /// 建筑物产权证号
-        /// </summary>        
+        /// </summary>
         [Display(Name = "建筑物产权证号")]
         public string EquityNumber { get; set; }
 
@@ -139,26 +139,26 @@ namespace Rhea.Model.Estate
 
         /// <summary>
         /// 使用年限
-        /// </summary>        
+        /// </summary>
         [Range(0, int.MaxValue)]
         [Display(Name = "使用年限")]
         public int? FixedYear { get; set; }
 
         /// <summary>
         /// 建筑设计单位
-        /// </summary>       
+        /// </summary>
         [Display(Name = "建筑设计单位")]
         public string DesignCompany { get; set; }
 
         /// <summary>
         /// 建筑物施工单位
-        /// </summary>        
+        /// </summary>
         [Display(Name = "建筑物施工单位")]
         public string ConstructCompany { get; set; }
 
         /// <summary>
         /// 建筑物房管形式
-        /// </summary>        
+        /// </summary>
         [UIHint("ManageType")]
         [Display(Name = "建筑物房管形式")]
         public string ManageType { get; set; }
@@ -188,11 +188,11 @@ namespace Rhea.Model.Estate
 
         /// <summary>
         /// 备注
-        /// </summary>        
+        /// </summary>
         [StringLength(1000)]
         [DataType(DataType.MultilineText)]
         [Display(Name = "备注")]
-        public string Remark { get; set; }      
+        public string Remark { get; set; }
 
         /// <summary>
         /// 日志属性
@@ -213,5 +213,5 @@ namespace Rhea.Model.Estate
         /// </summary>
         public List<Building> Buildings { get; set; }
         #endregion //Additional Property
-    }   
+    }
 }

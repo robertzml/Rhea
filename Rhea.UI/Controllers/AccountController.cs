@@ -173,7 +173,7 @@ namespace Rhea.UI.Controllers
             }
 
             return View(model);
-        }    
+        }
         #endregion //Action
     }
 }
