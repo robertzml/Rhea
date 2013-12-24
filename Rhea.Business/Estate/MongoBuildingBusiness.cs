@@ -239,7 +239,7 @@ namespace Rhea.Business.Estate
         /// <summary>
         /// 添加楼宇
         /// </summary>
-        /// <param name="data">楼宇数据</param>      
+        /// <param name="data">楼宇数据</param>
         /// <returns>楼宇ID,0:添加失败</returns>
         public int Create(Building data)
         {
@@ -302,7 +302,7 @@ namespace Rhea.Business.Estate
         /// <summary>
         /// 删除楼宇
         /// </summary>
-        /// <param name="id">楼宇ID</param>    
+        /// <param name="id">楼宇ID</param>
         /// <returns></returns>
         public bool Delete(int id)
         {
@@ -499,7 +499,7 @@ namespace Rhea.Business.Estate
         /// <summary>
         /// 备份楼宇
         /// </summary>
-        /// <param name="id">楼宇ID</param>    
+        /// <param name="id">楼宇ID</param>
         /// <returns></returns>
         public bool Backup(int id)
         {

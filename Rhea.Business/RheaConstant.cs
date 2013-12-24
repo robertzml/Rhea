@@ -13,8 +13,9 @@ namespace Rhea.Business
     {
         #region Constructor
         static RheaConstant()
-        {           
-            RheaConstant.ApiHost = ConfigurationManager.AppSettings["ApiHost"];            
+        {
+            RheaConstant.ApiHost = ConfigurationManager.AppSettings["ApiHost"];
+            RheaConstant.AuthUrl = ConfigurationManager.AppSettings["AuthUrl"];
         }
         #endregion //Constructor
 
@@ -23,6 +24,11 @@ namespace Rhea.Business
         /// API服务器地址
         /// </summary>
         public static readonly string ApiHost;
+
+        /// <summary>
+        /// 统一身份认证地址
+        /// </summary>
+        public static readonly string AuthUrl;
 
         /// <summary>
         /// 图片根目录
@@ -42,7 +48,7 @@ namespace Rhea.Business
         /// <summary>
         /// 面积小数位数
         /// </summary>
-        public static readonly int AreaDecimalDigits = 2;        
+        public static readonly int AreaDecimalDigits = 2;
         #endregion //Field
     }
 }

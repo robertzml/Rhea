@@ -40,6 +40,37 @@ namespace Rhea.UI.Controllers
             }
             base.Initialize(requestContext);
         }
+
+        /// <summary>
+        /// 计算Unix格式的时间戳
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        private string GetUnixTimeStamp(DateTime dt)
+        {
+            DateTime unixStartTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+            TimeSpan timeSpan = dt.Subtract(unixStartTime);
+            string timeStamp = timeSpan.Ticks.ToString();
+            return timeStamp.Substring(0, timeStamp.Length - 7);
+        }
+
+        /// <summary>
+        /// 统一身份认证登录
+        /// </summary>
+        /// <param name="userId">学号或工号</param>
+        public void LoginUnity(string userId)
+        {
+            bool result = this.accountBusiness.CreateUnity(userId);
+
+            UserProfile user = this.accountBusiness.Login(userId);
+            if (user != null)
+            {
+                HttpCookie cookie = formsService.SignIn(user.UserName, user.UserGroupName, false);
+                Response.Cookies.Add(cookie);
+
+                RedirectToAction("Index", "Home");
+            }           
+        }
         #endregion //Function
 
         #region Action
@@ -173,6 +204,48 @@ namespace Rhea.UI.Controllers
             }
 
             return View(model);
+        }
+
+        /// <summary>
+        /// 统一身份认证
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
+        public bool Check()
+        {
+            //工号或者学号 
+            string id_tag = Request.QueryString["id_tag"];
+
+            //客户端md5散列串 
+            string secret = Request.QueryString["secret"];
+
+            //客户端时间 
+            string time = Request.QueryString["timestamp"];
+
+            //双方约定的密码  
+            string pass = "该内容会另行告知";
+
+            //获取服务器时间戳 
+            string mytime = GetUnixTimeStamp(DateTime.Now);
+
+            //如果客户端时间早于服务器时间1个小时，则加密串过期 
+            if (Convert.ToInt64(mytime) - Convert.ToInt64(time) > 60 * 60)
+            {
+                Response.Redirect(Rhea.Business.RheaConstant.AuthUrl);
+                return false;
+            }
+
+            //服务器端md5散列串="工号+双方约定的密码+客户端时间"的md5 
+            string secret1 = System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile(id_tag + pass + time, "md5").ToLower();
+
+            //如果客户端md5散列串==服务器端md5散列串，则认证通过。 
+            if (secret == secret1)
+                return true;
+            else
+            {
+                Response.Redirect(Rhea.Business.RheaConstant.AuthUrl);
+                return false;
+            }
         }
         #endregion //Action
     }

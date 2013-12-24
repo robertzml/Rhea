@@ -193,6 +193,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StatisticController.cs" />
     <Compile Include="Filters\EnhancedAuthorizeAttribute.cs" />
@@ -1089,6 +1090,7 @@
     <Content Include="Views\Home\MapDetails.cshtml" />
     <Content Include="Views\Statistic\BuildingGroupFilter.cshtml" />
     <Content Include="Views\Home\Front.cshtml" />
+    <Content Include="Views\Shared\403.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -130,6 +130,41 @@ namespace Rhea.Business.Account
         }
 
         /// <summary>
+        /// 统一身份登录
+        /// </summary>
+        /// <param name="userId">学号或工号</param>
+        /// <returns></returns>
+        public UserProfile Login(string userId)
+        {
+            BsonDocument doc = this.context.FindOne(RheaCollection.User, "userId", userId);
+            if (doc != null)
+            {
+                int userStatus = doc.GetValue("status", 0).AsInt32;
+                if (userStatus == 1 || userStatus == 2)
+                    return null;
+
+                UserProfile user = new UserProfile();
+                user._id = doc["_id"].AsObjectId;
+                user.UserName = doc.GetValue("userName", "").AsString;
+                user.UserId = doc.GetValue("userId", "").AsString;
+                user.UserGroupId = doc.GetValue("userGroupId", 0).AsInt32;
+                user.Name = doc.GetValue("name", "").AsString;
+                user.LastLoginTime = doc.GetValue("currentLoginTime", DateTime.Now).ToLocalTime();
+                user.CurrentLoginTime = DateTime.Now;
+                user.DepartmentId = doc.GetValue("departmentId", 0).AsInt32;
+                user.Status = doc.GetValue("status", 0).AsInt32;
+
+                GetGroupInfo(ref user);
+
+                UpdateLoginTime(user._id, user.LastLoginTime, user.CurrentLoginTime);
+
+                return user;
+            }
+            else
+                return null;
+        }
+
+        /// <summary>
         /// 获取用户信息
         /// </summary>
         /// <param name="id">系统ID</param>
@@ -245,6 +280,36 @@ namespace Rhea.Business.Account
                 return string.Empty;
             else
                 return data._id.ToString();
+        }
+
+        /// <summary>
+        /// 添加统一身份认证用户
+        /// </summary>
+        /// <param name="userId">学号或工号</param>
+        /// <returns></returns>
+        public bool CreateUnity(string userId)
+        {
+            bool dup = this.context.CheckDuplicate(RheaCollection.User, "userId", userId);
+            if (dup)    //用户已存在
+                return true;
+
+            BsonDocument doc = new BsonDocument
+            {
+                { "userId", userId },
+                { "userName", userId },
+                { "name", "" },
+                { "password", "" },             
+                { "userGroupId", 100006 },
+                { "isSystem", false },           
+                { "status", 0 }
+            };
+
+            WriteConcernResult result = this.context.Insert(RheaCollection.User, doc);
+
+            if (result.HasLastErrorMessage)
+                return false;
+            else
+                return true;
         }
 
         /// <summary>

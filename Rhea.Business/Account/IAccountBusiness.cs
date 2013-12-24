@@ -21,6 +21,13 @@ namespace Rhea.Business.Account
         UserProfile Login(string userName, string password);
 
         /// <summary>
+        /// 统一身份登录
+        /// </summary>
+        /// <param name="userId">学号或工号</param>
+        /// <returns></returns>
+        UserProfile Login(string userId);
+
+        /// <summary>
         /// 获取用户信息
         /// </summary>
         /// <param name="id">系统ID</param>
@@ -53,6 +60,13 @@ namespace Rhea.Business.Account
         /// <param name="data">用户数据</param>
         /// <returns></returns>
         string Create(UserProfile data);
+
+        /// <summary>
+        /// 添加统一身份认证用户
+        /// </summary>
+        /// <param name="userId">学号或工号</param>
+        /// <returns></returns>
+        bool CreateUnity(string userId);
 
         /// <summary>
         /// 用户编辑
