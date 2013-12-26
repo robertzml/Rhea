@@ -69,7 +69,9 @@ namespace Rhea.UI.Controllers
                 Response.Cookies.Add(cookie);
 
                 RedirectToAction("Index", "Home");
-            }           
+            }
+            else
+                Response.Redirect(CommonService.ErrorPage(403));
         }
         #endregion //Function
 
@@ -223,7 +225,7 @@ namespace Rhea.UI.Controllers
             string time = Request.QueryString["timestamp"];
 
             //双方约定的密码  
-            string pass = "该内容会另行告知";
+            string pass = "estatejiangnan765nanjiangestatejiangnanok888";
 
             //获取服务器时间戳 
             string mytime = GetUnixTimeStamp(DateTime.Now);
@@ -240,7 +242,10 @@ namespace Rhea.UI.Controllers
 
             //如果客户端md5散列串==服务器端md5散列串，则认证通过。 
             if (secret == secret1)
+            {
+                LoginUnity(id_tag);
                 return true;
+            }
             else
             {
                 Response.Redirect(Rhea.Business.RheaConstant.AuthUrl);

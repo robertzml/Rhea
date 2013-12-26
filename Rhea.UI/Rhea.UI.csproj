@@ -193,7 +193,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
-    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StatisticController.cs" />
     <Compile Include="Filters\EnhancedAuthorizeAttribute.cs" />
@@ -205,6 +204,7 @@
     <Compile Include="Models\MapModels.cs" />
     <Compile Include="Models\NavModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CommonService.cs" />
     <Compile Include="Services\ContextExtension.cs" />
     <Compile Include="Services\FilesStatus.cs" />
     <Compile Include="Services\FormsAuthenticationService.cs" />
@@ -1090,7 +1090,7 @@
     <Content Include="Views\Home\MapDetails.cshtml" />
     <Content Include="Views\Statistic\BuildingGroupFilter.cshtml" />
     <Content Include="Views\Home\Front.cshtml" />
-    <Content Include="Views\Shared\403.cshtml" />
+    <Content Include="403.html" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
