@@ -58,7 +58,7 @@ namespace Rhea.UI.Controllers
         /// 统一身份认证登录
         /// </summary>
         /// <param name="userId">学号或工号</param>
-        public void LoginUnity(string userId)
+        public bool LoginUnity(string userId)
         {
             bool result = this.accountBusiness.CreateUnity(userId);
 
@@ -68,10 +68,11 @@ namespace Rhea.UI.Controllers
                 HttpCookie cookie = formsService.SignIn(user.UserName, user.UserGroupName, false);
                 Response.Cookies.Add(cookie);
 
-                RedirectToAction("Index", "Home");
+                return true;
             }
             else
-                Response.Redirect(CommonService.ErrorPage(403));
+                return false;
+            //Response.Redirect(CommonService.ErrorPage(403));
         }
         #endregion //Function
 
@@ -213,7 +214,7 @@ namespace Rhea.UI.Controllers
         /// </summary>
         /// <returns></returns>
         [AllowAnonymous]
-        public bool Check()
+        public ActionResult Check()
         {
             //工号或者学号 
             string id_tag = Request.QueryString["id_tag"];
@@ -234,7 +235,7 @@ namespace Rhea.UI.Controllers
             if (Convert.ToInt64(mytime) - Convert.ToInt64(time) > 60 * 60)
             {
                 Response.Redirect(Rhea.Business.RheaConstant.AuthUrl);
-                return false;
+                return RedirectToAction("Login");
             }
 
             //服务器端md5散列串="工号+双方约定的密码+客户端时间"的md5 
@@ -243,14 +244,14 @@ namespace Rhea.UI.Controllers
             //如果客户端md5散列串==服务器端md5散列串，则认证通过。 
             if (secret == secret1)
             {
-                LoginUnity(id_tag);
-                return true;
+                bool result = LoginUnity(id_tag);
+                if (result)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
             }
-            else
-            {
-                Response.Redirect(Rhea.Business.RheaConstant.AuthUrl);
-                return false;
-            }
+
+            return RedirectToAction("Login");
         }
         #endregion //Action
     }
