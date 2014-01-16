@@ -23,11 +23,15 @@ namespace Rhea.UI
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
-            bundles.Add(new StyleBundle("~/Content/boostrap3").Include(
-                        "~/Content/bootstrap.css"));
+            bundles.Add(new StyleBundle("~/Content/bootstrap3").Include(
+                        "~/Content/bootstrap.css",
+                        "~/Content/bootstrap-theme.css"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(                     
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/admin").Include(
+                      "~/Content/admin.css"));
         }
     }
 }

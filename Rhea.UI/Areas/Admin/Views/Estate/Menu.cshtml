@@ -1,0 +1,16 @@
+﻿
+@{
+    Layout = null;
+    ViewBag.Title = "房产管理菜单";
+}
+
+<ul class="nav nav-pills nav-stacked">
+    <li class="nav-header">导航</li>
+    <li class="active"><a href="@Url.Action("Index", new { controller = "Estate", area = "Admin" })">主页</a></li>
+    <li><a href="@Url.Action("List", new { controller = "Campus", area = "Admin" })" id="campus-manage">校区管理</a></li>
+    <li><a href="@Url.Action("List", new { controller = "BuildingGroup", area = "Admin" })" id="building-group-manage">楼群管理</a></li>
+    <li><a href="@Url.Action("List", new { controller = "Building", area = "Admin" })" id="building-manage">楼宇管理</a></li>
+    <li><a href="@Url.Action("Index", new { controller = "Room", area = "Admin" })" id="room-manage">房间管理</a></li>
+    <li class="nav-header">任务</li>
+    <li><a href="@Url.Action("Export", new { controller = "Estate", area = "Admin" })" id="export-task">导出数据</a></li>
+</ul>
