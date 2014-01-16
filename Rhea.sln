@@ -1,49 +1,9 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rhea.Business", "Rhea.Business\Rhea.Business.csproj", "{918B8082-498E-4A1E-8A2D-6CCC570496A0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rhea.Data", "Rhea.Data\Rhea.Data.csproj", "{E655E9DF-D987-44EB-B9CF-A9B874C2A9EB}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rhea.Common", "Rhea.Common\Rhea.Common.csproj", "{C8BC6CF8-FA0A-4CE8-84DB-DE8FD3478756}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rhea.UI", "Rhea.UI\Rhea.UI.csproj", "{4308CF6F-EFB6-40B0-9BF5-013DA186E731}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rhea.Model", "Rhea.Model\Rhea.Model.csproj", "{D4F516FB-EA16-4695-BE71-EE496980D763}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rhea.API", "Rhea.API\Rhea.API.csproj", "{04AB237A-0CBE-4923-B6F6-2E3EDB486D8B}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{918B8082-498E-4A1E-8A2D-6CCC570496A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{918B8082-498E-4A1E-8A2D-6CCC570496A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{918B8082-498E-4A1E-8A2D-6CCC570496A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{918B8082-498E-4A1E-8A2D-6CCC570496A0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E655E9DF-D987-44EB-B9CF-A9B874C2A9EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E655E9DF-D987-44EB-B9CF-A9B874C2A9EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E655E9DF-D987-44EB-B9CF-A9B874C2A9EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E655E9DF-D987-44EB-B9CF-A9B874C2A9EB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C8BC6CF8-FA0A-4CE8-84DB-DE8FD3478756}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C8BC6CF8-FA0A-4CE8-84DB-DE8FD3478756}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C8BC6CF8-FA0A-4CE8-84DB-DE8FD3478756}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C8BC6CF8-FA0A-4CE8-84DB-DE8FD3478756}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4308CF6F-EFB6-40B0-9BF5-013DA186E731}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4308CF6F-EFB6-40B0-9BF5-013DA186E731}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4308CF6F-EFB6-40B0-9BF5-013DA186E731}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4308CF6F-EFB6-40B0-9BF5-013DA186E731}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D4F516FB-EA16-4695-BE71-EE496980D763}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D4F516FB-EA16-4695-BE71-EE496980D763}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D4F516FB-EA16-4695-BE71-EE496980D763}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D4F516FB-EA16-4695-BE71-EE496980D763}.Release|Any CPU.Build.0 = Release|Any CPU
-		{04AB237A-0CBE-4923-B6F6-2E3EDB486D8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{04AB237A-0CBE-4923-B6F6-2E3EDB486D8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{04AB237A-0CBE-4923-B6F6-2E3EDB486D8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{04AB237A-0CBE-4923-B6F6-2E3EDB486D8B}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
