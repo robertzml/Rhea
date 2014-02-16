@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Rhea.Data.Estate;
+using Rhea.Model.Estate;
 
 namespace Rhea.UI.Areas.Admin.Controllers
 {
@@ -16,6 +18,14 @@ namespace Rhea.UI.Areas.Admin.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        public ActionResult List()
+        {
+            CampusRepository campusRepository = new CampusRepository();
+
+            var data = campusRepository.Get();
+            return View(data);
         }
 	}
 }

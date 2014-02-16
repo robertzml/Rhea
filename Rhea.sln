@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rhea.UI", "Rhea.UI\Rhea.UI.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rhea.Data", "Rhea.Data\Rhea.Data.csproj", "{9693EA80-FE07-45D4-B5A2-BEB3991553EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rhea.Business", "Rhea.Business\Rhea.Business.csproj", "{8A898100-B360-45EA-BC87-FAC1322C5221}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{9693EA80-FE07-45D4-B5A2-BEB3991553EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9693EA80-FE07-45D4-B5A2-BEB3991553EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9693EA80-FE07-45D4-B5A2-BEB3991553EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A898100-B360-45EA-BC87-FAC1322C5221}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A898100-B360-45EA-BC87-FAC1322C5221}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A898100-B360-45EA-BC87-FAC1322C5221}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A898100-B360-45EA-BC87-FAC1322C5221}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
