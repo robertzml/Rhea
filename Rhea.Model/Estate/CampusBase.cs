@@ -4,24 +4,27 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Rhea.Data.Mongo;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace Rhea.Model.Estate
 {
     /// <summary>
     /// 校区基类
     /// </summary>
-    public class CampusBase
+    public class CampusBase : Entity
     {
         #region Property
         /// <summary>
         /// ID
         /// </summary>
-        public int Id { get; set; }
+        //public int Id { get; set; }
 
         /// <summary>
         /// 名称
         /// </summary>
         [Required]
+        [BsonElement("name")]
         [Display(Name = "名称")]
         public string Name { get; set; }
 

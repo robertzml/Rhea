@@ -4,12 +4,14 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Rhea.Data.Mongo;
 
 namespace Rhea.Model.Estate
 {
     /// <summary>
     /// 校区类
     /// </summary>
+    [CollectionName("campus")]
     public class Campus : CampusBase
     {
         #region Constructor

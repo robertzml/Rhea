@@ -39,10 +39,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Estate\CampusBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Estate\" />
+    <ProjectReference Include="..\Rhea.Data.Mongo\Rhea.Data.Mongo.csproj">
+      <Project>{d38c786d-f948-4873-bff7-4b92cbde8b2b}</Project>
+      <Name>Rhea.Data.Mongo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rhea.Data\Rhea.Data.csproj">
+      <Project>{9693ea80-fe07-45d4-b5a2-beb3991553ee}</Project>
+      <Name>Rhea.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rhea.Model\Rhea.Model.csproj">
+      <Project>{8fdb75f7-8be8-4934-a8ed-6e39bc2854bc}</Project>
+      <Name>Rhea.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
