@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Rhea.Data.Mongo;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace Rhea.Model.Estate
@@ -12,7 +11,7 @@ namespace Rhea.Model.Estate
     /// <summary>
     /// 校区基类
     /// </summary>
-    public class CampusBase : Entity
+    public class CampusBase : MongoEntity
     {
         #region Property
         /// <summary>

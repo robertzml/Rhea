@@ -1,11 +1,12 @@
 ﻿using MongoDB.Driver;
+using Rhea.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rhea.Data.Mongo
+namespace Rhea.Data
 {
     /// <summary>
     /// IRepositoryManager definition.

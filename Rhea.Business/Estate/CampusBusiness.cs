@@ -13,15 +13,19 @@ namespace Rhea.Business.Estate
     {
         public List<Campus> Get()
         {
-            IRepository<Campus> campusRepository = new MongoRepository<Campus>();
-            return campusRepository.ToList();
+            //IRepository<Campus> campusRepository = new MongoRepository<Campus>();
+            //return campusRepository.ToList();
+
+            return null;
         }
 
         public Campus Get(int id)
         {
-            IRepository<Campus> campusRepository = new MongoRepository<Campus>();
+            //IRepository<Campus> campusRepository = new MongoRepository<Campus>();
 
-            return campusRepository.GetById(id.ToString());
+            //return campusRepository.GetById(id.ToString());
+
+            return null;
         }
     }
 }

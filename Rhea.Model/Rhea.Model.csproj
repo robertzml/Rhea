@@ -39,6 +39,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,23 +47,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CollectionName.cs" />
     <Compile Include="Estate\Campus.cs" />
     <Compile Include="Estate\CampusBase.cs" />
+    <Compile Include="IEntity.cs" />
     <Compile Include="Log.cs" />
+    <Compile Include="MongoEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Rhea.Data.Mongo\Rhea.Data.Mongo.csproj">
-      <Project>{d38c786d-f948-4873-bff7-4b92cbde8b2b}</Project>
-      <Name>Rhea.Data.Mongo</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Rhea.Data\Rhea.Data.csproj">
-      <Project>{9693ea80-fe07-45d4-b5a2-beb3991553ee}</Project>
-      <Name>Rhea.Data</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

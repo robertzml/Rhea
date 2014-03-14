@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace Rhea.Data.Mongo
+namespace Rhea.Model
 {
     /// <summary>
-    /// Attribute used to annotate Enities with to override mongo collection name. By default, when this attribute
-    /// is not specified, the classname will be used.
+    /// CollectionName Attribute,
+    /// 默认使用类名为集合名称
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, Inherited = true)]
     public class CollectionName : Attribute

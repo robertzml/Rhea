@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Rhea.Data
+namespace Rhea.Model
 {
     /// <summary>
     /// 通用实体接口
@@ -14,16 +15,20 @@ namespace Rhea.Data
     public interface IEntity<TKey>
     {
         /// <summary>
-        /// 实体ID
-        /// </summary>
-        [BsonId]
-        TKey Id { get; set; }
+        /// 实体主键
+        /// </summary>        
+        TKey _id { get; set; }
     }
 
     /// <summary>
-    /// 实体接口
+    /// MongoDB实体接口
     /// </summary>
-    /// <remarks>实体ID默认为字符串</remarks>
-    public interface IEntity : IEntity<string>
-    { }
+    public interface IMongoEntity : IEntity<ObjectId>
+    {
+        /// <summary>
+        /// 实体主键
+        /// </summary>
+        [BsonId]
+        new ObjectId _id { get; set; }
+    }
 }

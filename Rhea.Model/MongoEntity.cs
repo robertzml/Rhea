@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Runtime.Serialization;
 
-namespace Rhea.Data.Mongo
+namespace Rhea.Model
 {
     /// <summary>
     /// 实体抽象类
@@ -11,13 +11,14 @@ namespace Rhea.Data.Mongo
     [DataContract]
     [Serializable]
     [BsonIgnoreExtraElements(Inherited = true)]
-    public abstract class Entity : IEntity<string>
+    public abstract class MongoEntity : IEntity<ObjectId>
     {
         /// <summary>
         /// 实体主键ID
         /// </summary>
         [DataMember]
+        [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public virtual string Id { get; set; }
+        public virtual ObjectId _id { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MongoDB.Driver;
+using Rhea.Model;
 using System;
 using System.Configuration;
 
@@ -154,7 +155,7 @@ namespace Rhea.Data.Mongo
             else
             {
                 // No attribute found, get the basetype
-                while (!entitytype.BaseType.Equals(typeof(Entity)))
+                while (!entitytype.BaseType.Equals(typeof(MongoEntity)))
                 {
                     entitytype = entitytype.BaseType;
                 }

@@ -2,6 +2,7 @@
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using MongoDB.Driver.Linq;
+using Rhea.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -84,7 +85,7 @@ namespace Rhea.Data.Mongo
         /// <returns>实体T</returns>
         public virtual T GetById(TKey id)
         {
-            if (typeof(T).IsSubclassOf(typeof(Entity)))
+            if (typeof(T).IsSubclassOf(typeof(MongoEntity)))
             {
                 return this.collection.FindOneByIdAs<T>(new ObjectId(id as string));
             }
@@ -143,7 +144,7 @@ namespace Rhea.Data.Mongo
         /// <param name="id">The entity's id.</param>
         public virtual void Delete(TKey id)
         {
-            if (typeof(T).IsSubclassOf(typeof(Entity)))
+            if (typeof(T).IsSubclassOf(typeof(MongoEntity)))
             {
                 this.collection.Remove(Query.EQ("_id", new ObjectId(id as string)));
             }
@@ -168,7 +169,7 @@ namespace Rhea.Data.Mongo
         /// <param name="entity">The entity to delete.</param>
         public virtual void Delete(T entity)
         {
-            this.Delete(entity.Id);
+            this.Delete(entity._id);
         }
 
         /// <summary>
@@ -179,7 +180,7 @@ namespace Rhea.Data.Mongo
         {
             foreach (T entity in this.collection.AsQueryable<T>().Where(predicate))
             {
-                this.Delete(entity.Id);
+                this.Delete(entity._id);
             }
         }
 
