@@ -23,12 +23,12 @@ namespace Rhea.Model
     /// <summary>
     /// MongoDB实体接口
     /// </summary>
-    public interface IMongoEntity : IEntity<ObjectId>
+    public interface IMongoEntity : IEntity<string>
     {
         /// <summary>
         /// 实体主键
         /// </summary>
         [BsonId]
-        new ObjectId _id { get; set; }
+        new string _id { get; set; }
     }
 }

@@ -17,9 +17,16 @@ namespace Rhea.Data
         /// <summary>
         /// 获取实体
         /// </summary>
-        /// <param name="id">对象ID</param>
+        /// <param name="_id">对象ID</param>
         /// <returns>实体T</returns>
-        T GetById(TKey id);
+        T GetById(TKey _id);
+
+        /// <summary>
+        /// 获取实体
+        /// </summary>
+        /// <param name="predicate">查询条件</param>
+        /// <returns>查询结果</returns>
+        IEnumerable<T> Get(Expression<Func<T, bool>> predicate);
 
         /// <summary>
         /// 添加实体
@@ -50,8 +57,8 @@ namespace Rhea.Data
         /// <summary>
         /// 删除实体
         /// </summary>
-        /// <param name="id">实体ID</param>
-        void Delete(TKey id);
+        /// <param name="_id">实体ID</param>
+        void Delete(TKey _id);
 
         /// <summary>
         /// 删除实体

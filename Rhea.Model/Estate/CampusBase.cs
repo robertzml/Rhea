@@ -17,7 +17,7 @@ namespace Rhea.Model.Estate
         /// <summary>
         /// ID
         /// </summary>
-        //public int Id { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// 名称

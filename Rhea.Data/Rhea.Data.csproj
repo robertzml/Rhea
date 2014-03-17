@@ -46,15 +46,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Estate\ICampusRepository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="IRepositoryManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RheaContextBase.cs" />
     <Compile Include="RheaMongoContext.cs" />
     <Compile Include="Server\RheaServer.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Estate\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

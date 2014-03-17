@@ -81,17 +81,28 @@ namespace Rhea.Data.Mongo
         /// <summary>
         /// 获取实体
         /// </summary>
-        /// <param name="id">对象ID</param>
+        /// <param name="_id">对象ID</param>
         /// <returns>实体T</returns>
-        public virtual T GetById(TKey id)
+        public virtual T GetById(TKey _id)
         {
             if (typeof(T).IsSubclassOf(typeof(MongoEntity)))
             {
-                return this.collection.FindOneByIdAs<T>(new ObjectId(id as string));
+                return this.collection.FindOneByIdAs<T>(new ObjectId(_id as string));
             }
 
-            return this.collection.FindOneByIdAs<T>(BsonValue.Create(id));
+            return this.collection.FindOneByIdAs<T>(BsonValue.Create(_id));
         }
+
+        /// <summary>
+        /// 获取实体
+        /// </summary>
+        /// <param name="predicate">查询条件</param>
+        /// <returns>查询结果</returns>
+        public virtual IEnumerable<T> Get(Expression<Func<T, bool>> predicate)
+        {
+            return this.collection.AsQueryable<T>().Where(predicate);
+        }
+
 
         /// <summary>
         /// 添加实体
@@ -115,10 +126,10 @@ namespace Rhea.Data.Mongo
         }
 
         /// <summary>
-        /// Upserts an entity.
+        /// 更新实体
         /// </summary>
-        /// <param name="entity">The entity.</param>
-        /// <returns>The updated entity.</returns>
+        /// <param name="entity">实体对象</param>
+        /// <returns>更新后实体</returns>
         public virtual T Update(T entity)
         {
             this.collection.Save<T>(entity);
@@ -127,9 +138,9 @@ namespace Rhea.Data.Mongo
         }
 
         /// <summary>
-        /// Upserts the entities.
+        /// 更新多个实体
         /// </summary>
-        /// <param name="entities">The entities to update.</param>
+        /// <param name="entities">实体对象集合</param>
         public virtual void Update(IEnumerable<T> entities)
         {
             foreach (T entity in entities)
@@ -139,43 +150,43 @@ namespace Rhea.Data.Mongo
         }
 
         /// <summary>
-        /// Deletes an entity from the repository by its id.
+        /// 删除实体
         /// </summary>
-        /// <param name="id">The entity's id.</param>
-        public virtual void Delete(TKey id)
+        /// <param name="_id">实体ID</param>
+        public virtual void Delete(TKey _id)
         {
             if (typeof(T).IsSubclassOf(typeof(MongoEntity)))
             {
-                this.collection.Remove(Query.EQ("_id", new ObjectId(id as string)));
+                this.collection.Remove(Query.EQ("_id", new ObjectId(_id as string)));
             }
             else
             {
-                this.collection.Remove(Query.EQ("_id", BsonValue.Create(id)));
+                this.collection.Remove(Query.EQ("_id", BsonValue.Create(_id)));
             }
         }
 
         /// <summary>
-        /// Deletes an entity from the repository by its ObjectId.
+        /// 删除实体
         /// </summary>
-        /// <param name="id">The ObjectId of the entity.</param>
-        public virtual void Delete(ObjectId id)
+        /// <param name="entity">实体对象</param>
+        public virtual void Delete(ObjectId _id)
         {
-            this.collection.Remove(Query.EQ("_id", id));
+            this.collection.Remove(Query.EQ("_id", _id));
         }
 
         /// <summary>
-        /// Deletes the given entity.
+        /// 删除实体
         /// </summary>
-        /// <param name="entity">The entity to delete.</param>
+        /// <param name="entity">实体对象</param>
         public virtual void Delete(T entity)
         {
             this.Delete(entity._id);
         }
 
         /// <summary>
-        /// Deletes the entities matching the predicate.
+        /// 按条件删除实体
         /// </summary>
-        /// <param name="predicate">The expression.</param>
+        /// <param name="predicate">条件</param>
         public virtual void Delete(Expression<Func<T, bool>> predicate)
         {
             foreach (T entity in this.collection.AsQueryable<T>().Where(predicate))
@@ -185,7 +196,7 @@ namespace Rhea.Data.Mongo
         }
 
         /// <summary>
-        /// Deletes all entities in the repository.
+        /// 删除集合所有实体
         /// </summary>
         public virtual void DeleteAll()
         {
@@ -193,19 +204,19 @@ namespace Rhea.Data.Mongo
         }
 
         /// <summary>
-        /// Counts the total entities in the repository.
+        /// 集合计数
         /// </summary>
-        /// <returns>Count of entities in the collection.</returns>
+        /// <returns>实体数量</returns>
         public virtual long Count()
         {
             return this.collection.Count();
         }
 
         /// <summary>
-        /// Checks if the entity exists for given predicate.
+        /// 检查实体对象是否存在
         /// </summary>
-        /// <param name="predicate">The expression.</param>
-        /// <returns>True when an entity matching the predicate exists, false otherwise.</returns>
+        /// <param name="predicate">条件</param>
+        /// <returns>存在返回true, 否则返回false</returns>
         public virtual bool Exists(Expression<Func<T, bool>> predicate)
         {
             return this.collection.AsQueryable<T>().Any(predicate);
@@ -303,9 +314,9 @@ namespace Rhea.Data.Mongo
     }
 
     /// <summary>
-    /// Deals with entities in MongoDb.
+    /// MongoDB 实体类
     /// </summary>
-    /// <typeparam name="T">The type contained in the repository.</typeparam>
+    /// <typeparam name="T">repository 类型</typeparam>
     /// <remarks>Entities are assumed to use strings for Id's.</remarks>
     public class MongoRepository<T> : MongoRepository<T, string>, IRepository<T>
         where T : IEntity<string>
@@ -319,9 +330,9 @@ namespace Rhea.Data.Mongo
             : base() { }
 
         /// <summary>
-        /// Initializes a new instance of the MongoRepository class.
+        /// MongoDB 实体类
         /// </summary>
-        /// <param name="url">Url to use for connecting to MongoDB.</param>
+        /// <param name="url">MongoDB连接字符串</param>
         public MongoRepository(MongoUrl url)
             : base(url) { }
 

@@ -11,19 +11,14 @@ namespace Rhea.Data.Mongo
     /// <typeparam name="U"></typeparam>
     internal static class Util<U>
     {
+        #region Field
         /// <summary>
         /// App.config, Web.config 连接字符串键值.
         /// </summary>
         private const string DefaultConnectionstringName = "mongoConnection";
+        #endregion //Field        
 
-        /// <summary>
-        /// 获取连接字符串
-        /// </summary>
-        public static string GetDefaultConnectionString()
-        {
-            return ConfigurationManager.ConnectionStrings[DefaultConnectionstringName].ConnectionString;
-        }
-
+        #region Function
         /// <summary>
         /// 根据Mongo地址获取数据库
         /// </summary>
@@ -35,59 +30,7 @@ namespace Rhea.Data.Mongo
             var server = client.GetServer();
             return server.GetDatabase(url.DatabaseName); // WriteConcern defaulted to Acknowledged
         }
-
-        /// <summary>
-        /// 根据连接字符串获取Collection
-        /// </summary>
-        /// <typeparam name="T">Collection类型</typeparam>
-        /// <param name="connectionString">连接字符串</param>
-        /// <returns>Collection对象</returns>
-        public static MongoCollection<T> GetCollectionFromConnectionString<T>(string connectionString)
-            where T : IEntity<U>
-        {
-            return Util<U>.GetCollectionFromConnectionString<T>(connectionString, GetCollectionName<T>());
-        }
-
-        /// <summary>
-        /// 根据连接字符串获取Collection
-        /// </summary>
-        /// <typeparam name="T">Collection类型</typeparam>
-        /// <param name="connectionString">连接字符串</param>
-        /// <param name="collectionName">Collection名称</param>
-        /// <returns>Collection对象</returns>
-        public static MongoCollection<T> GetCollectionFromConnectionString<T>(string connectionString, string collectionName)
-            where T : IEntity<U>
-        {
-            return Util<U>.GetDatabaseFromUrl(new MongoUrl(connectionString))
-                .GetCollection<T>(collectionName);
-        }
-
-        /// <summary>
-        /// 根据MongoDB Url获取Collection
-        /// </summary>
-        /// <typeparam name="T">Collection类型</typeparam>
-        /// <param name="url">MongoDB Url</param>
-        /// <returns>Collection对象</returns>
-        public static MongoCollection<T> GetCollectionFromUrl<T>(MongoUrl url)
-            where T : IEntity<U>
-        {
-            return Util<U>.GetCollectionFromUrl<T>(url, GetCollectionName<T>());
-        }
-
-        /// <summary>
-        /// Creates and returns a MongoCollection from the specified type and url.
-        /// </summary>
-        /// <typeparam name="T">The type to get the collection of.</typeparam>
-        /// <param name="url">The url to use to get the collection from.</param>
-        /// <param name="collectionName">The name of the collection to use.</param>
-        /// <returns>Returns a MongoCollection from the specified type and url.</returns>
-        public static MongoCollection<T> GetCollectionFromUrl<T>(MongoUrl url, string collectionName)
-            where T : IEntity<U>
-        {
-            return Util<U>.GetDatabaseFromUrl(url)
-                .GetCollection<T>(collectionName);
-        }
-
+        
         /// <summary>
         /// 获取类型T的Collection名称
         /// </summary>
@@ -165,5 +108,73 @@ namespace Rhea.Data.Mongo
 
             return collectionname;
         }
+        #endregion //Function
+
+        #region Method
+        /// <summary>
+        /// 获取连接字符串
+        /// </summary>
+        public static string GetDefaultConnectionString()
+        {
+            return ConfigurationManager.ConnectionStrings[DefaultConnectionstringName].ConnectionString;
+        }
+
+        public static MongoCollection<T> GetCollection<T>(string connectionString, string databaseName)
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// 根据连接字符串获取Collection
+        /// </summary>
+        /// <typeparam name="T">Collection类型</typeparam>
+        /// <param name="connectionString">连接字符串</param>
+        /// <returns>Collection对象</returns>
+        public static MongoCollection<T> GetCollectionFromConnectionString<T>(string connectionString)
+            where T : IEntity<U>
+        {
+            return Util<U>.GetCollectionFromConnectionString<T>(connectionString, GetCollectionName<T>());
+        }
+
+        /// <summary>
+        /// 根据连接字符串获取Collection
+        /// </summary>
+        /// <typeparam name="T">Collection类型</typeparam>
+        /// <param name="connectionString">连接字符串</param>
+        /// <param name="collectionName">Collection名称</param>
+        /// <returns>Collection对象</returns>
+        public static MongoCollection<T> GetCollectionFromConnectionString<T>(string connectionString, string collectionName)
+            where T : IEntity<U>
+        {
+            return Util<U>.GetDatabaseFromUrl(new MongoUrl(connectionString))
+                .GetCollection<T>(collectionName);
+        }
+
+        /// <summary>
+        /// 根据MongoDB Url获取Collection
+        /// </summary>
+        /// <typeparam name="T">Collection类型</typeparam>
+        /// <param name="url">MongoDB Url</param>
+        /// <returns>Collection对象</returns>
+        public static MongoCollection<T> GetCollectionFromUrl<T>(MongoUrl url)
+            where T : IEntity<U>
+        {
+            return Util<U>.GetCollectionFromUrl<T>(url, GetCollectionName<T>());
+        }
+
+        /// <summary>
+        /// Creates and returns a MongoCollection from the specified type and url.
+        /// </summary>
+        /// <typeparam name="T">The type to get the collection of.</typeparam>
+        /// <param name="url">The url to use to get the collection from.</param>
+        /// <param name="collectionName">The name of the collection to use.</param>
+        /// <returns>Returns a MongoCollection from the specified type and url.</returns>
+        public static MongoCollection<T> GetCollectionFromUrl<T>(MongoUrl url, string collectionName)
+            where T : IEntity<U>
+        {
+            return Util<U>.GetDatabaseFromUrl(url)
+                .GetCollection<T>(collectionName);
+        }
+        #endregion //Method
     }
 }

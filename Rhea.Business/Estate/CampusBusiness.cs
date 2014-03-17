@@ -1,22 +1,39 @@
-﻿using System;
+﻿using Rhea.Data.Estate;
+using Rhea.Data.Mongo.Estate;
+using Rhea.Model.Estate;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Rhea.Model.Estate;
-using Rhea.Data;
-using Rhea.Data.Mongo;
 
 namespace Rhea.Business.Estate
 {
+    /// <summary>
+    /// 校区业务类
+    /// </summary>
     public class CampusBusiness
     {
-        public List<Campus> Get()
-        {
-            //IRepository<Campus> campusRepository = new MongoRepository<Campus>();
-            //return campusRepository.ToList();
+        #region Field
+        /// <summary>
+        /// 校区Campus
+        /// </summary>
+        private ICampusRepository campusRepository;
+        #endregion //Field
 
-            return null;
+        #region Constructor
+        public CampusBusiness()
+        {
+            this.campusRepository = new MongoCampusRepository();
+        }
+        #endregion //Constructor
+
+        #region Method
+        public IQueryable<Campus> Get()
+        {
+            var data = campusRepository.Get();
+
+            return data;
         }
 
         public Campus Get(int id)
@@ -27,5 +44,6 @@ namespace Rhea.Business.Estate
 
             return null;
         }
+        #endregion //Method
     }
 }

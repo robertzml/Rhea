@@ -6,12 +6,12 @@ using System.Runtime.Serialization;
 namespace Rhea.Model
 {
     /// <summary>
-    /// 实体抽象类
+    /// MongoDB实体抽象类
     /// </summary>
     [DataContract]
     [Serializable]
     [BsonIgnoreExtraElements(Inherited = true)]
-    public abstract class MongoEntity : IEntity<ObjectId>
+    public abstract class MongoEntity : IEntity<string>
     {
         /// <summary>
         /// 实体主键ID
@@ -19,6 +19,6 @@ namespace Rhea.Model
         [DataMember]
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public virtual ObjectId _id { get; set; }
+        public virtual string _id { get; set; }
     }
 }

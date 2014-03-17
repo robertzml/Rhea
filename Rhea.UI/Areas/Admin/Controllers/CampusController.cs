@@ -21,11 +21,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
         }
 
         public ActionResult List()
-        {
-            //CampusRepository campusRepository = new CampusRepository();
-
-            //var data = campusRepository.Get();
-            //return View(data);
+        {           
             CampusBusiness campusBusiness = new CampusBusiness();
             var data = campusBusiness.Get();
             return View(data);
