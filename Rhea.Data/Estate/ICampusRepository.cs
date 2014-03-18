@@ -16,7 +16,7 @@ namespace Rhea.Data.Estate
         /// 获取所有校区
         /// </summary>
         /// <returns>所有校区</returns>
-        IQueryable<Campus> Get();
+        IEnumerable<Campus> Get();
 
         /// <summary>
         /// 获取校区

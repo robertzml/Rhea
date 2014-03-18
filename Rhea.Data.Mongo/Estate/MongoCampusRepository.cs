@@ -1,13 +1,10 @@
-﻿using Rhea.Data;
+﻿using MongoDB.Driver.Linq;
 using Rhea.Data.Estate;
+using Rhea.Data.Server;
 using Rhea.Model.Estate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Rhea.Data.Mongo;
-using Rhea.Data.Server;
 
 namespace Rhea.Data.Mongo.Estate
 {
@@ -31,10 +28,12 @@ namespace Rhea.Data.Mongo.Estate
         #endregion //Constructor
 
         #region Method
-        public IQueryable<Campus> Get()
+        public IEnumerable<Campus> Get()
         {
-            return this.repository.Get(r => r.Status == 0).AsQueryable<Campus>();
-        
+            //var query = this.repository.Collection.AsQueryable<Campus>().Where(r => r.Status == 0);
+            //return query.ToList();
+
+            return this.repository.Get(r => r.Status == 0);
         }
 
         public Campus Get(int id)

@@ -118,7 +118,7 @@ namespace Rhea.Data
         /// <remarks>
         /// Instead of calling this method it is better to put the return value of RequestStart in a using statement.
         /// </remarks>
-        void RequestDone();
+        void RequestDone();        
     }
 
     /// <summary>
@@ -128,6 +128,8 @@ namespace Rhea.Data
     /// <remarks>实体使用字符串为ID</remarks>
     public interface IRepository<T> : IQueryable<T>, IRepository<T, string>
         where T : IEntity<string>
-    { }
+    {
+        MongoDB.Driver.MongoCollection<T> Collection { get; }
+    }
    
 }

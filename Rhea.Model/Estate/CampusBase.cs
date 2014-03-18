@@ -3,8 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using MongoDB.Bson;
 
 namespace Rhea.Model.Estate
 {
@@ -18,7 +20,7 @@ namespace Rhea.Model.Estate
         /// ID
         /// </summary>
         [BsonElement("id")]
-        public int Id { get; set; }
+        public int CampusId { get; set; }      
 
         /// <summary>
         /// 名称
@@ -45,6 +47,7 @@ namespace Rhea.Model.Estate
         /// <summary>
         /// 状态
         /// </summary>
+        [BsonElement("status")]
         [Display(Name = "状态")]
         public int Status { get; set; }
         #endregion //Property

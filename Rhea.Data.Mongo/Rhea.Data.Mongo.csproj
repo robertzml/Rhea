@@ -48,7 +48,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Estate\MongoCampusRepository.cs" />
-    <Compile Include="MongoContext.cs" />
     <Compile Include="MongoRepository.cs" />
     <Compile Include="MongoRepositoryManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

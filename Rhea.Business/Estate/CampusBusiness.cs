@@ -36,7 +36,7 @@ namespace Rhea.Business.Estate
         /// 获取所有校区
         /// </summary>
         /// <returns></returns>
-        public IQueryable<Campus> Get()
+        public IEnumerable<Campus> Get()
         {
             var data = campusRepository.Get();
             return data;

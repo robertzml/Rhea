@@ -310,6 +310,19 @@ namespace Rhea.Data.Mongo
             get { return this.collection.AsQueryable<T>().Provider; }
         }
         #endregion
+
+        #region Property
+        /// <summary>
+        /// Collection对象
+        /// </summary>
+        public MongoCollection<T> Collection
+        {
+            get
+            {
+                return this.collection;
+            }
+        }
+        #endregion //Property
     }
 
     /// <summary>
