@@ -17,6 +17,7 @@ namespace Rhea.Model
         /// <summary>
         /// 实体主键
         /// </summary>        
+        [BsonId]
         TKey _id { get; set; }
     }
 
@@ -28,7 +29,7 @@ namespace Rhea.Model
         /// <summary>
         /// 实体主键
         /// </summary>
-        [BsonId]
-        new string _id { get; set; }
+        //[BsonId]
+        //new string _id { get; set; }
     }
 }

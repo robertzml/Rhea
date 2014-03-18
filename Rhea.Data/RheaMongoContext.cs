@@ -12,7 +12,7 @@ namespace Rhea.Data
     /// <summary>
     /// 系统数据库连接
     /// </summary>
-    public class RheaMongoContext
+    internal class RheaMongoContext
     {
         #region Field
         /// <summary>

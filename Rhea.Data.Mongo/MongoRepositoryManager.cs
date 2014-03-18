@@ -30,7 +30,7 @@ namespace Rhea.Data.Mongo
         /// </summary>
         /// <remarks>Default constructor defaults to "MongoServerSettings" key for connectionstring.</remarks>
         public MongoRepositoryManager()
-            : this(Util<TKey>.GetDefaultConnectionString())
+            : this(Util<TKey>.GetConfigConnectionString())
         {
         }
 
@@ -40,7 +40,7 @@ namespace Rhea.Data.Mongo
         /// <param name="connectionString">Connectionstring to use for connecting to MongoDB.</param>
         public MongoRepositoryManager(string connectionString)
         {
-            this.collection = Util<TKey>.GetCollectionFromConnectionString<T>(connectionString);
+            this.collection = Util<TKey>.GetCollection<T>(connectionString, "");
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Rhea.Data.Mongo
         /// <param name="collectionName">The name of the collection to use.</param>
         public MongoRepositoryManager(string connectionString, string collectionName)
         {
-            this.collection = Util<TKey>.GetCollectionFromConnectionString<T>(connectionString, collectionName);
+            this.collection = Util<TKey>.GetCollection<T>(connectionString, collectionName);
         }
 
         /// <summary>

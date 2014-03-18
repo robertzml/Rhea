@@ -22,6 +22,9 @@ namespace Rhea.Business.Estate
         #endregion //Field
 
         #region Constructor
+        /// <summary>
+        /// 校区业务类
+        /// </summary>
         public CampusBusiness()
         {
             this.campusRepository = new MongoCampusRepository();
@@ -29,10 +32,13 @@ namespace Rhea.Business.Estate
         #endregion //Constructor
 
         #region Method
+        /// <summary>
+        /// 获取所有校区
+        /// </summary>
+        /// <returns></returns>
         public IQueryable<Campus> Get()
         {
             var data = campusRepository.Get();
-
             return data;
         }
 

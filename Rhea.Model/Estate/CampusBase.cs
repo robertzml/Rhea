@@ -1,10 +1,10 @@
-﻿using System;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MongoDB.Bson.Serialization.Attributes;
 
 namespace Rhea.Model.Estate
 {
@@ -17,6 +17,7 @@ namespace Rhea.Model.Estate
         /// <summary>
         /// ID
         /// </summary>
+        [BsonElement("id")]
         public int Id { get; set; }
 
         /// <summary>

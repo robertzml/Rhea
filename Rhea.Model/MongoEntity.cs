@@ -16,9 +16,9 @@ namespace Rhea.Model
         /// <summary>
         /// 实体主键ID
         /// </summary>
-        [DataMember]
-        [BsonId]
+        [DataMember]        
         [BsonRepresentation(BsonType.ObjectId)]
+        [BsonElement("_id")]
         public virtual string _id { get; set; }
     }
 }

@@ -7,8 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Rhea.Data.Mongo
 {
@@ -22,58 +20,60 @@ namespace Rhea.Data.Mongo
     {
         #region Field
         /// <summary>
-        /// MongoCollection field.
+        /// MongoCollection对象
         /// </summary>
         protected internal MongoCollection<T> collection;
         #endregion //Field
 
         #region Constructor
         /// <summary>
-        /// Initializes a new instance of the MongoRepository class.
-        /// Uses the Default App/Web.Config connectionstrings to fetch the connectionString and Database name.
+        /// 初始化 MongoDB Repository
+        /// 采用配置文件内连接字符串
         /// </summary>
-        /// <remarks>Default constructor defaults to "MongoServerSettings" key for connectionstring.</remarks>
-        public MongoRepository()
-            : this(Util<TKey>.GetDefaultConnectionString())
+        /// <remarks>默认连接字符串键值为mongoConnection</remarks>
+        public MongoRepository(string databaseName)
+            : this(Util<TKey>.GetConfigConnectionString(), databaseName)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the MongoRepository class.
+        /// 初始化 MongoDB Repository
         /// </summary>
-        /// <param name="connectionString">Connectionstring to use for connecting to MongoDB.</param>
-        public MongoRepository(string connectionString)
+        /// <param name="connectionString">连接字符串</param>
+        /// <param name="databaseName">数据库名称</param>
+        public MongoRepository(string connectionString, string databaseName)
         {
-            this.collection = Util<TKey>.GetCollectionFromConnectionString<T>(connectionString);
+            this.collection = Util<TKey>.GetCollection<T>(connectionString, databaseName);
         }
 
         /// <summary>
-        /// Initializes a new instance of the MongoRepository class.
+        /// 初始化 MongoDB Repository
         /// </summary>
-        /// <param name="connectionString">Connectionstring to use for connecting to MongoDB.</param>
-        /// <param name="collectionName">The name of the collection to use.</param>
-        public MongoRepository(string connectionString, string collectionName)
+        /// <param name="connectionString">连接字符串</param>
+        /// <param name="databaseName">数据库名称</param>
+        /// <param name="collectionName">Collection名称</param>
+        public MongoRepository(string connectionString, string databaseName, string collectionName)
         {
-            this.collection = Util<TKey>.GetCollectionFromConnectionString<T>(connectionString, collectionName);
+            this.collection = Util<TKey>.GetCollection<T>(connectionString, databaseName, collectionName);
         }
 
         /// <summary>
-        /// Initializes a new instance of the MongoRepository class.
+        /// 初始化 MongoDB Repository
         /// </summary>
-        /// <param name="url">Url to use for connecting to MongoDB.</param>
+        /// <param name="url">Mongo连接Url</param>
         public MongoRepository(MongoUrl url)
         {
-            this.collection = Util<TKey>.GetCollectionFromUrl<T>(url);
+            this.collection = Util<TKey>.GetCollection<T>(url);
         }
 
         /// <summary>
-        /// Initializes a new instance of the MongoRepository class.
+        /// 初始化 MongoDB Repository
         /// </summary>
-        /// <param name="url">Url to use for connecting to MongoDB.</param>
-        /// <param name="collectionName">The name of the collection to use.</param>
+        /// <param name="url">Mongo连接Url</param>
+        /// <param name="collectionName">Collection名称</param>
         public MongoRepository(MongoUrl url, string collectionName)
         {
-            this.collection = Util<TKey>.GetCollectionFromUrl<T>(url, collectionName);
+            this.collection = Util<TKey>.GetCollection<T>(url, collectionName);
         }
         #endregion //Constructor
 
@@ -102,7 +102,6 @@ namespace Rhea.Data.Mongo
         {
             return this.collection.AsQueryable<T>().Where(predicate);
         }
-
 
         /// <summary>
         /// 添加实体
@@ -314,49 +313,51 @@ namespace Rhea.Data.Mongo
     }
 
     /// <summary>
-    /// MongoDB 实体类
+    /// MongoDB Repository 类
     /// </summary>
-    /// <typeparam name="T">repository 类型</typeparam>
-    /// <remarks>Entities are assumed to use strings for Id's.</remarks>
+    /// <typeparam name="T">实体对象类型</typeparam>
+    /// <remarks>实体主键为string类型</remarks>
     public class MongoRepository<T> : MongoRepository<T, string>, IRepository<T>
         where T : IEntity<string>
     {
         /// <summary>
-        /// Initializes a new instance of the MongoRepository class.
-        /// Uses the Default App/Web.Config connectionstrings to fetch the connectionString and Database name.
+        /// 初始化 MongoRepository 类
+        /// 采用配置文件内连接字符串
         /// </summary>
-        /// <remarks>Default constructor defaults to "MongoServerSettings" key for connectionstring.</remarks>
-        public MongoRepository()
-            : base() { }
+        /// <remarks>默认连接字符串键值为mongoConnection</remarks>
+        public MongoRepository(string databaseName)
+            : base(databaseName) { }
 
         /// <summary>
-        /// MongoDB 实体类
+        /// 初始化 MongoRepository 类
         /// </summary>
         /// <param name="url">MongoDB连接字符串</param>
         public MongoRepository(MongoUrl url)
             : base(url) { }
 
         /// <summary>
-        /// Initializes a new instance of the MongoRepository class.
+        /// 初始化 MongoRepository 类
         /// </summary>
-        /// <param name="url">Url to use for connecting to MongoDB.</param>
-        /// <param name="collectionName">The name of the collection to use.</param>
+        /// <param name="url">MongoDB连接字符串</param>
+        /// <param name="collectionName">Collection名称</param>
         public MongoRepository(MongoUrl url, string collectionName)
             : base(url, collectionName) { }
 
         /// <summary>
-        /// Initializes a new instance of the MongoRepository class.
+        /// 初始化 MongoRepository 类
         /// </summary>
-        /// <param name="connectionString">Connectionstring to use for connecting to MongoDB.</param>
-        public MongoRepository(string connectionString)
-            : base(connectionString) { }
+        /// <param name="connectionString">连接字符串</param>
+        /// <param name="databaseName">数据库名称</param>
+        public MongoRepository(string connectionString, string databaseName)
+            : base(connectionString, databaseName) { }
 
         /// <summary>
-        /// Initializes a new instance of the MongoRepository class.
+        /// 初始化 MongoRepository 类
         /// </summary>
-        /// <param name="connectionString">Connectionstring to use for connecting to MongoDB.</param>
-        /// <param name="collectionName">The name of the collection to use.</param>
-        public MongoRepository(string connectionString, string collectionName)
-            : base(connectionString, collectionName) { }
+        /// <param name="connectionString">连接字符串</param>
+        /// <param name="databaseName">数据库名称</param>
+        /// <param name="collectionName">Collection名称</param>
+        public MongoRepository(string connectionString, string databaseName, string collectionName)
+            : base(connectionString, databaseName, collectionName) { }
     }
 }
