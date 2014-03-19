@@ -60,8 +60,7 @@
 @section scripts {
     <script type="text/javascript">
         $(function () {
-            $('ul.nav > li').removeClass("active");
-            $('ul.nav li a#campus-manage').parent().addClass('active');
+            menuNavActive($('a#campus-manage'));
         })
     </script>
 }

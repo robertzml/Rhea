@@ -1,12 +1,6 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using System;
-using System.Collections.Generic;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-using MongoDB.Bson;
 
 namespace Rhea.Model.Estate
 {
@@ -20,7 +14,8 @@ namespace Rhea.Model.Estate
         /// ID
         /// </summary>
         [BsonElement("id")]
-        public int CampusId { get; set; }      
+        [Display(Name = "ID")]
+        public int CampusId { get; set; }
 
         /// <summary>
         /// 名称
@@ -33,6 +28,7 @@ namespace Rhea.Model.Estate
         /// <summary>
         /// 图片地址
         /// </summary>
+        [BsonElement("imageUrl")]
         [Display(Name = "图片")]
         public string ImageUrl { get; set; }
 
@@ -41,11 +37,13 @@ namespace Rhea.Model.Estate
         /// </summary>
         [StringLength(1000)]
         [DataType(DataType.MultilineText)]
+        [BsonElement("remark")]
         [Display(Name = "备注")]
         public string Remark { get; set; }
 
         /// <summary>
         /// 状态
+        /// 0:在用; 1:删除
         /// </summary>
         [BsonElement("status")]
         [Display(Name = "状态")]

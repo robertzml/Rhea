@@ -15,6 +15,7 @@ namespace Rhea.Model
     {
         /// <summary>
         /// 实体主键ID
+        /// 系统ID
         /// </summary>
         [DataMember]
         [BsonId]

@@ -18,7 +18,7 @@ namespace Rhea.Data
         /// <summary>
         /// 数据Repository接口
         /// </summary>
-        protected IRepository<T> repository;
+        protected IMongoRepository<T> repository;
         #endregion //Field
     }
 }

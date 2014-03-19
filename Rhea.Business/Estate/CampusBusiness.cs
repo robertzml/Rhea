@@ -38,17 +38,50 @@ namespace Rhea.Business.Estate
         /// <returns></returns>
         public IEnumerable<Campus> Get()
         {
-            var data = campusRepository.Get();
+            var data = this.campusRepository.Get();
+            return data.Where(r => r.Status != 1);
+        }
+
+        /// <summary>
+        /// 获取校区
+        /// </summary>
+        /// <param name="id">校区ID</param>
+        /// <returns></returns>
+        public Campus Get(int id)
+        {
+            var data = this.campusRepository.Get(id);
+            if (data.Status == 1)
+                return null;
             return data;
         }
 
-        public Campus Get(int id)
+        /// <summary>
+        /// 获取校区数量
+        /// </summary>
+        /// <returns></returns>
+        public int Count()
         {
-            //IRepository<Campus> campusRepository = new MongoRepository<Campus>();
+            return this.campusRepository.Count();
+        }
 
-            //return campusRepository.GetById(id.ToString());
+        /// <summary>
+        /// 编辑校区
+        /// </summary>
+        /// <param name="data">数据对象</param>
+        /// <returns></returns>
+        public int Edit(Campus data)
+        {
+            throw new NotImplementedException();
+        }
 
-            return null;
+        /// <summary>
+        /// 删除校区
+        /// </summary>
+        /// <param name="id">校区ID</param>
+        /// <returns></returns>
+        public bool Delete(int id)
+        {
+            throw new NotImplementedException();
         }
         #endregion //Method
     }

@@ -9,19 +9,21 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Rhea.Model
 {
-    public class Log
+    public class Log : MongoEntity
     {
         #region Property
         /// <summary>
         /// 日志系统ID
         /// </summary>
-        [BsonId]
-        [Display(Name = "日志系统ID")]
-        public ObjectId _id { get; set; }
+        //[BsonId]
+        //[BsonElement("_id")]
+        //[Display(Name = "日志系统ID")]
+        //public ObjectId _id { get; set; }
 
         /// <summary>
         /// 标题
         /// </summary>
+        [BsonElement("title")]
         [Display(Name = "标题")]
         public string Title { get; set; }
 
@@ -34,6 +36,7 @@ namespace Rhea.Model
         /// <summary>
         /// 记录时间
         /// </summary>
+        [BsonElement("time")]
         [Display(Name = "记录时间")]
         public DateTime Time { get; set; }
 
@@ -46,12 +49,14 @@ namespace Rhea.Model
         /// <summary>
         /// 编辑人姓名
         /// </summary>
+        [BsonElement("userName")]
         [Display(Name = "编辑人")]
         public string UserName { get; set; }
 
         /// <summary>
         /// 日志类型
         /// </summary>
+        [BsonElement("type")]
         [Display(Name = "日志类型")]
         public int Type { get; set; }
 

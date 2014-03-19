@@ -122,11 +122,11 @@ namespace Rhea.Data
     }
 
     /// <summary>
-    /// Repository接口定义
+    /// MongoDB Repository接口定义
     /// </summary>
     /// <typeparam name="T">Repository类型</typeparam>
     /// <remarks>实体使用字符串为ID</remarks>
-    public interface IRepository<T> : IQueryable<T>, IRepository<T, string>
+    public interface IMongoRepository<T> : IQueryable<T>, IRepository<T, string>
         where T : IEntity<string>
     {
         MongoDB.Driver.MongoCollection<T> Collection { get; }

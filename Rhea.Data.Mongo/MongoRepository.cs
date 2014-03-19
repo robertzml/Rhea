@@ -330,7 +330,7 @@ namespace Rhea.Data.Mongo
     /// </summary>
     /// <typeparam name="T">实体对象类型</typeparam>
     /// <remarks>实体主键为string类型</remarks>
-    public class MongoRepository<T> : MongoRepository<T, string>, IRepository<T>
+    public class MongoRepository<T> : MongoRepository<T, string>, IMongoRepository<T>
         where T : IEntity<string>
     {
         /// <summary>

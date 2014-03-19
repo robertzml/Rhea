@@ -13,6 +13,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
     /// </summary>
     public class CampusController : Controller
     {
+
         //
         // GET: /Admin/Campus/
         public ActionResult Index()
@@ -20,10 +21,26 @@ namespace Rhea.UI.Areas.Admin.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 校区列表
+        /// </summary>
+        /// <returns></returns>
         public ActionResult List()
         {           
             CampusBusiness campusBusiness = new CampusBusiness();
             var data = campusBusiness.Get();
+            return View(data);
+        }
+
+        /// <summary>
+        /// 校区信息
+        /// </summary>
+        /// <param name="id">校区ID</param>
+        /// <returns></returns>
+        public ActionResult Details(int id)
+        {
+            CampusBusiness campusBusiness = new CampusBusiness();
+            var data = campusBusiness.Get(id);
             return View(data);
         }
 	}

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -23,12 +24,13 @@ namespace Rhea.Model.Estate
         }
         #endregion //Constructor
 
-        #region Field
+        #region Property
         /// <summary>
         /// 日志属性
         /// </summary>
+        [BsonElement("log")]
         [Display(Name = "日志属性")]
         public Log Log { get; set; }
-        #endregion //Field
+        #endregion //Property
     }
 }

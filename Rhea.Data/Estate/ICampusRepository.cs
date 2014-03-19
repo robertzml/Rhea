@@ -23,6 +23,12 @@ namespace Rhea.Data.Estate
         /// </summary>
         /// <param name="id">校区ID</param>
         /// <returns>校区对象</returns>
-        Campus Get(int id);   
+        Campus Get(int id);
+
+        /// <summary>
+        /// 校区计数
+        /// </summary>
+        /// <returns></returns>
+        int Count();
     }
 }
