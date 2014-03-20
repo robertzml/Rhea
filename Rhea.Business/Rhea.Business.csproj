@@ -39,8 +39,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Estate\BuildingBusiness.cs" />
     <Compile Include="Estate\BuildingGroupBusiness.cs" />
     <Compile Include="Estate\CampusBusiness.cs" />
+    <Compile Include="Estate\RoomBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

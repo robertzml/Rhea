@@ -1,45 +1,45 @@
-﻿using Rhea.Data.Estate;
-using Rhea.Model.Estate;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Rhea.Data.Estate;
+using Rhea.Model.Estate;
 using MongoDB.Driver.Builders;
 
 namespace Rhea.Data.Mongo.Estate
 {
     /// <summary>
-    /// MongoDB 楼群Repository
+    /// MongoDB 楼宇Repository
     /// </summary>
-    public class MongoBuildingGroupRepository : RheaContextBase<BuildingGroup>, IBuildingGroupRepository
+    public class MongoBuildingRepository : RheaContextBase<Building>, IBuildingRepository
     {
         #region Constructor
         /// <summary>
-        /// MongoDB 楼群Repository类
+        /// MongoDB 楼宇Repository
         /// </summary>
-        public MongoBuildingGroupRepository()
+        public MongoBuildingRepository()
         {
-            this.repository = new MongoRepository<BuildingGroup>(RheaServer.EstateDatabase);
+            this.repository = new MongoRepository<Building>(RheaServer.EstateDatabase);
         }
         #endregion //Constructor
 
         #region Method
         /// <summary>
-        /// 获取所有楼群
+        /// 获取所有楼宇
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<BuildingGroup> Get()
+        public IEnumerable<Building> Get()
         {
             return this.repository.AsEnumerable();
         }
 
         /// <summary>
-        /// 获取楼群
+        /// 获取楼宇
         /// </summary>
-        /// <param name="id">楼群ID</param>
+        /// <param name="id">楼宇ID</param>
         /// <returns></returns>
-        public BuildingGroup Get(int id)
+        public Building Get(int id)
         {
             var query = Query.EQ("id", id);
             return this.repository.Collection.FindOne(query);

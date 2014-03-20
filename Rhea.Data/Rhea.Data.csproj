@@ -47,15 +47,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Estate\IBuildingGroupRepository.cs" />
+    <Compile Include="Estate\IBuildingRepository.cs" />
     <Compile Include="Estate\ICampusRepository.cs" />
+    <Compile Include="Estate\IRoomRepository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="IRepositoryManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RheaContextBase.cs" />
     <Compile Include="RheaMongoContext.cs" />
-    <Compile Include="Server\RheaServer.cs" />
+    <Compile Include="RheaServer.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Server\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

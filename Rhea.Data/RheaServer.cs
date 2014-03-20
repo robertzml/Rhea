@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rhea.Data.Server
+namespace Rhea.Data
 {
     /// <summary>
     /// Rhea服务器

@@ -10,50 +10,50 @@ using System.Threading.Tasks;
 namespace Rhea.Business.Estate
 {
     /// <summary>
-    /// 楼群业务
+    /// 楼宇业务类
     /// </summary>
-    public class BuildingGroupBusiness
+    public class BuildingBusiness
     {
         #region Field
         /// <summary>
-        /// 楼群Repository
+        /// 楼宇Reposiotry
         /// </summary>
-        private IBuildingGroupRepository buildingGroupRepository;
+        private IBuildingRepository buildingRepository;
         #endregion //Field
 
         #region Constructor
         /// <summary>
-        /// 楼群业务
+        /// 楼宇业务类
         /// </summary>
-        public BuildingGroupBusiness()
+        public BuildingBusiness()
         {
-            this.buildingGroupRepository = new MongoBuildingGroupRepository();
+            this.buildingRepository = new MongoBuildingRepository();
         }
         #endregion //Constructor
 
         #region Method
         /// <summary>
-        /// 获取所有楼群
+        /// 获取所有楼宇
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<BuildingGroup> Get()
+        public IEnumerable<Building> Get()
         {
-            var data = this.buildingGroupRepository.Get();
+            var data = this.buildingRepository.Get();
             return data.Where(r => r.Status != 1);
         }
 
         /// <summary>
-        /// 获取楼群
+        /// 获取楼宇
         /// </summary>
-        /// <param name="id">楼群ID</param>
+        /// <param name="id">楼宇ID</param>
         /// <returns></returns>
-        public BuildingGroup Get(int id)
+        public Building Get(int id)
         {
-            var data = this.buildingGroupRepository.Get(id);
-            if (data.Status == 1)
-                return null;
-            else
+            var data = this.buildingRepository.Get(id);
+            if (data.Status != 1)
                 return data;
+            else
+                return null;
         }
         #endregion //Method
     }
