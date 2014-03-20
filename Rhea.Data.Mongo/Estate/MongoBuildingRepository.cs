@@ -35,6 +35,17 @@ namespace Rhea.Data.Mongo.Estate
         }
 
         /// <summary>
+        /// 按楼群获取楼宇
+        /// </summary>
+        /// <param name="buildingGroupId">所属楼群ID</param>
+        /// <returns></returns>
+        public IEnumerable<Building> GetByBuildingGroup(int buildingGroupId)
+        {
+            var query = Query.EQ("buildingGroupId", buildingGroupId);
+            return this.repository.Collection.Find(query);
+        }
+
+        /// <summary>
         /// 获取楼宇
         /// </summary>
         /// <param name="id">楼宇ID</param>

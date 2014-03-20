@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using MongoDB.Bson.Serialization.Attributes;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Rhea.Model.Estate
@@ -22,6 +23,7 @@ namespace Rhea.Model.Estate
         /// <summary>
         /// 楼宇ID
         /// </summary>
+        [BsonElement("id")]
         [Display(Name = "楼宇ID")]
         public int BuildingId { get; set; }
 
@@ -29,6 +31,7 @@ namespace Rhea.Model.Estate
         /// 名称
         /// </summary>
         [Required]
+        [BsonElement("name")]
         [Display(Name = "名称")]
         public string Name { get; set; }
 
@@ -49,6 +52,7 @@ namespace Rhea.Model.Estate
         /// <summary>
         /// 建筑面积
         /// </summary>        
+        [BsonElement("buildArea")]
         [Range(0.0, double.MaxValue)]
         [Display(Name = "建筑面积")]
         public double? BuildArea { get; set; }
@@ -56,6 +60,7 @@ namespace Rhea.Model.Estate
         /// <summary>
         /// 使用面积
         /// </summary>        
+        [BsonElement("usableArea")]
         [Range(0.0, double.MaxValue)]
         [Display(Name = "使用面积")]
         public double? UsableArea { get; set; }
@@ -63,6 +68,7 @@ namespace Rhea.Model.Estate
         /// <summary>
         /// 地上楼层数
         /// </summary>
+        [BsonElement("aboveGroundFloor")]
         [Range(0, int.MaxValue)]
         [Display(Name = "地上楼层数")]
         public int? AboveGroundFloor { get; set; }
@@ -70,6 +76,7 @@ namespace Rhea.Model.Estate
         /// <summary>
         /// 地下楼层数
         /// </summary>
+        [BsonElement("underGroundFloor")]
         [Range(0, int.MaxValue)]
         [Display(Name = "地下楼层数")]
         public int? UnderGroundFloor { get; set; }

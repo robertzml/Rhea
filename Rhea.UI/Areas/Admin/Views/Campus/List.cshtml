@@ -13,7 +13,7 @@
     <div class="col-lg-10 col-md-10">
         <h1 class="page-header">@ViewBag.Title</h1>
 
-        <table class="table table-bordered table-striped">
+        <table id="campus-list" class="table table-bordered table-striped">
             <thead>
                 <tr>
                     <th>
@@ -28,7 +28,9 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Status)
                     </th>
-                    <th></th>
+                    <th>
+                        编辑
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -62,6 +64,9 @@
 @section scripts {
     <script type="text/javascript">
         $(function () {
+            var dom = $('table#campus-list');
+            var oTable = initDataTable(dom);
+
             menuNavActive($('a#campus-manage'));
         })
     </script>

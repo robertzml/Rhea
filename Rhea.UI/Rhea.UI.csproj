@@ -160,6 +160,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\BuildingController.cs" />
     <Compile Include="Areas\Admin\Controllers\BuildingGroupController.cs" />
     <Compile Include="Areas\Admin\Controllers\CampusController.cs" />
     <Compile Include="Areas\Admin\Controllers\EstateController.cs" />
@@ -198,6 +199,7 @@
     <Content Include="Areas\Admin\Views\Campus\Details.cshtml" />
     <Content Include="Areas\Admin\Views\BuildingGroup\List.cshtml" />
     <Content Include="Areas\Admin\Views\BuildingGroup\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Building\List.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Plugins\tables\dataTables\images\back_disabled.png" />
     <Content Include="Plugins\tables\dataTables\images\back_enabled.png" />

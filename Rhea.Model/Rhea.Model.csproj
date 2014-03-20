@@ -51,7 +51,6 @@
     <Compile Include="Estate\Building.cs" />
     <Compile Include="Estate\BuildingGroup.cs" />
     <Compile Include="Estate\Campus.cs" />
-    <Compile Include="Estate\CampusBase.cs" />
     <Compile Include="Estate\Room.cs" />
     <Compile Include="Estate\RoomFunctionCode.cs" />
     <Compile Include="IEntity.cs" />

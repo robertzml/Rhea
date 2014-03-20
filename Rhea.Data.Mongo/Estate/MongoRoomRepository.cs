@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Rhea.Data.Estate;
 using Rhea.Model.Estate;
 using MongoDB.Driver.Builders;
+using Rhea.Data;
 
 namespace Rhea.Data.Mongo.Estate
 {

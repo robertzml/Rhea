@@ -19,6 +19,13 @@ namespace Rhea.Data.Estate
         IEnumerable<Building> Get();
 
         /// <summary>
+        /// 按楼群获取楼宇
+        /// </summary>
+        /// <param name="buildingGroupId">所属楼群ID</param>
+        /// <returns></returns>
+        IEnumerable<Building> GetByBuildingGroup(int buildingGroupId);
+
+        /// <summary>
         /// 获取楼宇
         /// </summary>
         /// <param name="id">楼宇ID</param>
