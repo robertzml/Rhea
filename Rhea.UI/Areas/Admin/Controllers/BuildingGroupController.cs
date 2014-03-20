@@ -10,20 +10,20 @@ using System.Web.Routing;
 namespace Rhea.UI.Areas.Admin.Controllers
 {
     /// <summary>
-    /// 校区控制器
+    /// 楼群控制器
     /// </summary>
-    public class CampusController : Controller
+    public class BuildingGroupController : Controller
     {
         #region Field
-        private CampusBusiness campusBusiness;
+        private BuildingGroupBusiness buildingGroupBusiness;
         #endregion //Field
 
         #region Function
         protected override void Initialize(RequestContext requestContext)
         {
-            if (campusBusiness == null)
+            if (buildingGroupBusiness == null)
             {
-                campusBusiness = new CampusBusiness();
+                buildingGroupBusiness = new BuildingGroupBusiness();
             }
 
             base.Initialize(requestContext);
@@ -32,30 +32,30 @@ namespace Rhea.UI.Areas.Admin.Controllers
 
         #region Action
         //
-        // GET: /Admin/Campus/
+        // GET: /Admin/BuildingGroup/
         public ActionResult Index()
         {
             return View();
         }
 
         /// <summary>
-        /// 校区列表
+        /// 楼群列表
         /// </summary>
         /// <returns></returns>
         public ActionResult List()
-        {           
-            var data = campusBusiness.Get();
+        {
+            var data = this.buildingGroupBusiness.Get();
             return View(data);
         }
 
         /// <summary>
-        /// 校区信息
+        /// 楼群信息
         /// </summary>
-        /// <param name="id">校区ID</param>
+        /// <param name="id">楼群ID</param>
         /// <returns></returns>
         public ActionResult Details(int id)
-        {            
-            var data = campusBusiness.Get(id);
+        {
+            var data = this.buildingGroupBusiness.Get(id);
             return View(data);
         }
         #endregion //Action

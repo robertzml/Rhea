@@ -160,6 +160,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\BuildingGroupController.cs" />
     <Compile Include="Areas\Admin\Controllers\CampusController.cs" />
     <Compile Include="Areas\Admin\Controllers\EstateController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
@@ -174,6 +175,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\admin.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -194,7 +196,23 @@
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Campus\List.cshtml" />
     <Content Include="Areas\Admin\Views\Campus\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\BuildingGroup\List.cshtml" />
+    <Content Include="Areas\Admin\Views\BuildingGroup\Details.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Plugins\tables\dataTables\images\back_disabled.png" />
+    <Content Include="Plugins\tables\dataTables\images\back_enabled.png" />
+    <Content Include="Plugins\tables\dataTables\images\back_enabled_hover.png" />
+    <Content Include="Plugins\tables\dataTables\images\forward_disabled.png" />
+    <Content Include="Plugins\tables\dataTables\images\forward_enabled.png" />
+    <Content Include="Plugins\tables\dataTables\images\forward_enabled_hover.png" />
+    <Content Include="Plugins\tables\dataTables\images\sort_asc.png" />
+    <Content Include="Plugins\tables\dataTables\images\sort_asc_disabled.png" />
+    <Content Include="Plugins\tables\dataTables\images\sort_both.png" />
+    <Content Include="Plugins\tables\dataTables\images\sort_desc.png" />
+    <Content Include="Plugins\tables\dataTables\images\sort_desc_disabled.png" />
+    <Content Include="Plugins\tables\dataTables\jquery.dataTables.css" />
+    <Content Include="Plugins\tables\dataTables\jquery.dataTables.js" />
+    <Content Include="Plugins\tables\dataTables\jquery.dataTables.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\function.js" />

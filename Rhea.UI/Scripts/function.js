@@ -88,7 +88,7 @@ function ajaxContentLoadPage2(action, controller, request, $dom) {
 
 function initDataTable($dom) {
 	var dt = $dom.dataTable({
-		"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span4'i><'span8'p>>",
+		"sDom": "<'row'<'col-lg-6'l><'col-lg-6'f>r>t<'row'<'col-lg-4'i><'col-lg-8'p>>",
 		"sPaginationType": "full_numbers",
 		"bJQueryUI": false,
 		"bAutoWidth": false,

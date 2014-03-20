@@ -22,6 +22,7 @@ namespace Rhea.Model.Estate
         /// 楼群ID
         /// </summary>
         [BsonElement("id")]
+        [Display(Name = "楼群ID")]
         public int BuildingGroupId { get; set; }
 
         /// <summary>
@@ -54,6 +55,7 @@ namespace Rhea.Model.Estate
         /// <summary>
         /// 楼宇栋数
         /// </summary>
+        [BsonElement("buildingCount")]
         [Range(1, int.MaxValue)]
         [Display(Name = "楼宇栋数")]
         public int? BuildingCount { get; set; }
@@ -67,6 +69,7 @@ namespace Rhea.Model.Estate
         /// <summary>
         /// 建筑面积
         /// </summary>
+        [BsonElement("buildArea")]
         [Range(0.0, double.MaxValue)]
         [Display(Name = "建筑面积")]
         public double? BuildArea { get; set; }
@@ -74,6 +77,7 @@ namespace Rhea.Model.Estate
         /// <summary>
         /// 使用面积
         /// </summary>
+        [BsonElement("usableArea")]
         [Range(0.0, double.MaxValue)]
         [Display(Name = "使用面积")]
         public double? UsableArea { get; set; }
@@ -178,6 +182,7 @@ namespace Rhea.Model.Estate
         /// <summary>
         /// 排序
         /// </summary>
+        [BsonElement("sort")]
         [Display(Name = "排序")]
         public int Sort { get; set; }
 
