@@ -16,7 +16,7 @@ namespace Rhea.Business.Estate
     {
         #region Field
         /// <summary>
-        /// 校区Campus
+        /// 校区Repository
         /// </summary>
         private ICampusRepository campusRepository;
         #endregion //Field
