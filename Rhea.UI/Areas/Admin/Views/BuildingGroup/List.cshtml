@@ -53,7 +53,7 @@
                             <a class="btn btn-success btn-sm" href="@Url.Action("Details", new { controller = "BuildingGroup", id = item.BuildingGroupId, area = "Admin" })"><span class="glyphicon glyphicon-zoom-in"></span> 查看</a>
                             <a class="btn btn-warning btn-sm" href="@Url.Action("Edit", new { controller = "BuildingGroup", id = item.BuildingGroupId, area = "Admin" })"><span class="glyphicon glyphicon-edit"></span> 编辑</a>
                             <a class="btn btn-danger btn-sm" href="@Url.Action("Delete", new { controller = "BuildingGroup", id = item.BuildingGroupId, area = "Admin" })"><span class="glyphicon glyphicon-remove"></span> 删除</a>
-                            <a class="btn btn-info btn-sm" href="@Url.Action("List", new { controller = "Building", buildingGroupId = item.BuildingGroupId, area = "Admin" })"><i class="icon-chevron-right icon-white"></i>楼宇</a>
+                            <a class="btn btn-info btn-sm" href="@Url.Action("List", new { controller = "Building", buildingGroupId = item.BuildingGroupId, area = "Admin" })"><span class="glyphicon glyphicon-chevron-right"></span> 楼宇</a>
                         </td>
                     </tr>
                 }

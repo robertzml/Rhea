@@ -200,6 +200,7 @@
     <Content Include="Areas\Admin\Views\BuildingGroup\List.cshtml" />
     <Content Include="Areas\Admin\Views\BuildingGroup\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Building\List.cshtml" />
+    <Content Include="Areas\Admin\Views\Building\Details.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Plugins\tables\dataTables\images\back_disabled.png" />
     <Content Include="Plugins\tables\dataTables\images\back_enabled.png" />

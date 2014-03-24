@@ -46,9 +46,9 @@ namespace Rhea.Model.Estate
         /// <summary>
         /// 备注
         /// </summary>
+        [BsonElement("remark")]
         [StringLength(1000)]
         [DataType(DataType.MultilineText)]
-        [BsonElement("remark")]
         [Display(Name = "备注")]
         public string Remark { get; set; }
 

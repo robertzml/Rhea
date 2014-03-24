@@ -30,7 +30,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
             }
 
             base.Initialize(requestContext);
-        } 
+        }
         #endregion //Function
 
         #region Action
@@ -49,7 +49,18 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             var data = this.buildingBusiness.Get();
             return View(data);
-        }        
+        }
+
+        /// <summary>
+        /// 楼宇信息
+        /// </summary>
+        /// <param name="id">楼宇ID</param>
+        /// <returns></returns>
+        public ActionResult Details(int id)
+        {
+            var data = this.buildingBusiness.Get(id);
+            return View(data);
+        }
         #endregion //Action
     }
 }

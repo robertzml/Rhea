@@ -1,0 +1,115 @@
+﻿@model Rhea.Model.Estate.Building
+
+@{
+    ViewBag.Title = "楼宇信息";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-2 col-md-2">
+        @Html.Action("Menu", "Estate")
+    </div>
+
+    <div class="col-lg-10 col-md-10">
+        <h1 class="page-header">@ViewBag.Title</h1>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th style="width:20%;">
+                        属性
+                    </th>
+                    <th style="width:80%;">
+                        值
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </td>
+                    <td>
+                        @Model.Name
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.BuildArea)
+                    </td>
+                    <td>
+                        @Model.BuildArea
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.UsableArea)
+                    </td>
+                    <td>
+                        @Model.UsableArea
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.AboveGroundFloor)
+                    </td>
+                    <td>
+                        @Model.AboveGroundFloor
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.UnderGroundFloor)
+                    </td>
+                    <td>
+                        @Model.UnderGroundFloor
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.UseType)
+                    </td>
+                    <td>
+                        @{
+                            //var type = (BuildingUseType)Model.UseType;
+                           // @type.DisplayName();
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Remark)
+                    </td>
+                    <td>
+                        @Model.Remark
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Log.UserName)
+                    </td>
+                    <td>
+                        @Model.Log.UserName
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Log.Time)
+                    </td>
+                    <td>
+                        @Model.Log.Time
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            menuNavActive($('a#building-manage'));
+        })
+    </script>
+}

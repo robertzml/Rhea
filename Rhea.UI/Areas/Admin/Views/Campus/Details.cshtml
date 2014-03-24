@@ -12,76 +12,82 @@
     </div>
 
     <div class="col-lg-10 col-md-10">
-        <h1 class="page-header">@ViewBag.Title</h1>
-    
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th style="width:20%;">
-                        属性
-                    </th>
-                    <th style="width:80%;">
-                        值
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        @Html.DisplayNameFor(model => model.CampusId)
-                    </td>
-                    <td>
-                        @Model.CampusId
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        @Html.DisplayNameFor(model => model.Name)
-                    </td>
-                    <td>
-                        @Model.Name
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        @Html.DisplayNameFor(model => model.ImageUrl)
-                    </td>
-                    <td>
-                        @Model.ImageUrl
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        @Html.DisplayNameFor(model => model.Remark)
-                    </td>
-                    <td>
-                        @Model.Remark
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        @Html.DisplayNameFor(model => model.Status)
-                    </td>
-                    <td>
-                        @Model.Status
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        @Html.DisplayNameFor(model => model.Log.Time)
-                    </td>
-                    <td>
-                        @Model.Log.Time
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">@ViewBag.Title</h3>
+            </div>
 
-        <hr />
-        <p>
-            <a href="@Url.Action("List")" class="btn btn-success" role="button"><span class="glyphicon glyphicon-list"></span> 回到列表</a>
-            <a href="@Url.Action("Edit")" class="btn btn-warning" role="button"><span class="glyphicon glyphicon-edit"></span> 编辑</a>
-        </p>
+            <div class="panel-body">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th style="width:20%;">
+                                属性
+                            </th>
+                            <th style="width:80%;">
+                                值
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.CampusId)
+                            </td>
+                            <td>
+                                @Model.CampusId
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Name)
+                            </td>
+                            <td>
+                                @Model.Name
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.ImageUrl)
+                            </td>
+                            <td>
+                                @Model.ImageUrl
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Remark)
+                            </td>
+                            <td>
+                                @Model.Remark
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Status)
+                            </td>
+                            <td>
+                                @Model.Status
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Log.Time)
+                            </td>
+                            <td>
+                                @Model.Log.Time
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <hr />
+                <p>
+                    <a href="@Url.Action("List")" class="btn btn-success" role="button"><span class="glyphicon glyphicon-list"></span> 回到列表</a>
+                    <a href="@Url.Action("Edit")" class="btn btn-warning" role="button"><span class="glyphicon glyphicon-edit"></span> 编辑</a>
+                </p>
+            </div>    
+        </div>            
     </div>
 </div>
 
