@@ -44,11 +44,20 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// <summary>
         /// 楼宇列表
         /// </summary>
+        /// <param name="buildingGroupId">所属楼群ID</param>
         /// <returns></returns>
-        public ActionResult List()
+        public ActionResult List(int? buildingGroupId)
         {
-            var data = this.buildingBusiness.Get();
-            return View(data);
+            if (buildingGroupId == null)
+            {
+                var data = this.buildingBusiness.Get();
+                return View(data);
+            }
+            else
+            {
+                var data = this.buildingBusiness.GetByBuildingGroup((int)buildingGroupId);
+                return View(data);
+            }
         }
 
         /// <summary>

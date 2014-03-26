@@ -55,6 +55,17 @@ namespace Rhea.Business.Estate
             else
                 return null;
         }
+
+        /// <summary>
+        /// 按楼群获取楼宇
+        /// </summary>
+        /// <param name="buildingGroupId">所属楼群ID</param>
+        /// <returns></returns>
+        public IEnumerable<Building> GetByBuildingGroup(int buildingGroupId)
+        {
+            var data = this.buildingRepository.GetByBuildingGroup(buildingGroupId);
+            return data.Where(r => r.Status != 1);
+        }
         #endregion //Method
     }
 }

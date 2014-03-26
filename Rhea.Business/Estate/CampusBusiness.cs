@@ -50,9 +50,10 @@ namespace Rhea.Business.Estate
         public Campus Get(int id)
         {
             var data = this.campusRepository.Get(id);
-            if (data.Status == 1)
+            if (data.Status != 1)
+                return data;
+            else
                 return null;
-            return data;
         }
 
         /// <summary>

@@ -45,6 +45,7 @@ namespace Rhea.Model.Estate
         /// 所属楼群ID
         /// </summary>
         [Required]
+        [BsonElement("buildingGroupId")]
         [Display(Name = "所属楼群")]
         [UIHint("BuildingGroupDropDownList")]
         public int BuildingGroupId { get; set; }
@@ -115,18 +116,21 @@ namespace Rhea.Model.Estate
         /// <summary>
         /// 状态
         /// </summary>
+        [BsonElement("status")]
         [Display(Name = "状态")]
         public int Status { get; set; }
 
         /// <summary>
         /// 日志属性
         /// </summary>
+        [BsonElement("log")]
         [Display(Name = "日志属性")]
         public Log Log { get; set; }
 
         /// <summary>
         /// 楼层列表
         /// </summary>
+        [BsonElement("floors")]
         public List<Floor> Floors { get; set; }
         #endregion //Property
     }
@@ -139,12 +143,14 @@ namespace Rhea.Model.Estate
         /// <summary>
         /// ID
         /// </summary>
-        public int Id { get; set; }
+        [BsonElement("id")]
+        public int FloorId { get; set; }
 
         /// <summary>
         /// 编号
         /// </summary>
         [Required]
+        [BsonElement("number")]
         [Display(Name = "编号")]
         public int Number { get; set; }
 
@@ -152,12 +158,14 @@ namespace Rhea.Model.Estate
         /// 名称
         /// </summary>
         [Required]
+        [BsonElement("name")]
         [Display(Name = "名称")]
         public string Name { get; set; }
 
         /// <summary>
         /// 建筑面积
         /// </summary>     
+        [BsonElement("buildArea")]
         [Display(Name = "建筑面积")]
         public double? BuildArea { get; set; }
 

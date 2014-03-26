@@ -11,54 +11,67 @@
     </div>
 
     <div class="col-lg-10 col-md-10">
-        <h1 class="page-header">@ViewBag.Title</h1>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">@ViewBag.Title</h3>
+            </div>
 
-        <table id="building-list" class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th>
-                        楼宇ID
-                    </th>
-                    <th>
-                        楼宇名称
-                    </th>
-                    <th>
-                        建筑面积(m<sup>2</sup>)
-                    </th>
-                    <th>
-                        使用面积(m<sup>2</sup>)
-                    </th>
-                    <th>
-                        地上楼层
-                    </th>
-                    <th>
-                        地下楼层
-                    </th>
-                    <th>
-                        操作
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>@item.BuildingId</td>
-                        <td>@item.Name</td>
-                        <td>@item.BuildArea</td>
-                        <td>@item.UsableArea</td>
-                        <td>@item.AboveGroundFloor</td>
-                        <td>@item.UnderGroundFloor</td>
-                        <td>
-                            <a class="btn btn-success btn-sm" href="@Url.Action("Details", new { controller = "Building", id = item.BuildingId, area = "Admin" })"><span class="glyphicon glyphicon-zoom-in"></span> 查看</a>
-                            <a class="btn btn-warning btn-sm" href="@Url.Action("Edit", new { controller = "Building", id = item.BuildingId, area = "Admin" })"><span class="glyphicon glyphicon-edit"></span> 编辑</a>
-                            <a class="btn btn-danger btn-sm" href="@Url.Action("Delete", new { controller = "Building", id = item.BuildingId, area = "Admin" })"><span class="glyphicon glyphicon-remove"></span> 删除</a>
-                            <a class="btn btn-info btn-sm" href="@Url.Action("ListByBuilding", new { controller = "Room", buildingId = item.BuildingId, area = "Admin" })"><i class="icon-th-large icon-white"></i>房间</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+            <div class="panel-body">
+                <table id="building-list" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                楼宇ID
+                            </th>
+                            <th>
+                                楼宇名称
+                            </th>
+                            <th>
+                                建筑面积(m<sup>2</sup>)
+                            </th>
+                            <th>
+                                使用面积(m<sup>2</sup>)
+                            </th>
+                            <th>
+                                地上楼层
+                            </th>
+                            <th>
+                                地下楼层
+                            </th>
+                            <th>
+                                操作
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.BuildingId</td>
+                                <td>@item.Name</td>
+                                <td>@item.BuildArea</td>
+                                <td>@item.UsableArea</td>
+                                <td>@item.AboveGroundFloor</td>
+                                <td>@item.UnderGroundFloor</td>
+                                <td>
+                                    <a class="btn btn-success btn-sm" href="@Url.Action("Details", new { controller = "Building", id = item.BuildingId })"><span class="glyphicon glyphicon-zoom-in"></span> 查看</a>
+                                    <a class="btn btn-warning btn-sm" href="@Url.Action("Edit", new { controller = "Building", id = item.BuildingId })"><span class="glyphicon glyphicon-edit"></span> 编辑</a>
+                                    <a class="btn btn-danger btn-sm" href="@Url.Action("Delete", new { controller = "Building", id = item.BuildingId })"><span class="glyphicon glyphicon-remove"></span> 删除</a>
+                                    <a class="btn btn-info btn-sm" href="@Url.Action("ListByBuilding", new { controller = "Room", buildingId = item.BuildingId })"><span class="glyphicon glyphicon-th-large"></span> 房间</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <hr />
+                <p>
+                    <a class="btn btn-success" href="@Url.Action("List", new { controller = "Building" })"><span class="glyphicon glyphicon-chevron-left"></span>所有楼宇</a>
+                    <a class="btn btn-primary" href="@Url.Action("Create", new { controller = "Building" })"><span class="glyphicon glyphicon-plus"></span>添加楼宇</a>
+                </p>
+            </div>
+        </div>       
+       
     </div>
 </div>
 

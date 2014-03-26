@@ -50,10 +50,10 @@ namespace Rhea.Business.Estate
         public BuildingGroup Get(int id)
         {
             var data = this.buildingGroupRepository.Get(id);
-            if (data.Status == 1)
-                return null;
-            else
+            if (data.Status != 1)
                 return data;
+            else
+                return null;
         }
         #endregion //Method
     }

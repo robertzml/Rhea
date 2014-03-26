@@ -20,6 +20,9 @@
                     <thead>
                         <tr>
                             <th>
+                                @Html.DisplayNameFor(model => model.CampusId)
+                            </th>
+                            <th>
                                 @Html.DisplayNameFor(model => model.Name)
                             </th>
                             <th>
@@ -41,6 +44,9 @@
                         {
                             <tr>
                                 <td>
+                                    @Html.DisplayFor(modelItem => item.CampusId)
+                                </td>
+                                <td>
                                     @Html.DisplayFor(modelItem => item.Name)
                                 </td>
                                 <td>
@@ -54,9 +60,9 @@
                                 </td>
                                 <td>
                                     <a class="btn btn-success btn-sm" href="@Url.Action("Details", new { controller = "Campus", id = item.CampusId })"><span class="glyphicon glyphicon-zoom-in"></span> 查看</a>
-                                    <a class="btn btn-warning btn-sm" href="@Url.Action("Edit", new { controller = "Campus", id = item.CampusId, area = "Admin" })"><span class="glyphicon glyphicon-edit"></span> 编辑</a>
-                                    <a class="btn btn-danger btn-sm" href="@Url.Action("Delete", new { controller = "Campus", id = item.CampusId, area = "Admin" })"><span class="glyphicon glyphicon-remove"></span> 删除</a>
-                                    <a class="btn btn-info btn-sm" href="@Url.Action("List", new { controller = "Building", buildingGroupId = item.CampusId, area = "Admin" })"><span class="glyphicon glyphicon-chevron-right"></span> 楼宇</a>
+                                    <a class="btn btn-warning btn-sm" href="@Url.Action("Edit", new { controller = "Campus", id = item.CampusId })"><span class="glyphicon glyphicon-edit"></span> 编辑</a>
+                                    <a class="btn btn-danger btn-sm" href="@Url.Action("Delete", new { controller = "Campus", id = item.CampusId })"><span class="glyphicon glyphicon-remove"></span> 删除</a>
+                                    <a class="btn btn-info btn-sm" href="@Url.Action("List", new { controller = "BuildingGroup", campusId = item.CampusId })"><span class="glyphicon glyphicon-chevron-right"></span> 楼群</a>
                                 </td>
                             </tr>
                         }

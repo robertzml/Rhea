@@ -25,7 +25,7 @@ namespace Rhea.Model.Estate
         /// ID
         /// </summary>
         [BsonElement("id")]
-        [Display(Name = "ID")]
+        [Display(Name = "校区ID")]
         public int CampusId { get; set; }
 
         /// <summary>
