@@ -24,5 +24,12 @@ namespace Rhea.Data.Estate
         /// <param name="id">房间ID</param>
         /// <returns></returns>
         Room Get(int id);
+
+        /// <summary>
+        /// 根据楼宇获取房间
+        /// </summary>
+        /// <param name="buildingId">所属楼宇ID</param>
+        /// <returns></returns>
+        IEnumerable<Room> GetByBuilding(int buildingId);
     }
 }

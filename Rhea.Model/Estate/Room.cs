@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
 using System.ComponentModel.DataAnnotations;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace Rhea.Model.Estate
 {
@@ -14,13 +15,15 @@ namespace Rhea.Model.Estate
         /// <summary>
         /// 房间ID
         /// </summary>
+        [BsonElement("id")]
         [Display(Name = "房间ID")]
-        public int Id { get; set; }
+        public int RoomId { get; set; }
 
         /// <summary>
         /// 房间名称
         /// </summary>
         [Required]
+        [BsonElement("name")]
         [Display(Name = "房间名称")]
         public string Name { get; set; }
 
@@ -28,6 +31,7 @@ namespace Rhea.Model.Estate
         /// 房间编号
         /// </summary>
         [Required]
+        [BsonElement("number")]
         [Display(Name = "房间编号")]
         public string Number { get; set; }
 
@@ -35,18 +39,21 @@ namespace Rhea.Model.Estate
         /// 楼层
         /// </summary>
         [Required]
+        [BsonElement("floor")]
         [Display(Name = "楼层")]
         public int Floor { get; set; }
 
         /// <summary>
         /// 跨数
         /// </summary>
+        [BsonElement("span")]
         [Display(Name = "跨数")]
         public double? Span { get; set; }
 
         /// <summary>
         /// 朝向
         /// </summary>
+        [BsonElement("orientation")]
         [Display(Name = "朝向")]
         [UIHint("Orientation")]
         public string Orientation { get; set; }
@@ -54,12 +61,14 @@ namespace Rhea.Model.Estate
         /// <summary>
         /// 建筑面积
         /// </summary>        
+        [BsonElement("buildArea")]
         [Display(Name = "建筑面积")]
         public double? BuildArea { get; set; }
 
         /// <summary>
         /// 使用面积
         /// </summary>
+        [BsonElement("usableArea")]
         [Display(Name = "使用面积")]
         public double? UsableArea { get; set; }
 
@@ -72,7 +81,7 @@ namespace Rhea.Model.Estate
         /// <summary>
         /// 功能编码
         /// </summary>
-        [Required]
+        [Required]        
         [Display(Name = "功能编码")]
         [UIHint("FunctionCodeDropDownList")]
         public RoomFunctionCode Function { get; set; }
@@ -81,6 +90,7 @@ namespace Rhea.Model.Estate
         /// 楼宇ID
         /// </summary>
         [Required]
+        [BsonElement("buildingId")]
         [Display(Name = "所属楼宇")]
         [UIHint("BuildingDropDownList")]
         public int BuildingId { get; set; }
@@ -139,6 +149,7 @@ namespace Rhea.Model.Estate
         /// <summary>
         /// 日志属性
         /// </summary>
+        [BsonElement("log")]
         [Display(Name = "日志属性")]
         public Log Log { get; set; }
 
@@ -148,6 +159,7 @@ namespace Rhea.Model.Estate
         /// <remarks>
         /// 0:正常 1:已删除 2:已合并 3:已拆分
         /// </remarks>
+        [BsonElement("status")]
         [Display(Name = "状态")]
         public int Status { get; set; }
 

@@ -188,9 +188,6 @@
     <Content Include="Content\Site.css" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Nav.cshtml" />
     <Content Include="Areas\Admin\Views\Estate\Index.cshtml" />
@@ -202,6 +199,12 @@
     <Content Include="Areas\Admin\Views\BuildingGroup\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Building\List.cshtml" />
     <Content Include="Areas\Admin\Views\Building\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Room\ListByBuilding.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Plugins\tables\dataTables\images\back_disabled.png" />
     <Content Include="Plugins\tables\dataTables\images\back_enabled.png" />
@@ -260,7 +263,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\Room\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

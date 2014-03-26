@@ -43,6 +43,19 @@ namespace Rhea.Business.Estate
         }
 
         /// <summary>
+        /// 获取所有楼群
+        /// </summary>
+        /// <param name="sort">是否按Sort字段排序</param>
+        /// <returns></returns>
+        public IEnumerable<BuildingGroup> Get(bool sort)
+        {
+            if (!sort)
+                return this.Get();
+            else
+                return this.Get().OrderBy(r => r.Sort);
+        }
+
+        /// <summary>
         /// 获取楼群
         /// </summary>
         /// <param name="id">楼群ID</param>

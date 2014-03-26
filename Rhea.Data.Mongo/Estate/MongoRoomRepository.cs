@@ -42,6 +42,17 @@ namespace Rhea.Data.Mongo.Estate
             var query = Query.EQ("id", id);
             return this.repository.Collection.FindOne(query);
         }
+
+        /// <summary>
+        /// 根据楼宇获取房间
+        /// </summary>
+        /// <param name="buildingId">所属楼宇ID</param>
+        /// <returns></returns>
+        public IEnumerable<Room> GetByBuilding(int buildingId)
+        {
+            var query = Query.EQ("buildingId", buildingId);
+            return this.repository.Collection.Find(query);
+        }
         #endregion //Method
     }
 }
