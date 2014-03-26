@@ -44,7 +44,7 @@
                                         @Html.DisplayNameFor(model => model.CampusId)
                                     </td>
                                     <td>
-                                        @*@Model.CampusName()*@
+                                        @Model.CampusName()
                                     </td>
                                 </tr>
                                 <tr>
@@ -125,8 +125,8 @@
                                     </td>
                                     <td>
                                         @{
-    //var type = (BuildingUseType)Model.UseType;
-    //@type.DisplayName();
+                                            var type = (BuildingUseType)Model.UseType;
+                                            @type.DisplayName();
                                         }
                                     </td>
                                 </tr>

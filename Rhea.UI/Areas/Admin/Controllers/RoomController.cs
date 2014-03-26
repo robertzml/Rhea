@@ -63,6 +63,17 @@ namespace Rhea.UI.Areas.Admin.Controllers
             var data = this.roomBusiness.GetByBuilding(buildingId);
             return View(data);
         }
+
+        /// <summary>
+        /// 房间信息
+        /// </summary>
+        /// <param name="id">房间ID</param>
+        /// <returns></returns>
+        public ActionResult Details(int id)
+        {
+            var data = this.roomBusiness.Get(id);
+            return View(data);
+        }
         #endregion //Action
     }
 }

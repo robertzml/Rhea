@@ -62,9 +62,9 @@
                                 <td></td>
                                 <td></td>
                                 <td>
-                                    <a class="btn btn-success btn-sm" href="@Url.Action("Details", new { controller = "Room", id = item.RoomId })"><i class="icon-zoom-in icon-white"></i>查看</a>
-                                    <a class="btn btn-warning btn-sm" href="@Url.Action("Edit", new { controller = "Room", id = item.RoomId })"><i class="icon-edit icon-white"></i>编辑</a>
-                                    <a class="btn btn-danger btn-sm" href="@Url.Action("Delete", new { controller = "Room", id = item.RoomId })"><i class="icon-remove icon-white"></i>删除</a>
+                                    <a class="btn btn-success btn-sm" href="@Url.Action("Details", new { controller = "Room", id = item.RoomId })"><span class="glyphicon glyphicon-zoom-in"></span> 查看</a>
+                                    <a class="btn btn-warning btn-sm" href="@Url.Action("Edit", new { controller = "Room", id = item.RoomId })"><span class="glyphicon glyphicon-edit"></span> 编辑</a>
+                                    <a class="btn btn-danger btn-sm" href="@Url.Action("Delete", new { controller = "Room", id = item.RoomId })"><span class="glyphicon glyphicon-remove"></span> 删除</a>
                                 </td>
                             </tr>
                         }
@@ -73,8 +73,8 @@
 
                 <hr />
                 <p>
-                    <a class="btn btn-success" href="@Url.Action("Details", new { controller = "Building", id = ViewBag.BuildingId, area = "Admin" })"><i class="icon-chevron-left icon-white"></i>楼宇</a>
-                    <a class="btn btn-primary" href="@Url.Action("Create", new { controller = "Room", area = "Admin" })"><i class="icon-plus icon-white"></i>添加房间</a>
+                    <a class="btn btn-success" href="@Url.Action("Details", new { controller = "Building", id = ViewBag.BuildingId, area = "Admin" })"><span class="glyphicon glyphicon-chevron-left"></span>楼宇</a>
+                    <a class="btn btn-primary" href="@Url.Action("Create", new { controller = "Room", area = "Admin" })"><span class="glyphicon glyphicon-plus"></span>添加房间</a>
                 </p>
             </div>
         </div>

@@ -205,6 +205,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Areas\Admin\Views\Room\Details.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Plugins\tables\dataTables\images\back_disabled.png" />
     <Content Include="Plugins\tables\dataTables\images\back_enabled.png" />
@@ -272,6 +273,10 @@
     <ProjectReference Include="..\Rhea.Business\Rhea.Business.csproj">
       <Project>{8a898100-b360-45ea-bc87-fac1322c5221}</Project>
       <Name>Rhea.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rhea.Common\Rhea.Common.csproj">
+      <Project>{e366501d-8652-4c16-b19a-201a45da0780}</Project>
+      <Name>Rhea.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Rhea.Model\Rhea.Model.csproj">
       <Project>{8fdb75f7-8be8-4934-a8ed-6e39bc2854bc}</Project>

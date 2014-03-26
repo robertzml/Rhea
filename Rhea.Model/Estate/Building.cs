@@ -38,6 +38,7 @@ namespace Rhea.Model.Estate
         /// <summary>
         /// 图片地址
         /// </summary>
+        [BsonElement("imageUrl")]
         [Display(Name = "图片")]
         public string ImageUrl { get; set; }
 
@@ -89,6 +90,7 @@ namespace Rhea.Model.Estate
         /// 1:学院楼宇,2:教学楼宇,3:行政办公,4:宿舍楼宇,5:辅助楼宇
         /// </remarks>
         [Required]
+        [BsonElement("useType")]
         [UIHint("BuildingUseType")]
         [Display(Name = "使用类型")]
         public int UseType { get; set; }
@@ -96,12 +98,14 @@ namespace Rhea.Model.Estate
         /// <summary>
         /// 局部平面图
         /// </summary>
+        [BsonElement("partMapUrl")]
         [Display(Name = "局部导航")]
         public string PartMapUrl { get; set; }
 
         /// <summary>
         /// 备注
         /// </summary>
+        [BsonElement("remark")]
         [StringLength(1000)]
         [DataType(DataType.MultilineText)]
         [Display(Name = "备注")]
@@ -110,6 +114,7 @@ namespace Rhea.Model.Estate
         /// <summary>
         /// 排序
         /// </summary>
+        [BsonElement("sort")]
         [Display(Name = "排序")]
         public int Sort { get; set; }
 
@@ -172,18 +177,21 @@ namespace Rhea.Model.Estate
         /// <summary>
         /// 使用面积
         /// </summary>
+        [BsonElement("usableArea")]
         [Display(Name = "使用面积")]
         public double? UsableArea { get; set; }
 
         /// <summary>
         /// 楼层平面图
         /// </summary>
+        [BsonElement("imageUrl")]
         [Display(Name = "楼层平面图")]
         public string ImageUrl { get; set; }
 
         /// <summary>
         /// 备注
         /// </summary>
+        [BsonElement("remark")]
         [DataType(DataType.MultilineText)]
         [Display(Name = "备注")]
         public string Remark { get; set; }
@@ -191,6 +199,7 @@ namespace Rhea.Model.Estate
         /// <summary>
         /// 状态
         /// </summary>
+        [BsonElement("status")]
         [Display(Name = "状态")]
         public int Status { get; set; }
     }
