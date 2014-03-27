@@ -42,7 +42,8 @@ namespace Rhea.Business
                         { "buildingId", new BsonDocument {
                             { "$in", new BsonArray(buildingIds)  }
                         }},
-                        { "function.firstCode", firstCode }
+                        { "function.firstCode", firstCode },
+                        { "status", 0 }
                     }}
                 },
                 new BsonDocument {
@@ -149,7 +150,8 @@ namespace Rhea.Business
                 new BsonDocument { 
                     { "$match", new BsonDocument {
                         { matchId, id },
-                        { "function.firstCode", firstCode }
+                        { "function.firstCode", firstCode },
+                        { "status", 0 }
                     }}
                 },
                 new BsonDocument {

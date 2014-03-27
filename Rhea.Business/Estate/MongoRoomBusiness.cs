@@ -520,7 +520,12 @@ namespace Rhea.Business.Estate
         /// <returns></returns>
         public double TotalArea()
         {
-            BsonDocument[] pipeline = {              
+            BsonDocument[] pipeline = {   
+                new BsonDocument {
+                    { "$match", new BsonDocument {
+                        { "status", 0 }
+                    }}
+                },           
                 new BsonDocument {
                     { "$group", new BsonDocument {
                         { "_id", "1" },
@@ -550,7 +555,8 @@ namespace Rhea.Business.Estate
             BsonDocument[] pipeline = {
                 new BsonDocument {
                     { "$match", new BsonDocument {
-                        { "departmentId", departmentId }
+                        { "departmentId", departmentId },
+                        { "status", 0 }
                     }}
                 },
                 new BsonDocument {
@@ -584,7 +590,8 @@ namespace Rhea.Business.Estate
                 new BsonDocument {
                     { "$match", new BsonDocument {
                         { "function.firstCode", firstCode },
-                        { "function.secondCode", secondCode }
+                        { "function.secondCode", secondCode },
+                        { "status", 0 }
                     }}
                 },
                 new BsonDocument {

@@ -17,13 +17,13 @@
             <thead>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.Id)
-                    </th>
-                    <th>
                         @Html.DisplayNameFor(model => model.UserId)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.UserName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.UserGroupName)
@@ -43,9 +43,9 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@item.Id</td>
                     <td>@item.UserId</td>
                     <td>@item.UserName</td>
+                    <td>@item.Name</td>
                     <td>@item.UserGroupName</td>
                     <td>@item.LastLoginTime</td>
                     <td>

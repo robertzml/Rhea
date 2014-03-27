@@ -329,13 +329,15 @@ namespace Rhea.Business.Account
                 if (string.IsNullOrEmpty(data.Password))
                 {
                     update = Update.Set("userGroupId", data.UserGroupId)
-                        .Set("departmentId", (BsonValue)data.DepartmentId);
+                        .Set("departmentId", (BsonValue)data.DepartmentId)
+                        .Set("name", data.Name);
                 }
                 else
                 {
                     update = Update.Set("userGroupId", data.UserGroupId)
                         .Set("password", Hasher.SHA1Encrypt(data.Password))
-                        .Set("departmentId", (BsonValue)data.DepartmentId);
+                        .Set("departmentId", (BsonValue)data.DepartmentId)
+                        .Set("name", data.Name);
                 }
 
                 WriteConcernResult result = this.context.Update(RheaCollection.User, query, update);

@@ -349,7 +349,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirm(int id)
-        {
+        {           
             //backup
             bool backok = this.roomBusiness.Backup(id);
             if (!backok)
@@ -369,6 +369,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
             //log
             var user = GetUser();
             var room = this.roomBusiness.Get(id);
+            int buildingId = room.BuildingId;
             Log log = new Log
             {
                 Title = "删除房间",
@@ -387,7 +388,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
             }
 
             TempData["Message"] = "删除成功";
-            return RedirectToAction("Index", "Room", new { area = "Admin" });
+            return RedirectToAction("Details", "Building", new { area = "Admin", id = buildingId });
         }
 
         /// <summary>
