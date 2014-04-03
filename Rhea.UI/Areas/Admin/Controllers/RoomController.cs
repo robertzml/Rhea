@@ -203,6 +203,21 @@ namespace Rhea.UI.Areas.Admin.Controllers
         }
 
         /// <summary>
+        /// 房间列表
+        /// </summary>
+        /// <param name="buildingGroupId">所属楼群ID</param>
+        /// <returns></returns>
+        public ActionResult ListByBuildingGroup(int buildingGroupId)
+        {
+            IBuildingGroupBusiness buildingGroupBusiness = new MongoBuildingGroupBusiness();
+            ViewBag.BuildingGroupName = buildingGroupBusiness.GetName(buildingGroupId);
+            ViewBag.BuildingGroupId = buildingGroupId;
+
+            var data = this.roomBusiness.GetListByBuildingGroup(buildingGroupId);
+            return View(data);
+        }
+
+        /// <summary>
         /// 房间添加
         /// </summary>
         /// <returns></returns>

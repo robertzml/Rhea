@@ -31,7 +31,7 @@
                     <th>
                         排序
                     </th>
-                    <th style="width:280px;">
+                    <th style="width:330px;">
                         操作
                     </th>
                 </tr>
@@ -51,6 +51,7 @@
                         <a class="btn btn-warning btn-small" href="@Url.Action("Edit", new { controller = "BuildingGroup", id = item.Id, area = "Admin" })"><i class="icon-edit icon-white"></i>编辑</a> 
                         <a class="btn btn-danger btn-small" href="@Url.Action("Delete", new { controller = "BuildingGroup", id = item.Id, area = "Admin" })"><i class="icon-remove icon-white"></i>删除</a>
                         <a class="btn btn-info btn-small" href="@Url.Action("List", new { controller = "Building", buildingGroupId = item.Id, area = "Admin" })"><i class="icon-chevron-right icon-white"></i>楼宇</a>
+                        <a class="btn btn-info btn-small" href="@Url.Action("ListByBuildingGroup", new { controller = "Room", buildingGroupId = item.Id, area = "Admin" })"><i class="icon-th-large icon-white"></i>房间</a>
                     </td>
                 </tr>
             }

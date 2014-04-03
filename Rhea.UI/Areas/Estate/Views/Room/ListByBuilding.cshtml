@@ -35,6 +35,9 @@
                     <th>
                         功能
                     </th>
+                    <th>
+                        使用面积(m<sup>2</sup>)
+                    </th>
                     <th style="width:80px;">
                         操作
                     </th>
@@ -59,6 +62,9 @@
                     <td>
                         <span style="display:none;">@item.Function.ClassifyName</span>
                         @item.Function.Property
+                    </td>
+                    <td>
+                        @item.UsableArea
                     </td>
                     <td>
                          <div class="btn-group">
@@ -117,7 +123,8 @@
         });
 
         var dom = $('table#room-list');
-        var oTable = initDataTable(dom);        
+        var oTable = initDataTable(dom);
+        oTable.fnSort([[0, 'asc']]);
 
         setBoxAction();
 

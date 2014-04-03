@@ -89,11 +89,6 @@
                     shared: true
                 },
                 series: [{
-                    name: nameA,
-                    data: [],
-                    type: 'column',
-                    color: colors[2]
-                }, {
                     name: nameB,
                     data: [],
                     type: 'column',
@@ -115,10 +110,9 @@
                 option.xAxis.categories.push(item.BuildingName);
             });
 
-            $.each(data, function (i, item) {
-                option.series[0].data.push({ name: item.BuildingName, y: parseFloat(item.BuildArea) });
-                option.series[1].data.push({ name: item.BuildingName, y: parseFloat(item.UsableArea) });
-                option.series[2].data.push({ name: item.BuildingName, y: parseInt(item.RoomCount) });
+            $.each(data, function (i, item) {                
+                option.series[0].data.push({ name: item.BuildingName, y: parseFloat(item.UsableArea) });
+                option.series[1].data.push({ name: item.BuildingName, y: parseInt(item.RoomCount) });
             });
 
             var chart1 = new Highcharts.Chart(option);

@@ -16,6 +16,10 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -1062,6 +1066,7 @@
     <Content Include="Areas\Admin\Views\Advance\MapPointCreate.cshtml" />
     <Content Include="Areas\Admin\Views\Advance\MapPointDetails.cshtml" />
     <Content Include="Areas\Admin\Views\Advance\MapPointEdit.cshtml" />
+    <Content Include="Areas\Admin\Views\Room\ListByBuildingGroup.cshtml" />
     <None Include="Content\fonts\icomoon.eot" />
     <None Include="Content\fonts\icomoon.ttf" />
     <None Include="Content\fonts\icomoon.woff" />
