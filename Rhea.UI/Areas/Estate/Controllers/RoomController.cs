@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Routing;
+﻿using Rhea.Business;
 using Rhea.Business.Account;
 using Rhea.Business.Estate;
 using Rhea.Business.Personnel;
@@ -12,6 +7,12 @@ using Rhea.Model;
 using Rhea.Model.Account;
 using Rhea.Model.Estate;
 using Rhea.UI.Filters;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace Rhea.UI.Areas.Estate.Controllers
 {
@@ -163,7 +164,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
             var data = this.roomBusiness.Get(id);
 
             var drooms = this.roomBusiness.GetListByDepartment(data.DepartmentId);
-            ViewBag.DepartmentArea = Math.Round(Convert.ToDouble(drooms.Sum(r => r.UsableArea)), 2);
+            ViewBag.DepartmentArea = Math.Round(Convert.ToDouble(drooms.Sum(r => r.UsableArea)), RheaConstant.AreaDecimalDigits);
 
             return View(data);
         }

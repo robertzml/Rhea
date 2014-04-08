@@ -407,7 +407,8 @@ namespace Rhea.Business.Estate
                     { "$match", new BsonDocument {
                         { "buildingId", new BsonDocument { 
                             { "$in", bids }
-                        }}
+                        }},
+                        { "status", 0 }
                     }}
                 },
                 new BsonDocument {

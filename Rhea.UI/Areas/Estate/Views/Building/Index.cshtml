@@ -14,7 +14,6 @@
     <div class="section-nav">
         <ul id="secTab" class="nav nav-tabs pattern">
             <li class="active"><a href="#tab-fun" data-toggle="tab">常 规</a></li>
-            <li><a href="#tab-room" data-toggle="tab">楼 层</a></li>
             <li><a href="#tab-stat" data-toggle="tab">统 计</a></li>
         </ul>
 
@@ -32,37 +31,22 @@
                 </div>
                 <hr />
                 <div class="secbar-widget">
-                    <h5 class="title">
-                        当前</h5>
-                    <div class="content">
-                        <div class="rightnow">
-                            <ul class="unstyled">
-                                <li><span class="number">@Model.Floors.Count</span><span class="icon16 icomoon-icon-clubs"></span>楼层</li>
-                                <li><span class="number">@Model.RoomCount</span><span class="icon16 icomoon-icon-home-9"></span>房间</li>
-                                <li><span class="number">@Model.BuildArea</span><span class="icon16 icomoon-icon-copy"></span>建筑面积</li>
-                                <li><span class="number">@Model.UsableArea</span><span class="icon16 icomoon-icon-copy-2"></span>使用面积</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- End .sidenav-widget -->
-            </div>
-            <div class="tab-pane fade" id="tab-room">
-                <div class="secbar-widget">
                     <h4 class="title">
-                        楼层列表</h4>
+                        楼层列表
+                    </h4>
                     <div class="content">
                         <ul id="floor-list" class="nav nav-pills nav-stacked">
-                        @foreach (var item in Model.Floors)
-                        {
-                            <li><a href="#" ref="@item.Number">@item.Name</a></li>
-                        }
+                            @foreach (var item in Model.Floors)
+                            {
+                                <li><a href="#" ref="@item.Number">@item.Name</a></li>
+                            }
                         </ul>
                     </div>
                 </div>
                 <div class="secbar-widget" id="sec-room-info" style="display:none;">
                     <h4 class="title">
-                        房间信息</h4>
+                        房间信息
+                    </h4>
                     <div class="content">
                         <div class="btn-group" data-toggle="buttons-radio">
                             <button id="plan-view" class="btn btn-primary active">平面图</button>
@@ -71,6 +55,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- End .sidenav-widget -->
             </div>
             <div class="tab-pane fade" id="tab-stat">
                 <div class="centerContent">
@@ -86,6 +71,21 @@
                             </a>
                         </li>
                     </ul>
+                </div>
+                <div class="secbar-widget">
+                    <h5 class="title">
+                        当前
+                    </h5>
+                    <div class="content">
+                        <div class="rightnow">
+                            <ul class="unstyled">
+                                <li><span class="number">@Model.Floors.Count</span><span class="icon16 icomoon-icon-clubs"></span>楼层</li>
+                                <li><span class="number">@Model.RoomCount</span><span class="icon16 icomoon-icon-home-9"></span>房间</li>
+                                <li><span class="number">@Model.BuildArea</span><span class="icon16 icomoon-icon-copy"></span>建筑面积</li>
+                                <li><span class="number">@Model.UsableArea</span><span class="icon16 icomoon-icon-copy-2"></span>使用面积</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

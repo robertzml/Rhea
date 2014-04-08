@@ -15,6 +15,7 @@
                 <span class="label label-info">房间数量</span> <span id="floor-room-count">@Model.RoomCount</span>
             </div>
             <form class="box-form right" action="">
+                <button id="svg-print" class="btn btn-primary btn-mini" type="submit">打印</button>
                 <button id="zoom-in" class="btn btn-success btn-mini" type="submit">放大</button>
                 <button id="zoom-out" class="btn btn-success btn-mini" type="submit">缩小</button>
             </form>
@@ -33,7 +34,7 @@
     </div>
 </div>
 
-<div class="row-fluid">
+<div class="row-fluid" id="select-room-info">
     <div class="span6">
         <div id="room-summary"></div>
     </div>
@@ -43,6 +44,7 @@
     $(function () {
         var svg;
         var zoomRate = 1.1;
+        var selectroom = [];
 
         loadSvg('@Model.SvgPath');
 
@@ -62,11 +64,29 @@
                     svg = $(this).children('svg');
 
                     $("svg g[id^='g']").click(function () {
-                        var id = $(this).attr('id').toString().substring(1);                        
+                        var id = $(this).attr('id').toString().substring(1);
                         $("svg *[class='room-select']").attr('class', 'fil0');
                         $(this).children('[ref=bound]').attr('class', 'room-select');
                         $('#room-summary').load('/Estate/Room/Summary', { id: id });
                     });
+
+                    /*$("svg g[id^='g']").click(function () {
+                        var id = $(this).attr('id').toString().substring(1);                        
+                        //$(this).children('[ref=bound]').attr('class', 'room-select');
+                        $(this).children('[ref=bound]').toggle(
+                             function () {
+                                 $(this).attr('class', 'room-select');
+                             },
+                             function () {
+                                 $(this).attr('class', 'fil0');
+                             }
+                            );
+
+                        var tdoc = $('<div class="span4"></div>');
+                        $(tdoc).load('/Estate/Room/Summary', { id: id });
+
+                        $('#select-room-info').append(tdoc);
+                    });*/
                 });
             }
             else {
@@ -100,5 +120,29 @@
             svg.attr('width', width);
             svg.attr('height', height);
         }
+
+        function myPrint(obj) {
+            //打开一个新窗口newWindow
+            var newWindow = window.open("打印窗口", "_blank");
+            //要打印的div的内容
+            var docStr = obj.innerHTML;
+            //打印内容写入newWindow文档
+            newWindow.document.write(docStr);
+            //关闭文档
+            newWindow.document.close();
+            //调用打印机
+            //newWindow.print();
+            //关闭newWindow页面
+            //newWindow.close();
+        }
+
+        $('#svg-print').click(function () {
+            var dom = $('div#svg');
+            
+           // alert(dom[0].innerHTML);
+            myPrint(dom[0]);
+            return false;
+        });
+
     });
 </script>

@@ -14,7 +14,6 @@
     <div class="section-nav">
         <ul id="secTab" class="nav nav-tabs pattern">
             <li class="active"><a href="#tab-fun" data-toggle="tab">常 规</a></li>
-            <li><a href="#tab-room" data-toggle="tab">楼 宇</a></li>
             <li><a href="#tab-stat" data-toggle="tab">统 计</a></li>
         </ul>
 
@@ -25,6 +24,57 @@
                         <button class="btn btn-block btn-primary" id="building-group-intro"><span class="icon16 icomoon-icon-cog white"></span> 简介</button>
                         <button class="btn btn-block btn-info" id="building-group-details"><span class="icon16 icomoon-icon-info-2 white"></span> 详细</button>
                     </div>
+                </div>
+                <hr />
+                <div class="secbar-widget">
+                    <h4 class="title">
+                        楼宇列表
+                    </h4>
+                    <div class="content">
+                        <ul id="building-list" class="nav nav-pills nav-stacked">
+                            @foreach (var item in Model.Buildings)
+                            {
+                                <li><a href="#" ref="@item.Id">@item.Name</a></li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <div class="secbar-widget">
+                    <h5 class="title">
+                        当前
+                    </h5>
+                    <div class="content">
+                        <div class="rightnow">
+                            <ul class="unstyled">
+                                <li><span class="number">@Model.Buildings.Count</span><span class="icon16 icomoon-icon-clubs"></span>楼宇</li>
+                                <li><span class="number">@Model.RoomCount</span><span class="icon16 icomoon-icon-home-9"></span>房间</li>
+                                <li><span class="number">@Model.BuildArea</span><span class="icon16 icomoon-icon-copy"></span>建筑面积</li>
+                                <li><span class="number">@Model.UsableArea</span><span class="icon16 icomoon-icon-copy-2"></span>使用面积</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- End .sidenav-widget -->
+            </div>
+            <div class="tab-pane fade" id="tab-stat">
+                <div class="centerContent">
+                    <ul class="bigBtnIcon">
+                        <li>
+                            <a href="#" id="room-list" title="房间列表" class="tip">
+                                <span class="icon icomoon-icon-list-view"></span><span class="txt">房间列表</span> 
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" id="building-group-classify" title="分类统计" class="tip">
+                                <span class="icon icomoon-icon-drawer-2"></span><span class="txt">分类统计</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" id="building-group-statistic" title="分楼宇统计" class="tip">
+                                <span class="icon icomoon-icon-support"></span><span class="txt">分楼宇统计</span>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
                 <hr />
                 <div class="secbar-widget">
@@ -52,56 +102,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="secbar-widget">
-                    <h5 class="title">
-                        当前</h5>
-                    <div class="content">
-                        <div class="rightnow">
-                            <ul class="unstyled">
-                                <li><span class="number">@Model.Buildings.Count</span><span class="icon16 icomoon-icon-clubs"></span>楼宇</li>
-                                <li><span class="number">@Model.RoomCount</span><span class="icon16 icomoon-icon-home-9"></span>房间</li>
-                                <li><span class="number">@Model.BuildArea</span><span class="icon16 icomoon-icon-copy"></span>建筑面积</li>
-                                <li><span class="number">@Model.UsableArea</span><span class="icon16 icomoon-icon-copy-2"></span>使用面积</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- End .sidenav-widget -->
-            </div>
-            <div class="tab-pane fade" id="tab-room">
-                <div class="secbar-widget">
-                    <h4 class="title">
-                        楼宇列表</h4>
-                    <div class="content">
-                        <ul id="building-list" class="nav nav-pills nav-stacked">
-                        @foreach (var item in Model.Buildings)
-                        {
-                            <li><a href="#" ref="@item.Id">@item.Name</a></li>
-                        }
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="tab-pane fade" id="tab-stat">
-                <div class="centerContent">
-                    <ul class="bigBtnIcon">
-                        <li>
-                            <a href="#" id="room-list" title="房间列表" class="tip">
-                                <span class="icon icomoon-icon-list-view"></span><span class="txt">房间列表</span> 
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" id="building-group-classify" title="分类统计" class="tip">
-                                <span class="icon icomoon-icon-drawer-2"></span><span class="txt">分类统计</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" id="building-group-statistic" title="分楼宇统计" class="tip">
-                                <span class="icon icomoon-icon-support"></span><span class="txt">分楼宇统计</span>
-                            </a>
-                        </li>
-                    </ul>
                 </div>
             </div>
         </div>

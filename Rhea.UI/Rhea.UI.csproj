@@ -1096,6 +1096,7 @@
     <Content Include="Views\Statistic\BuildingGroupFilter.cshtml" />
     <Content Include="Views\Home\Front.cshtml" />
     <Content Include="403.html" />
+    <None Include="Properties\PublishProfiles\配置文件1.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
