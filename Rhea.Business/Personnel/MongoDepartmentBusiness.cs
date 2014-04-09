@@ -61,6 +61,7 @@ namespace Rhea.Business.Personnel
             department.Description = doc.GetValue("description", "").AsString;
             department.ImageUrl = doc.GetValue("imageUrl", "").AsString;
             department.LogoUrl = doc.GetValue("logoUrl", "").AsString;
+            department.PartMapUrl = doc.GetValue("partMapUrl", "").AsString;
             department.ShortName = doc.GetValue("shortName", "").AsString;
             department.Status = doc.GetValue("status", 0).AsInt32;
 
@@ -262,6 +263,7 @@ namespace Rhea.Business.Personnel
                 { "shortName", data.ShortName ?? "" },
                 { "imageUrl", data.ImageUrl ?? "" },
                 { "logoUrl", data.LogoUrl ?? "" },
+                { "partMapUrl", data.PartMapUrl ?? "" },
                 { "type", data.Type },           
                 { "description", data.Description ?? "" },
                 { "status", 0 }
@@ -288,7 +290,8 @@ namespace Rhea.Business.Personnel
                 .Set("type", data.Type)
                 .Set("description", data.Description ?? "")
                 .Set("imageUrl", data.ImageUrl ?? "")
-                .Set("logoUrl", data.LogoUrl ?? "");
+                .Set("logoUrl", data.LogoUrl ?? "")
+                .Set("partMapUrl", data.PartMapUrl ?? "");
 
             WriteConcernResult result = this.context.Update(PersonnelCollection.Department, query, update);
 

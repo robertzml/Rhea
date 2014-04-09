@@ -8,7 +8,7 @@
 <div class="box">
     <div class="box-header well" data-original-title>
         <h2>
-            <i class="icon-tasks"></i>部门信息</h2>   
+            <i class="icon-tasks"></i>部门信息</h2>
     </div>
 
     <div class="box-content"> 
@@ -16,7 +16,7 @@
             <div class="span12">
 
             @using (Html.BeginForm())
-            {                
+            {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
 
@@ -90,6 +90,15 @@
                                         <td>
                                             @Html.EditorFor(model => model.LogoUrl)
                                             @Html.ValidationMessageFor(model => model.LogoUrl)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.PartMapUrl)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.PartMapUrl)
+                                            @Html.ValidationMessageFor(model => model.PartMapUrl)
                                         </td>
                                     </tr>
                                     <tr>
@@ -422,8 +431,8 @@
 
                     <div class="form-actions">
                         <button type="submit" class="btn btn-primary">保存</button>
-                        <a class="btn" href="@Url.Action("Details", new { controller = "Department", id = Model.Id, area = "Admin" })">取消</a> 
-                        <a class="btn" href="@Url.Action("List", new { controller = "Department", area = "Admin" })">回到列表</a> 
+                        <a class="btn" href="@Url.Action("Details", new { controller = "Department", id = Model.Id, area = "Admin" })">取消</a>
+                        <a class="btn" href="@Url.Action("List", new { controller = "Department", area = "Admin" })">回到列表</a>
                     </div>
 
                 </fieldset>

@@ -51,6 +51,12 @@ namespace Rhea.Model.Personnel
         public string LogoUrl { get; set; }
 
         /// <summary>
+        /// 部门局部地图
+        /// </summary>
+        [Display(Name = "局部地图")]
+        public string PartMapUrl { get; set; }
+
+        /// <summary>
         /// 介绍
         /// </summary>
         [StringLength(500)]
