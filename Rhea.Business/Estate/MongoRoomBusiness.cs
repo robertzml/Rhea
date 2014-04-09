@@ -456,6 +456,16 @@ namespace Rhea.Business.Estate
         }
 
         /// <summary>
+        /// 获取房间使用面积
+        /// </summary>
+        /// <param name="id">房间ID</param>
+        /// <returns></returns>
+        public double GetUsableArea(int id)
+        {
+            return 0;
+        }
+
+        /// <summary>
         /// 楼群内房间数量
         /// </summary>
         /// <param name="buildingGroupId">楼群ID</param>
