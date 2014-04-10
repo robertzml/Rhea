@@ -266,6 +266,17 @@ namespace Rhea.UI.Areas.Estate.Controllers
             data = data.Where(r => r.FirstCode == firstCode).ToList();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
+
+        /// <summary>
+        /// 获取房间使用面积
+        /// </summary>
+        /// <param name="id">房间ID</param>
+        /// <returns></returns>
+        public JsonResult GetUsableArea(int id)
+        {
+            double area = this.roomBusiness.GetUsableArea(id);
+            return Json(area, JsonRequestBehavior.AllowGet);
+        }
         #endregion //Json
     }
 }

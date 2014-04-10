@@ -9,6 +9,11 @@
     g rect, g path, g text {
         cursor: pointer;
     }
+
+    #select-room-info > div:nth-child(3n+1) {
+        margin-left: 0;
+        clear:left;
+    }
 </style>
 
 <div class="box">
@@ -17,8 +22,8 @@
             <span class="left">@Model.Name - 平面图</span>
             <div id="floor-info">
                 <span class="label label-info">使用面积</span> <span id="floor-usable-area">@Model.UsableArea m<sup>2</sup></span>
-                <span class="label label-info">选择面积</span> <span id="floor-select-area">0 m<sup>2</sup></span>
                 <span class="label label-info">房间数量</span> <span id="floor-room-count">@Model.RoomCount</span>
+                <span class="label label-info">选择面积</span> <span id="floor-select-area">0 m<sup>2</sup></span>
             </div>
             <form class="box-form right" action="">
                 <button id="svg-print" class="btn btn-primary btn-mini" type="submit">打印</button>
@@ -46,8 +51,7 @@
 <script type="text/javascript">
     $(function () {
         var svg;
-        var zoomRate = 1.1;
-        var selectroom = [];
+        var zoomRate = 1.1;      
         var selectarea = 0.0;
 
         loadSvg('@Model.SvgPath');
@@ -72,7 +76,11 @@
                             var id = $(this).attr('id').toString().substring(1);
                             $(this).children('[ref=bound]').attr('class', 'fil1');
 
-                            selectroom.push(id);
+                            $.getJSON('/Estate/Room/GetUsableArea', { id: id }, function (json) {
+                                selectarea = selectarea + parseFloat(json);
+                                var a = selectarea.toFixed(2);
+                                $('#floor-select-area').html(a + 'm<sup>2</sup>');
+                            });
 
                             var tdoc = $('<div id="s' + id +'" class="span4"></div>');
                             $(tdoc).load('/Estate/Room/Summary', { id: id });                           
@@ -82,6 +90,14 @@
                             var id = $(this).attr('id').toString().substring(1);
                             $(this).children('[ref=bound]').attr('class', 'fil0');                            
                          
+                            $.getJSON('/Estate/Room/GetUsableArea', { id: id }, function (json) {
+                                selectarea = selectarea - parseFloat(json);
+                                var a = selectarea.toFixed(2);
+                                if (a == 0)
+                                    a = 0;
+                                $('#floor-select-area').html(a + 'm<sup>2</sup>');
+                            });
+
                             var tdoc = $('div#s' + id);
                             tdoc.remove();
                         }
@@ -138,13 +154,13 @@
 
         $('#svg-print').click(function () {
             var dom = $('div#svg');
-            $("svg g[id^='g']").children('[ref=bound][class=fil0]').attr('class', 'fil3');
-            $("svg g[id^='g']").children('[ref=bound][class=fil1]').attr('class', 'fil2');
+            $("svg g[id^='g']").children('[ref=bound][class=fil0]').attr('class', 'fil10');
+            $("svg g[id^='g']").children('[ref=bound][class=fil1]').attr('class', 'fil4');
 
             myPrint(dom[0]);
 
-            $("svg g[id^='g']").children('[ref=bound][class=fil2]').attr('class', 'fil1');
-            $("svg g[id^='g']").children('[ref=bound][class=fil3]').attr('class', 'fil0');
+            $("svg g[id^='g']").children('[ref=bound][class=fil4]').attr('class', 'fil1');
+            $("svg g[id^='g']").children('[ref=bound][class=fil10]').attr('class', 'fil0');
             return false;
         });
 

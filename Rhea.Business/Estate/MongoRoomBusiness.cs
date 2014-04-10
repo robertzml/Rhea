@@ -462,7 +462,13 @@ namespace Rhea.Business.Estate
         /// <returns></returns>
         public double GetUsableArea(int id)
         {
-            return 0;
+            BsonDocument doc = this.context.FindOne(EstateCollection.Room, "id", id);
+
+            if (doc == null)
+                return 0.0;
+
+            double area = doc.GetValue("usableArea", 0.0).AsDouble;
+            return area;
         }
 
         /// <summary>
