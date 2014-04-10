@@ -120,9 +120,9 @@
                     }
                     </ul>
                 </li>
-                <li><a href="#"><span class="icon16 icomoon-icon-hammer"></span>基础设施<span class="notification blue">@Model.BuildingGroups.Where(r => r.UseType == 6).Count()</span></a>
+                <li><a href="#"><span class="icon16 icomoon-icon-trophy"></span>室外运动场<span class="notification blue">@Model.BuildingGroups.Where(r => r.UseType == 7).Count()</span></a>
                     <ul class="sub scroll">
-                    @foreach (var bg in Model.BuildingGroups.Where(r => r.UseType == 6))
+                    @foreach (var bg in Model.BuildingGroups.Where(r => r.UseType == 7))
                     {
                         <li><a href="#" title="@bg.Name" ref="@bg.Id"><span class="building-group-index icon16 icomoon-icon-file"></span>@bg.Name</a>
                             <ul class="sub">

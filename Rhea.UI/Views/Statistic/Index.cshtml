@@ -47,16 +47,18 @@
                     <ul class="sub">
                         <li><a href="#" id="building-group-usable-area-compare"><span class="icon16 icomoon-icon-cube"></span>楼群使用面积比较</a></li>
                         <li><a href="#" id="building-group-build-area-compare"><span class="icon16 icomoon-icon-cube-2"></span>楼群建筑面积比较</a></li>
+                        <li><a href="#" id="building-group-space-rate-compare"><span class="icon16 icomoon-icon-home-4"></span>楼群得房率比较</a></li>
+                        <li><a href="#" id="total-build-area"><span class="icon16 icomoon-icon-home-8"></span>总建筑面积</a></li>
                     </ul>
                 </li>
                 <li><a href="#"><span class="icon16 icomoon-icon-book"></span>学院房屋数据</a>
                     <ul class="sub">
                         <li><a href="#" id="department-usable-area-compare"><span class="icon16 icomoon-icon-stats-up "></span>学院使用面积比较</a></li>
-                        <li><a href="#" id="department-build-area-compare"><span class="icon16 icomoon-icon-stairs"></span>学院建筑面积比较</a></li>
                         <li><a href="#" id="department-building-area-statistic"><span class="icon16 icomoon-icon-ladder"></span>学院楼宇用房统计</a></li>
                         <li><a href="#" id="department-classify-area-statistic"><span class="icon16 icomoon-icon-drawer-2"></span>学院分类用房统计</a></li>
                         <li><a href="#" id="department-classify-area-compare"><span class="icon16 icomoon-icon-box"></span>学院分类用房比较</a></li>
                         <li><a href="#" id="department-avgoffice-area-compare"><span class="icon16 icomoon-icon-accessibility"></span>人均办公用房面积比较</a></li>
+                        <li><a href="#" id="department-avgmeeting-area-compare"><span class="icon16 icomoon-icon-comments-7"></span>人均会议用房面积比较</a></li>
                         <li><a href="#" id="department-avgresearch-area-compare"><span class="icon16 icomoon-icon-reading"></span>人均科研用房面积比较</a></li>
                         <li><a href="#" id="department-avgfunds-area-compare"><span class="icon16 icomoon-icon-coins"></span>科研经费用房面积比较</a></li>
                         <li><a href="#" id="department-indicator-compare"><span class="icon16 icomoon-icon-rulers"></span>用房指标比较</a></li>
@@ -118,13 +120,18 @@
             return false;
         });
 
-        $('a#department-usable-area-compare').click(function () {
-            ajaxLoadPage2("DepartmentUsableAreaCompare", "Statistic", {});
+        $('a#building-group-space-rate-compare').click(function () {
+            ajaxLoadPage2("BuildingGroupSpaceRateCompare", "Statistic", {});
             return false;
         });
 
-        $('a#department-build-area-compare').click(function () {
-            ajaxLoadPage2("DepartmentBuildAreaCompare", "Statistic", {});
+        $('a#total-build-area').click(function () {
+            ajaxLoadPage2("TotalUseTypeArea", "Statistic", {});
+            return false;
+        });
+
+        $('a#department-usable-area-compare').click(function () {
+            ajaxLoadPage2("DepartmentUsableAreaCompare", "Statistic", {});
             return false;
         });
 
@@ -145,6 +152,11 @@
 
         $('a#department-avgoffice-area-compare').click(function () {
             ajaxLoadPage2("DepartmentAverageOfficeAreaCompare", "Statistic", {});
+            return false;
+        });
+
+        $('a#department-avgmeeting-area-compare').click(function () {
+            ajaxLoadPage2("DepartmentAverageMeetingAreaCompare", "Statistic", {});
             return false;
         });
 

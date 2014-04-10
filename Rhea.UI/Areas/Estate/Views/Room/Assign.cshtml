@@ -229,7 +229,7 @@
                 var roomArea = parseFloat('@Model.UsableArea');
                 $.getJSON('/Department/GetArea', { id: sid }, function (response) {
                     $('input#currentArea').val(response.Area);
-                    $('input#futureArea').val(response.Area + roomArea);
+                    $('input#futureArea').val((response.Area + roomArea).toFixed(2));
                 });
             }
         });

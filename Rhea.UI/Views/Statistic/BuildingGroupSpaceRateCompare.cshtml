@@ -1,0 +1,124 @@
+﻿@{
+    ViewBag.Title = "楼群得房率比较";
+    Layout = null;
+}
+
+@Html.Action("Heading", new { controller = "Common", area = "", title = ViewBag.Title, active = "房产统计" })
+
+@Html.Action("BuildingGroupFilter", new { controller = "Statistic", area = "", type = 1 })
+
+<div class="row-fluid">
+    <div class="span12">
+
+        <div class="box chart gradient">
+            <div class="title">
+                <h4>
+                    <span class="icon16 icomoon-icon-bars"></span><span>得房率图</span>
+                </h4>
+                <a href="#" class="minimize">Minimize</a>
+            </div>
+            <div class="content">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div id="container-bgspacerate-compare" style="width: 100%; height: 900px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        var dataList;
+        var colors = Highcharts.getOptions().colors;
+
+        $.getJSON('/Statistic/BuildingGroupTotalAreaCompareData', { areaType: 3 }, function (response) {
+            dataList = response;
+            setStackChart(response);
+
+            $('img.ajax-loader').hide();
+        });
+
+        setBoxAction();
+
+        $('button#compare').click(function () {
+            var sel = [];
+            $.each(dataList, function (i, item) {
+                var id = dataList[i].BuildingGroupType;
+                var $input = $('#check-list input:checkbox[value=' + id.toString() + ']');
+                if ($input.prop('checked')) {
+                    sel.push(dataList[i]);
+                }
+            });
+
+            setStackChart(sel);
+            return false;
+        });
+
+        function setStackChart(data) {
+            var option = {
+                chart: {
+                    renderTo: 'container-bgspacerate-compare',
+                    type: 'bar'
+                },
+                title: {
+                    text: '楼群得房率比较'
+                },
+                credits: {
+                    enabled: false
+                },
+                xAxis: {
+                    categories: []
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: '得房率(%)'
+                    },
+                    stackLabels: {
+                        enabled: true,
+                        style: {
+                            fontWeight: 'normal',
+                            color: colors[4] || 'gray'
+                        }
+                    }
+                },
+                legend: {
+                    backgroundColor: '#FFFFFF',
+                    reversed: true
+                },
+                tooltip: {
+                    formatter: function () {
+                        return '' + this.series.name + ': ' + this.y + '%';
+                    }
+                },
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+                series: [{
+                    name: '得房率',
+                    color: colors[4],
+                    data: []
+                }]
+            };
+
+            option.xAxis.categories = [];
+            $.each(data, function (i, item) {
+                option.xAxis.categories.push(item.BuildingGroupName);
+            });
+
+            $.each(data, function (i, item) {
+                option.series[0].data.push({ name: item.BuildingGroupName, y: parseFloat(item.SpaceRate) });
+            });
+
+            var chart = new Highcharts.Chart(option);
+        };
+    });
+</script>

@@ -16,7 +16,6 @@
     <div class="section-nav">
         <ul id="secTab" class="nav nav-tabs pattern">
             <li class="active"><a href="#tab-fun" data-toggle="tab">功 能</a></li>
-            <li><a href="#tab-room" data-toggle="tab">房 屋</a></li>
             <li><a href="#tab-stat" data-toggle="tab">统 计</a></li>
         </ul>
 
@@ -29,73 +28,15 @@
                     </div>
                 </div>
                 <hr />
-                <div class="secbar-widget">
-                <div class="centerContent">
-                    <div class="circle-stats">
-                    @if (Model.DepartmentType == (int)DepartmentType.Type1)
-                    {          
-                        <div class="circular-item tip" title="办公用房比例">
-                            <span class="icon icomoon-icon-license"></span>
-                            <input type="text" value="@Model.OfficeAreaRatio" class="orangeCircle" />
-                        </div>
-                        <div class="circular-item tip" title="实验用房比例">
-                            <span class="icon icomoon-icon-microscope"></span>
-                            <input type="text" value="@Model.ExperimentAreaRatio" class="blueCircle" />
-                        </div>
-                        <div class="circular-item tip" title="科研用房比例">
-                            <span class="icon icomoon-icon-announcement"></span>
-                            <input type="text" value="@Model.ResearchAreaRatio" class="yellowCircle" />
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="circular-item tip" title="办公用房比例">
-                            <span class="icon icomoon-icon-license"></span>
-                            <input type="text" value="@Model.OfficeAreaRatio" class="orangeCircle" />
-                        </div>
-                    }
-                    @if (Model.Overproof > 100)
-                    {
-                        <div class="circular-item tip" title="定额率">
-                            <span class="icon icomoon-icon-target-2"></span>
-                            <input type="text" value="@Convert.ToInt32(Model.Overproof)" class="redCircle" />
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="circular-item tip" title="定额率">
-                            <span class="icon icomoon-icon-target-2"></span>
-                            <input type="text" value="@Model.Overproof" class="greenCircle" />
-                        </div>
-                    }
-                    </div>
-                </div>
-                </div>
 
-                <div class="secbar-widget">
-                    <h5 class="title">当前</h5>
-                    <div class="content">
-                        <div class="rightnow">
-                            <ul class="unstyled">
-                                <li><span class="number">@Model.StaffCount</span><span class="icon16 icomoon-icon-new-2"></span>教职工</li>
-                                <li><span class="number">@Model.Buildings.Count</span><span class="icon16 icomoon-icon-clubs"></span>楼宇</li>
-                                <li><span class="number">@Model.RoomCount</span><span class="icon16 icomoon-icon-home-9"></span>房间</li>
-                                <li><span class="number">@Math.Truncate(Model.TotalArea)</span><span class="icon16 icomoon-icon-tag"></span>面积</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="tab-pane fade" id="tab-room">
                 <div class="secbar-widget">
                     <h4 class="title">楼宇列表</h4>
                     <div class="content">
                         <ul id="building-list" class="nav nav-pills nav-stacked">
-                        @foreach (var item in Model.Buildings)
-                        {
-                            <li><a href="#" ref="@item.Id">@item.Name</a></li>
-                        }
+                            @foreach (var item in Model.Buildings)
+                            {
+                                <li><a href="#" ref="@item.Id">@item.Name</a></li>
+                            }
                         </ul>
                     </div>
                 </div>
@@ -103,12 +44,10 @@
                 <div class="secbar-widget">
                     <h4 class="title">楼层列表</h4>
                     <div class="content">
-                        <ul id="floor-list" class="nav nav-pills nav-stacked">
-                        
-                        </ul>
+                        <ul id="floor-list" class="nav nav-pills nav-stacked"></ul>
                     </div>
                 </div>
-                
+
                 <div class="secbar-widget" id="sec-room-info" style="display:none;">
                     <h4 class="title">房间信息</h4>
                     <div class="content">
@@ -161,6 +100,64 @@
                             </a>
                         </li>
                     </ul>
+                </div>
+
+                <div class="secbar-widget">
+                    <h5 class="title">当前</h5>
+                    <div class="content">
+                        <div class="rightnow">
+                            <ul class="unstyled">
+                                <li><span class="number">@Model.StaffCount</span><span class="icon16 icomoon-icon-new-2"></span>教职工</li>
+                                <li><span class="number">@Model.Buildings.Count</span><span class="icon16 icomoon-icon-clubs"></span>楼宇</li>
+                                <li><span class="number">@Model.RoomCount</span><span class="icon16 icomoon-icon-home-9"></span>房间</li>
+                                <li><span class="number">@Math.Truncate(Model.TotalArea)</span><span class="icon16 icomoon-icon-tag"></span>面积</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+
+                <div class="secbar-widget">
+                    <div class="centerContent">
+                        <div class="circle-stats">
+                            @if (Model.DepartmentType == (int)DepartmentType.Type1)
+                            {
+                                <div class="circular-item tip" title="办公用房比例">
+                                    <span class="icon icomoon-icon-license"></span>
+                                    <input type="text" value="@Model.OfficeAreaRatio" class="orangeCircle" />
+                                </div>
+                                <div class="circular-item tip" title="实验用房比例">
+                                    <span class="icon icomoon-icon-microscope"></span>
+                                    <input type="text" value="@Model.ExperimentAreaRatio" class="blueCircle" />
+                                </div>
+                                <div class="circular-item tip" title="科研用房比例">
+                                    <span class="icon icomoon-icon-announcement"></span>
+                                    <input type="text" value="@Model.ResearchAreaRatio" class="yellowCircle" />
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="circular-item tip" title="办公用房比例">
+                                    <span class="icon icomoon-icon-license"></span>
+                                    <input type="text" value="@Model.OfficeAreaRatio" class="orangeCircle" />
+                                </div>
+                            }
+                            @if (Model.Overproof > 100)
+                            {
+                                <div class="circular-item tip" title="定额率">
+                                    <span class="icon icomoon-icon-target-2"></span>
+                                    <input type="text" value="@Convert.ToInt32(Model.Overproof)" class="redCircle" />
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="circular-item tip" title="定额率">
+                                    <span class="icon icomoon-icon-target-2"></span>
+                                    <input type="text" value="@Model.Overproof" class="greenCircle" />
+                                </div>
+                            }
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

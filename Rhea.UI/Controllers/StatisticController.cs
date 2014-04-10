@@ -111,22 +111,22 @@ namespace Rhea.UI.Controllers
         }
 
         /// <summary>
+        /// 楼群得房率比较
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult BuildingGroupSpaceRateCompare()
+        {
+            return View();
+        }
+
+        /// <summary>
         /// 学院使用面积比较
         /// </summary>
         /// <returns></returns>
         public ActionResult DepartmentUsableAreaCompare()
         {
             return View();
-        }
-
-        /// <summary>
-        /// 学院建筑面积比较
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult DepartmentBuildAreaCompare()
-        {
-            return View();
-        }
+        }   
 
         /// <summary>
         /// 学院楼宇用房统计
@@ -160,6 +160,15 @@ namespace Rhea.UI.Controllers
         /// </summary>
         /// <returns></returns>
         public ActionResult DepartmentAverageOfficeAreaCompare()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 学院人均会议用房面积
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult DepartmentAverageMeetingAreaCompare()
         {
             return View();
         }
@@ -223,7 +232,7 @@ namespace Rhea.UI.Controllers
         /// <summary>
         /// 楼群面积比较
         /// </summary>
-        /// <param name="areaType">面积类型, 1:使用面积, 2:建筑面积</param>
+        /// <param name="areaType">面积类型, 1:使用面积, 2:建筑面积, 3:得房率</param>
         /// <returns></returns>
         public JsonResult BuildingGroupTotalAreaCompareData(int areaType)
         {
@@ -242,6 +251,11 @@ namespace Rhea.UI.Controllers
                     UsableArea = Math.Round(buildingGroupBusiness.GetUsableArea(buildingGroup.Id), RheaConstant.AreaDecimalDigits),
                     BuildingGroupType = buildingGroup.UseType
                 };
+                if (model.BuildArea != 0)
+                    model.SpaceRate = Math.Round(model.UsableArea / model.BuildArea, RheaConstant.AreaDecimalDigits);
+                else
+                    model.SpaceRate = 0;
+
                 data.Add(model);
             }
 
@@ -249,8 +263,11 @@ namespace Rhea.UI.Controllers
             {
                 data = data.OrderByDescending(r => r.UsableArea).ToList();
             }
-            else
+            else if (areaType == 2)
                 data = data.OrderByDescending(r => r.BuildArea).ToList();
+            else
+                data = data.OrderByDescending(r => r.SpaceRate).ToList();
+
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
@@ -371,7 +388,46 @@ namespace Rhea.UI.Controllers
                 DepartmentAverageAreaModel avg = new DepartmentAverageAreaModel();
                 avg.DepartmentId = department.Id;
                 avg.DepartmentName = department.Name;
-                avg.TotalArea = model.FirstClassify.Where(r => r.FunctionFirstCode == 1).Sum(r => r.Area);
+                var roomFirstModel = model.FirstClassify.Single(r => r.FunctionFirstCode == 1);
+                avg.TotalArea = roomFirstModel.SecondClassify.Where(r => r.FunctionSecondCode == 1).Sum(r => r.Area);
+                //avg.TotalArea = model.FirstClassify.Where(r => r.FunctionFirstCode == 1).Sum(r => r.Area);
+
+                Department addition = departmentBusiness.Get(department.Id, DepartmentAdditionType.ScaleData);
+                avg.PeopleCount = addition.StaffCount;
+
+                if (avg.PeopleCount == 0)
+                    avg.AverageArea = 0;
+                else
+                    avg.AverageArea = Math.Round(avg.TotalArea / avg.PeopleCount, 2);
+
+                data.Add(avg);
+            }
+
+            data = data.OrderByDescending(r => r.AverageArea).ToList();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 所有部门人均会议面积
+        /// </summary>
+        /// <param name="type">部门类型</param>
+        /// <returns></returns>
+        public JsonResult DepartmentAverageMeetingAreaCompareData(int type)
+        {
+            IDepartmentBusiness departmentBusiness = new MongoDepartmentBusiness();
+            var departments = departmentBusiness.GetList().Where(r => r.Type == type);
+
+            List<DepartmentAverageAreaModel> data = new List<DepartmentAverageAreaModel>();
+
+            foreach (var department in departments)
+            {
+                DepartmentClassifyAreaModel model = statisticBusiness.GetDepartmentClassifyArea(department.Id, false);
+
+                DepartmentAverageAreaModel avg = new DepartmentAverageAreaModel();
+                avg.DepartmentId = department.Id;
+                avg.DepartmentName = department.Name;
+                var roomFirstModel = model.FirstClassify.Single(r => r.FunctionFirstCode == 1);
+                avg.TotalArea = roomFirstModel.SecondClassify.Where(r => r.FunctionSecondCode == 2).Sum(r => r.Area);            
 
                 Department addition = departmentBusiness.Get(department.Id, DepartmentAdditionType.ScaleData);
                 avg.PeopleCount = addition.StaffCount;

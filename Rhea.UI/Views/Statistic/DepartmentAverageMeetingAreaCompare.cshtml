@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "学院建筑面积比较";
+    ViewBag.Title = "学院人均会议用房比较";
     Layout = null;
 }
 
@@ -13,18 +13,18 @@
         <div class="box chart gradient">
             <div class="title">
                 <h4>
-                    <span class="icon16 icomoon-icon-bars"></span><span>建筑面积图</span>
+                    <span class="icon16 icomoon-icon-bars"></span><span>会议面积图</span>
                 </h4>
                 <a href="#" class="minimize">Minimize</a>
             </div>
 
-            <div class="content">       
+            <div class="content">
                 <div class="row-fluid">
                     <div class="span12">
-                        <div id="container-buildarea-compare" style="width: 100%; height: 650px;">
+                        <div id="container-avgmeetingarea-compare" style="width: 100%; height: 650px;">
                         </div>
-                    </div>         
-                </div>       
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -36,7 +36,7 @@
         var dataList;
         var colors = Highcharts.getOptions().colors;
 
-        $.getJSON('/Statistic/DepartmentTotalAreaCompareData', { type: 1, areaType: 2 }, function (response) {
+        $.getJSON('/Statistic/DepartmentAverageMeetingAreaCompareData', { type: 1 }, function (response) {
             dataList = response;
             setStackChart(response);
         });
@@ -60,11 +60,11 @@
         function setStackChart(data) {
             var option = {
                 chart: {
-                    renderTo: 'container-buildarea-compare',
+                    renderTo: 'container-avgmeetingarea-compare',
                     type: 'bar'
                 },
                 title: {
-                    text: '学院建筑面积比较'
+                    text: '学院人均会议用房面积比较'
                 },
                 credits: {
                     enabled: false
@@ -75,7 +75,7 @@
                 yAxis: {
                     min: 0,
                     title: {
-                        text: '建筑面积(m2)'
+                        text: '人均面积(m2/人)'
                     },
                     stackLabels: {
                         enabled: true,
@@ -91,7 +91,7 @@
                 },
                 tooltip: {
                     formatter: function () {
-                        return '' + this.series.name + ': ' + this.y + ' m<sup>2</sup>';
+                        return '' + this.series.name + ': ' + this.y + ' m<sup>2</sup>/人';
                     }
                 },
                 plotOptions: {
@@ -102,8 +102,8 @@
                     }
                 },
                 series: [{
-                    name: '建筑面积',
-                    color: colors[1],
+                    name: '人均面积',
+                    color: colors[4],
                     data: []
                 }]
             };
@@ -114,7 +114,7 @@
             });
 
             $.each(data, function (i, item) {
-                option.series[0].data.push({ name: item.DepartmentName, y: parseFloat(item.BuildArea) });
+                option.series[0].data.push({ name: item.DepartmentName, y: parseFloat(item.AverageArea) });
             });
 
             var chart = new Highcharts.Chart(option);

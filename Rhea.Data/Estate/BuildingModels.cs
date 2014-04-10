@@ -45,6 +45,12 @@ namespace Rhea.Data.Estate
         /// 基础设施
         /// </summary>
         [Display(Name = "基础设施")]
-        Infrastructure = 6
+        Infrastructure = 6,
+
+        /// <summary>
+        /// 室外运动场
+        /// </summary>
+        [Display(Name = "室外运动场")]
+        Stadium = 7
     }
 }

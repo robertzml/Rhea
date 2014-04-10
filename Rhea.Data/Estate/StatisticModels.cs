@@ -226,6 +226,11 @@ namespace Rhea.Data.Estate
         public double UsableArea { get; set; }
 
         /// <summary>
+        /// 得房率
+        /// </summary>
+        public double SpaceRate { get; set; }
+
+        /// <summary>
         /// 房间数量
         /// </summary>
         public int RoomCount { get; set; }

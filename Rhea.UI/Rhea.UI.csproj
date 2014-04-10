@@ -954,9 +954,6 @@
     <Content Include="Views\Statistic\DepartmentFilter.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Statistic\DepartmentBuildAreaCompare.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Areas\Admin\Views\Department\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -1097,6 +1094,8 @@
     <Content Include="Views\Home\Front.cshtml" />
     <Content Include="403.html" />
     <None Include="Properties\PublishProfiles\配置文件1.pubxml" />
+    <Content Include="Views\Statistic\BuildingGroupSpaceRateCompare.cshtml" />
+    <Content Include="Views\Statistic\DepartmentAverageMeetingAreaCompare.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
