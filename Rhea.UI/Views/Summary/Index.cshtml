@@ -1,0 +1,94 @@
+﻿@{
+    ViewBag.Title = "房产纪要";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--Responsive navigation button-->
+<div class="resBtn">
+    <a href="#"><span class="icon16 icomoon-icon-list-view-2"></span></a>
+</div>
+
+<!--Left Sidebar collapse button-->
+<div class="collapseBtn leftbar">
+    <a href="#" class="tip" title="Hide Left Sidebar">
+        <span class="icon12 icomoon-icon-arrow-first">
+        </span>
+    </a>
+</div>
+
+<!--Sidebar background-->
+<div id="sidebarbg">
+</div>
+
+<div id="sidebar">
+    <div class="shortcuts">
+        <ul>
+            <li>
+                <a href="#" title="Support" class="tip">
+                    <span class="icon24 icomoon-icon-support">
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="#" title="Backup" class="tip">
+                    <span class="icon24 icomoon-icon-database">
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="#" title="Statistics" class="tip">
+                    <span class="icon24 icomoon-icon-pie-2">
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="#" title="Request" class="tip">
+                    <span class="icon24 icomoon-icon-pencil">
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="sidenav">
+        <div class="sidebar-widget" style="margin: -1px 0 0 0;">
+            <h5 class="title" style="margin-bottom: 0">
+                导航
+            </h5>
+        </div>
+        <!-- End .sidenav-widget -->
+        <div class="mainnav">
+            <ul>
+                <li><a href="#" id="room-alteration"><span class="icon16 icomoon-icon-stairs"></span>房屋变动记录</a></li>                
+                <li><a href="#" id="meeting-summary"><span class="icon16 icomoon-icon-stack"></span>会议纪要</a></li>
+                <li><a href="#" id="estate-file"><span class="icon16 icomoon-icon-file"></span>房产文件</a></li>                       
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!--Body content-->
+<div id="content" class="clearfix">
+    <div class="contentwrapper">
+        <!-- Build page from here: -->
+        <div id="ajax-content1">
+
+        </div>
+        <!--End page -->
+    </div>
+</div>
+<!-- End #content -->
+
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            $('.navbar .nav #nav-summary2').parent().addClass('active');
+            $('.tip').tooltip();
+
+            $('a#room-alteration').click(function () {
+                ajaxLoadPage2("RoomAlteration", "Summary", {});
+                return false;
+            });
+        });
+    </script>
+}

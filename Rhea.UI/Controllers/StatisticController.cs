@@ -590,7 +590,7 @@ namespace Rhea.UI.Controllers
                 {
                     DepartmentId = department.Id,
                     DepartmentName = department.Name,
-                    TotalArea = first.Area
+                    TotalArea = first.SecondClassify.Where(r => r.FunctionSecondCode == 1).Sum(r => r.Area)
                 };
 
                 Department addition = departmentBusiness.Get(department.Id, DepartmentAdditionType.ScaleData);
@@ -600,7 +600,7 @@ namespace Rhea.UI.Controllers
                 if (model.PeopleCount == 0)
                     model.AverageArea = 0;
                 else
-                    model.AverageArea = Math.Round(model.TotalArea / model.PeopleCount, 2);
+                    model.AverageArea = Math.Round(model.TotalArea / model.PeopleCount, RheaConstant.AreaDecimalDigits);
 
                 data.Add(model);
             }
