@@ -73,7 +73,11 @@
                 </li>
                 <li><a href="#"><span class="icon16 icomoon-icon-users-2"></span>学生用房数据</a>
                     <ul class="sub">
-                        <li><a href="#" id="student-avg-area"><span class="icon16 icomoon-icon-grid"></span>生均用房数据</a></li>
+                        <li><a href="#" id="student-avgeducation-area"><span class="icon16 icomoon-icon-grid"></span>生均教学行政用房</a></li>
+                        <li><a href="#" id="student-avgfloorage-area"><span class="icon16 icomoon-icon-grid"></span>生均占地面积</a></li>
+                        <li><a href="#" id="student-avgdormitory-area"><span class="icon16 icomoon-icon-grid"></span>生均学生宿舍面积</a></li>
+                        <li><a href="#" id="student-avgstadium-area"><span class="icon16 icomoon-icon-grid"></span>生均学生室外运动场地面积</a></li>
+                        <li><a href="#" id="student-avgdining-area"><span class="icon16 icomoon-icon-grid"></span>生均学生食堂面积</a></li>
                     </ul>
                 </li>
             </ul>
@@ -192,6 +196,16 @@
 
         $('a#institution-indicator-compare').click(function () {
             ajaxLoadPage2("InstitutionIndicatorCompare", "Statistic", {});
+            return false;
+        });
+
+        $('a#student-avgeducation-area').click(function () {
+            ajaxLoadPage2("StudentAverageEducationArea", "Statistic", {});
+            return false;
+        });
+
+        $('a#student-avgfloorage-area').click(function () {
+            ajaxLoadPage2("StudentFloorageArea", "Statistic", {});
             return false;
         });
     });

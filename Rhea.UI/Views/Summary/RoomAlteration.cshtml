@@ -1,0 +1,327 @@
+﻿@{
+    ViewBag.Title = "房屋变动记录";
+    Layout = null;
+}
+
+<link href="@Url.Content("~/Plugins/misc/timeliner/css/screen.css")" type="text/css" rel="stylesheet" />
+<link href="@Url.Content("~/Plugins/misc/timeliner/css/responsive.css")" type="text/css" rel="stylesheet" />
+
+@Html.Action("Heading", new { controller = "Common", area = "", title = ViewBag.Title, active = "房产概要" })
+
+
+<div class="row-fluid">
+    <div class="span12">
+        <div class="page-header">
+            <h4>房屋变动时间轴</h4>
+        </div>
+
+        <div class="content">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div id="timelineContainer" class="timelineContainer">
+                        <div class="timelineToggle"><p><a class="expandAll">+ expand all</a></p></div>
+                        <br class="clear">
+
+                        <div class="timelineMajor">
+                            <h2 class="timelineMajorMarker"><span>2014.4</span></h2>
+                            <dl class="timelineMinor">
+                                <dt id ="30008"><a>杂志社用房调整</a></dt>
+                                <dd class="timelineEvent" id="30008EX" style="display:none;">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    学院部门
+                                                </th>
+                                                <th>
+                                                    原使用面积 (m<sup>2</sup>)
+                                                </th>
+                                                <th>
+                                                    现使用面积 (m<sup>2</sup>)
+                                                </th>
+                                                <th>
+                                                    面积增减 (m<sup>2</sup>)
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>杂志社改革</td>
+                                                <td>515</td>
+                                                <td>0</td>
+                                                <td>-515</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br class="clear">
+                                </dd>
+                            </dl>
+                            <dl class="timelineMinor">
+                                <dt id="30007"><a>收发室用房调整</a></dt>
+                                <dd class="timelineEvent" id="30007EX" style="display:none;">
+                                    <p>收发室搬至体育中心</p>
+                                    <br class="clear">
+                                </dd>
+                            </dl>
+                        </div><!-- /.timelineMajor -->
+
+                        <div class="timelineMajor">
+                            <h2 class="timelineMajorMarker"><span>2014.3</span></h2>
+                            <dl class="timelineMinor">
+                                <dt id="30006"><a>行政楼用房微调</a></dt>
+                                <dd class="timelineEvent" id="30006EX" style="display:none;">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    学院部门
+                                                </th>
+                                                <th>
+                                                    原使用房间
+                                                </th>
+                                                <th>
+                                                    现使用房间
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>招投标办</td>
+                                                <td>A116</td>
+                                                <td>15.8</td>
+                                            </tr>
+                                            <tr>
+                                                <td>资产管理处</td>
+                                                <td>B108</td>
+                                                <td>35</td>
+                                            </tr>
+                                            <tr>
+                                                <td>新农村发展研究院</td>
+                                                <td>A404</td>
+                                                <td>41.4</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br class="clear">
+                                </dd>
+                            </dl>
+                            <dl class="timelineMinor">
+                                <dt id="30005"><a>部门用房调换</a></dt>
+                                <dd class="timelineEvent" id="30005EX" style="display:none;">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    学院部门
+                                                </th>
+                                                <th>
+                                                    原使用房间
+                                                </th>
+                                                <th>
+                                                    现使用房间
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>工程审计室</td>
+                                                <td>A116</td>
+                                                <td>A406</td>
+                                            </tr>
+                                            <tr>
+                                                <td>离退休处（关工委）</td>
+                                                <td>A406</td>
+                                                <td>A116</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br class="clear">
+                                </dd>
+                            </dl>
+                        </div><!-- /.timelineMajor -->
+
+                        <div class="timelineMajor">
+                            <h2 class="timelineMajorMarker"><span>2013.12</span></h2>
+                            <dl class="timelineMinor">
+                                <dt id="30004"><a>至善学院发展用房调整</a></dt>
+                                <dd class="timelineEvent" id="30004EX" style="display:none;">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    学院部门
+                                                </th>
+                                                <th>
+                                                    原使用面积 (m<sup>2</sup>)
+                                                </th>
+                                                <th>
+                                                    现使用面积 (m<sup>2</sup>)
+                                                </th>
+                                                <th>
+                                                    面积增减 (m<sup>2</sup>)
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>至善学院</td>
+                                                <td>230</td>
+                                                <td>560</td>
+                                                <td>331</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br class="clear">
+                                </dd>
+                            </dl>
+                        </div><!-- /.timelineMajor -->
+
+                        <div class="timelineMajor">
+                            <h2 class="timelineMajorMarker"><span>2013.11</span></h2>
+                            <dl class="timelineMinor">
+                                <dt id="30003"><a>医学院临时借房间做实验室</a></dt>
+                                <dd class="timelineEvent" id="30003EX" style="display:none;">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    学院部门
+                                                </th>
+                                                <th>
+                                                    原使用面积 (m<sup>2</sup>)
+                                                </th>
+                                                <th>
+                                                    现使用面积 (m<sup>2</sup>)
+                                                </th>
+                                                <th>
+                                                    面积增减 (m<sup>2</sup>)
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>医学院</td>
+                                                <td>2080</td>
+                                                <td>2437</td>
+                                                <td>357</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br class="clear">
+                                </dd>
+                            </dl>
+                        </div><!-- /.timelineMajor -->
+
+                        <div class="timelineMajor">
+                            <h2 class="timelineMajorMarker"><span>2013.10</span></h2>
+                            <dl class="timelineMinor">
+                                <dt id="30002"><a>青山湾校区置换</a></dt>
+                                <dd class="timelineEvent" id="30002EX" style="display:none;">
+                                    <p>青山湾校区卖给滨湖区政府。</p>
+                                    <br class="clear">
+                                </dd>
+                            </dl>
+                        </div><!-- /.timelineMajor -->
+
+                        <div class="timelineMajor">
+                            <h2 class="timelineMajorMarker"><span>2013.9</span></h2>
+                            <dl class="timelineMinor">
+                                <dt id="30001"><a>数媒经管楼搬迁调整</a></dt>
+                                <dd class="timelineEvent" id="30001EX" style="display:none;">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    学院部门
+                                                </th>
+                                                <th>
+                                                    原使用面积 (m<sup>2</sup>)
+                                                </th>
+                                                <th>
+                                                    现使用面积 (m<sup>2</sup>)
+                                                </th>
+                                                <th>
+                                                    面积增减 (m<sup>2</sup>)
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>商学院</td>
+                                                <td>4348</td>
+                                                <td>6105</td>
+                                                <td>1757</td>
+                                            </tr>
+                                            <tr>
+                                                <td>数媒学院</td>	
+                                                <td>3169</td>
+                                                <td>5307</td>
+                                                <td>2138</td>
+                                            </tr>
+                                            <tr>
+                                                <td>外国语学院</td>
+                                                <td>4215</td>
+                                                <td>4733</td>
+                                                <td>518</td>
+                                            </tr>
+                                            <tr>
+                                                <td>马克思主义学院</td>
+                                                <td>427</td>
+                                                <td>957</td>
+                                                <td>530</td>
+                                            </tr>
+                                            <tr>
+                                                <td>法学院</td>
+                                                <td>1587</td>
+                                                <td>1742</td>
+                                                <td>155</td>
+                                            </tr>
+                                            <tr>
+                                                <td>君远学院</td>
+                                                <td>1707</td>
+                                                <td>2986</td>
+                                                <td>1279</td>
+                                            </tr>
+                                            <tr>
+                                                <td>设计学院</td>
+                                                <td>15729</td>
+                                                <td>16466</td>
+                                                <td>737</td>
+                                            </tr>
+                                            <tr>
+                                                <td>人文学院</td>
+                                                <td>8456</td>
+                                                <td>8580</td>
+                                                <td>124</td>
+                                            </tr>
+                                            <tr>
+                                                <td>理学院</td>
+                                                <td>6356</td>
+                                                <td>6580</td>
+                                                <td>224</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br class="clear">
+                                </dd>
+                            </dl>
+                        </div><!-- /.timelineMajor -->
+
+                        <br class="clear">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $.timeliner({
+            timelineContainer: '#timelineContainer',
+            expandAllText: '+ 全部展开', // value: string; defaults to '+ expand all'
+            collapseAllText: '- 全部收起' // value: string; defaults to '- collapse all'
+        });
+    });
+</script>

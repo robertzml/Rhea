@@ -666,6 +666,12 @@
     <Content Include="Plugins\misc\search\tipuesearch_content.js" />
     <Content Include="Plugins\misc\search\tipuesearch_data.js" />
     <Content Include="Plugins\misc\search\tipuesearch_set.js" />
+    <Content Include="Plugins\misc\timeliner\css\responsive.css" />
+    <Content Include="Plugins\misc\timeliner\css\screen.css" />
+    <Content Include="Plugins\misc\timeliner\images\timeline_century_tick.gif" />
+    <Content Include="Plugins\misc\timeliner\images\timeline_decade_tick.gif" />
+    <Content Include="Plugins\misc\timeliner\js\timeliner.js" />
+    <Content Include="Plugins\misc\timeliner\js\timeliner.min.js" />
     <Content Include="Plugins\misc\totop\jquery.ui.totop.js" />
     <Content Include="Plugins\misc\totop\jquery.ui.totop.min.js" />
     <Content Include="Plugins\tables\dataTables\images\back_disabled.png" />
@@ -1098,6 +1104,10 @@
     <Content Include="Views\Statistic\BuildingGroupSpaceRateCompare.cshtml" />
     <Content Include="Views\Statistic\DepartmentAverageMeetingAreaCompare.cshtml" />
     <Content Include="Views\Summary\Index.cshtml" />
+    <Content Include="Views\Summary\RoomAlteration.cshtml" />
+    <Content Include="Views\Summary\EstateFile.cshtml" />
+    <Content Include="Views\Statistic\StudentAverageEducationArea.cshtml" />
+    <Content Include="Views\Statistic\StudentFloorageArea.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

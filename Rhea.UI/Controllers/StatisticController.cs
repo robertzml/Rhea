@@ -83,6 +83,7 @@ namespace Rhea.UI.Controllers
             return View();
         }
 
+        #region 建筑物类
         /// <summary>
         /// 学校总体建筑分类面积
         /// </summary>
@@ -118,7 +119,9 @@ namespace Rhea.UI.Controllers
         {
             return View();
         }
+        #endregion //建筑物类
 
+        #region 学院统计
         /// <summary>
         /// 学院使用面积比较
         /// </summary>
@@ -199,7 +202,9 @@ namespace Rhea.UI.Controllers
         {
             return View();
         }
+        #endregion //学院统计
 
+        #region 行政机关统计
         /// <summary>
         /// 行政机关办公用房面积比较
         /// </summary>
@@ -226,6 +231,54 @@ namespace Rhea.UI.Controllers
         {
             return View();
         }
+        #endregion //行政机关统计
+
+        #region 学生用房统计
+        /// <summary>
+        /// 生均教学行政用房
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult StudentAverageEducationArea()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 生均占地面积
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult StudentFloorageArea()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 生均学生宿舍面积
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult StudentAverageDormitoryArea()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 生均学生室外运动场地面积
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult StudentAverageStadiumArea()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 生均学生食堂面积
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult StduentAverageDiningArea()
+        {
+            return View();
+        }
+        #endregion //学生用房统计
         #endregion //Action
 
         #region Json

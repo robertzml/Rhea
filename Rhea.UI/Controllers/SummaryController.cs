@@ -26,6 +26,24 @@ namespace Rhea.UI.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// 会议纪要
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult MeetingSummary()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 房产文件
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult EstateFile()
+        {
+            return View();
+        }
         #endregion //Action
     }
 }

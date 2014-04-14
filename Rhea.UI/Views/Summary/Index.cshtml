@@ -80,6 +80,7 @@
 <!-- End #content -->
 
 @section scripts {
+<script src="@Url.Content("~/Plugins/misc/timeliner/js/timeliner.min.js")" type="text/javascript"></script>
     <script type="text/javascript">
         $(function () {
             $('.navbar .nav #nav-summary2').parent().addClass('active');
@@ -87,6 +88,11 @@
 
             $('a#room-alteration').click(function () {
                 ajaxLoadPage2("RoomAlteration", "Summary", {});
+                return false;
+            });
+
+            $('a#estate-file').click(function () {
+                ajaxLoadPage2("EstateFile", "Summary", {});
                 return false;
             });
         });

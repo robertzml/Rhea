@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "房产文件";
+    Layout = null;
+}
+
+@Html.Action("Heading", new { controller = "Common", area = "", title = ViewBag.Title, active = "房产概要" })
+
+<div class="row-fluid">
+    <div class="span12">
+        <div class="page-header">
+            <h4>房产文件列表</h4>
+        </div>
+
+        <div class="content">
+            <table id="department-list" class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            文件名
+                        </th>
+                        <th>
+                            发布时间
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="#">关于印发《江南大学公用房管理办法（试行）》的通知</a></td>
+                        <td>2014-01-03</td>
+                    </tr>       
+                </tbody>
+            </table>
+        </div>
+ 
+    </div>
+</div>
