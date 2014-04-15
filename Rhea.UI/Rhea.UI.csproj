@@ -1108,6 +1108,9 @@
     <Content Include="Views\Summary\EstateFile.cshtml" />
     <Content Include="Views\Statistic\StudentAverageEducationArea.cshtml" />
     <Content Include="Views\Statistic\StudentFloorageArea.cshtml" />
+    <Content Include="Views\Statistic\StudentAverageDormitoryArea.cshtml" />
+    <Content Include="Views\Statistic\StudentAverageStadiumArea.cshtml" />
+    <Content Include="Views\Statistic\StduentAverageDiningArea.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

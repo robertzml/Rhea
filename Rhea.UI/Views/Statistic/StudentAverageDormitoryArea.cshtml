@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "生均教学行政用房";
+    ViewBag.Title = "生均学生宿舍面积";
     Layout = null;
 }
 
@@ -11,7 +11,7 @@
         <div class="box chart gradient">
             <div class="title">
                 <h4>
-                    <span class="icon16 icomoon-icon-bars"></span><span>生均教学行政用房 = (教学及辅助用房面积+行政办公用房面积) / 全日制在校生数</span>
+                    <span class="icon16 icomoon-icon-bars"></span><span>生均学生宿舍面积 = 学生宿舍面积 / 全日制在校生数</span>
                 </h4>
                 <a href="#" class="minimize">Minimize</a>
             </div>
@@ -19,7 +19,7 @@
             <div class="content">
                 <div class="row-fluid">
                     <div class="span12">
-                        <div id="container-student-avg-educationarea" style="width: 100%; height: 650px;">
+                        <div id="container-student-avg-dormitory-area" style="width: 100%; height: 650px;">
                         </div>
                     </div>
                 </div>
@@ -33,24 +33,19 @@
     $(function () {
         var colors = Highcharts.getOptions().colors;
 
-        $.getJSON('/Statistic/InstitutionOfficeAreaData', function (response) {            
-            setColumnChart(response);
-        });
-
-        setBoxAction();
-        
+        setColumnChart(0);
 
         function setColumnChart(data) {
             var option = {
                 chart: {
-                    renderTo: 'container-student-avg-educationarea',
+                    renderTo: 'container-student-avg-dormitory-area',
                     type: 'column'
                 },
                 credits: {
                     enabled: false
                 },
                 title: {
-                    text: '历年生均教学行政用房图'
+                    text: '历年生均学生宿舍面积'
                 },
                 xAxis: {
                     categories: [2013, 2014, 2015]
@@ -74,7 +69,7 @@
                 },
                 series: [{
                     name: "面积",
-                    color: colors[0],
+                    color: colors[2],
                     data: [78.5, 79.6, 0]
                 }]
             };

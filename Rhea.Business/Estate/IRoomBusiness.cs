@@ -64,6 +64,21 @@ namespace Rhea.Business.Estate
         List<Room> GetListByDepartment(int departmentId, int buildingId);
 
         /// <summary>
+        /// 获取房间列表
+        /// </summary>
+        /// <param name="firstCode">一级功能编码</param>
+        /// <returns></returns>
+        List<Room> GetListByFunction(int firstCode);
+
+        /// <summary>
+        /// 获取房间列表
+        /// </summary>
+        /// <param name="firstCode">一级功能编码</param>
+        /// <param name="secondCode">二级功能编码</param>
+        /// <returns></returns>
+        List<Room> GetListByFunction(int firstCode, int secondCode);
+
+        /// <summary>
         /// 获取房间
         /// </summary>
         /// <param name="id">房间ID</param>

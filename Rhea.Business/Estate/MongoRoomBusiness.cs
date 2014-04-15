@@ -290,6 +290,51 @@ namespace Rhea.Business.Estate
         }
 
         /// <summary>
+        /// 获取房间列表
+        /// </summary>
+        /// <param name="firstCode">一级功能编码</param>
+        /// <returns></returns>
+        public List<Room> GetListByFunction(int firstCode)
+        {
+            var query = Query.EQ("function.firstCode", firstCode);
+            var docs = this.context.Find(EstateCollection.Room, query);
+
+            List<Room> rooms = new List<Room>();
+            foreach(var doc in docs)
+            {
+                if (doc.GetValue("status", 0).AsInt32 == 1)
+                    continue;
+                Room room = ModelBind(doc);
+                rooms.Add(room);
+            }
+
+            return rooms;
+        }
+
+        /// <summary>
+        /// 获取房间列表
+        /// </summary>
+        /// <param name="firstCode">一级功能编码</param>
+        /// <param name="secondCode">二级功能编码</param>
+        /// <returns></returns>
+        public List<Room> GetListByFunction(int firstCode, int secondCode)
+        {
+            var query = Query.And(Query.EQ("function.firstCode", firstCode), Query.EQ("function.secondCode", secondCode));
+            var docs = this.context.Find(EstateCollection.Room, query);
+
+            List<Room> rooms = new List<Room>();
+            foreach (var doc in docs)
+            {
+                if (doc.GetValue("status", 0).AsInt32 == 1)
+                    continue;
+                Room room = ModelBind(doc);
+                rooms.Add(room);
+            }
+
+            return rooms;
+        }
+
+        /// <summary>
         /// 获取房间
         /// </summary>
         /// <param name="id">房间ID</param>

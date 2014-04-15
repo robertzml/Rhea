@@ -1,5 +1,6 @@
 ﻿@{
     ViewBag.Title = "地图导航";
+    int rank = User.Rank();
 }
 
 <link href="@Url.Content("~/Plugins/map/smartmap/base.css")" type="text/css" rel="stylesheet" />
@@ -21,7 +22,9 @@
     <div class="modal-body">
     </div>
     <div class="modal-footer">
+        @if (rank >= 500) { 
         <button id="map-point-enter" class="btn btn-success">详细</button>
+        }
         <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">关闭</button>
     </div>
 </div>

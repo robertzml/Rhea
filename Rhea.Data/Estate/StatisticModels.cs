@@ -287,4 +287,45 @@ namespace Rhea.Data.Estate
         /// </summary>
         public double TotalArea { get; set; }
     }
+
+    /// <summary>
+    /// 生均用房数据模型
+    /// </summary>
+    public class StudentAverageModel
+    {
+        /// <summary>
+        /// 年份
+        /// </summary>
+        public int Year { get; set; }
+
+        /// <summary>
+        /// 全日制在校生数
+        /// </summary>
+        public int StudentCount { get; set; }
+
+        /// <summary>
+        /// 教学及辅助用房面积
+        /// </summary>
+        public double EducationArea { get; set; }
+
+        /// <summary>
+        /// 行政办公用房面积
+        /// </summary>
+        public double OfficeArea { get; set; }
+
+        /// <summary>
+        /// 占地面积
+        /// </summary>
+        public double FloorageArea { get; set; }
+
+        /// <summary>
+        /// 宿舍面积
+        /// </summary>
+        public double DormitoryArea { get; set; }
+
+        /// <summary>
+        /// 食堂面积
+        /// </summary>
+        public double DiningArea { get; set; }
+    }
 }

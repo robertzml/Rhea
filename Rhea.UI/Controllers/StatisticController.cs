@@ -665,6 +665,22 @@ namespace Rhea.UI.Controllers
 
             return Json(data, JsonRequestBehavior.AllowGet);
         }
+
+        /// <summary>
+        /// 学生用房数据
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult StudentAverageData()
+        {
+            StudentAverageModel data = new StudentAverageModel();
+            IRoomBusiness roomBusiness = new MongoRoomBusiness();
+
+            data.StudentCount = 3058;
+
+            data.EducationArea = Math.Round(Convert.ToDouble(roomBusiness.GetListByFunction(1).Sum(r => r.UsableArea)), RheaConstant.AreaDecimalDigits);
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
         #endregion //Json
     }
 }
