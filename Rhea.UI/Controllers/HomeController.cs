@@ -101,6 +101,28 @@ namespace Rhea.UI.Controllers
         }
 
         /// <summary>
+        /// 自定义主页
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Dashboard()
+        {
+            EstateMenuModel data = new EstateMenuModel();
+
+            IBuildingGroupBusiness buildingGroupBusiness = new MongoBuildingGroupBusiness();
+            data.BuildingGroups = buildingGroupBusiness.GetSimpleList(true);
+
+            IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
+            var buildings = buildingBusiness.GetList(true);
+
+            foreach (var bg in data.BuildingGroups)
+            {
+                bg.Buildings = buildings.Where(r => r.BuildingGroupId == bg.Id).ToList();
+            }           
+
+            return View(data);
+        }
+
+        /// <summary>
         /// 楼群导航
         /// </summary>
         /// <returns></returns>

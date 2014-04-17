@@ -1111,6 +1111,7 @@
     <Content Include="Views\Statistic\StudentAverageDormitoryArea.cshtml" />
     <Content Include="Views\Statistic\StudentAverageStadiumArea.cshtml" />
     <Content Include="Views\Statistic\StduentAverageDiningArea.cshtml" />
+    <Content Include="Views\Home\Dashboard.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

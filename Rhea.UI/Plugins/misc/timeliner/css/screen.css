@@ -2,7 +2,7 @@
 /* ============ TIMELINE ============= */
 
 .timelineContainer {
-	border-left:2px solid #ccc;
+	border-left:2px solid #1db702;
 	margin:20px auto;
 	width:900px;
 }
@@ -46,12 +46,11 @@ div.timelineMajor {
 		padding:4px 4px 4px 20px;
 	}
 
-	.timelineMajor h2 span {
-		background:#ccc;
+	.timelineMajor h2 span {		
 		-webkit-border-radius:4px;
 		-moz-border-radius:4px;
 		border-radius:4px;
-		color:#131313;
+		color:#1DB702;
 		letter-spacing:.1em;
 		line-height:1.7em;
 		padding:3px 5px 1px;
@@ -78,12 +77,12 @@ dl.timelineMinor {
 	}
 
 		.timelineMinor dt a {
-			color:#28A43D;
+			color:#737373;
 			cursor:pointer;
 		}
 
 		.timelineMinor dt a.closed {
-			color:#28A43D;
+			color:#737373;
 			font-size:1em;
 			margin-left:0;
 		}
