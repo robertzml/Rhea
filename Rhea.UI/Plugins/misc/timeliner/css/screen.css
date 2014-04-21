@@ -2,7 +2,8 @@
 /* ============ TIMELINE ============= */
 
 .timelineContainer {
-	border-left:2px solid #1db702;
+	background: url("../images/line04.gif") repeat-y scroll 107px 0 rgba(0, 0, 0, 0);
+	/*border-left:2px solid #1db702;*/
 	margin:20px auto;
 	width:900px;
 }
@@ -59,10 +60,10 @@ div.timelineMajor {
 dl.timelineMinor {
 	clear:left;
 	float:left;
-	margin:0 12px 0 0;
+	margin:0 12px 0 100px;
 	padding:4px 4px 4px 0;
 	position:relative;
-	width:880px;
+	width:750px;
 }
 
 	.timelineMinor dt {

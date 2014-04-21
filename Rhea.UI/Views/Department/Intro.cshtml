@@ -16,7 +16,7 @@
             </div>
             <div class="content">
                 <a class="colorbox-pic" id="department-pic" title="@Model.Name" href="@Model.ImageUrl">
-                    <img src="@Model.ImageUrl" alt="部门图片" />
+                    <img src="@Model.ImageUrl" />
                 </a>
             </div>
         </div>
@@ -25,12 +25,14 @@
         <div class="box gradient">
             <div class="title">
                 <h4>
-                    <span class="icon16 icomoon-icon-notebook"></span><span>部门介绍</span>
+                    <span class="icon16 icomoon-icon-notebook"></span><span>局部地图</span>
                 </h4>
                 <a href="#" class="minimize">Minimize</a>
             </div>
             <div class="content">
-                <p>@Model.Description</p>
+                <a class="colorbox-pic" title="@Model.Name" href="@Model.PartMapUrl">
+                    <img src="@Model.PartMapUrl" />
+                </a>
             </div>
         </div>
     </div>

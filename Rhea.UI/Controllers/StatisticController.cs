@@ -672,12 +672,28 @@ namespace Rhea.UI.Controllers
         /// <returns></returns>
         public JsonResult StudentAverageData()
         {
-            StudentAverageModel data = new StudentAverageModel();
+            List<StudentAverageModel> data = new List<StudentAverageModel>();
             IRoomBusiness roomBusiness = new MongoRoomBusiness();
 
-            data.StudentCount = 3058;
+            StudentAverageModel m1 = new StudentAverageModel();
+            m1.Year = 2012;
+            m1.StudentCount = 19877;
+            m1.DormitoryArea = Math.Round(434705.85 / m1.StudentCount, 2);
+            m1.EducationArea = Math.Round(525952.31 / m1.StudentCount, 2);
+            m1.FloorageArea = Math.Round(2082713.1 / m1.StudentCount, 2);
+            m1.StadiumArea = Math.Round(79046.86 / m1.StudentCount, 2);
+            m1.DiningArea = Math.Round(38038.15 / m1.StudentCount, 2);
+            data.Add(m1);
 
-            data.EducationArea = Math.Round(Convert.ToDouble(roomBusiness.GetListByFunction(1).Sum(r => r.UsableArea)), RheaConstant.AreaDecimalDigits);
+            StudentAverageModel m2 = new StudentAverageModel();
+            m2.Year = 2013;
+            m2.StudentCount = 20032;
+            m2.DormitoryArea = Math.Round(434705.85 / m2.StudentCount, 2);
+            m2.EducationArea = Math.Round(549657.31 / m2.StudentCount, 2);
+            m2.FloorageArea = Math.Round(2082713.1 / m2.StudentCount, 2);
+            m2.StadiumArea = Math.Round(79046.86 / m2.StudentCount, 2);
+            m2.DiningArea = Math.Round(38038.15 / m2.StudentCount, 2);
+            data.Add(m2);
 
             return Json(data, JsonRequestBehavior.AllowGet);
         }

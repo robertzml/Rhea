@@ -1,18 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Rhea.Business;
+﻿using Rhea.Business;
 using Rhea.Business.Account;
 using Rhea.Business.Estate;
 using Rhea.Business.Personnel;
+using Rhea.Data.Personnel;
 using Rhea.Model;
 using Rhea.Model.Estate;
 using Rhea.UI.Areas.Estate.Models;
 using Rhea.UI.Filters;
 using Rhea.UI.Models;
 using Rhea.UI.Services;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
 
 namespace Rhea.UI.Controllers
 {
@@ -106,20 +107,65 @@ namespace Rhea.UI.Controllers
         /// <returns></returns>
         public ActionResult Dashboard()
         {
-            EstateMenuModel data = new EstateMenuModel();
-
-            IBuildingGroupBusiness buildingGroupBusiness = new MongoBuildingGroupBusiness();
-            data.BuildingGroups = buildingGroupBusiness.GetSimpleList(true);
-
-            IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
-            var buildings = buildingBusiness.GetList(true);
-
-            foreach (var bg in data.BuildingGroups)
+            if (User.IsInRole2("Department"))
             {
-                bg.Buildings = buildings.Where(r => r.BuildingGroupId == bg.Id).ToList();
-            }           
+                IAccountBusiness accountBusiness = new MongoAccountBusiness();
+                var user = accountBusiness.GetByUserName(User.Identity.Name);
+                int departmentId = user.DepartmentId;
+                IDepartmentBusiness departmentBusiness = new MongoDepartmentBusiness();
 
-            return View(data);
+                DepartmentSectionModel data = new DepartmentSectionModel();
+
+                var department = departmentBusiness.Get(departmentId, DepartmentAdditionType.ScaleData | DepartmentAdditionType.ResearchData | DepartmentAdditionType.SpecialAreaData);
+                data.DepartmentId = departmentId;
+                data.DepartmentName = department.Name;
+                data.StaffCount = department.StaffCount;
+
+                IRoomBusiness roomBusiness = new MongoRoomBusiness();
+                var rooms = roomBusiness.GetListByDepartment(departmentId);
+                data.RoomCount = rooms.Count;
+                data.TotalArea = Convert.ToDouble(rooms.Sum(r => r.UsableArea));
+                data.DepartmentType = department.Type;
+
+                IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
+                data.Buildings = buildingBusiness.GetListByDepartment(departmentId);
+
+                IIndicatorBusiness indicatorBusiness = new MongoIndicatorBusiness();
+                DepartmentIndicatorModel indicator = indicatorBusiness.GetDepartmentIndicator(department);
+
+                if (department.Type == (int)DepartmentType.Type1)   //院系
+                {
+                    data.ExistingArea = indicator.ExistingArea;
+                    data.DeservedArea = indicator.DeservedArea;
+                    data.Overproof = indicator.Overproof;
+
+                    double offArea = Convert.ToDouble(rooms.Where(r => r.Function.FirstCode == 1).Sum(r => r.UsableArea));
+                    data.OfficeAreaRatio = Math.Round(offArea / data.TotalArea * 100, 2);
+
+                    double expArea = Convert.ToDouble(rooms.Where(r => r.Function.FirstCode == 3).Sum(r => r.UsableArea));
+                    data.ExperimentAreaRatio = Math.Round(expArea / data.TotalArea * 100, 2);
+
+                    double resArea = Convert.ToDouble(rooms.Where(r => r.Function.FirstCode == 4).Sum(r => r.UsableArea));
+                    data.ResearchAreaRatio = Math.Round(resArea / data.TotalArea * 100, 2);
+                }
+                else
+                {
+                    data.StaffCount = department.PresidentCount + department.VicePresidentCount + department.ChiefCount +
+                        department.ViceChiefCount + department.MemberCount;
+                    data.ExistingArea = indicator.ExistingArea;
+                    data.DeservedArea = indicator.DeservedArea;
+                    data.Overproof = indicator.Overproof;
+
+                    double offArea = Convert.ToDouble(rooms.Where(r => r.Function.FirstCode == 1).Sum(r => r.UsableArea));
+                    data.OfficeAreaRatio = Math.Round(offArea / data.TotalArea * 100, 2);
+                }
+
+                return View(data);
+            }
+            else
+            {
+                return View("Map");
+            }            
         }
 
         /// <summary>

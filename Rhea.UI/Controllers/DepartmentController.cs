@@ -126,6 +126,10 @@ namespace Rhea.UI.Controllers
             Department data = this.departmentBusiness.Get(id);
             if (!string.IsNullOrEmpty(data.ImageUrl))
                 data.ImageUrl = RheaConstant.ImagesRoot + data.ImageUrl;
+
+            if (!string.IsNullOrEmpty(data.PartMapUrl))
+                data.PartMapUrl = RheaConstant.ImagesRoot + data.PartMapUrl;
+
             return View(data);
         }
 

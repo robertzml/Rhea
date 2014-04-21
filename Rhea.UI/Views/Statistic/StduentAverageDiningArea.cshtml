@@ -33,7 +33,11 @@
     $(function () {
         var colors = Highcharts.getOptions().colors;
 
-        setColumnChart(0);
+        $.getJSON('/Statistic/StudentAverageData', function (response) {
+            setColumnChart(response);
+        });
+
+        setBoxAction();      
 
         function setColumnChart(data) {
             var option = {
@@ -48,7 +52,7 @@
                     text: '历年生均学生食堂面积'
                 },
                 xAxis: {
-                    categories: [2013, 2014, 2015]
+                    categories: []
                 },
                 yAxis: {
                     min: 0,
@@ -70,14 +74,14 @@
                 series: [{
                     name: "面积",
                     color: colors[4],
-                    data: [78.5, 79.6, 0]
+                    data: []
                 }]
             };
 
-            /*$.each(data, function (i, item) {
-                option.series[0].data.push([item.Year, parseFloat(item.AverageArea)]);
+            $.each(data, function (i, item) {
+                option.series[0].data.push([item.Year, parseFloat(item.DiningArea)]);
                 option.xAxis.categories.push(item.Year);
-            });*/
+            });
 
             var chart1 = new Highcharts.Chart(option);
         }

@@ -319,6 +319,11 @@ namespace Rhea.Data.Estate
         public double FloorageArea { get; set; }
 
         /// <summary>
+        /// 室外运动场面积
+        /// </summary>
+        public double StadiumArea { get; set; }
+
+        /// <summary>
         /// 宿舍面积
         /// </summary>
         public double DormitoryArea { get; set; }
