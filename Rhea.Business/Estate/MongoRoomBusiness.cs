@@ -118,6 +118,47 @@ namespace Rhea.Business.Estate
 
             return room;
         }
+
+        /// <summary>
+        /// 获取新ID
+        /// </summary>
+        /// <param name="type">房间类型, 1：公用房，3:宿舍</param>
+        /// <returns></returns>
+        private int GetNewId(int type)
+        {
+            type = (type + 1) * 100000;
+            BsonDocument[] pipeline = {
+                new BsonDocument {
+                    { "$project", new BsonDocument {
+                        { "id", 1 }
+                    }}
+                },
+                new BsonDocument {
+                    { "$match", new BsonDocument {
+                        { "id", new BsonDocument { 
+                            { "$lt", type }
+                        }}
+                    }}
+                },
+                new BsonDocument {
+                    { "$sort", new BsonDocument {
+                        { "id", -1 }
+                    }}
+                },
+                new BsonDocument {
+                    { "$limit", 1 }
+                }
+            };
+
+            AggregateResult max = this.context.Aggregate(EstateCollection.Room, pipeline);
+            if (max.ResultDocuments.Count() == 0)
+                return 0;
+            else
+            {
+                int maxId = max.ResultDocuments.First()["id"].AsInt32;
+                return maxId;
+            }
+        }
         #endregion //Function
 
         #region Method
@@ -359,7 +400,8 @@ namespace Rhea.Business.Estate
         /// <returns>房间ID，0:添加失败</returns>
         public int Create(Room data)
         {
-            data.Id = this.context.FindSequenceIndex(EstateCollection.Room) + 1;
+            //data.Id = this.context.FindSequenceIndex(EstateCollection.Room) + 1;
+            data.Id = this.GetNewId(1) + 1;
 
             BsonDocument doc = new BsonDocument //39
             {

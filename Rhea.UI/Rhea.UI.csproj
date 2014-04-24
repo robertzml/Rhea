@@ -611,14 +611,6 @@
     <Content Include="Plugins\map\smartmap\images\map\setup.png" />
     <Content Include="Plugins\map\smartmap\jquery.mapbox.js" />
     <Content Include="Plugins\map\smartmap\smartmap.js" />
-    <Content Include="Plugins\misc\eventline\css\history.css" />
-    <Content Include="Plugins\misc\eventline\images\arrow.png" />
-    <Content Include="Plugins\misc\eventline\images\icon06.gif" />
-    <Content Include="Plugins\misc\eventline\images\icon07.gif" />
-    <Content Include="Plugins\misc\eventline\images\icon08.gif" />
-    <Content Include="Plugins\misc\eventline\images\icon09.gif" />
-    <Content Include="Plugins\misc\eventline\images\line04.gif" />
-    <Content Include="Plugins\misc\eventline\js\main.js" />
     <Content Include="Plugins\misc\fullcalendar\fullcalendar.css" />
     <Content Include="Plugins\misc\fullcalendar\fullcalendar.js" />
     <Content Include="Plugins\misc\fullcalendar\fullcalendar.min.js" />

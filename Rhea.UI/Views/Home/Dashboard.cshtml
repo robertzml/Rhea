@@ -4,179 +4,184 @@
 @{
     ViewBag.Title = "个人主页";
 }
+<link href="@Url.Content("~/Plugins/gallery/colorbox/colorbox.css")" rel="stylesheet" type="text/css" /> 
 
+<div id="content-noside" class="clearfix">
+    <div class="contentwrapper">
 
-<!--Sidebar background-->
-<div id="section-barbg">
-</div>
+        @Html.Action("Heading", new { controller = "Common", area = "", title = Model.DepartmentName, active = "部门导航" })
 
-<div id="section-bar">
-    <div class="section-nav">
-        <ul id="secTab" class="nav nav-tabs pattern">
-            <li class="active"><a href="#tab-fun" data-toggle="tab">功 能</a></li>
-            <li><a href="#tab-stat" data-toggle="tab">统 计</a></li>
-        </ul>
+        <div id="section-bar">
+            <div class="section-nav">
+                <ul id="secTab" class="nav nav-tabs pattern">
+                    <li class="active"><a href="#tab-fun" data-toggle="tab">功 能</a></li>
+                    <li><a href="#tab-stat" data-toggle="tab">统 计</a></li>
+                </ul>
 
-        <div class="tab-content">
-            <div class="tab-pane fade in active" id="tab-fun">
-                <div class="secbar-widget">
-                    <div class="content">
-                        <button class="btn btn-primary btn-block" id="department-intro"><span class="icon16 icomoon-icon-cog white"></span> 简介</button>
-                        <button class="btn btn-info btn-block" id="department-details"><span class="icon16 icomoon-icon-info-2 white"></span> 详细</button>
-                    </div>
-                </div>
-                <hr />
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="tab-fun">
+                        <div class="secbar-widget">
+                            <div class="content">
+                                <button class="btn btn-primary btn-block" id="department-intro"><span class="icon16 icomoon-icon-cog white"></span> 简介</button>
+                                <button class="btn btn-info btn-block" id="department-details"><span class="icon16 icomoon-icon-info-2 white"></span> 详细</button>
+                            </div>
+                        </div>
+                        <hr />
 
-                <div class="secbar-widget">
-                    <h4 class="title">楼宇列表</h4>
-                    <div class="content">
-                        <ul id="building-list" class="nav nav-pills nav-stacked">
-                            @foreach (var item in Model.Buildings)
-                            {
-                                <li><a href="#" ref="@item.Id">@item.Name</a></li>
-                            }
-                        </ul>
-                    </div>
-                </div>
+                        <div class="secbar-widget">
+                            <h4 class="title">楼宇列表</h4>
+                            <div class="content">
+                                <ul id="building-list" class="nav nav-pills nav-stacked">
+                                    @foreach (var item in Model.Buildings)
+                                    {
+                                    <li><a href="#" ref="@item.Id">@item.Name</a></li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
 
-                <div class="secbar-widget">
-                    <h4 class="title">楼层列表</h4>
-                    <div class="content">
-                        <ul id="floor-list" class="nav nav-pills nav-stacked"></ul>
-                    </div>
-                </div>
+                        <div class="secbar-widget">
+                            <h4 class="title">楼层列表</h4>
+                            <div class="content">
+                                <ul id="floor-list" class="nav nav-pills nav-stacked"></ul>
+                            </div>
+                        </div>
 
-                <div class="secbar-widget" id="sec-room-info" style="display:none;">
-                    <h4 class="title">房间信息</h4>
-                    <div class="content">
-                        <div class="btn-group" data-toggle="buttons-radio">
-                            <button id="plan-view" class="btn btn-primary active">平面图</button>
-                            <button id="list-view" class="btn btn-primary">房间</button>
-                            <button id="floor-view" class="btn btn-primary">楼层</button>
+                        <div class="secbar-widget" id="sec-room-info" style="display:none;">
+                            <h4 class="title">房间信息</h4>
+                            <div class="content">
+                                <div class="btn-group" data-toggle="buttons-radio">
+                                    <button id="plan-view" class="btn btn-primary active">平面图</button>
+                                    <button id="list-view" class="btn btn-primary">房间</button>
+                                    <button id="floor-view" class="btn btn-primary">楼层</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="tab-pane fade" id="tab-stat">
-                <div class="centerContent">
-                    <ul class="bigBtnIcon">
-                        <li>
-                            <a href="#" id="room-list" title="房间列表" class="tip">
-                                <span class="icon icomoon-icon-list-view"></span><span class="txt">房间列表</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" id="department-statistic">
-                                <span class="icon icomoon-icon-drawer"></span>
-                                <span class="txt">四类用房</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" id="department-classify">
-                                <span class="icon icomoon-icon-drawer-2"></span>
-                                <span class="txt">分类统计</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" id="department-indicator">
-                                <span class="icon icomoon-icon-shield"></span>
-                                <span class="txt">指标化</span>
-                                @if (Model.Overproof > 100)
-                                {
-                                    <span class="notification red">超</span>
-                                }
-                                else
-                                {
-                                    <span class="notification green">@Model.Overproof%</span>
-                                }
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" id="department-history">
-                                <span class="icon icomoon-icon-storage"></span>
-                                <span class="txt">历史数据</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="secbar-widget">
-                    <h5 class="title">当前</h5>
-                    <div class="content">
-                        <div class="rightnow">
-                            <ul class="unstyled">
-                                <li><span class="number">@Model.StaffCount</span><span class="icon16 icomoon-icon-new-2"></span>教职工</li>
-                                <li><span class="number">@Model.Buildings.Count</span><span class="icon16 icomoon-icon-clubs"></span>楼宇</li>
-                                <li><span class="number">@Model.RoomCount</span><span class="icon16 icomoon-icon-home-9"></span>房间</li>
-                                <li><span class="number">@Math.Truncate(Model.TotalArea)</span><span class="icon16 icomoon-icon-tag"></span>面积</li>
+                    <div class="tab-pane fade" id="tab-stat">
+                        <div class="centerContent">
+                            <ul class="bigBtnIcon">
+                                <li>
+                                    <a href="#" id="room-list" title="房间列表" class="tip">
+                                        <span class="icon icomoon-icon-list-view"></span><span class="txt">房间列表</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" id="department-statistic">
+                                        <span class="icon icomoon-icon-drawer"></span>
+                                        <span class="txt">四类用房</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" id="department-classify">
+                                        <span class="icon icomoon-icon-drawer-2"></span>
+                                        <span class="txt">分类统计</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" id="department-indicator">
+                                        <span class="icon icomoon-icon-shield"></span>
+                                        <span class="txt">指标化</span>
+                                        @if (Model.Overproof > 100)
+                                        {
+                                        <span class="notification red">超</span>
+                                        }
+                                        else
+                                        {
+                                        <span class="notification green">@Model.Overproof%</span>
+                                        }
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" id="department-history">
+                                        <span class="icon icomoon-icon-storage"></span>
+                                        <span class="txt">历史数据</span>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
-                    </div>
-                </div>
-                <hr />
 
-                <div class="secbar-widget">
-                    <div class="centerContent">
-                        <div class="circle-stats">
-                            @if (Model.DepartmentType == (int)DepartmentType.Type1)
-                            {
-                                <div class="circular-item tip" title="办公用房比例">
-                                    <span class="icon icomoon-icon-license"></span>
-                                    <input type="text" value="@Model.OfficeAreaRatio" class="orangeCircle" />
+                        <div class="secbar-widget">
+                            <h5 class="title">当前</h5>
+                            <div class="content">
+                                <div class="rightnow">
+                                    <ul class="unstyled">
+                                        <li><span class="number">@Model.StaffCount</span><span class="icon16 icomoon-icon-new-2"></span>教职工</li>
+                                        <li><span class="number">@Model.Buildings.Count</span><span class="icon16 icomoon-icon-clubs"></span>楼宇</li>
+                                        <li><span class="number">@Model.RoomCount</span><span class="icon16 icomoon-icon-home-9"></span>房间</li>
+                                        <li><span class="number">@Math.Truncate(Model.TotalArea)</span><span class="icon16 icomoon-icon-tag"></span>面积</li>
+                                    </ul>
                                 </div>
-                                <div class="circular-item tip" title="实验用房比例">
-                                    <span class="icon icomoon-icon-microscope"></span>
-                                    <input type="text" value="@Model.ExperimentAreaRatio" class="blueCircle" />
+                            </div>
+                        </div>
+                        <hr />
+
+                        <div class="secbar-widget">
+                            <div class="centerContent">
+                                <div class="circle-stats">
+                                    @if (Model.DepartmentType == (int)DepartmentType.Type1)
+                                    {
+                                    <div class="circular-item tip" title="办公用房比例">
+                                        <span class="icon icomoon-icon-license"></span>
+                                        <input type="text" value="@Model.OfficeAreaRatio" class="orangeCircle" />
+                                    </div>
+                                    <div class="circular-item tip" title="实验用房比例">
+                                        <span class="icon icomoon-icon-microscope"></span>
+                                        <input type="text" value="@Model.ExperimentAreaRatio" class="blueCircle" />
+                                    </div>
+                                    <div class="circular-item tip" title="科研用房比例">
+                                        <span class="icon icomoon-icon-announcement"></span>
+                                        <input type="text" value="@Model.ResearchAreaRatio" class="yellowCircle" />
+                                    </div>
+                                    }
+                                    else
+                                    {
+                                    <div class="circular-item tip" title="办公用房比例">
+                                        <span class="icon icomoon-icon-license"></span>
+                                        <input type="text" value="@Model.OfficeAreaRatio" class="orangeCircle" />
+                                    </div>
+                                    }
+                                    @if (Model.Overproof > 100)
+                                    {
+                                    <div class="circular-item tip" title="定额率">
+                                        <span class="icon icomoon-icon-target-2"></span>
+                                        <input type="text" value="@Convert.ToInt32(Model.Overproof)" class="redCircle" />
+                                    </div>
+                                    }
+                                    else
+                                    {
+                                    <div class="circular-item tip" title="定额率">
+                                        <span class="icon icomoon-icon-target-2"></span>
+                                        <input type="text" value="@Model.Overproof" class="greenCircle" />
+                                    </div>
+                                    }
                                 </div>
-                                <div class="circular-item tip" title="科研用房比例">
-                                    <span class="icon icomoon-icon-announcement"></span>
-                                    <input type="text" value="@Model.ResearchAreaRatio" class="yellowCircle" />
-                                </div>
-                            }
-                            else
-                            {
-                                <div class="circular-item tip" title="办公用房比例">
-                                    <span class="icon icomoon-icon-license"></span>
-                                    <input type="text" value="@Model.OfficeAreaRatio" class="orangeCircle" />
-                                </div>
-                            }
-                            @if (Model.Overproof > 100)
-                            {
-                                <div class="circular-item tip" title="定额率">
-                                    <span class="icon icomoon-icon-target-2"></span>
-                                    <input type="text" value="@Convert.ToInt32(Model.Overproof)" class="redCircle" />
-                                </div>
-                            }
-                            else
-                            {
-                                <div class="circular-item tip" title="定额率">
-                                    <span class="icon icomoon-icon-target-2"></span>
-                                    <input type="text" value="@Model.Overproof" class="greenCircle" />
-                                </div>
-                            }
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
-<div id="section-content" class="clearfix">
-    <div class="row-fluid">
-        <div class="span12">
-            <div id="content2-layer"></div>
-            <div id="content2-loader"></div>
-            <div id="ajax-content2">
-                @Html.Action("Intro", "Department", new { area = "", id = Model.DepartmentId })
+        <div id="section-content" class="clearfix">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div id="content2-layer"></div>
+                    <div id="content2-loader"></div>
+                    <div id="ajax-content2">
+                        @Html.Action("Intro", "Department", new { area = "", id = Model.DepartmentId })
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 @section scripts {
+<script src="~/Plugins/gallery/colorbox/jquery.colorbox.js" type="text/javascript"></script>
 <script type="text/javascript">
     $(function () {
+        $('.navbar .nav #nav-department').parent().addClass('active');
 
         $('.tip').tooltip();
 

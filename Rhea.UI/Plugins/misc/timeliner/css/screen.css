@@ -2,9 +2,9 @@
 /* ============ TIMELINE ============= */
 
 .timelineContainer {
-	background: url("../images/line04.gif") repeat-y scroll 107px 0 rgba(0, 0, 0, 0);
+	background: url("../images/line04.gif") repeat-y scroll 130px 0 rgba(0, 0, 0, 0);
 	/*border-left:2px solid #1db702;*/
-	margin:20px auto;
+	margin-top:20px;
 	width:900px;
 }
 
@@ -38,10 +38,10 @@ div.timelineMajor {
 }
 
 	.timelineMajor h2 {
-		background:url(../images/timeline_century_tick.gif) left center no-repeat;
+		background:url(../images/timeline_century_tick.gif) 110px center no-repeat;
 		font-family:Palatino,"Times New Roman", Times, serif;
 		cursor: pointer;
-		font-size:2em;
+		font-size:1.5em;
 		font-weight:400;
 		margin:0 0 10px;
 		padding:4px 4px 4px 20px;
@@ -60,7 +60,7 @@ div.timelineMajor {
 dl.timelineMinor {
 	clear:left;
 	float:left;
-	margin:0 12px 0 100px;
+	margin:0 12px 0 130px;
 	padding:4px 4px 4px 0;
 	position:relative;
 	width:750px;

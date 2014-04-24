@@ -30,7 +30,7 @@
                         {
                             <li>
                                 <label class="checkbox">
-                                    <input class="building-group-type" type="checkbox" checked="checked" value="@Convert.ToInt32(o)" />@o.DisplayName()
+                                    <input class="building-group-type" type="checkbox" value="@Convert.ToInt32(o)" />@o.DisplayName()
                                 </label>
                             </li>
                         }
@@ -58,6 +58,8 @@
 
 <script type="text/javascript">
     $(function () {
+        $('#check-list input:checkbox[value=1]').prop('checked', true);
+
         $('button#select-all').click(function () {
             $('#check-list input:checkbox').prop('checked', true);
             return false;

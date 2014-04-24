@@ -37,7 +37,16 @@
 
         $.getJSON('/Statistic/BuildingGroupTotalAreaCompareData', { areaType: 1 }, function (response) {
             dataList = response;
-            setStackChart(response);
+            //setStackChart(response);
+
+            var sel = [];
+            $.each(dataList, function (i, item) {
+                var id = dataList[i].BuildingGroupType;
+                if (id == 1) {
+                    sel.push(dataList[i]);
+                }
+            });
+            setStackChart(sel);
         });
 
         setBoxAction();
