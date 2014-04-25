@@ -59,6 +59,7 @@
     <Compile Include="LogType.cs" />
     <Compile Include="Personnel\DepartmentModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Server\EnergyCollection.cs" />
     <Compile Include="Server\EstateCollection.cs" />
     <Compile Include="Server\PersonnelCollection.cs" />
     <Compile Include="Server\RheaCollection.cs" />

@@ -1,0 +1,97 @@
+﻿@model Rhea.Model.Energy.RoomMap
+
+@{
+    ViewBag.Title = "BindRoom";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Energy.cshtml";
+}
+
+
+<div class="box">
+    <div class="box-header well" data-original-title>
+        <h2>
+            <i class="icon-th-list"></i>绑定信息
+        </h2>
+    </div>
+
+    <div class="box-content">
+        <div class="row-fluid">
+            <div class="span12">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                
+                <fieldset>
+                    <legend>绑定信息</legend>
+
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th style="width: 100px">
+                                    属性
+                                </th>
+                                <th>
+                                    值
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.RoomId)
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.RoomId)
+                                    @Html.ValidationMessageFor(model => model.RoomId)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.NodeId)
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.NodeId)
+                                    @Html.ValidationMessageFor(model => model.NodeId)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.szOPCNode)
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.szOPCNode)
+                                    @Html.ValidationMessageFor(model => model.szOPCNode)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.Multiplying)
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.Multiplying)
+                                    @Html.ValidationMessageFor(model => model.Multiplying)
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">保存</button>
+                        <a class="btn" href="@Url.Action("BindList", new { controller = "Energy", area = "Admin" })">回到列表</a>
+                    </div>
+                </fieldset>
+            }
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+<script type="text/javascript">
+    $(function () {
+        var menu = $('a#bind-room');
+        menuNavActive(menu);
+    });
+</script>
+}

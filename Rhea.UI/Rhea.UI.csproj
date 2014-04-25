@@ -180,6 +180,7 @@
     <Compile Include="Areas\Admin\Controllers\BuildingGroupController.cs" />
     <Compile Include="Areas\Admin\Controllers\DepartmentController.cs" />
     <Compile Include="Areas\Admin\Controllers\DictionaryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\EnergyController.cs" />
     <Compile Include="Areas\Admin\Controllers\EstateController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoomController.cs" />
@@ -1071,6 +1072,10 @@
     <Content Include="Areas\Admin\Views\Advance\MapPointDetails.cshtml" />
     <Content Include="Areas\Admin\Views\Advance\MapPointEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Room\ListByBuildingGroup.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout_Energy.cshtml" />
+    <Content Include="Areas\Admin\Views\Energy\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Energy\BindRoom.cshtml" />
+    <Content Include="Areas\Admin\Views\Energy\BindDetails.cshtml" />
     <None Include="Content\fonts\icomoon.eot" />
     <None Include="Content\fonts\icomoon.ttf" />
     <None Include="Content\fonts\icomoon.woff" />

@@ -25,6 +25,11 @@ namespace Rhea.Data.Server
         /// Personnel数据库
         /// </summary>
         public static readonly string PersonnelDatabase = "personnel";
+
+        /// <summary>
+        /// Energy数据库
+        /// </summary>
+        public static readonly string EnergyDatabase = "energy";
         #endregion //Field
     }
 }
