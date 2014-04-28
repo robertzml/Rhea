@@ -41,6 +41,56 @@ namespace Rhea.Business.Energy
 
         #region Method
         /// <summary>
+        /// 获取绑定房间信息列表
+        /// </summary>
+        /// <returns></returns>
+        public List<RoomMap> GetBindList()
+        {
+            List<RoomMap> data = new List<RoomMap>();
+            var docs = this.context.FindAll(EnergyCollection.RoomMap);
+
+            foreach(BsonDocument doc in docs)
+            {
+                if (doc["status"].AsInt32 == 1)
+                    continue;
+
+                RoomMap map = new RoomMap();
+                map.RoomId = doc["roomId"].AsInt32;
+                map.NodeId = doc["nodeId"].AsInt64;
+                map.szOPCNode = doc.GetValue("szOPCNode", "").AsString;
+                map.Multiplying = doc["multiplying"].AsInt32;
+                map.Status = doc["status"].AsInt32;
+                data.Add(map);
+            }
+
+            return data;
+        }
+
+        /// <summary>
+        /// 获取绑定房间信息
+        /// </summary>
+        /// <param name="roomId">房间ID</param>
+        /// <returns></returns>
+        public RoomMap GetBind(int roomId)
+        {
+            BsonDocument doc = this.context.FindOne(EnergyCollection.RoomMap, "roomId", roomId);
+
+            if (doc != null)
+            {
+                RoomMap map = new RoomMap();
+                map.RoomId = roomId;
+                map.NodeId = doc["nodeId"].AsInt64;
+                map.szOPCNode = doc.GetValue("szOPCNode", "").AsString;
+                map.Multiplying = doc["multiplying"].AsInt32;
+                map.Status = doc["status"].AsInt32;
+
+                return map;
+            }
+            else
+                return null;
+        }
+
+        /// <summary>
         /// 绑定房间与电系统数据
         /// </summary>
         /// <param name="data">数据对象</param>

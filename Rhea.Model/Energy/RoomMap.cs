@@ -34,5 +34,11 @@ namespace Rhea.Model.Energy
         /// </summary>
         [Display(Name = "倍率")]
         public int Multiplying { get; set; }
+
+        /// <summary>
+        /// 状态
+        /// </summary>
+        [Display(Name = "状态" )]
+        public int Status { get; set; }
     }
 }

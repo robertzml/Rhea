@@ -44,6 +44,27 @@ namespace Rhea.UI.Areas.Admin.Controllers
         }
 
         /// <summary>
+        /// 绑定信息
+        /// </summary>
+        /// <param name="roomId">房间ID</param>
+        /// <returns></returns>
+        public ActionResult BindDetails(int roomId)
+        {
+            var data = this.mongoElectricBusiness.GetBind(roomId);
+            return View(data);
+        }
+
+        /// <summary>
+        /// 绑定房间列表
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult BindList()
+        {
+            var data = this.mongoElectricBusiness.GetBindList();
+            return View(data);
+        }
+
+        /// <summary>
         /// 绑定房间与电系统
         /// </summary>
         /// <returns></returns>
@@ -78,12 +99,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
             }
 
             return View(model);
-        }
-
-        public ActionResult BindDetails(int roomId)
-        {
-            return View();
-        }
+        }        
         #endregion //Action
     }
 }

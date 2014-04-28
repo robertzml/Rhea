@@ -1076,6 +1076,7 @@
     <Content Include="Areas\Admin\Views\Energy\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Energy\BindRoom.cshtml" />
     <Content Include="Areas\Admin\Views\Energy\BindDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\Energy\BindList.cshtml" />
     <None Include="Content\fonts\icomoon.eot" />
     <None Include="Content\fonts\icomoon.ttf" />
     <None Include="Content\fonts\icomoon.woff" />
