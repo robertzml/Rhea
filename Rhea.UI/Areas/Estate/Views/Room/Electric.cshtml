@@ -1,0 +1,95 @@
+﻿@model Rhea.UI.Areas.Estate.Models.ElectricModel
+
+@{
+    ViewBag.Title = "用电情况";
+}
+
+<div class="page-header">
+    <h3>
+        @ViewBag.Title
+    </h3>
+</div>
+
+<div class="row-fluid">
+    <div class="span12">
+        <div class="box chart gradient">
+            <div class="title">
+                <h4>
+                    <span class="icon16 icomoon-icon-bars"></span><span>24小时用电</span>
+                </h4>
+                <a href="#" class="minimize">Minimize</a>
+            </div>
+
+            <div class="content">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div id="container-electric-column" style="width: 99%; height:400px;">                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        var dataList;
+        var colors = Highcharts.getOptions().colors;
+
+        $.getJSON('/Estate/Room/GetElectric', { id: '@Model.RoomId' }, function (response) {
+            dataList = response;
+            if (response != null)
+                setColumnChart(dataList);
+        });
+
+        function setColumnChart(data) {
+            var option = {
+                chart: {
+                    renderTo: 'container-electric-column',
+                    type: 'column'
+                },
+                credits: {
+                    enabled: false
+                },
+                title: {
+                    text: ''
+                },
+                xAxis: {
+                    categories: [],
+                    title: {
+                        text: '小时'
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: '用电量 (kWh)'
+                    }
+                },
+                tooltip: {
+                    formatter: function () {
+                        return '' + this.y + ' kWh';
+                    }
+                },
+                plotOptions: {
+                    column: {                        
+                        borderWidth: 0
+                    }
+                },
+                series: [{
+                    name: "用电量",
+                    color: colors[5],
+                    data: []
+                }]
+            };           
+
+            $.each(data, function (i, item) {
+                option.series[0].data.push(parseFloat(item.HourDataValue));
+                option.xAxis.categories.push(i);
+            });
+
+            var chart2 = new Highcharts.Chart(option);         
+        }
+    });
+</script>

@@ -65,6 +65,7 @@
     <Compile Include="Server\RheaCollection.cs" />
     <Compile Include="Server\RheaServer.cs" />
     <Compile Include="Server\RheaMongoContext.cs" />
+    <Compile Include="Server\SqlServerContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
