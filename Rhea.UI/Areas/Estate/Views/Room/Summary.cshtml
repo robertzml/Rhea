@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "房间摘要";
     Layout = null;
+    var id = "r" + Model.Id;
 }
 
 <div class="box">
@@ -10,7 +11,7 @@
         <h4>
             <span class="icon16 icomoon-icon-camera"></span><span>所选房间信息</span>
             <form class="box-form right" action="">
-                <button id="room-details" class="btn btn-primary btn-mini" data-toggle="modal" href="/Estate/Room/Details/@Model.Id" data-target="#myModal">详细</button>
+                <button id="room-details" class="btn btn-primary btn-mini" data-toggle="modal" href="/Estate/Room/Details/@Model.Id" data-target="#@id">详细</button>
             </form>
         </h4>
     </div>
@@ -63,7 +64,7 @@
     </div>
 </div>
 
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="@id" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel">@Model.Name</h3>

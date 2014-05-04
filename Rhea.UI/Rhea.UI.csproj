@@ -1080,6 +1080,7 @@
     <Content Include="Areas\Admin\Views\Energy\BindDetails.cshtml" />
     <Content Include="Areas\Admin\Views\Energy\BindList.cshtml" />
     <Content Include="Areas\Estate\Views\Room\Electric.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\CreateUnity.cshtml" />
     <None Include="Content\fonts\icomoon.eot" />
     <None Include="Content\fonts\icomoon.ttf" />
     <None Include="Content\fonts\icomoon.woff" />
