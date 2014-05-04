@@ -69,6 +69,13 @@ namespace Rhea.Business.Account
         bool CreateUnity(string userId);
 
         /// <summary>
+        /// 添加统一身份认证用户
+        /// </summary>
+        /// <param name="data">用户数据</param>
+        /// <returns></returns>
+        bool CreateUnity(UserProfile data);
+
+        /// <summary>
         /// 用户编辑
         /// </summary>
         /// <param name="data">用户数据</param>

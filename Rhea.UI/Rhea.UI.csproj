@@ -1071,6 +1071,7 @@
     <Content Include="Areas\Admin\Views\Advance\MapPointDetails.cshtml" />
     <Content Include="Areas\Admin\Views\Advance\MapPointEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Room\ListByBuildingGroup.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\CreateUnity.cshtml" />
     <None Include="Content\fonts\icomoon.eot" />
     <None Include="Content\fonts\icomoon.ttf" />
     <None Include="Content\fonts\icomoon.woff" />

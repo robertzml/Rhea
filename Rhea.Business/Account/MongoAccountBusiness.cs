@@ -268,9 +268,9 @@ namespace Rhea.Business.Account
                 { "userId", data.UserId },
                 { "userName", data.UserName },
                 { "name", data.Name },
-                { "password", Hasher.SHA1Encrypt(data.Password) },             
+                { "password", Hasher.SHA1Encrypt(data.Password) },
                 { "userGroupId", data.UserGroupId },
-                { "isSystem", true },           
+                { "isSystem", true },
                 { "status", 0 }
             };
 
@@ -298,9 +298,39 @@ namespace Rhea.Business.Account
                 { "userId", userId },
                 { "userName", userId },
                 { "name", "" },
-                { "password", "" },             
+                { "password", "" },
                 { "userGroupId", 100006 },
-                { "isSystem", false },           
+                { "isSystem", false },
+                { "status", 0 }
+            };
+
+            WriteConcernResult result = this.context.Insert(RheaCollection.User, doc);
+
+            if (result.HasLastErrorMessage)
+                return false;
+            else
+                return true;
+        }
+
+        /// <summary>
+        /// 添加统一身份认证用户
+        /// </summary>
+        /// <param name="data">用户模型</param>
+        /// <returns></returns>
+        public bool CreateUnity(UserProfile data)
+        {
+            bool dup = this.context.CheckDuplicate(RheaCollection.User, "userId", data.UserId);
+            if (dup)    //用户已存在
+                return true;
+
+            BsonDocument doc = new BsonDocument
+            {
+                { "userId", data.UserId },
+                { "userName", data.UserId },
+                { "name", data.Name },
+                { "password", "" },
+                { "userGroupId", data.UserGroupId },
+                { "isSystem", false },
                 { "status", 0 }
             };
 

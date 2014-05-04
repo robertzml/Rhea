@@ -142,6 +142,42 @@ namespace Rhea.UI.Areas.Admin.Controllers
         }
 
         /// <summary>
+        /// 添加统一身份认证用户
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult CreateUnity()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 添加统一身份认证用户
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult CreateUnity(UserProfile model)
+        {
+            if (ModelState.IsValid)
+            {
+                bool result = this.accountBusiness.CreateUnity(model);
+
+                if (result)
+                {
+                    TempData["Message"] = "添加成功";
+                    return RedirectToAction("List", "Account", new { area = "Admin" });
+                }
+                else
+                {
+                    ModelState.AddModelError("", "保存失败");
+                }
+            }
+
+            return View(model);
+        }
+
+        /// <summary>
         /// 用户编辑
         /// </summary>
         /// <param name="id">用户系统ID</param>
