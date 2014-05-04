@@ -6,6 +6,7 @@ using Rhea.Data;
 using Rhea.Model;
 using Rhea.Model.Account;
 using Rhea.Model.Estate;
+using Rhea.UI.Areas.Estate.Models;
 using Rhea.UI.Filters;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Rhea.Business.Energy;
 
 namespace Rhea.UI.Areas.Estate.Controllers
 {
@@ -251,6 +253,18 @@ namespace Rhea.UI.Areas.Estate.Controllers
             var data = this.roomBusiness.GetAssignHistory(id);
             return View(data);
         }
+
+        /// <summary>
+        /// 用电情况
+        /// </summary>
+        /// <param name="id">房间ID</param>
+        /// <returns></returns>
+        public ActionResult Electric(int id)
+        {
+            ElectricModel model = new ElectricModel();
+            model.RoomId = id;
+            return View(model);
+        }
         #endregion //Action
 
         #region Json
@@ -276,6 +290,19 @@ namespace Rhea.UI.Areas.Estate.Controllers
         {
             double area = this.roomBusiness.GetUsableArea(id);
             return Json(area, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 获取用电数据
+        /// </summary>
+        /// <param name="id">房间ID</param>
+        /// <param name="date">查询日期</param>
+        /// <returns></returns>
+        public JsonResult GetElectric(int id, DateTime date)
+        {
+            MongoElectricBusiness electricBusiness = new MongoElectricBusiness();
+            var data = electricBusiness.GetHourValueByDay(id, date);
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
         #endregion //Json
     }

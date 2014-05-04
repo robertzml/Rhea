@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Rhea.Model.Energy.RoomMap>
+
+@{
+    ViewBag.Title = "绑定房间列表";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Energy.cshtml";
+}
+
+<div class="box">
+    <div class="box-header well" data-original-title>
+        <h2>
+            <i class="icon-tasks"></i>@ViewBag.Title
+        </h2>
+    </div>
+
+    <div class="box-content">
+        <table id="bind-room-list" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RoomId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NodeId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.szOPCNode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Multiplying)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th style="width:330px;">
+                        操作
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RoomId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NodeId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.szOPCNode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Multiplying)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                        <td>
+                            <a class="btn btn-success btn-small" href="@Url.Action("BindDetails", new { controller = "Energy", roomId = item.RoomId, area = "Admin" })"><i class="icon-zoom-in icon-white"></i>查看</a> 
+                            <a class="btn btn-warning btn-small" href="@Url.Action("Edit", new { controller = "Energy", roomId = item.RoomId, area = "Admin" })"><i class="icon-edit icon-white"></i>编辑</a>
+                            <a class="btn btn-danger btn-small" href="@Url.Action("Delete", new { controller = "Energy", roomId = item.RoomId, area = "Admin" })"><i class="icon-remove icon-white"></i>删除</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <p>
+            <a class="btn btn-primary" href="@Url.Action("BindRoom", new { controller = "Energy", area = "Admin" })"><i class="icon-plus icon-white"></i>添加绑定</a>
+        </p>
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            var dom = $('table#bind-room-list');
+            var oTable = initDataTable(dom);          
+
+            var menu = $('a#bind-list');
+            menuNavActive(menu);
+        });
+    </script>
+}

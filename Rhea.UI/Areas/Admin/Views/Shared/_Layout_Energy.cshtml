@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "_Layout_Energy";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    bool isRoot = User.IsInRole2("Root");
+}
+
+<div class="span2">
+    <div class="well sidebar-nav">
+        <ul class="nav nav-list">
+            <li class="nav-header">导航</li>
+            <li class="active"><a href="@Url.Action("Index", new { controller = "Energy", area = "Admin" })">主页</a></li>
+            <li><a href="@Url.Action("BindList", new { controller = "Energy", area = "Admin" })" id="bind-list">绑定列表</a></li>
+            <li class="nav-header">任务</li>
+            <li><a href="@Url.Action("BindRoom", new { controller = "Energy", area = "Admin" })" id="bind-room">绑定房间</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="span10">
+    @RenderBody()
+</div>
+
+@section scripts {
+    @RenderSection("scripts", required: false)
+}

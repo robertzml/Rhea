@@ -37,6 +37,10 @@ namespace Rhea.UI
                         "~/Plugins/tables/dataTables/jquery.dataTables.js",
                         "~/Plugins/tables/responsive-tables/responsive-tables.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/datepicker").Include(
+                        "~/Plugins/forms/datepicker/bootstrap-datepicker.js",
+                        "~/Plugins/forms/datepicker/bootstrap-datepicker.zh-CN.js"));
+
             // 使用 Modernizr 的开发版本进行开发和了解信息。然后，当你做好
             // 生产准备时，请使用 http://modernizr.com 上的生成工具来仅选择所需的测试。
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
@@ -64,6 +68,9 @@ namespace Rhea.UI
 
             bundles.Add(new StyleBundle("~/Content/colorbox").Include(
                         "~/Plugins/gallery/colorbox/colorbox.css"));
+
+            bundles.Add(new StyleBundle("~/Content/datepicker").Include(
+                        "~/Plugins/forms/datepicker/datepicker.css"));
         }
     }
 }
