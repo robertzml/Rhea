@@ -459,6 +459,7 @@
     <Content Include="Plugins\forms\color-picker\mask.png" />
     <Content Include="Plugins\forms\color-picker\wheel.png" />
     <Content Include="Plugins\forms\datepicker\bootstrap-datepicker.js" />
+    <Content Include="Plugins\forms\datepicker\bootstrap-datepicker.zh-CN.js" />
     <Content Include="Plugins\forms\datepicker\datepicker.css" />
     <Content Include="Plugins\forms\dualselect\jquery.dualListBox-1.3.min.js" />
     <Content Include="Plugins\forms\ibutton\ibutton-slider-default.png" />

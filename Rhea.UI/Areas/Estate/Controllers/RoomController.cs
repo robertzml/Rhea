@@ -298,10 +298,10 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <param name="id">房间ID</param>
         /// <param name="date">查询日期</param>
         /// <returns></returns>
-        public JsonResult GetElectric(int id)
+        public JsonResult GetElectric(int id, DateTime date)
         {
             MongoElectricBusiness electricBusiness = new MongoElectricBusiness();
-            var data = electricBusiness.GetHourValueByDay(id, DateTime.Now);
+            var data = electricBusiness.GetHourValueByDay(id, date);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
         #endregion //Json

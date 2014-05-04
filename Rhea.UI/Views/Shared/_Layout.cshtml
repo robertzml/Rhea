@@ -10,6 +10,7 @@
         <!-- Plugins stylesheets -->
         <link href="@Url.Content("~/Content/icons.css")" rel="stylesheet" type="text/css" />
         <link href="@Url.Content("~/Plugins/tables/dataTables/jquery.dataTables.css")" type="text/css" rel="stylesheet" />
+        @Styles.Render("~/Content/datepicker")
 
         <!-- Main stylesheets -->
         <link href="@Url.Content("~/Content/main.css")" rel="stylesheet" type="text/css" />
@@ -49,6 +50,7 @@
         @Scripts.Render("~/bundles/highcharts")
         @Scripts.Render("~/bundles/datatable")
         @Scripts.Render("~/bundles/noty")
+        @Scripts.Render("~/bundles/datepicker")
         <script src="@Url.Content("~/Plugins/misc/totop/jquery.ui.totop.min.js")" type="text/javascript" ></script>
         <script src="@Url.Content("~/Plugins/charts/sparkline/jquery.sparkline.min.js")" type="text/javascript"></script>
         <script src="@Url.Content("~/Plugins/charts/knob/jquery.knob.js")" type="text/javascript"></script>
