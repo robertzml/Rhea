@@ -154,11 +154,11 @@ namespace Rhea.Business.Energy
                 elec.RoomId = roomId;
                 elec.NodeId = map.NodeId;
                 elec.HourDate = Convert.ToDateTime(row["F_HourDate"]);
-                elec.HourDataValue = Convert.ToDecimal(row["F_HourDataValue"]);
+                elec.HourDataValue = Convert.ToDecimal(row["F_HourDataValue"]) * map.Multiplying;
                 elec.StartHourDate = Convert.ToDateTime(row["F_StartHourDate"]);
-                elec.StartHourData = Convert.ToDecimal(row["F_StartHourData"]);
+                elec.StartHourData = Convert.ToDecimal(row["F_StartHourData"]) * map.Multiplying;
                 elec.EndHourDate = Convert.ToDateTime(row["F_EndHourDate"]);
-                elec.EndHourData = Convert.ToDecimal(row["F_EndHourData"]);
+                elec.EndHourData = Convert.ToDecimal(row["F_EndHourData"]) * map.Multiplying;
 
                 data.Add(elec);
             }
@@ -182,7 +182,7 @@ namespace Rhea.Business.Energy
             List<HourElectric> data = new List<HourElectric>();
 
             string sql = string.Format("SELECT * FROM T_BD_HourValue WHERE F_NodeID = {0} AND " +
-                "F_HourDate between '{1}' and '{2}'", map.NodeId, startDate.ToString("yyyy-MM-dd"), 
+                "F_HourDate between '{1}' and '{2}'", map.NodeId, startDate.ToString("yyyy-MM-dd"),
                 endDate.ToString("yyyy-MM-dd"));
             DataTable dt = this.sqlContext.ExecuteQuery(sql);
 
@@ -192,11 +192,11 @@ namespace Rhea.Business.Energy
                 elec.RoomId = roomId;
                 elec.NodeId = map.NodeId;
                 elec.HourDate = Convert.ToDateTime(row["F_HourDate"]);
-                elec.HourDataValue = Convert.ToDecimal(row["F_HourDataValue"]);
+                elec.HourDataValue = Convert.ToDecimal(row["F_HourDataValue"]) * map.Multiplying;
                 elec.StartHourDate = Convert.ToDateTime(row["F_StartHourDate"]);
-                elec.StartHourData = Convert.ToDecimal(row["F_StartHourData"]);
+                elec.StartHourData = Convert.ToDecimal(row["F_StartHourData"]) * map.Multiplying;
                 elec.EndHourDate = Convert.ToDateTime(row["F_EndHourDate"]);
-                elec.EndHourData = Convert.ToDecimal(row["F_EndHourData"]);
+                elec.EndHourData = Convert.ToDecimal(row["F_EndHourData"]) * map.Multiplying;
 
                 data.Add(elec);
             }

@@ -157,7 +157,8 @@ namespace Rhea.UI.Controllers
         /// <returns></returns>
         public ActionResult Setting()
         {
-            return View();
+            UserProfile user = this.accountBusiness.GetByUserName(User.Identity.Name);
+            return View(user);
         }
 
         /// <summary>

@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Rhea.Model.Account.UserProfile
+
+@{
     ViewBag.Title = "用户设置";
 }
 
@@ -39,8 +41,10 @@
         </div>
         <!-- End .sidenav-widget -->
         <div class="mainnav">
-            <ul>               
+            <ul>
+                @if (Model.IsSystem) { 
                 <li><a href="#" id="change-password"><span class="icon16 icomoon-icon-locked-3"></span>修改密码</a></li>  
+                }
             </ul>
         </div>
     </div>
@@ -53,7 +57,7 @@
     <div class="contentwrapper">
         <!-- Build page from here: -->
         <div id="ajax-content1">
-        
+
         </div>
         <!--End page -->
     </div>
@@ -64,7 +68,7 @@
 @section scripts {
 <script type="text/javascript">
     $(function () {
-        $('a#change-password').click(function() {           
+        $('a#change-password').click(function() {
             ajaxLoadPage2("ChangePassword", "Account", {});
             return false;
         });

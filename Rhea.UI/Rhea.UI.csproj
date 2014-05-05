@@ -671,6 +671,7 @@
     <Content Include="Plugins\misc\search\tipuesearch_set.js" />
     <Content Include="Plugins\misc\timeliner\css\responsive.css" />
     <Content Include="Plugins\misc\timeliner\css\screen.css" />
+    <Content Include="Plugins\misc\timeliner\images\line04.gif" />
     <Content Include="Plugins\misc\timeliner\images\timeline_century_tick.gif" />
     <Content Include="Plugins\misc\timeliner\images\timeline_decade_tick.gif" />
     <Content Include="Plugins\misc\timeliner\js\timeliner.js" />
