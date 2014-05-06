@@ -11,6 +11,7 @@ using Rhea.Data.Estate;
 using Rhea.Model.Estate;
 using Rhea.UI.Areas.Estate.Models;
 using Rhea.UI.Filters;
+using Rhea.Business.Energy;
 
 namespace Rhea.UI.Areas.Estate.Controllers
 {
@@ -210,6 +211,19 @@ namespace Rhea.UI.Areas.Estate.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// 用水计量
+        /// </summary>
+        /// <param name="id">楼群ID</param>
+        /// <returns></returns>
+        public ActionResult Water(int id)
+        {
+            WaterModel data = new WaterModel();
+            data.BuildingId = id;
+
+            return View(data);
+        }
         #endregion //Action
 
         #region Json
@@ -225,7 +239,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
             IRoomBusiness roomBusiness = new MongoRoomBusiness();
             IBuildingBusiness buildingBusiness = new MongoBuildingBusiness();
             var buildings = buildingBusiness.GetListByBuildingGroup(id).OrderBy(r => r.Id);
-            
+
             foreach (var building in buildings)
             {
                 BuildingTotalAreaModel m = new BuildingTotalAreaModel
@@ -241,6 +255,19 @@ namespace Rhea.UI.Areas.Estate.Controllers
                 data.Add(m);
             }
 
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 用水数据
+        /// </summary>
+        /// <param name="id">楼宇ID</param>
+        /// <param name="date">日期</param>
+        /// <returns></returns>
+        public JsonResult GetWater(int id, DateTime date)
+        {
+            MongoWaterBusiness waterBusines = new MongoWaterBusiness();
+            var data = waterBusines.GetHourValueByDay(id, date);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
         #endregion //Json

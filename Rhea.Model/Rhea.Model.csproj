@@ -52,7 +52,9 @@
     <Compile Include="Account\UserGroup.cs" />
     <Compile Include="Account\UserProfile.cs" />
     <Compile Include="Energy\HourElectric.cs" />
+    <Compile Include="Energy\HourWater.cs" />
     <Compile Include="Energy\RoomMap.cs" />
+    <Compile Include="Energy\WaterMap.cs" />
     <Compile Include="Estate\Building.cs" />
     <Compile Include="Estate\BuildingGroup.cs" />
     <Compile Include="Estate\Campus.cs" />

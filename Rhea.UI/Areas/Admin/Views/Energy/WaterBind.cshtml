@@ -1,0 +1,88 @@
+﻿@model Rhea.Model.Energy.WaterMap
+
+@{
+    ViewBag.Title = "绑定水系统数据";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Energy.cshtml";
+}
+
+
+<div class="box">
+    <div class="box-header well" data-original-title>
+        <h2>
+            <i class="icon-th-list"></i>@ViewBag.Title
+        </h2>
+    </div>
+
+    <div class="box-content">
+        <div class="row-fluid">
+            <div class="span12">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+
+                    <fieldset>
+                        <legend>绑定信息</legend>
+
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th style="width: 100px">
+                                        属性
+                                    </th>
+                                    <th>
+                                        值
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.BuildingId)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.BuildingId)
+                                        @Html.ValidationMessageFor(model => model.BuildingId)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.NodeId)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.NodeId)
+                                        @Html.ValidationMessageFor(model => model.NodeId)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.szOPCNode)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.szOPCNode)
+                                        @Html.ValidationMessageFor(model => model.szOPCNode)
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">保存</button>
+                            <a class="btn" href="@Url.Action("WaterBindList", new { controller = "Energy", area = "Admin" })">回到列表</a>
+                        </div>
+                    </fieldset>
+                }
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            var menu = $('a#water-bind');
+            menuNavActive(menu);
+        });
+    </script>
+}

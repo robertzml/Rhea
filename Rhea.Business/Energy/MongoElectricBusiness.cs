@@ -115,7 +115,7 @@ namespace Rhea.Business.Energy
 
             BsonDocument doc = new BsonDocument
             {
-                { "roomId", data.RoomId },                
+                { "roomId", data.RoomId },
                 { "nodeId", data.NodeId },
                 { "szOPCNode", data.szOPCNode },
                 { "multiplying", data.Multiplying },

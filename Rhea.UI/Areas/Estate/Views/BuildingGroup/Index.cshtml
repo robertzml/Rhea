@@ -74,6 +74,11 @@
                                 <span class="icon icomoon-icon-support"></span><span class="txt">分楼宇统计</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="#" id="building-group-water" title="用水计量" class="tip">
+                                <span class="icon icomoon-icon-droplet"></span><span class="txt">用水计量</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <hr />
@@ -113,7 +118,7 @@
         <div class="span12">
             <div id="content2-layer"></div>
             <div id="content2-loader"></div>
-            <div id="ajax-content2">                
+            <div id="ajax-content2">
                 @Html.Action("Intro", "BuildingGroup", new { area = "Estate", id = Model.BuildingGroupId })
             </div>
         </div>
@@ -125,7 +130,7 @@
     $(function () {
         $('.tip').tooltip();
 
-        //circular progrress bar        
+        //circular progrress bar
         $(".redCircle").knob({
             'min': 0,
             'max': 100,
@@ -199,6 +204,11 @@
 
         $('a#building-group-classify').click(function () {
             ajaxContentLoadPage("Classify", "BuildingGroup", "Estate", { id: '@Model.BuildingGroupId' }, $('#ajax-content2'));
+            return false;
+        });
+
+        $('a#building-group-water').click(function () {
+            ajaxContentLoadPage("Water", "BuildingGroup", "Estate", { id: '@Model.BuildingGroupId' }, $('#ajax-content2'));
             return false;
         });
 

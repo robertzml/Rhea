@@ -1,7 +1,7 @@
-﻿@model Rhea.UI.Areas.Estate.Models.ElectricModel
+﻿@model Rhea.UI.Areas.Estate.Models.WaterModel
 
 @{
-    ViewBag.Title = "用电情况";
+    ViewBag.Title = "用水情况";
 }
 
 <div class="page-header">
@@ -10,12 +10,13 @@
     </h3>
 </div>
 
+
 <div class="row-fluid">
     <div class="span12">
         <div class="box chart gradient">
             <div class="title">
                 <h4>
-                    <span class="icon16 icomoon-icon-bars"></span><span>24小时用电</span>
+                    <span class="icon16 icomoon-icon-bars"></span><span>24小时用水</span>
                 </h4>
                 <a href="#" class="minimize">Minimize</a>
             </div>
@@ -31,7 +32,7 @@
                 </div>
                 <div class="row-fluid">
                     <div class="span12">
-                        <div id="container-electric-column" style="width: 99%; height:400px;">
+                        <div id="container-water-column" style="width: 99%; height:400px;">
                         </div>
                     </div>
                 </div>
@@ -45,20 +46,20 @@
         var dataList;
         var colors = Highcharts.getOptions().colors;
 
-        var elecdate = $('#date-select').datepicker({ format: 'yyyy-mm-dd', autoclose: true, language: "zh-CN" })
-            .on('changeDate', function (e) {
-                var d = e.date.getDate();
-                var m = e.date.getMonth();
-                m += 1;  
-                var y = e.date.getFullYear();
-                var s = y + '-' + m + '-' + d;
-                loadData(s);
-            });
+        var waterdate = $('#date-select').datepicker({ format: 'yyyy-mm-dd', autoclose: true, language: "zh-CN" })
+           .on('changeDate', function (e) {
+               var d = e.date.getDate();
+               var m = e.date.getMonth();
+               m += 1;
+               var y = e.date.getFullYear();
+               var s = y + '-' + m + '-' + d;
+               loadData(s);
+           });
 
         loadData('@DateTime.Now');
 
         function loadData(date) {
-            $.getJSON('/Estate/Room/GetElectric', { id: '@Model.RoomId', date: date }, function (response) {
+            $.getJSON('/Estate/BuildingGroup/GetWater', { id: '@Model.BuildingId', date: date }, function (response) {
                 dataList = response;
                 if (response != null)
                     setColumnChart(dataList);
@@ -68,7 +69,7 @@
         function setColumnChart(data) {
             var option = {
                 chart: {
-                    renderTo: 'container-electric-column',
+                    renderTo: 'container-water-column',
                     type: 'column'
                 },
                 credits: {
@@ -86,12 +87,12 @@
                 yAxis: {
                     min: 0,
                     title: {
-                        text: '用电量 (kWh)'
+                        text: '用水量 (t)'
                     }
                 },
                 tooltip: {
                     formatter: function () {
-                        return '' + this.y + ' kWh';
+                        return '' + this.y + ' t';
                     }
                 },
                 plotOptions: {
@@ -100,15 +101,23 @@
                     }
                 },
                 series: [{
-                    name: "用电量",
-                    color: colors[5],
-                    data: []
+                    name: "用水量",
+                    color: colors[2],
+                    data: [],
+                    dataLabels: {
+                        enabled: true,
+                        color: '#3E576F'
+                    }
                 }]
             };
 
             $.each(data, function (i, item) {
-                option.series[0].data.push(parseFloat(item.HourDataValue));
-                option.xAxis.categories.push(i);
+                option.series[0].data.push(parseFloat(item.HourValue));
+                
+                var parsedDate = new Date(parseInt(item.ReadingDate.substr(6)));
+                var jsDate = new Date(parsedDate); //Date object
+               
+                option.xAxis.categories.push(jsDate.getHours());
             });
 
             var chart2 = new Highcharts.Chart(option);

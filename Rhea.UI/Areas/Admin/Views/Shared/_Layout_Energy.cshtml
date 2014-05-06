@@ -9,9 +9,12 @@
         <ul class="nav nav-list">
             <li class="nav-header">导航</li>
             <li class="active"><a href="@Url.Action("Index", new { controller = "Energy", area = "Admin" })">主页</a></li>
+            <li class="nav-header">电系统</li>
             <li><a href="@Url.Action("BindList", new { controller = "Energy", area = "Admin" })" id="bind-list">绑定列表</a></li>
-            <li class="nav-header">任务</li>
             <li><a href="@Url.Action("BindRoom", new { controller = "Energy", area = "Admin" })" id="bind-room">绑定房间</a></li>
+            <li class="nav-header">水系统</li>
+            <li><a href="@Url.Action("WaterBindList", new { controller = "Energy", area = "Admin" })" id="water-bind-list">绑定列表</a></li>
+            <li><a href="@Url.Action("WaterBind", new { controller = "Energy", area = "Admin" })" id="water-bind">绑定楼宇</a></li>
         </ul>
     </div>
 </div>
