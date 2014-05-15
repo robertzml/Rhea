@@ -15,7 +15,13 @@ namespace Rhea.Data.Server
         /// 房间绑定表
         /// roomMap
         /// </summary>
-        public static readonly string RoomMap = "roomMap";        
+        public static readonly string RoomMap = "roomMap";
+
+        /// <summary>
+        /// 楼宇水表绑定表
+        /// waterMap
+        /// </summary>
+        public static readonly string WaterMap = "waterMap";
         #endregion //Field
     }
 }

@@ -19,6 +19,11 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// 电系统业务
         /// </summary>
         private MongoElectricBusiness mongoElectricBusiness;
+
+        /// <summary>
+        /// 水系统业务
+        /// </summary>
+        private MongoWaterBusiness mongoWaterBusiness;
         #endregion //Field
 
         #region Function
@@ -27,6 +32,11 @@ namespace Rhea.UI.Areas.Admin.Controllers
             if (mongoElectricBusiness == null)
             {
                 mongoElectricBusiness = new MongoElectricBusiness();
+            }
+
+            if (mongoWaterBusiness == null)
+            {
+                mongoWaterBusiness = new MongoWaterBusiness();
             }
 
             base.Initialize(requestContext);
@@ -43,6 +53,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
             return View();
         }
 
+        #region Electric
         /// <summary>
         /// 绑定信息
         /// </summary>
@@ -99,7 +110,65 @@ namespace Rhea.UI.Areas.Admin.Controllers
             }
 
             return View(model);
-        }        
+        }
+        #endregion //Electric
+
+        #region Water
+        /// <summary>
+        /// 水系统绑定列表
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult WaterBindList()
+        {
+            var data = this.mongoWaterBusiness.GetBindList();
+            return View(data);
+        }
+
+        /// <summary>
+        /// 水系统绑定信息
+        /// </summary>
+        /// <param name="buildingId">楼宇ID</param>
+        /// <returns></returns>
+        public ActionResult WaterBindDetails(int buildingId)
+        {
+            var data = this.mongoWaterBusiness.GetBind(buildingId);
+            return View(data);
+        }
+
+        /// <summary>
+        /// 绑定水系统数据
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult WaterBind()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 绑定水系统数据
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult WaterBind(WaterMap model)
+        {
+            if(ModelState.IsValid)
+            {
+                bool result = this.mongoWaterBusiness.BindBuilding(model);
+                if (!result)
+                {
+                    ModelState.AddModelError("", "绑定失败");
+                    return View(model);
+                }
+
+                TempData["Message"] = "绑定成功";
+                return RedirectToAction("WaterBindDetails", "Energy", new { area = "Admin", buildingId = model.BuildingId });
+            }
+
+            return View(model);
+        }
+        #endregion //Water
         #endregion //Action
     }
 }

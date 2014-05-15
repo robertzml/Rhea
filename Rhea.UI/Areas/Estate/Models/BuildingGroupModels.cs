@@ -82,4 +82,20 @@ namespace Rhea.UI.Areas.Estate.Models
         /// </summary>
         public double OtherAreaRatio { get; set; }
     }
+
+    /// <summary>
+    /// 用水模型
+    /// </summary>
+    public class WaterModel
+    {
+        /// <summary>
+        /// 楼宇ID
+        /// </summary>
+        public int BuildingId { get; set; }
+
+        /// <summary>
+        /// 水系统节点ID
+        /// </summary>
+        public long NodeId { get; set; }
+    }
 }

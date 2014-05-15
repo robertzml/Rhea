@@ -1082,6 +1082,10 @@
     <Content Include="Areas\Admin\Views\Energy\BindList.cshtml" />
     <Content Include="Areas\Estate\Views\Room\Electric.cshtml" />
     <Content Include="Areas\Admin\Views\Account\CreateUnity.cshtml" />
+    <Content Include="Areas\Admin\Views\Energy\WaterBindList.cshtml" />
+    <Content Include="Areas\Admin\Views\Energy\WaterBind.cshtml" />
+    <Content Include="Areas\Admin\Views\Energy\WaterBindDetails.cshtml" />
+    <Content Include="Areas\Estate\Views\BuildingGroup\Water.cshtml" />
     <None Include="Content\fonts\icomoon.eot" />
     <None Include="Content\fonts\icomoon.ttf" />
     <None Include="Content\fonts\icomoon.woff" />
