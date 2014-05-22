@@ -34,6 +34,10 @@ namespace Rhea.UI
             bundles.Add(new StyleBundle("~/Content/fontawesome").Include(
                       "~/Content/font-awesome.min.css"));
 
+            bundles.Add(new StyleBundle("~/Content/admin").Include(
+                     "~/Content/admin.css",
+                     "~/Content/admin.custom.css"));
+
             bundles.Add(new StyleBundle("~/Plugin/jqueryui").Include(
                      "~/plugins/jquery-ui/jquery-ui.min.css"));
 

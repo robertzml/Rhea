@@ -1,0 +1,8 @@
+body {
+	font-family: '微软雅黑', Arial;
+}
+
+div#top-panel #top-nav a{
+	line-height: 40px;
+	padding:5px 15px;
+}

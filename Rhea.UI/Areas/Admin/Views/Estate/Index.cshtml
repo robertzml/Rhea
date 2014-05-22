@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "房产管理";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    @Html.Action("Menu")
+
+
+    <!--Start Content-->
+    <div id="content" class="col-xs-12 col-sm-10 col-lg-10">
+        <div class="preloader">
+            <img src="/Images/devoops_getdata.gif" class="devoops-getdata" alt="preloader" />
+        </div>
+        
+    </div>
+    <!--End Content-->
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            topNavActive($('#estate-nav'));
+        });
+    </script>
+}
