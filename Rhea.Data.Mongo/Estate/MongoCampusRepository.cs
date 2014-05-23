@@ -33,7 +33,6 @@ namespace Rhea.Data.Mongo.Estate
         /// <summary>
         /// 获取所有校区
         /// </summary>
-        /// <remarks>状态不为1的对象</remarks>
         /// <returns>所有校区</returns>
         public IEnumerable<Campus> Get()
         {

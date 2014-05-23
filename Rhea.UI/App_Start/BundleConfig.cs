@@ -27,6 +27,10 @@ namespace Rhea.UI
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                       "~/plugins/jquery-ui/jquery-ui.min.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/datatables").Include(
+                      "~/plugins/datatables/jquery.dataTables.js",
+                      "~/plugins/datatables/dataTables.bootstrap.js"));
+
             // For css
             bundles.Add(new StyleBundle("~/Content/bootstrap").Include(
                       "~/Content/bootstrap.min.css"));

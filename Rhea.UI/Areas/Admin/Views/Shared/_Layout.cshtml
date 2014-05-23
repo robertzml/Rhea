@@ -10,8 +10,6 @@
     @Styles.Render("~/Content/bootstrap")
     @Styles.Render("~/Plugin/jqueryui")
     @Styles.Render("~/Content/fontawesome")
-    <link href='http://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css'>
-
     <link href="/plugins/select2/select2.css" rel="stylesheet">
     @Styles.Render("~/Content/admin")
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -22,10 +20,6 @@
 </head>
 <body>
     <!--Start Header-->
-    <div id="screensaver">
-        <canvas id="canvas"></canvas>
-        <i class="fa fa-lock" id="screen_unlock"></i>
-    </div>
     <div id="modalbox">
         <div class="devoops-modal">
             <div class="devoops-modal-header">
@@ -147,9 +141,10 @@
     <!--End Container-->
 
 
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <!-- plugin scripts -->
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/datatables")
     <script src="@Url.Content("~/Scripts/function.js")" type="text/javascript"></script>
     <!-- All functions for this theme + document.ready processing -->
     <script src="~/Scripts/admin.js"></script>
