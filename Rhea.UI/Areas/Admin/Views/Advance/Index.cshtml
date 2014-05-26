@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "高级管理";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    @Html.Action("Menu", "Advance")
+
+    <!--Start Content-->
+    <div id="content" class="col-xs-12 col-sm-10 col-lg-10">
+    </div>
+    <!--End Content-->
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            topNavActive($('#advance-nav'));
+        });
+    </script>
+}

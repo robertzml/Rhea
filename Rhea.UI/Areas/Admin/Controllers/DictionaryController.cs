@@ -1,5 +1,5 @@
-﻿using Rhea.Business.Estate;
-using Rhea.Model.Estate;
+﻿using Rhea.Business;
+using Rhea.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,23 +10,23 @@ using System.Web.Routing;
 namespace Rhea.UI.Areas.Admin.Controllers
 {
     /// <summary>
-    /// 校区控制器
+    /// 字典控制器
     /// </summary>
-    public class CampusController : Controller
+    public class DictionaryController : Controller
     {
         #region Field
         /// <summary>
-        /// 楼宇业务
+        /// 字典业务
         /// </summary>
-        private CampusBusiness campusBusiness;
+        private DictionaryBusiness dictionaryBusiness;
         #endregion //Field
 
         #region Function
         protected override void Initialize(RequestContext requestContext)
         {
-            if (campusBusiness == null)
+            if (dictionaryBusiness == null)
             {
-                campusBusiness = new CampusBusiness();
+                dictionaryBusiness = new DictionaryBusiness();
             }
 
             base.Initialize(requestContext);
@@ -34,30 +34,19 @@ namespace Rhea.UI.Areas.Admin.Controllers
         #endregion //Function
 
         #region Action
-        // GET: Admin/Campus
+        // GET: Admin/Dictionary
         public ActionResult Index()
         {
             return View();
         }
 
         /// <summary>
-        /// 校区列表
+        /// 字典集列表
         /// </summary>
         /// <returns></returns>
         public ActionResult List()
         {
-            var data = this.campusBusiness.Get();
-            return View(data);
-        }
-
-        /// <summary>
-        /// 校区信息
-        /// </summary>
-        /// <param name="id">校区ID</param>
-        /// <returns></returns>
-        public ActionResult Details(int id)
-        {
-            var data = this.campusBusiness.Get(id);
+            var data = this.dictionaryBusiness.Get();
             return View(data);
         }
         #endregion //Action

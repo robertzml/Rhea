@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Estate\ICampusRepository.cs" />
+    <Compile Include="IDictionaryRepository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="IRepositoryManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -52,6 +52,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CollectionName.cs" />
+    <Compile Include="Dictionary.cs" />
+    <Compile Include="Estate\Building.cs" />
     <Compile Include="Estate\Campus.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="MongoEntity.cs" />

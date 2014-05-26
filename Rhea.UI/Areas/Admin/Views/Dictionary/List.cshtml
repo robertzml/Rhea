@@ -1,0 +1,107 @@
+﻿@model IEnumerable<Rhea.Model.Dictionary>
+
+@{
+    ViewBag.Title = "字典列表";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    @Html.Action("Menu", "Advance")
+
+    <!--Start Content-->
+    <div id="content" class="col-xs-12 col-sm-10 col-lg-10">
+        <div class="row">
+            <div id="breadcrumb" class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><a href="@Url.Action("Index", "Advance")">高级管理</a></li>
+                    <li><a href="#">字典管理</a></li>
+                    <li><a href="@Url.Action("List", "Dictionary")">字典列表</a></li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-lg-12">
+                <div class="box">
+                    <div class="box-header">
+                        <div class="box-name">
+                            <i class="fa fa-table"></i>
+                            <span>@ViewBag.Title</span>
+                        </div>
+                        <div class="box-icons">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="expand-link">
+                                <i class="fa fa-expand"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                        <div class="no-move"></div>
+                    </div>
+
+                    <div class="box-content table-responsive">
+                        <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="dictionary-table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Name)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Title)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.IsCombined)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Remark)
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Title)
+                                        </td>
+                                        <td>
+                                            @item.IsCombined
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Remark)
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                                            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End Content-->
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            topNavActive($('#advance-nav'));
+            leftNavActive($('#dictionary-list-menu'));
+
+            initDatatable($('#dictionary-table'));
+        });
+    </script>
+}
