@@ -1,3 +1,11 @@
+function showMessage(text) {
+	var n = noty({
+		text: text,
+		type: 'information',
+		timeout: 1000
+	});
+}
+
 function topNavActive($dom) {
 	$('ul#top-nav').children().removeClass('active');
 	$dom.parent().addClass('active');

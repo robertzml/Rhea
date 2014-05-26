@@ -30,7 +30,7 @@ function LoadAjaxContent(url){
 //
 //  Function maked all .box selector is draggable, to disable for concrete element add class .no-drop
 //
-function WinMove(){
+function WinMove3(){
 	$( "div.box").not('.no-drop')
 		.draggable({
 			revert: true,
@@ -290,13 +290,7 @@ $(document).ready(function () {
 			e.preventDefault();
 			var content = $(this).closest('div.box');
 			content.remove();
-		});
-	$('#locked-screen').on('click', function (e) {
-		e.preventDefault();
-		$('body').addClass('body-screensaver');
-		$('#screensaver').addClass("show");
-		ScreenSaver();
-	});
+		});	
 	$('body').on('click', 'a.close-link', function(e){
 		e.preventDefault();
 		CloseModalBox();

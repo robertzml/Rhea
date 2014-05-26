@@ -134,6 +134,16 @@ namespace Rhea.Data.Mongo
         }
 
         /// <summary>
+        /// 获取配置文件连接字符串
+        /// </summary>
+        /// <param name="configName">配置名称</param>
+        /// <returns></returns>
+        public static string GetconfigconnectionString(string configName)
+        {
+            return ConfigurationManager.ConnectionStrings[configName].ConnectionString;
+        }
+
+        /// <summary>
         /// 获取Collection
         /// </summary>
         /// <typeparam name="T">实体类型</typeparam>

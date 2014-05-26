@@ -17,6 +17,7 @@ namespace Rhea.Model
         /// <summary>
         /// 名称
         /// </summary>
+        [Required]
         [BsonElement("name")]
         [Display(Name = "名称")]
         public string Name { get; set; }
@@ -24,6 +25,7 @@ namespace Rhea.Model
         /// <summary>
         /// 标题
         /// </summary>
+        [Required]
         [BsonElement("title")]
         [Display(Name = "标题")]
         public string Title { get; set; }
@@ -45,6 +47,7 @@ namespace Rhea.Model
         /// <summary>
         /// 备注
         /// </summary>
+        [DataType(DataType.MultilineText)]
         [BsonElement("remark")]
         [Display(Name = "备注")]
         public string Remark { get; set; }

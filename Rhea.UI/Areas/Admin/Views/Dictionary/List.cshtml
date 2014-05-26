@@ -58,7 +58,7 @@
                                     <th>
                                         @Html.DisplayNameFor(model => model.Remark)
                                     </th>
-                                    <th></th>
+                                    <th>操作</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -78,15 +78,19 @@
                                             @Html.DisplayFor(modelItem => item.Remark)
                                         </td>
                                         <td>
-                                            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                                            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                                            <a href="@Url.Action("Details", new { controller = "Dictionary", name = item.Name })" class="btn btn-info btn-sm" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
+                                            <a href="@Url.Action("Edit", new { controller = "Dictionary", name = item.Name })" class="btn btn-warning btn-sm" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
                                         </td>
                                     </tr>
                                 }
 
                             </tbody>
                         </table>
+
+                        <hr />
+                        <p>
+                            <a href="@Url.Action("Create", new { controller = "Dictionary" })" class="btn btn-primary" role="button"><i class="fa fa-plus-circle"></i>&nbsp;添加字典</a>
+                        </p>
                     </div> 
                 </div>
             </div>

@@ -25,23 +25,12 @@
         </li>
         <li class="dropdown">
             <a href="#" class="dropdown-toggle">
-                <i class="fa fa-table"></i>
-                <span class="hidden-xs">楼宇管理</span>
-            </a>
-            <ul class="dropdown-menu">
-                <li><a class="ajax-link" href="ajax/tables_simple.html">Simple Tables</a></li>
-                <li><a class="ajax-link" href="ajax/tables_datatables.html">Data Tables</a></li>
-                <li><a class="ajax-link" href="ajax/tables_beauty.html">Beauty Tables</a></li>
-            </ul>
-        </li>
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle">
                 <i class="fa fa-book"></i>
                 <span class="hidden-xs">字典管理</span>
             </a>
             <ul class="dropdown-menu">
                 <li><a href="@Url.Action("List", "Dictionary")" id="dictionary-list-menu">字典列表</a></li>
-                <li><a href="#">房间功能</a></li>
+                <li><a href="@Url.Action("Create", "Dictionary")" id="dictionary-create-menu">添加字典</a></li>
                 <li><a href="#">File Uploader</a></li>
             </ul>
         </li>

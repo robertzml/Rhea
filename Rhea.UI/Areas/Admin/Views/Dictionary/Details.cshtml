@@ -1,0 +1,118 @@
+﻿@model Rhea.Model.Dictionary
+
+@{
+    ViewBag.Title = "字典信息";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    @Html.Action("Menu", "Advance")
+
+    <div id="content" class="col-xs-12 col-sm-10 col-lg-10">
+        <div class="row">
+            <div id="breadcrumb" class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><a href="@Url.Action("Index", "Advance")">高级管理</a></li>
+                    <li><a href="#">字典管理</a></li>
+                    <li><a href="@Url.Action("List", "Dictionary")">字典列表</a></li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-lg-12">
+                <div class="box">
+                    <div class="box-header">
+                        <div class="box-name">
+                            <i class="fa fa-info-circle"></i>
+                            <span>@ViewBag.Title</span>
+                        </div>
+                        <div class="box-icons">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="expand-link">
+                                <i class="fa fa-expand"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                        <div class="no-move"></div>
+                    </div>
+
+                    <div class="box-content table-responsive">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>属性</th>
+                                    <th>值</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Name)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Title)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Title)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.IsCombined)
+                                    </td>
+                                    <td>
+                                        @Model.IsCombined
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Property)
+                                    </td>
+                                    <td>
+                                        @foreach (var item in Model.Property)
+                                        {
+                                            <span>@item</span><br />
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Remark)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Remark)
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <hr />
+                        <p>
+                            <a href="@Url.Action("List", new { controller = "Dictionary" })" class="btn btn-primary" role="button"><i class="fa fa-list"></i>&nbsp;回到列表</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            topNavActive($('#advance-nav'));
+            leftNavActive($('#dictionary-list-menu'));
+        });
+    </script>
+}
