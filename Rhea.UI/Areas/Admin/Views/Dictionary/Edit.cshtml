@@ -1,7 +1,7 @@
 ﻿@model Rhea.Model.Dictionary
 
 @{
-    ViewBag.Title = "添加字典";
+    ViewBag.Title = "编辑字典";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
@@ -14,7 +14,7 @@
                 <ol class="breadcrumb">
                     <li><a href="@Url.Action("Index", "Advance")">高级管理</a></li>
                     <li><a href="#">字典管理</a></li>
-                    <li><a href="@Url.Action("Create", "Dictionary")">添加字典</a></li>
+                    <li><a href="#">编辑字典</a></li>
                 </ol>
             </div>
         </div>
@@ -49,6 +49,7 @@
                                 <legend>字典属性</legend>
 
                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model._id)
 
                                 <table class="table table-bordered table-striped table-hover">
                                     <thead>
@@ -64,7 +65,7 @@
                                                 @Html.LabelFor(model => model.Name)
                                             </td>
                                             <td>
-                                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                                             </td>
                                             <td>
                                                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
@@ -86,7 +87,7 @@
                                                 @Html.LabelFor(model => model.Property)
                                             </td>
                                             <td>
-                                                <textarea id="Property" name="Property" class="form-control"></textarea>
+                                                <textarea id="Property" name="Property" class="form-control">@ViewBag.Property</textarea>
                                             </td>
                                             <td>
                                                 @Html.ValidationMessageFor(model => model.Property, "", new { @class = "text-danger" })
@@ -108,8 +109,8 @@
 
                                 <hr />
                                 <p>
-                                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;添加</button>
-                                    <a href="@Url.Action("List", new { controller = "Dictionary" })" class="btn btn-default" role="button"><i class="fa fa-list"></i>&nbsp;回到列表</a>
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;保存</button>
+                                    <a href="@Url.Action("Details", new { controller = "Dictionary", name = Model.Name })" class="btn btn-default" role="button"><i class="fa fa-list"></i>&nbsp;取消</a>
                                 </p>
                             </fieldset>
                         }
@@ -124,7 +125,7 @@
     <script type="text/javascript">
         $(function () {
             topNavActive($('#advance-nav'));
-            leftNavActive($('#dictionary-create-menu'));
+            leftNavActive($('#dictionary-list-menu'));
         });
     </script>
 }

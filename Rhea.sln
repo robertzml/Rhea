@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rhea.Data.Mongo", "Rhea.Dat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rhea.Business", "Rhea.Business\Rhea.Business.csproj", "{AB669DD9-BC89-4BEA-93D5-0AEB650067E3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rhea.Common", "Rhea.Common\Rhea.Common.csproj", "{A89D3A8E-B3F7-41B9-B4AA-4C31AD0D6603}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{AB669DD9-BC89-4BEA-93D5-0AEB650067E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB669DD9-BC89-4BEA-93D5-0AEB650067E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB669DD9-BC89-4BEA-93D5-0AEB650067E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A89D3A8E-B3F7-41B9-B4AA-4C31AD0D6603}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A89D3A8E-B3F7-41B9-B4AA-4C31AD0D6603}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A89D3A8E-B3F7-41B9-B4AA-4C31AD0D6603}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A89D3A8E-B3F7-41B9-B4AA-4C31AD0D6603}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

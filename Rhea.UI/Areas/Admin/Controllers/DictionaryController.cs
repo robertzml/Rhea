@@ -1,12 +1,13 @@
 ﻿using Rhea.Business;
+using Rhea.Common;
 using Rhea.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using System.Text.RegularExpressions;
 
 namespace Rhea.UI.Areas.Admin.Controllers
 {
@@ -86,16 +87,62 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 model.Property = Regex.Split(Request.Form["Property"].TrimEnd(), "\r\n");
                 model.IsCombined = false;
 
-                bool result = this.dictionaryBusiness.Create(model);
-                if (result)
+                ErrorCode result = this.dictionaryBusiness.Create(model);
+                if (result == ErrorCode.Success)
                 {
                     TempData["Message"] = "添加字典成功";
                     return RedirectToAction("List", "Dictionary");
                 }
                 else
+                {
                     TempData["Message"] = "添加字典失败";
+                    ModelState.AddModelError("", result.DisplayName());
+                }
             }
-            return View();
+            return View(model);
+        }
+
+        /// <summary>
+        /// 编辑字典
+        /// </summary>
+        /// <param name="name">字典集名称</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Edit(string name)
+        {
+            var data = this.dictionaryBusiness.Get(name);
+            ViewBag.Property = string.Join("\r\n", data.Property);
+            return View(data);
+        }
+
+        /// <summary>
+        /// 编辑字典
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Edit(Dictionary model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.Property = Regex.Split(Request.Form["Property"].TrimEnd(), "\r\n");
+                model.IsCombined = false;
+
+                ErrorCode result = this.dictionaryBusiness.Edit(model);
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "编辑字典成功";
+                    return RedirectToAction("List", "Dictionary");
+                }
+                else
+                {
+                    TempData["Message"] = "编辑字典失败";
+                    ModelState.AddModelError("", result.DisplayName());
+                }
+            }
+
+            return View(model);
         }
         #endregion //Action
     }

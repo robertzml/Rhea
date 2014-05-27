@@ -55,22 +55,41 @@ namespace Rhea.Data.Mongo
         /// </summary>
         /// <param name="data">字典对象</param>
         /// <returns></returns>
-        public bool Create(Dictionary data)
+        public ErrorCode Create(Dictionary data)
         {
             try
             {
                 bool dup = this.repository.Exists(r => r.Name == data.Name);
                 if (dup)
-                    return false;
+                    return ErrorCode.DuplicateName;
 
                 this.repository.Add(data);
             }
             catch (Exception)
             {
-                return false;
+                return ErrorCode.Exception;
             }
 
-            return true;
+            return ErrorCode.Success;
+        }
+
+        /// <summary>
+        /// 保存字典集
+        /// </summary>
+        /// <param name="data">字典对象</param>
+        /// <returns></returns>
+        public ErrorCode Edit(Dictionary data)
+        {
+            try
+            {
+                this.repository.Update(data);
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
         }
         #endregion //Method
     }

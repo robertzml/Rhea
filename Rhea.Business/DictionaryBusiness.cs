@@ -56,9 +56,19 @@ namespace Rhea.Business
         /// </summary>
         /// <param name="data">字典对象</param>
         /// <returns></returns>
-        public bool Create(Dictionary data)
+        public ErrorCode Create(Dictionary data)
         {
             return this.dictionaryRepository.Create(data);
+        }
+
+        /// <summary>
+        /// 编辑字典集
+        /// </summary>
+        /// <param name="data">字典对象</param>
+        /// <returns></returns>
+        public ErrorCode Edit(Dictionary data)
+        {
+            return this.dictionaryRepository.Edit(data);
         }
         #endregion //Method
     }

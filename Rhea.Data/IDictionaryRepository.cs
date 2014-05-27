@@ -30,6 +30,13 @@ namespace Rhea.Data
         /// </summary>
         /// <param name="data">字典对象</param>
         /// <returns></returns>
-        bool Create(Dictionary data);
+        ErrorCode Create(Dictionary data);
+
+        /// <summary>
+        /// 保存字典集
+        /// </summary>
+        /// <param name="data">字典对象</param>
+        /// <returns></returns>
+        ErrorCode Edit(Dictionary data);
     }
 }
