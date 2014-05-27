@@ -18,19 +18,18 @@
                 <span class="hidden-xs">校区管理</span>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="@Url.Action("List", "Campus")" id="estate-list-menu">校区列表</a></li>
-                <li><a class="ajax-link" href="ajax/charts_flot.html">添加校区</a></li>
+                <li><a href="@Url.Action("List", "Campus")" id="campus-list-menu">校区列表</a></li>
+                <li><a href="#">添加校区</a></li>
             </ul>
         </li>
         <li class="dropdown">
             <a href="#" class="dropdown-toggle">
-                <i class="fa fa-table"></i>
-                <span class="hidden-xs">楼宇管理</span>
+                <i class="fa fa-building"></i>
+                <span class="hidden-xs">建筑管理</span>
             </a>
             <ul class="dropdown-menu">
-                <li><a class="ajax-link" href="ajax/tables_simple.html">Simple Tables</a></li>
-                <li><a class="ajax-link" href="ajax/tables_datatables.html">Data Tables</a></li>
-                <li><a class="ajax-link" href="ajax/tables_beauty.html">Beauty Tables</a></li>
+                <li><a href="@Url.Action("List", "Building")" id="building-list-menu">建筑列表</a></li>
+                <li><a href="@Url.Action("Create", "Building")" id="building-create-menu">添加建筑</a></li>
             </ul>
         </li>
         <li class="dropdown">

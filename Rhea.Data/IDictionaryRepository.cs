@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Rhea.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Rhea.Model;
 
 namespace Rhea.Data
 {

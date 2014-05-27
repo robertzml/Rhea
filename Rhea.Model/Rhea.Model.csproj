@@ -55,7 +55,9 @@
     <Compile Include="Dictionary.cs" />
     <Compile Include="ErrorCode.cs" />
     <Compile Include="Estate\Building.cs" />
+    <Compile Include="Estate\BuildingGroup.cs" />
     <Compile Include="Estate\Campus.cs" />
+    <Compile Include="Estate\EstateModels.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="MongoEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

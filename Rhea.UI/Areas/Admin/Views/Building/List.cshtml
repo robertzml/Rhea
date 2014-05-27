@@ -1,0 +1,137 @@
+﻿@model IEnumerable<Rhea.Model.Estate.Building>
+
+@{
+    ViewBag.Title = "建筑列表";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    @Html.Action("Menu", "Estate")
+
+    <!--Start Content-->
+    <div id="content" class="col-xs-12 col-sm-10 col-lg-10">
+        <div class="row">
+            <div id="breadcrumb" class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><a href="@Url.Action("Index", "Estate")">房产管理</a></li>
+                    <li><a href="#">校区管理</a></li>
+                    <li><a href="@Url.Action("List", "Building")">建筑列表</a></li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-lg-12">
+                <div class="box">
+                    <div class="box-header">
+                        <div class="box-name">
+                            <i class="fa fa-table"></i>
+                            <span>@ViewBag.Title</span>
+                        </div>
+                        <div class="box-icons">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="expand-link">
+                                <i class="fa fa-expand"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                        <div class="no-move"></div>
+                    </div>
+
+                    <div class="box-content table-responsive">
+                        <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="building-table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.BuildingId)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Name)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.CampusId)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.BuildArea)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.UsableArea)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.BuildType)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.UseType)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Sort)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Status)
+                                    </th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.BuildingId)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CampusId)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.BuildArea)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.UsableArea)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.BuildType)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.UseType)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Sort)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Status)
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.BuildingId }) |
+                                            @Html.ActionLink("Details", "Details", new { id = item.BuildingId }) |
+                                            @Html.ActionLink("Delete", "Delete", new { id = item.BuildingId })
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                        <hr />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            topNavActive($('#estate-nav'));
+            leftNavActive($('#building-list-menu'));
+
+            initDatatable($('#building-table'));
+        });
+    </script>
+}

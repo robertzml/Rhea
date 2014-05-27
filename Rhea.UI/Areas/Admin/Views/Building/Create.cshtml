@@ -1,0 +1,386 @@
+﻿@model Rhea.Model.Estate.Building
+
+@{
+    ViewBag.Title = "添加建筑";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    @Html.Action("Menu", "Estate")
+
+    <div id="content" class="col-xs-12 col-sm-10 col-lg-10">
+        <div class="row">
+            <div id="breadcrumb" class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><a href="@Url.Action("Index", "Advance")">高级管理</a></li>
+                    <li><a href="#">字典管理</a></li>
+                    <li><a href="@Url.Action("Create", "Dictionary")">添加字典</a></li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-lg-12">
+                <div class="box">
+                    <div class="box-header">
+                        <div class="box-name">
+                            <i class="fa fa-plus-circle"></i>
+                            <span>@ViewBag.Title</span>
+                        </div>
+                        <div class="box-icons">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="expand-link">
+                                <i class="fa fa-expand"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                        <div class="no-move"></div>
+                    </div>
+
+                    <div class="box-content table-responsive">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            <fieldset>
+                                <legend>建筑属性</legend>
+
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                <table class="table table-bordered table-striped table-hover">
+                                    <thead>
+                                        <tr>
+
+                                            <th class="col-md-2">属性</th>
+                                            <th class="col-md-8">值</th>
+                                            <th class="col-md-2">验证</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                @Html.LabelFor(model => model.BuildingId)
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(model => model.BuildingId, new { htmlAttributes = new { @class = "form-control" } })
+                                            </td>
+                                            <td>
+                                                @Html.ValidationMessageFor(model => model.BuildingId, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @Html.LabelFor(model => model.Name)
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                            </td>
+                                            <td>
+                                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @Html.LabelFor(model => model.ImageUrl)
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(model => model.ImageUrl, new { htmlAttributes = new { @class = "form-control" } })
+                                            </td>
+                                            <td>
+                                                @Html.ValidationMessageFor(model => model.ImageUrl, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @Html.LabelFor(model => model.PartMapUrl)
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(model => model.PartMapUrl, new { htmlAttributes = new { @class = "form-control" } })
+                                            </td>
+                                            <td>
+                                                @Html.ValidationMessageFor(model => model.PartMapUrl, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @Html.LabelFor(model => model.CampusId)
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(model => model.CampusId, new { htmlAttributes = new { @class = "form-control" } })
+                                            </td>
+                                            <td>
+                                                @Html.ValidationMessageFor(model => model.CampusId, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @Html.LabelFor(model => model.ParentId)
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(model => model.ParentId, new { htmlAttributes = new { @class = "form-control" } })
+                                            </td>
+                                            <td>
+                                                @Html.ValidationMessageFor(model => model.ParentId, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @Html.LabelFor(model => model.HasChild)
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(model => model.HasChild, new { htmlAttributes = new { @class = "form-control" } })
+                                            </td>
+                                            <td>
+                                                @Html.ValidationMessageFor(model => model.HasChild, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @Html.LabelFor(model => model.OrganizeType)
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(model => model.OrganizeType, new { htmlAttributes = new { @class = "form-control" } })
+                                            </td>
+                                            <td>
+                                                @Html.ValidationMessageFor(model => model.OrganizeType, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @Html.LabelFor(model => model.UseType)
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(model => model.UseType, new { htmlAttributes = new { @class = "form-control" } })
+                                            </td>
+                                            <td>
+                                                @Html.ValidationMessageFor(model => model.UseType, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @Html.LabelFor(model => model.BuildArea)
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(model => model.BuildArea, new { htmlAttributes = new { @class = "form-control" } })
+                                            </td>
+                                            <td>
+                                                @Html.ValidationMessageFor(model => model.BuildArea, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @Html.LabelFor(model => model.UsableArea)
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(model => model.UsableArea, new { htmlAttributes = new { @class = "form-control" } })
+                                            </td>
+                                            <td>
+                                                @Html.ValidationMessageFor(model => model.UsableArea, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @Html.LabelFor(model => model.Floorage)
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(model => model.Floorage, new { htmlAttributes = new { @class = "form-control" } })
+                                            </td>
+                                            <td>
+                                                @Html.ValidationMessageFor(model => model.Floorage, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @Html.LabelFor(model => model.AreaCoeffcient)
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(model => model.AreaCoeffcient, new { htmlAttributes = new { @class = "form-control" } })
+                                            </td>
+                                            <td>
+                                                @Html.ValidationMessageFor(model => model.AreaCoeffcient, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @Html.LabelFor(model => model.BuildType)
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(model => model.BuildType, new { htmlAttributes = new { @class = "form-control" } })
+                                            </td>
+                                            <td>
+                                                @Html.ValidationMessageFor(model => model.BuildType, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @Html.LabelFor(model => model.BuildStructure)
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(model => model.BuildStructure, new { htmlAttributes = new { @class = "form-control" } })
+                                            </td>
+                                            <td>
+                                                @Html.ValidationMessageFor(model => model.BuildStructure, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @Html.LabelFor(model => model.BuildCost)
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(model => model.BuildCost, new { htmlAttributes = new { @class = "form-control" } })
+                                            </td>
+                                            <td>
+                                                @Html.ValidationMessageFor(model => model.BuildCost, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @Html.LabelFor(model => model.CurrentValue)
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(model => model.CurrentValue, new { htmlAttributes = new { @class = "form-control" } })
+                                            </td>
+                                            <td>
+                                                @Html.ValidationMessageFor(model => model.CurrentValue, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @Html.LabelFor(model => model.Classified)
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(model => model.Classified, new { htmlAttributes = new { @class = "form-control" } })
+                                            </td>
+                                            <td>
+                                                @Html.ValidationMessageFor(model => model.Classified, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @Html.LabelFor(model => model.FundsSubject)
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(model => model.FundsSubject, new { htmlAttributes = new { @class = "form-control" } })
+                                            </td>
+                                            <td>
+                                                @Html.ValidationMessageFor(model => model.FundsSubject, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @Html.LabelFor(model => model.EquityNumber)
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(model => model.EquityNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                            </td>
+                                            <td>
+                                                @Html.ValidationMessageFor(model => model.EquityNumber, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @Html.LabelFor(model => model.BuildDate)
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(model => model.BuildDate, new { htmlAttributes = new { @class = "form-control" } })
+                                            </td>
+                                            <td>
+                                                @Html.ValidationMessageFor(model => model.BuildDate, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                @Html.LabelFor(model => model.FixedYear)
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(model => model.FixedYear, new { htmlAttributes = new { @class = "form-control" } })
+                                            </td>
+                                            <td>
+                                                @Html.ValidationMessageFor(model => model.FixedYear, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @Html.LabelFor(model => model.DesignCompany)
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(model => model.DesignCompany, new { htmlAttributes = new { @class = "form-control" } })
+                                            </td>
+                                            <td>
+                                                @Html.ValidationMessageFor(model => model.DesignCompany, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @Html.LabelFor(model => model.ConstructCompany)
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(model => model.ConstructCompany, new { htmlAttributes = new { @class = "form-control" } })
+                                            </td>
+                                            <td>
+                                                @Html.ValidationMessageFor(model => model.ConstructCompany, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @Html.LabelFor(model => model.ManageType)
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(model => model.ManageType, new { htmlAttributes = new { @class = "form-control" } })
+                                            </td>
+                                            <td>
+                                                @Html.ValidationMessageFor(model => model.ManageType, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @Html.LabelFor(model => model.Sort)
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(model => model.Sort, new { htmlAttributes = new { @class = "form-control" } })
+                                            </td>
+                                            <td>
+                                                @Html.ValidationMessageFor(model => model.Sort, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @Html.LabelFor(model => model.Remark)
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
+                                            </td>
+                                            <td>
+                                                @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <hr />
+                                <p>
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;添加</button>
+                                    <a href="@Url.Action("List", new { controller = "Building" })" class="btn btn-default" role="button"><i class="fa fa-list"></i>&nbsp;回到列表</a>
+                                </p>
+                        </fieldset>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            topNavActive($('#estate-nav'));
+            leftNavActive($('#building-create-menu'));
+        });
+    </script>
+}

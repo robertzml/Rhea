@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Estate\IBuildingRepository.cs" />
     <Compile Include="Estate\ICampusRepository.cs" />
     <Compile Include="IDictionaryRepository.cs" />
     <Compile Include="IRepository.cs" />
