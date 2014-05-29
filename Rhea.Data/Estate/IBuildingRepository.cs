@@ -20,10 +20,24 @@ namespace Rhea.Data.Estate
         IEnumerable<Building> Get();
 
         /// <summary>
+        /// 获取建筑
+        /// </summary>
+        /// <param name="id">建筑ID</param>
+        /// <returns></returns>
+        Building Get(int id);
+
+        /// <summary>
+        /// 按组织类型获取建筑
+        /// </summary>
+        /// <param name="organizeType">组织类型</param>
+        /// <returns></returns>
+        IEnumerable<Building> GetByOrganizeType(int organizeType);
+
+        /// <summary>
         /// 添加建筑
         /// </summary>
-        /// <param name="model">建筑对象</param>
+        /// <param name="data">建筑对象</param>
         /// <returns></returns>
-        ErrorCode Create(Building model);
+        ErrorCode Create(Building data);
     }
 }

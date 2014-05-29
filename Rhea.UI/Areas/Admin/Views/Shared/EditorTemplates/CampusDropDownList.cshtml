@@ -1,0 +1,16 @@
+﻿@model int?
+
+<select class="form-control" id="CampusId" name="CampusId">
+    <option value="">-- 请选择 --</option>
+    @{
+        CampusBusiness business = new CampusBusiness();
+        IEnumerable<Campus> campus = business.Get();
+
+        foreach (var item in campus)
+        {
+        <option value="@item.CampusId" @(Model == item.CampusId ? "selected='selected'" : "")>
+            @item.Name
+        </option>
+        }
+    }
+</select>

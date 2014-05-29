@@ -42,6 +42,7 @@
     <Compile Include="DictionaryBusiness.cs" />
     <Compile Include="Estate\BuildingBusiness.cs" />
     <Compile Include="Estate\CampusBusiness.cs" />
+    <Compile Include="ModelExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

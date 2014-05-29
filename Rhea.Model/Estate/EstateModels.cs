@@ -55,6 +55,9 @@ namespace Rhea.Model.Estate
         Stadium = 7
     }
 
+    /// <summary>
+    /// 建筑组织形式
+    /// </summary>
     public enum BuildingOrganizeType
     {
         /// <summary>

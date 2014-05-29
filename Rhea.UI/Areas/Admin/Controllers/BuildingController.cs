@@ -1,4 +1,6 @@
 ﻿using Rhea.Business.Estate;
+using Rhea.Common;
+using Rhea.Model;
 using Rhea.Model.Estate;
 using System;
 using System.Collections.Generic;
@@ -51,6 +53,22 @@ namespace Rhea.UI.Areas.Admin.Controllers
         }
 
         /// <summary>
+        /// 建筑详细
+        /// </summary>
+        /// <param name="id">建筑ID</param>
+        /// <returns></returns>
+        public ActionResult Details(int id)
+        {
+            var data = this.buildingBusiness.Get(id);
+
+            if (data.OrganizeType == (int)BuildingOrganizeType.BuildingGroup)
+            {
+                return View("BuildingGroupDetails", data);
+            }
+            return View(data);
+        }
+
+        /// <summary>
         /// 添加建筑
         /// </summary>
         /// <returns></returns>
@@ -60,11 +78,32 @@ namespace Rhea.UI.Areas.Admin.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 添加建筑
+        /// </summary>
+        /// <param name="model">建筑对象</param>
+        /// <returns></returns>
         [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult Create(Building model)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                ErrorCode result = this.buildingBusiness.Create(model);
+
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "添加建筑成功";
+                    return RedirectToAction("List", "Building");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "添加建筑失败");
+                    ModelState.AddModelError("", result.DisplayName());
+                }
+            }
+
+            return View(model);
         }
         #endregion //Action
     }

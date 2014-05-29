@@ -42,13 +42,47 @@ namespace Rhea.Data.Mongo.Estate
         }
 
         /// <summary>
+        /// 获取建筑
+        /// </summary>
+        /// <param name="id">建筑ID</param>
+        /// <returns></returns>
+        public virtual Building Get(int id)
+        {
+            return this.repository.Where(r => r.BuildingId == id).First();
+        }
+
+        /// <summary>
+        /// 按组织类型获取建筑
+        /// </summary>
+        /// <param name="organizeType">组织类型</param>
+        /// <returns></returns>
+        public IEnumerable<Building> GetByOrganizeType(int organizeType)
+        {
+            return this.repository.Where(r => r.OrganizeType == organizeType);
+        }
+
+        /// <summary>
         /// 添加建筑
         /// </summary>
-        /// <param name="model">建筑对象</param>
+        /// <param name="data">建筑对象</param>
         /// <returns></returns>
-        public ErrorCode Create(Building model)
+        public ErrorCode Create(Building data)
         {
-            throw new NotImplementedException();
+            try
+            {
+                bool dup = this.repository.Exists(r => r.BuildingId == data.BuildingId);
+                if (dup)
+                    return ErrorCode.DuplicateId;
+
+
+                this.repository.Add(data);
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
         }
         #endregion //Method
     }

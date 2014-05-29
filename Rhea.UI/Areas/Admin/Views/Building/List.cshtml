@@ -14,7 +14,7 @@
             <div id="breadcrumb" class="col-md-12">
                 <ol class="breadcrumb">
                     <li><a href="@Url.Action("Index", "Estate")">房产管理</a></li>
-                    <li><a href="#">校区管理</a></li>
+                    <li><a href="#">建筑管理</a></li>
                     <li><a href="@Url.Action("List", "Building")">建筑列表</a></li>
                 </ol>
             </div>
@@ -56,16 +56,16 @@
                                         @Html.DisplayNameFor(model => model.CampusId)
                                     </th>
                                     <th>
+                                        @Html.DisplayNameFor(model => model.OrganizeType)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.UseType)
+                                    </th>
+                                    <th>
                                         @Html.DisplayNameFor(model => model.BuildArea)
                                     </th>
                                     <th>
                                         @Html.DisplayNameFor(model => model.UsableArea)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.BuildType)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.UseType)
                                     </th>
                                     <th>
                                         @Html.DisplayNameFor(model => model.Sort)
@@ -87,7 +87,19 @@
                                             @Html.DisplayFor(modelItem => item.Name)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.CampusId)
+                                            @item.CampusName()
+                                        </td>
+                                        <td>
+                                            @{
+                                            var type1 = (BuildingOrganizeType)item.OrganizeType;
+                                            @type1.DisplayName();
+                                            }
+                                        </td>
+                                        <td>
+                                            @{
+                                            var type2 = (BuildingUseType)item.UseType;
+                                            @type2.DisplayName();
+                                            }
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.BuildArea)
@@ -96,21 +108,14 @@
                                             @Html.DisplayFor(modelItem => item.UsableArea)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.BuildType)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.UseType)
-                                        </td>
-                                        <td>
                                             @Html.DisplayFor(modelItem => item.Sort)
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Status)
                                         </td>
                                         <td>
-                                            @Html.ActionLink("Edit", "Edit", new { id = item.BuildingId }) |
-                                            @Html.ActionLink("Details", "Details", new { id = item.BuildingId }) |
-                                            @Html.ActionLink("Delete", "Delete", new { id = item.BuildingId })
+                                            <a href="@Url.Action("Details", new { controller = "Building", id = item.BuildingId })" class="btn btn-info btn-sm" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
+                                            <a href="@Url.Action("Edit", new { controller = "Building", id = item.BuildingId })" class="btn btn-warning btn-sm" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
                                         </td>
                                     </tr>
                                 }

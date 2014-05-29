@@ -52,10 +52,22 @@ namespace Rhea.Model.Estate
         public int CampusId { get; set; }
 
         /// <summary>
+        /// 建筑组织形式
+        /// </summary>
+        /// <remarks>
+        /// 1:楼群,2:组团,3:独栋,4:分区,5:楼宇,6:操场
+        /// </remarks>
+        [BsonElement("organizeType")]
+        [UIHint("BuildingOrganizeType")]
+        [Display(Name = "建筑组织形式")]
+        public int OrganizeType { get; set; }
+
+        /// <summary>
         /// 父级建筑ID
         /// </summary>
         [BsonElement("parentId")]
-        [Display(Name = "父级建筑ID")]
+        [UIHint("ParentBuildingList")]
+        [Display(Name = "父级建筑")]
         public int ParentId { get; set; }
 
         /// <summary>
@@ -64,16 +76,6 @@ namespace Rhea.Model.Estate
         [BsonElement("hasChild")]
         [Display(Name = "是否有子建筑")]
         public bool HasChild { get; set; }
-
-        /// <summary>
-        /// 建筑组织形式
-        /// </summary>
-        /// <remarks>
-        /// 1:楼群,2:组团,3:独栋,4:分区,5:楼宇,6:操场
-        /// </remarks>
-        [BsonElement("organizeType")]
-        [Display(Name = "建筑组织形式")]
-        public int OrganizeType { get; set; }
 
         /// <summary>
         /// 使用类型
@@ -174,6 +176,7 @@ namespace Rhea.Model.Estate
         /// <summary>
         /// 建成日期
         /// </summary>
+        [BsonDateTimeOptions(DateOnly = true)]
         [BsonElement("buildDate")]
         [DataType(DataType.Date)]
         [Display(Name = "建成日期")]

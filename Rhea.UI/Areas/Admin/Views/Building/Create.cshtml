@@ -12,9 +12,9 @@
         <div class="row">
             <div id="breadcrumb" class="col-md-12">
                 <ol class="breadcrumb">
-                    <li><a href="@Url.Action("Index", "Advance")">高级管理</a></li>
-                    <li><a href="#">字典管理</a></li>
-                    <li><a href="@Url.Action("Create", "Dictionary")">添加字典</a></li>
+                    <li><a href="@Url.Action("Index", "Estate")">房产管理</a></li>
+                    <li><a href="#">建筑管理</a></li>
+                    <li><a href="@Url.Action("Create", "Building")">添加建筑</a></li>
                 </ol>
             </div>
         </div>
@@ -117,6 +117,17 @@
                                         </tr>
                                         <tr>
                                             <td>
+                                                @Html.LabelFor(model => model.OrganizeType)
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(model => model.OrganizeType, new { htmlAttributes = new { @class = "form-control" } })
+                                            </td>
+                                            <td>
+                                                @Html.ValidationMessageFor(model => model.OrganizeType, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
                                                 @Html.LabelFor(model => model.ParentId)
                                             </td>
                                             <td>
@@ -135,17 +146,6 @@
                                             </td>
                                             <td>
                                                 @Html.ValidationMessageFor(model => model.HasChild, "", new { @class = "text-danger" })
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                @Html.LabelFor(model => model.OrganizeType)
-                                            </td>
-                                            <td>
-                                                @Html.EditorFor(model => model.OrganizeType, new { htmlAttributes = new { @class = "form-control" } })
-                                            </td>
-                                            <td>
-                                                @Html.ValidationMessageFor(model => model.OrganizeType, "", new { @class = "text-danger" })
                                             </td>
                                         </tr>
                                         <tr>
@@ -291,7 +291,6 @@
                                                 @Html.ValidationMessageFor(model => model.BuildDate, "", new { @class = "text-danger" })
                                             </td>
                                         </tr>
-
                                         <tr>
                                             <td>
                                                 @Html.LabelFor(model => model.FixedYear)
@@ -381,6 +380,13 @@
         $(function () {
             topNavActive($('#estate-nav'));
             leftNavActive($('#building-create-menu'));
+
+            $('#BuildDate').datepicker({
+                format: "yyyy-mm-dd",
+                weekStart: 7,
+                language: "zh-CN",
+                autoclose: true
+            });
         });
     </script>
 }
