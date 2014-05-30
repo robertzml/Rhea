@@ -1,0 +1,14 @@
+﻿@model bool?
+@{    
+    if (Model != null)
+    {
+        if (Model == true)
+        {
+            @("有");
+        }
+        else
+        {
+            @("无");
+        }
+    }   
+}

@@ -63,7 +63,8 @@ namespace Rhea.UI.Areas.Admin.Controllers
 
             if (data.OrganizeType == (int)BuildingOrganizeType.BuildingGroup)
             {
-                return View("BuildingGroupDetails", data);
+                BuildingGroup bg = this.buildingBusiness.GetBuildingGroup(id);
+                return View("BuildingGroupDetails", bg);
             }
             return View(data);
         }

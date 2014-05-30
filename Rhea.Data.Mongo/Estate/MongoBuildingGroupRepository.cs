@@ -37,7 +37,7 @@ namespace Rhea.Data.Mongo.Estate
         /// </summary>
         /// <param name="id">建筑ID</param>
         /// <returns>楼群</returns>
-        public new BuildingGroup Get(int id)
+        public override Building Get(int id)
         {
             return this.repository.Where(r => r.BuildingId == id).First();
         }
