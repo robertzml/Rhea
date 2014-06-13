@@ -41,7 +41,7 @@ namespace Rhea.Business.Estate
         {
             return this.buildingRepository.Get().Where(r => r.Status != 1);
         }
-        
+
         /// <summary>
         /// 获取建筑
         /// </summary>
@@ -98,6 +98,17 @@ namespace Rhea.Business.Estate
         {
             data.Status = 0;
             return this.buildingRepository.Create(data);
+        }
+
+        /// <summary>
+        /// 更新楼群
+        /// </summary>
+        /// <param name="data">楼群数据</param>
+        /// <returns></returns>
+        public ErrorCode UpdateBuildingGroup(BuildingGroup data)
+        {
+            IBuildingRepository buildingRepository = new MongoBuildingGroupRepository();
+            return buildingRepository.Update(data);
         }
         #endregion //Method
     }

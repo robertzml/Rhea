@@ -84,6 +84,16 @@ namespace Rhea.Data.Mongo.Estate
 
             return ErrorCode.Success;
         }
+
+        /// <summary>
+        /// 更新建筑
+        /// </summary>
+        /// <param name="data">建筑对象</param>
+        /// <returns></returns>
+        public virtual ErrorCode Update(Building data)
+        {
+            return ErrorCode.NotImplement;
+        }
         #endregion //Method
     }
 }

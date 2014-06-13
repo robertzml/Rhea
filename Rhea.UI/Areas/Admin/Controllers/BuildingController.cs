@@ -106,6 +106,52 @@ namespace Rhea.UI.Areas.Admin.Controllers
 
             return View(model);
         }
+
+        /// <summary>
+        /// 编辑建筑
+        /// </summary>
+        /// <param name="id">建筑ID</param>
+        /// <returns></returns>
+        public ActionResult Edit(int id)
+        {
+            var data = this.buildingBusiness.Get(id);
+
+            switch ((BuildingOrganizeType)data.OrganizeType)
+            {
+                case BuildingOrganizeType.BuildingGroup:
+                    BuildingGroup bg = this.buildingBusiness.GetBuildingGroup(id);
+                    return View("BuildingGroupEdit", bg);
+            }
+
+            return View();
+        }
+
+        /// <summary>
+        /// 编辑楼群
+        /// </summary>
+        /// <param name="model">楼群对象</param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult BuildingGroupEdit(BuildingGroup model)
+        {
+            if (ModelState.IsValid)
+            {
+                ErrorCode result = this.buildingBusiness.UpdateBuildingGroup(model);
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "编辑楼群成功";
+                    return RedirectToAction("List", "Building");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "编辑楼群失败");
+                    ModelState.AddModelError("", result.DisplayName());
+                }
+            }
+
+            return View(model);
+        }
         #endregion //Action
     }
 }

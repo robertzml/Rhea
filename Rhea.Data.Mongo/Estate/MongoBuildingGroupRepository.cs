@@ -41,6 +41,26 @@ namespace Rhea.Data.Mongo.Estate
         {
             return this.repository.Where(r => r.BuildingId == id).First();
         }
+
+        /// <summary>
+        /// 更新建筑
+        /// </summary>
+        /// <param name="data">建筑对象</param>
+        /// <returns></returns>
+        public override ErrorCode Update(Building data)
+        {
+            try
+            {
+                BuildingGroup bg = (BuildingGroup)data;
+                this.repository.Update(bg);
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
         #endregion //Method
     }
 }

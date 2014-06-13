@@ -31,6 +31,12 @@ namespace Rhea.Model
         Exception = 2,
 
         /// <summary>
+        /// 未实现程序
+        /// </summary>
+        [Display(Name = "未实现程序")]
+        NotImplement = 3,
+
+        /// <summary>
         /// ID重复
         /// </summary>
         [Display(Name = "ID重复")]

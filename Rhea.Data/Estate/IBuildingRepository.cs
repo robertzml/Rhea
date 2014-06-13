@@ -39,5 +39,12 @@ namespace Rhea.Data.Estate
         /// <param name="data">建筑对象</param>
         /// <returns></returns>
         ErrorCode Create(Building data);
+
+        /// <summary>
+        /// 更新建筑
+        /// </summary>
+        /// <param name="data">建筑对象</param>
+        /// <returns></returns>
+        ErrorCode Update(Building data);
     }
 }
