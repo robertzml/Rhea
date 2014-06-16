@@ -57,22 +57,6 @@ namespace Rhea.Business.Estate
         }
 
         /// <summary>
-        /// 获取楼群建筑
-        /// </summary>
-        /// <param name="id">建筑ID</param>
-        /// <returns></returns>
-        public BuildingGroup GetBuildingGroup(int id)
-        {
-            IBuildingRepository buildingRepository = new MongoBuildingGroupRepository();
-            BuildingGroup data = (BuildingGroup)buildingRepository.Get(id);
-
-            if (data.Status == 1)
-                return null;
-            else
-                return data;
-        }
-
-        /// <summary>
         /// 获取所有父级建筑
         /// </summary>
         /// <remarks>
@@ -101,6 +85,22 @@ namespace Rhea.Business.Estate
         }
 
         /// <summary>
+        /// 获取楼群建筑
+        /// </summary>
+        /// <param name="id">建筑ID</param>
+        /// <returns></returns>
+        public BuildingGroup GetBuildingGroup(int id)
+        {
+            IBuildingRepository buildingRepository = new MongoBuildingGroupRepository();
+            BuildingGroup data = (BuildingGroup)buildingRepository.Get(id);
+
+            if (data.Status == 1)
+                return null;
+            else
+                return data;
+        }
+
+        /// <summary>
         /// 更新楼群
         /// </summary>
         /// <param name="data">楼群数据</param>
@@ -108,6 +108,33 @@ namespace Rhea.Business.Estate
         public ErrorCode UpdateBuildingGroup(BuildingGroup data)
         {
             IBuildingRepository buildingRepository = new MongoBuildingGroupRepository();
+            return buildingRepository.Update(data);
+        }
+
+        /// <summary>
+        /// 获取独栋建筑
+        /// </summary>
+        /// <param name="id">建筑ID</param>
+        /// <returns></returns>
+        public Cottage GetCottage(int id)
+        {
+            IBuildingRepository buildingRepository = new MongoCottageRepository();
+            Cottage data = (Cottage)buildingRepository.Get(id);
+
+            if (data.Status == 1)
+                return null;
+            else
+                return data;
+        }
+
+        /// <summary>
+        /// 更新独栋
+        /// </summary>
+        /// <param name="data">独栋数据</param>
+        /// <returns></returns>
+        public ErrorCode UpdateCottage(Cottage data)
+        {
+            IBuildingRepository buildingRepository = new MongoCottageRepository();
             return buildingRepository.Update(data);
         }
         #endregion //Method

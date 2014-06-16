@@ -1,9 +1,10 @@
-﻿@model Rhea.Model.Estate.BuildingGroup
+﻿@model Rhea.Model.Estate.Cottage
 
 @{
-    ViewBag.Title = "编辑楼群";
+    ViewBag.Title = "编辑独栋";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+
 
 <div class="row">
     @Html.Action("Menu", "Estate")
@@ -42,7 +43,7 @@
                     </div>
 
                     <div class="box-content table-responsive">
-                        @using (Html.BeginForm("CottageEdit", "Building"))
+                        @using (Html.BeginForm("BuildingGroupEdit", "Building"))
                         {
                             @Html.AntiForgeryToken()
 
@@ -339,17 +340,6 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                @Html.LabelFor(model => model.SubregionCount)
-                                            </td>
-                                            <td>
-                                                @Html.EditorFor(model => model.SubregionCount, new { htmlAttributes = new { @class = "form-control" } })
-                                            </td>
-                                            <td>
-                                                @Html.ValidationMessageFor(model => model.SubregionCount, "", new { @class = "text-danger" })
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
                                                 @Html.LabelFor(model => model.Remark)
                                             </td>
                                             <td>
@@ -391,3 +381,4 @@
         });
     </script>
 }
+

@@ -61,11 +61,22 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             var data = this.buildingBusiness.Get(id);
 
-            if (data.OrganizeType == (int)BuildingOrganizeType.BuildingGroup)
+            switch ((BuildingOrganizeType)data.OrganizeType)
             {
-                BuildingGroup bg = this.buildingBusiness.GetBuildingGroup(id);
-                return View("BuildingGroupDetails", bg);
+                case BuildingOrganizeType.BuildingGroup:
+                    BuildingGroup bg = this.buildingBusiness.GetBuildingGroup(id);
+                    return View("BuildingGroupDetails", bg);
+                case BuildingOrganizeType.Cluster:
+                    break;
+                case BuildingOrganizeType.Cottage:
+                    Cottage cottage = this.buildingBusiness.GetCottage(id);
+                    return View("CottageDetails", cottage);
+                case BuildingOrganizeType.Block:
+                    break;
+                case BuildingOrganizeType.Subregion:
+                    break;
             }
+
             return View(data);
         }
 
@@ -121,6 +132,11 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 case BuildingOrganizeType.BuildingGroup:
                     BuildingGroup bg = this.buildingBusiness.GetBuildingGroup(id);
                     return View("BuildingGroupEdit", bg);
+                case BuildingOrganizeType.Cluster:
+                    break;
+                case BuildingOrganizeType.Cottage:
+                    Cottage cottage = this.buildingBusiness.GetCottage(id);
+                    return View("CottageEdit", cottage);
             }
 
             return View();
@@ -146,6 +162,33 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 else
                 {
                     ModelState.AddModelError("", "编辑楼群失败");
+                    ModelState.AddModelError("", result.DisplayName());
+                }
+            }
+
+            return View(model);
+        }
+
+        /// <summary>
+        /// 编辑独栋
+        /// </summary>
+        /// <param name="model">独栋对象</param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult CottageEdit(Cottage model)
+        {
+            if (ModelState.IsValid)
+            {
+                ErrorCode result = this.buildingBusiness.UpdateCottage(model);
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "编辑独栋成功";
+                    return RedirectToAction("List", "Building");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "编辑独栋失败");
                     ModelState.AddModelError("", result.DisplayName());
                 }
             }
