@@ -166,6 +166,7 @@
     <Compile Include="Areas\Admin\Controllers\DictionaryController.cs" />
     <Compile Include="Areas\Admin\Controllers\EstateController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Models\SyncBuildingModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -254,6 +255,7 @@
     <Content Include="Areas\Admin\Views\Building\BuildingGroupEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Building\CottageDetails.cshtml" />
     <Content Include="Areas\Admin\Views\Building\CottageEdit.cshtml" />
+    <Content Include="Areas\Admin\Views\Building\Sync.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="plugins\jquery-ui\i18n\jquery-ui-i18n.min.js" />
     <Content Include="plugins\jquery-ui\i18n\jquery.ui.datepicker-zh-CN.min.js" />
@@ -345,7 +347,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

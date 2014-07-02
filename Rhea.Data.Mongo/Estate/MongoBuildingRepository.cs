@@ -74,7 +74,6 @@ namespace Rhea.Data.Mongo.Estate
                 if (dup)
                     return ErrorCode.DuplicateId;
 
-
                 this.repository.Add(data);
             }
             catch (Exception)

@@ -1,7 +1,9 @@
-﻿using Rhea.Business.Estate;
+﻿using Rhea.Business;
+using Rhea.Business.Estate;
 using Rhea.Common;
 using Rhea.Model;
 using Rhea.Model.Estate;
+using Rhea.UI.Areas.Admin.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -194,6 +196,49 @@ namespace Rhea.UI.Areas.Admin.Controllers
             }
 
             return View(model);
+        }
+
+        /// <summary>
+        /// 同步建筑
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Sync()
+        {
+            SyncBusiness syncBusiness = new SyncBusiness();
+
+            SyncBuildingModel model = new SyncBuildingModel();
+            model.BuildingGroups = syncBusiness.GetOriginBuildingGroup();
+
+            return View(model);
+        }
+
+        /// <summary>
+        /// 同步建筑
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult SyncPost()
+        {
+            int oldBuildingId = Convert.ToInt32(Request.Form["oldBuildingId"]);
+            int newBuildingId = Convert.ToInt32(Request.Form["newBuildingId"]);
+            int organizeType = Convert.ToInt32(Request.Form["organizeType"]);
+            bool hasChild = Request.Form["hasChild"] == "has" ? true : false;
+            int sort = Convert.ToInt32(Request.Form["sort"]);
+
+            SyncBusiness syncBusiness = new SyncBusiness();
+            ErrorCode result = syncBusiness.SyncBuildingGroup(oldBuildingId, newBuildingId, organizeType, hasChild, sort);
+
+            if (result == ErrorCode.Success)
+            {
+                TempData["Message"] = "同步成功";
+            }
+            else
+            {
+                TempData["Message"] = "同步失败";
+            }
+
+            return RedirectToAction("Sync");
         }
         #endregion //Action
     }
