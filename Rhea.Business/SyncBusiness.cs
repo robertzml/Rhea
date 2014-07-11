@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Rhea.Model;
+using System.Data;
 
 namespace Rhea.Business
 {
@@ -18,6 +19,9 @@ namespace Rhea.Business
     public class SyncBusiness
     {
         #region Field
+        /// <summary>
+        /// 原始数据房产Repository
+        /// </summary>
         private OriginEstateRepository originRepository;
         #endregion //Field
 
@@ -58,7 +62,12 @@ namespace Rhea.Business
             building.Name = doc["name"].AsString;
             building.ImageUrl = doc.GetValue("imageUrl", "").AsString;
             building.OrganizeType = organizeType;
-            building.HasChild = hasChild;
+
+            if (organizeType == 1 || organizeType == 2)
+                building.HasChild = true;
+            else
+                building.HasChild = false;
+
             building.UseType = doc["useType"].AsInt32;
             building.BuildArea = doc["buildArea"].AsDouble;
             building.BuildCost = (double?)doc.GetValue("buildCost", null);
@@ -69,6 +78,93 @@ namespace Rhea.Business
             ErrorCode result = buildingRepository.Create(building);
 
             return result;
+        }
+
+        /// <summary>
+        /// 同步楼群数据
+        /// </summary>
+        /// <param name="map">原始建筑映射</param>
+        /// <returns></returns>
+        public ErrorCode SyncBuildingGroup(OriginBuildingMap map)
+        {
+            BsonDocument doc = this.originRepository.GetBuildingGroup(map.OldId);
+
+            Building building = new Building();
+            building.BuildingId = map.NewId;
+            building.CampusId = 100001;
+            building.ParentId = map.NewParentId;
+            building.Name = doc["name"].AsString;
+            building.ImageUrl = doc.GetValue("imageUrl", "").AsString;
+            building.OrganizeType = map.OrganizeType;
+            building.HasChild = map.HasChild;
+            building.UseType = doc["useType"].AsInt32;
+            building.BuildArea = doc["buildArea"].AsDouble;
+            building.BuildCost = (double?)doc.GetValue("buildCost", null);
+            building.Sort = map.Sort;
+            building.Status = 0;
+
+            MongoBuildingRepository buildingRepository = new MongoBuildingRepository();
+            ErrorCode result = buildingRepository.Create(building);
+
+            return result;
+        }
+
+
+        /// <summary>
+        /// 获取原始楼宇列表
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<int, string> GetOriginBuilding()
+        {
+            return this.originRepository.GetBuildingList();
+        }
+
+        public ErrorCode SyncBuilding(int oldBuildingid, int newId, int organizeType, int sort)
+        {
+            BsonDocument doc = this.originRepository.GetBuilding(oldBuildingid);
+
+
+            return ErrorCode.Success;
+        }
+
+        /// <summary>
+        /// 从Sqlite里获取关联数据
+        /// </summary>
+        /// <returns></returns>
+        public List<OriginBuildingMap> GetRelateData()
+        {
+            SqliteRepository repository = new SqliteRepository(@"E:\Test\rheaimport.sqlite");
+
+            string sql = "SELECT * FROM buildingGroup";
+            DataTable dt = repository.ExecuteQuery(sql);
+
+            List<OriginBuildingMap> maps = new List<OriginBuildingMap>();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                OriginBuildingMap map = new OriginBuildingMap();
+                map.OldId = Convert.ToInt32(row["原Id"]);
+                map.NewId = Convert.ToInt32(row["ID"]);
+                map.OrganizeType = Convert.ToInt32(row["组织类型"]);
+                map.OldParentId = Convert.ToInt32(row["父级ID"]);
+                if (map.OrganizeType == 1 || map.OrganizeType == 2)
+                    map.HasChild = true;
+                else
+                    map.HasChild = false;
+                map.Sort = Convert.ToInt32(row["排序"]);
+
+                maps.Add(map);
+            }
+
+            foreach (var map in maps)
+            {
+                if (map.OldParentId == 200000)
+                    map.NewParentId = 200000;
+                else
+                    map.NewParentId = maps.Single(r => r.OldId == map.OldParentId).NewId;
+            }
+
+            return maps;
         }
         #endregion //Method
     }

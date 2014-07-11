@@ -48,7 +48,7 @@ namespace Rhea.Data.Mongo
         /// <returns></returns>
         public Dictionary<int, string> GetBuildingGroupList()
         {
-            Open("estate");         
+            Open("estate");
             MongoCollection<BsonDocument> collection = this.database.GetCollection<BsonDocument>("buildingGroup");
 
             var query = Query.NE("status", 1);
@@ -56,7 +56,7 @@ namespace Rhea.Data.Mongo
 
             Dictionary<int, string> data = new Dictionary<int, string>();
 
-            foreach(BsonDocument doc in docs)
+            foreach (BsonDocument doc in docs)
             {
                 int id = doc["id"].AsInt32;
                 string name = doc["name"].AsString;
@@ -75,6 +75,46 @@ namespace Rhea.Data.Mongo
         {
             Open("estate");
             MongoCollection<BsonDocument> collection = this.database.GetCollection<BsonDocument>("buildingGroup");
+
+            var query = Query.EQ("id", id);
+            var doc = collection.FindOne(query);
+
+            return doc;
+        }
+
+        /// <summary>
+        /// 获取原始楼宇列表
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<int, string> GetBuildingList()
+        {
+            Open("estate");
+            MongoCollection<BsonDocument> collection = this.database.GetCollection<BsonDocument>("building");
+
+            var query = Query.NE("status", 1);
+            var docs = collection.Find(query);
+
+            Dictionary<int, string> data = new Dictionary<int, string>();
+
+            foreach (BsonDocument doc in docs)
+            {
+                int id = doc["id"].AsInt32;
+                string name = doc["name"].AsString;
+                data.Add(id, name);
+            }
+
+            return data;
+        }
+
+        /// <summary>
+        /// 获取原始楼宇
+        /// </summary>
+        /// <param name="id">楼宇ID</param>
+        /// <returns></returns>
+        public BsonDocument GetBuilding(int id)
+        {
+            Open("estate");
+            MongoCollection<BsonDocument> collection = this.database.GetCollection<BsonDocument>("building");
 
             var query = Query.EQ("id", id);
             var doc = collection.FindOne(query);

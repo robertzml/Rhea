@@ -29,6 +29,16 @@ namespace Rhea.Data.Mongo.Estate
         {
             this.repository = new MongoRepository<Building>(RheaServer.EstateDatabase);
         }
+
+        /// <summary>
+        /// MongoDB 建筑Repository
+        /// </summary>
+        /// <param name="connectionString">连接字符串</param>
+        /// <param name="database">数据库</param>
+        public MongoBuildingRepository(string connectionString, string database)
+        {
+            this.repository = new MongoRepository<Building>(connectionString, database);
+        }
         #endregion //Constructor
 
         #region Method
