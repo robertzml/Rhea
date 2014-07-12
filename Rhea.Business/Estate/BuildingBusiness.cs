@@ -137,6 +137,38 @@ namespace Rhea.Business.Estate
             IBuildingRepository buildingRepository = new MongoCottageRepository();
             return buildingRepository.Update(data);
         }
+
+        /// <summary>
+        /// 获取分区
+        /// </summary>
+        /// <param name="id">建筑ID</param>
+        /// <returns></returns>
+        public Subregion GetSubregion(int id)
+        {
+            IBuildingRepository buildingRepository = new MongoSubregionRepository();
+            Subregion data = (Subregion)buildingRepository.Get(id);
+
+            if (data.Status == 1)
+                return null;
+            else
+                return data;
+        }
+
+        /// <summary>
+        /// 获取楼宇
+        /// </summary>
+        /// <param name="id">建筑ID</param>
+        /// <returns></returns>
+        public Block GetBlock(int id)
+        {
+            IBuildingRepository buildingRepository = new MongoBlockRepository();
+            Block data = (Block)buildingRepository.Get(id);
+
+            if (data.Status == 1)
+                return null;
+            else
+                return data;
+        }
         #endregion //Method
     }
 }

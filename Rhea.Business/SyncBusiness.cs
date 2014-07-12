@@ -119,12 +119,31 @@ namespace Rhea.Business
             return this.originRepository.GetBuildingList();
         }
 
-        public ErrorCode SyncBuilding(int oldBuildingid, int newId, int organizeType, int sort)
+        /// <summary>
+        /// 同步楼宇数据
+        /// </summary>
+        /// <param name="map">原始建筑映射</param>
+        /// <returns></returns>
+        public ErrorCode SyncBuilding(OriginBuildingMap map)
         {
-            BsonDocument doc = this.originRepository.GetBuilding(oldBuildingid);
+            BsonDocument doc = this.originRepository.GetBuilding(map.OldId);
 
+            Building building = new Building();
+            building.BuildingId = map.NewId;
+            building.CampusId = 100001;
+            building.ParentId = map.NewParentId;
+            building.Name = doc["name"].AsString;            
+            building.OrganizeType = map.OrganizeType;
+            building.HasChild = map.HasChild;
+            building.UseType = doc["useType"].AsInt32;           
+           
+            building.Sort = map.Sort;
+            building.Status = 0;
 
-            return ErrorCode.Success;
+            MongoBuildingRepository buildingRepository = new MongoBuildingRepository();
+            ErrorCode result = buildingRepository.Create(building);
+
+            return result;
         }
 
         /// <summary>

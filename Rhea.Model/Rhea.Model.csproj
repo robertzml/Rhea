@@ -56,11 +56,14 @@
     <Compile Include="CollectionName.cs" />
     <Compile Include="Dictionary.cs" />
     <Compile Include="ErrorCode.cs" />
+    <Compile Include="Estate\Block.cs" />
     <Compile Include="Estate\Building.cs" />
     <Compile Include="Estate\BuildingGroup.cs" />
     <Compile Include="Estate\Campus.cs" />
     <Compile Include="Estate\Cottage.cs" />
     <Compile Include="Estate\EstateModels.cs" />
+    <Compile Include="Estate\Floor.cs" />
+    <Compile Include="Estate\Subregion.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="MongoEntity.cs" />
     <Compile Include="OriginBuildingMap.cs" />

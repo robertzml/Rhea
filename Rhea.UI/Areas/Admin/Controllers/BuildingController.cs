@@ -73,10 +73,13 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 case BuildingOrganizeType.Cottage:
                     Cottage cottage = this.buildingBusiness.GetCottage(id);
                     return View("CottageDetails", cottage);
-                case BuildingOrganizeType.Block:
-                    break;
                 case BuildingOrganizeType.Subregion:
-                    break;
+                    Subregion subregion = this.buildingBusiness.GetSubregion(id);
+                    return View("SubregionDetails", subregion);
+                case BuildingOrganizeType.Block:
+                    Block block = this.buildingBusiness.GetBlock(id);
+                    return View("BlockDetails", block);
+               
             }
 
             return View(data);

@@ -9,15 +9,16 @@ using System.Threading.Tasks;
 namespace Rhea.Model.Estate
 {
     /// <summary>
-    /// 独栋建筑类
+    /// 楼宇类
+    /// 隶属于组团
     /// </summary>
-    public class Cottage : Building
+    public class Block : Building
     {
         #region Constructor
         /// <summary>
-        /// 独栋建筑类
+        /// 楼宇类
         /// </summary>
-        public Cottage()
+        public Block()
         {
             this.Floors = new List<Floor>();
         }

@@ -11,7 +11,9 @@ namespace Rhea.ConsoleTest
         static void Main(string[] args)
         {
             Synchronization synchronization = new Synchronization();
-            synchronization.SyncBuildingGroup();
+            //synchronization.SyncBuildingGroup();
+            //synchronization.ShowBuildingMap();
+            synchronization.SyncBuilding();
         }
     }
 }

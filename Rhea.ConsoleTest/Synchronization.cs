@@ -29,6 +29,31 @@ namespace Rhea.ConsoleTest
                 Console.WriteLine(result.DisplayName());
             }
         }
+
+        public void SyncBuilding()
+        {
+            SyncBusiness business = new SyncBusiness();
+            List<OriginBuildingMap> maps = business.GetRelateData();
+
+            maps = maps.Where(r => r.NewId >= 200077 && r.NewId <= 200196).ToList();
+
+            foreach (var row in maps)
+            {
+                ErrorCode result = business.SyncBuilding(row);
+                Console.WriteLine(result.DisplayName());
+            }
+        }
+
+        public void ShowBuildingMap()
+        {
+            SyncBusiness business = new SyncBusiness();
+            List<OriginBuildingMap> maps = business.GetRelateData();
+
+            foreach(var row in maps)
+            {
+                Console.WriteLine("newId:{0}, oldId:{1}, parentId:{2}, type:{3}", row.NewId, row.OldId, row.NewParentId, row.OrganizeType);
+            }
+        }
         #endregion //Method
     }
 }

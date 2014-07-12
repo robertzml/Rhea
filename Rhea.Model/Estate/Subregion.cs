@@ -9,15 +9,16 @@ using System.Threading.Tasks;
 namespace Rhea.Model.Estate
 {
     /// <summary>
-    /// 独栋建筑类
+    /// 分区类
+    /// 隶属于楼群
     /// </summary>
-    public class Cottage : Building
+    public class Subregion : Building
     {
         #region Constructor
         /// <summary>
-        /// 独栋建筑类
+        /// 分区类
         /// </summary>
-        public Cottage()
+        public Subregion()
         {
             this.Floors = new List<Floor>();
         }
@@ -30,7 +31,7 @@ namespace Rhea.Model.Estate
         [BsonElement("aboveGroundFloor")]
         [Display(Name = "地上楼层数")]
         public int AboveGroundFloor { get; set; }
-
+        
         /// <summary>
         /// 地下楼层数
         /// </summary>
