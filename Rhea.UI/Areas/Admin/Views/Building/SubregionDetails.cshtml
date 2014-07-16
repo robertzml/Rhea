@@ -1,9 +1,10 @@
-﻿@model Rhea.Model.Estate.Cottage
+﻿@model Rhea.Model.Estate.Subregion
 
 @{
-    ViewBag.Title = "独栋信息";
+    ViewBag.Title = "分区信息";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+
 
 <div class="row">
     @Html.Action("Menu", "Estate")
@@ -14,7 +15,7 @@
                 <ol class="breadcrumb">
                     <li><a href="@Url.Action("Index", "Estate")">房产管理</a></li>
                     <li><a href="#">建筑管理</a></li>
-                    <li><a href="#">独栋信息</a></li>
+                    <li><a href="#">分区信息</a></li>
                 </ol>
             </div>
         </div>
@@ -302,7 +303,7 @@
                         <hr />
                         <p>
                             <a href="@Url.Action("List", new { controller = "Building" })" class="btn btn-primary" role="button"><i class="fa fa-list"></i>&nbsp;回到列表</a>
-                            <a href="@Url.Action("CottageEdit", new { controller = "Building", id = Model.BuildingId })" class="btn btn-warning" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
+                            <a href="@Url.Action("SubregionEdit", new { controller = "Building", id = Model.BuildingId })" class="btn btn-warning" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
                         </p>
                     </div>
                 </div>

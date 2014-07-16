@@ -60,6 +60,7 @@
     <Compile Include="Estate\Building.cs" />
     <Compile Include="Estate\BuildingGroup.cs" />
     <Compile Include="Estate\Campus.cs" />
+    <Compile Include="Estate\Cluster.cs" />
     <Compile Include="Estate\Cottage.cs" />
     <Compile Include="Estate\EstateModels.cs" />
     <Compile Include="Estate\Floor.cs" />

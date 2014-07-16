@@ -69,7 +69,8 @@ namespace Rhea.UI.Areas.Admin.Controllers
                     BuildingGroup bg = this.buildingBusiness.GetBuildingGroup(id);
                     return View("BuildingGroupDetails", bg);
                 case BuildingOrganizeType.Cluster:
-                    break;
+                    Cluster cluster = this.buildingBusiness.GetCluster(id);
+                    return View("ClusterDetails", cluster);
                 case BuildingOrganizeType.Cottage:
                     Cottage cottage = this.buildingBusiness.GetCottage(id);
                     return View("CottageDetails", cottage);

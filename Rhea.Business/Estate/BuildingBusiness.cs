@@ -103,11 +103,38 @@ namespace Rhea.Business.Estate
         /// <summary>
         /// 更新楼群
         /// </summary>
-        /// <param name="data">楼群数据</param>
+        /// <param name="data">楼群对象</param>
         /// <returns></returns>
         public ErrorCode UpdateBuildingGroup(BuildingGroup data)
         {
             IBuildingRepository buildingRepository = new MongoBuildingGroupRepository();
+            return buildingRepository.Update(data);
+        }
+
+        /// <summary>
+        /// 获取组团
+        /// </summary>
+        /// <param name="id">建筑ID</param>
+        /// <returns></returns>
+        public Cluster GetCluster(int id)
+        {
+            IBuildingRepository buildingRepository = new MongoClusterRepository();
+            Cluster data = (Cluster)buildingRepository.Get(id);
+
+            if (data.Status == 1)
+                return null;
+            else
+                return data;
+        }
+
+        /// <summary>
+        /// 更新组团
+        /// </summary>
+        /// <param name="data">组团对象</param>
+        /// <returns></returns>
+        public ErrorCode UpdateCluster(Cluster data)
+        {
+            IBuildingRepository buildingRepository = new MongoClusterRepository();
             return buildingRepository.Update(data);
         }
 
@@ -130,7 +157,7 @@ namespace Rhea.Business.Estate
         /// <summary>
         /// 更新独栋
         /// </summary>
-        /// <param name="data">独栋数据</param>
+        /// <param name="data">独栋对象</param>
         /// <returns></returns>
         public ErrorCode UpdateCottage(Cottage data)
         {

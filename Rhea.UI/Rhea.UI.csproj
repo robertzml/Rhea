@@ -255,6 +255,9 @@
     <Content Include="Areas\Admin\Views\Building\BuildingGroupEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Building\CottageDetails.cshtml" />
     <Content Include="Areas\Admin\Views\Building\CottageEdit.cshtml" />
+    <Content Include="Areas\Admin\Views\Building\ClusterDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\Building\SubregionDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\Building\BlockDetails.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="plugins\jquery-ui\i18n\jquery-ui-i18n.min.js" />

@@ -1,7 +1,7 @@
-﻿@model Rhea.Model.Estate.Cottage
+﻿@model Rhea.Model.Estate.Cluster
 
 @{
-    ViewBag.Title = "独栋信息";
+    ViewBag.Title = "组团信息";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
@@ -14,7 +14,7 @@
                 <ol class="breadcrumb">
                     <li><a href="@Url.Action("Index", "Estate")">房产管理</a></li>
                     <li><a href="#">建筑管理</a></li>
-                    <li><a href="#">独栋信息</a></li>
+                    <li><a href="#">组团信息</a></li>
                 </ol>
             </div>
         </div>
@@ -119,6 +119,14 @@
                                 </tr>
                                 <tr>
                                     <td>
+                                        @Html.DisplayNameFor(model => model.BuildingCount)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.BuildingCount)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
                                         @Html.DisplayNameFor(model => model.UseType)
                                     </td>
                                     <td>
@@ -126,22 +134,6 @@
                                             var type2 = (BuildingUseType)Model.UseType;
                                             @type2.DisplayName();
                                         }
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        @Html.DisplayNameFor(model => model.AboveGroundFloor)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(model => model.AboveGroundFloor)
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        @Html.DisplayNameFor(model => model.UnderGroundFloor)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(model => model.UnderGroundFloor)
                                     </td>
                                 </tr>
                                 <tr>
@@ -302,7 +294,7 @@
                         <hr />
                         <p>
                             <a href="@Url.Action("List", new { controller = "Building" })" class="btn btn-primary" role="button"><i class="fa fa-list"></i>&nbsp;回到列表</a>
-                            <a href="@Url.Action("CottageEdit", new { controller = "Building", id = Model.BuildingId })" class="btn btn-warning" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
+                            <a href="@Url.Action("ClusterEdit", new { controller = "Building", id = Model.BuildingId })" class="btn btn-warning" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
                         </p>
                     </div>
                 </div>
@@ -320,4 +312,3 @@
         });
     </script>
 }
-
