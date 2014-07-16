@@ -146,6 +146,34 @@ namespace Rhea.Business
             return result;
         }
 
+        public ErrorCode SyncSubregionFloor(OriginBuildingMap map)
+        {
+            BsonDocument doc = this.originRepository.GetBuilding(map.OldId);
+
+            MongoSubregionRepository subregionRepository = new MongoSubregionRepository();
+            Subregion subregion = (Subregion)subregionRepository.Get(map.NewId);
+
+            BsonArray array = doc["floors"].AsBsonArray;
+            foreach (BsonDocument row in array)
+            {                
+                if (row.GetValue("status", 0).AsInt32 == 1)
+                    continue;
+
+                Floor floor = new Floor();
+                floor.Id = row["id"].AsInt32;
+                floor.Number = row["number"].AsInt32;
+                floor.Name = row["name"].AsString;
+                floor.ImageUrl = row["imageUrl"].AsString;
+                floor.Remark = row["remark"].AsString;
+                floor.Status = 0;
+
+                subregion.Floors.Add(floor);
+            }
+
+            ErrorCode result = subregionRepository.Update(subregion);
+            return result;
+        }
+
         /// <summary>
         /// 从Sqlite里获取关联数据
         /// </summary>

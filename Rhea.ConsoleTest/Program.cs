@@ -13,7 +13,8 @@ namespace Rhea.ConsoleTest
             Synchronization synchronization = new Synchronization();
             //synchronization.SyncBuildingGroup();
             //synchronization.ShowBuildingMap();
-            synchronization.SyncBuilding();
+            //synchronization.SyncBuilding();
+            synchronization.SyncSubregion();
         }
     }
 }

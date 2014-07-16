@@ -44,6 +44,23 @@ namespace Rhea.ConsoleTest
             }
         }
 
+        public void SyncSubregion()
+        {
+            SyncBusiness business = new SyncBusiness();
+
+            List<OriginBuildingMap> maps = business.GetRelateData();
+
+            maps = maps.Where(r => r.NewId > 200077 && r.NewId <= 2000123).ToList();
+
+            foreach (var row in maps)
+            {
+                if (row.OrganizeType != 4)
+                    continue;
+                ErrorCode result = business.SyncSubregionFloor(row);
+                Console.WriteLine(result.DisplayName());
+            }
+        }
+
         public void ShowBuildingMap()
         {
             SyncBusiness business = new SyncBusiness();
