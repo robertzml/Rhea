@@ -53,6 +53,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account\UserGroup.cs" />
+    <Compile Include="Account\User.cs" />
     <Compile Include="CollectionName.cs" />
     <Compile Include="Dictionary.cs" />
     <Compile Include="ErrorCode.cs" />

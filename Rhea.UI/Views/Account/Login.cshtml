@@ -1,63 +1,115 @@
-﻿@using Rhea.UI.Models
-@model LoginViewModel
+﻿@model Rhea.UI.Models.LoginModel
 
 @{
+    Layout = null;
     ViewBag.Title = "登录";
 }
 
-<h2>@ViewBag.Title.</h2>
-<div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <h4>使用本地帐户登录。</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="登录" class="btn btn-default" />
-                    </div>
-                </div>
-                <p>
-                    @Html.ActionLink("注册为新用户", "Register")
-                </p>
-                @* 为密码重置功能启用帐户确认后，请启用此项一次
-                <p>
-                    @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                </p>*@
-            }
-        </section>
-    </div>
-    <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>
-</div>
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <title>房产管理系统 - 登录</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <link href="@Url.Content("~/Content/bootstrap.css")" type="text/css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            padding-top: 40px;
+            padding-bottom: 40px;
+            background: #a7dafc url('/Images/loginbg.jpg') no-repeat fixed center;
+        }
+
+        #floater {
+            float: left;
+            height: 45%;
+            margin-bottom: -120px;
+        }
+
+        #content {
+            clear: both;
+            position: relative;
+        }
+
+        .form-signin {
+            max-width: 300px;
+            padding: 19px 29px 29px;
+            margin: 0 auto 20px;
+            background-color: #fff;
+            border: 1px solid #e5e5e5;
+            opacity: 0.95;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+            -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+            box-shadow: 0 1px 2px rgba(0,0,0,.05);
+        }
+
+        .form-signin .checkbox {
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .form-signin-heading {
+            font-family: 微软雅黑;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .form-signin input[type="text"],
+        .form-signin input[type="password"] {
+            font-size: 14px;
+            height: auto;
+            margin-bottom: 15px;
+            padding: 0px 9px;
+            width: 220px;
+        }
+
+        .form-signin #login-btn {
+            margin-left: 120px;
+        }
+    </style>   
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+        <script src="@Url.Content("~/Scripts/html5shiv.js")"></script>
+    <![endif]-->
+    @Scripts.Render("~/bundles/jquery")
+</head>
+
+<body>
+    <div id="floater"></div>
+    <div id="content" class="container">
+        @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-signin" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <h2 class="form-signin-heading">房产管理系统登录</h2>
+
+            <div class="input-prepend">
+                <span class="add-on"><i class="icon-user"></i></span>
+                @Html.TextBoxFor(m => m.UserName, new { autofocus = "true", placeholder = "用户名", @class = "input-block-level", type = "text" })
+            </div>
+            <br />
+            @Html.ValidationMessageFor(m => m.UserName)
+
+            <div class="input-prepend">
+                <span class="add-on"><i class="icon-lock"></i></span>
+                @Html.PasswordFor(m => m.Password, new { placeholder = "密码", @class = "input-block-level", type = "password" })
+            </div>
+            <br />
+            @Html.ValidationMessageFor(m => m.Password)
+            <label class="checkbox">
+                @Html.CheckBoxFor(m => m.RememberMe) 记住我
+            </label>
+            <button id="login-btn" type="submit" class="btn btn-primary">登 录</button>
+        }
+    </div> <!-- /container -->
+    @Scripts.Render("~/bundles/bootstrap")
+
+</body>
+</html>
+
