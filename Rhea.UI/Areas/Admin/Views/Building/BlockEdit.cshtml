@@ -1,7 +1,7 @@
-﻿@model Rhea.Model.Estate.Cottage
+﻿@model Rhea.Model.Estate.Block
 
 @{
-    ViewBag.Title = "编辑独栋";
+    ViewBag.Title = "编辑楼宇";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
@@ -43,12 +43,12 @@
                     </div>
 
                     <div class="box-content table-responsive">
-                        @using (Html.BeginForm("CottageEdit", "Building"))
+                        @using (Html.BeginForm("BlockEdit", "Building"))
                         {
                             @Html.AntiForgeryToken()
 
                             <fieldset>
-                                <legend>独栋属性</legend>
+                                <legend>楼宇属性</legend>
 
                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                 @Html.HiddenFor(model => model._id)
@@ -403,4 +403,6 @@
         });
     </script>
 }
+
+
 

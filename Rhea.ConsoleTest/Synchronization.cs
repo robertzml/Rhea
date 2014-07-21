@@ -84,7 +84,7 @@ namespace Rhea.ConsoleTest
 
             List<OriginBuildingMap> maps = business.GetRelateData();
 
-            maps = maps.Where(r => r.NewId >= 200001 && r.NewId <= 200065).ToList();
+            maps = maps.Where(r => r.NewId == 200027).ToList();
 
             foreach (var row in maps)
             {

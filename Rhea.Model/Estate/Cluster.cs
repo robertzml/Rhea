@@ -18,9 +18,9 @@ namespace Rhea.Model.Estate
         /// <summary>
         /// 楼宇数量
         /// </summary>
-        [BsonElement("buildingCount")]
+        [BsonElement("blockCount")]
         [Display(Name = "楼宇数量")]
-        public int BuildingCount { get; set; }
+        public int BlockCount { get; set; }
         #endregion //Property
     }
 }

@@ -54,6 +54,7 @@
     <Compile Include="Estate\MongoCampusRepository.cs" />
     <Compile Include="Estate\MongoClusterRepository.cs" />
     <Compile Include="Estate\MongoCottageRepository.cs" />
+    <Compile Include="Estate\MongoPlaygroundRepository.cs" />
     <Compile Include="Estate\MongoSubregionRepository.cs" />
     <Compile Include="MongoDictionaryRepository.cs" />
     <Compile Include="MongoRepository.cs" />

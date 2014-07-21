@@ -63,6 +63,8 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             var data = this.buildingBusiness.Get(id);
 
+            ViewBag.Children = this.buildingBusiness.GetChildBuildings(id);
+
             switch ((BuildingOrganizeType)data.OrganizeType)
             {
                 case BuildingOrganizeType.BuildingGroup:
@@ -80,7 +82,9 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 case BuildingOrganizeType.Block:
                     Block block = this.buildingBusiness.GetBlock(id);
                     return View("BlockDetails", block);
-               
+                case BuildingOrganizeType.Playground:
+                    Playground playground = this.buildingBusiness.GetPlayground(id);
+                    return View("PlaygroundDetails", playground);
             }
 
             return View(data);
@@ -139,10 +143,20 @@ namespace Rhea.UI.Areas.Admin.Controllers
                     BuildingGroup bg = this.buildingBusiness.GetBuildingGroup(id);
                     return View("BuildingGroupEdit", bg);
                 case BuildingOrganizeType.Cluster:
-                    break;
+                    Cluster cluster = this.buildingBusiness.GetCluster(id);
+                    return View("ClusterEdit", cluster);
                 case BuildingOrganizeType.Cottage:
                     Cottage cottage = this.buildingBusiness.GetCottage(id);
                     return View("CottageEdit", cottage);
+                case BuildingOrganizeType.Subregion:
+                    Subregion subregion = this.buildingBusiness.GetSubregion(id);
+                    return View("SubregionEdit", subregion);
+                case BuildingOrganizeType.Block:
+                    Block block = this.buildingBusiness.GetBlock(id);
+                    return View("BlockEdit", block);
+                case BuildingOrganizeType.Playground:
+                    Playground playground = this.buildingBusiness.GetPlayground(id);
+                    return View("PlaygroundEdit", playground);
             }
 
             return View();
@@ -163,11 +177,38 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 if (result == ErrorCode.Success)
                 {
                     TempData["Message"] = "编辑楼群成功";
-                    return RedirectToAction("List", "Building");
+                    return RedirectToAction("Details", "Building", new { id = model.BuildingId });
                 }
                 else
                 {
                     ModelState.AddModelError("", "编辑楼群失败");
+                    ModelState.AddModelError("", result.DisplayName());
+                }
+            }
+
+            return View(model);
+        }
+
+        /// <summary>
+        /// 编辑组团
+        /// </summary>
+        /// <param name="model">组团对象</param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult ClusterEdit(Cluster model)
+        {
+            if (ModelState.IsValid)
+            {
+                ErrorCode result = this.buildingBusiness.UpdateCluster(model);
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "编辑组团成功";
+                    return RedirectToAction("Details", "Building", new { id = model.BuildingId });
+                }
+                else
+                {
+                    ModelState.AddModelError("", "编辑组团失败");
                     ModelState.AddModelError("", result.DisplayName());
                 }
             }
@@ -190,11 +231,92 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 if (result == ErrorCode.Success)
                 {
                     TempData["Message"] = "编辑独栋成功";
-                    return RedirectToAction("List", "Building");
+                    return RedirectToAction("Details", "Building", new { id = model.BuildingId });
                 }
                 else
                 {
                     ModelState.AddModelError("", "编辑独栋失败");
+                    ModelState.AddModelError("", result.DisplayName());
+                }
+            }
+
+            return View(model);
+        }
+
+        /// <summary>
+        /// 编辑分区
+        /// </summary>
+        /// <param name="model">分区对象</param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult SubregionEdit(Subregion model)
+        {
+            if (ModelState.IsValid)
+            {
+                ErrorCode result = this.buildingBusiness.UpdateSubregion(model);
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "编辑分区成功";
+                    return RedirectToAction("Details", "Building", new { id = model.BuildingId });
+                }
+                else
+                {
+                    ModelState.AddModelError("", "编辑分区失败");
+                    ModelState.AddModelError("", result.DisplayName());
+                }
+            }
+
+            return View(model);
+        }
+
+        /// <summary>
+        /// 编辑楼宇
+        /// </summary>
+        /// <param name="model">楼宇对象</param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult BlockEdit(Block model)
+        {
+            if (ModelState.IsValid)
+            {
+                ErrorCode result = this.buildingBusiness.UpdateBlock(model);
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "编辑分区成功";
+                    return RedirectToAction("Details", "Building", new { id = model.BuildingId });
+                }
+                else
+                {
+                    ModelState.AddModelError("", "编辑分区失败");
+                    ModelState.AddModelError("", result.DisplayName());
+                }
+            }
+
+            return View(model);
+        }
+
+        /// <summary>
+        /// 编辑操场
+        /// </summary>
+        /// <param name="model">操场对象</param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult PlaygroundEdit(Playground model)
+        {
+            if (ModelState.IsValid)
+            {
+                ErrorCode result = this.buildingBusiness.UpdatePlayground(model);
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "编辑操场成功";
+                    return RedirectToAction("Details", "Building", new { id = model.BuildingId });
+                }
+                else
+                {
+                    ModelState.AddModelError("", "编辑操场失败");
                     ModelState.AddModelError("", result.DisplayName());
                 }
             }

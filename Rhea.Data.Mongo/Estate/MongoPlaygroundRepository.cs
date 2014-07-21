@@ -10,24 +10,24 @@ using Rhea.Model.Estate;
 namespace Rhea.Data.Mongo.Estate
 {
     /// <summary>
-    /// MongoDB 组团 Repsoitory
+    /// MongoDB 操场 Repository
     /// </summary>
-    public class MongoClusterRepository : MongoBuildingRepository
+    public class MongoPlaygroundRepository : MongoBuildingRepository
     {
-        #region Field
+         #region Field
         /// <summary>
         /// repository对象
         /// </summary>
-        private IMongoRepository<Cluster> repository;
+        private IMongoRepository<Playground> repository;
         #endregion //Field
 
         #region Constructor
         /// <summary>
-        /// MongoDB 组团 Repository
+        /// MongoDB 操场 Repository
         /// </summary>
-        public MongoClusterRepository()
+        public MongoPlaygroundRepository()
         {
-            this.repository = new MongoRepository<Cluster>(RheaServer.EstateDatabase);
+            this.repository = new MongoRepository<Playground>(RheaServer.EstateDatabase);
         }
         #endregion //Constructor
 
@@ -36,7 +36,7 @@ namespace Rhea.Data.Mongo.Estate
         /// 获取建筑
         /// </summary>
         /// <param name="id">建筑ID</param>
-        /// <returns>组团</returns>
+        /// <returns>操场</returns>
         public override Building Get(int id)
         {
             return this.repository.Where(r => r.BuildingId == id).First();
@@ -51,8 +51,8 @@ namespace Rhea.Data.Mongo.Estate
         {
             try
             {
-                Cluster cluster = (Cluster)data;
-                this.repository.Update(cluster);
+                Playground playground = (Playground)data;
+                this.repository.Update(playground);
             }
             catch(Exception)
             {

@@ -33,6 +33,7 @@ namespace Rhea.Business.Estate
         #endregion //Constructor
 
         #region Method
+        #region Building
         /// <summary>
         /// 获取所有建筑
         /// </summary>
@@ -74,6 +75,17 @@ namespace Rhea.Business.Estate
         }
 
         /// <summary>
+        /// 获取子建筑
+        /// </summary>
+        /// <param name="parentId">父级建筑ID</param>
+        /// <returns></returns>
+        public IEnumerable<Building> GetChildBuildings(int parentId)
+        {
+            var data = this.buildingRepository.Get().Where(r => r.ParentId == parentId);
+            return data;
+        }
+
+        /// <summary>
         /// 添加建筑
         /// </summary>
         /// <param name="data">建筑对象</param>
@@ -83,7 +95,9 @@ namespace Rhea.Business.Estate
             data.Status = 0;
             return this.buildingRepository.Create(data);
         }
+        #endregion //Building
 
+        #region BuildingGroup
         /// <summary>
         /// 获取楼群建筑
         /// </summary>
@@ -110,7 +124,9 @@ namespace Rhea.Business.Estate
             IBuildingRepository buildingRepository = new MongoBuildingGroupRepository();
             return buildingRepository.Update(data);
         }
+        #endregion //BuildingGroup
 
+        #region Cluster
         /// <summary>
         /// 获取组团
         /// </summary>
@@ -137,7 +153,9 @@ namespace Rhea.Business.Estate
             IBuildingRepository buildingRepository = new MongoClusterRepository();
             return buildingRepository.Update(data);
         }
+        #endregion //Cluster
 
+        #region Cottage
         /// <summary>
         /// 获取独栋建筑
         /// </summary>
@@ -163,9 +181,14 @@ namespace Rhea.Business.Estate
         public ErrorCode UpdateCottage(Cottage data)
         {
             IBuildingRepository buildingRepository = new MongoCottageRepository();
+            Cottage old = (Cottage)buildingRepository.Get(data.BuildingId);
+            data.Floors = old.Floors;
+
             return buildingRepository.Update(data);
         }
+        #endregion //Cottage
 
+        #region Subregion
         /// <summary>
         /// 获取分区
         /// </summary>
@@ -184,6 +207,22 @@ namespace Rhea.Business.Estate
         }
 
         /// <summary>
+        /// 更新分区
+        /// </summary>
+        /// <param name="data">分区对象</param>
+        /// <returns></returns>
+        public ErrorCode UpdateSubregion(Subregion data)
+        {
+            IBuildingRepository buildingRepository = new MongoSubregionRepository();
+            Subregion old = (Subregion)buildingRepository.Get(data.BuildingId);
+            data.Floors = old.Floors;
+
+            return buildingRepository.Update(data);
+        }
+        #endregion //Subregion
+
+        #region Block
+        /// <summary>
         /// 获取楼宇
         /// </summary>
         /// <param name="id">建筑ID</param>
@@ -199,6 +238,50 @@ namespace Rhea.Business.Estate
             else
                 return data;
         }
+
+        /// <summary>
+        /// 更新楼宇
+        /// </summary>
+        /// <param name="data">楼宇对象</param>
+        /// <returns></returns>
+        public ErrorCode UpdateBlock(Block data)
+        {
+            IBuildingRepository buildingRepository = new MongoBlockRepository();
+            Block old = (Block)buildingRepository.Get(data.BuildingId);
+            data.Floors = old.Floors;
+
+            return buildingRepository.Update(data);
+        }
+        #endregion //Block
+
+        #region Playground
+        /// <summary>
+        /// 获取操场
+        /// </summary>
+        /// <param name="id">建筑ID</param>
+        /// <returns></returns>
+        public Playground GetPlayground(int id)
+        {
+            IBuildingRepository buildingRepository = new MongoPlaygroundRepository();
+            Playground data = (Playground)buildingRepository.Get(id);
+
+            if (data.Status == 1)
+                return null;
+            else
+                return data;
+        }
+
+        /// <summary>
+        /// 更新操场
+        /// </summary>
+        /// <param name="data">操场对象</param>
+        /// <returns></returns>
+        public ErrorCode UpdatePlayground(Playground data)
+        {
+            IBuildingRepository buildingRepository = new MongoPlaygroundRepository();
+            return buildingRepository.Update(data);
+        }
+        #endregion //Playground
         #endregion //Method
     }
 }

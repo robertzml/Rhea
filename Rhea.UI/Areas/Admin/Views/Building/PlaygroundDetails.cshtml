@@ -1,9 +1,10 @@
-﻿@model Rhea.Model.Estate.Cottage
+﻿@model Rhea.Model.Estate.Playground
 
 @{
-    ViewBag.Title = "独栋信息";
+    ViewBag.Title = "操场信息";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+
 
 <div class="row">
     @Html.Action("Menu", "Estate")
@@ -14,7 +15,7 @@
                 <ol class="breadcrumb">
                     <li><a href="@Url.Action("Index", "Estate")">房产管理</a></li>
                     <li><a href="#">建筑管理</a></li>
-                    <li><a href="#">独栋信息</a></li>
+                    <li><a href="#">操场信息</a></li>
                 </ol>
             </div>
         </div>
@@ -128,22 +129,6 @@
                                                     var type2 = (BuildingUseType)Model.UseType;
                                                     @type2.DisplayName();
                                                 }
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                @Html.DisplayNameFor(model => model.AboveGroundFloor)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(model => model.AboveGroundFloor)
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                @Html.DisplayNameFor(model => model.UnderGroundFloor)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(model => model.UnderGroundFloor)
                                             </td>
                                         </tr>
                                         <tr>
@@ -324,83 +309,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-xs-12 col-lg-12">
-                <div class="box">
-                    <div class="box-header">
-                        <div class="box-name">
-                            <i class="fa fa-info-circle"></i>
-                            <span>楼层信息</span>
-                        </div>
-                        <div class="box-icons">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="expand-link">
-                                <i class="fa fa-expand"></i>
-                            </a>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                        <div class="no-move"></div>
-                    </div>
-
-                    <div class="box-content table-responsive">
-                        <table class="table table-bordered table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        ID
-                                    </th>
-                                    <th>
-                                        编号
-                                    </th>
-                                    <th>
-                                        名称
-                                    </th>
-                                    <th>
-                                        建筑面积
-                                    </th>
-                                    <th>
-                                        使用面积
-                                    </th>
-                                    <th>
-                                        平面图
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model.Floors)
-                                {
-                                    <tr>
-                                        <td>
-                                            @item.Id
-                                        </td>
-                                        <td>
-                                            @item.Number
-                                        </td>
-                                        <td>
-                                            @item.Name
-                                        </td>
-                                        <td>
-                                            @item.BuildArea
-                                        </td>
-                                        <td>
-                                            @item.UsableArea
-                                        </td>
-                                        <td>
-                                            @item.ImageUrl
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 
@@ -413,4 +321,7 @@
         });
     </script>
 }
+
+
+
 

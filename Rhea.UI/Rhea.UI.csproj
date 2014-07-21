@@ -258,6 +258,11 @@
     <Content Include="Areas\Admin\Views\Building\ClusterDetails.cshtml" />
     <Content Include="Areas\Admin\Views\Building\SubregionDetails.cshtml" />
     <Content Include="Areas\Admin\Views\Building\BlockDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\Building\PlaygroundDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\Building\ClusterEdit.cshtml" />
+    <Content Include="Areas\Admin\Views\Building\SubregionEdit.cshtml" />
+    <Content Include="Areas\Admin\Views\Building\BlockEdit.cshtml" />
+    <Content Include="Areas\Admin\Views\Building\PlaygroundEdit.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="plugins\jquery-ui\i18n\jquery-ui-i18n.min.js" />

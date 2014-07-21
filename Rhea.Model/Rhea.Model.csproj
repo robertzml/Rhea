@@ -64,6 +64,7 @@
     <Compile Include="Estate\Cottage.cs" />
     <Compile Include="Estate\EstateModels.cs" />
     <Compile Include="Estate\Floor.cs" />
+    <Compile Include="Estate\Playground.cs" />
     <Compile Include="Estate\Subregion.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="MongoEntity.cs" />
