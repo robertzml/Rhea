@@ -14,7 +14,9 @@ namespace Rhea.ConsoleTest
             //synchronization.SyncBuildingGroup();
             //synchronization.ShowBuildingMap();
             //synchronization.SyncBuilding();
-            synchronization.SyncSubregion();
+            //synchronization.SyncSubregion();
+            //synchronization.SyncBlock();
+            synchronization.SyncCottage();
         }
     }
 }

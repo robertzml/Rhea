@@ -121,6 +121,22 @@ namespace Rhea.Data.Mongo
 
             return doc;
         }
+
+        /// <summary>
+        /// 获取原始子楼宇
+        /// </summary>
+        /// <param name="buildingGroupId">所属楼群ID</param>
+        /// <returns></returns>
+        public BsonDocument GetChildBuilding(int buildingGroupId)
+        {
+            Open("estate");
+            MongoCollection<BsonDocument> collection = this.database.GetCollection<BsonDocument>("building");
+
+            var query = Query.EQ("buildingGroupId", buildingGroupId);
+            var doc = collection.FindOne(query);
+
+            return doc;
+        }
         #endregion //Method
     }
 }

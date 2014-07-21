@@ -50,13 +50,47 @@ namespace Rhea.ConsoleTest
 
             List<OriginBuildingMap> maps = business.GetRelateData();
 
-            maps = maps.Where(r => r.NewId > 200077 && r.NewId <= 2000123).ToList();
+            maps = maps.Where(r => r.NewId > 200077 && r.NewId <= 200123).ToList();
 
             foreach (var row in maps)
             {
                 if (row.OrganizeType != 4)
                     continue;
                 ErrorCode result = business.SyncSubregionFloor(row);
+                Console.WriteLine(result.DisplayName());
+            }
+        }
+
+        public void SyncBlock()
+        {
+            SyncBusiness business = new SyncBusiness();
+
+            List<OriginBuildingMap> maps = business.GetRelateData();
+
+            maps = maps.Where(r => r.NewId >= 200124 && r.NewId <= 200196).ToList();
+
+            foreach (var row in maps)
+            {
+                if (row.OrganizeType != 5)
+                    continue;
+                ErrorCode result = business.SyncBlockFloor(row);
+                Console.WriteLine(result.DisplayName());
+            }
+        }
+
+        public void SyncCottage()
+        {
+            SyncBusiness business = new SyncBusiness();
+
+            List<OriginBuildingMap> maps = business.GetRelateData();
+
+            maps = maps.Where(r => r.NewId >= 200001 && r.NewId <= 200065).ToList();
+
+            foreach (var row in maps)
+            {
+                if (row.OrganizeType != 3)
+                    continue;
+                ErrorCode result = business.SyncCottageFloor(row);
                 Console.WriteLine(result.DisplayName());
             }
         }

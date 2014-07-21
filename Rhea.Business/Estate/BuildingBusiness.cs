@@ -94,7 +94,7 @@ namespace Rhea.Business.Estate
             IBuildingRepository buildingRepository = new MongoBuildingGroupRepository();
             BuildingGroup data = (BuildingGroup)buildingRepository.Get(id);
 
-            if (data.Status == 1)
+            if (data.OrganizeType != (int)BuildingOrganizeType.BuildingGroup || data.Status == 1)
                 return null;
             else
                 return data;
@@ -147,6 +147,7 @@ namespace Rhea.Business.Estate
         {
             IBuildingRepository buildingRepository = new MongoCottageRepository();
             Cottage data = (Cottage)buildingRepository.Get(id);
+            data.Floors = data.Floors.OrderBy(r => r.Number).ToList();
 
             if (data.Status == 1)
                 return null;
@@ -174,6 +175,7 @@ namespace Rhea.Business.Estate
         {
             IBuildingRepository buildingRepository = new MongoSubregionRepository();
             Subregion data = (Subregion)buildingRepository.Get(id);
+            data.Floors = data.Floors.OrderBy(r => r.Number).ToList();
 
             if (data.Status == 1)
                 return null;
@@ -190,6 +192,7 @@ namespace Rhea.Business.Estate
         {
             IBuildingRepository buildingRepository = new MongoBlockRepository();
             Block data = (Block)buildingRepository.Get(id);
+            data.Floors = data.Floors.OrderBy(r => r.Number).ToList();
 
             if (data.Status == 1)
                 return null;

@@ -174,6 +174,72 @@ namespace Rhea.Business
             return result;
         }
 
+        public ErrorCode SyncBlockFloor(OriginBuildingMap map)
+        {
+            BsonDocument doc = this.originRepository.GetBuilding(map.OldId);
+
+            MongoBlockRepository blockRepository = new MongoBlockRepository();
+            Block block = (Block)blockRepository.Get(map.NewId);          
+
+            BsonArray array = doc["floors"].AsBsonArray;
+            foreach (BsonDocument row in array)
+            {
+                if (row.GetValue("status", 0).AsInt32 == 1)
+                    continue;
+
+                Floor floor = new Floor();
+                floor.Id = row["id"].AsInt32;
+                floor.Number = row["number"].AsInt32;
+                floor.Name = row["name"].AsString;
+                floor.ImageUrl = row["imageUrl"].AsString;
+                floor.Remark = row["remark"].AsString;
+                floor.Status = 0;
+
+                block.Floors.Add(floor);
+            }
+
+            ErrorCode result = blockRepository.Update(block);
+            return result;
+        }
+
+        public ErrorCode SyncCottageFloor(OriginBuildingMap map)
+        { 
+            BsonDocument doc = this.originRepository.GetChildBuilding(map.OldId);
+
+            if (doc == null)
+                return ErrorCode.NotImplement;
+
+            MongoCottageRepository cottageRepository = new MongoCottageRepository();
+            Cottage cottage = (Cottage)cottageRepository.Get(map.NewId);
+
+            if (cottage.Floors.Count != 0)
+                return ErrorCode.Exception;
+
+            if (!doc.Contains("floors"))
+                return ErrorCode.Exception;
+
+            BsonArray array = doc["floors"].AsBsonArray;
+
+            foreach (BsonDocument row in array)
+            {
+                if (row.GetValue("status", 0).AsInt32 == 1)
+                    continue;
+
+                Floor floor = new Floor();
+                floor.Id = row["id"].AsInt32;
+                floor.Number = row["number"].AsInt32;
+                floor.Name = row["name"].AsString;
+                floor.ImageUrl = row["imageUrl"].AsString;
+                floor.Remark = row["remark"].AsString;
+                floor.Status = 0;
+
+                cottage.Floors.Add(floor);
+            }
+
+            ErrorCode result = cottageRepository.Update(cottage);
+            return result;
+        }
+
         /// <summary>
         /// 从Sqlite里获取关联数据
         /// </summary>

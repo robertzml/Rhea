@@ -25,5 +25,20 @@ namespace Rhea.Business
             string name = campusRepository.Get(building.CampusId).Name;
             return name;
         }
+
+        /// <summary>
+        /// 父级建筑名称
+        /// </summary>
+        /// <param name="building">建筑对象</param>
+        /// <returns></returns>
+        public static string ParentName(this Building building)
+        {
+            if (building.ParentId == 200000)
+                return RheaConstant.TopParentBuildingName;
+
+            IBuildingRepository repository = new MongoBuildingRepository();
+            string name = repository.Get(building.ParentId).Name;
+            return name;
+        }
     }
 }
