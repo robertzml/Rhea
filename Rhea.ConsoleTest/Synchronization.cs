@@ -95,6 +95,19 @@ namespace Rhea.ConsoleTest
             }
         }
 
+        public void SyncDepartment()
+        {
+            SyncBusiness business = new SyncBusiness();
+
+            List<OriginDepartmentMap> maps = business.GetRelateDepartment();
+
+            foreach(var row in maps)
+            {
+                ErrorCode result = business.SyncDepartment(row);
+                Console.WriteLine(result.DisplayName());
+            }
+        }
+
         public void ShowBuildingMap()
         {
             SyncBusiness business = new SyncBusiness();
@@ -103,6 +116,17 @@ namespace Rhea.ConsoleTest
             foreach(var row in maps)
             {
                 Console.WriteLine("newId:{0}, oldId:{1}, parentId:{2}, type:{3}", row.NewId, row.OldId, row.NewParentId, row.OrganizeType);
+            }
+        }
+
+        public void ShowDepartmentMap()
+        {
+            SyncBusiness business = new SyncBusiness();
+            List<OriginDepartmentMap> maps = business.GetRelateDepartment();
+
+            foreach (var row in maps)
+            {
+                Console.WriteLine("oldId:{0}, newId:{1}, name:{2}, type:{3}", row.OldId, row.NewId, row.NewName, row.Type);
             }
         }
         #endregion //Method

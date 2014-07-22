@@ -40,14 +40,13 @@ namespace Rhea.UI.Filters
         /// <returns></returns>
         private bool CheckRank(string[] userRoles)
         {
-            //UserBusiness business = new UserBusiness();
-            //var group = business.Get(userRoles[0]);
+            UserBusiness business = new UserBusiness();
+            var group = business.GetUserGroup(userRoles[0]);
 
-            //if (group == null)
-            //    return false;
-            //else
-            //    return group.Rank >= rank;
-            return true;
+            if (group == null)
+                return false;
+            else
+                return group.Rank >= rank;
         }
 
         /// <summary>

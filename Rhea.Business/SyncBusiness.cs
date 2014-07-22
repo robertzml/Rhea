@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Rhea.Model;
 using System.Data;
+using Rhea.Data.Mongo.Personnel;
+using Rhea.Model.Personnel;
 
 namespace Rhea.Business
 {
@@ -132,11 +134,11 @@ namespace Rhea.Business
             building.BuildingId = map.NewId;
             building.CampusId = 100001;
             building.ParentId = map.NewParentId;
-            building.Name = doc["name"].AsString;            
+            building.Name = doc["name"].AsString;
             building.OrganizeType = map.OrganizeType;
             building.HasChild = map.HasChild;
-            building.UseType = doc["useType"].AsInt32;           
-           
+            building.UseType = doc["useType"].AsInt32;
+
             building.Sort = map.Sort;
             building.Status = 0;
 
@@ -155,7 +157,7 @@ namespace Rhea.Business
 
             BsonArray array = doc["floors"].AsBsonArray;
             foreach (BsonDocument row in array)
-            {                
+            {
                 if (row.GetValue("status", 0).AsInt32 == 1)
                     continue;
 
@@ -179,7 +181,7 @@ namespace Rhea.Business
             BsonDocument doc = this.originRepository.GetBuilding(map.OldId);
 
             MongoBlockRepository blockRepository = new MongoBlockRepository();
-            Block block = (Block)blockRepository.Get(map.NewId);          
+            Block block = (Block)blockRepository.Get(map.NewId);
 
             BsonArray array = doc["floors"].AsBsonArray;
             foreach (BsonDocument row in array)
@@ -203,7 +205,7 @@ namespace Rhea.Business
         }
 
         public ErrorCode SyncCottageFloor(OriginBuildingMap map)
-        { 
+        {
             BsonDocument doc = this.originRepository.GetChildBuilding(map.OldId);
 
             if (doc == null)
@@ -278,6 +280,55 @@ namespace Rhea.Business
             }
 
             return maps;
+        }
+
+        /// <summary>
+        /// 从Sqlite里获取关联部门
+        /// </summary>
+        /// <returns></returns>
+        public List<OriginDepartmentMap> GetRelateDepartment()
+        {
+            SqliteRepository repository = new SqliteRepository(@"E:\Test\rheaimport.sqlite");
+
+            string sql = "SELECT * FROM department";
+            DataTable dt = repository.ExecuteQuery(sql);
+
+            List<OriginDepartmentMap> maps = new List<OriginDepartmentMap>();
+
+            foreach(DataRow row in dt.Rows)
+            {
+                OriginDepartmentMap map = new OriginDepartmentMap();
+                map.OldId = Convert.ToInt32(row["原编码"]);
+                map.NewId = Convert.ToInt32(row["编码"]);
+                map.NewName = row["单位名称"].ToString();
+                map.Type = Convert.ToInt32(row["类型"]);
+
+                maps.Add(map);
+            }
+
+            return maps;
+        }
+        
+        public ErrorCode SyncDepartment(OriginDepartmentMap map)
+        {
+            BsonDocument doc = this.originRepository.GetDepartment(map.OldId);
+
+            Department department = new Department();
+            department.DepartmentId = map.NewId;
+            department.Name = map.NewName;
+            department.Type = map.Type;
+            if (map.OldId != 0)
+            {
+                department.ShortName = doc.GetValue("shortName", "").AsString;
+                department.ImageUrl = doc.GetValue("imageUrl", "").AsString;
+                department.Description = doc.GetValue("description", "").AsString;
+            }
+            department.Status = 0;
+
+            MongoDepartmentRepository departmentRepository = new MongoDepartmentRepository();          
+            ErrorCode result = departmentRepository.Create(department);
+
+            return result;
         }
         #endregion //Method
     }

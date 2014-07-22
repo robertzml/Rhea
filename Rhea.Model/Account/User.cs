@@ -14,6 +14,7 @@ namespace Rhea.Model.Account
     [CollectionName("user")]
     public class User : MongoEntity
     {
+        #region Property
         /// <summary>
         /// 用户ID
         /// </summary>
@@ -98,5 +99,6 @@ namespace Rhea.Model.Account
         [BsonElement("status")]
         [Display(Name = "用户状态")]
         public int Status { get; set; }
+        #endregion //Property
     }
 }

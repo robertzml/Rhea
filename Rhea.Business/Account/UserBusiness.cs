@@ -21,6 +21,11 @@ namespace Rhea.Business.Account
         /// 用户Repository
         /// </summary>
         private IUserRepository userRepository;
+
+        /// <summary>
+        /// 用户组Repository
+        /// </summary>
+        public IUserGroupRepository userGroupRepository;
         #endregion //Field
 
         #region Constructor
@@ -30,6 +35,7 @@ namespace Rhea.Business.Account
         public UserBusiness()
         {
             this.userRepository = new MongoUserRepository();
+            this.userGroupRepository = new MongoUserGroupRepository();
         }
         #endregion //Constructor
 
@@ -61,6 +67,26 @@ namespace Rhea.Business.Account
         public User GetByUserName(string userName)
         {
             return this.userRepository.GetByUserName(userName);
+        }
+
+        /// <summary>
+        /// 获取用户组
+        /// </summary>
+        /// <param name="id">用户组ID</param>
+        /// <returns></returns>
+        public UserGroup GetUserGroup(int id)
+        {
+            return this.userGroupRepository.Get(id);
+        }
+
+        /// <summary>
+        /// 获取用户组
+        /// </summary>
+        /// <param name="name">用户组名称</param>
+        /// <returns></returns>
+        public UserGroup GetUserGroup(string name)
+        {
+            return this.userGroupRepository.Get(name);
         }
         #endregion //Method
     }

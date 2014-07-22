@@ -137,6 +137,22 @@ namespace Rhea.Data.Mongo
 
             return doc;
         }
+
+        /// <summary>
+        /// 获取原始部门
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public BsonDocument GetDepartment(int id)
+        {
+            Open("personnel");
+            MongoCollection<BsonDocument> collection = this.database.GetCollection<BsonDocument>("department");
+
+            var query = Query.EQ("id", id);
+            var doc = collection.FindOne(query);
+
+            return doc;
+        }
         #endregion //Method
     }
 }

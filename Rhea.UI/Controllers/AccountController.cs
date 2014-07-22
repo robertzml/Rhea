@@ -95,7 +95,7 @@ namespace Rhea.UI.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "abc");
+                    ModelState.AddModelError("", result.DisplayName());
                 }
             }
 

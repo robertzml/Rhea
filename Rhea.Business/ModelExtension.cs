@@ -1,12 +1,14 @@
-﻿using Rhea.Data.Estate;
+﻿using Rhea.Data.Account;
+using Rhea.Data.Estate;
+using Rhea.Data.Mongo.Account;
 using Rhea.Data.Mongo.Estate;
+using Rhea.Model.Account;
 using Rhea.Model.Estate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Rhea.Model.Account;
 
 namespace Rhea.Business
 {
@@ -50,7 +52,9 @@ namespace Rhea.Business
         /// <returns></returns>
         public static string UserGroupName(this User user)
         {
-            return "Root";
+            IUserGroupRepository repository = new MongoUserGroupRepository();
+            string name = repository.Get(user.UserGroupId).Name;
+            return name;
         }
         #endregion //Method
     }
