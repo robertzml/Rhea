@@ -57,6 +57,10 @@
     <Compile Include="SyncBusiness.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Rhea.Common\Rhea.Common.csproj">
+      <Project>{a89d3a8e-b3f7-41b9-b4aa-4c31ad0d6603}</Project>
+      <Name>Rhea.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Rhea.Data.Mongo\Rhea.Data.Mongo.csproj">
       <Project>{ddf710b4-3a6b-4131-8591-c222460eb073}</Project>
       <Name>Rhea.Data.Mongo</Name>

@@ -3,8 +3,19 @@ $.extend( true, $.fn.dataTable.defaults, {
 	"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
 	"sPaginationType": "bootstrap",
 	"oLanguage": {
-		"sLengthMenu": "_MENU_ records per page"
-	}
+			"sLengthMenu": "每页 _MENU_ 条记录",
+			"sInfo": "显示 _START_ 至 _END_ 共有 _TOTAL_ 条记录",
+			"sInfoEmpty": "记录为空",
+			"sInfoFiltered": " - 从 _MAX_ 条记录中",
+			"sZeroRecords": "结果为空",
+			"sSearch": "搜索:",
+			"oPaginate": {
+				"sFirst": "首页",
+				"sLast": "末页",
+				"sPrevious": "上页",
+				"sNext": "下页"
+			}
+		},
 } );
 
 

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Rhea.Model.Account;
 
 namespace Rhea.Business
 {
@@ -14,6 +15,7 @@ namespace Rhea.Business
     /// </summary>
     public static class ModelExtension
     {
+        #region Method
         /// <summary>
         /// 建筑所属校区名称
         /// </summary>
@@ -40,5 +42,16 @@ namespace Rhea.Business
             string name = repository.Get(building.ParentId).Name;
             return name;
         }
+
+        /// <summary>
+        /// 用户组名称
+        /// </summary>
+        /// <param name="user">用户对象</param>
+        /// <returns></returns>
+        public static string UserGroupName(this User user)
+        {
+            return "Root";
+        }
+        #endregion //Method
     }
 }

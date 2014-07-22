@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account\MongoUserRepository.cs" />
     <Compile Include="Estate\MongoBlockRepository.cs" />
     <Compile Include="Estate\MongoBuildingGroupRepository.cs" />
     <Compile Include="Estate\MongoBuildingRepository.cs" />

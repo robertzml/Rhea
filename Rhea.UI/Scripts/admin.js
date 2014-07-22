@@ -27,113 +27,12 @@ function LoadAjaxContent(url){
 		async: false
 	});
 }
-//
-//  Function maked all .box selector is draggable, to disable for concrete element add class .no-drop
-//
-function WinMove3(){
-	$( "div.box").not('.no-drop')
-		.draggable({
-			revert: true,
-			zIndex: 2000,
-			cursor: "crosshair",
-			handle: '.box-name',
-			opacity: 0.8
-		})
-		.droppable({
-			tolerance: 'pointer',
-			drop: function( event, ui ) {
-				var draggable = ui.draggable;
-				var droppable = $(this);
-				var dragPos = draggable.position();
-				var dropPos = droppable.position();
-				draggable.swap(droppable);
-				setTimeout(function() {
-					var dropmap = droppable.find('[id^=map-]');
-					var dragmap = draggable.find('[id^=map-]');
-					if (dragmap.length > 0 || dropmap.length > 0){
-						dragmap.resize();
-						dropmap.resize();
-					}
-					else {
-						draggable.resize();
-						droppable.resize();
-					}
-				}, 50);
-				setTimeout(function() {
-					draggable.find('[id^=map-]').resize();
-					droppable.find('[id^=map-]').resize();
-				}, 250);
-			}
-		});
-}
-//
-// Swap 2 elements on page. Used by WinMove function
-//
-jQuery.fn.swap = function(b){
-	b = jQuery(b)[0];
-	var a = this[0];
-	var t = a.parentNode.insertBefore(document.createTextNode(''), a);
-	b.parentNode.insertBefore(a, b);
-	t.parentNode.insertBefore(b, t);
-	t.parentNode.removeChild(t);
-	return this;
-};
 
-
-//
-//  Function for create 2 dates in human-readable format (with leading zero)
-//
-function PrettyDates(){
-	var currDate = new Date();
-	var year = currDate.getFullYear();
-	var month = currDate.getMonth() + 1;
-	var startmonth = 1;
-	if (month > 3){
-		startmonth = month -2;
-	}
-	if (startmonth <=9){
-		startmonth = '0'+startmonth;
-	}
-	if (month <= 9) {
-		month = '0'+month;
-	}
-	var day= currDate.getDate();
-	if (day <= 9) {
-		day = '0'+day;
-	}
-	var startdate = year +'-'+ startmonth +'-01';
-	var enddate = year +'-'+ month +'-'+ day;
-	return [startdate, enddate];
-}
 //
 //  Function set min-height of window (required for this theme)
 //
 function SetMinBlockHeight(elem){
 	elem.css('min-height', window.innerHeight - 49)
-}
-//
-//  Helper for correct size of Messages page
-//
-function MessagesMenuWidth(){
-	var W = window.innerWidth;
-	var W_menu = $('#sidebar-left').outerWidth();
-	var w_messages = (W-W_menu)*16.666666666666664/100;
-	$('#messages-menu').width(w_messages);
-}
-//
-// Function for change panels of Dashboard
-//
-function DashboardTabChecker(){
-	$('#content').on('click', 'a.tab-link', function(e){
-		e.preventDefault();
-		$('div#dashboard_tabs').find('div[id^=dashboard]').each(function(){
-			$(this).css('visibility', 'hidden').css('position', 'absolute');
-		});
-		var attr = $(this).attr('id');
-		$('#'+'dashboard-'+attr).css('visibility', 'visible').css('position', 'relative');
-		$(this).closest('.nav').find('li').removeClass('active');
-		$(this).closest('li').addClass('active');
-	});
 }
 
 //
@@ -176,32 +75,6 @@ function Table2Json(table) {
 	});
 	var result_json = JSON.stringify(result);
 	OpenModalBox('Table to JSON values', result_json);
-}
-
-
-/*-------------------------------------------
-	Function for File upload page (form_file_uploader.html)
----------------------------------------------*/
-function FileUpload(){
-	$('#bootstrapped-fine-uploader').fineUploader({
-		template: 'qq-template-bootstrap',
-		classes: {
-			success: 'alert alert-success',
-			fail: 'alert alert-error'
-		},
-		thumbnails: {
-			placeholders: {
-				waitingPath: "assets/waiting-generic.png",
-				notAvailablePath: "assets/not_available-generic.png"
-			}
-		},
-		request: {
-			endpoint: 'server/handleUploads'
-		},
-		validation: {
-			allowedExtensions: ['jpeg', 'jpg', 'gif', 'png']
-		}
-	});
 }
 
 //////////////////////////////////////////////////////

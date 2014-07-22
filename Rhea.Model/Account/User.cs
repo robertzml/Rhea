@@ -53,13 +53,6 @@ namespace Rhea.Model.Account
         public int UserGroupId { get; set; }
 
         /// <summary>
-        /// 用户组名称
-        /// </summary>
-        [BsonElement("userGroupName")]
-        [Display(Name = "用户组名称")]
-        public string UserGroupName { get; set; }
-
-        /// <summary>
         /// 上次登录时间
         /// </summary>
         [BsonElement("lastLoginTime")]

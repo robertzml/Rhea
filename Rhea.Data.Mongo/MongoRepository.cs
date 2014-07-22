@@ -365,4 +365,85 @@ namespace Rhea.Data.Mongo
             : base(url, collectionName) { }
         #endregion //Constructor
     }
+
+    /// <summary>
+    /// MongoRepository类，返回BsonDocument
+    /// </summary>
+    public class MongoRepository
+    {
+        #region Field
+        /// <summary>
+        /// MongoCollection对象
+        /// </summary>
+        private MongoCollection<BsonDocument> collection;
+
+        /// <summary>
+        /// MongoDatabase对象
+        /// </summary>
+        private MongoDatabase database;
+        #endregion //Field
+
+        #region Constructor
+        /// <summary>
+        /// 初始化 MongoRepository 类
+        /// </summary>
+        /// <param name="connectionString">连接字符串</param>
+        /// <param name="databaseName">数据库名称</param>
+        public MongoRepository(string connectionString, string databaseName)
+        {
+            this.database = GetDatabase(new MongoUrl(connectionString), databaseName);
+        }
+
+        /// <summary>
+        /// 初始化 MongoRepository 类
+        /// </summary>
+        /// <param name="connectionString">连接字符串</param>
+        /// <param name="databaseName">数据库名称</param>
+        /// <param name="collectionName">Collection名称</param>
+        public MongoRepository(string connectionString, string databaseName, string collectionName)
+        {
+            this.database = GetDatabase(new MongoUrl(connectionString), databaseName);
+            this.collection = this.database.GetCollection<BsonDocument>(collectionName);
+        }
+        #endregion //Constructor
+
+        #region Function
+        /// <summary>
+        /// 获取数据库
+        /// </summary>
+        /// <param name="url">数据库URL</param>
+        /// <param name="databaseName">数据库名称</param>
+        /// <returns></returns>
+        private MongoDatabase GetDatabase(MongoUrl url, string databaseName)
+        {
+            var client = new MongoClient(url);
+            var server = client.GetServer();
+            return server.GetDatabase(databaseName);
+        }
+        #endregion //Function
+
+        #region Method
+        /// <summary>
+        /// 设置MongoCollection
+        /// </summary>
+        /// <param name="collectionName">Collection名称</param>
+        public void SetCollection(string collectionName)
+        {
+            this.collection = this.database.GetCollection<BsonDocument>(collectionName);
+        }
+        #endregion //Method
+
+        #region Property
+        /// <summary>
+        /// MongoCollection对象
+        /// </summary>
+        public MongoCollection<BsonDocument> Collection
+        {
+            get
+            {
+                return this.collection;
+            }
+        }
+        #endregion //Property
+    }
 }

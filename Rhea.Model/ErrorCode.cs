@@ -37,6 +37,30 @@ namespace Rhea.Model
         NotImplement = 3,
 
         /// <summary>
+        /// 用户ID重复
+        /// </summary>
+        [Display(Name = "用户ID重复")]
+        DuplicateUserId = 10,
+
+        /// <summary>
+        /// 用户名称重复
+        /// </summary>
+        [Display(Name = "用户名称重复")]
+        DuplicateUserName = 11,
+
+        /// <summary>
+        /// 密码错误
+        /// </summary>
+        [Display(Name = "密码错误")]
+        WrongPassword = 12,
+
+        /// <summary>
+        /// 用户不存在
+        /// </summary>
+        [Display(Name = "用户不存在")]
+        UserNotExist = 13,
+
+        /// <summary>
         /// ID重复
         /// </summary>
         [Display(Name = "ID重复")]
