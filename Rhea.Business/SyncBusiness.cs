@@ -330,6 +330,55 @@ namespace Rhea.Business
 
             return result;
         }
+
+        /// <summary>
+        /// 获取原始房间列表
+        /// </summary>
+        /// <returns></returns>
+        public List<int> GetOriginRoom()
+        {
+            return this.originRepository.GetRoomList();
+        }
+
+        /// <summary>
+        /// 同步房间
+        /// </summary>
+        /// <param name="id">房间ID</param>
+        /// <param name="buildingMap"></param>
+        /// <param name="departmentMap"></param>
+        /// <returns></returns>
+        public ErrorCode SyncRoom(int id, List<OriginBuildingMap> buildingMap, List<OriginDepartmentMap> departmentMap)
+        {
+            BsonDocument doc = this.originRepository.GetRoom(id);
+
+            Room room = new Room();
+            room.RoomId = id;
+            room.Name = doc["name"].AsString;
+            room.Number = doc["number"].AsString;
+            room.Floor = doc["floor"].AsInt32;
+            room.UsableArea = doc["usableArea"].AsDouble;
+            room.RoomStatus = doc["roomStatus"].AsString;
+            room.Status = 0;
+
+            room.DepartmentId = departmentMap.Single(r => r.OldId == doc["departmentId"].AsInt32).NewId;
+            
+            int oldBuildingId = doc["buildingId"].AsInt32;
+
+            if (buildingMap.Any(r => r.OldId == oldBuildingId))
+            {
+                room.BuildingId = buildingMap.Single(r => r.OldId == oldBuildingId).NewId;
+            }
+            else
+            {
+                BsonDocument building = this.originRepository.GetBuilding(doc["buildingId"].AsInt32);
+                int bgId = building["buildingGroupId"].AsInt32;
+                room.BuildingId = buildingMap.Single(r => r.OldId == bgId).NewId;
+            }
+
+
+
+            return ErrorCode.Success;
+        }
         #endregion //Method
     }
 }

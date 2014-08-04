@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Rhea.Data.Mongo.Estate
 {
     /// <summary>
-    /// MongoDB 建筑Repository
+    /// MongoDB 建筑 Repository
     /// </summary>
     public class MongoBuildingRepository : IBuildingRepository
     {

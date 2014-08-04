@@ -13,6 +13,16 @@ namespace Rhea.Model.Estate
     [CollectionName("room")]
     public class Room : MongoEntity
     {
+        #region Constructor
+        /// <summary>
+        /// 房间类
+        /// </summary>
+        public Room()
+        {
+            this.Function = new RoomFunctionCode();
+        }
+        #endregion //Constructor
+
         #region Property
         /// <summary>
         /// 房间ID
@@ -84,10 +94,11 @@ namespace Rhea.Model.Estate
         /// <summary>
         /// 功能编码
         /// </summary>
-        //[Required]
-        //[Display(Name = "功能编码")]
-        //[UIHint("FunctionCodeDropDownList")]
-        //public RoomFunction Function { get; set; }
+        [Required]
+        [BsonElement("function")]
+        [Display(Name = "功能编码")]
+        [UIHint("FunctionCodeDropDownList")]
+        public RoomFunctionCode Function { get; set; }
 
         /// <summary>
         /// 楼宇ID
@@ -133,9 +144,9 @@ namespace Rhea.Model.Estate
         /// <summary>
         /// 管理人
         /// </summary>
-        [BsonElement("manager")]
-        [Display(Name = "管理人")]
-        public string Manager { get; set; }
+        //[BsonElement("manager")]
+        //[Display(Name = "管理人")]
+        //public string Manager { get; set; }
 
         /// <summary>
         /// 房间状态
@@ -154,7 +165,7 @@ namespace Rhea.Model.Estate
         [DataType(DataType.MultilineText)]
         [BsonElement("remark")]
         [Display(Name = "备注")]
-        public string Remark { get; set; }     
+        public string Remark { get; set; }
 
         /// <summary>
         /// 状态

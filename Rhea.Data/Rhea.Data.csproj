@@ -67,6 +67,7 @@
     <Compile Include="Account\IUserRepository.cs" />
     <Compile Include="Estate\IBuildingRepository.cs" />
     <Compile Include="Estate\ICampusRepository.cs" />
+    <Compile Include="Estate\IRoomRepository.cs" />
     <Compile Include="IDictionaryRepository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="IRepositoryManager.cs" />

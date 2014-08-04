@@ -153,6 +153,45 @@ namespace Rhea.Data.Mongo
 
             return doc;
         }
+
+        /// <summary>
+        /// 获取原始房间列表
+        /// </summary>
+        /// <returns></returns>
+        public List<int> GetRoomList()
+        {
+            Open("estate");
+            MongoCollection<BsonDocument> collection = this.database.GetCollection<BsonDocument>("room");
+
+            var query = Query.NE("status", 1);
+            var docs = collection.Find(query);
+
+            List<int> data = new List<int>();
+
+            foreach (BsonDocument doc in docs)
+            {
+                int id = doc["id"].AsInt32;
+                data.Add(id);
+            }
+
+            return data;
+        }
+
+        /// <summary>
+        /// 获取原始房间
+        /// </summary>
+        /// <param name="id">房间ID</param>
+        /// <returns></returns>
+        public BsonDocument GetRoom(int id)
+        {
+            Open("estate");
+            MongoCollection<BsonDocument> collection = this.database.GetCollection<BsonDocument>("room");
+
+            var query = Query.EQ("id", id);
+            var doc = collection.FindOne(query);
+
+            return doc;
+        }
         #endregion //Method
     }
 }
