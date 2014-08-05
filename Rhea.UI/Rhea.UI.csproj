@@ -183,6 +183,7 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\layout.css" />
+    <Content Include="Content\login-soft.css" />
     <Content Include="Content\plugins.css" />
     <Content Include="Content\themes\blue.css" />
     <Content Include="Content\themes\darkblue.css" />
@@ -203,12 +204,19 @@
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="Images\admin-logo.png" />
     <Content Include="Images\avatar.png" />
+    <Content Include="Images\bg-logo.png" />
     <Content Include="Images\loginbg.jpg" />
+    <Content Include="Images\logo.png" />
     <Content Include="img\accordion-plusminus.png" />
     <Content Include="img\ajax-loading.gif" />
     <Content Include="img\ajax-modal-loading.gif" />
     <Content Include="img\arrow-down.png" />
     <Content Include="img\avatar.png" />
+    <Content Include="img\bg-white-lock.png" />
+    <Content Include="img\bg\1.jpg" />
+    <Content Include="img\bg\2.jpg" />
+    <Content Include="img\bg\3.jpg" />
+    <Content Include="img\bg\4.jpg" />
     <Content Include="img\datatable-row-openclose.png" />
     <Content Include="img\flags\ad.png" />
     <Content Include="img\flags\ae.png" />
@@ -756,6 +764,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\layout.js" />
+    <Content Include="Scripts\login-soft.js" />
     <Content Include="Scripts\metronic.js" />
     <Content Include="Scripts\modernizr-2.7.2.js" />
     <Content Include="Scripts\quick-sidebar.js" />
