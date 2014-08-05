@@ -27,7 +27,7 @@ namespace Rhea.UI
                         "~/Scripts/modernizr-*"));           
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
-                      "~/plugins/jquery-ui/jquery-ui.min.js"));
+                      "~/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/datatables").Include(
                 "~/plugins/datatables/media/js/jquery.dataTables.min.js",

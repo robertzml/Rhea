@@ -551,7 +551,6 @@
     <Content Include="Areas\Admin\Views\Estate\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Campus\List.cshtml" />
     <Content Include="Areas\Admin\Views\Campus\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Advance\Menu.cshtml" />
     <Content Include="Areas\Admin\Views\Advance\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Dictionary\List.cshtml" />
     <Content Include="Areas\Admin\Views\Dictionary\Details.cshtml" />
@@ -687,6 +686,8 @@
     <Content Include="plugins\datatables\extensions\TableTools\images\psd\file_types.psd" />
     <Content Include="plugins\datatables\extensions\TableTools\images\psd\printer.psd" />
     <Content Include="plugins\datatables\Readme.md" />
+    <Content Include="Areas\Admin\Views\Shared\_MenuPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout_Advance.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="plugins\jquery-1.11.0.min.js" />

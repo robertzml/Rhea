@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";  
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
 
@@ -27,19 +27,19 @@
                 </form>
                 <!-- END RESPONSIVE QUICK SEARCH FORM -->
             </li>
-            <li class ="start left-nav-first">
-                <a href="@Url.Action("Index", "Estate")" id="estate-home-menu">
+            <li class="start left-nav-first">
+                <a href="@Url.Action("Index", "Advance")" id="advance-home-menu">
                     <i class="fa fa-dashboard"></i>
                     <span class="title">
-                        房产主页
+                        高级管理
                     </span>
                 </a>
             </li>
             <li class="left-nav-first">
                 <a href="javascript:;">
-                    <i class="fa fa-bank"></i>
+                    <i class="fa fa-users"></i>
                     <span class="title">
-                        校区管理
+                        用户管理
                     </span>
                     <span class="arrow open">
                     </span>
@@ -48,56 +48,34 @@
                 <ul class="sub-menu">
                     <li>
                         <a href="@Url.Action("List", "Campus")" id="campus-list-menu">
-                            校区列表
+                            用户列表
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            添加校区
+                            用户组列表
                         </a>
                     </li>
                 </ul>
             </li>
             <li class="left-nav-first">
                 <a href="javascript:;">
-                    <i class="fa fa-building"></i>
+                    <i class="fa fa-book"></i>
                     <span class="title">
-                        建筑管理
+                        字典管理
                     </span>
                     <span class="arrow ">
                     </span>
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="@Url.Action("List", "Building")" id="building-list-menu">
-                            建筑列表
+                        <a href="@Url.Action("List", "Dictionary")" id="dictionary-list-menu">
+                            字典列表
                         </a>
                     </li>
                     <li>
-                        <a href="@Url.Action("Create", "Building")" id="building-create-menu">
-                            添加建筑
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="left-nav-first">
-                <a href="javascript:;">
-                    <i class="fa fa-map-marker"></i>
-                    <span class="title">
-                        房间管理
-                    </span>
-                    <span class="arrow ">
-                    </span>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a href="@Url.Action("List", "Room")" id="room-list-menu">
-                            房间列表
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            添加房间
+                        <a href="@Url.Action("Create", "Dictionary")" id="dictionary-create-menu">
+                            添加字典
                         </a>
                     </li>
                 </ul>
@@ -123,7 +101,6 @@
     </div>
 </div>
 <!-- END CONTENT -->
-
 @section scripts {
     @RenderSection("scripts", required: false)
 }

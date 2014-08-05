@@ -7,8 +7,10 @@ function showMessage(text) {
 }
 
 function topNavActive($dom) {
-	$('ul#top-nav').children().removeClass('active');
+	$('ul#top-nav').children().removeClass('active');	
+
 	$dom.parent().addClass('active');
+	$dom.append('<span class="selected"></span>');
 }
 
 function leftNavActive($dom) {

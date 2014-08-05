@@ -1,23 +1,43 @@
 ﻿
 @{
     ViewBag.Title = "高级管理";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Advance.cshtml";
 }
 
-<div class="row">
-    @Html.Action("Menu", "Advance")
-
-    <!--Start Content-->
-    <div id="content" class="col-xs-12 col-sm-10 col-lg-10">
-        <h2>高级管理</h2>
-    </div>
-    <!--End Content-->
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">
+    @ViewBag.Title <small>horizontal mega menu & sidebar menu layout</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index", "Advance")">高级管理</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">高级主页</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">Horizontal & Sidebar Menu</a>
+        </li>
+    </ul>
 </div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+        Page content goes here
+    </div>
+</div>
+<!-- END PAGE CONTENT-->
 
 @section scripts {
     <script type="text/javascript">
         $(function () {
             topNavActive($('#advance-nav'));
+            leftNavActive($('#advance-home-menu'));
         });
     </script>
 }

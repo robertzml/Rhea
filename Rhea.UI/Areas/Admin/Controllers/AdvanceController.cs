@@ -17,15 +17,6 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             return View();
         }
-
-        /// <summary>
-        /// 高级管理菜单
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult Menu()
-        {
-            return View();
-        }
         #endregion //Action
     }
 }

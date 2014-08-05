@@ -2,124 +2,127 @@
 
 @{
     ViewBag.Title = "添加字典";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Advance.cshtml";
 }
 
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">
+    @ViewBag.Title
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index", "Advance")">高级管理</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">字典管理</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">@ViewBag.Title</a>
+        </li>
+    </ul>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
 <div class="row">
-    @Html.Action("Menu", "Advance")
-
-    <div id="content" class="col-xs-12 col-sm-10 col-lg-10">
-        <div class="row">
-            <div id="breadcrumb" class="col-md-12">
-                <ol class="breadcrumb">
-                    <li><a href="@Url.Action("Index", "Advance")">高级管理</a></li>
-                    <li><a href="#">字典管理</a></li>
-                    <li><a href="@Url.Action("Create", "Dictionary")">添加字典</a></li>
-                </ol>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xs-12 col-lg-12">
-                <div class="box">
-                    <div class="box-header">
-                        <div class="box-name">
-                            <i class="fa fa-plus-circle"></i>
-                            <span>@ViewBag.Title</span>
-                        </div>
-                        <div class="box-icons">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="expand-link">
-                                <i class="fa fa-expand"></i>
-                            </a>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                        <div class="no-move"></div>
-                    </div>
-
-                    <div class="box-content table-responsive">
-                        @using (Html.BeginForm())
-                        {
-                            @Html.AntiForgeryToken()
-                            <fieldset>
-                                <legend>字典属性</legend>
-
-                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-                                <table class="table table-bordered table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th class="col-md-2">属性</th>
-                                            <th class="col-md-8">值</th>
-                                            <th class="col-md-2">验证</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                @Html.LabelFor(model => model.Name)
-                                            </td>
-                                            <td>
-                                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                                            </td>
-                                            <td>
-                                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                @Html.LabelFor(model => model.Title)
-                                            </td>
-                                            <td>
-                                                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
-                                            </td>
-                                            <td>
-                                                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                @Html.LabelFor(model => model.Property)
-                                            </td>
-                                            <td>
-                                                <textarea id="Property" name="Property" class="form-control"></textarea>
-                                            </td>
-                                            <td>
-                                                @Html.ValidationMessageFor(model => model.Property, "", new { @class = "text-danger" })
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                @Html.LabelFor(model => model.Remark)
-                                            </td>
-                                            <td>
-                                                @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
-                                            </td>
-                                            <td>
-                                                @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-                                <hr />
-                                <p>
-                                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;添加</button>
-                                    <a href="@Url.Action("List", new { controller = "Dictionary" })" class="btn btn-default" role="button"><i class="fa fa-list"></i>&nbsp;回到列表</a>
-                                </p>
-                            </fieldset>
-                        }
-                    </div>
+    <div class="col-md-12">
+        <div class="portlet box green">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-plus"></i>添加字典
                 </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+                    <a href="javascript:;" class="reload">
+                    </a>
+                    <a href="javascript:;" class="remove">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <fieldset>
+                        <legend>字典属性</legend>                       
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="col-md-2">属性</th>
+                                    <th class="col-md-8">值</th>
+                                    <th class="col-md-2">验证</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.Name)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td>
+                                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.Title)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td>
+                                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.Property)
+                                    </td>
+                                    <td>
+                                        <textarea id="Property" name="Property" class="form-control"></textarea>
+                                    </td>
+                                    <td>
+                                        @Html.ValidationMessageFor(model => model.Property, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.Remark)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td>
+                                        @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4>说明：</h4>
+                        <p class="text-info">属性集一行一条</p>
+
+                        <hr />
+                        <p>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;添加</button>
+                            <a href="@Url.Action("List", new { controller = "Dictionary" })" class="btn btn-default" role="button"><i class="fa fa-list"></i>&nbsp;回到列表</a>
+                        </p>
+                    </fieldset>
+                }
             </div>
         </div>
     </div>
 </div>
-
+<!-- END PAGE CONTENT-->
 @section scripts {
     <script type="text/javascript">
         $(function () {
