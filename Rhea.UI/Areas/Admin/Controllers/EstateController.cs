@@ -17,11 +17,6 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             return View();
         }
-
-        public ActionResult Menu()
-        {
-            return View();
-        }
         #endregion //Action
     }
 }

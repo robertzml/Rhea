@@ -12,23 +12,28 @@ namespace Rhea.UI
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/jqueryv1").Include(
+                "~/plugins/jquery-1.11.0.min.js",
+                "~/plugins/jquery-migrate-1.2.1.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+                "~/plugins/bootstrap/js/bootstrap.min.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.unobtrusive*",
                         "~/Scripts/jquery.validate*"));
 
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-*"));
-
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+                        "~/Scripts/modernizr-*"));           
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                       "~/plugins/jquery-ui/jquery-ui.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/datatables").Include(
-                      "~/plugins/datatables/jquery.dataTables.js",
-                      "~/plugins/datatables/dataTables.bootstrap.js"));
+                "~/plugins/datatables/media/js/jquery.dataTables.min.js",
+                "~/plugins/datatables/extensions/TableTools/js/dataTables.tableTools.min.js",
+                "~/plugins/datatables/extensions/Scroller/js/dataTables.scroller.min.js",
+                "~/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/noty").Include(
                       "~/plugins/noty/jquery.noty.js",
@@ -41,9 +46,6 @@ namespace Rhea.UI
 
 
             // For css
-            bundles.Add(new StyleBundle("~/Content/bootstrap").Include(
-                      "~/Content/bootstrap.min.css"));
-
             bundles.Add(new StyleBundle("~/Content/fontawesome").Include(
                       "~/Content/font-awesome.min.css"));
 
@@ -54,6 +56,16 @@ namespace Rhea.UI
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/Plugin/bootstrap").Include(
+                     "~/plugins/bootstrap/css/bootstrap.min.css"));
+
+            bundles.Add(new StyleBundle("~/Plugin/uniform").Include(
+                     "~/plugins/uniform/css/uniform.default.css"));
+
+            bundles.Add(new StyleBundle("~/Plugin/datatables").Include(
+                "~/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css",
+                "~/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"));
 
             bundles.Add(new StyleBundle("~/Plugin/jqueryui").Include(
                      "~/plugins/jquery-ui/jquery-ui.min.css"));

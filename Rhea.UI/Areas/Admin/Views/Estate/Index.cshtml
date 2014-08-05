@@ -1,26 +1,60 @@
 ﻿
 @{
-    ViewBag.Title = "房产管理";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "房产主页";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Estate.cshtml";
 }
 
-<div class="row">
-    @Html.Action("Menu", "Estate")
-
-    <!--Start Content-->
-    <div id="content" class="col-xs-12 col-sm-10 col-lg-10">
-        <div class="preloader">
-            <img src="/Images/devoops_getdata.gif" class="devoops-getdata" alt="preloader" />
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">
+    @ViewBag.Title <small>horizontal mega menu & sidebar menu layout</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index", "Estate")">房产管理</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">房产主页</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">Horizontal & Sidebar Menu</a>
+        </li>
+    </ul>
+    <div class="page-toolbar">
+        <div class="btn-group pull-right">
+            <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
+                Actions <i class="fa fa-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu pull-right" role="menu">
+                <li>
+                    <a href="#">Action</a>
+                </li>
+                <li class="divider">
+                </li>
+                <li>
+                    <a href="#">Separated link</a>
+                </li>
+            </ul>
         </div>
-        
     </div>
-    <!--End Content-->
 </div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+        Page content goes here
+    </div>
+</div>
+<!-- END PAGE CONTENT-->
 
 @section scripts {
     <script type="text/javascript">
         $(function () {
             topNavActive($('#estate-nav'));
+            leftNavActive($('#estate-home-menu'));
         });
     </script>
 }
