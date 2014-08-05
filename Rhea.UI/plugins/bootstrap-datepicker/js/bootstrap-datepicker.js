@@ -63,7 +63,7 @@
 				this.push.apply(this, new_array);
 			},
 			clear: function(){
-				this.length = 0;
+				this.splice(0);
 			},
 			copy: function(){
 				var a = new DateArray();
@@ -111,6 +111,8 @@
 
 		if (this.o.rtl){
 			this.picker.addClass('datepicker-rtl');
+			this.picker.find('.prev i, .next i')
+						.toggleClass('fa-angle-left fa-angle-right');
 		}
 
 		this.viewMode = this.o.startView;
@@ -1598,9 +1600,9 @@
 		},
 		headTemplate: '<thead>'+
 							'<tr>'+
-								'<th class="prev">&laquo;</th>'+
+								'<th class="prev"><i class="fa fa-angle-left"></i></th>'+
 								'<th colspan="5" class="datepicker-switch"></th>'+
-								'<th class="next">&raquo;</th>'+
+								'<th class="next"><i class="fa fa-angle-right"></i></th>'+
 							'</tr>'+
 						'</thead>',
 		contTemplate: '<tbody><tr><td colspan="7"></td></tr></tbody>',
