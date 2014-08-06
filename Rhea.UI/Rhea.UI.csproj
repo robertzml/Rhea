@@ -164,6 +164,7 @@
     <Compile Include="Areas\Admin\Controllers\DictionaryController.cs" />
     <Compile Include="Areas\Admin\Controllers\EstateController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RoomController.cs" />
     <Compile Include="Areas\Admin\Models\SyncBuildingModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -696,6 +697,8 @@
     <Content Include="plugins\datatables\Readme.md" />
     <Content Include="Areas\Admin\Views\Shared\_MenuPartial.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout_Advance.cshtml" />
+    <Content Include="Areas\Admin\Views\Room\ListByBuilding.cshtml" />
+    <Content Include="Areas\Admin\Views\Room\Details.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="plugins\jquery-1.11.0.min.js" />

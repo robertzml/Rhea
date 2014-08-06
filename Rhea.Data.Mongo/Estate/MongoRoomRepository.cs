@@ -43,6 +43,53 @@ namespace Rhea.Data.Mongo.Estate
 
         #region Method
         /// <summary>
+        /// 获取所有房间
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Room> Get()
+        {
+            return this.repository.AsEnumerable();
+        }
+
+        /// <summary>
+        /// 根据建筑获取房间
+        /// </summary>
+        /// <param name="buildingId">所属建筑ID</param>
+        /// <returns></returns>
+        public IEnumerable<Room> GetByBuilding(int buildingId)
+        {
+            return this.repository.Where(r => r.BuildingId == buildingId);
+        }
+
+        /// <summary>
+        /// 获取多个建筑下房间
+        /// </summary>
+        /// <param name="buildingsId">建筑ID数组</param>
+        /// <returns></returns>
+        public IEnumerable<Room> GetByBuildings(int[] buildingsId)
+        {
+            var data = from r in repository.AsEnumerable()
+                       where buildingsId.Contains(r.BuildingId)
+                       select r;
+
+            return data;
+        }
+
+        /// <summary>
+        /// 获取房间
+        /// </summary>
+        /// <param name="id">房间ID</param>
+        /// <returns></returns>
+        public Room Get(int id)
+        {
+            var data = this.repository.Where(r => r.RoomId == id);
+            if (data.Count() == 0)
+                return null;
+            else
+                return data.First();
+        }
+
+        /// <summary>
         /// 添加房间
         /// </summary>
         /// <param name="data">房间对象</param>

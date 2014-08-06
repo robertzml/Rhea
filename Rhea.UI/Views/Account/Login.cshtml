@@ -73,19 +73,19 @@
                 <label class="control-label visible-ie8 visible-ie9">用户名</label>
                 <div class="input-icon">
                     <i class="fa fa-user"></i>
-                    <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="用户名" name="UserName" />
+                    <input class="form-control placeholder-no-fix" type="text" placeholder="用户名" name="UserName" />
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label visible-ie8 visible-ie9">密码</label>
                 <div class="input-icon">
                     <i class="fa fa-lock"></i>
-                    <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="密码" name="Password" />
+                    <input class="form-control placeholder-no-fix" type="password" placeholder="密码" name="Password" />
                 </div>
             </div>
             <div class="form-actions">
                 <label class="checkbox">
-                    <input type="checkbox" name="RememberMe" value="1" /> 记住我
+                    @Html.CheckBoxFor(m => m.RememberMe) 记住我
                 </label>
                 <button type="submit" class="btn blue pull-right">
                     登录 <i class="m-icon-swapright m-icon-white"></i>

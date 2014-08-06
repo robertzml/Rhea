@@ -101,11 +101,11 @@ namespace Rhea.Model.Estate
         public RoomFunctionCode Function { get; set; }
 
         /// <summary>
-        /// 楼宇ID
+        /// 建筑ID
         /// </summary>
         [Required]
         [BsonElement("buildingId")]
-        [Display(Name = "所属楼宇")]
+        [Display(Name = "所属建筑")]
         [UIHint("BuildingDropDownList")]
         public int BuildingId { get; set; }
 

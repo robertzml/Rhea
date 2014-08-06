@@ -46,6 +46,30 @@ namespace Rhea.Business
         }
 
         /// <summary>
+        /// 房间所属建筑名称
+        /// </summary>
+        /// <param name="room">房间对象</param>
+        /// <returns></returns>
+        public static string BuildingName(this Room room)
+        {
+            IBuildingRepository repository = new MongoBuildingRepository();
+            string name = repository.Get(room.BuildingId).Name;
+            return name;
+        }
+
+        /// <summary>
+        /// 房间所属部门名称
+        /// </summary>
+        /// <param name="room">房间对象</param>
+        /// <returns></returns>
+        public static string DepartmentName(this Room room)
+        {
+            //IDep
+
+            return null;
+        }
+
+        /// <summary>
         /// 用户组名称
         /// </summary>
         /// <param name="user">用户对象</param>

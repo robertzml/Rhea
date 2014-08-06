@@ -58,7 +58,11 @@ namespace Rhea.Data.Mongo.Estate
         /// <returns></returns>
         public virtual Building Get(int id)
         {
-            return this.repository.Where(r => r.BuildingId == id).First();
+            var data = this.repository.Where(r => r.BuildingId == id);
+            if (data.Count() == 0)
+                return null;
+            else
+                return data.First();
         }
 
         /// <summary>
