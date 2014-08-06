@@ -2,8 +2,11 @@
 using Rhea.Data.Estate;
 using Rhea.Data.Mongo.Account;
 using Rhea.Data.Mongo.Estate;
+using Rhea.Data.Mongo.Personnel;
+using Rhea.Data.Personnel;
 using Rhea.Model.Account;
 using Rhea.Model.Estate;
+using Rhea.Model.Personnel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,9 +67,9 @@ namespace Rhea.Business
         /// <returns></returns>
         public static string DepartmentName(this Room room)
         {
-            //IDep
-
-            return null;
+            IDepartmentRepository repository = new MongoDepartmentRepository();
+            string name = repository.Get(room.DepartmentId).Name;
+            return name;
         }
 
         /// <summary>

@@ -1,7 +1,7 @@
 ﻿
 @{
-    ViewBag.Title = "高级管理";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout_Advance.cshtml";
+    ViewBag.Title = "人事管理";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Personnel.cshtml";
 }
 
 <!-- BEGIN PAGE HEADER-->
@@ -12,11 +12,11 @@
     <ul class="page-breadcrumb">
         <li>
             <i class="fa fa-home"></i>
-            <a href="@Url.Action("Index", "Advance")">高级管理</a>
+            <a href="@Url.Action("Index", "Personnel")">人事管理</a>
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
-            <a href="#">高级主页</a>
+            <a href="#">人事主页</a>
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
@@ -32,12 +32,12 @@
     </div>
 </div>
 <!-- END PAGE CONTENT-->
-
 @section scripts {
     <script type="text/javascript">
         $(function () {
-            Rhea.topNavActive($('#advance-nav'));
-            Rhea.leftNavActive($('#advance-home-menu'));
+            Rhea.topNavActive($('#personnel-nav'));
+            Rhea.leftNavActive($('#personnel-home-menu'));
         });
     </script>
 }
+

@@ -53,6 +53,7 @@
     <Compile Include="Estate\CampusBusiness.cs" />
     <Compile Include="Estate\RoomBusiness.cs" />
     <Compile Include="ModelExtension.cs" />
+    <Compile Include="Personnel\DepartmentBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RheaConstant.cs" />
     <Compile Include="SyncBusiness.cs" />

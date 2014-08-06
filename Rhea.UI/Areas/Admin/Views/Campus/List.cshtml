@@ -5,7 +5,6 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout_Estate.cshtml";
 }
 
-
 <!-- BEGIN PAGE HEADER-->
 <h3 class="page-title">
     @ViewBag.Title
@@ -82,8 +81,8 @@
 @section scripts {
     <script type="text/javascript">
         $(function () {
-            topNavActive($('#estate-nav'));
-            leftNavActive($('#campus-list-menu'));
+            Rhea.topNavActive($('#estate-nav'));
+            Rhea.leftNavActive($('#campus-list-menu'));
         });
     </script>
 }

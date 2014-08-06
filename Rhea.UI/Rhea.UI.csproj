@@ -161,9 +161,11 @@
     <Compile Include="Areas\Admin\Controllers\AdvanceController.cs" />
     <Compile Include="Areas\Admin\Controllers\BuildingController.cs" />
     <Compile Include="Areas\Admin\Controllers\CampusController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DepartmentController.cs" />
     <Compile Include="Areas\Admin\Controllers\DictionaryController.cs" />
     <Compile Include="Areas\Admin\Controllers\EstateController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PersonnelController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoomController.cs" />
     <Compile Include="Areas\Admin\Models\SyncBuildingModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -699,6 +701,10 @@
     <Content Include="Areas\Admin\Views\Shared\_Layout_Advance.cshtml" />
     <Content Include="Areas\Admin\Views\Room\ListByBuilding.cshtml" />
     <Content Include="Areas\Admin\Views\Room\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout_Personnel.cshtml" />
+    <Content Include="Areas\Admin\Views\Personnel\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Department\List.cshtml" />
+    <Content Include="Areas\Admin\Views\Department\Details.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="plugins\jquery-1.11.0.min.js" />
@@ -771,6 +777,7 @@
     <Content Include="Scripts\metronic.js" />
     <Content Include="Scripts\modernizr-2.7.2.js" />
     <Content Include="Scripts\quick-sidebar.js" />
+    <Content Include="Scripts\rhea.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

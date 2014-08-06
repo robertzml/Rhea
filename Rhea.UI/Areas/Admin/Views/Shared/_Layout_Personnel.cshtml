@@ -28,18 +28,18 @@
                 <!-- END RESPONSIVE QUICK SEARCH FORM -->
             </li>
             <li class="start left-nav-first">
-                <a href="@Url.Action("Index", "Advance")" id="advance-home-menu">
+                <a href="@Url.Action("Index", "Personnel")" id="personnel-home-menu">
                     <i class="fa fa-dashboard"></i>
                     <span class="title">
-                        高级管理
+                        人事管理
                     </span>
                 </a>
             </li>
             <li class="left-nav-first">
                 <a href="javascript:;">
-                    <i class="fa fa-users"></i>
+                    <i class="fa fa-joomla"></i>
                     <span class="title">
-                        用户管理
+                        部门管理
                     </span>
                     <span class="arrow open">
                     </span>
@@ -47,13 +47,8 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="@Url.Action("List", "Campus")" id="campus-list-menu">
-                            用户列表
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            用户组列表
+                        <a href="@Url.Action("List", "Department")" id="department-list-menu">
+                            部门列表
                         </a>
                     </li>
                 </ul>
@@ -62,20 +57,15 @@
                 <a href="javascript:;">
                     <i class="fa fa-book"></i>
                     <span class="title">
-                        字典管理
+                        教职工管理
                     </span>
                     <span class="arrow ">
                     </span>
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="@Url.Action("List", "Dictionary")" id="dictionary-list-menu">
-                            字典列表
-                        </a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("Create", "Dictionary")" id="dictionary-create-menu">
-                            添加字典
+                        <a href="#" id="dictionary-list-menu">
+                            教职工列表
                         </a>
                     </li>
                 </ul>
@@ -101,6 +91,7 @@
     </div>
 </div>
 <!-- END CONTENT -->
+
 @section scripts {
     @RenderSection("scripts", required: false)
 }
