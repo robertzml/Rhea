@@ -39,6 +39,24 @@ namespace Rhea.Business.Account
         }
         #endregion //Constructor
 
+        #region Function
+        /// <summary>
+        /// 更新登录时间
+        /// </summary>
+        /// <param name="_id">用户系统ID</param>
+        /// <param name="last">上次登录时间</param>
+        /// <param name="current">本次登录时间</param>
+        private void UpdateLoginTime(User user, DateTime last, DateTime current)
+        {
+            user.LastLoginTime = last;
+            user.CurrentLoginTime = current;
+
+            this.userRepository.Update(user);
+
+            return;
+        }
+        #endregion //Function
+
         #region Method
         /// <summary>
         /// 用户登录
@@ -56,7 +74,28 @@ namespace Rhea.Business.Account
             if (user.Password != Hasher.SHA1Encrypt(password))
                 return ErrorCode.WrongPassword;
 
+            UpdateLoginTime(user, user.CurrentLoginTime, DateTime.Now);
+
             return ErrorCode.Success;
+        }
+
+        /// <summary>
+        /// 获取所有用户
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<User> Get()
+        {
+            return this.userRepository.Get().Where(r => r.Status != 1);
+        }
+
+        /// <summary>
+        /// 获取用户
+        /// </summary>
+        /// <param name="_id">用户系统ID</param>
+        /// <returns></returns>
+        public User Get(string _id)
+        {
+            return this.userRepository.Get(_id);
         }
 
         /// <summary>
@@ -67,6 +106,15 @@ namespace Rhea.Business.Account
         public User GetByUserName(string userName)
         {
             return this.userRepository.GetByUserName(userName);
+        }
+
+        /// <summary>
+        /// 获取所有用户组
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<UserGroup> GetUserGroup()
+        {
+            return this.userGroupRepository.Get();
         }
 
         /// <summary>
@@ -87,6 +135,17 @@ namespace Rhea.Business.Account
         public UserGroup GetUserGroup(string name)
         {
             return this.userGroupRepository.Get(name);
+        }
+
+        /// <summary>
+        /// 添加用户组
+        /// </summary>
+        /// <param name="data">用户组对象</param>
+        /// <returns></returns>
+        public ErrorCode CreateUserGroup(UserGroup data)
+        {
+            data.Status = 0;
+            return this.userGroupRepository.Create(data);
         }
         #endregion //Method
     }

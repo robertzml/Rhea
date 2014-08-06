@@ -32,6 +32,16 @@ namespace Rhea.UI.Areas.Admin.Controllers
 
         #region Action
         /// <summary>
+        /// 房间列表
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult List()
+        {
+            var data = this.roomBusiness.Get();
+            return View(data);
+        }
+
+        /// <summary>
         /// 根据建筑获取房间
         /// </summary>
         /// <param name="buildingId">建筑ID</param>

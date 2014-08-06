@@ -1,0 +1,122 @@
+﻿@model IEnumerable<Rhea.Model.Estate.Room>
+
+@{
+    ViewBag.Title = "房间列表";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Estate.cshtml";
+}
+
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">
+    @ViewBag.Title
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index", "Estate")">房产管理</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">房间管理</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">@ViewBag.Title</a>
+        </li>
+    </ul>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-list"></i>房间列表
+                </div>
+                <div class="tools">
+                </div>
+            </div>
+            <div class="portlet-body">
+                <table class="table table-striped table-bordered table-hover" id="room-table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.RoomId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Number)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Name)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Floor)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.UsableArea)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.BuildingId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DepartmentId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.RoomStatus)
+                            </th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.RoomId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Number)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Floor)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UsableArea)
+                                </td>
+                                <td>
+                                    @item.BuildingName()
+                                </td>
+                                <td>
+                                    @item.DepartmentName()
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.RoomStatus)
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Details", new { controller = "Room", id = item.RoomId })" class="btn btn-info btn-sm" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
+                                    <a href="@Url.Action("Edit", new { controller = "Room", id = item.RoomId })" class="btn btn-warning btn-sm" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT-->
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            Rhea.topNavActive($('#estate-nav'));
+            Rhea.leftNavActive($('#room-list-menu'));
+
+            Rhea.initDatatable($('#room-table'));
+        });
+    </script>
+}
+

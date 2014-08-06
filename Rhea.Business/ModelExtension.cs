@@ -83,6 +83,18 @@ namespace Rhea.Business
             string name = repository.Get(user.UserGroupId).Name;
             return name;
         }
+
+        /// <summary>
+        /// 用户组显示名称
+        /// </summary>
+        /// <param name="user">用户对象</param>
+        /// <returns></returns>
+        public static string UserGroupTitle(this User user)
+        {
+            IUserGroupRepository repository = new MongoUserGroupRepository();
+            string title = repository.Get(user.UserGroupId).Title;
+            return title;
+        }
         #endregion //Method
     }
 }

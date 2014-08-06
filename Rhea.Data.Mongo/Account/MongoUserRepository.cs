@@ -42,6 +42,16 @@ namespace Rhea.Data.Mongo.Account
         }
 
         /// <summary>
+        /// 获取用户
+        /// </summary>
+        /// <param name="_id">用户系统ID</param>
+        /// <returns></returns>
+        public User Get(string _id)
+        {
+            return this.repository.GetById(_id);
+        }
+
+        /// <summary>
         /// 根据登录名获取用户
         /// </summary>
         /// <param name="userName">登录名</param>
@@ -73,6 +83,25 @@ namespace Rhea.Data.Mongo.Account
                     return ErrorCode.DuplicateUserId;
 
                 this.repository.Add(data);
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
+
+        /// <summary>
+        /// 更新用户
+        /// </summary>
+        /// <param name="data">用户对象</param>
+        /// <returns></returns>
+        public ErrorCode Update(User data)
+        {
+            try
+            {
+                this.repository.Update(data);
             }
             catch (Exception)
             {

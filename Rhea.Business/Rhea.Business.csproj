@@ -56,7 +56,6 @@
     <Compile Include="Personnel\DepartmentBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RheaConstant.cs" />
-    <Compile Include="SyncBusiness.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Rhea.Common\Rhea.Common.csproj">

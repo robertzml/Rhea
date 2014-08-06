@@ -1,0 +1,128 @@
+﻿@model Rhea.Model.Account.UserGroup
+
+@{
+    ViewBag.Title = "用户组信息";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Advance.cshtml";
+}
+
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">
+    @ViewBag.Title
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index", "Advance")">高级管理</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">用户管理</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">@ViewBag.Title</a>
+        </li>
+    </ul>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box green">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-th"></i>用户组信息
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+                    <a href="javascript:;" class="reload">
+                    </a>
+                    <a href="javascript:;" class="remove">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>属性</th>
+                                    <th>值</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.UserGroupId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.UserGroupId)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Name)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Title)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Title)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Rank)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Rank)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Remark)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Remark)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Status)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Status)
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <hr />
+                <p>
+                    <a href="@Url.Action("List", new { controller = "UserGroup" })" class="btn btn-primary" role="button"><i class="fa fa-list"></i>&nbsp;回到列表</a>
+                    <a href="@Url.Action("Edit", new { controller = "UserGroup", id = Model.UserGroupId })" class="btn btn-warning" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT-->
+
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            Rhea.topNavActive($('#advance-nav'));
+            Rhea.leftNavActive($('#user-group-list-menu'));
+        });
+    </script>
+}

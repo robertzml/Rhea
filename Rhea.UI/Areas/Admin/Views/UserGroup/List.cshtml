@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Rhea.Model.Dictionary>
+﻿@model IEnumerable<Rhea.Model.Account.UserGroup>
 
 @{
-    ViewBag.Title = "字典列表";
+    ViewBag.Title = "用户组列表";
     Layout = "~/Areas/Admin/Views/Shared/_Layout_Advance.cshtml";
 }
 
@@ -17,7 +17,7 @@
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
-            <a href="#">字典管理</a>
+            <a href="#">用户管理</a>
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
@@ -32,7 +32,7 @@
         <div class="portlet box green">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-list"></i>字典列表
+                    <i class="fa fa-list"></i>用户组列表
                 </div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse">
@@ -44,9 +44,12 @@
                 </div>
             </div>
             <div class="portlet-body">
-                <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="dictionary-table">
+                <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="user-table">
                     <thead>
                         <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.UserGroupId)
+                            </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Name)
                             </th>
@@ -54,10 +57,13 @@
                                 @Html.DisplayNameFor(model => model.Title)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.IsCombined)
+                                @Html.DisplayNameFor(model => model.Rank)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Remark)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Status)
                             </th>
                             <th>操作</th>
                         </tr>
@@ -67,31 +73,31 @@
                         {
                             <tr>
                                 <td>
+                                    @Html.DisplayFor(modelItem => item.UserGroupId)
+                                </td>
+                                <td>
                                     @Html.DisplayFor(modelItem => item.Name)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Title)
                                 </td>
                                 <td>
-                                    @item.IsCombined
+                                    @Html.DisplayFor(modelItem => item.Rank)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Remark)
                                 </td>
                                 <td>
-                                    <a href="@Url.Action("Details", new { controller = "Dictionary", name = item.Name })" class="btn btn-info btn-sm" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
-                                    <a href="@Url.Action("Edit", new { controller = "Dictionary", name = item.Name })" class="btn btn-warning btn-sm" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
+                                    @Html.DisplayFor(modelItem => item.Status)
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Details", new { controller = "UserGroup", id = item.UserGroupId })" class="btn btn-info btn-sm" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
+                                    <a href="@Url.Action("Edit", new { controller = "UserGroup", id = item.UserGroupId })" class="btn btn-warning btn-sm" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
                                 </td>
                             </tr>
                         }
-
                     </tbody>
                 </table>
-
-                <hr />
-                <p>
-                    <a href="@Url.Action("Create", new { controller = "Dictionary" })" class="btn btn-primary" role="button"><i class="fa fa-plus-circle"></i>&nbsp;添加字典</a>
-                </p>
             </div>
         </div>
     </div>
@@ -102,9 +108,9 @@
     <script type="text/javascript">
         $(function () {
             Rhea.topNavActive($('#advance-nav'));
-            Rhea.leftNavActive($('#dictionary-list-menu'));
+            Rhea.leftNavActive($('#user-group-list-menu'));
 
-            Rhea.initDatatable2($('#dictionary-table'));
+            Rhea.initDatatable2($('#user-table'));
         });
     </script>
 }

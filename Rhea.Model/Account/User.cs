@@ -50,12 +50,13 @@ namespace Rhea.Model.Account
         /// </summary>
         [BsonElement("userGroupId")]
         [UIHint("UserGroupDropDownList")]
-        [Display(Name = "用户组ID")]
+        [Display(Name = "用户组")]
         public int UserGroupId { get; set; }
 
         /// <summary>
         /// 上次登录时间
         /// </summary>
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         [BsonElement("lastLoginTime")]
         [Display(Name = "上次登录时间")]
         public DateTime LastLoginTime { get; set; }
@@ -63,6 +64,7 @@ namespace Rhea.Model.Account
         /// <summary>
         /// 本次登录时间
         /// </summary>
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         [BsonElement("currentLoginTime")]
         [Display(Name = "本次登录时间")]
         public DateTime CurrentLoginTime { get; set; }

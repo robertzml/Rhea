@@ -73,8 +73,6 @@
     <Compile Include="Estate\Subregion.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="MongoEntity.cs" />
-    <Compile Include="OriginBuildingMap.cs" />
-    <Compile Include="OriginDepartmentMap.cs" />
     <Compile Include="Personnel\Department.cs" />
     <Compile Include="Personnel\PersonnelModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

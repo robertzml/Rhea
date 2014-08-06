@@ -63,7 +63,6 @@
     <Compile Include="MongoDictionaryRepository.cs" />
     <Compile Include="MongoRepository.cs" />
     <Compile Include="MongoRepositoryManager.cs" />
-    <Compile Include="OriginEstateRepository.cs" />
     <Compile Include="Personnel\MongoDepartmentRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util.cs" />

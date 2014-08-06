@@ -68,6 +68,29 @@ namespace Rhea.Data.Mongo.Account
             else
                 return data.First();
         }
+
+        /// <summary>
+        /// 添加用户组
+        /// </summary>
+        /// <param name="data">用户组对象</param>
+        /// <returns></returns>
+        public ErrorCode Create(UserGroup data)
+        {
+            try
+            {
+                bool dup = this.repository.Exists(r => r.UserGroupId == data.UserGroupId);
+                if (dup)
+                    return ErrorCode.DuplicateId;
+
+                this.repository.Add(data);
+            }
+            catch(Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
         #endregion //Method
     }
 }

@@ -20,6 +20,13 @@ namespace Rhea.Data.Account
         IEnumerable<User> Get();
 
         /// <summary>
+        /// 获取用户
+        /// </summary>
+        /// <param name="_id">用户系统ID</param>
+        /// <returns></returns>
+        User Get(string _id);
+
+        /// <summary>
         /// 根据登录名获取用户
         /// </summary>
         /// <param name="userName">登录名</param>
@@ -32,5 +39,12 @@ namespace Rhea.Data.Account
         /// <param name="data">用户对象</param>
         /// <returns></returns>
         ErrorCode Create(User data);
+
+        /// <summary>
+        /// 更新用户
+        /// </summary>
+        /// <param name="data">用户对象</param>
+        /// <returns></returns>
+        ErrorCode Update(User data);
     }
 }

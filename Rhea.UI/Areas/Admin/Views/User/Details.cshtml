@@ -1,0 +1,172 @@
+﻿@model Rhea.Model.Account.User
+
+@{
+    ViewBag.Title = "用户信息";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Advance.cshtml";
+}
+
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">
+    @ViewBag.Title
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index", "Advance")">高级管理</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">用户管理</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">@ViewBag.Title</a>
+        </li>
+    </ul>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box green">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-th"></i>用户信息
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+                    <a href="javascript:;" class="reload">
+                    </a>
+                    <a href="javascript:;" class="remove">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>属性</th>
+                                    <th>值</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model._id)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model._id)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.UserId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.UserId)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.UserName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.UserName)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Name)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.UserGroupId)
+                                    </td>
+                                    <td>
+                                        @Model.UserGroupTitle()
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.LastLoginTime)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.LastLoginTime)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.CurrentLoginTime)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.CurrentLoginTime)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.IsSystem)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.IsSystem)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.DepartmentId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.DepartmentId)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.AvatarUrl)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.AvatarUrl)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Status)
+                                    </td>
+                                    <td>
+                                        @if (Model.Status == 0)
+                                        {
+                                            <span class="label label-success">正常</span>
+                                        }
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <hr />
+                <p>
+                    <a href="@Url.Action("List", new { controller = "User" })" class="btn btn-primary" role="button"><i class="fa fa-list"></i>&nbsp;回到列表</a>
+                    <a href="@Url.Action("Edit", new { controller = "User", id = Model.UserId })" class="btn btn-warning" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT-->
+
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            Rhea.topNavActive($('#advance-nav'));
+            Rhea.leftNavActive($('#user-list-menu'));
+        });
+    </script>
+}
+
