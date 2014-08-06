@@ -40,7 +40,7 @@ var Rhea = function () {
 				"container": "DTTT_dropdown dropdown-menu tabletools-dropdown-menu"
 			}
 		});
-
+				
 		var oTable = $dom.dataTable({
 			"order": [
 				[0, 'asc']
@@ -92,6 +92,106 @@ var Rhea = function () {
 				}]
 			}
 		});	
+		
+	}
+	
+	var handleInitDatatable2 = function($dom) {
+		/* Set tabletools buttons and button container */
+
+		$.extend(true, $.fn.DataTable.TableTools.classes, {
+			"container": "btn-group tabletools-dropdown-on-portlet",
+			"buttons": {
+				"normal": "btn btn-sm default",
+				"disabled": "btn btn-sm default disabled"
+			},
+			"collection": {
+				"container": "DTTT_dropdown dropdown-menu tabletools-dropdown-menu"
+			}
+		});
+				
+		var oTable = $dom.dataTable({
+			"order": [
+				[0, 'asc']
+			],
+			
+			"lengthMenu": [
+				[5, 10, 20, -1],
+				[5, 10, 20, "All"] // change per page values here
+			],
+			// set the initial value
+			"pageLength": 10,
+			
+			"pagingType": "bootstrap_full_number",
+			
+			"language": {
+					"lengthMenu": "  _MENU_ 记录",
+					"sLengthMenu": "每页 _MENU_ 条记录",
+					"sInfo": "显示 _START_ 至 _END_ 共有 _TOTAL_ 条记录",
+					"sInfoEmpty": "记录为空",
+					"sInfoFiltered": " - 从 _MAX_ 条记录中",
+					"sZeroRecords": "结果为空",
+					"sSearch": "搜索:",
+					"paginate": {
+						"previous":"Prev",
+						"next": "Next",
+						"last": "Last",
+						"first": "First"
+					}
+				},
+			
+			"dom": "<'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r><'table-scrollable't><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12' p>>", // horizobtal scrollable datatable			
+		});	
+		
+	}
+	
+	var handleAjaxLoad = function($dom, e, url, request) {
+		e.preventDefault();
+            Metronic.scrollTop();
+
+            //var url = $(this).attr("href");
+            var menuContainer = jQuery('.page-sidebar ul');
+            var pageContent = $('.page-content');
+            var pageContentBody = $('.page-content .page-content-body');
+
+            menuContainer.children('li.active').removeClass('active');
+            menuContainer.children('arrow.open').removeClass('open');
+
+            $dom.parents('li').each(function () {
+                $dom.addClass('active');
+                $dom.children('a > span.arrow').addClass('open');
+            });
+            $dom.parents('li').addClass('active');
+
+            if (Metronic.getViewPort().width < 992 && $('.page-sidebar').hasClass("in")) { // close the menu on mobile view while laoding a page 
+                $('.page-header .responsive-toggler').click();
+            }
+
+            Metronic.startPageLoading();
+
+            var the = $dom;
+
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: url,
+				data: request,
+                dataType: "html",
+                success: function (res) {
+
+                    if (the.parents('li.open').size() === 0) {
+                        $('.page-sidebar-menu > li.open > a').click();
+                    }
+
+                    Metronic.stopPageLoading();
+                    pageContentBody.html(res);
+                    Layout.fixContentHeight(); // fix content height
+                    Metronic.initAjax(); // initialize core stuff
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    Metronic.stopPageLoading();
+                    pageContentBody.html('<h4>Could not load the requested content.</h4>');
+                }
+            });
 	}
 	
 	return {
@@ -114,6 +214,14 @@ var Rhea = function () {
 		
 		initDatatable: function($dom) {
 			handleInitDatatable($dom);
+		},
+		
+		initDatatable2: function($dom) {
+			handleInitDatatable2($dom);
+		},
+		
+		ajaxLoadPage: function($dom, e, url, request) {
+			handleAjaxLoad($dom, e, url, request);
 		}
 
     };

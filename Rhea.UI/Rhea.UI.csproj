@@ -168,6 +168,10 @@
     <Compile Include="Areas\Admin\Controllers\PersonnelController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoomController.cs" />
     <Compile Include="Areas\Admin\Models\SyncBuildingModel.cs" />
+    <Compile Include="Areas\Apartment\ApartmentAreaRegistration.cs" />
+    <Compile Include="Areas\Apartment\Controllers\ApartmentController.cs" />
+    <Compile Include="Areas\Apartment\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Apartment\Models\FloorModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\EnhancedAuthorizeAttribute.cs" />
@@ -705,6 +709,11 @@
     <Content Include="Areas\Admin\Views\Personnel\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Department\List.cshtml" />
     <Content Include="Areas\Admin\Views\Department\Details.cshtml" />
+    <Content Include="Areas\Apartment\Views\web.config" />
+    <Content Include="Areas\Apartment\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Apartment\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Apartment\Views\Home\BuildingMenu.cshtml" />
+    <Content Include="Areas\Apartment\Views\Apartment\Floor.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="plugins\jquery-1.11.0.min.js" />
@@ -761,7 +770,6 @@
     <Content Include="plugins\uniform\jquery.uniform.min.js" />
     <Content Include="Scripts\admin.js" />
     <Content Include="Scripts\datatable.js" />
-    <Content Include="Scripts\function.js" />
     <Content Include="Scripts\html5shiv.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

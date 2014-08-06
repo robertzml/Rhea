@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Rhea.Model.Estate.Block>
+
+<ul class="sub-menu">
+    @foreach(var building in Model)
+    { 
+    <li>
+        <a href="javascript:;">
+            <i class="fa fa-maxcdn"></i> @building.Name <span class="arrow"></span>
+        </a>
+        <ul class="sub-menu">
+            @foreach (var floor in building.Floors)
+            {
+                <li>
+                    <a class="ajax-link" ref1="@building.BuildingId" ref2="@floor.Number" href="#">@floor.Name</a>
+                </li>
+            }
+        </ul>
+    </li>
+    }
+</ul>

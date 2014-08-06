@@ -1,0 +1,134 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- BEGIN SIDEBAR -->
+<div class="page-sidebar-wrapper">
+    <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+    <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+    <div class="page-sidebar navbar-collapse collapse">
+        <!-- BEGIN SIDEBAR MENU1 -->
+        <ul class="page-sidebar-menu hidden-sm hidden-xs" id="left-nav" data-auto-scroll="false" data-slide-speed="200">
+            <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
+            <!-- DOC: This is mobile version of the horizontal menu. The desktop version is defined(duplicated) in the header above -->
+            <li class="sidebar-search-wrapper">
+                <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+                <form class="sidebar-search sidebar-search-bordered" action="#" method="POST">
+                    <a href="javascript:;" class="remove">
+                        <i class="icon-close"></i>
+                    </a>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search...">
+                        <span class="input-group-btn">
+                            <button class="btn submit"><i class="icon-magnifier"></i></button>
+                        </span>
+                    </div>
+                </form>
+                <!-- END RESPONSIVE QUICK SEARCH FORM -->
+            </li>
+            <li class="start left-nav-first">
+                <a href="@Url.Action("Index", "Home")" id="apartment-home-menu">
+                    <i class="fa fa-dashboard"></i>
+                    <span class="title">
+                        青教主页
+                    </span>
+                </a>
+            </li>
+            <li class="left-nav-first">
+                <a href="javascript:;">
+                    <i class="fa fa-bank"></i>
+                    <span class="title">
+                        青教公寓
+                    </span>
+                    <span class="arrow open">
+                    </span>
+                    <span class="selected"></span>
+                </a>
+                @Html.Action("BuildingMenu", "Home")
+            </li>
+            <li class="left-nav-first">
+                <a href="javascript:;">
+                    <i class="fa fa-building"></i>
+                    <span class="title">
+                        建筑管理
+                    </span>
+                    <span class="arrow ">
+                    </span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="#" id="building-list-menu">
+                            建筑列表
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" id="building-create-menu">
+                            添加建筑
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="left-nav-first">
+                <a href="javascript:;">
+                    <i class="fa fa-columns"></i>
+                    <span class="title">
+                        房间管理
+                    </span>
+                    <span class="arrow ">
+                    </span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="#" id="room-list-menu">
+                            房间列表
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            添加房间
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="last">
+                <a href="#">
+                    <i class="fa fa-user"></i>
+                    <span class="title">
+                        Login Page
+                    </span>
+                </a>
+            </li>
+        </ul>
+        <!-- END SIDEBAR MENU1 -->
+        
+    </div>
+</div>
+<!-- END SIDEBAR -->
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <div class="page-content">
+        <div class="page-content-body">
+            <!-- HERE WILL BE LOADED AN AJAX CONTENT -->
+            @RenderBody()
+        </div>
+    </div>
+</div>
+<!-- END CONTENT -->
+
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            $('.page-sidebar a.ajax-link').click(function (e) {
+              
+                var url = "/Apartment/Apartment/Floor";
+                var buildingId = $(this).attr('ref1');
+                var floor = $(this).attr('ref2');
+                var request = { buildingId: buildingId, floor: floor };
+
+                Rhea.ajaxLoadPage($(this), e, url, request);
+                return false;
+            });
+        })
+    </script>
+    @RenderSection("scripts", required: false)
+}

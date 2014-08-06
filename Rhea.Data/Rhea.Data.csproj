@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Account\IUserGroupRepository.cs" />
     <Compile Include="Account\IUserRepository.cs" />
+    <Compile Include="Apartment\IInhabitantRepository.cs" />
     <Compile Include="Estate\IBuildingRepository.cs" />
     <Compile Include="Estate\ICampusRepository.cs" />
     <Compile Include="Estate\IRoomRepository.cs" />

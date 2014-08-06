@@ -13,10 +13,10 @@ namespace Rhea.Model.Estate
     public class RoomFunctionCode
     {
         /// <summary>
-        /// 编码
+        /// 功能编码
         /// </summary>
         [BsonElement("codeId")]
-        [Display(Name = "编码")]
+        [Display(Name = "功能编码")]
         public string CodeId { get; set; }
 
         /// <summary>

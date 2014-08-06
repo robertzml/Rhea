@@ -9,7 +9,7 @@ using Rhea.Model.Estate;
 namespace Rhea.Data.Mongo.Estate
 {
     /// <summary>
-    /// MongoDB 楼宇Repository
+    /// MongoDB 楼宇 Repository
     /// </summary>
     public class MongoBlockRepository : MongoBuildingRepository
     {
@@ -22,7 +22,7 @@ namespace Rhea.Data.Mongo.Estate
 
         #region Constructor
         /// <summary>
-        /// MongoDB 楼宇Repository
+        /// MongoDB 楼宇 Repository
         /// </summary>
         public MongoBlockRepository()
         {
@@ -39,6 +39,16 @@ namespace Rhea.Data.Mongo.Estate
         public override Building Get(int id)
         {
             return this.repository.Where(r => r.BuildingId == id).First();
+        }
+
+        /// <summary>
+        /// 获取子建筑
+        /// </summary>
+        /// <param name="parentId">父级建筑ID</param>
+        /// <returns></returns>
+        public override IEnumerable<Building> GetChildren(int parentId)
+        {
+            return this.repository.Where(r => r.ParentId == parentId);
         }
 
         /// <summary>

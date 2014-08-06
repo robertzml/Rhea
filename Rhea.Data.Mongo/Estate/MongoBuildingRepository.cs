@@ -52,6 +52,17 @@ namespace Rhea.Data.Mongo.Estate
         }
 
         /// <summary>
+        /// 获取子建筑
+        /// </summary>
+        /// <param name="parentId">父级建筑ID</param>
+        /// <returns></returns>
+        public virtual IEnumerable<Building> GetChildren(int parentId)
+        {
+            var data = this.repository.Where(r => r.ParentId == parentId);
+            return data;
+        }
+
+        /// <summary>
         /// 获取建筑
         /// </summary>
         /// <param name="id">建筑ID</param>
@@ -63,7 +74,7 @@ namespace Rhea.Data.Mongo.Estate
                 return null;
             else
                 return data.First();
-        }
+        }       
 
         /// <summary>
         /// 按组织类型获取建筑

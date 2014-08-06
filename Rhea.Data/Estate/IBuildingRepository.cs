@@ -20,6 +20,13 @@ namespace Rhea.Data.Estate
         IEnumerable<Building> Get();
 
         /// <summary>
+        /// 获取子建筑
+        /// </summary>
+        /// <param name="parentId">父级建筑ID</param>
+        /// <returns></returns>
+        IEnumerable<Building> GetChildren(int parentId);
+
+        /// <summary>
         /// 获取建筑
         /// </summary>
         /// <param name="id">建筑ID</param>

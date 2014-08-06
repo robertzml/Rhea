@@ -240,6 +240,18 @@ namespace Rhea.Business.Estate
         }
 
         /// <summary>
+        /// 获取组团内楼宇
+        /// </summary>
+        /// <param name="parentId">组团ID</param>
+        /// <returns></returns>
+        public IEnumerable<Block> GetChildBlocks(int parentId)
+        {
+            IBuildingRepository buildingRepository = new MongoBlockRepository();
+            var data = buildingRepository.GetChildren(parentId) as IEnumerable<Block>;
+            return data;
+        }
+
+        /// <summary>
         /// 更新楼宇
         /// </summary>
         /// <param name="data">楼宇对象</param>
