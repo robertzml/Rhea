@@ -2,6 +2,7 @@
 using Rhea.Common;
 using Rhea.Model;
 using Rhea.Model.Account;
+using Rhea.UI.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,7 +43,8 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult List()
         {
-            var data = this.userBusiness.GetUserGroup();
+            bool isRoot = User.IsInRole2("Root");
+            var data = this.userBusiness.GetUserGroup(isRoot);
             return View(data);
         }
 

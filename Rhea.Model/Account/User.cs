@@ -93,6 +93,14 @@ namespace Rhea.Model.Account
         public string AvatarUrl { get; set; }
 
         /// <summary>
+        /// 备注
+        /// </summary>
+        [DataType(DataType.MultilineText)]
+        [BsonElement("remark")]
+        [Display(Name = "备注")]
+        public string Remark { get; set; }
+
+        /// <summary>
         /// 系统状态
         /// </summary>
         /// <remarks>

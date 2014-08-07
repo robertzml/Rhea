@@ -1,5 +1,8 @@
 ﻿using Rhea.Business.Account;
+using Rhea.Common;
+using Rhea.Model;
 using Rhea.Model.Account;
+using Rhea.UI.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,6 +56,44 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             var data = this.userBusiness.Get(id);
             return View(data);
+        }
+
+        /// <summary>
+        /// 添加用户
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 添加用户
+        /// </summary>
+        /// <param name="Model">用户对象</param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Create(User model)
+        {
+            if (ModelState.IsValid)
+            {
+                ErrorCode result = this.userBusiness.Create(model);
+
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "添加用户成功";
+                    return RedirectToAction("List", "User");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "添加用户失败");
+                    ModelState.AddModelError("", result.DisplayName());
+                }
+            }
+
+            return View(model);
         }
         #endregion //Action
     }

@@ -1,6 +1,6 @@
-/* here you can put your own css to customize and override the theme */
+/* For custom css */
 
-h1, h2, h3, h4, h5, h6 , .page-title {
+h1, h2, h3, h4, h5, h6 , .page-title, .dropdown-menu {
 	font-family: '微软雅黑';
 }
 

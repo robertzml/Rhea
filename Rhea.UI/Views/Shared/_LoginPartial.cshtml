@@ -1,13 +1,70 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
-   
-
+    <li class="dropdown dropdown-user">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+            <img alt="" class="img-circle" src="/img/avatar3_small.jpg" />
+            <span class="username username-hide-on-mobile">
+                @User.Identity.Name
+            </span>
+            <i class="fa fa-angle-down"></i>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a href="extra_profile.html">
+                    <i class="fa fa-user"></i> 信 息
+                </a>
+            </li>
+            <li>
+                <a href="page_calendar.html">
+                    <i class="fa fa-calendar"></i> 日 历
+                </a>
+            </li>
+            <li>
+                <a href="inbox.html">
+                    <i class="fa fa-inbox"></i> 收 件 箱 <span class="badge badge-danger">
+                        3
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-tasks"></i> 任 务 <span class="badge badge-success">
+                        7
+                    </span>
+                </a>
+            </li>
+            @if (User.Rank() >= 900)
+            {
+                <li>
+                    <a href="@Url.Action("Index", new { area = "Admin", controller = "Home" })">
+                        <i class="fa fa-cog"></i> 后 台
+                    </a>
+                </li>
+            }
+            <li class="divider">
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-lock"></i> 锁 定
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Logout", "Account")">
+                    <i class="fa fa-power-off"></i> 注 销
+                </a>
+            </li>
+        </ul>
+    </li>
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("注册", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("登录", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
+    <li class="dropdown dropdown-user">
+        <a href="@Url.Action("Login", new { area = "", controller= "Account" })">            
+            <span class="username username-hide-on-mobile">
+                登录
+            </span>
+            <i class="fa fa-angle-down"></i>
+        </a>
+    </li>
 }

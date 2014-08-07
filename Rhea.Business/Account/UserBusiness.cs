@@ -109,12 +109,41 @@ namespace Rhea.Business.Account
         }
 
         /// <summary>
+        /// 添加用户
+        /// </summary>
+        /// <param name="data">用户对象</param>
+        /// <returns></returns>
+        public ErrorCode Create(User data)
+        {
+            data.Password = Hasher.SHA1Encrypt(data.Password);
+            data.IsSystem = true;
+            data.LastLoginTime = DateTime.Now;
+            data.CurrentLoginTime = DateTime.Now;
+            data.DepartmentId = 0;
+            return this.userRepository.Create(data);
+        }
+
+        /// <summary>
         /// 获取所有用户组
         /// </summary>
+        /// <remarks>不包括Root</remarks>
         /// <returns></returns>
         public IEnumerable<UserGroup> GetUserGroup()
         {
-            return this.userGroupRepository.Get();
+            return this.userGroupRepository.Get().Where(r => r.Name != "Root");
+        }
+
+        /// <summary>
+        /// 获取所有用户组
+        /// </summary>
+        /// <param name="isRoot">是否Root</param>
+        /// <returns></returns>
+        public IEnumerable<UserGroup> GetUserGroup(bool isRoot)
+        {
+            if (isRoot)
+                return this.userGroupRepository.Get();
+            else
+                return GetUserGroup();
         }
 
         /// <summary>

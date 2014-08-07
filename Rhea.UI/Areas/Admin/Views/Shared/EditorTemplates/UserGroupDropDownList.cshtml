@@ -1,0 +1,18 @@
+﻿@using Rhea.Model.Account
+@model int?
+
+<select id="UserGroupId" name="UserGroupId" class="form-control">
+    <option value="0">-- 请选择 --</option>
+    @{
+        UserBusiness business = new UserBusiness();
+        bool isRoot = User.IsInRole2("Root");
+        var groups = business.GetUserGroup(isRoot);
+
+        foreach (var item in groups)
+        {
+            <option value="@item.UserGroupId" @(Model == item.UserGroupId ? "selected='selected'" : "")>
+                @item.Name
+            </option>
+        }
+    }
+</select>
