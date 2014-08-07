@@ -124,6 +124,47 @@ namespace Rhea.Business.Account
         }
 
         /// <summary>
+        /// 编辑用户
+        /// </summary>
+        /// <param name="data">用户对象</param>
+        /// <returns></returns>
+        public ErrorCode Update(User data)
+        {
+            var user = this.userRepository.Get(data._id);
+
+            user.Name = data.Name;
+            user.UserGroupId = data.UserGroupId;
+            user.DepartmentId = data.DepartmentId;
+            user.Remark = data.Remark;
+
+            if (!string.IsNullOrEmpty(data.Password))
+            {
+                user.Password = Hasher.SHA1Encrypt(data.Password);
+            }
+
+            return this.userRepository.Update(user);
+        }
+
+        /// <summary>
+        /// 修改密码
+        /// </summary>
+        /// <param name="data">用户对象</param>
+        /// <param name="oldPassword">原密码</param>
+        /// <param name="newPassword">新密码</param>
+        /// <returns></returns>
+        public ErrorCode ChangePassword(User data, string oldPassword, string newPassword)
+        {
+            var user = this.userRepository.Get(data._id);
+
+            if (user.Password != Hasher.SHA1Encrypt(oldPassword))
+                return ErrorCode.WrongPassword;
+
+            user.Password = Hasher.SHA1Encrypt(newPassword);
+
+            return this.userRepository.Update(user);
+        }
+
+        /// <summary>
         /// 获取所有用户组
         /// </summary>
         /// <remarks>不包括Root</remarks>

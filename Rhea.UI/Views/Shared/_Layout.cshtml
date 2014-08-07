@@ -19,6 +19,7 @@
     @Styles.Render("~/Plugin/datatables")
     @Styles.Render("~/Plugin/datepicker")
     <!-- END GLOBAL MANDATORY STYLES -->
+    @RenderSection("styles", required: false)
     <!-- BEGIN THEME STYLES -->
     <link href="@Url.Content("~/Content/components.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/plugins.css")" rel="stylesheet" type="text/css" />

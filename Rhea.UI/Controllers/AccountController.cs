@@ -56,6 +56,18 @@ namespace Rhea.UI.Controllers
             string timeStamp = timeSpan.Ticks.ToString();
             return timeStamp.Substring(0, timeStamp.Length - 7);
         }
+
+        private ActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
         #endregion //Function
 
         #region Action
@@ -114,16 +126,43 @@ namespace Rhea.UI.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        private ActionResult RedirectToLocal(string returnUrl)
+        /// <summary>
+        /// 个人主页
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Index()
         {
-            if (Url.IsLocalUrl(returnUrl))
+            var user = this.userBusiness.GetByUserName(User.Identity.Name);
+            return View(user);
+        }
+
+        /// <summary>
+        /// 修改密码
+        /// </summary>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult ChangePassword()
+        {
+            string oldPassword = Request.Form["oldPassword"];
+            string newPassword = Request.Form["newPassword"];
+            string confirmPassword = Request.Form["confirmPassword"];
+
+            var user = this.userBusiness.GetByUserName(User.Identity.Name);
+
+            if (newPassword != confirmPassword)
             {
-                return Redirect(returnUrl);
+                ViewBag.Message = "修改密码失败";
+                return View();
             }
+
+            ErrorCode result = this.userBusiness.ChangePassword(user, oldPassword, newPassword);
+            if (result == ErrorCode.Success)
+                ViewBag.Message = "修改密码成功";
             else
-            {
-                return RedirectToAction("Index", "Home");
-            }
+                ViewBag.Message = "修改密码失败，" + result.DisplayName() + ".";
+
+            return View();
         }
         #endregion //Action
     }

@@ -95,6 +95,46 @@ namespace Rhea.UI.Areas.Admin.Controllers
 
             return View(model);
         }
+
+        /// <summary>
+        /// 编辑用户
+        /// </summary>
+        /// <param name="id">用户ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Edit(string id)
+        {
+            var data = this.userBusiness.Get(id);
+            return View(data);
+        }
+
+        /// <summary>
+        /// 编辑用户
+        /// </summary>
+        /// <param name="model">用户对象</param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Edit(User model)
+        {
+            if (ModelState.IsValid)
+            {
+                ErrorCode result = this.userBusiness.Update(model);
+
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "编辑用户成功";
+                    return RedirectToAction("Details", "User", new { id = model._id });
+                }
+                else
+                {
+                    ModelState.AddModelError("", "编辑用户失败");
+                    ModelState.AddModelError("", result.DisplayName());
+                }
+            }
+
+            return View(model);
+        }
         #endregion //Action
     }
 }

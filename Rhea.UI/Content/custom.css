@@ -15,3 +15,51 @@ h1, h2, h3, h4, h5, h6 , .page-title, .dropdown-menu {
 .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
 	vertical-align: middle;
 }
+
+
+/*profile summary*/
+.profile .profile-summary ul {
+  margin-top: -12px;
+}
+
+.profile .profile-summary li {
+  padding: 5px 0;
+  overflow: hidden;
+  border-top: solid 1px #eee;
+}
+
+.profile .profile-summary li:first-child {
+  border-top: none;
+}
+
+.profile .profile-summary li .sale-info {
+  float: left;
+  color: #646464;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.profile .profile-summary li .sale-num {
+  float: right;
+  color: #169ef4;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.profile .profile-summary li span i {
+  top: 1px;
+  width: 13px;
+  height: 14px;
+  margin-left: 3px;
+  position: relative;
+  display: inline-block;
+}
+
+.profile .profile-summary .caption h4 {
+  color: #383839;
+  font-size: 18px;
+}
+
+.profile .profile-summary .caption {
+  border-color: #c9c9c9;
+}

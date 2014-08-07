@@ -2,13 +2,18 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section styles {
+    <link href="/Content/profile.css" rel="stylesheet" type="text/css" />
+    <link href="/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css" />
+}
+
 <!-- BEGIN SIDEBAR -->
 <div class="page-sidebar-wrapper">
     <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
     <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
     <div class="page-sidebar navbar-collapse collapse">
         <!-- BEGIN SIDEBAR MENU1 -->
-        <ul class="page-sidebar-menu hidden-sm hidden-xs" id="left-nav" data-auto-scroll="false" data-slide-speed="200">
+        <ul class="page-sidebar-menu hidden-sm hidden-xs" id="left-nav" data-auto-scroll="true" data-slide-speed="200">
             <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
             <!-- DOC: This is mobile version of the horizontal menu. The desktop version is defined(duplicated) in the header above -->
             <li class="sidebar-search-wrapper">
@@ -27,64 +32,55 @@
                 <!-- END RESPONSIVE QUICK SEARCH FORM -->
             </li>
             <li class="start left-nav-first">
-                <a href="@Url.Action("Index", "Home")" id="apartment-home-menu">
-                    <i class="fa fa-dashboard"></i>
+                <a href="@Url.Action("Index", "Account")" id="account-index-menu">
+                    <i class="fa fa-user"></i>
                     <span class="title">
-                        青教主页
+                        用户信息
+                    </span>
+                </a>
+            </li>
+            <li class="left-nav-first">
+                <a href="@Url.Action("Index", "Account")" id="account-calendar-menu">
+                    <i class="fa fa-calendar"></i>
+                    <span class="title">
+                        日历
+                    </span>
+                </a>
+            </li>
+            <li class="left-nav-first">
+                <a href="@Url.Action("Index", "Account")" id="account-inbox-menu">
+                    <i class="fa fa-inbox"></i>
+                    <span class="title">
+                        收件箱
+                    </span>
+                </a>
+            </li>
+            <li class="left-nav-first">
+                <a href="@Url.Action("Index", "Account")" id="account-task-menu">
+                    <i class="fa fa-tasks"></i>
+                    <span class="title">
+                        任务
                     </span>
                 </a>
             </li>
             <li class="left-nav-first">
                 <a href="javascript:;">
-                    <i class="fa fa-bank"></i>
+                    <i class="fa fa-book"></i>
                     <span class="title">
-                        青教公寓
-                    </span>
-                    <span class="arrow">
-                    </span>
-                </a>
-                @Html.Action("BuildingMenu", "Home")
-            </li>
-            <li class="left-nav-first">
-                <a href="javascript:;">
-                    <i class="fa fa-building"></i>
-                    <span class="title">
-                        建筑管理
+                        字典管理
                     </span>
                     <span class="arrow ">
                     </span>
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="#" id="building-list-menu">
-                            建筑列表
+                        <a href="@Url.Action("List", "Dictionary")" id="dictionary-list-menu">
+                            字典列表
                         </a>
                     </li>
                     <li>
-                        <a href="#" id="building-create-menu">
-                            添加建筑
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="left-nav-first">
-                <a href="javascript:;">
-                    <i class="fa fa-columns"></i>
-                    <span class="title">
-                        房间管理
-                    </span>
-                    <span class="arrow ">
-                    </span>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a href="#" id="room-list-menu">
-                            房间列表
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            添加房间
+                        <a href="@Url.Action("Create", "Dictionary")" id="dictionary-create-menu">
+                            添加字典
                         </a>
                     </li>
                 </ul>
@@ -99,35 +95,18 @@
             </li>
         </ul>
         <!-- END SIDEBAR MENU1 -->
-        
     </div>
 </div>
 <!-- END SIDEBAR -->
 <!-- BEGIN CONTENT -->
 <div class="page-content-wrapper">
     <div class="page-content">
-        <div class="page-content-body">
-            <!-- HERE WILL BE LOADED AN AJAX CONTENT -->
-            @RenderBody()
-        </div>
+        @RenderBody()
     </div>
 </div>
 <!-- END CONTENT -->
-
 @section scripts {
-    <script type="text/javascript">
-        $(function () {
-            $('.page-sidebar a.ajax-link').click(function (e) {
-              
-                var url = "/Apartment/Apartment/Floor";
-                var buildingId = $(this).attr('ref1');
-                var floor = $(this).attr('ref2');
-                var request = { buildingId: buildingId, floor: floor };
-
-                Rhea.ajaxLoadPage($(this), e, url, request);
-                return false;
-            });
-        })
-    </script>
+    <script src="/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
+    <script src="~/Scripts/account.js" type="text/javascript"></script>
     @RenderSection("scripts", required: false)
 }
