@@ -42,6 +42,19 @@ namespace Rhea.Data.Mongo.Estate
         }
 
         /// <summary>
+        /// 获取子建筑
+        /// </summary>
+        /// <param name="parentId">父级建筑ID</param>
+        /// <remarks>
+        /// 获取楼群的子分区
+        /// </remarks>
+        /// <returns></returns>
+        public override IEnumerable<Building> GetChildren(int parentId)
+        {
+            return this.repository.Where(r => r.ParentId == parentId);
+        }
+
+        /// <summary>
         /// 更新建筑
         /// </summary>
         /// <param name="data">建筑对象</param>
@@ -50,8 +63,37 @@ namespace Rhea.Data.Mongo.Estate
         {
             try
             {
-                Subregion cottage = (Subregion)data;
-                this.repository.Update(cottage);
+                Subregion subregion = (Subregion)data;
+                this.repository.Update(subregion);
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
+
+        /// <summary>
+        /// 更新楼层
+        /// </summary>
+        /// <param name="buildingId">建筑ID</param>
+        /// <param name="data">楼层对象</param>
+        /// <returns></returns>
+        public override ErrorCode UpdateFloor(int buildingId, Floor data)
+        {
+            try
+            {
+                Subregion subregion = this.repository.Single(r => r.BuildingId == buildingId);
+                Floor floor = subregion.Floors.Single(r => r.Id == data.Id);
+                floor.Number = data.Number;
+                floor.Name = data.Name;
+                floor.UsableArea = data.UsableArea;
+                floor.BuildArea = data.BuildArea;
+                floor.ImageUrl = data.ImageUrl;
+                floor.Remark = data.Remark;
+
+                this.repository.Update(subregion);
             }
             catch (Exception)
             {

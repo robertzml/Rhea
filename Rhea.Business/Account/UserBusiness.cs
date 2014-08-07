@@ -74,6 +74,9 @@ namespace Rhea.Business.Account
             if (user.Password != Hasher.SHA1Encrypt(password))
                 return ErrorCode.WrongPassword;
 
+            if (user.Status == 1)
+                return ErrorCode.ObjectDeleted;
+
             UpdateLoginTime(user, user.CurrentLoginTime, DateTime.Now);
 
             return ErrorCode.Success;
@@ -95,7 +98,11 @@ namespace Rhea.Business.Account
         /// <returns></returns>
         public User Get(string _id)
         {
-            return this.userRepository.Get(_id);
+            var data = this.userRepository.Get(_id);
+            if (data.Status == 1)
+                return null;
+            else
+                return data;
         }
 
         /// <summary>
@@ -105,7 +112,11 @@ namespace Rhea.Business.Account
         /// <returns></returns>
         public User GetByUserName(string userName)
         {
-            return this.userRepository.GetByUserName(userName);
+            var data = this.userRepository.GetByUserName(userName);
+            if (data.Status == 1)
+                return null;
+            else
+                return data;
         }
 
         /// <summary>

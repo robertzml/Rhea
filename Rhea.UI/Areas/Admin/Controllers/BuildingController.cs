@@ -322,6 +322,50 @@ namespace Rhea.UI.Areas.Admin.Controllers
 
             return View(model);
         }
+
+        /// <summary>
+        /// 编辑楼层
+        /// </summary>
+        /// <param name="buildingId">所属建筑ID</param>
+        /// <param name="floorId">楼层ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult EditFloor(int buildingId, int floorId)
+        {
+            ViewBag.BuildingId = buildingId;
+            var data = this.buildingBusiness.GetFloor(buildingId, floorId);
+            return View(data);
+        }
+
+        /// <summary>
+        /// 编辑楼层
+        /// </summary>
+        /// <param name="model">楼层对象</param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult EditFloor(Floor model)
+        {
+            int buildingId = Convert.ToInt32(Request.Form["BuildingId"]);
+
+            if (ModelState.IsValid)
+            {
+                ErrorCode result = this.buildingBusiness.UpdateFloor(buildingId, model);
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "编辑楼层成功";
+                    return RedirectToAction("Details", "Building", new { id = buildingId });
+                }
+                else
+                {
+                    ModelState.AddModelError("", "编辑楼层失败");
+                    ModelState.AddModelError("", result.DisplayName());
+                }
+            }
+
+            ViewBag.BuildingId = buildingId;
+            return View(model);
+        }
         #endregion //Action
     }
 }

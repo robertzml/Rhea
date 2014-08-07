@@ -365,6 +365,12 @@
                             <th>
                                 平面图
                             </th>
+                            <th>
+                                备注
+                            </th>
+                            <th>
+                                操作
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -388,6 +394,12 @@
                                 </td>
                                 <td>
                                     @item.ImageUrl
+                                </td>
+                                <td>
+                                    @item.Remark
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("EditFloor", new { controller = "Building", buildingId = Model.BuildingId, floorId = item.Id })" class="btn btn-warning btn-sm" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
                                 </td>
                             </tr>
                         }

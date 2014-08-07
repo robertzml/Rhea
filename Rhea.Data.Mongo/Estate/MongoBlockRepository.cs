@@ -45,6 +45,9 @@ namespace Rhea.Data.Mongo.Estate
         /// 获取子建筑
         /// </summary>
         /// <param name="parentId">父级建筑ID</param>
+        /// <remarks>
+        /// 获取组团的子楼宇
+        /// </remarks>
         /// <returns></returns>
         public override IEnumerable<Building> GetChildren(int parentId)
         {
@@ -61,6 +64,35 @@ namespace Rhea.Data.Mongo.Estate
             try
             {
                 Block block = (Block)data;
+                this.repository.Update(block);
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
+
+        /// <summary>
+        /// 更新楼层
+        /// </summary>
+        /// <param name="buildingId">建筑ID</param>
+        /// <param name="data">楼层对象</param>
+        /// <returns></returns>
+        public override ErrorCode UpdateFloor(int buildingId, Floor data)
+        {
+            try
+            {
+                Block block = this.repository.Single(r => r.BuildingId == buildingId);
+                Floor floor = block.Floors.Single(r => r.Id == data.Id);
+                floor.Number = data.Number;
+                floor.Name = data.Name;
+                floor.UsableArea = data.UsableArea;
+                floor.BuildArea = data.BuildArea;
+                floor.ImageUrl = data.ImageUrl;
+                floor.Remark = data.Remark;
+
                 this.repository.Update(block);
             }
             catch (Exception)

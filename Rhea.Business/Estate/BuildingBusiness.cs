@@ -95,6 +95,83 @@ namespace Rhea.Business.Estate
             data.Status = 0;
             return this.buildingRepository.Create(data);
         }
+
+        /// <summary>
+        /// 获取楼层
+        /// </summary>
+        /// <param name="buildingId">所属建筑ID</param>
+        /// <param name="floorId">楼层ID</param>
+        /// <returns></returns>
+        public Floor GetFloor(int buildingId, int floorId)
+        {
+            var building = this.buildingRepository.Get(buildingId);
+            if (building == null || building.Status == 1)
+                return null;
+            else
+            {
+                switch ((BuildingOrganizeType)building.OrganizeType)
+                {
+                    case BuildingOrganizeType.BuildingGroup:
+                        return null;
+                    case BuildingOrganizeType.Cluster:
+                        return null;
+
+                    case BuildingOrganizeType.Cottage:
+                        IBuildingRepository cottageRepository = new MongoCottageRepository();
+                        var cottage = (Cottage)cottageRepository.Get(buildingId);
+                        return cottage.Floors.Single(r => r.Id == floorId);
+
+                    case BuildingOrganizeType.Subregion:
+                        IBuildingRepository subregionRepository = new MongoSubregionRepository();
+                        var subregion = (Subregion)subregionRepository.Get(buildingId);
+                        return subregion.Floors.Single(r => r.Id == floorId);
+
+                    case BuildingOrganizeType.Block:
+                        IBuildingRepository blockRepository = new MongoBlockRepository();
+                        var block = (Block)blockRepository.Get(buildingId);
+                        return block.Floors.Single(r => r.Id == floorId);
+
+                    case BuildingOrganizeType.Playground:
+                        return null;
+                }
+                return null;
+            }
+        }
+
+        public ErrorCode UpdateFloor(int buildingId, Floor data)
+        {
+            var building = this.buildingRepository.Get(buildingId);
+            if (building == null || building.Status == 1)
+                return ErrorCode.ObjectDeleted;
+            else
+            {
+                switch ((BuildingOrganizeType)building.OrganizeType)
+                {
+                    case BuildingOrganizeType.BuildingGroup:
+                        return ErrorCode.NotImplement;
+
+                    case BuildingOrganizeType.Cluster:
+                        return ErrorCode.NotImplement;
+
+                    case BuildingOrganizeType.Cottage:
+                        IBuildingRepository cottageRepository = new MongoCottageRepository();
+                        return cottageRepository.UpdateFloor(buildingId, data);
+
+                    case BuildingOrganizeType.Subregion:
+                        IBuildingRepository subregionRepository = new MongoSubregionRepository();
+                        return subregionRepository.UpdateFloor(buildingId, data);
+
+                    case BuildingOrganizeType.Block:
+                        IBuildingRepository blockRepository = new MongoBlockRepository();
+                        return blockRepository.UpdateFloor(buildingId, data);
+
+                    case BuildingOrganizeType.Playground:
+                        return ErrorCode.NotImplement;
+                }
+
+                return ErrorCode.NotImplement;
+            }
+        }
         #endregion //Building
 
         #region BuildingGroup
@@ -248,7 +325,7 @@ namespace Rhea.Business.Estate
         {
             IBuildingRepository buildingRepository = new MongoBlockRepository();
             var data = buildingRepository.GetChildren(parentId) as IEnumerable<Block>;
-            return data;
+            return data.Where(r => r.Status != 1);
         }
 
         /// <summary>

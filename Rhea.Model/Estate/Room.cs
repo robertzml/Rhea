@@ -177,5 +177,137 @@ namespace Rhea.Model.Estate
         [Display(Name = "状态")]
         public int Status { get; set; }
         #endregion //Property
+
+        #region Additional
+        /// <summary>
+        /// 供热情况
+        /// </summary>
+        [BsonElement("heating")]
+        [Display(Name = "供热情况")]
+        public bool? Heating { get; set; }
+
+        /// <summary>
+        /// 消防情况
+        /// </summary>
+        [BsonElement("fireControl")]
+        [Display(Name = "消防情况")]
+        [UIHint("FireControl")]
+        public string FireControl { get; set; }
+
+        /// <summary>
+        /// 房间高度
+        /// </summary>
+        [BsonElement("height")]
+        [Display(Name = "房间高度")]
+        public double? Height { get; set; }
+
+        /// <summary>
+        /// 房间东西长度
+        /// </summary>
+        [BsonElement("ewWidth")]
+        [Display(Name = "房间东西长度")]
+        public double? EWWidth { get; set; }
+
+        /// <summary>
+        /// 房间南北长度
+        /// </summary>
+        [BsonElement("snWidth")]
+        [Display(Name = "房间南北长度")]
+        public double? SNWidth { get; set; }
+
+        /// <summary>
+        /// 国际分类编号
+        /// </summary>
+        [BsonElement("internationalId")]
+        [Display(Name = "国际分类编号")]
+        public int? InternationalId { get; set; }
+
+        /// <summary>
+        /// 教育部分类编号
+        /// </summary>
+        [BsonElement("educationId")]
+        [Display(Name = "教育部分类编号")]
+        public int? EducationId { get; set; }
+
+        /// <summary>
+        /// 供电情况
+        /// </summary>
+        [BsonElement("powerSupply")]
+        [Display(Name = "供电情况")]
+        [UIHint("PowerSupply")]
+        public string PowerSupply { get; set; }
+
+        /// <summary>
+        /// 空调情况
+        /// </summary>
+        [BsonElement("airCondition")]
+        [Display(Name = "空调情况")]
+        [UIHint("AirCondition")]
+        public string AirCondition { get; set; }
+
+        /// <summary>
+        /// 是否有安全制度
+        /// </summary>
+        [BsonElement("hasSecurity")]
+        [Display(Name = "是否有安全制度")]
+        public bool? HasSecurity { get; set; }
+
+        /// <summary>
+        /// 是否有危险化学品
+        /// </summary>
+        [BsonElement("hasChemical")]
+        [Display(Name = "是否有危险化学品")]
+        public bool? HasChemical { get; set; }
+
+        /// <summary>
+        /// 是否有废液处理
+        /// </summary>
+        [BsonElement("hasTrash")]
+        [Display(Name = "是否有废液处理")]
+        [UIHint("TrashHandle")]
+        public string HasTrash { get; set; }
+
+        /// <summary>
+        /// 是否有安全教育检查
+        /// </summary>
+        [BsonElement("hasSecurityCheck")]
+        [Display(Name = "是否有安全教育检查")]
+        public bool? HasSecurityCheck { get; set; }
+
+        /// <summary>
+        /// 压力容器数量
+        /// </summary>
+        [BsonElement("pressureContainer")]
+        [Display(Name = "压力容器数量")]
+        public int? PressureContainer { get; set; }
+
+        /// <summary>
+        /// 钢瓶数量
+        /// </summary>
+        [BsonElement("cylinder")]
+        [Display(Name = "钢瓶数量")]
+        public int? Cylinder { get; set; }
+
+        /// <summary>
+        /// 通风是否有取暖
+        /// </summary>
+        [BsonElement("heatingInAeration")]
+        [Display(Name = "通风是否有取暖")]
+        public bool? HeatingInAeration { get; set; }
+
+        /// <summary>
+        /// 是否有试验台
+        /// </summary>
+        [BsonElement("hasTestBed")]
+        [Display(Name = "是否有试验台")]
+        public bool? HasTestBed { get; set; }
+
+        /// <summary>
+        /// 使用费用
+        /// </summary>
+        [BsonElement("usageCharge")]
+        [Display(Name = "使用费用")]
+        public double? UsageCharge { get; set; }
+        #endregion //Additional
     }
 }

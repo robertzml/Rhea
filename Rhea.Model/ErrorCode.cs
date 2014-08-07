@@ -37,6 +37,12 @@ namespace Rhea.Model
         NotImplement = 3,
 
         /// <summary>
+        /// 对象已删除
+        /// </summary>
+        [Display(Name = "对象已删除")]
+        ObjectDeleted = 4,
+
+        /// <summary>
         /// 用户ID重复
         /// </summary>
         [Display(Name = "用户ID重复")]

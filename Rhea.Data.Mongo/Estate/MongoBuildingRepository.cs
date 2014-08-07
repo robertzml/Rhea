@@ -74,7 +74,7 @@ namespace Rhea.Data.Mongo.Estate
                 return null;
             else
                 return data.First();
-        }       
+        }
 
         /// <summary>
         /// 按组织类型获取建筑
@@ -115,6 +115,17 @@ namespace Rhea.Data.Mongo.Estate
         /// <param name="data">建筑对象</param>
         /// <returns></returns>
         public virtual ErrorCode Update(Building data)
+        {
+            return ErrorCode.NotImplement;
+        }
+
+        /// <summary>
+        /// 更新楼层
+        /// </summary>
+        /// <param name="buildingId">建筑ID</param>
+        /// <param name="data">楼层对象</param>
+        /// <returns></returns>
+        public virtual ErrorCode UpdateFloor(int buildingId, Floor data)
         {
             return ErrorCode.NotImplement;
         }

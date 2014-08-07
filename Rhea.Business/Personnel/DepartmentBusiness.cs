@@ -40,7 +40,7 @@ namespace Rhea.Business.Personnel
         /// <returns></returns>
         public IEnumerable<Department> Get()
         {
-            return this.departmentRepository.Get();
+            return this.departmentRepository.Get().Where(r => r.Status != 1);
         }
 
         /// <summary>
@@ -50,7 +50,11 @@ namespace Rhea.Business.Personnel
         /// <returns></returns>
         public Department Get(int id)
         {
-            return this.departmentRepository.Get(id);
+            var data = this.departmentRepository.Get(id);
+            if (data.Status == 1)
+                return null;
+            else
+                return data;
         }
         #endregion //Method
     }

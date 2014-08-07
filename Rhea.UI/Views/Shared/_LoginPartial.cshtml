@@ -37,7 +37,7 @@
             @if (User.Rank() >= 900)
             {
                 <li>
-                    <a href="@Url.Action("Index", new { area = "Admin", controller = "Home" })">
+                    <a href="@Url.Action("Index", new { area = "Admin", controller = "Home" })" target="_blank">
                         <i class="fa fa-cog"></i> 后 台
                     </a>
                 </li>
@@ -60,7 +60,7 @@
 else
 {
     <li class="dropdown dropdown-user">
-        <a href="@Url.Action("Login", new { area = "", controller= "Account" })">            
+        <a href="@Url.Action("Login", new { area = "", controller= "Account" })">
             <span class="username username-hide-on-mobile">
                 登录
             </span>
