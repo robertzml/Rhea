@@ -94,7 +94,7 @@
                 var buildingId = $(this).attr('ref');
                 var request = { id: buildingId };
 
-                Rhea.ajaxLoadPage($(this), e, url, request);
+                Rhea.ajaxNavPage($(this), e, url, request);
                 return false;
             });
 
@@ -104,7 +104,7 @@
                 var buildingId = $(this).parent().attr('ref');
                 var request = { id: buildingId };
 
-                Rhea.ajaxLoadPage($(this), e, url, request);
+                Rhea.ajaxNavPage($(this), e, url, request);
                 return false;
             });
         })

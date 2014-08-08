@@ -124,7 +124,7 @@
                 var floor = $(this).attr('ref2');
                 var request = { buildingId: buildingId, floor: floor };
 
-                Rhea.ajaxLoadPage($(this), e, url, request);
+                Rhea.ajaxNavPage($(this), e, url, request);
                 return false;
             });
         })

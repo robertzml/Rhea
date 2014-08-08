@@ -175,7 +175,9 @@
     <Compile Include="Areas\Apartment\Models\FloorModel.cs" />
     <Compile Include="Areas\Estate\Controllers\BuildingController.cs" />
     <Compile Include="Areas\Estate\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Estate\Controllers\RoomController.cs" />
     <Compile Include="Areas\Estate\EstateAreaRegistration.cs" />
+    <Compile Include="Areas\Estate\Models\BuildingModels.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\EnhancedAuthorizeAttribute.cs" />
@@ -735,6 +737,10 @@
     <Content Include="Areas\Estate\Views\Home\Index.cshtml" />
     <Content Include="Areas\Estate\Views\Home\BuildingMenu.cshtml" />
     <Content Include="Areas\Estate\Views\Building\Index.cshtml" />
+    <Content Include="Areas\Estate\Views\Building\BuildingGroupIndex.cshtml" />
+    <Content Include="Areas\Estate\Views\Shared\DisplayTemplates\Boolean.cshtml" />
+    <Content Include="Areas\Estate\Views\Room\ListByBuilding.cshtml" />
+    <Content Include="Areas\Estate\Views\Building\SubregionIndex.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="plugins\jquery-1.11.0.min.js" />
@@ -879,7 +885,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Estate\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

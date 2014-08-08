@@ -16,6 +16,10 @@ h1, h2, h3, h4, h5, h6 , .page-title, .dropdown-menu {
 	vertical-align: middle;
 }
 
+.no-padding {
+	padding: 0;
+}
+
 /*profile summary*/
 .profile .profile-summary ul {
   margin-top: -12px;

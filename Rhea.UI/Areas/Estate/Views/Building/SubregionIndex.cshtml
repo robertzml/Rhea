@@ -1,0 +1,184 @@
+﻿@model Rhea.UI.Areas.Estate.Models.SubregionIndexModel
+
+@{
+    ViewBag.Title = Model.Subregion.Name;
+    Layout = null;
+}
+
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">
+    @ViewBag.Title <small>@Model.Subregion.Remark</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index", new { area = "Estate", controller= "Home" })">房产管理</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">分区主页</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">@ViewBag.Title</a>
+        </li>
+    </ul>
+    <div class="page-toolbar">
+        <div class="btn-group pull-right">
+            <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
+                Actions <i class="fa fa-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu pull-right" role="menu">
+                <li>
+                    <a href="#">Action</a>
+                </li>
+                <li class="divider">
+                </li>
+                <li>
+                    <a href="#">Separated link</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- END PAGE HEADER-->
+
+<!-- BEGIN PAGE CONTENT-->
+<div class="row profile">
+    <div class="col-md-12">
+        <!--BEGIN TABS-->
+        <div class="tabbable tabbable-custom tabbable-full-width">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#tab_1_1" data-toggle="tab">
+                        摘要
+                    </a>
+                </li>
+                <li>
+                    <a href="#tab_1_2" data-toggle="tab">
+                        信息
+                    </a>
+                </li>
+                <li>
+                    <a href="#tab_1_3" data-toggle="tab">
+                        房间
+                    </a>
+                </li>
+                <li>
+                    <a href="#tab_1_4" data-toggle="tab">
+                        统计
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab_1_1">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">分区全景</h3>
+                                </div>
+                                <div class="panel-body no-padding">
+                                    <img src="@Model.Subregion.ImageUrl" class="img-responsive" alt="" />
+                                </div>
+                            </div>
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-info sub-building-ajax-link" ref="@Model.Parent.BuildingId">
+                                    <i class="fa fa-reply"></i> 回到楼群
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="col-md-8 profile-info">
+                                    <h1>@Model.Subregion.Name</h1>
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.
+                                    </p>
+                                    <p>
+                                    </p>
+                                    <ul class="list-inline">
+                                        <li>
+                                            <i class="fa fa-map-marker"></i> Spain
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-calendar"></i> 18 Jan 1982
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-briefcase"></i> Design
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-star"></i> Top Seller
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-heart"></i> BASE Jumping
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--end col-md-8-->
+                                <div class="col-md-4">
+                                    <div class="portlet profile-summary">
+                                        <div class="portlet-title">
+                                            <div class="caption">
+                                                概况
+                                            </div>
+                                        </div>
+                                        <div class="portlet-body">
+                                            <ul class="list-unstyled">
+                                                <li>
+                                                    <span class="sale-info">
+                                                        名称
+                                                    </span>
+                                                    <span class="sale-num">
+                                                        @Model.Subregion.Name
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <span class="sale-info">
+                                                        地上楼层数
+                                                    </span>
+                                                    <span class="sale-num">
+                                                        @Model.Subregion.AboveGroundFloor
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <span class="sale-info">
+                                                        地下楼层数
+                                                    </span>
+                                                    <span class="sale-num">
+                                                        @Model.Subregion.UnderGroundFloor
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end col-md-4-->
+                            </div>
+                            <!--end row-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--END TABS-->
+    </div>
+</div>
+<!-- END PAGE CONTENT-->
+
+
+<script type="text/javascript">
+    $(function () {
+
+        $('a.sub-building-ajax-link').click(function (e) {
+            var url = "/Estate/Building/Index";
+            var buildingId = $(this).attr('ref');
+            var request = { id: buildingId };
+
+            Rhea.ajaxLoadPage($(this), e, url, request);
+            return false;
+        });      
+
+    });
+</script>

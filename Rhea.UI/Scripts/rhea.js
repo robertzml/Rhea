@@ -196,6 +196,40 @@ var Rhea = function () {
             });
 	}
 	
+	/* not nav ajax load */
+	var handleAjaxLoad2 = function($dom, e, url, request) {
+		e.preventDefault();
+            Metronic.scrollTop();
+
+            var pageContent = $('.page-content');
+            var pageContentBody = $('.page-content .page-content-body');
+
+            if (Metronic.getViewPort().width < 992 && $('.page-sidebar').hasClass("in")) { // close the menu on mobile view while laoding a page 
+                $('.page-header .responsive-toggler').click();
+            }
+
+            Metronic.startPageLoading();           
+
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: url,
+				data: request,
+                dataType: "html",
+                success: function (res) {
+
+                    Metronic.stopPageLoading();
+                    pageContentBody.html(res);
+                    Layout.fixContentHeight(); // fix content height
+                    Metronic.initAjax(); // initialize core stuff
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    Metronic.stopPageLoading();
+                    pageContentBody.html('<h4>Could not load the requested content.</h4>');
+                }
+            });
+	}
+	
 	return {
         //main function to initiate the module
         init: function () {
@@ -222,9 +256,14 @@ var Rhea = function () {
 			handleInitDatatable2($dom);
 		},
 		
-		ajaxLoadPage: function($dom, e, url, request) {
+		ajaxNavPage: function($dom, e, url, request) {
 			handleAjaxLoad($dom, e, url, request);
-		}
+		},
+		
+		ajaxLoadPage: function($dom, e, url, request) {
+			handleAjaxLoad2($dom, e, url, request);
+		},
+		
 
     };
 }();

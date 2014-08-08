@@ -138,6 +138,12 @@ namespace Rhea.Business.Estate
             }
         }
 
+        /// <summary>
+        /// 编辑楼层
+        /// </summary>
+        /// <param name="buildingId">所属建筑ID</param>
+        /// <param name="data">楼层对象</param>
+        /// <returns></returns>
         public ErrorCode UpdateFloor(int buildingId, Floor data)
         {
             var building = this.buildingRepository.Get(buildingId);
@@ -281,6 +287,18 @@ namespace Rhea.Business.Estate
                 return null;
             else
                 return data;
+        }
+
+        /// <summary>
+        /// 获取下属子分区
+        /// </summary>
+        /// <param name="parentId">楼群ID</param>
+        /// <returns></returns>
+        public IEnumerable<Subregion> GetChildSubregions(int parentId)
+        {
+            IBuildingRepository buildingRepository = new MongoSubregionRepository();
+            var data = buildingRepository.GetChildren(parentId) as IEnumerable<Subregion>;
+            return data.Where(r => r.Status != 1);
         }
 
         /// <summary>
