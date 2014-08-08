@@ -1,7 +1,7 @@
 ﻿
 @{
-    ViewBag.Title = "青教管理";
-    Layout = "~/Areas/Apartment/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "房产管理";
+    Layout = "~/Areas/Estate/Views/Shared/_Layout.cshtml";
 }
 
 <!-- BEGIN PAGE HEADER-->
@@ -12,11 +12,11 @@
     <ul class="page-breadcrumb">
         <li>
             <i class="fa fa-home"></i>
-            <a href="@Url.Action("Index", new { area = "Apartment", controller = "Home" })">青教管理</a>
+            <a href="@Url.Action("Index", new { area = "Estate", controller= "Home" })">房产管理</a>
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
-            <a href="#">青教主页</a>
+            <a href="#">房产主页</a>
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
@@ -53,9 +53,13 @@
 @section scripts {
     <script type="text/javascript">
         $(function () {
-            Rhea.topNavActive($('#apartment-nav'));
-            Rhea.leftNavActive($('#apartment-home-menu'));
+            Rhea.topNavActive($('#estate-nav'));
+            Rhea.leftNavActive($('#estate-home-menu'));
         });
     </script>
 }
+
+
+
+
 

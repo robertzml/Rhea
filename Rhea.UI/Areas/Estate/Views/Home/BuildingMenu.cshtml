@@ -1,0 +1,236 @@
+﻿@model IEnumerable<Rhea.Model.Estate.Building>
+
+@{
+    Layout = null;
+    int topParentId = 200000;
+}
+
+
+<li class="left-nav-first">
+    <a href="javascript:;">
+        <i class="fa fa-graduation-cap"></i>
+        <span class="title">
+            学院楼
+        </span>        
+        <span class="arrow ">
+        </span>
+        <span class="badge badge-primary" style="margin-right:10px;">@Model.Where(r => r.UseType == 1 && r.ParentId == topParentId).Count()</span>
+    </a>
+    <ul class="sub-menu">
+        @foreach (var building in Model.Where(r => r.UseType == 1 && r.ParentId == topParentId))
+        {
+            <li>
+                @if (building.HasChild)
+                {
+                <a href="javascript:;" ref="@building.BuildingId">
+                    <i class="ajax-link fa fa-maxcdn"></i> @building.Name <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    @foreach (var item in Model.Where(r => r.ParentId == building.BuildingId))
+                    {
+                        <li>
+                            <a class="ajax-link" ref="@item.BuildingId" href="#">@item.Name</a>
+                        </li>
+                    }
+                </ul>
+                }
+                else
+                {
+                    <a class="ajax-link" ref="@building.BuildingId" href="#">
+                        <i class="fa fa-windows"></i> @building.Name
+                    </a>
+                }
+            </li>
+        }
+    </ul>
+</li>
+<li class="left-nav-first">
+    <a href="javascript:;">
+        <i class="fa fa-book"></i>
+        <span class="title">
+            教学楼
+        </span>
+        <span class="arrow ">
+        </span>
+        <span class="badge badge-primary" style="margin-right:10px;">@Model.Where(r => r.UseType == 2 && r.ParentId == topParentId).Count()</span>
+    </a>
+    <ul class="sub-menu">
+        @foreach (var building in Model.Where(r => r.UseType == 2 && r.ParentId == topParentId))
+        {
+            <li>
+                @if (building.HasChild)
+                {
+                    <a href="javascript:;" ref="@building.BuildingId">
+                        <i class="ajax-link fa fa-maxcdn"></i> @building.Name <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        @foreach (var item in Model.Where(r => r.ParentId == building.BuildingId))
+                        {
+                            <li>
+                                <a class="ajax-link" ref="@item.BuildingId" href="#">@item.Name</a>
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <a class="ajax-link" ref="@building.BuildingId" href="#">
+                        <i class="fa fa-windows"></i> @building.Name
+                    </a>
+                }
+            </li>
+        }
+    </ul>
+</li>
+<li class="left-nav-first">
+    <a href="javascript:;">
+        <i class="fa fa-user-md"></i>
+        <span class="title">
+            行政办公
+        </span>
+        <span class="arrow ">
+        </span>
+        <span class="badge badge-primary" style="margin-right:10px;">@Model.Where(r => r.UseType == 3 && r.ParentId == topParentId).Count()</span>
+    </a>
+    <ul class="sub-menu">
+        @foreach (var building in Model.Where(r => r.UseType == 3 && r.ParentId == topParentId))
+        {
+            <li>
+                @if (building.HasChild)
+                {
+                    <a href="javascript:;" ref="@building.BuildingId">
+                        <i class="ajax-link fa fa-maxcdn"></i> @building.Name <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        @foreach (var item in Model.Where(r => r.ParentId == building.BuildingId))
+                        {
+                            <li>
+                                <a class="ajax-link" ref="@item.BuildingId" href="#">@item.Name</a>
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <a class="ajax-link" ref="@building.BuildingId" href="#">
+                        <i class="fa fa-windows"></i> @building.Name
+                    </a>
+                }
+            </li>
+        }
+    </ul>
+</li>
+<li class="left-nav-first">
+    <a href="javascript:;">
+        <i class="fa fa-qq"></i>
+        <span class="title">
+            宿舍楼
+        </span>
+        <span class="arrow ">
+        </span>
+        <span class="badge badge-primary" style="margin-right:10px;">@Model.Where(r => r.UseType == 4 && r.ParentId == topParentId).Count()</span>
+    </a>
+    <ul class="sub-menu">
+        @foreach (var building in Model.Where(r => r.UseType == 4 && r.ParentId == topParentId))
+        {
+            <li>
+                @if (building.HasChild)
+                {
+                    <a href="javascript:;" ref="@building.BuildingId">
+                        <i class="ajax-link fa fa-maxcdn"></i> @building.Name <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        @foreach (var item in Model.Where(r => r.ParentId == building.BuildingId))
+                        {
+                            <li>
+                                <a class="ajax-link" ref="@item.BuildingId" href="#">@item.Name</a>
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <a class="ajax-link" ref="@building.BuildingId" href="#">
+                        <i class="fa fa-windows"></i> @building.Name
+                    </a>
+                }
+            </li>
+        }
+    </ul>
+</li>
+<li class="left-nav-first">
+    <a href="javascript:;">
+        <i class="fa fa-gavel"></i>
+        <span class="title">
+            辅助楼
+        </span>
+        <span class="arrow ">
+        </span>
+        <span class="badge badge-primary" style="margin-right:10px;">@Model.Where(r => r.UseType == 5 && r.ParentId == topParentId).Count()</span>
+    </a>
+    <ul class="sub-menu">
+        @foreach (var building in Model.Where(r => r.UseType == 5 && r.ParentId == topParentId))
+        {
+            <li>
+                @if (building.HasChild)
+                {
+                    <a href="javascript:;" ref="@building.BuildingId">
+                        <i class="ajax-link fa fa-maxcdn"></i> @building.Name <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        @foreach (var item in Model.Where(r => r.ParentId == building.BuildingId))
+                        {
+                            <li>
+                                <a class="ajax-link" ref="@item.BuildingId" href="#">@item.Name</a>
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <a class="ajax-link" ref="@building.BuildingId" href="#">
+                        <i class="fa fa-windows"></i> @building.Name
+                    </a>
+                }
+            </li>
+        }
+    </ul>
+</li>
+<li class="left-nav-first">
+    <a href="javascript:;">
+        <i class="fa fa-trophy"></i>
+        <span class="title">
+            室外运动场
+        </span>
+        <span class="arrow ">
+        </span>
+        <span class="badge badge-primary" style="margin-right:10px;">@Model.Where(r => r.UseType == 7 && r.ParentId == topParentId).Count()</span>
+    </a>
+    <ul class="sub-menu">
+        @foreach (var building in Model.Where(r => r.UseType == 7 && r.ParentId == topParentId))
+        {
+            <li>
+                @if (building.HasChild)
+                {
+                    <a href="javascript:;" ref="@building.BuildingId">
+                        <i class="ajax-link fa fa-maxcdn"></i> @building.Name <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        @foreach (var item in Model.Where(r => r.ParentId == building.BuildingId))
+                        {
+                            <li>
+                                <a class="ajax-link" ref="@item.BuildingId" href="#">@item.Name</a>
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <a class="ajax-link" ref="@building.BuildingId" href="#">
+                        <i class="fa fa-windows"></i> @building.Name
+                    </a>
+                }
+            </li>
+        }
+    </ul>
+</li>
