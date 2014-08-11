@@ -49,6 +49,64 @@ namespace Rhea.UI.Areas.Estate.Models
     }
 
     /// <summary>
+    /// 组团主页模型
+    /// </summary>
+    public class ClusterIndexModel
+    {
+        /// <summary>
+        /// 组团对象
+        /// </summary>
+        public Cluster Cluster { get; set; }
+
+        /// <summary>
+        /// 下属楼宇
+        /// </summary>
+        public List<Block> Blocks { get; set; }
+
+        /// <summary>
+        /// 入驻部门
+        /// </summary>
+        public List<BuildingDepartmentModel> EnterDepartment { get; set; }
+    }
+
+    /// <summary>
+    /// 楼宇主页模型
+    /// </summary>
+    public class BlockIndexModel
+    {
+        /// <summary>
+        /// 楼宇对象
+        /// </summary>
+        public Block Block { get; set; }
+
+        /// <summary>
+        /// 上级组团
+        /// </summary>
+        public Cluster Parent { get; set; }
+
+        /// <summary>
+        /// 入驻部门
+        /// </summary>
+        public List<BuildingDepartmentModel> EnterDepartment { get; set; }
+    }
+
+    /// <summary>
+    /// 独栋首页模型
+    /// </summary>
+    public class CottageIndexModel
+    {
+        /// <summary>
+        /// 独栋对象
+        /// </summary>
+        public Cottage Cottage { get; set; }
+
+        /// <summary>
+        /// 入驻部门
+        /// </summary>
+        public List<BuildingDepartmentModel> EnterDepartment { get; set; }
+    }
+
+    /// <summary>
     /// 建筑入驻部门模型
     /// </summary>
     public class BuildingDepartmentModel

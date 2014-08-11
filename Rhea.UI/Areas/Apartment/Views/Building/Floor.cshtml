@@ -75,6 +75,18 @@
                     <div class="row">
                         
                     </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-info sub-building-ajax-link" ref="@Model.Parent.BuildingId">
+                                    <i class="fa fa-reply"></i> 回到楼宇
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+
+                        </div>
+                    </div>
                 </div>
                 <!--tab_1_2-->
                 <div class="tab-pane" id="tab_1_2">
@@ -194,6 +206,15 @@
             e.preventDefault();
             var $dom = $('div#svg').children('svg');
             Rhea.zoomSvg($dom, 'zoomOut');
+            return false;
+        });
+
+        $('a.sub-building-ajax-link').click(function (e) {
+            var url = "/Apartment/Building/Block";
+            var buildingId = $(this).attr('ref');
+            var request = { id: buildingId };
+
+            Rhea.ajaxLoadPage($(this), e, url, request);
             return false;
         });
     });

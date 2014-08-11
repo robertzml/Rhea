@@ -1,13 +1,13 @@
-﻿@model Rhea.UI.Areas.Estate.Models.SubregionIndexModel
+﻿@model Rhea.UI.Areas.Estate.Models.ClusterIndexModel
 
 @{
-    ViewBag.Title = Model.Subregion.Name;
+    ViewBag.Title = Model.Cluster.Name;
     Layout = null;
 }
 
 <!-- BEGIN PAGE HEADER-->
 <h3 class="page-title">
-    @ViewBag.Title <small>@Model.Subregion.Remark</small>
+    @ViewBag.Title <small>@Model.Cluster.Remark</small>
 </h3>
 <div class="page-bar">
     <ul class="page-breadcrumb">
@@ -17,7 +17,7 @@
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
-            <a href="#">分区主页</a>
+            <a href="#">组团主页</a>
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
@@ -43,11 +43,9 @@
     </div>
 </div>
 <!-- END PAGE HEADER-->
-
 <!-- BEGIN PAGE CONTENT-->
 <div class="row profile">
     <div class="col-md-12">
-        <!--BEGIN TABS-->
         <div class="tabbable tabbable-custom tabbable-full-width">
             <ul class="nav nav-tabs">
                 <li class="active">
@@ -77,15 +75,15 @@
                         <div class="col-md-3">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">分区全景</h3>
+                                    <h3 class="panel-title">组团全景</h3>
                                 </div>
                                 <div class="panel-body no-padding">
-                                    <img src="@Model.Subregion.ImageUrl" class="img-responsive" alt="" />
+                                    <img src="@Model.Cluster.ImageUrl" class="img-responsive" alt="" />
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 profile-info">
-                            <h1>@Model.Subregion.Name</h1>
+                            <h1>@Model.Cluster.Name</h1>
                             <p>
                                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.
                             </p>
@@ -123,23 +121,34 @@
                                                 名称
                                             </span>
                                             <span class="sale-num">
-                                                @Model.Subregion.Name
+                                                @Model.Cluster.Name
                                             </span>
                                         </li>
                                         <li>
                                             <span class="sale-info">
-                                                地上楼层数
+                                                建筑面积
                                             </span>
                                             <span class="sale-num">
-                                                @Model.Subregion.AboveGroundFloor
+                                                @Model.Cluster.BuildArea m<sup>2</sup>
                                             </span>
                                         </li>
                                         <li>
                                             <span class="sale-info">
-                                                地下楼层数
+                                                使用面积
                                             </span>
                                             <span class="sale-num">
-                                                @Model.Subregion.UnderGroundFloor
+                                                @Model.Cluster.UsableArea
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="sale-info">
+                                                建成日期
+                                            </span>
+                                            <span class="sale-num">
+                                                @if (Model.Cluster.BuildDate != null)
+                                                {
+                                                    @Convert.ToDateTime(Model.Cluster.BuildDate).ToShortDateString();
+                                                }
                                             </span>
                                         </li>
                                     </ul>
@@ -150,62 +159,102 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="list-group">
-                                <a href="#" class="list-group-item list-group-item-info sub-building-ajax-link" ref="@Model.Parent.BuildingId">
-                                    <i class="fa fa-reply"></i> 回到楼群
-                                </a>
+                                @foreach (var item in Model.Blocks)
+                                {
+                                    <a href="#" class="list-group-item list-group-item-info sub-building-ajax-link" ref="@item.BuildingId">
+                                        <i class="fa fa-plus-square"></i> @item.Name
+                                    </a>
+                                }
                             </div>
                         </div>
                         <div class="col-md-9">
-
-                        </div>
-                    </div>
-                </div>
-                <div id="tab_1_2" class="tab-pane">
-                    <div class="row">
-                        <div class="col-md-2">
-                            <ul class="ver-inline-menu tabbable margin-bottom-10">
-                                <li class="active">
-                                    <a data-toggle="tab" href="#tab_1_2_1">
-                                        <i class="fa fa-info"></i> 分区信息
-                                    </a>
-                                    <span class="after">
-                                    </span>
-                                </li>
-                                <li>
-                                    <a data-toggle="tab" href="#tab_1_2_2">
-                                        <i class="fa fa-image"></i> 图片集
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-md-10">
-                            <div class="tab-content">
-                                <div id="tab_1_2_1" class="tab-pane active">
-                                    <div class="portlet">
-                                        <div class="portlet-title">
-                                            <div class="caption">
-                                                <i class="fa fa-info-circle"></i> 详细信息
-                                            </div>
-                                        </div>
+                            <div class="tabbable tabbable-custom tabbable-custom-profile">
+                                <ul class="nav nav-tabs">
+                                    <li class="active">
+                                        <a href="#tab_1_11" data-toggle="tab">
+                                            组团入驻部门
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#tab_1_22" data-toggle="tab">
+                                            Feeds
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="tab_1_11">
                                         <div class="portlet-body">
-                                            @Html.Action("SubregionDetails", new { id = Model.Subregion.BuildingId })
+                                            <table class="table table-striped table-bordered table-advance table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            部门名称
+                                                        </th>
+                                                        <th>
+                                                            房间数量
+                                                        </th>
+                                                        <th>
+                                                            使用面积 (m<sup>2</sup>)
+                                                        </th>
+                                                        <th>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var item in Model.EnterDepartment)
+                                                    {
+                                                        <tr>
+                                                            <td>
+                                                                @item.DepartmentName
+                                                            </td>
+                                                            <td>
+                                                                @item.RoomCount
+                                                            </td>
+                                                            <td>
+                                                                @item.TotalUsableArea
+                                                            </td>
+                                                            <td>
+                                                                <a class="btn default btn-xs green-stripe" href="#">
+                                                                    View
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <td>合计</td>
+                                                        <td>@Model.EnterDepartment.Sum(r => r.RoomCount)</td>
+                                                        <td>@Model.EnterDepartment.Sum(r => r.TotalUsableArea)</td>
+                                                        <td>&nbsp;</td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="tab-pane" id="tab_1_2_2">
-
+                                    <!--tab-pane-->
+                                    <div class="tab-pane" id="tab_1_22">
+                                    </div>
+                                    <!--tab-pane-->
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="tab-pane" id="tab_1_2">
+
+                </div>
+                <div class="tab-pane" id="tab_1_3">
+
+                </div>
+                <div class="tab-pane" id="tab_1_4">
+
+                </div>
             </div>
         </div>
-        <!--END TABS-->
     </div>
 </div>
 <!-- END PAGE CONTENT-->
-
 
 <script type="text/javascript">
     $(function () {
@@ -218,6 +267,7 @@
             Rhea.ajaxLoadPage($(this), e, url, request);
             return false;
         });
+        
 
     });
 </script>

@@ -82,94 +82,93 @@
                                     <img src="@Model.BuildingGroup.ImageUrl" class="img-responsive" alt="" />
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-md-6 profile-info">
+                            <h1>@Model.BuildingGroup.Name</h1>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.
+                            </p>
+                            <p>
+                            </p>
+                            <ul class="list-inline">
+                                <li>
+                                    <i class="fa fa-map-marker"></i> Spain
+                                </li>
+                                <li>
+                                    <i class="fa fa-calendar"></i> 18 Jan 1982
+                                </li>
+                                <li>
+                                    <i class="fa fa-briefcase"></i> Design
+                                </li>
+                                <li>
+                                    <i class="fa fa-star"></i> Top Seller
+                                </li>
+                                <li>
+                                    <i class="fa fa-heart"></i> BASE Jumping
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="portlet profile-summary">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        概况
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            <span class="sale-info">
+                                                名称
+                                            </span>
+                                            <span class="sale-num">
+                                                @Model.BuildingGroup.Name
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="sale-info">
+                                                建筑面积
+                                            </span>
+                                            <span class="sale-num">
+                                                @Model.BuildingGroup.BuildArea m<sup>2</sup>
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="sale-info">
+                                                使用面积
+                                            </span>
+                                            <span class="sale-num">
+                                                @Model.BuildingGroup.UsableArea
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="sale-info">
+                                                建成日期
+                                            </span>
+                                            <span class="sale-num">
+                                                @if (Model.BuildingGroup.BuildDate != null)
+                                                {
+                                                    @Convert.ToDateTime(Model.BuildingGroup.BuildDate).ToShortDateString();
+                                                }
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
                             <div class="list-group">
-                                @foreach(var item in Model.Subregions)
-                                { 
-                                <a href="#" class="list-group-item list-group-item-info sub-building-ajax-link" ref="@item.BuildingId">
-                                    <i class="fa fa-plus-square"></i> @item.Name
-                                </a>
+                                @foreach (var item in Model.Subregions)
+                                {
+                                    <a href="#" class="list-group-item list-group-item-info sub-building-ajax-link" ref="@item.BuildingId">
+                                        <i class="fa fa-plus-square"></i> @item.Name
+                                    </a>
                                 }
                             </div>
                         </div>
                         <div class="col-md-9">
-                            <div class="row">
-                                <div class="col-md-8 profile-info">
-                                    <h1>@Model.BuildingGroup.Name</h1>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.
-                                    </p>
-                                    <p>
-                                    </p>
-                                    <ul class="list-inline">
-                                        <li>
-                                            <i class="fa fa-map-marker"></i> Spain
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-calendar"></i> 18 Jan 1982
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-briefcase"></i> Design
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star"></i> Top Seller
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-heart"></i> BASE Jumping
-                                        </li>
-                                    </ul>
-                                </div>
-                                <!--end col-md-8-->
-                                <div class="col-md-4">
-                                    <div class="portlet profile-summary">
-                                        <div class="portlet-title">
-                                            <div class="caption">
-                                                概况
-                                            </div>
-                                        </div>
-                                        <div class="portlet-body">
-                                            <ul class="list-unstyled">
-                                                <li>
-                                                    <span class="sale-info">
-                                                        名称
-                                                    </span>
-                                                    <span class="sale-num">
-                                                        @Model.BuildingGroup.Name
-                                                    </span>
-                                                </li>
-                                                <li>
-                                                    <span class="sale-info">
-                                                        建筑面积
-                                                    </span>
-                                                    <span class="sale-num">
-                                                        @Model.BuildingGroup.BuildArea
-                                                    </span>
-                                                </li>
-                                                <li>
-                                                    <span class="sale-info">
-                                                        使用面积
-                                                    </span>
-                                                    <span class="sale-num">
-                                                        @Model.BuildingGroup.UsableArea
-                                                    </span>
-                                                </li>
-                                                <li>
-                                                    <span class="sale-info">
-                                                        建成日期
-                                                    </span>
-                                                    <span class="sale-num">
-                                                        @if (Model.BuildingGroup.BuildDate != null)
-                                                        {
-                                                            @Convert.ToDateTime(Model.BuildingGroup.BuildDate).ToShortDateString();
-                                                        }
-                                                    </span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--end col-md-4-->
-                            </div>
-                            <!--end row-->
                             <div class="tabbable tabbable-custom tabbable-custom-profile">
                                 <ul class="nav nav-tabs">
                                     <li class="active">
@@ -203,7 +202,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach(var item in Model.EnterDepartment)
+                                                    @foreach (var item in Model.EnterDepartment)
                                                     {
                                                         <tr>
                                                             <td>
@@ -228,6 +227,7 @@
                                                         <td>合计</td>
                                                         <td>@Model.EnterDepartment.Sum(r => r.RoomCount)</td>
                                                         <td>@Model.EnterDepartment.Sum(r => r.TotalUsableArea)</td>
+                                                        <td>&nbsp;</td>
                                                     </tr>
                                                 </tfoot>
                                             </table>
@@ -258,69 +258,6 @@
                                                         <div class="col2">
                                                             <div class="date">
                                                                 Just now
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="col1">
-                                                            <div class="cont">
-                                                                <div class="cont-col1">
-                                                                    <div class="label label-default">
-                                                                        <i class="fa fa-bullhorn"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont-col2">
-                                                                    <div class="desc">
-                                                                        New order received. Please take care of it.
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col2">
-                                                            <div class="date">
-                                                                3 hours
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="col1">
-                                                            <div class="cont">
-                                                                <div class="cont-col1">
-                                                                    <div class="label label-warning">
-                                                                        <i class="fa fa-bullhorn"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont-col2">
-                                                                    <div class="desc">
-                                                                        New order received. Please take care of it.
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col2">
-                                                            <div class="date">
-                                                                5 hours
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="col1">
-                                                            <div class="cont">
-                                                                <div class="cont-col1">
-                                                                    <div class="label label-default">
-                                                                        <i class="fa fa-bullhorn"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont-col2">
-                                                                    <div class="desc">
-                                                                        New order received. Please take care of it.
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col2">
-                                                            <div class="date">
-                                                                21 hours
                                                             </div>
                                                         </div>
                                                     </li>
@@ -389,230 +326,7 @@
                                             </div>
                                         </div>
                                         <div class="portlet-body">
-                                            <div class="row">
-                                                <div class="col-xs-12 col-md-6">
-                                                    <table class="table table-bordered table-striped table-hover">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>属性</th>
-                                                                <th>值</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>
-                                                                    @Html.DisplayNameFor(model => model.BuildingGroup.Name)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayFor(model => model.BuildingGroup.Name)
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    @Html.DisplayNameFor(model => model.BuildingGroup.CampusId)
-                                                                </td>
-                                                                <td>
-                                                                    @Model.BuildingGroup.CampusName()
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    @Html.DisplayNameFor(model => model.BuildingGroup.OrganizeType)
-                                                                </td>
-                                                                <td>
-                                                                    @{
-                                                                        var type1 = (BuildingOrganizeType)Model.BuildingGroup.OrganizeType;
-                                                                        @type1.DisplayName();
-                                                                    }
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    @Html.DisplayNameFor(model => model.BuildingGroup.ParentId)
-                                                                </td>
-                                                                <td>
-                                                                    @Model.BuildingGroup.ParentName()
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    @Html.DisplayNameFor(model => model.BuildingGroup.HasChild)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayFor(model => model.BuildingGroup.HasChild)
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    @Html.DisplayNameFor(model => model.BuildingGroup.SubregionCount)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayFor(model => model.BuildingGroup.SubregionCount)
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    @Html.DisplayNameFor(model => model.BuildingGroup.UseType)
-                                                                </td>
-                                                                <td>
-                                                                    @{
-                                                                        var type2 = (BuildingUseType)Model.BuildingGroup.UseType;
-                                                                        @type2.DisplayName();
-                                                                    }
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    @Html.DisplayNameFor(model => model.BuildingGroup.BuildArea)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayFor(model => model.BuildingGroup.BuildArea) m<sup>2</sup>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    @Html.DisplayNameFor(model => model.BuildingGroup.UsableArea)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayFor(model => model.BuildingGroup.UsableArea)
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    @Html.DisplayNameFor(model => model.BuildingGroup.Floorage)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayFor(model => model.BuildingGroup.Floorage)
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    @Html.DisplayNameFor(model => model.BuildingGroup.AreaCoeffcient)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayFor(model => model.BuildingGroup.AreaCoeffcient)
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    @Html.DisplayNameFor(model => model.BuildingGroup.BuildType)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayFor(model => model.BuildingGroup.BuildType)
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    @Html.DisplayNameFor(model => model.BuildingGroup.BuildStructure)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayFor(model => model.BuildingGroup.BuildStructure)
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    @Html.DisplayNameFor(model => model.BuildingGroup.BuildCost)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayFor(model => model.BuildingGroup.BuildCost)
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                                <div class="col-xs-12 col-md-6">
-                                                    <table class="table table-bordered table-striped table-hover">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>属性</th>
-                                                                <th>值</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>
-                                                                    @Html.DisplayNameFor(model => model.BuildingGroup.CurrentValue)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayFor(model => model.BuildingGroup.CurrentValue)
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    @Html.DisplayNameFor(model => model.BuildingGroup.Classified)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayFor(model => model.BuildingGroup.Classified)
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    @Html.DisplayNameFor(model => model.BuildingGroup.FundsSubject)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayFor(model => model.BuildingGroup.FundsSubject)
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    @Html.DisplayNameFor(model => model.BuildingGroup.EquityNumber)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayFor(model => model.BuildingGroup.EquityNumber)
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    @Html.DisplayNameFor(model => model.BuildingGroup.BuildDate)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayFor(model => model.BuildingGroup.BuildDate)
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    @Html.DisplayNameFor(model => model.BuildingGroup.FixedYear)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayFor(model => model.BuildingGroup.FixedYear)
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    @Html.DisplayNameFor(model => model.BuildingGroup.DesignCompany)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayFor(model => model.BuildingGroup.DesignCompany)
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    @Html.DisplayNameFor(model => model.BuildingGroup.ConstructCompany)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayFor(model => model.BuildingGroup.ConstructCompany)
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    @Html.DisplayNameFor(model => model.BuildingGroup.ManageType)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayFor(model => model.BuildingGroup.ManageType)
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    @Html.DisplayNameFor(model => model.BuildingGroup.Remark)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayFor(model => model.BuildingGroup.Remark)
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
+                                            @Html.Action("BuildingGroupDetails", new { id = Model.BuildingGroup.BuildingId })
                                         </div>
                                     </div>
                                 </div>
@@ -703,26 +417,6 @@
                                                     </label>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>
-                                                    Enim eiusmod high life accusamus terry richardson ad squid wolf moon
-                                                </td>
-                                                <td>
-                                                    <label class="uniform-inline">
-                                                        <input type="checkbox" value="" /> Yes
-                                                    </label>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Enim eiusmod high life accusamus terry richardson ad squid wolf moon
-                                                </td>
-                                                <td>
-                                                    <label class="uniform-inline">
-                                                        <input type="checkbox" value="" /> Yes
-                                                    </label>
-                                                </td>
-                                            </tr>
                                         </table>
                                         <!--end profile-settings-->
                                         <div class="margin-top-10">
@@ -763,11 +457,11 @@
                 <!--end tab-pane-->
                 <div class="tab-pane" id="tab_1_4">
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <ul class="ver-inline-menu tabbable margin-bottom-10">
                                 <li class="active">
                                     <a data-toggle="tab" href="#tab_1">
-                                        <i class="fa fa-briefcase"></i> General Questions
+                                        <i class="fa fa-sitemap"></i> 分类统计
                                     </a>
                                     <span class="after">
                                     </span>
@@ -784,81 +478,10 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-10">
                             <div class="tab-content">
                                 <div id="tab_1" class="tab-pane active">
-                                    <div id="accordion1" class="panel-group">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">
-                                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_1">
-                                                        1. Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry ?
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="accordion1_1" class="panel-collapse collapse in">
-                                                <div class="panel-body">
-                                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">
-                                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_2">
-                                                        2. Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry ?
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="accordion1_2" class="panel-collapse collapse">
-                                                <div class="panel-body">
-                                                    Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="panel panel-danger">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">
-                                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_5">
-                                                        5. Leggings occaecat craft beer farm-to-table, raw denim aesthetic ?
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="accordion1_5" class="panel-collapse collapse">
-                                                <div class="panel-body">
-                                                    3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">
-                                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_6">
-                                                        6. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth ?
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="accordion1_6" class="panel-collapse collapse">
-                                                <div class="panel-body">
-                                                    3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">
-                                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_7">
-                                                        7. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft ?
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="accordion1_7" class="panel-collapse collapse">
-                                                <div class="panel-body">
-                                                    3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                                 <div id="tab_2" class="tab-pane">
                                     <div id="accordion2" class="panel-group">

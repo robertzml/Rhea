@@ -1,0 +1,246 @@
+﻿@model Rhea.Model.Estate.Cottage
+
+@{
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-xs-12 col-lg-6">
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>属性</th>
+                    <th>值</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Name)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.ImageUrl)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.ImageUrl)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.PartMapUrl)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.PartMapUrl)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.CampusId)
+                    </td>
+                    <td>
+                        @Model.CampusName()
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.OrganizeType)
+                    </td>
+                    <td>
+                        @{
+                            var type1 = (BuildingOrganizeType)Model.OrganizeType;
+                            @type1.DisplayName();
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.ParentId)
+                    </td>
+                    <td>
+                        @Model.ParentName()
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.UseType)
+                    </td>
+                    <td>
+                        @{
+                            var type2 = (BuildingUseType)Model.UseType;
+                            @type2.DisplayName();
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.AboveGroundFloor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.AboveGroundFloor)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.UnderGroundFloor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.UnderGroundFloor)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.BuildArea)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.BuildArea)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.UsableArea)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.UsableArea)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Floorage)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Floorage)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.AreaCoeffcient)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.AreaCoeffcient)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.BuildType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.BuildType)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.BuildStructure)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.BuildStructure)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.BuildCost)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.BuildCost)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-xs-12 col-lg-6">
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>属性</th>
+                    <th>值</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.CurrentValue)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.CurrentValue)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Classified)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Classified)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.FundsSubject)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.FundsSubject)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.EquityNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.EquityNumber)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.BuildDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.BuildDate)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.FixedYear)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.FixedYear)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.DesignCompany)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.DesignCompany)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.ConstructCompany)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.ConstructCompany)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.ManageType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.ManageType)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Remark)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Remark)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -50,8 +50,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
             var f = block.Floors.Single(r => r.Number == floor);
 
             FloorModel data = new FloorModel();
-            data.BuildingId = buildingId;
-            data.BuildingName = block.Name;
+            data.Parent = block;
             data.Floor = f;
 
             if (!string.IsNullOrEmpty(f.ImageUrl))

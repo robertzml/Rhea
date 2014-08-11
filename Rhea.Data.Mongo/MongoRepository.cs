@@ -5,6 +5,7 @@ using MongoDB.Driver.Linq;
 using Rhea.Model;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -384,6 +385,16 @@ namespace Rhea.Data.Mongo
         #endregion //Field
 
         #region Constructor
+        /// <summary>
+        /// 初始化 MongoRepository 类
+        /// </summary>
+        /// <param name="databaseName">数据库名称</param>
+        public MongoRepository(string databaseName)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["mongoConnection"].ConnectionString;
+            this.database = GetDatabase(new MongoUrl(connectionString), databaseName);
+        }
+
         /// <summary>
         /// 初始化 MongoRepository 类
         /// </summary>

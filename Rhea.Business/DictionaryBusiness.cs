@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Rhea.Data;
 using Rhea.Data.Mongo;
 using Rhea.Model;
+using Rhea.Model.Estate;
+using MongoDB.Bson;
 
 namespace Rhea.Business
 {
@@ -69,6 +71,34 @@ namespace Rhea.Business
         public ErrorCode Edit(Dictionary data)
         {
             return this.dictionaryRepository.Edit(data);
+        }
+
+        /// <summary>
+        /// 获取房间功能编码列表
+        /// </summary>
+        /// <returns></returns>
+        public List<RoomFunctionCode> GetRoomFunctionCodes()
+        {
+            List<RoomFunctionCode> data = new List<RoomFunctionCode>();
+            BsonRepository repository = new BsonRepository();
+            BsonDocument doc = repository.GetRoomFunctionCodes();
+
+            BsonArray array = doc["property"].AsBsonArray;
+           
+            foreach(BsonDocument row in array)
+            {
+                RoomFunctionCode code = new RoomFunctionCode();
+                code.CodeId = row["codeId"].AsString;
+                code.FirstCode = row["firstCode"].AsInt32;
+                code.SecondCode = row["secondCode"].AsInt32;
+                code.ClassifyName = row["classifyName"].AsString;
+                code.FunctionProperty = row["functionProperty"].AsString;
+                code.Remark = row["remark"].AsString;
+
+                data.Add(code);
+            }
+
+            return data;
         }
         #endregion //Method
     }

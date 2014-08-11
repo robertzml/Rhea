@@ -37,16 +37,9 @@ namespace Rhea.UI.Areas.Apartment.Models
     public class FloorModel
     {
         /// <summary>
-        /// 楼宇ID
+        /// 父级楼宇
         /// </summary>
-        [Display(Name = "楼宇ID")]
-        public int BuildingId { get; set; }
-
-        /// <summary>
-        /// 楼宇名称
-        /// </summary>
-        [Display(Name = "楼宇名称")]
-        public string BuildingName { get; set; }
+        public Block Parent { get; set; }
 
         /// <summary>
         /// 楼层信息

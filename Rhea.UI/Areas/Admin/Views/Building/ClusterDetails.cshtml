@@ -33,7 +33,7 @@
         <div class="portlet box green">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-th"></i>组团信息
+                    <i class="fa fa-th"></i> @Model.Name
                 </div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse">
@@ -313,6 +313,7 @@
                 <hr />
                 <p>
                     <a href="@Url.Action("List", new { controller = "Building" })" class="btn btn-primary" role="button"><i class="fa fa-list"></i>&nbsp;回到列表</a>
+                    <a href="@Url.Action("ListByBuilding", new { controller = "Room", buildingId = Model.BuildingId })" class="btn btn-success" role="button"><i class="fa fa-outdent"></i>&nbsp;房间</a>
                     <a href="@Url.Action("Edit", new { controller = "Building", id = Model.BuildingId })" class="btn btn-warning" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
                 </p>
             </div>

@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Account\UserGroup.cs" />
     <Compile Include="Account\User.cs" />
+    <Compile Include="Apartment\ApartmentRoom.cs" />
     <Compile Include="Apartment\Inhabitant.cs" />
     <Compile Include="CollectionName.cs" />
     <Compile Include="Dictionary.cs" />

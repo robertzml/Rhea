@@ -743,6 +743,12 @@
     <Content Include="Areas\Estate\Views\Building\SubregionIndex.cshtml" />
     <Content Include="Areas\Apartment\Views\Building\Block.cshtml" />
     <Content Include="Areas\Apartment\Views\Building\Floor.cshtml" />
+    <Content Include="Areas\Estate\Views\Building\CottageIndex.cshtml" />
+    <Content Include="Areas\Estate\Views\Building\CottageDetails.cshtml" />
+    <Content Include="Areas\Estate\Views\Building\BuildingGroupDetails.cshtml" />
+    <Content Include="Areas\Estate\Views\Building\SubregionDetails.cshtml" />
+    <Content Include="Areas\Estate\Views\Building\ClusterIndex.cshtml" />
+    <Content Include="Areas\Estate\Views\Building\BlockIndex.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="plugins\jquery-1.11.0.min.js" />
