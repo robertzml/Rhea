@@ -69,9 +69,9 @@
             </li>
             <li class="left-nav-first">
                 <a href="javascript:;">
-                    <i class="fa fa-columns"></i>
+                    <i class="fa fa-users"></i>
                     <span class="title">
-                        房间管理
+                        人员管理
                     </span>
                     <span class="arrow ">
                     </span>
@@ -119,10 +119,20 @@
         $(function () {
             $('.page-sidebar a.ajax-link').click(function (e) {
               
-                var url = "/Apartment/Apartment/Floor";
+                var url = "/Apartment/Building/Floor";
                 var buildingId = $(this).attr('ref1');
                 var floor = $(this).attr('ref2');
                 var request = { buildingId: buildingId, floor: floor };
+
+                Rhea.ajaxNavPage($(this), e, url, request);
+                return false;
+            });
+
+            $('.page-sidebar i.ajax-link').click(function (e) {
+
+                var url = "/Apartment/Building/Block";
+                var id = $(this).attr('ref');
+                var request = { id: id };
 
                 Rhea.ajaxNavPage($(this), e, url, request);
                 return false;

@@ -1,0 +1,200 @@
+﻿@model Rhea.UI.Areas.Apartment.Models.FloorModel
+
+@{
+    ViewBag.Title = Model.Floor.Name;
+    Layout = null;
+}
+
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">
+    @ViewBag.Title
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index", new { area = "Apartment", controller = "Home" })">青教管理</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">青教公寓</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">@ViewBag.Title</a>
+        </li>
+    </ul>
+    <div class="page-toolbar">
+        <div class="btn-group pull-right">
+            <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
+                Actions <i class="fa fa-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu pull-right" role="menu">
+                <li>
+                    <a href="#">Action</a>
+                </li>
+                <li class="divider">
+                </li>
+                <li>
+                    <a href="#">Separated link</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="tabbable tabbable-custom tabbable-full-width">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#tab_1_1" data-toggle="tab">
+                        摘要
+                    </a>
+                </li>
+                <li>
+                    <a href="#tab_1_2" data-toggle="tab">
+                        平面图
+                    </a>
+                </li>
+                <li>
+                    <a href="#tab_1_3" data-toggle="tab">
+                        房间
+                    </a>
+                </li>
+                <li>
+                    <a href="#tab_1_4" data-toggle="tab">
+                        Help
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <!--tab_1_1-->
+                <div class="tab-pane active" id="tab_1_1">
+                    <div class="row">
+                        
+                    </div>
+                </div>
+                <!--tab_1_2-->
+                <div class="tab-pane" id="tab_1_2">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="portlet box blue">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-slack"></i>楼层平面图
+                                    </div>
+                                    <div class="tools">
+                                        <a href="javascript:;" class="collapse">
+                                        </a>
+                                        <a href="javascript:;" class="reload">
+                                        </a>
+                                        <a href="javascript:;" class="remove">
+                                        </a>
+                                    </div>
+                                    <div class="actions">
+                                        <a href="#" id="zoom-in" class="btn btn-default btn-sm">
+                                            <i class="fa fa-search-plus"></i> 放大
+                                        </a>
+                                        <a href="#" id="zoom-out" class="btn btn-default btn-sm">
+                                            <i class="fa fa-search-minus"></i> 缩小
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+                                    <div style="height:500px; overflow:auto;">
+                                        <div id="svg"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--tab_1_3-->
+                <div class="tab-pane" id="tab_1_3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="portlet">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-list"></i>房间信息
+                                    </div>
+                                    <div class="tools">
+                                        <a href="javascript:;" class="collapse">
+                                        </a>
+                                        <a href="javascript:;" class="reload">
+                                        </a>
+                                        <a href="javascript:;" class="remove">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+                                    <table class="table table-striped table-bordered table-hover table-advance" id="room-table">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    房间编号
+                                                </th>
+                                                <th>
+                                                    房间名称
+                                                </th>
+                                                <th>
+                                                    使用面积
+                                                </th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.Rooms)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Number)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Name)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.UsableArea)
+                                                    </td>
+                                                    <td>
+                                                        <a href="@Url.Action("Details", new { controller = "Room", id = item.RoomId })" class="btn btn-info btn-sm" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
+                                                        <a href="@Url.Action("Edit", new { controller = "Room", id = item.RoomId })" class="btn btn-warning btn-sm" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT-->
+
+<script type="text/javascript">
+    $(function () {
+        Rhea.initDatatable2($('#room-table'));
+
+        Rhea.ajaxLoadSvg($('div#svg'), '@Model.SvgPath');
+
+        $('#zoom-in').click(function (e) {
+            e.preventDefault();
+            var $dom = $('div#svg').children('svg');
+            Rhea.zoomSvg($dom, 'zoomIn');
+            return false;
+        });
+
+        $('#zoom-out').click(function (e) {
+            e.preventDefault();
+            var $dom = $('div#svg').children('svg');
+            Rhea.zoomSvg($dom, 'zoomOut');
+            return false;
+        });
+    });
+</script>

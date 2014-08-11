@@ -148,86 +148,128 @@ var Rhea = function () {
 	
 	var handleAjaxLoad = function($dom, e, url, request) {
 		e.preventDefault();
-            Metronic.scrollTop();
+		Metronic.scrollTop();
 
-            //var url = $(this).attr("href");
-            var menuContainer = jQuery('.page-sidebar ul');
-            var pageContent = $('.page-content');
-            var pageContentBody = $('.page-content .page-content-body');
+		//var url = $(this).attr("href");
+		var menuContainer = jQuery('.page-sidebar ul');
+		var pageContent = $('.page-content');
+		var pageContentBody = $('.page-content .page-content-body');
 
-            menuContainer.children('li.active').removeClass('active');
-            menuContainer.children('arrow.open').removeClass('open');
+		menuContainer.children('li.active').removeClass('active');
+		menuContainer.children('arrow.open').removeClass('open');
 
-            $dom.parents('li').each(function () {
-                $dom.addClass('active');
-                $dom.children('a > span.arrow').addClass('open');
-            });
-            $dom.parents('li').addClass('active');
+		$dom.parents('li').each(function () {
+			$dom.addClass('active');
+			$dom.children('a > span.arrow').addClass('open');
+		});
+		$dom.parents('li').addClass('active');
 
-            if (Metronic.getViewPort().width < 992 && $('.page-sidebar').hasClass("in")) { // close the menu on mobile view while laoding a page 
-                $('.page-header .responsive-toggler').click();
-            }
+		if (Metronic.getViewPort().width < 992 && $('.page-sidebar').hasClass("in")) { // close the menu on mobile view while laoding a page 
+			$('.page-header .responsive-toggler').click();
+		}
 
-            Metronic.startPageLoading();
+		Metronic.startPageLoading();
 
-            var the = $dom;
+		var the = $dom;
 
-            $.ajax({
-                type: "GET",
-                cache: false,
-                url: url,
-				data: request,
-                dataType: "html",
-                success: function (res) {
+		$.ajax({
+			type: "GET",
+			cache: false,
+			url: url,
+			data: request,
+			dataType: "html",
+			success: function (res) {
 
-                    if (the.parents('li.open').size() === 0) {
-                        $('.page-sidebar-menu > li.open > a').click();
-                    }
+				if (the.parents('li.open').size() === 0) {
+					$('.page-sidebar-menu > li.open > a').click();
+				}
 
-                    Metronic.stopPageLoading();
-                    pageContentBody.html(res);
-                    Layout.fixContentHeight(); // fix content height
-                    Metronic.initAjax(); // initialize core stuff
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    Metronic.stopPageLoading();
-                    pageContentBody.html('<h4>Could not load the requested content.</h4>');
-                }
-            });
+				Metronic.stopPageLoading();
+				pageContentBody.html(res);
+				Layout.fixContentHeight(); // fix content height
+				Metronic.initAjax(); // initialize core stuff
+			},
+			error: function (xhr, ajaxOptions, thrownError) {
+				Metronic.stopPageLoading();
+				pageContentBody.html('<h4>Could not load the requested content.</h4>');
+			}
+		});
 	}
 	
 	/* not nav ajax load */
 	var handleAjaxLoad2 = function($dom, e, url, request) {
 		e.preventDefault();
-            Metronic.scrollTop();
+		Metronic.scrollTop();
 
-            var pageContent = $('.page-content');
-            var pageContentBody = $('.page-content .page-content-body');
+		var pageContent = $('.page-content');
+		var pageContentBody = $('.page-content .page-content-body');
 
-            if (Metronic.getViewPort().width < 992 && $('.page-sidebar').hasClass("in")) { // close the menu on mobile view while laoding a page 
-                $('.page-header .responsive-toggler').click();
-            }
+		if (Metronic.getViewPort().width < 992 && $('.page-sidebar').hasClass("in")) { // close the menu on mobile view while laoding a page 
+			$('.page-header .responsive-toggler').click();
+		}
 
-            Metronic.startPageLoading();           
+		Metronic.startPageLoading();
 
-            $.ajax({
-                type: "GET",
-                cache: false,
-                url: url,
-				data: request,
-                dataType: "html",
-                success: function (res) {
+		$.ajax({
+			type: "GET",
+			cache: false,
+			url: url,
+			data: request,
+			dataType: "html",
+			success: function (res) {
 
-                    Metronic.stopPageLoading();
-                    pageContentBody.html(res);
-                    Layout.fixContentHeight(); // fix content height
-                    Metronic.initAjax(); // initialize core stuff
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    Metronic.stopPageLoading();
-                    pageContentBody.html('<h4>Could not load the requested content.</h4>');
-                }
-            });
+				Metronic.stopPageLoading();
+				pageContentBody.html(res);
+				Layout.fixContentHeight(); // fix content height
+				Metronic.initAjax(); // initialize core stuff
+			},
+			error: function (xhr, ajaxOptions, thrownError) {
+				Metronic.stopPageLoading();
+				pageContentBody.html('<h4>Could not load the requested content.</h4>');
+			}
+		});
+	}
+	
+	var handleAjaxSvg = function(container, url) {
+			
+		Metronic.startPageLoading();
+
+		$.ajax({
+			type: "GET",
+			cache: false,
+			url: url,			
+			dataType: "html",
+			success: function (res) {
+
+				Metronic.stopPageLoading();
+				container.html(res);
+				Layout.fixContentHeight(); // fix content height
+				Metronic.initAjax(); // initialize core stuff
+				
+				var svg = $(this).children('svg');
+			},
+			error: function (xhr, ajaxOptions, thrownError) {
+				Metronic.stopPageLoading();
+				container.html('<h4>无法载入平面图</h4>');
+			}
+		});
+	}
+	
+	function handleZoomSvg($dom, zoomType) {
+		var width = parseFloat($dom.attr('width'));
+		var height = parseFloat($dom.attr('height'));
+		var zoomRate = 1.1;
+
+		if (zoomType == 'zoomIn') {
+			width *= zoomRate;
+			height *= zoomRate;
+		}
+		else if (zoomType == 'zoomOut') {
+			width /= zoomRate;
+			height /= zoomRate;
+		}
+		$dom.attr('width', width);
+		$dom.attr('height', height);
 	}
 	
 	return {
@@ -264,6 +306,17 @@ var Rhea = function () {
 			handleAjaxLoad2($dom, e, url, request);
 		},
 		
+		ajaxLoadSvg: function(container, url) {
+			if (url == '') {
+				container.html('无平面图');
+			} else {			
+				handleAjaxSvg(container, url);
+			}
+		},
+		
+		zoomSvg: function($dom, zoomType) {
+			handleZoomSvg($dom, zoomType);
+		}
 
     };
 }();

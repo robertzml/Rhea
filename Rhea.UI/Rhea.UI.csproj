@@ -171,6 +171,7 @@
     <Compile Include="Areas\Admin\Controllers\UserGroupController.cs" />
     <Compile Include="Areas\Apartment\ApartmentAreaRegistration.cs" />
     <Compile Include="Areas\Apartment\Controllers\ApartmentController.cs" />
+    <Compile Include="Areas\Apartment\Controllers\BuildingController.cs" />
     <Compile Include="Areas\Apartment\Controllers\HomeController.cs" />
     <Compile Include="Areas\Apartment\Models\FloorModel.cs" />
     <Compile Include="Areas\Estate\Controllers\BuildingController.cs" />
@@ -721,7 +722,6 @@
     <Content Include="Areas\Apartment\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Apartment\Views\Home\Index.cshtml" />
     <Content Include="Areas\Apartment\Views\Home\BuildingMenu.cshtml" />
-    <Content Include="Areas\Apartment\Views\Apartment\Floor.cshtml" />
     <Content Include="Areas\Admin\Views\Room\List.cshtml" />
     <Content Include="Areas\Admin\Views\User\List.cshtml" />
     <Content Include="Areas\Admin\Views\UserGroup\List.cshtml" />
@@ -741,6 +741,8 @@
     <Content Include="Areas\Estate\Views\Shared\DisplayTemplates\Boolean.cshtml" />
     <Content Include="Areas\Estate\Views\Room\ListByBuilding.cshtml" />
     <Content Include="Areas\Estate\Views\Building\SubregionIndex.cshtml" />
+    <Content Include="Areas\Apartment\Views\Building\Block.cshtml" />
+    <Content Include="Areas\Apartment\Views\Building\Floor.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="plugins\jquery-1.11.0.min.js" />
@@ -885,6 +887,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Apartment\Views\Apartment\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
