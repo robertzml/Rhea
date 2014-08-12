@@ -17,9 +17,9 @@ namespace Rhea.Model.Apartment
         /// <summary>
         /// 工号、学号或其它
         /// </summary>
-        [BsonElement("inhabitantId")]
+        [BsonElement("jobNumber")]
         [Display(Name = "工号")]
-        public string InhabitantId { get; set; }
+        public string JobNumber { get; set; }
 
         /// <summary>
         /// 姓名
@@ -30,17 +30,18 @@ namespace Rhea.Model.Apartment
 
         /// <summary>
         /// 住户类型
+        /// 1:教职工；2:外聘人员；3:挂职；4:学生；5:其他
         /// </summary>
         [BsonElement("type")]
         [Display(Name = "住户类型")]
         public int Type { get; set; }
 
         /// <summary>
-        /// 所属部门
+        /// 所属部门名称
         /// </summary>
-        [BsonElement("departmentId")]
-        [Display(Name = "所属部门")]
-        public int DepartmentId { get; set; }
+        [BsonElement("departmentName")]
+        [Display(Name = "所属部门名称")]
+        public string DepartmentName { get; set; }
 
         /// <summary>
         /// 职务
@@ -48,6 +49,34 @@ namespace Rhea.Model.Apartment
         [BsonElement("duty")]
         [Display(Name = "职务")]
         public string Duty { get; set; }
+
+        /// <summary>
+        /// 电话
+        /// </summary>
+        [BsonElement("telephone")]
+        [Display(Name = "电话")]
+        public string Telephone { get; set; }
+
+        /// <summary>
+        /// 身份证
+        /// </summary>
+        [BsonElement("identityCard")]
+        [Display(Name = "身份证")]
+        public string IdentityCard { get; set; }
+
+        /// <summary>
+        /// 公积金领取情况
+        /// </summary>
+        [BsonElement("extractAccumulatedFunds")]
+        [Display(Name = "公积金提取情况")]
+        public bool? ExtractAccumulatedFunds { get; set; }
+
+        /// <summary>
+        /// 婚姻状况
+        /// </summary>
+        [BsonElement("telephone")]
+        [Display(Name = "婚姻状况")]
+        public string Marriage { get; set; }
 
         /// <summary>
         /// 备注

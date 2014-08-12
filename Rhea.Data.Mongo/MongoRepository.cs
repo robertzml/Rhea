@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Configuration;
 
 namespace Rhea.Data.Mongo
 {
@@ -387,6 +388,7 @@ namespace Rhea.Data.Mongo
         #region Constructor
         /// <summary>
         /// 初始化 MongoRepository 类
+        /// 采用配置文件内连接字符串
         /// </summary>
         /// <param name="databaseName">数据库名称</param>
         public MongoRepository(string databaseName)
