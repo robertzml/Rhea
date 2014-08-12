@@ -150,6 +150,12 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="list-group">
+                                @foreach (var item in Model.Subregion.Floors)
+                                {
+                                    <a href="#" class="list-group-item list-group-item-success sub-floor-ajax-link" ref="@item.Id">
+                                        <i class="fa fa-road"></i> @item.Name
+                                    </a>
+                                }
                                 <a href="#" class="list-group-item list-group-item-info sub-building-ajax-link" ref="@Model.Parent.BuildingId">
                                     <i class="fa fa-reply"></i> 回到楼群
                                 </a>

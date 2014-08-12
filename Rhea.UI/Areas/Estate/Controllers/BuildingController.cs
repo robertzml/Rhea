@@ -117,6 +117,8 @@ namespace Rhea.UI.Areas.Estate.Controllers
             if (!string.IsNullOrEmpty(data.Cottage.ImageUrl))
                 data.Cottage.ImageUrl = RheaConstant.ImagesRoot + data.Cottage.ImageUrl;
 
+            data.Cottage.Floors.ForEach(r => r.ImageUrl = RheaConstant.SvgRoot + r.ImageUrl);
+
             data.EnterDepartment = GetEnterDepartment(id);
 
             return data;
