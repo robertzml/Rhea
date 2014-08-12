@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Rhea.Model;
 using Rhea.Model.Estate;
 
 namespace Rhea.UI.Areas.Estate.Models
@@ -135,5 +136,36 @@ namespace Rhea.UI.Areas.Estate.Models
         /// 使用面积
         /// </summary>
         public double TotalUsableArea { get; set; }
+    }
+
+    /// <summary>
+    /// 建筑分类用房面积模型
+    /// </summary>
+    public class BuildingClassifyAreaModel
+    {
+        /// <summary>
+        /// 建筑ID
+        /// </summary>
+        public int BuildingId { get; set; }
+
+        /// <summary>
+        /// 建筑名称
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// 一级分类
+        /// </summary>
+        public List<RoomFirstClassifyAreaModel> FirstClassify { get; set; }
+
+        /// <summary>
+        /// 使用总面积
+        /// </summary>
+        public double TotalArea { get; set; }
+
+        /// <summary>
+        /// 房间总数
+        /// </summary>
+        public int RoomCount { get; set; }
     }
 }

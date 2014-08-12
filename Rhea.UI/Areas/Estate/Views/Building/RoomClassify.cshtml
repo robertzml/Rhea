@@ -1,0 +1,81 @@
+﻿@model Rhea.UI.Areas.Estate.Models.BuildingClassifyAreaModel
+
+@{
+    Layout = null;
+}
+
+<style type="text/css">
+    table#classify-table td, table#classify-table th {
+        text-align: center;
+    }
+    table#classify-table td {
+        border-left-width: 1px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-12">
+        <table id="classify-table" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>一级分类</th>
+                    <th>编码</th>
+                    <th>二级分类</th>
+                    <th>使用面积 (m<sup>2</sup>)</th>
+                    <th>房间数量</th>
+                    <th>总使用面积 (m<sup>2</sup>)</th>
+                    <th>总房间数量</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.FirstClassify)
+                {
+                    if (item.SecondClassify.Count == 0)
+                    {
+                        continue;
+                    }
+                    <tr>
+                        <td rowspan="@item.SecondClassify.Count">
+                            @item.ClassifyName
+                        </td>
+                        <td>
+                            @string.Format("{0}.{1}", item.SecondClassify[0].FirstCode, item.SecondClassify[0].SecondCode)
+                        </td>
+                        <td>
+                            @item.SecondClassify[0].Property
+                        </td>
+                        <td>
+                            @item.SecondClassify[0].Area
+                        </td>
+                        <td>
+                            @item.SecondClassify[0].RoomCount
+                        </td>
+                        <td rowspan="@item.SecondClassify.Count">
+                            @item.Area
+                        </td>
+                        <td rowspan="@item.SecondClassify.Count">
+                            @item.RoomCount
+                        </td>
+                    </tr>
+                    for (int i = 1; i < item.SecondClassify.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                @string.Format("{0}.{1}", item.SecondClassify[i].FirstCode, item.SecondClassify[i].SecondCode)
+                            </td>
+                            <td>
+                                @item.SecondClassify[i].Property
+                            </td>
+                            <td>
+                                @item.SecondClassify[i].Area
+                            </td>
+                            <td>
+                                @item.SecondClassify[i].RoomCount
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

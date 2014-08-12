@@ -1,13 +1,14 @@
-﻿using System;
+﻿using Rhea.Business;
+using Rhea.Business.Estate;
+using Rhea.Business.Personnel;
+using Rhea.Model;
+using Rhea.Model.Estate;
+using Rhea.UI.Areas.Estate.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Rhea.Business.Estate;
-using Rhea.Model.Estate;
-using Rhea.UI.Areas.Estate.Models;
-using Rhea.Business;
-using Rhea.Business.Personnel;
 
 namespace Rhea.UI.Areas.Estate.Controllers
 {
@@ -215,6 +216,32 @@ namespace Rhea.UI.Areas.Estate.Controllers
         }
 
         /// <summary>
+        /// 组团详细信息
+        /// </summary>
+        /// <param name="id">组团ID</param>
+        /// <returns></returns>
+        [ChildActionOnly]
+        public ActionResult ClusterDetails(int id)
+        {
+            BuildingBusiness business = new BuildingBusiness();
+            var data = business.GetCluster(id);
+            return View(data);
+        }
+
+        /// <summary>
+        /// 楼宇详细信息
+        /// </summary>
+        /// <param name="id">楼宇ID</param>
+        /// <returns></returns>
+        [ChildActionOnly]
+        public ActionResult BlockDetails(int id)
+        {
+            BuildingBusiness business = new BuildingBusiness();
+            var data = business.GetBlock(id);
+            return View(data);
+        }
+
+        /// <summary>
         /// 独栋详细信息
         /// </summary>
         /// <param name="id">独栋ID</param>
@@ -234,7 +261,30 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         public ActionResult RoomClassify(int id)
         {
-            return View();
+            BuildingClassifyAreaModel data = new BuildingClassifyAreaModel();
+
+            BuildingBusiness buildingBusiness = new BuildingBusiness();
+            StatisticBusiness statisticBusiness = new StatisticBusiness();
+            DictionaryBusiness dictionaryBusiness = new DictionaryBusiness();
+            RoomBusiness roomBusiness = new RoomBusiness();
+
+            var building = buildingBusiness.Get(id);
+            var rooms = roomBusiness.GetByBuilding(id);
+
+            data.BuildingId = id;
+            data.Name = building.Name;
+            data.FirstClassify = new List<RoomFirstClassifyAreaModel>();
+
+            var functionCodes = dictionaryBusiness.GetRoomFunctionCodes();
+            var firstFunction = functionCodes.GroupBy(r => r.FirstCode).Select(g => new { g.Key });
+
+            foreach (var item in firstFunction)
+            {
+                var classify = statisticBusiness.GetBuildingFirstClassifyArea(id, item.Key, functionCodes, rooms, false);
+                data.FirstClassify.Add(classify);
+            }
+
+            return View(data);
         }
         #endregion //Action
     }

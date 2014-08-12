@@ -68,10 +68,7 @@ namespace Rhea.Data.Mongo.Estate
         /// <returns></returns>
         public IEnumerable<Room> GetByBuildings(int[] buildingsId)
         {
-            var data = from r in repository.AsEnumerable()
-                       where buildingsId.Contains(r.BuildingId)
-                       select r;
-
+            var data = this.repository.Where(r => buildingsId.Contains(r.BuildingId));
             return data;
         }
 
