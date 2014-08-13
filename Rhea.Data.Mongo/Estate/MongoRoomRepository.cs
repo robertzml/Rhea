@@ -77,7 +77,7 @@ namespace Rhea.Data.Mongo.Estate
         /// </summary>
         /// <param name="id">房间ID</param>
         /// <returns></returns>
-        public Room Get(int id)
+        public virtual Room Get(int id)
         {
             var data = this.repository.Where(r => r.RoomId == id);
             if (data.Count() == 0)
@@ -100,6 +100,25 @@ namespace Rhea.Data.Mongo.Estate
                     return ErrorCode.DuplicateId;
 
                 this.repository.Add(data);
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
+
+        /// <summary>
+        /// 更新房间
+        /// </summary>
+        /// <param name="data">房间对象</param>
+        /// <returns></returns>
+        public virtual ErrorCode Update(Room data)
+        {
+            try
+            {
+                this.repository.Update(data);
             }
             catch (Exception)
             {

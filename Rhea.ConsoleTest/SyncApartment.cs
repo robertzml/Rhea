@@ -58,6 +58,7 @@ namespace Rhea.ConsoleTest
             data.TermLimit = row["年限"].ToString();
             data.LiHuStatus = row["蠡湖家园入住情况"].ToString();
             data.Remark = row["备注"].ToString();
+            data.Status = 0;
 
             MongoResideRecordRepository repository = new MongoResideRecordRepository();
             ErrorCode result = repository.Create(data);
@@ -67,26 +68,77 @@ namespace Rhea.ConsoleTest
             return data;
         }
 
-        private void GetData()
+        /// <summary>
+        /// 更新房间
+        /// </summary>
+        /// <param name="row"></param>
+        private void UpdateRoom(DataRow row)
+        {
+            int roomId = Convert.ToInt32(row["房间ID"]);
+
+            MongoApartmentRoomRepository repository = new MongoApartmentRoomRepository();
+            ApartmentRoom room = (ApartmentRoom)repository.Get(roomId);
+
+            room.HouseType = row["户型"].ToString();
+            room.ResideType = Convert.ToInt32(row["居住状态"]);
+
+            if (Convert.ToInt32(row["空调"]) == 0)
+                room.HasAirCondition = false;
+            else
+                room.HasAirCondition = true;
+
+            if (Convert.ToInt32(row["热水器"]) == 0)
+                room.HasWaterHeater = false;
+            else
+                room.HasWaterHeater = true;
+
+            ErrorCode result = repository.Update(room);
+            Console.WriteLine("更新房间:{0}, {1}", room.Name, result.DisplayName());
+        }
+
+        public void InsertData()
         {
             SqliteRepository repository = new SqliteRepository(@"E:\Test\rheaimport.sqlite");
 
             string sql = "SELECT * FROM Apartment";
             DataTable dt = repository.ExecuteQuery(sql);
 
-            foreach(DataRow row in dt.Rows)
+            foreach (DataRow row in dt.Rows)
             {
                 int status = Convert.ToInt32(row["居住状态"]);
 
                 switch (status)
                 {
                     case 0:
-                        continue;
+                        break;
                     case 1:
-                        
+                        Inhabitant data1 = AddInhabitant(row);
+                        AddResideRecord(row, data1);
+                        break;
+                    case 2:
+                        Inhabitant data2 = AddInhabitant(row);
+                        AddResideRecord(row, data2);
+                        break;
+                    case 3:
+                        AddResideRecord(row, null);
+                        break;
+                    case 4:
+                        AddResideRecord(row, null);
                         break;
                 }
+            }
+        }
 
+        public void InsertRoom()
+        {
+            SqliteRepository repository = new SqliteRepository(@"E:\Test\rheaimport.sqlite");
+
+            string sql = "SELECT * FROM Apartment";
+            DataTable dt = repository.ExecuteQuery(sql);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                UpdateRoom(row);
             }
         }
     }

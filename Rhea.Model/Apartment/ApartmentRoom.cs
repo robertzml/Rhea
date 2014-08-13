@@ -41,7 +41,7 @@ namespace Rhea.Model.Apartment
         /// 居住状态
         /// </summary>
         /// <remarks>
-        /// 0:可分配；1:正常居住；2:保留；3:部门占用；4:仓库
+        /// 0:可分配；1:正常居住；2:挂职居住；3:部门占用；4:仓库；5:保留
         /// </remarks>
         [BsonElement("resideType")]
         [Display(Name = "居住状态")]

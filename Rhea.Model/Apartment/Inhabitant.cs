@@ -74,7 +74,7 @@ namespace Rhea.Model.Apartment
         /// <summary>
         /// 婚姻状况
         /// </summary>
-        [BsonElement("telephone")]
+        [BsonElement("marriage")]
         [Display(Name = "婚姻状况")]
         public string Marriage { get; set; }
 

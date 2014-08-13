@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Account\MongoUserGroupRepository.cs" />
     <Compile Include="Account\MongoUserRepository.cs" />
+    <Compile Include="Apartment\MongoApartmentRoomRepository.cs" />
     <Compile Include="Apartment\MongoInhabitantRepository.cs" />
     <Compile Include="Apartment\MongoResideRecordRepository.cs" />
     <Compile Include="BsonRepository.cs" />

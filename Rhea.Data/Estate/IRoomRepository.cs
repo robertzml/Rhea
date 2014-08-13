@@ -46,5 +46,12 @@ namespace Rhea.Data.Estate
         /// <param name="data">房间对象</param>
         /// <returns></returns>
         ErrorCode Create(Room data);
+
+        /// <summary>
+        /// 更新房间
+        /// </summary>
+        /// <param name="data">房间对象</param>
+        /// <returns></returns>
+        ErrorCode Update(Room data);
     }
 }

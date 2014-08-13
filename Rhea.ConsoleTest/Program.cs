@@ -10,16 +10,8 @@ namespace Rhea.ConsoleTest
     {
         static void Main(string[] args)
         {
-            //Synchronization synchronization = new Synchronization();
-            //synchronization.SyncBuildingGroup();
-            //synchronization.ShowBuildingMap();
-            //synchronization.SyncBuilding();
-            //synchronization.SyncSubregion();
-            //synchronization.SyncBlock();
-            //synchronization.SyncCottage();
-
-            //synchronization.ShowDepartmentMap();
-            //synchronization.SyncDepartment();
+            SyncApartment sync = new SyncApartment();
+            //sync.InsertRoom();
         }
     }
 }
