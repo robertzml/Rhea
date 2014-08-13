@@ -18,7 +18,7 @@ namespace Rhea.Data.Mongo.Apartment
         /// <summary>
         /// Repository对象
         /// </summary>
-        private IMongoRepository<ResideRecord> repository; 
+        private IMongoRepository<ResideRecord> repository;
         #endregion //Field
 
         #region Constructor
@@ -33,6 +33,45 @@ namespace Rhea.Data.Mongo.Apartment
 
         #region Method
         /// <summary>
+        /// 获取所有居住记录
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<ResideRecord> Get()
+        {
+            return this.repository.AsEnumerable();
+        }
+
+        /// <summary>
+        /// 获取居住记录
+        /// </summary>
+        /// <param name="_id">系统ID</param>
+        /// <returns></returns>
+        public ResideRecord Get(string _id)
+        {
+            return this.repository.GetById(_id);
+        }
+
+        /// <summary>
+        /// 获取多个房间的居住记录
+        /// </summary>
+        /// <param name="roomsId">房间ID数组</param>
+        /// <returns></returns>
+        public IEnumerable<ResideRecord> GetByRooms(int[] roomsId)
+        {
+            return this.repository.Where(r => roomsId.Contains(r.RoomId));
+        }
+
+        /// <summary>
+        /// 根据房间获取居住记录
+        /// </summary>
+        /// <param name="roomId">房间ID</param>
+        /// <returns></returns>
+        public IEnumerable<ResideRecord> GetByRoom(int roomId)
+        {
+            return this.repository.Where(r => r.RoomId == roomId);
+        }
+
+        /// <summary>
         /// 添加居住记录
         /// </summary>
         /// <param name="data">居住记录对象</param>
@@ -43,7 +82,7 @@ namespace Rhea.Data.Mongo.Apartment
             {
                 this.repository.Add(data);
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return ErrorCode.Exception;
             }

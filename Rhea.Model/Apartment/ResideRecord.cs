@@ -70,7 +70,7 @@ namespace Rhea.Model.Apartment
         public DateTime? EnterDate { get; set; }
 
         /// <summary>
-        /// 入住时间
+        /// 到期时间
         /// </summary>
         [BsonDateTimeOptions(DateOnly = true)]
         [BsonElement("expireDate")]

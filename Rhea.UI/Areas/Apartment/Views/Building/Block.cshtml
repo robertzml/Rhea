@@ -54,7 +54,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#tab_1_2" data-toggle="tab">
+                    <a href="#tab_details" data-toggle="tab">
                         详细
                     </a>
                 </li>
@@ -167,64 +167,72 @@
                     </div>
                 </div>
                 <!--tab_1_2-->
-                <div class="tab-pane" id="tab_1_2">
+                <div class="tab-pane" id="tab_details">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <ul class="ver-inline-menu tabbable margin-bottom-10">
+                                <li class="active">
+                                    <a data-toggle="tab" href="#tab_1_2_1">
+                                        <i class="fa fa-info"></i> 楼宇信息
+                                    </a>
+                                    <span class="after">
+                                    </span>
+                                </li>
+                                <li>
+                                    <a data-toggle="tab" href="#tab_1_2_2">
+                                        <i class="fa fa-indent"></i> 分区信息
+                                    </a>
+                                </li>
+                                <li>
+                                    <a data-toggle="tab" href="#tab_1_2_3">
+                                        <i class="fa fa-image"></i> 图片集
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="tab-content">
+                                <div id="tab_1_2_1" class="tab-pane active">
+                                    <div class="portlet">
+                                        <div class="portlet-title">
+                                            <div class="caption">
+                                                <i class="fa fa-info-circle"></i> 详细信息
+                                            </div>
+                                        </div>
+                                        <div class="portlet-body">
+                                            @Html.Action("BlockDetails", new { id = Model.Block.BuildingId })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab_1_2_2">
 
+                                </div>
+                                <div class="tab-pane" id="tab_1_2_3">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!--tab_1_3-->
                 <div class="tab-pane" id="tab_1_3">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="portlet">
+                            <div class="portlet box blue">
                                 <div class="portlet-title">
                                     <div class="caption">
-                                        <i class="fa fa-list"></i>房间信息
+                                        <i class="fa fa-gift"></i>房间列表
                                     </div>
                                     <div class="tools">
-                                        <a href="javascript:;" class="collapse">
+                                        <a href="#" class="collapse">
                                         </a>
-                                        <a href="javascript:;" class="reload">
+                                        <a href="#" data-load="true" data-url="/Apartment/Room/ListByBuilding?buildingId=@Model.Block.BuildingId" class="reload">
                                         </a>
-                                        <a href="javascript:;" class="remove">
+                                        <a href="#" class="remove">
                                         </a>
                                     </div>
                                 </div>
-                                <div class="portlet-body">
-                                    <table class="table table-striped table-bordered table-hover table-advance" id="room-table">
-                                        <thead>
-                                            <tr>
-                                                <th>
-                                                    房间编号
-                                                </th>
-                                                <th>
-                                                    房间名称
-                                                </th>
-                                                <th>
-                                                    使用面积
-                                                </th>
-                                                <th>操作</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach (var item in Model.Rooms)
-                                            {
-                                                <tr>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.Number)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.Name)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.UsableArea)
-                                                    </td>
-                                                    <td>
-                                                        <a href="@Url.Action("Details", new { controller = "Room", id = item.RoomId })" class="btn btn-info btn-sm" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
-                                                        <a href="@Url.Action("Edit", new { controller = "Room", id = item.RoomId })" class="btn btn-warning btn-sm" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
-                                                    </td>
-                                                </tr>
-                                            }
-                                        </tbody>
-                                    </table>
+                                <div class="portlet-body portlet-empty">
                                 </div>
                             </div>
                         </div>
@@ -238,7 +246,8 @@
 
 <script type="text/javascript">
     $(function () {
-        Rhea.initDatatable2($('#room-table'));
+
+        $('.portlet .portlet-title a.reload[data-load="true"]').click();
 
         $('a.sub-floor-ajax-link').click(function (e) {
             var url = "/Apartment/Building/Floor";
@@ -249,5 +258,6 @@
             Rhea.ajaxLoadPage($(this), e, url, request);
             return false;
         });
+
     });
 </script>

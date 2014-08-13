@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Rhea.Model.Estate.Room>
+﻿@model IEnumerable<Rhea.UI.Areas.Apartment.Models.RoomResideModel>
 
 @{
     Layout = null;
@@ -22,13 +22,7 @@
                         @Html.DisplayNameFor(model => model.UsableArea) (m<sup>2</sup>)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.BuildingId)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.DepartmentId)
-                    </th>
-                    <th>
-                        功能
+                        @Html.DisplayNameFor(model => model.BuildingName)
                     </th>
                     <th>操作</th>
                 </tr>
@@ -50,17 +44,10 @@
                             @Html.DisplayFor(modelItem => item.UsableArea)
                         </td>
                         <td>
-                            @item.BuildingName()
+                            @Html.DisplayFor(modelItem => item.BuildingName)
                         </td>
                         <td>
-                            @item.DepartmentName()
-                        </td>
-                        <td>
-                            <span style="display:none;">@item.Function.ClassifyName</span>
-                            @item.Function.FunctionProperty
-                        </td>
-                        <td>
-                            <a href="@Url.Action("Details", new { controller = "Room", id = item.RoomId })" class="btn btn-info btn-sm" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
+                            <a href="#" ref="@item.RoomId" class="btn btn-info btn-sm room-ajax-link" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
                         </td>
                     </tr>
                 }
@@ -71,6 +58,16 @@
 
 <script type="text/javascript">
     $(function () {
+
+        $('a.room-ajax-link').click(function (e) {
+            var url = "/Apartment/Room/Details";
+            var roomId = $(this).attr('ref');
+            var request = { id: roomId };
+
+            Rhea.ajaxLoadPage($(this), e, url, request);
+            return false;
+        });
+
         Rhea.initDatatable2($('#room-table'));
     });
 </script>

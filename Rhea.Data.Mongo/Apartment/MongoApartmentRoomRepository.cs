@@ -34,6 +34,26 @@ namespace Rhea.Data.Mongo.Apartment
 
         #region Method
         /// <summary>
+        /// 根据建筑获取房间
+        /// </summary>
+        /// <param name="buildingId">所属建筑ID</param>
+        /// <returns></returns>
+        public override IEnumerable<Room> GetByBuilding(int buildingId)
+        {
+            return this.repository.Where(r => r.BuildingId == buildingId);
+        }
+
+        /// <summary>
+        /// 获取多个建筑下房间
+        /// </summary>
+        /// <param name="buildingsId">建筑ID数组</param>
+        /// <returns></returns>
+        public override IEnumerable<Room> GetByBuildings(int[] buildingsId)
+        {
+            return this.repository.Where(r => buildingsId.Contains(r.BuildingId));
+        }
+
+        /// <summary>
         /// 获取青教房间
         /// </summary>
         /// <param name="id">房间ID</param>

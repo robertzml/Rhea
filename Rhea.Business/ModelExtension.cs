@@ -21,6 +21,7 @@ namespace Rhea.Business
     public static class ModelExtension
     {
         #region Method
+        #region Building Method
         /// <summary>
         /// 建筑所属校区名称
         /// </summary>
@@ -47,7 +48,9 @@ namespace Rhea.Business
             string name = repository.Get(building.ParentId).Name;
             return name;
         }
+        #endregion //Building Method
 
+        #region Room Method
         /// <summary>
         /// 房间所属建筑名称
         /// </summary>
@@ -71,7 +74,9 @@ namespace Rhea.Business
             string name = repository.Get(room.DepartmentId).Name;
             return name;
         }
+        #endregion //Room Method
 
+        #region User Method
         /// <summary>
         /// 用户组名称
         /// </summary>
@@ -95,6 +100,7 @@ namespace Rhea.Business
             string title = repository.Get(user.UserGroupId).Title;
             return title;
         }
+        #endregion //User Method
         #endregion //Method
     }
 }

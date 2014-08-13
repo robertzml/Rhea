@@ -56,7 +56,7 @@ namespace Rhea.Data.Mongo.Estate
         /// </summary>
         /// <param name="buildingId">所属建筑ID</param>
         /// <returns></returns>
-        public IEnumerable<Room> GetByBuilding(int buildingId)
+        public virtual IEnumerable<Room> GetByBuilding(int buildingId)
         {
             return this.repository.Where(r => r.BuildingId == buildingId);
         }
@@ -66,7 +66,7 @@ namespace Rhea.Data.Mongo.Estate
         /// </summary>
         /// <param name="buildingsId">建筑ID数组</param>
         /// <returns></returns>
-        public IEnumerable<Room> GetByBuildings(int[] buildingsId)
+        public virtual IEnumerable<Room> GetByBuildings(int[] buildingsId)
         {
             var data = this.repository.Where(r => buildingsId.Contains(r.BuildingId));
             return data;

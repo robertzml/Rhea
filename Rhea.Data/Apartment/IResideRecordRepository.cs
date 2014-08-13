@@ -14,6 +14,33 @@ namespace Rhea.Data.Apartment
     public interface IResideRecordRepository
     {
         /// <summary>
+        /// 获取所有居住记录
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<ResideRecord> Get();
+
+        /// <summary>
+        /// 获取居住记录
+        /// </summary>
+        /// <param name="_id">系统ID</param>
+        /// <returns></returns>
+        ResideRecord Get(string _id);       
+
+        /// <summary>
+        /// 获取多个房间的居住记录
+        /// </summary>
+        /// <param name="roomsId">房间ID数组</param>
+        /// <returns></returns>
+        IEnumerable<ResideRecord> GetByRooms(int[] roomsId);
+
+        /// <summary>
+        /// 根据房间获取居住记录
+        /// </summary>
+        /// <param name="roomId">房间ID</param>
+        /// <returns></returns>
+        IEnumerable<ResideRecord> GetByRoom(int roomId);
+
+        /// <summary>
         /// 添加居住记录
         /// </summary>
         /// <param name="data">居住记录对象</param>

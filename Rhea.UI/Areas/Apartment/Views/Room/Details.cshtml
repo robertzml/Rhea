@@ -1,0 +1,202 @@
+﻿@model Rhea.UI.Areas.Apartment.Models.ApartmentRoomModel
+
+@{
+    ViewBag.Title = Model.Room.Name;
+    Layout = null;
+}
+
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">
+    @ViewBag.Title
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index", new { area = "Apartment", controller = "Home" })">青教管理</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">青教公寓</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">@ViewBag.Title</a>
+        </li>
+    </ul>
+    <div class="page-toolbar">
+        <div class="btn-group pull-right">
+            <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
+                Actions <i class="fa fa-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu pull-right" role="menu">
+                <li>
+                    <a href="#">Action</a>
+                </li>
+                <li class="divider">
+                </li>
+                <li>
+                    <a href="#">Separated link</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-9">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-gift"></i>房间信息
+                        </div>
+                        <div class="tools">
+                            <a href="#" class="collapse">
+                            </a>
+                            <a href="#" class="reload">
+                            </a>
+                            <a href="#" class="remove">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <table class="table table-bordered table-striped table-hover table-advance">
+                            <thead>
+                                <tr>
+                                    <th>属性</th>
+                                    <th>值</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Room.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Room.Name)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Room.Number)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Room.Number)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Room.Floor)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Room.Floor)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Room.UsableArea)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Room.UsableArea)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Room.HouseType)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Room.HouseType)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Room.HasAirCondition)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Room.HasAirCondition)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Room.HasWaterHeater)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Room.HasWaterHeater)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Room.ResideType)
+                                    </td>
+                                    <td>
+                                        @{
+                                            var type1 = (ResideType)Model.Room.ResideType;
+                                            @type1.DisplayName();
+                                        }
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-gift"></i>居住记录
+                        </div>
+                        <div class="tools">
+                            <a href="#" class="collapse">
+                            </a>
+                            <a href="#" class="reload">
+                            </a>
+                            <a href="#" class="remove">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <table class="table table-bordered table-striped table-hover table-advance">
+                            <thead>
+                                <tr>
+                                    <th>姓名</th>
+                                    <th>部门</th>
+                                    <th>入住时间</th>
+                                    <th>到期时间</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach(var item in Model.Records)
+                                {
+                                    <tr>
+                                        <td>
+                                            @item.InhabitantName
+                                        </td>
+                                        <td>
+                                            @item.InhabitantDepartment
+                                        </td>
+                                        <td>
+                                            @item.EnterDate
+                                        </td>
+                                        <td>
+                                            @item.ExpireDate
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+
+    </div>
+</div>
+<!-- END PAGE CONTENT-->

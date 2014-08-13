@@ -37,6 +37,18 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         }
 
         /// <summary>
+        /// 青教楼宇详细
+        /// </summary>
+        /// <param name="id">楼宇ID</param>
+        /// <returns></returns>
+        public ActionResult BlockDetails(int id)
+        {
+            BuildingBusiness buildingBusiness = new BuildingBusiness();
+            Block data = buildingBusiness.GetBlock(id);
+            return View(data);
+        }
+
+        /// <summary>
         /// 青教楼层
         /// </summary>
         /// <param name="buildingId">楼宇ID</param>
