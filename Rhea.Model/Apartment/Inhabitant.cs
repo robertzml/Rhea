@@ -37,10 +37,10 @@ namespace Rhea.Model.Apartment
         public int Type { get; set; }
 
         /// <summary>
-        /// 所属部门名称
+        /// 所属部门
         /// </summary>
         [BsonElement("departmentName")]
-        [Display(Name = "所属部门名称")]
+        [Display(Name = "所属部门")]
         public string DepartmentName { get; set; }
 
         /// <summary>
@@ -79,6 +79,13 @@ namespace Rhea.Model.Apartment
         public string Marriage { get; set; }
 
         /// <summary>
+        /// 蠡湖家园入住情况
+        /// </summary>
+        [BsonElement("liHuStatus")]
+        [Display(Name = "蠡湖家园入住情况")]
+        public string LiHuStatus { get; set; }
+
+        /// <summary>
         /// 备注
         /// </summary>
         [BsonElement("remark")]
@@ -88,6 +95,9 @@ namespace Rhea.Model.Apartment
         /// <summary>
         /// 状态
         /// </summary>
+        /// <remarks>
+        /// 0:正常居住；1:删除；2:离开；3:延期居住
+        /// </remarks>
         [BsonElement("status")]
         [Display(Name = "状态")]
         public int Status { get; set; }

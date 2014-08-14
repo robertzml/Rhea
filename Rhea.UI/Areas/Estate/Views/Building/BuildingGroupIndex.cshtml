@@ -146,10 +146,7 @@
                                                 建成日期
                                             </span>
                                             <span class="sale-num">
-                                                @if (Model.BuildingGroup.BuildDate != null)
-                                                {
-                                                    @Convert.ToDateTime(Model.BuildingGroup.BuildDate).ToShortDateString();
-                                                }
+                                                @Model.BuildingGroup.BuildDate.ToDateString()
                                             </span>
                                         </li>
                                     </ul>

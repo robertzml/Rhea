@@ -1,0 +1,112 @@
+﻿@model Rhea.Model.Apartment.Inhabitant
+
+@{
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        @if(Model == null)
+        {
+            <h2>当前无住户</h2>
+        }
+        else
+        {  
+        <table class="table table-bordered table-striped table-hover table-advance">
+            <tbody>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.JobNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.JobNumber)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Name)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Type)
+                    </td>
+                    <td>
+                        @{
+                            var type1 = (InhabitantType)Model.Type;
+                            @type1.DisplayName()
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.DepartmentName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.DepartmentName)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Duty)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Duty)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Telephone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Telephone)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.IdentityCard)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.IdentityCard)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.ExtractAccumulatedFunds)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.ExtractAccumulatedFunds)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Marriage)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Marriage)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.LiHuStatus)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.LiHuStatus)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Remark)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Remark)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        }
+    </div>
+</div>

@@ -1,6 +1,6 @@
 /* For custom css */
 
-h1, h2, h3, h4, h5, h6 , .page-title, .dropdown-menu {
+h1, h2, h3, h4, h5, h6 , .label, .page-title, .dropdown-menu {
 	font-family: '微软雅黑';
 }
 
@@ -14,6 +14,10 @@ h1, h2, h3, h4, h5, h6 , .page-title, .dropdown-menu {
 
 .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
 	vertical-align: middle;
+}
+
+.table-advance thead tr th {
+	background: none repeat scroll 0 0 #f0f6fa;
 }
 
 .no-padding {

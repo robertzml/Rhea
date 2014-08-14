@@ -45,13 +45,13 @@
 <!-- END PAGE HEADER-->
 <!-- BEGIN PAGE CONTENT-->
 <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-10">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="portlet">
                     <div class="portlet-title">
                         <div class="caption">
-                            <i class="fa fa-gift"></i>房间信息
+                            <i class="fa fa-globe"></i>房间信息
                         </div>
                         <div class="tools">
                             <a href="#" class="collapse">
@@ -64,12 +64,6 @@
                     </div>
                     <div class="portlet-body">
                         <table class="table table-bordered table-striped table-hover table-advance">
-                            <thead>
-                                <tr>
-                                    <th>属性</th>
-                                    <th>值</th>
-                                </tr>
-                            </thead>
                             <tbody>
                                 <tr>
                                     <td>
@@ -100,7 +94,7 @@
                                         @Html.DisplayNameFor(model => model.Room.UsableArea)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(model => model.Room.UsableArea)
+                                        @Html.DisplayFor(model => model.Room.UsableArea) m<sup>2</sup>
                                     </td>
                                 </tr>
                                 <tr>
@@ -129,6 +123,14 @@
                                 </tr>
                                 <tr>
                                     <td>
+                                        @Html.DisplayNameFor(model => model.Room.Orientation)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Room.Orientation)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
                                         @Html.DisplayNameFor(model => model.Room.ResideType)
                                     </td>
                                     <td>
@@ -143,13 +145,33 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-6">
+                <div class="portlet">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-male"></i>当前住户
+                        </div>
+                        <div class="tools">
+                            <a href="#" class="collapse">
+                            </a>
+                            <a href="#" class="reload">
+                            </a>
+                            <a href="#" class="remove">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        @Html.Action("CurrentInhabitant", new { id = Model.Room.RoomId })
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="portlet">
                     <div class="portlet-title">
                         <div class="caption">
-                            <i class="fa fa-gift"></i>居住记录
+                            <i class="fa fa-history"></i>居住记录
                         </div>
                         <div class="tools">
                             <a href="#" class="collapse">
@@ -166,8 +188,14 @@
                                 <tr>
                                     <th>姓名</th>
                                     <th>部门</th>
+                                    <th>房租</th>
+                                    <th>居住类型</th>
                                     <th>入住时间</th>
                                     <th>到期时间</th>
+                                    <th>年限</th>
+                                    <th>离开时间</th>
+                                    <th>备注</th>
+                                    <th>状态</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -181,10 +209,42 @@
                                             @item.InhabitantDepartment
                                         </td>
                                         <td>
-                                            @item.EnterDate
+                                            @item.Rent
                                         </td>
                                         <td>
-                                            @item.ExpireDate
+                                            @{
+                                                var type2 = (ResideType)item.ResideType;
+                                                @type2.DisplayName();
+                                            }
+                                        </td>
+                                        <td>
+                                            @item.EnterDate.ToDateString()
+                                        </td>
+                                        <td>
+                                            @item.ExpireDate.ToDateString()
+                                        </td>
+                                        <td>
+                                            @item.TermLimit
+                                        </td>
+                                        <td>
+                                            @item.LeaveDate.ToDateString()
+                                        </td>
+                                        <td>
+                                            @item.Remark
+                                        </td>
+                                        <td>
+                                            @switch ((EntityStatus)item.Status)
+                                            {
+                                                case EntityStatus.Normal:
+                                                    <span class="label label-success">居住中</span>
+                                                    break;
+                                                case EntityStatus.OverTime:
+                                                    <span class="label label-danger">超期</span>
+                                                    break;
+                                                case EntityStatus.MoveOut:
+                                                    <span class="label label-default">已搬出</span>
+                                                    break;
+                                            }
                                         </td>
                                     </tr>
                                 }
@@ -195,7 +255,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
 
     </div>
 </div>

@@ -70,6 +70,35 @@ namespace Rhea.Business.Apartment
             else
                 return (ApartmentRoom)data;
         }
+
+        /// <summary>
+        /// 获取房间当前住户
+        /// </summary>
+        /// <param name="id">房间ID</param>
+        /// <remarks>
+        /// 仅限正常居住和挂职居住
+        /// </remarks>
+        /// <returns></returns>
+        public Inhabitant GetCurrentInhabitant(int id)
+        {
+            var data = this.roomRepository.Get(id);
+            if (data == null || data.Status == 1)
+                return null;
+
+            ResideRecordBusiness recordBusiness = new ResideRecordBusiness();
+            var records = recordBusiness.GetByRoom(id).Where(r => r.Status == 0);
+            if (records == null || records.Count() == 0)
+                return null;
+
+            var record = records.First();
+            if ((ResideType)record.ResideType == ResideType.Normal || (ResideType)record.ResideType == ResideType.Guest)
+            {
+                InhabitantBusiness inhabitantBusiness = new InhabitantBusiness();
+                return inhabitantBusiness.Get(record.InhabitantId);
+            }
+            else
+                return null;
+        }
         #endregion //Method
     }
 }

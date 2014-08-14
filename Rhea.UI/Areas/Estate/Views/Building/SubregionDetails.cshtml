@@ -198,7 +198,7 @@
                         @Html.DisplayNameFor(model => model.BuildDate)
                     </td>
                     <td>
-                        @Html.DisplayFor(model => model.BuildDate)
+                        @Model.BuildDate.ToDateString()
                     </td>
                 </tr>
                 <tr>

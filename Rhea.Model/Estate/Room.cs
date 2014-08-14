@@ -171,7 +171,7 @@ namespace Rhea.Model.Estate
         /// 状态
         /// </summary>
         /// <remarks>
-        /// 0:正常 1:已删除 2:已合并 3:已拆分
+        /// 0:正常 1:已删除 21:已合并 22:已拆分
         /// </remarks>
         [BsonElement("status")]
         [Display(Name = "状态")]

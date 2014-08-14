@@ -75,6 +75,19 @@ namespace Rhea.UI.Areas.Apartment.Controllers
 
             return View(data);
         }
+
+        /// <summary>
+        /// 房间当前住户
+        /// </summary>
+        /// <param name="id">房间ID</param>
+        /// <returns></returns>
+        public ActionResult CurrentInhabitant(int id)
+        {
+            ApartmentRoomBusiness roomBusiness = new ApartmentRoomBusiness();
+            var data = roomBusiness.GetCurrentInhabitant(id);
+
+            return View(data);
+        }
         #endregion //Action
     }
 }

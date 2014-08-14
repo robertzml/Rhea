@@ -38,7 +38,7 @@ namespace Rhea.Data.Mongo.Apartment
         /// <returns></returns>
         public IEnumerable<Inhabitant> Get()
         {
-            return this.repository.AsEnumerable();
+            return this.repository.AsEnumerable().Where(r => r.Status != 1);
         }
 
         /// <summary>
@@ -48,7 +48,11 @@ namespace Rhea.Data.Mongo.Apartment
         /// <returns></returns>
         public Inhabitant Get(string _id)
         {
-            return this.repository.GetById(_id);
+            var data = this.repository.GetById(_id);
+            if (data == null || data.Status == 1)
+                return null;
+            else
+                return data;
         }
 
         /// <summary>
@@ -61,6 +65,25 @@ namespace Rhea.Data.Mongo.Apartment
             try
             {
                 this.repository.Add(data);
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
+
+        /// <summary>
+        /// 编辑住户
+        /// </summary>
+        /// <param name="data">住户对象</param>
+        /// <returns></returns>
+        public ErrorCode Update(Inhabitant data)
+        {
+            try
+            {
+                this.repository.Update(data);
             }
             catch (Exception)
             {

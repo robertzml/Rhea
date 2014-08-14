@@ -126,29 +126,18 @@
                                         </li>
                                         <li>
                                             <span class="sale-info">
-                                                建筑面积
+                                                地上楼层数
                                             </span>
                                             <span class="sale-num">
-                                                @Model.Block.BuildArea m<sup>2</sup>
+                                                @Model.Block.AboveGroundFloor
                                             </span>
                                         </li>
                                         <li>
                                             <span class="sale-info">
-                                                使用面积
+                                                地下楼层数
                                             </span>
                                             <span class="sale-num">
-                                                @Model.Block.UsableArea
-                                            </span>
-                                        </li>
-                                        <li>
-                                            <span class="sale-info">
-                                                建成日期
-                                            </span>
-                                            <span class="sale-num">
-                                                @if (Model.Block.BuildDate != null)
-                                                {
-                                                    @Convert.ToDateTime(Model.Block.BuildDate).ToShortDateString();
-                                                }
+                                                @Model.Block.UnderGroundFloor
                                             </span>
                                         </li>
                                     </ul>

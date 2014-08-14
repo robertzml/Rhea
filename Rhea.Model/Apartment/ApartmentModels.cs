@@ -7,7 +7,7 @@ using System.Text;
 namespace Rhea.Model.Apartment
 {
     /// <summary>
-    /// 居住状态
+    /// 居住类型
     /// </summary>
     public enum ResideType
     {

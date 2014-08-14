@@ -34,6 +34,15 @@ namespace Rhea.Business.Apartment
 
         #region Method
         /// <summary>
+        /// 获取所有居住记录
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<ResideRecord> Get()
+        {
+            return this.recordRepository.Get().Where(r => r.Status != 1);
+        }
+
+        /// <summary>
         /// 根据楼宇获取居住记录
         /// </summary>
         /// <param name="buildingId">楼宇ID</param>
@@ -43,7 +52,7 @@ namespace Rhea.Business.Apartment
             RoomBusiness roomBusiness = new RoomBusiness();
             var rooms = roomBusiness.GetByBuilding(buildingId).Select(r => r.RoomId);
 
-            var data = this.recordRepository.GetByRooms(rooms.ToArray());
+            var data = this.recordRepository.GetByRooms(rooms.ToArray()).Where(r => r.Status != 1);
             return data;
         }
 
@@ -54,7 +63,7 @@ namespace Rhea.Business.Apartment
         /// <returns></returns>
         public IEnumerable<ResideRecord> GetByRoom(int roomId)
         {
-            var data = this.recordRepository.GetByRoom(roomId);
+            var data = this.recordRepository.GetByRoom(roomId).Where(r => r.Status != 1);
             return data;
         }
         #endregion //Method

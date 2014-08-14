@@ -43,15 +43,16 @@ namespace Rhea.Model.Apartment
         [BsonElement("inhabitantDepartment")]
         [Display(Name = "部门")]
         public string InhabitantDepartment { get; set; }
-        
+
         /// <summary>
-        /// 居住状态
+        /// 居住类型
         /// </summary>
         /// <remarks>
         /// 0:可分配；1:正常居住；2:挂职居住；3:部门占用；4:仓库；5:保留
+        /// 仅1,2类型有住户对象
         /// </remarks>
         [BsonElement("resideType")]
-        [Display(Name = "居住状态")]
+        [Display(Name = "居住类型")]
         public int ResideType { get; set; }
 
         /// <summary>
@@ -93,13 +94,6 @@ namespace Rhea.Model.Apartment
         public DateTime? LeaveDate { get; set; }
 
         /// <summary>
-        /// 蠡湖家园入住情况
-        /// </summary>
-        [BsonElement("liHuStatus")]
-        [Display(Name = "蠡湖家园入住情况")]
-        public string LiHuStatus { get; set; }
-
-        /// <summary>
         /// 备注
         /// </summary>
         [BsonElement("remark")]
@@ -109,6 +103,9 @@ namespace Rhea.Model.Apartment
         /// <summary>
         /// 状态
         /// </summary>
+        /// <remarks>
+        /// 0:居住中； 1:已删除； 50:超期; 51:已搬出
+        /// </remarks>
         [BsonElement("status")]
         [Display(Name = "状态")]
         public int Status { get; set; }

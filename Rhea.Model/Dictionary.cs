@@ -51,6 +51,13 @@ namespace Rhea.Model
         [BsonElement("remark")]
         [Display(Name = "备注")]
         public string Remark { get; set; }
+
+        /// <summary>
+        /// 状态，0:正常；1:删除
+        /// </summary>
+        [BsonElement("status")]
+        [Display(Name = "状态")]
+        public int Status { get; set; }
         #endregion //Property
     }
 }

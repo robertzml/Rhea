@@ -10,6 +10,7 @@ using Rhea.Data.Mongo.Apartment;
 using Rhea.Model;
 using Rhea.Model.Apartment;
 using Rhea.Common;
+using Rhea.Business.Apartment;
 
 namespace Rhea.ConsoleTest
 {
@@ -56,7 +57,7 @@ namespace Rhea.ConsoleTest
                 data.ExpireDate = Convert.ToDateTime(row["到期时间"]);
 
             data.TermLimit = row["年限"].ToString();
-            data.LiHuStatus = row["蠡湖家园入住情况"].ToString();
+            //data.LiHuStatus = row["蠡湖家园入住情况"].ToString();
             data.Remark = row["备注"].ToString();
             data.Status = 0;
 
@@ -128,6 +129,25 @@ namespace Rhea.ConsoleTest
                 }
             }
         }
+
+        //public void UpdateInhabitant()
+        //{
+        //    ResideRecordBusiness recordBusiness = new ResideRecordBusiness();
+        //    var records = recordBusiness.Get();
+
+        //    InhabitantBusiness inhabitantBusiness = new InhabitantBusiness();
+
+        //    foreach(var record in records)
+        //    {
+        //        if (string.IsNullOrEmpty(record.InhabitantId))
+        //            continue;
+
+        //        var inhabitant = inhabitantBusiness.Get(record.InhabitantId);
+        //        inhabitant.LiHuStatus = record.LiHuStatus;
+        //        ErrorCode result = inhabitantBusiness.Update(inhabitant);
+        //        Console.WriteLine("更新住户: {0}, {1}", result.DisplayName(), inhabitant.Name);
+        //    }
+        //}
 
         public void InsertRoom()
         {

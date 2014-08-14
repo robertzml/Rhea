@@ -757,6 +757,7 @@
     <Content Include="Areas\Apartment\Views\Shared\DisplayTemplates\Boolean.cshtml" />
     <Content Include="Areas\Apartment\Views\Room\ListByBuilding.cshtml" />
     <Content Include="Areas\Apartment\Views\Room\Details.cshtml" />
+    <Content Include="Areas\Apartment\Views\Room\CurrentInhabitant.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="plugins\jquery-1.11.0.min.js" />

@@ -38,13 +38,14 @@ namespace Rhea.Model.Apartment
         public bool HasWaterHeater { get; set; }
 
         /// <summary>
-        /// 居住状态
+        /// 居住类型
         /// </summary>
         /// <remarks>
         /// 0:可分配；1:正常居住；2:挂职居住；3:部门占用；4:仓库；5:保留
+        /// 仅1,2类型有住户对象
         /// </remarks>
         [BsonElement("resideType")]
-        [Display(Name = "居住状态")]
+        [Display(Name = "居住类型")]
         public int ResideType { get; set; }
         #endregion //Property
     }

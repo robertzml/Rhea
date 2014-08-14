@@ -32,6 +32,12 @@ namespace Rhea.Data.Apartment
         /// <param name="data">住户对象</param>
         /// <returns></returns>
         ErrorCode Create(Inhabitant data);
-        
+
+        /// <summary>
+        /// 编辑住户
+        /// </summary>
+        /// <param name="data">住户对象</param>
+        /// <returns></returns>
+        ErrorCode Update(Inhabitant data);
     }
 }

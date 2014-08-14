@@ -12,6 +12,7 @@ namespace Rhea.ConsoleTest
         {
             SyncApartment sync = new SyncApartment();
             //sync.InsertRoom();
+            //sync.UpdateInhabitant();
         }
     }
 }
