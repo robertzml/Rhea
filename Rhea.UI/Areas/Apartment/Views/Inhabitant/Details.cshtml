@@ -1,0 +1,221 @@
+﻿@model Rhea.Model.Apartment.Inhabitant
+
+@{
+    Layout = null;
+    ViewBag.Title = "住户信息";
+}
+
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">
+    @ViewBag.Title
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index", new { area = "Apartment", controller = "Home" })">青教管理</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">住户管理</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">@ViewBag.Title</a>
+        </li>
+    </ul>
+    <div class="page-toolbar">
+        <div class="btn-group pull-right">
+            <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
+                Actions <i class="fa fa-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu pull-right" role="menu">
+                <li>
+                    <a href="#">Action</a>
+                </li>
+                <li class="divider">
+                </li>
+                <li>
+                    <a href="#">Separated link</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box green">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-list"></i>&nbsp;@Model.Name
+                </div>
+                <div class="tools">
+                    <a href="#" class="collapse">
+                    </a>
+                    <a href="#" class="reload">
+                    </a>
+                    <a href="#" class="remove">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        <table class="table table-bordered table-striped table-hover">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.JobNumber)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.JobNumber)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Name)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Type)
+                                    </td>
+                                    <td>
+                                        @{
+                                            var type1 = (InhabitantType)Model.Type;
+                                            @type1.DisplayName()
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.DepartmentName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.DepartmentName)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Duty)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Duty)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Telephone)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Telephone)
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <table class="table table-bordered table-striped table-hover">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.IdentityCard)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.IdentityCard)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.ExtractAccumulatedFunds)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.ExtractAccumulatedFunds)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Marriage)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Marriage)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.LiHuStatus)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.LiHuStatus)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Remark)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Remark)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Status)
+                                    </td>
+                                    <td>
+                                        @switch ((EntityStatus)Model.Status)
+                                        {
+                                            case EntityStatus.Normal:
+                                                <span class="label label-success">正常居住</span>
+                                                break;
+                                            case EntityStatus.InhabitantMoveOut:
+                                            <span class="label label-normal">已搬出</span>
+                                                break;
+                                            case EntityStatus.InhabitantExtend:
+                                            <span class="label label-warning">延期居住</span>
+                                                break;
+                                        }
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <hr />
+                <p>
+                    <a href="/Apartment/Inhabitant/List" class="btn btn-primary ajaxify" role="button"><i class="fa fa-list"></i>&nbsp;回到列表</a>                   
+                    <a href="@Url.Action("Edit", new { controller = "Inhabitant", id = Model._id })" class="btn btn-warning" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-bars"></i>&nbsp;居住记录
+                </div>
+                <div class="tools">
+                    <a href="#" class="collapse">
+                    </a>
+                    <a href="#" class="reload">
+                    </a>
+                    <a href="#" class="remove">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT-->

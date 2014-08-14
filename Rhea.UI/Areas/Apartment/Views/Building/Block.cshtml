@@ -137,7 +137,7 @@
                             <div class="list-group">
                                 @foreach (var item in Model.Block.Floors)
                                 {
-                                    <a href="#" class="list-group-item list-group-item-success sub-floor-ajax-link" ref="@item.Number">
+                                    <a href="/Apartment/Building/Floor?buildingId=@Model.Block.BuildingId&floor=@item.Number" class="list-group-item list-group-item-success ajaxify">
                                         <i class="fa fa-plus-square"></i> @item.Name
                                     </a>
                                 }
@@ -236,7 +236,7 @@
                                                         @Model.Rooms.Count(r => r.Floor == item.Number)
                                                     </td>
                                                     <td>
-                                                        <a class="btn btn-success btn-sm sub-floor-ajax-link" href="#" ref="@item.Number"><i class="fa fa-search-plus"></i>详细</a>
+                                                        <a class="btn btn-success btn-sm ajaxify" href="/Apartment/Building/Floor?buildingId=@Model.Block.BuildingId&floor=@item.Number"><i class="fa fa-search-plus"></i>&nbsp;详细</a>
                                                     </td>
                                                 </tr>
                                             }
@@ -284,16 +284,6 @@
     $(function () {
 
         $('.portlet .portlet-title a.reload[data-load="true"]').click();
-
-        $('a.sub-floor-ajax-link').click(function (e) {
-            var url = "/Apartment/Building/Floor";
-            var buildingId = '@Model.Block.BuildingId';
-            var floor = $(this).attr('ref');
-            var request = { buildingId: buildingId, floor: floor };
-
-            Rhea.ajaxLoadPage($(this), e, url, request);
-            return false;
-        });
 
     });
 </script>

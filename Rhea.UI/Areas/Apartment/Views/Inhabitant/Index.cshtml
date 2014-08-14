@@ -1,12 +1,11 @@
-﻿
-@{
-    ViewBag.Title = "青教管理";
-    Layout = "~/Areas/Apartment/Views/Shared/_Layout.cshtml";
+﻿@{
+    ViewBag.Title = "住户概况";
+    Layout = null;
 }
 
 <!-- BEGIN PAGE HEADER-->
 <h3 class="page-title">
-    @ViewBag.Title <small>horizontal mega menu & sidebar menu layout</small>
+    @ViewBag.Title
 </h3>
 <div class="page-bar">
     <ul class="page-breadcrumb">
@@ -16,11 +15,11 @@
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
-            <a href="#">青教主页</a>
+            <a href="#">住户管理</a>
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
-            <a href="#">Horizontal & Sidebar Menu</a>
+            <a href="#">@ViewBag.Title</a>
         </li>
     </ul>
     <div class="page-toolbar">
@@ -45,16 +44,35 @@
 <!-- BEGIN PAGE CONTENT-->
 <div class="row">
     <div class="col-md-12">
-        Page content goes here
+        <div class="tabbable tabbable-custom tabbable-full-width">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#tab_summary" data-toggle="tab">
+                        摘要
+                    </a>
+                </li>
+                <li>
+                    <a href="#tab_2" data-toggle="tab">
+                        统计
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab_summary">
+
+                </div>
+                <div class="tab-pane" id="tab_2">
+                    
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <!-- END PAGE CONTENT-->
 
-@section scripts {
-    <script type="text/javascript">
-        $(function () {
-            Rhea.topNavActive($('#apartment-nav'));
-            Rhea.leftNavActive($('#apartment-home-menu'));
-        });
-    </script>
-}
+
+<script type="text/javascript">
+    $(function () {
+        
+    });
+</script>

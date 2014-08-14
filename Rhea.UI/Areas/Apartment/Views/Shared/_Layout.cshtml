@@ -44,12 +44,34 @@
                     </span>
                 </a>
                 @Html.Action("BuildingMenu", "Home")
+            </li>            
+            <li class="left-nav-first">
+                <a href="javascript:;">
+                    <i class="fa fa-users"></i>
+                    <span class="title">
+                        住户管理
+                    </span>
+                    <span class="arrow ">
+                    </span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a class="ajaxify" href="/Apartment/Inhabitant/Index">
+                            住户概况
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ajaxify" href="/Apartment/Inhabitant/List">
+                            住户列表
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li class="left-nav-first">
                 <a href="javascript:;">
-                    <i class="fa fa-building"></i>
+                    <i class="fa fa-cogs"></i>
                     <span class="title">
-                        建筑管理
+                        业务办理
                     </span>
                     <span class="arrow ">
                     </span>
@@ -63,28 +85,6 @@
                     <li>
                         <a href="#" id="building-create-menu">
                             添加建筑
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="left-nav-first">
-                <a href="javascript:;">
-                    <i class="fa fa-users"></i>
-                    <span class="title">
-                        人员管理
-                    </span>
-                    <span class="arrow ">
-                    </span>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a href="#" id="room-list-menu">
-                            房间列表
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            添加房间
                         </a>
                     </li>
                 </ul>
@@ -117,16 +117,6 @@
 @section scripts {
     <script type="text/javascript">
         $(function () {
-            $('.page-sidebar a.ajax-link').click(function (e) {
-              
-                var url = "/Apartment/Building/Floor";
-                var buildingId = $(this).attr('ref1');
-                var floor = $(this).attr('ref2');
-                var request = { buildingId: buildingId, floor: floor };
-
-                Rhea.ajaxNavPage($(this), e, url, request);
-                return false;
-            });
 
             $('.page-sidebar i.ajax-link').click(function (e) {
 

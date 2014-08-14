@@ -172,6 +172,7 @@
     <Compile Include="Areas\Apartment\ApartmentAreaRegistration.cs" />
     <Compile Include="Areas\Apartment\Controllers\BuildingController.cs" />
     <Compile Include="Areas\Apartment\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Apartment\Controllers\InhabitantController.cs" />
     <Compile Include="Areas\Apartment\Controllers\RoomController.cs" />
     <Compile Include="Areas\Apartment\Models\BuildingModels.cs" />
     <Compile Include="Areas\Apartment\Models\RoomModels.cs" />
@@ -758,6 +759,9 @@
     <Content Include="Areas\Apartment\Views\Room\ListByBuilding.cshtml" />
     <Content Include="Areas\Apartment\Views\Room\Details.cshtml" />
     <Content Include="Areas\Apartment\Views\Room\CurrentInhabitant.cshtml" />
+    <Content Include="Areas\Apartment\Views\Inhabitant\Index.cshtml" />
+    <Content Include="Areas\Apartment\Views\Inhabitant\List.cshtml" />
+    <Content Include="Areas\Apartment\Views\Inhabitant\Details.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="plugins\jquery-1.11.0.min.js" />

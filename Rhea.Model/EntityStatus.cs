@@ -43,7 +43,21 @@ namespace Rhea.Model
         /// 已搬出
         /// </summary>
         [Display(Name = "已搬出")]
-        MoveOut = 51
+        MoveOut = 51,
+
+        /// <summary>
+        /// 住户类
+        /// 已搬出
+        /// </summary>
+        [Display(Name = "已搬出")]
+        InhabitantMoveOut = 55,
+
+        /// <summary>
+        /// 住户类
+        /// 延期居住
+        /// </summary>
+        [Display(Name = "延期居住")]
+        InhabitantExtend = 56
     }
  
 }

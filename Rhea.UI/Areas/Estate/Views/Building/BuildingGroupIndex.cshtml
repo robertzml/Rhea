@@ -159,7 +159,7 @@
                             <div class="list-group">
                                 @foreach (var item in Model.Subregions)
                                 {
-                                    <a href="#" class="list-group-item list-group-item-info sub-building-ajax-link" ref="@item.BuildingId">
+                                    <a href="/Estate/Building/Index/@item.BuildingId" class="list-group-item list-group-item-info ajaxify">
                                         <i class="fa fa-plus-square"></i> @item.Name
                                     </a>
                                 }
@@ -377,7 +377,7 @@
                                                                 }
                                                             </td>
                                                             <td>
-                                                                <a class="btn btn-success btn-sm sub-building-ajax-link" href="#" ref="@item.BuildingId"><i class="fa fa-search-plus"></i>详细</a>
+                                                                <a class="btn btn-success btn-sm ajaxify" href="/Estate/Building/Index/@item.BuildingId"><i class="fa fa-search-plus"></i>详细</a>
                                                             </td>
                                                         </tr>
                                                     }
@@ -657,15 +657,6 @@
 
 <script type="text/javascript">
     $(function () {
-
-        $('a.sub-building-ajax-link').click(function (e) {
-            var url = "/Estate/Building/Index";
-            var buildingId = $(this).attr('ref');
-            var request = { id: buildingId };
-
-            Rhea.ajaxLoadPage($(this), e, url, request);
-            return false;
-        });
 
         $('.portlet .portlet-title a.reload[data-load="true"]').click();
 

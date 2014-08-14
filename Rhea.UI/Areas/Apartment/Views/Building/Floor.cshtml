@@ -65,7 +65,7 @@
                 </li>
                 <li>
                     <a href="#tab_1_4" data-toggle="tab">
-                        Help
+                        统计
                     </a>
                 </li>
             </ul>
@@ -78,7 +78,7 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="list-group">
-                                <a href="#" class="list-group-item list-group-item-info sub-building-ajax-link" ref="@Model.Parent.BuildingId">
+                                <a href="/Apartment/Building/Block/@Model.Parent.BuildingId" class="list-group-item list-group-item-info ajaxify">
                                     <i class="fa fa-reply"></i> 回到楼宇
                                 </a>
                             </div>
@@ -174,13 +174,5 @@
             return false;
         });
 
-        $('a.sub-building-ajax-link').click(function (e) {
-            var url = "/Apartment/Building/Block";
-            var buildingId = $(this).attr('ref');
-            var request = { id: buildingId };
-
-            Rhea.ajaxLoadPage($(this), e, url, request);
-            return false;
-        });
     });
 </script>

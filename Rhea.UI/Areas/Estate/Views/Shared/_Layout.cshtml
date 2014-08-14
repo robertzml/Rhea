@@ -88,15 +88,6 @@
 @section scripts {
     <script type="text/javascript">
         $(function () {
-            $('.page-sidebar a.ajax-link').click(function (e) {
-
-                var url = "/Estate/Building/Index";
-                var buildingId = $(this).attr('ref');
-                var request = { id: buildingId };
-
-                Rhea.ajaxNavPage($(this), e, url, request);
-                return false;
-            });
 
             $('.page-sidebar i.ajax-link').click(function (e) {
 

@@ -11,7 +11,7 @@
             @foreach (var floor in building.Floors)
             {
                 <li>
-                    <a class="ajax-link" ref1="@building.BuildingId" ref2="@floor.Number" href="#">@floor.Name</a>
+                    <a class="ajaxify" href="/Apartment/Building/Floor?buildingId=@building.BuildingId&floor=@floor.Number">@floor.Name</a>
                 </li>
             }
         </ul>

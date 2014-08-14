@@ -59,7 +59,7 @@
                             @item.ResideType.DisplayName()
                         </td>
                         <td>
-                            <a href="#" ref="@item.RoomId" class="btn btn-info btn-sm room-ajax-link" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
+                            <a href="/Apartment/Room/Details/@item.RoomId" class="btn btn-info btn-sm ajaxify" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
                         </td>
                     </tr>
                 }
@@ -70,15 +70,6 @@
 
 <script type="text/javascript">
     $(function () {
-
-        $('a.room-ajax-link').click(function (e) {
-            var url = "/Apartment/Room/Details";
-            var roomId = $(this).attr('ref');
-            var request = { id: roomId };
-
-            Rhea.ajaxLoadPage($(this), e, url, request);
-            return false;
-        });
 
         Rhea.initDatatable2($('#room-table'));
     });
