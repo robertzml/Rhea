@@ -10,9 +10,6 @@
             <thead>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.Number)
-                    </th>
-                    <th>
                         @Html.DisplayNameFor(model => model.Name)
                     </th>
                     <th>
@@ -22,7 +19,16 @@
                         @Html.DisplayNameFor(model => model.UsableArea) (m<sup>2</sup>)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.BuildingName)
+                        @Html.DisplayNameFor(model => model.RoomResideType)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.InhabitantName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.InhabitantDepartment)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ResideType)
                     </th>
                     <th>操作</th>
                 </tr>
@@ -31,9 +37,6 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Number)
-                        </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Name)
                         </td>
@@ -44,7 +47,16 @@
                             @Html.DisplayFor(modelItem => item.UsableArea)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.BuildingName)
+                            @item.RoomResideType.DisplayName()
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.InhabitantName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.InhabitantDepartment)
+                        </td>
+                        <td>
+                            @item.ResideType.DisplayName()
                         </td>
                         <td>
                             <a href="#" ref="@item.RoomId" class="btn btn-info btn-sm room-ajax-link" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>

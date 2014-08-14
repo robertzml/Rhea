@@ -1,4 +1,5 @@
 ﻿using Rhea.Business;
+using Rhea.Business.Apartment;
 using Rhea.Business.Estate;
 using Rhea.Model.Estate;
 using Rhea.UI.Areas.Apartment.Models;
@@ -28,7 +29,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
             BuildingBusiness buildingBusiness = new BuildingBusiness();
             data.Block = buildingBusiness.GetBlock(id);
 
-            RoomBusiness roomBusiness = new RoomBusiness();
+            ApartmentRoomBusiness roomBusiness = new ApartmentRoomBusiness();
             data.Rooms = roomBusiness.GetByBuilding(id).ToList();
 
             data.TotalArea = Math.Round(data.Rooms.Sum(r => r.UsableArea), RheaConstant.AreaDecimalDigits);
@@ -70,7 +71,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
             else
                 data.SvgPath = string.Empty;
 
-            RoomBusiness roomBusiness = new RoomBusiness();
+            ApartmentRoomBusiness roomBusiness = new ApartmentRoomBusiness();
             data.Rooms = roomBusiness.GetByBuilding(buildingId).Where(r => r.Floor == floor).ToList();
 
             return View(data);

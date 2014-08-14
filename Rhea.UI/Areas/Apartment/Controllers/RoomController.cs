@@ -16,9 +16,15 @@ namespace Rhea.UI.Areas.Apartment.Controllers
     public class RoomController : Controller
     {
         #region Function
-        private IEnumerable<RoomResideModel> BindRoom(IEnumerable<ApartmentRoom> rooms, IEnumerable<ResideRecord> records)
+        /// <summary>
+        /// 模型绑定
+        /// </summary>
+        /// <param name="rooms">房间对象</param>
+        /// <returns>房间居住对象</returns>
+        private IEnumerable<RoomResideModel> BindRoom(IEnumerable<ApartmentRoom> rooms)
         {
             List<RoomResideModel> data = new List<RoomResideModel>();
+            ApartmentRoomBusiness roomBusiness = new ApartmentRoomBusiness();
 
             foreach (var room in rooms)
             {
@@ -29,8 +35,16 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                 model.Floor = room.Floor;
                 model.UsableArea = room.UsableArea;
                 model.BuildingName = room.BuildingName();
+                model.RoomResideType = (ResideType)room.ResideType;
 
-                //ResideRecord record = records.Where(r => r.RoomId == room.RoomId)
+                ResideRecord record = roomBusiness.GetCurrentRecord(room.RoomId);
+                if (record != null)
+                {
+                    model.InhabitantId = record.InhabitantId;
+                    model.InhabitantName = record.InhabitantName;
+                    model.InhabitantDepartment = record.InhabitantDepartment;
+                    model.ResideType = (ResideType)record.ResideType;
+                }
 
                 data.Add(model);
             }
@@ -47,15 +61,26 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         /// <returns></returns>
         public ActionResult ListByBuilding(int buildingId)
         {
-            ResideRecordBusiness recordBusiness = new ResideRecordBusiness();
-            var records = recordBusiness.GetByBuilding(buildingId);
-
             ApartmentRoomBusiness roomBusiness = new ApartmentRoomBusiness();
             var rooms = roomBusiness.GetByBuilding(buildingId);
 
-            var data = BindRoom(rooms, records);
-
+            var data = BindRoom(rooms);
             return View(data);
+        }
+
+        /// <summary>
+        /// 房间列表
+        /// </summary>
+        /// <param name="buildingId">所属楼宇ID</param>
+        /// <param name="floor">楼层</param>
+        /// <returns></returns>
+        public ActionResult ListByFloor(int buildingId, int floor)
+        {
+            ApartmentRoomBusiness roomBusiness = new ApartmentRoomBusiness();
+            var rooms = roomBusiness.GetByBuilding(buildingId).Where(r => r.Floor == floor);
+
+            var data = BindRoom(rooms);
+            return View("ListByBuilding", data);
         }
 
         /// <summary>

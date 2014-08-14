@@ -68,6 +68,12 @@ namespace Rhea.UI.Areas.Apartment.Models
         public string BuildingName { get; set; }
 
         /// <summary>
+        /// 房间居住状态
+        /// </summary>
+        [Display(Name = "房间居住状态")]
+        public ResideType RoomResideType { get; set; }
+
+        /// <summary>
         /// 居住人ID
         /// </summary>      
         [Display(Name = "居住人ID")]

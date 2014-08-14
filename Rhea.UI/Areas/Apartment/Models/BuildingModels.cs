@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using Rhea.Model.Apartment;
 using Rhea.Model.Estate;
 
 namespace Rhea.UI.Areas.Apartment.Models
@@ -22,7 +23,7 @@ namespace Rhea.UI.Areas.Apartment.Models
         /// 房间列表
         /// </summary>
         [Display(Name = "房间列表")]
-        public List<Room> Rooms { get; set; }
+        public List<ApartmentRoom> Rooms { get; set; }
 
         /// <summary>
         /// 总使用面积
@@ -57,7 +58,7 @@ namespace Rhea.UI.Areas.Apartment.Models
         /// 房间列表
         /// </summary>
         [Display(Name = "房间列表")]
-        public List<Room> Rooms { get; set; }
+        public List<ApartmentRoom> Rooms { get; set; }
 
     }
 }
