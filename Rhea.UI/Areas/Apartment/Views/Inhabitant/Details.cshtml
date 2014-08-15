@@ -49,7 +49,7 @@
         <div class="portlet box green">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-list"></i>&nbsp;@Model.Name
+                    <i class="fa fa-indent"></i>&nbsp;@Model.Name
                 </div>
                 <div class="tools">
                     <a href="#" class="collapse">
@@ -188,8 +188,8 @@
                 
                 <hr />
                 <p>
-                    <a href="/Apartment/Inhabitant/List" class="btn btn-primary ajaxify" role="button"><i class="fa fa-list"></i>&nbsp;回到列表</a>                   
-                    <a href="@Url.Action("Edit", new { controller = "Inhabitant", id = Model._id })" class="btn btn-warning" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
+                    <a href="/Apartment/Inhabitant/List" class="btn btn-primary ajaxify" role="button"><i class="fa fa-list"></i>&nbsp;回到列表</a>
+                    <a href="/Apartment/Inhabitant/Edit/@Model._id" class="btn btn-warning ajaxify" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
                 </p>
             </div>
         </div>
@@ -213,9 +213,10 @@
                 </div>
             </div>
             <div class="portlet-body">
-
+                @Html.Action("Record", new { controller = "Inhabitant", id = Model._id })
             </div>
         </div>
     </div>
 </div>
 <!-- END PAGE CONTENT-->
+

@@ -34,6 +34,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                 model.Number = room.Number;
                 model.Floor = room.Floor;
                 model.UsableArea = room.UsableArea;
+                model.HouseType = room.HouseType;
                 model.BuildingName = room.BuildingName();
                 model.RoomResideType = (ResideType)room.ResideType;
 

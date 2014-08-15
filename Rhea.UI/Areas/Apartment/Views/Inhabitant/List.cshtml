@@ -82,16 +82,16 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.Telephone)
                             </th>
-                            <th>
+                            <th class="hidden-xs">
                                 @Html.DisplayNameFor(model => model.ExtractAccumulatedFunds)
                             </th>
-                            <th>
+                            <th class="hidden-xs">
                                 @Html.DisplayNameFor(model => model.Marriage)
                             </th>
-                            <th>
+                            <th class="hidden-xs">
                                 @Html.DisplayNameFor(model => model.LiHuStatus)
                             </th>
-                            <th>
+                            <th class="hidden-xs">
                                 @Html.DisplayNameFor(model => model.Remark)
                             </th>
                             <th>
@@ -125,16 +125,16 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Telephone)
                                 </td>
-                                <td>
+                                <td class="hidden-xs">
                                     @Html.DisplayFor(modelItem => item.ExtractAccumulatedFunds)
                                 </td>
-                                <td>
+                                <td class="hidden-xs">
                                     @Html.DisplayFor(modelItem => item.Marriage)
                                 </td>
-                                <td>
+                                <td class="hidden-xs">
                                     @Html.DisplayFor(modelItem => item.LiHuStatus)
                                 </td>
-                                <td>
+                                <td class="hidden-xs">
                                     @Html.DisplayFor(modelItem => item.Remark)
                                 </td>
                                 <td>
@@ -153,7 +153,6 @@
                                 </td>
                                 <td>
                                     <a href="/Apartment/Inhabitant/Details/@item._id" class="btn btn-info btn-sm ajaxify" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
-                                    <a href="#" ref="@item._id" class="btn btn-warning btn-sm inhabitant-edit-link" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
                                 </td>
                             </tr>
                         }
@@ -167,8 +166,7 @@
 
 
 <script type="text/javascript">
-    $(function () {    
-
+    $(function () {
         Rhea.initDatatable2($('#inhabitant-table'));
     });
 </script>

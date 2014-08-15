@@ -1,10 +1,12 @@
 ﻿using Rhea.Data.Account;
 using Rhea.Data.Estate;
 using Rhea.Data.Mongo.Account;
+using Rhea.Data.Mongo.Apartment;
 using Rhea.Data.Mongo.Estate;
 using Rhea.Data.Mongo.Personnel;
 using Rhea.Data.Personnel;
 using Rhea.Model.Account;
+using Rhea.Model.Apartment;
 using Rhea.Model.Estate;
 using Rhea.Model.Personnel;
 using System;
@@ -75,6 +77,21 @@ namespace Rhea.Business
             return name;
         }
         #endregion //Room Method
+
+        #region Record Method
+        /// <summary>
+        /// 获取青教房间
+        /// </summary>
+        /// <param name="record">居住记录</param>
+        /// <returns></returns>
+        public static ApartmentRoom GetApartmentRoom(this ResideRecord record)
+        {
+            IRoomRepository roomRepository = new MongoApartmentRoomRepository();
+            var room = (ApartmentRoom)roomRepository.Get(record.RoomId);
+            return room;
+        }
+        #endregion //Record Method
+
 
         #region User Method
         /// <summary>

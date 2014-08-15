@@ -62,6 +62,12 @@ namespace Rhea.UI.Areas.Apartment.Models
         public double UsableArea { get; set; }
 
         /// <summary>
+        /// 户型
+        /// </summary>
+        [Display(Name = "户型")]
+        public string HouseType { get; set; }
+
+        /// <summary>
         /// 所属楼宇
         /// </summary>      
         [Display(Name = "所属楼宇")]

@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Rhea.Model.Apartment.ResideRecord>
+
+@{
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered table-striped table-hover table-advance">
+            <thead>
+                <tr>
+                    <th>房间名称</th>
+                    <th>户型</th>
+                    <th>房租</th>
+                    <th>居住类型</th>
+                    <th>入住时间</th>
+                    <th>到期时间</th>
+                    <th>年限</th>
+                    <th>离开时间</th>
+                    <th>备注</th>
+                    <th>状态</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.GetApartmentRoom().Name
+                        </td>
+                        <td>
+                            @item.GetApartmentRoom().HouseType
+                        </td>
+                        <td>
+                            @item.Rent
+                        </td>
+                        <td>
+                            @{
+                                var type2 = (ResideType)item.ResideType;
+                                @type2.DisplayName();
+                            }
+                        </td>
+                        <td>
+                            @item.EnterDate.ToDateString()
+                        </td>
+                        <td>
+                            @item.ExpireDate.ToDateString()
+                        </td>
+                        <td>
+                            @item.TermLimit
+                        </td>
+                        <td>
+                            @item.LeaveDate.ToDateString()
+                        </td>
+                        <td>
+                            @item.Remark
+                        </td>
+                        <td>
+                            @switch ((EntityStatus)item.Status)
+                            {
+                                case EntityStatus.Normal:
+                                    <span class="label label-success">居住中</span>
+                                    break;
+                                case EntityStatus.OverTime:
+                                <span class="label label-danger">超期</span>
+                                    break;
+                                case EntityStatus.MoveOut:
+                                <span class="label label-default">已搬出</span>
+                                    break;
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -198,7 +198,8 @@ var Rhea = function () {
 	
 	/* not nav ajax load */
 	var handleAjaxLoad2 = function($dom, e, url, request) {
-		e.preventDefault();
+		if (e != null)
+			e.preventDefault();
 		Metronic.scrollTop();
 
 		var pageContent = $('.page-content');

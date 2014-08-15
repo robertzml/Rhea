@@ -41,6 +41,13 @@ namespace Rhea.Data.Apartment
         IEnumerable<ResideRecord> GetByRoom(int roomId);
 
         /// <summary>
+        /// 获取住户居住记录
+        /// </summary>
+        /// <param name="inhabitantId">住户ID</param>
+        /// <returns></returns>
+        IEnumerable<ResideRecord> GetByInhabitant(string inhabitantId);
+
+        /// <summary>
         /// 添加居住记录
         /// </summary>
         /// <param name="data">居住记录对象</param>

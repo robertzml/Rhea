@@ -66,6 +66,17 @@ namespace Rhea.Business.Apartment
             var data = this.recordRepository.GetByRoom(roomId).Where(r => r.Status != 1);
             return data;
         }
+
+        /// <summary>
+        /// 获取住户居住记录
+        /// </summary>
+        /// <param name="inhabitantId">住户ID</param>
+        /// <returns></returns>
+        public IEnumerable<ResideRecord> GetByInhabitant(string inhabitantId)
+        {
+            var data = this.recordRepository.GetByInhabitant(inhabitantId).Where(r => r.Status != 1);
+            return data;
+        }
         #endregion //Method
     }
 }

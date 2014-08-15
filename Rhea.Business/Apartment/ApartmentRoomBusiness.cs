@@ -119,6 +119,16 @@ namespace Rhea.Business.Apartment
 
             return records.First();
         }
+
+        /// <summary>
+        /// 编辑房间
+        /// </summary>
+        /// <param name="data">房间对象</param>
+        /// <returns></returns>
+        public ErrorCode Update(ApartmentRoom data)
+        {
+            return this.roomRepository.Update(data);
+        }
         #endregion //Method
     }
 }

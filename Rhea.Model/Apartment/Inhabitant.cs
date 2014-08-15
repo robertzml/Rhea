@@ -24,14 +24,24 @@ namespace Rhea.Model.Apartment
         /// <summary>
         /// 姓名
         /// </summary>
+        [Required]
         [BsonElement("name")]
         [Display(Name = "姓名")]
         public string Name { get; set; }
 
         /// <summary>
+        /// 性别
+        /// </summary>
+        [BsonElement("gender")]
+        [Display(Name = "性别")]
+        public string Gender { get; set; }
+
+        /// <summary>
         /// 住户类型
         /// 1:教职工；2:外聘人员；3:挂职；4:学生；5:其他
         /// </summary>
+        [Required]
+        [UIHint("InhabitantType")]
         [BsonElement("type")]
         [Display(Name = "住户类型")]
         public int Type { get; set; }
@@ -88,6 +98,7 @@ namespace Rhea.Model.Apartment
         /// <summary>
         /// 备注
         /// </summary>
+        [DataType(DataType.MultilineText)]
         [BsonElement("remark")]
         [Display(Name = "备注")]
         public string Remark { get; set; }

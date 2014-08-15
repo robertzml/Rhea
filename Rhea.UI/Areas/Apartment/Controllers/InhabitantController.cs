@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Routing;
 using System.Web.Mvc;
 using Rhea.Business.Apartment;
+using Rhea.Common;
+using Rhea.Model;
 using Rhea.Model.Apartment;
 
 namespace Rhea.UI.Areas.Apartment.Controllers
@@ -61,6 +63,54 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         public ActionResult Details(string id)
         {
             var data = this.inhabitantBusiness.Get(id);
+            return View(data);
+        }
+
+        /// <summary>
+        /// 住户编辑
+        /// </summary>
+        /// <param name="id">住户ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Edit(string id)
+        {
+            var data = this.inhabitantBusiness.Get(id);
+            return View(data);
+        }
+
+        /// <summary>
+        /// 住户编辑
+        /// </summary>
+        /// <param name="model">住户对象</param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Edit(Inhabitant model)
+        {
+            if (ModelState.IsValid)
+            {
+                ErrorCode result = this.inhabitantBusiness.Update(model);
+                if (result == ErrorCode.Success)
+                {
+                    return RedirectToAction("Details", new { id = model._id });
+                }
+                else
+                {
+                    ModelState.AddModelError("", result.DisplayName());
+                }
+            }
+          
+            return View(model);
+        }
+
+        /// <summary>
+        /// 居住记录
+        /// </summary>
+        /// <param name="id">住户ID</param>
+        /// <returns></returns>
+        public ActionResult Record(string id)
+        {
+            ResideRecordBusiness business = new ResideRecordBusiness();
+            var data = business.GetByInhabitant(id);
             return View(data);
         }
         #endregion //Action

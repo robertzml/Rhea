@@ -106,7 +106,7 @@
 <!-- BEGIN CONTENT -->
 <div class="page-content-wrapper">
     <div class="page-content">
-        <div class="page-content-body">
+        <div class="page-content-body" id="page-content-body">
             <!-- HERE WILL BE LOADED AN AJAX CONTENT -->
             @RenderBody()
         </div>
@@ -119,7 +119,6 @@
         $(function () {
 
             $('.page-sidebar i.ajax-link').click(function (e) {
-
                 var url = "/Apartment/Building/Block";
                 var id = $(this).attr('ref');
                 var request = { id: id };
