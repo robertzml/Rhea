@@ -1,12 +1,15 @@
-﻿using System;
+﻿using Rhea.Business;
+using Rhea.Business.Apartment;
+using Rhea.Common;
+using Rhea.Model;
+using Rhea.Model.Apartment;
+using Rhea.UI.Areas.Apartment.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Rhea.Business;
-using Rhea.Business.Apartment;
-using Rhea.Model.Apartment;
-using Rhea.UI.Areas.Apartment.Models;
+using System.Web.Routing;
 
 namespace Rhea.UI.Areas.Apartment.Controllers
 {
@@ -15,6 +18,13 @@ namespace Rhea.UI.Areas.Apartment.Controllers
     /// </summary>
     public class RoomController : Controller
     {
+        #region Field
+        /// <summary>
+        /// 青教房间业务对象
+        /// </summary>
+        private ApartmentRoomBusiness roomBusiness;
+        #endregion //Field
+
         #region Function
         /// <summary>
         /// 模型绑定
@@ -24,7 +34,6 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         private IEnumerable<RoomResideModel> BindRoom(IEnumerable<ApartmentRoom> rooms)
         {
             List<RoomResideModel> data = new List<RoomResideModel>();
-            ApartmentRoomBusiness roomBusiness = new ApartmentRoomBusiness();
 
             foreach (var room in rooms)
             {
@@ -38,19 +47,28 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                 model.BuildingName = room.BuildingName();
                 model.RoomResideType = (ResideType)room.ResideType;
 
-                ResideRecord record = roomBusiness.GetCurrentRecord(room.RoomId);
+                ResideRecord record = this.roomBusiness.GetCurrentRecord(room.RoomId);
                 if (record != null)
                 {
                     model.InhabitantId = record.InhabitantId;
                     model.InhabitantName = record.InhabitantName;
                     model.InhabitantDepartment = record.InhabitantDepartment;
-                    model.ResideType = (ResideType)record.ResideType;
                 }
 
                 data.Add(model);
             }
 
             return data;
+        }
+
+        protected override void Initialize(RequestContext requestContext)
+        {
+            if (roomBusiness == null)
+            {
+                roomBusiness = new ApartmentRoomBusiness();
+            }
+
+            base.Initialize(requestContext);
         }
         #endregion //Function
 
@@ -62,8 +80,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         /// <returns></returns>
         public ActionResult ListByBuilding(int buildingId)
         {
-            ApartmentRoomBusiness roomBusiness = new ApartmentRoomBusiness();
-            var rooms = roomBusiness.GetByBuilding(buildingId);
+            var rooms = this.roomBusiness.GetByBuilding(buildingId);
 
             var data = BindRoom(rooms);
             return View(data);
@@ -77,8 +94,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         /// <returns></returns>
         public ActionResult ListByFloor(int buildingId, int floor)
         {
-            ApartmentRoomBusiness roomBusiness = new ApartmentRoomBusiness();
-            var rooms = roomBusiness.GetByBuilding(buildingId).Where(r => r.Floor == floor);
+            var rooms = this.roomBusiness.GetByBuilding(buildingId).Where(r => r.Floor == floor);
 
             var data = BindRoom(rooms);
             return View("ListByBuilding", data);
@@ -93,13 +109,58 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         {
             ApartmentRoomModel data = new ApartmentRoomModel();
 
-            ApartmentRoomBusiness roomBusiness = new ApartmentRoomBusiness();
-            data.Room = roomBusiness.Get(id);
+            data.Room = this.roomBusiness.Get(id);
 
             ResideRecordBusiness recordBusiness = new ResideRecordBusiness();
             data.Records = recordBusiness.GetByRoom(id).ToList();
 
             return View(data);
+        }
+
+        /// <summary>
+        /// 编辑房间
+        /// </summary>
+        /// <param name="id">房间ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            ApartmentRoom data = this.roomBusiness.Get(id);
+            return View(data);
+        }
+
+        /// <summary>
+        /// 编辑房间
+        /// </summary>
+        /// <param name="model">房间对象</param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Edit(ApartmentRoom model)
+        {
+            if (ModelState.IsValid)
+            {
+                ApartmentRoom data = this.roomBusiness.Get(model.RoomId);
+
+                data.HouseType = model.HouseType;
+                data.Orientation = model.Orientation;
+                data.HasAirCondition = model.HasAirCondition;
+                data.HasWaterHeater = model.HasWaterHeater;
+                data.ResideType = model.ResideType;
+                data.Remark = model.Remark;
+
+                ErrorCode result = this.roomBusiness.Update(data);
+                if (result == ErrorCode.Success)
+                {
+                    return RedirectToAction("Details", new { id = model.RoomId });
+                }
+                else
+                {
+                    ModelState.AddModelError("", result.DisplayName());
+                }
+            }
+
+            return View(model);
         }
 
         /// <summary>
@@ -109,8 +170,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         /// <returns></returns>
         public ActionResult CurrentInhabitant(int id)
         {
-            ApartmentRoomBusiness roomBusiness = new ApartmentRoomBusiness();
-            var data = roomBusiness.GetCurrentInhabitant(id);
+            var data = this.roomBusiness.GetCurrentInhabitant(id);
 
             return View(data);
         }

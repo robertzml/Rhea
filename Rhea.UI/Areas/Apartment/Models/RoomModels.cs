@@ -68,15 +68,21 @@ namespace Rhea.UI.Areas.Apartment.Models
         public string HouseType { get; set; }
 
         /// <summary>
+        /// 朝向
+        /// </summary>
+        [Display(Name = "朝向")]
+        public string Orientation { get; set; }
+
+        /// <summary>
         /// 所属楼宇
         /// </summary>      
         [Display(Name = "所属楼宇")]
         public string BuildingName { get; set; }
 
         /// <summary>
-        /// 房间居住状态
+        /// 居住类型
         /// </summary>
-        [Display(Name = "房间居住状态")]
+        [Display(Name = "居住类型")]
         public ResideType RoomResideType { get; set; }
 
         /// <summary>
@@ -96,11 +102,5 @@ namespace Rhea.UI.Areas.Apartment.Models
         /// </summary>       
         [Display(Name = "部门")]
         public string InhabitantDepartment { get; set; }
-
-        /// <summary>
-        /// 居住状态
-        /// </summary>
-        [Display(Name = "居住状态")]
-        public ResideType ResideType { get; set; }
     }
 }

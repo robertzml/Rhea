@@ -98,7 +98,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                     ModelState.AddModelError("", result.DisplayName());
                 }
             }
-          
+
             return View(model);
         }
 

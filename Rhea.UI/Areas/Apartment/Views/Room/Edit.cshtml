@@ -1,0 +1,163 @@
+﻿@model Rhea.Model.Apartment.ApartmentRoom
+
+@{
+    Layout = null;
+    ViewBag.Title = "编辑房间";
+    AjaxOptions ajaxOpts = new AjaxOptions
+    {
+        UpdateTargetId = "page-content-body",
+        Url = Url.Action("Edit", "Room"),
+        HttpMethod = "POST",
+        OnSuccess = "Rhea.showMessage('编辑成功')"
+    };
+}
+
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">
+    @ViewBag.Title
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index", new { area = "Apartment", controller = "Home" })">青教管理</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">青教公寓</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">@ViewBag.Title</a>
+        </li>
+    </ul>
+    <div class="page-toolbar">
+        <div class="btn-group pull-right">
+            <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
+                Actions <i class="fa fa-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu pull-right" role="menu">
+                <li>
+                    <a href="#">Action</a>
+                </li>
+                <li class="divider">
+                </li>
+                <li>
+                    <a href="#">Separated link</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box yellow">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-indent"></i>&nbsp;房间信息
+                </div>
+                <div class="tools">
+                    <a href="#" class="collapse">
+                    </a>
+                    <a href="#" class="reload">
+                    </a>
+                    <a href="#" class="remove">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-md-12 form">
+                        @using (Ajax.BeginForm("Edit", new { controller = "Room" }, ajaxOpts, new { @class = "form-horizontal" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            @Html.HiddenFor(model => model._id)
+                            @Html.HiddenFor(model => model.RoomId)
+
+                            <div class="form-body">
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-6">
+                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Number, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-6">
+                                        @Html.EditorFor(model => model.Number, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                        @Html.ValidationMessageFor(model => model.Number, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.HouseType, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-6">
+                                        @Html.EditorFor(model => model.HouseType, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.HouseType, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Orientation, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-6">
+                                        @Html.EditorFor(model => model.Orientation, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Orientation, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.HasAirCondition, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-6">
+                                        @Html.EditorFor(model => model.HasAirCondition, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.HasAirCondition, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.HasWaterHeater, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-6">
+                                        @Html.EditorFor(model => model.HasWaterHeater, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.HasWaterHeater, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.ResideType, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-6">
+                                        @Html.EditorFor(model => model.ResideType, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.ResideType, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Remark, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-6">
+                                        @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-actions">
+                                    <div class="row">
+                                        <div class="col-md-offset-3 col-md-9">
+                                            <button type="submit" class="btn blue"><i class="fa fa-save"></i>&nbsp;保存</button>
+                                            <a href="/Apartment/Room/Details/@Model.RoomId" class="btn btn-default ajaxify" role="button"><i class="fa fa-chevron-left"></i>&nbsp;取消</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT-->

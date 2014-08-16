@@ -140,8 +140,22 @@
                                         }
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Room.Remark)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Room.Remark)
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
+
+                        <hr />
+                        <p>
+                            <a href="/Apartment/Building/Block/@Model.Room.BuildingId" class="btn btn-primary ajaxify" role="button"><i class="fa fa-list"></i>&nbsp;回到楼宇</a>
+                            <a href="/Apartment/Room/Edit/@Model.Room.RoomId" class="btn btn-warning ajaxify" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
+                        </p>
                     </div>
                 </div>
             </div>

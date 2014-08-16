@@ -766,6 +766,10 @@
     <Content Include="Areas\Apartment\Views\Inhabitant\Edit.cshtml" />
     <Content Include="Areas\Apartment\Views\Shared\EditorTemplates\InhabitantType.cshtml" />
     <Content Include="Areas\Apartment\Views\Shared\EditorTemplates\Boolean.cshtml" />
+    <Content Include="Areas\Apartment\Views\Room\Edit.cshtml" />
+    <Content Include="Areas\Apartment\Views\Shared\EditorTemplates\ResideType.cshtml" />
+    <Content Include="Areas\Apartment\Views\Shared\EditorTemplates\Orientation.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Orientation.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="plugins\jquery-1.11.0.min.js" />
