@@ -7,7 +7,7 @@
 
 <!-- BEGIN PAGE HEADER-->
 <h3 class="page-title">
-    @ViewBag.Title <small>horizontal mega menu & sidebar menu layout</small>
+    @ViewBag.Title
 </h3>
 <div class="page-bar">
     <ul class="page-breadcrumb">
@@ -150,6 +150,14 @@
                                 </tr>
                                 <tr>
                                     <td>
+                                        @Html.DisplayNameFor(model => model.PlanningArea)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.PlanningArea)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
                                         @Html.DisplayNameFor(model => model.Floorage)
                                     </td>
                                     <td>
@@ -180,14 +188,6 @@
                                         @Html.DisplayFor(model => model.BuildStructure)
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        @Html.DisplayNameFor(model => model.BuildCost)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(model => model.BuildCost)
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -200,6 +200,14 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.BuildCost)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.BuildCost)
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td>
                                         @Html.DisplayNameFor(model => model.CurrentValue)

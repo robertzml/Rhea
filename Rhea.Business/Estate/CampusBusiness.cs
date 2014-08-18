@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Rhea.Data.Estate;
 using Rhea.Data.Mongo.Estate;
+using Rhea.Model;
 using Rhea.Model.Estate;
 
 namespace Rhea.Business.Estate
@@ -41,7 +42,7 @@ namespace Rhea.Business.Estate
         {
             return this.campusRepository.Get().Where(r => r.Status != 1);
         }
-        
+
         /// <summary>
         /// 获取校区
         /// </summary>
@@ -54,6 +55,16 @@ namespace Rhea.Business.Estate
                 return null;
             else
                 return data;
+        }
+
+        /// <summary>
+        /// 更新校区
+        /// </summary>
+        /// <param name="data">校区对象</param>
+        /// <returns></returns>
+        public ErrorCode Update(Campus data)
+        {
+            return this.campusRepository.Update(data);
         }
         #endregion //Method
     }

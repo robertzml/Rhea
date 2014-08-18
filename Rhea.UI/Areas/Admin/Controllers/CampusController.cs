@@ -1,4 +1,6 @@
 ﻿using Rhea.Business.Estate;
+using Rhea.Common;
+using Rhea.Model;
 using Rhea.Model.Estate;
 using System;
 using System.Collections.Generic;
@@ -59,6 +61,44 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             var data = this.campusBusiness.Get(id);
             return View(data);
+        }
+
+        /// <summary>
+        /// 校区编辑
+        /// </summary>
+        /// <param name="id">校区ID</param>
+        /// <returns></returns>
+        public ActionResult Edit(int id)
+        {
+            var data = this.campusBusiness.Get(id);
+            return View(data);
+        }
+
+        /// <summary>
+        /// 校区编辑
+        /// </summary>
+        /// <param name="model">校区对象</param>
+        /// <returns></returns>
+        public ActionResult Edit(Campus model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.Status = 0;
+                ErrorCode result = this.campusBusiness.Update(model);
+
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "编辑校区成功";
+                    return RedirectToAction("Details", new { controller = "Campus", id = model.CampusId });
+                }
+                else
+                {
+                    TempData["Message"] = "编辑校区失败";
+                    ModelState.AddModelError("", result.DisplayName());
+                }
+            }
+
+            return View(model);
         }
         #endregion //Action
     }

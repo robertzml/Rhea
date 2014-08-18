@@ -62,7 +62,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             var data = this.buildingBusiness.Get(id);
 
-            ViewBag.Children = this.buildingBusiness.GetChildBuildings(id);
+            ViewBag.Children = this.buildingBusiness.GetChildBuildings(id).OrderBy(r => r.Sort);
 
             switch ((BuildingOrganizeType)data.OrganizeType)
             {

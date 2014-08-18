@@ -10,6 +10,9 @@ namespace Rhea.Model.Estate
     /// <summary>
     /// 建筑基类
     /// </summary>
+    /// <remarks>
+    /// 共29个属性
+    /// </remarks>
     [CollectionName("building")]
     public class Building : MongoEntity
     {
@@ -104,6 +107,14 @@ namespace Rhea.Model.Estate
         [Range(0.0, double.MaxValue)]
         [Display(Name = "使用面积")]
         public double? UsableArea { get; set; }
+
+        /// <summary>
+        /// 计划面积
+        /// </summary>
+        [BsonElement("planningArea")]
+        [Range(0.0, double.MaxValue)]
+        [Display(Name = "计划面积")]
+        public double? PlanningArea { get; set; }
 
         /// <summary>
         /// 占地面积

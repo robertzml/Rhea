@@ -32,5 +32,12 @@ namespace Rhea.Data.Personnel
         /// <param name="data">部门对象</param>
         /// <returns></returns>
         ErrorCode Create(Department data);
+
+        /// <summary>
+        /// 编辑部门
+        /// </summary>
+        /// <param name="data">部门对象</param>
+        /// <returns></returns>
+        ErrorCode Update(Department data);
     }
 }

@@ -77,6 +77,25 @@ namespace Rhea.Data.Mongo.Personnel
 
             return ErrorCode.Success;
         }
+
+        /// <summary>
+        /// 编辑部门
+        /// </summary>
+        /// <param name="data">部门对象</param>
+        /// <returns></returns>
+        public ErrorCode Update(Department data)
+        {
+            try
+            {
+                this.repository.Update(data);
+            }
+            catch(Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
         #endregion //Method
     }
 }

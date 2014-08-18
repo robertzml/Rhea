@@ -1,4 +1,5 @@
-﻿using Rhea.Model.Estate;
+﻿using Rhea.Model;
+using Rhea.Model.Estate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace Rhea.Data.Estate
         /// </summary>
         /// <param name="data">校区对象</param>
         /// <returns></returns>
-        bool Update(Campus data);
+        ErrorCode Update(Campus data);
 
         /// <summary>
         /// 校区计数

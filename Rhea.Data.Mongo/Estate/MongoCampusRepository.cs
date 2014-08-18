@@ -3,6 +3,7 @@ using MongoDB.Driver.Builders;
 using MongoDB.Driver.Linq;
 using Rhea.Data;
 using Rhea.Data.Estate;
+using Rhea.Model;
 using Rhea.Model.Estate;
 using System;
 using System.Collections.Generic;
@@ -64,7 +65,7 @@ namespace Rhea.Data.Mongo.Estate
         /// </summary>
         /// <param name="data">校区对象</param>
         /// <returns></returns>
-        public bool Update(Campus data)
+        public ErrorCode Update(Campus data)
         {
             try
             {
@@ -72,9 +73,9 @@ namespace Rhea.Data.Mongo.Estate
             }
             catch (Exception)
             {
-                return false;
+                return ErrorCode.Exception;
             }
-            return true;
+            return ErrorCode.Success;
         }
         #endregion //Method
     }

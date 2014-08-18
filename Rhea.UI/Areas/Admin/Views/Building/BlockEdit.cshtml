@@ -176,6 +176,17 @@
                                 </tr>
                                 <tr>
                                     <td>
+                                        @Html.LabelFor(model => model.PlanningArea)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.PlanningArea, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td>
+                                        @Html.ValidationMessageFor(model => model.PlanningArea, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
                                         @Html.LabelFor(model => model.Floorage)
                                     </td>
                                     <td>

@@ -66,11 +66,18 @@ namespace Rhea.Model.Personnel
         /// <summary>
         /// 介绍
         /// </summary>
-        [StringLength(500)]
         [DataType(DataType.MultilineText)]
         [BsonElement("description")]
         [Display(Name = "介绍")]
         public string Description { get; set; }
+        
+        /// <summary>
+        /// 备注
+        /// </summary>
+        [DataType(DataType.MultilineText)]
+        [BsonElement("remark")]
+        [Display(Name = "备注")]
+        public string Remark { get; set; }
 
         /// <summary>
         /// 状态，0:正常；1:删除
