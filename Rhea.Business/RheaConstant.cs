@@ -23,6 +23,11 @@ namespace Rhea.Business
         public static readonly string SvgRoot = "/Attachment/svg/";
 
         /// <summary>
+        /// 头像目录
+        /// </summary>
+        public static readonly string AvatarRoot = "/Attachment/avatar/";
+
+        /// <summary>
         /// 顶级父建筑名称
         /// </summary>
         public static readonly string TopParentBuildingName = "江南大学";

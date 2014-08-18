@@ -43,16 +43,6 @@
                         账户
                     </a>
                 </li>
-                <li>
-                    <a href="#tab_1_4" data-toggle="tab">
-                        Projects
-                    </a>
-                </li>
-                <li>
-                    <a href="#tab_1_6" data-toggle="tab">
-                        Help
-                    </a>
-                </li>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="tab_1_1">
@@ -60,155 +50,123 @@
                         <div class="col-md-3">
                             <ul class="list-unstyled profile-nav">
                                 <li>
-                                    <img src="/Images/avatar.png" class="img-responsive" alt="" />
-                                    <a href="#" class="profile-edit">
-                                        edit
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        Projects
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        Messages <span>
-                                            3
-                                        </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        Friends
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        Settings
-                                    </a>
+                                    <img src="@Model.AvatarUrl" class="img-responsive" alt="照片" style="margin:0px auto;" />
                                 </li>
                             </ul>
                         </div>
-                        <div class="col-md-9">
-                            <div class="row">
-                                <div class="col-md-8 profile-info">
-                                    <h1>@Model.Name <small>@Model.UserName</small></h1>
-                                    <p>
-                                        @Model.Remark
-                                    </p>
-                                    <ul class="list-inline">
-                                        <li>
-                                            <i class="fa fa-map-marker"></i> Spain
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-calendar"></i> 18 Jan 1982
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-briefcase"></i> Design
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star"></i> Top Seller
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-heart"></i> BASE Jumping
-                                        </li>
-                                    </ul>
-                                    
-                                </div>
-                                <!--end col-md-8-->
-                                <div class="col-md-4">
-                                    <div class="portlet profile-summary">
-                                        <div class="portlet-title">
-                                            <div class="caption">
-                                                用户信息
-                                            </div>
-                                        </div>
-                                        <div class="portlet-body">
-                                            <ul class="list-unstyled">
-                                                <li>
-                                                    <span class="sale-info">
-                                                        @Html.DisplayNameFor(model => model.UserId)
-                                                    </span>
-                                                    <span class="sale-num">
-                                                        @Html.DisplayFor(model => model.UserId)
-                                                    </span>
-                                                </li>
-                                                <li>
-                                                    <span class="sale-info">
-                                                        @Html.DisplayNameFor(model => model.UserName)
-                                                    </span>
-                                                    <span class="sale-num">
-                                                        @Html.DisplayFor(model => model.UserName)
-                                                    </span>
-                                                </li>
-                                                <li>
-                                                    <span class="sale-info">
-                                                        @Html.DisplayNameFor(model => model.Name)
-                                                    </span>
-                                                    <span class="sale-num">
-                                                        @Html.DisplayFor(model => model.Name)
-                                                    </span>
-                                                </li>
-                                                <li>
-                                                    <span class="sale-info">
-                                                        @Html.DisplayNameFor(model => model.UserGroupId)
-                                                    </span>
-                                                    <span class="sale-num">
-                                                        @Model.UserGroupTitle()
-                                                    </span>
-                                                </li>
-                                                <li>
-                                                    <span class="sale-info">
-                                                        @Html.DisplayNameFor(model => model.LastLoginTime)
-                                                    </span>
-                                                    <span class="sale-num">
-                                                        @Html.DisplayFor(model => model.LastLoginTime)
-                                                    </span>
-                                                </li>
-                                                <li>
-                                                    <span class="sale-info">
-                                                        @Html.DisplayNameFor(model => model.CurrentLoginTime)
-                                                    </span>
-                                                    <span class="sale-num">
-                                                        @Html.DisplayFor(model => model.CurrentLoginTime)
-                                                    </span>
-                                                </li>
-                                                <li>
-                                                    <span class="sale-info">
-                                                        @Html.DisplayNameFor(model => model.DepartmentId)
-                                                    </span>
-                                                    <span class="sale-num">
-                                                        @Html.DisplayFor(model => model.DepartmentId)
-                                                    </span>
-                                                </li>
-                                                <li>
-                                                    <span class="sale-info">
-                                                        @Html.DisplayNameFor(model => model.IsSystem)
-                                                    </span>
-                                                    <span class="sale-num">
-                                                        @if(Model.IsSystem)
-                                                        {
-                                                            <span>是</span>
-                                                        }
-                                                        else
-                                                        {
-                                                            <span>否</span>
-                                                        }
-                                                    </span>
-                                                </li>
-                                            </ul>
-                                        </div>
+                        <div class="col-md-5 portfolio-info">
+                            <h1>@Model.Name <small>@Model.UserName</small></h1>
+                            <p>
+                                @Model.Remark
+                            </p>
+                            <ul class="list-inline">
+                                <li>
+                                    <i class="fa fa-map-marker"></i> Spain
+                                </li>
+                                <li>
+                                    <i class="fa fa-calendar"></i> 18 Jan 1982
+                                </li>
+                                <li>
+                                    <i class="fa fa-briefcase"></i> Design
+                                </li>
+                                <li>
+                                    <i class="fa fa-star"></i> Top Seller
+                                </li>
+                                <li>
+                                    <i class="fa fa-heart"></i> BASE Jumping
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="portlet profile-summary">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        用户信息
                                     </div>
                                 </div>
-                                <!--end col-md-4-->
+                                <div class="portlet-body">
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            <span class="sale-info">
+                                                @Html.DisplayNameFor(model => model.UserId)
+                                            </span>
+                                            <span class="sale-num">
+                                                @Html.DisplayFor(model => model.UserId)
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="sale-info">
+                                                @Html.DisplayNameFor(model => model.UserName)
+                                            </span>
+                                            <span class="sale-num">
+                                                @Html.DisplayFor(model => model.UserName)
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="sale-info">
+                                                @Html.DisplayNameFor(model => model.Name)
+                                            </span>
+                                            <span class="sale-num">
+                                                @Html.DisplayFor(model => model.Name)
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="sale-info">
+                                                @Html.DisplayNameFor(model => model.UserGroupId)
+                                            </span>
+                                            <span class="sale-num">
+                                                @Model.UserGroupTitle()
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="sale-info">
+                                                @Html.DisplayNameFor(model => model.LastLoginTime)
+                                            </span>
+                                            <span class="sale-num">
+                                                @Html.DisplayFor(model => model.LastLoginTime)
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="sale-info">
+                                                @Html.DisplayNameFor(model => model.CurrentLoginTime)
+                                            </span>
+                                            <span class="sale-num">
+                                                @Html.DisplayFor(model => model.CurrentLoginTime)
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="sale-info">
+                                                @Html.DisplayNameFor(model => model.DepartmentId)
+                                            </span>
+                                            <span class="sale-num">
+                                                @Html.DisplayFor(model => model.DepartmentId)
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="sale-info">
+                                                @Html.DisplayNameFor(model => model.IsSystem)
+                                            </span>
+                                            <span class="sale-num">
+                                                @if (Model.IsSystem)
+                                                {
+                                                    <span>是</span>
+                                                }
+                                                else
+                                                {
+                                                    <span>否</span>
+                                                }
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                            <!--end row-->
                         </div>
                     </div>
+                    <!-- end row-->
                 </div>
                 <div class="tab-pane" id="tab_1_2">
                     <div class="row profile-account">
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <ul class="ver-inline-menu tabbable margin-bottom-10">
                                 <li class="active">
                                     <a data-toggle="tab" href="#tab_1_2_1">
@@ -218,7 +176,7 @@
                                     </span>
                                 </li>
                                 <li>
-                                    <a data-toggle="tab" href="#tab_1_2_2">
+                                    <a data-toggle="tab" href="#tab_avatar">
                                         <i class="fa fa-picture-o"></i> 修改头像
                                     </a>
                                 </li>
@@ -229,7 +187,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-10">
                             <div class="tab-content">
                                 <div id="tab_1_2_1" class="tab-pane active">
                                     <form role="form" action="#">
@@ -249,18 +207,6 @@
                                             <label class="control-label">Interests</label>
                                             <input type="text" placeholder="Design, Web etc." class="form-control" />
                                         </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Occupation</label>
-                                            <input type="text" placeholder="Web Developer" class="form-control" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">About</label>
-                                            <textarea class="form-control" rows="3" placeholder="We are KeenThemes!!!"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Website Url</label>
-                                            <input type="text" placeholder="http://www.mywebsite.com" class="form-control" />
-                                        </div>
                                         <div class="margiv-top-10">
                                             <a href="#" class="btn green">
                                                 Save Changes
@@ -271,49 +217,38 @@
                                         </div>
                                     </form>
                                 </div>
-                                <div id="tab_1_2_2" class="tab-pane">
-                                    <p>
-                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
-                                    </p>
-                                    <form action="#" role="form">
+                                <div id="tab_avatar" class="tab-pane">
+                                    <div id="result-content2"></div>
+                                    <p>请选择图片，图片大小不能超过1M。图片会缩放成256x256大小。</p>
+                                    <form id="avatar-form" role="form" method="post" enctype="multipart/form-data">
+                                        @Html.AntiForgeryToken()
                                         <div class="form-group">
                                             <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
-                                                    <img src="#" alt="" />
+                                                <div class="fileinput-new thumbnail" style="width: 256px; height: 256px;">
+                                                    <img src="@Model.AvatarUrl" alt="" />
                                                 </div>
-                                                <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;">
+                                                <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 256px; max-height: 256px;">
                                                 </div>
                                                 <div>
                                                     <span class="btn default btn-file">
                                                         <span class="fileinput-new">
-                                                            Select image
+                                                            选择图片
                                                         </span>
                                                         <span class="fileinput-exists">
-                                                            Change
+                                                            修改
                                                         </span>
-                                                        <input type="file" name="...">
+                                                        <input type="file" name="avatarfile" id="avatarfile">
                                                     </span>
                                                     <a href="#" class="btn default fileinput-exists" data-dismiss="fileinput">
-                                                        Remove
+                                                        删除
                                                     </a>
                                                 </div>
                                             </div>
-                                            <div class="clearfix margin-top-10">
-                                                <span class="label label-danger">
-                                                    NOTE!
-                                                </span>
-                                                <span>
-                                                    Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only
-                                                </span>
-                                            </div>
                                         </div>
+                                        <hr />
                                         <div class="margin-top-10">
-                                            <a href="#" class="btn green">
-                                                Submit
-                                            </a>
-                                            <a href="#" class="btn default">
-                                                Cancel
-                                            </a>
+                                            <input type="submit" class="btn green" value="保存" />
+                                            <input type="reset" class="btn default" value="取消" />
                                         </div>
                                     </form>
                                 </div>
@@ -357,7 +292,12 @@
         $(function () {
             Rhea.leftNavActive($('#account-index-menu'));
             FormWizard.init();
+
+            $('#avatar-form').ajaxForm({
+                target: '#result-content2',
+                url: '/Account/UploadAvatar'
+            });
+
         });
     </script>
 }
-

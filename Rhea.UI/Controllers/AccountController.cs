@@ -8,6 +8,8 @@ using Rhea.UI.Models;
 using Rhea.UI.Services;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -133,6 +135,8 @@ namespace Rhea.UI.Controllers
         public ActionResult Index()
         {
             var user = this.userBusiness.GetByUserName(User.Identity.Name);
+            if (!string.IsNullOrEmpty(user.AvatarUrl))
+                user.AvatarUrl = RheaConstant.AvatarRoot + user.AvatarUrl;
             return View(user);
         }
 
@@ -163,6 +167,80 @@ namespace Rhea.UI.Controllers
                 ViewBag.Message = "修改密码失败，" + result.DisplayName() + ".";
 
             return View();
+        }
+
+        /// <summary>
+        /// 上传头像
+        /// </summary>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult UploadAvatar()
+        {
+            HttpPostedFileBase hp = Request.Files["avatarfile"];
+            if (hp == null)
+            {
+                ViewBag.Message = "请选择文件";
+                return View("UploadAvatarResult");
+            }
+
+            var user = this.userBusiness.GetByUserName(User.Identity.Name);
+
+            string uploadPath = Server.MapPath(RheaConstant.AvatarRoot);
+            //文件名为用户ID
+            string fileName = user._id + Path.GetExtension(hp.FileName);
+
+            long contentLength = hp.ContentLength;
+            //文件不能大于1M
+            if (contentLength > 1024 * 1024)
+            {
+                ViewBag.Message = "文件大小超过限制要求.";
+                return View("UploadAvatarResult");
+            }
+
+            if (!Util.CheckImageExtension(fileName))
+            {
+                ViewBag.Message = "请上传图片文件.";
+                return View("UploadAvatarResult");
+            }
+
+            try
+            {
+                string name = Path.GetFileNameWithoutExtension(fileName);
+                string ext = Path.GetExtension(fileName);
+
+                Bitmap image = Util.ResizeImage(hp.InputStream, 256, 256);
+                string filePath = uploadPath + fileName;
+                image.Save(filePath);
+
+                Bitmap large = Util.ResizeImage(filePath, 128, 128);
+                string largePath = uploadPath + name + "_128" + ext;
+                large.Save(largePath);
+
+                Bitmap medium = Util.ResizeImage(filePath, 64, 64);
+                string mediumPath = uploadPath + name + "_64" + ext;
+                medium.Save(mediumPath);
+
+                Bitmap small = Util.ResizeImage(filePath, 32, 32);
+                string smallPath = uploadPath + name + "_32" + ext;
+                small.Save(smallPath);
+
+                ErrorCode result = this.userBusiness.ChangeAvatar(user, fileName, name + "_128" + ext, name + "_64" + ext, name + "_32" + ext);
+                if (result == ErrorCode.Success)
+                {
+                    ViewBag.Message = "保存头像成功";
+                }
+                else
+                {
+                    ViewBag.Message = result.DisplayName();
+                }
+            }
+            catch
+            {
+                ViewBag.Message = "上传失败.";
+            }
+
+            return View("UploadAvatarResult");
         }
         #endregion //Action
     }

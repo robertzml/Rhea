@@ -131,6 +131,10 @@ namespace Rhea.Business.Account
             data.LastLoginTime = DateTime.Now;
             data.CurrentLoginTime = DateTime.Now;
             data.DepartmentId = 0;
+            data.AvatarUrl = "default.png";
+            data.AvatarLarge = "default_128.png";
+            data.AvatarMedium = "default_64.png";
+            data.AvatarSmall = "default_32.png";
             return this.userRepository.Create(data);
         }
 
@@ -171,6 +175,40 @@ namespace Rhea.Business.Account
                 return ErrorCode.WrongPassword;
 
             user.Password = Hasher.SHA1Encrypt(newPassword);
+
+            return this.userRepository.Update(user);
+        }
+
+        /// <summary>
+        /// 修改头像
+        /// </summary>
+        /// <param name="data">用户对象</param>
+        /// <param name="avatarUrl">新头像地址</param>
+        /// <returns></returns>
+        public ErrorCode ChangeAvatar(User data, string avatarUrl)
+        {
+            var user = this.userRepository.Get(data._id);
+            user.AvatarUrl = avatarUrl;
+
+            return this.userRepository.Update(user);
+        }
+
+        /// <summary>
+        /// 修改头像
+        /// </summary>
+        /// <param name="data">用户对象</param>
+        /// <param name="avatarUrl">新头像地址</param>
+        /// <param name="largeUrl">大头像</param>
+        /// <param name="mediumUrl">中头像</param>
+        /// <param name="smallUrl">小头像</param>
+        /// <returns></returns>
+        public ErrorCode ChangeAvatar(User data, string avatarUrl, string largeUrl, string mediumUrl, string smallUrl)
+        {
+            var user = this.userRepository.Get(data._id);
+            user.AvatarUrl = avatarUrl;
+            user.AvatarLarge = largeUrl;
+            user.AvatarMedium = mediumUrl;
+            user.AvatarSmall = smallUrl;
 
             return this.userRepository.Update(user);
         }

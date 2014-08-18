@@ -1,4 +1,5 @@
-﻿using Rhea.Business.Account;
+﻿using Rhea.Business;
+using Rhea.Business.Account;
 using Rhea.Common;
 using Rhea.Model;
 using Rhea.Model.Account;
@@ -43,7 +44,8 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult List()
         {
-            var data = this.userBusiness.Get();
+            var data = this.userBusiness.Get().ToList();
+            data.ForEach(r => r.AvatarSmall = RheaConstant.AvatarRoot + r.AvatarSmall);
             return View(data);
         }
 

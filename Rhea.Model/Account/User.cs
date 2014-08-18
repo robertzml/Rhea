@@ -87,10 +87,35 @@ namespace Rhea.Model.Account
 
         /// <summary>
         /// 头像地址
+        /// 256x256
         /// </summary>
         [BsonElement("avatarUrl")]
         [Display(Name = "头像")]
         public string AvatarUrl { get; set; }
+
+        /// <summary>
+        /// 大头像
+        /// 128x128
+        /// </summary>
+        [BsonElement("avatarLarge")]
+        [Display(Name = "大头像")]
+        public string AvatarLarge { get; set; }
+
+        /// <summary>
+        /// 中头像
+        /// 64x64
+        /// </summary>
+        [BsonElement("avatarMedium")]
+        [Display(Name = "中头像")]
+        public string AvatarMedium { get; set; }
+
+        /// <summary>
+        /// 小头像
+        /// 32x32
+        /// </summary>
+        [BsonElement("avatarSmall")]
+        [Display(Name = "小头像")]
+        public string AvatarSmall { get; set; }
 
         /// <summary>
         /// 备注

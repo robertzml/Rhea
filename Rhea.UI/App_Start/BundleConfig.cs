@@ -45,6 +45,9 @@ namespace Rhea.UI
                       "~/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js",
                       "~/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-CN.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/fileinput").Include(
+                "~/plugins/bootstrap-fileinput/bootstrap-fileinput.js"));
+
 
             // For css
             bundles.Add(new StyleBundle("~/Content/fontawesome").Include(
@@ -73,6 +76,9 @@ namespace Rhea.UI
 
             bundles.Add(new StyleBundle("~/Plugin/datepicker").Include(
                     "~/plugins/bootstrap-datepicker/css/datepicker3.css"));
+
+            bundles.Add(new StyleBundle("~/Plugin/fileinput").Include(
+                "~/plugins/bootstrap-fileinput/bootstrap-fileinput.css"));
 
             // 将 EnableOptimizations 设为 false 以进行调试。有关详细信息，
             // 请访问 http://go.microsoft.com/fwlink/?LinkId=301862

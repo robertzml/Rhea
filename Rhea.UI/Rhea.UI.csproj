@@ -189,9 +189,14 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\FilesStatus.cs" />
     <Compile Include="Services\FormsAuthenticationService.cs" />
     <Compile Include="Services\IFormsAuthenticationService.cs" />
     <Compile Include="Services\ModelExtension.cs" />
+    <Compile Include="Services\UploadHandler.ashx.cs">
+      <DependentUpon>UploadHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\Util.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -569,6 +574,14 @@
     <Content Include="plugins\bootstrap-datepicker\css\datepicker3.css" />
     <Content Include="plugins\bootstrap-datepicker\js\bootstrap-datepicker.js" />
     <Content Include="plugins\bootstrap-datepicker\js\locales\bootstrap-datepicker.zh-CN.js" />
+    <Content Include="plugins\bootstrap-fileinput\bootstrap-fileinput.css" />
+    <Content Include="plugins\bootstrap-fileinput\bootstrap-fileinput.js" />
+    <Content Include="plugins\bootstrap-hover-dropdown\bootstrap-hover-dropdown.js" />
+    <Content Include="plugins\bootstrap-hover-dropdown\bootstrap-hover-dropdown.min.js" />
+    <Content Include="plugins\bootstrap-switch\css\bootstrap-switch.css" />
+    <Content Include="plugins\bootstrap-switch\css\bootstrap-switch.min.css" />
+    <Content Include="plugins\bootstrap-switch\js\bootstrap-switch.js" />
+    <Content Include="plugins\bootstrap-switch\js\bootstrap-switch.min.js" />
     <Content Include="plugins\bootstrap\css\bootstrap.css" />
     <Content Include="plugins\bootstrap\css\bootstrap.min.css" />
     <Content Include="plugins\bootstrap\fonts\glyphicons-halflings-regular.svg" />
@@ -694,6 +707,40 @@
     <Content Include="plugins\datatables\plugins\bootstrap\dataTables.bootstrap.js" />
     <Content Include="plugins\excanvas.min.js" />
     <Content Include="plugins\jquery-1.11.0.min.map" />
+    <Content Include="plugins\jquery-file-upload\blueimp-gallery\blueimp-gallery.min.css" />
+    <Content Include="plugins\jquery-file-upload\blueimp-gallery\jquery.blueimp-gallery.min.js" />
+    <Content Include="plugins\jquery-file-upload\cors\postmessage.html" />
+    <Content Include="plugins\jquery-file-upload\cors\result.html" />
+    <Content Include="plugins\jquery-file-upload\css\demo-ie8.css" />
+    <Content Include="plugins\jquery-file-upload\css\demo.css" />
+    <Content Include="plugins\jquery-file-upload\css\jquery.fileupload-noscript.css" />
+    <Content Include="plugins\jquery-file-upload\css\jquery.fileupload-ui-noscript.css" />
+    <Content Include="plugins\jquery-file-upload\css\jquery.fileupload-ui.css" />
+    <Content Include="plugins\jquery-file-upload\css\jquery.fileupload.css" />
+    <Content Include="plugins\jquery-file-upload\css\style.css" />
+    <Content Include="plugins\jquery-file-upload\img\loading.gif" />
+    <Content Include="plugins\jquery-file-upload\img\progressbar.gif" />
+    <Content Include="plugins\jquery-file-upload\js\app.js" />
+    <Content Include="plugins\jquery-file-upload\js\cors\jquery.postmessage-transport.js" />
+    <Content Include="plugins\jquery-file-upload\js\cors\jquery.xdr-transport.js" />
+    <Content Include="plugins\jquery-file-upload\js\jquery.fileupload-angular.js" />
+    <Content Include="plugins\jquery-file-upload\js\jquery.fileupload-audio.js" />
+    <Content Include="plugins\jquery-file-upload\js\jquery.fileupload-image.js" />
+    <Content Include="plugins\jquery-file-upload\js\jquery.fileupload-jquery-ui.js" />
+    <Content Include="plugins\jquery-file-upload\js\jquery.fileupload-process.js" />
+    <Content Include="plugins\jquery-file-upload\js\jquery.fileupload-ui.js" />
+    <Content Include="plugins\jquery-file-upload\js\jquery.fileupload-validate.js" />
+    <Content Include="plugins\jquery-file-upload\js\jquery.fileupload-video.js" />
+    <Content Include="plugins\jquery-file-upload\js\jquery.fileupload.js" />
+    <Content Include="plugins\jquery-file-upload\js\jquery.iframe-transport.js" />
+    <Content Include="plugins\jquery-file-upload\js\main.js" />
+    <Content Include="plugins\jquery-file-upload\js\vendor\canvas-to-blob.min.js" />
+    <Content Include="plugins\jquery-file-upload\js\vendor\jquery.ui.widget.js" />
+    <Content Include="plugins\jquery-file-upload\js\vendor\load-image.min.js" />
+    <Content Include="plugins\jquery-file-upload\js\vendor\tmpl.min.js" />
+    <Content Include="plugins\jquery-form\jquery.form.js" />
+    <Content Include="plugins\jquery-slimscroll\jquery.slimscroll.js" />
+    <Content Include="plugins\jquery-slimscroll\jquery.slimscroll.min.js" />
     <Content Include="plugins\jquery.blockui.min.js" />
     <Content Include="plugins\jquery.cokie.min.js" />
     <Content Include="plugins\select2\README.md" />
@@ -770,6 +817,11 @@
     <Content Include="Areas\Apartment\Views\Shared\EditorTemplates\ResideType.cshtml" />
     <Content Include="Areas\Apartment\Views\Shared\EditorTemplates\Orientation.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Orientation.cshtml" />
+    <Content Include="plugins\bootstrap-hover-dropdown\LICENSE" />
+    <Content Include="plugins\bootstrap-switch\LICENSE" />
+    <Content Include="plugins\bootstrap-switch\README.md" />
+    <Content Include="plugins\jquery-slimscroll\README.md" />
+    <Content Include="plugins\jquery-file-upload\README.md" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="plugins\jquery-1.11.0.min.js" />
@@ -910,6 +962,8 @@
     <Content Include="Views\Shared\_Layout_Account.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Services\UploadHandler.ashx" />
+    <Content Include="Views\Account\UploadAvatarResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
