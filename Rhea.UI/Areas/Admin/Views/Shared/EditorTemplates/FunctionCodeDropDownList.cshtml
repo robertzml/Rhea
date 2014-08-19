@@ -1,0 +1,16 @@
+﻿@model RoomFunctionCode
+
+<select class="form-control" id="FunctionCodeId" name="FunctionCodeId">
+    <option value="">-- 请选择 --</option>
+    @{
+        DictionaryBusiness business = new DictionaryBusiness();
+        List<RoomFunctionCode> codes = business.GetRoomFunctionCodes();
+
+        foreach (var item in codes)
+        {
+            <option value="@item.CodeId" @(Model.CodeId == item.CodeId ? "selected='selected'" : "")>
+                @item.CodeId - @item.FunctionProperty
+            </option>
+        }
+    }
+</select>

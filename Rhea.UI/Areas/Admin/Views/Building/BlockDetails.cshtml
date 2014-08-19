@@ -410,6 +410,7 @@
                                     @item.Remark
                                 </td>
                                 <td>
+                                    <a href="@Url.Action("UploadSvg", new { controller = "Building", buildingId = Model.BuildingId, floorId = item.Id })" class="btn btn-primary btn-sm" role="button"><i class="fa fa-upload"></i>&nbsp;上传平面图</a>
                                     <a href="@Url.Action("EditFloor", new { controller = "Building", buildingId = Model.BuildingId, floorId = item.Id })" class="btn btn-warning btn-sm" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
                                 </td>
                             </tr>

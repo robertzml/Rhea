@@ -4,6 +4,7 @@ using Rhea.Business.Personnel;
 using Rhea.Model;
 using Rhea.Model.Estate;
 using Rhea.UI.Areas.Estate.Models;
+using Rhea.UI.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
     /// <summary>
     /// 建筑控制器
     /// </summary>
+    [EnhancedAuthorize(Roles = "Root, Administrator, Estate")]
     public class BuildingController : Controller
     {
         #region Function

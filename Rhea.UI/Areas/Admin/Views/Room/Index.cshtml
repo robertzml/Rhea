@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "房间管理";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Estate.cshtml";
+}
+
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">
+    @ViewBag.Title
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index", "Estate")">房产管理</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">@ViewBag.Title</a>
+        </li>
+    </ul>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="alert alert-warning">
+            <strong>Warning!</strong> 载入房间列表会耗时较长，慎用!
+        </div>
+        <p>
+            <a href="@Url.Action("List", new { controller = "Room" })" class="btn btn-primary" role="button"><i class="fa fa-list"></i>&nbsp;房间列表</a>
+        </p>
+    </div>
+</div>
+<!-- END PAGE CONTENT-->
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            Rhea.topNavActive($('#estate-nav'));
+            Rhea.leftNavActive($('#room-list-menu'));
+        });
+    </script>
+}
+
+
+
+
+

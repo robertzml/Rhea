@@ -368,6 +368,51 @@ namespace Rhea.UI.Areas.Admin.Controllers
             ViewBag.BuildingId = buildingId;
             return View(model);
         }
+
+        /// <summary>
+        /// 上传平面图
+        /// </summary>
+        /// <param name="buildingId">建筑ID</param>
+        /// <param name="floorId">楼层ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult UploadSvg(int buildingId, int floorId)
+        {
+            ViewBag.BuildingId = buildingId;
+            var data = this.buildingBusiness.GetFloor(buildingId, floorId);
+            return View(data);            
+        }
+
+        /// <summary>
+        /// 上传平面图
+        /// </summary>
+        /// <param name="model">楼层对象</param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult UploadSvg(Floor model)
+        {
+            int buildingId = Convert.ToInt32(Request.Form["BuildingId"]);
+            string oldSvg = Request.Form["OldSvg"];
+            ViewBag.BuildingId = buildingId;
+
+            if (ModelState.IsValid)
+            {
+                ErrorCode result = this.buildingBusiness.UpdateSvg(buildingId, model);
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "编辑平面图成功";
+                    return RedirectToAction("Details", "Building", new { id = buildingId });
+                }
+                else
+                {
+                    ModelState.AddModelError("", "编辑平面图失败");
+                    ModelState.AddModelError("", result.DisplayName());
+                }
+            }
+
+            return View(model);
+        }
         #endregion //Action
     }
 }

@@ -1,0 +1,258 @@
+﻿@model Rhea.Model.Estate.Floor
+
+@{
+    ViewBag.Title = "上传平面图";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Estate.cshtml";
+}
+
+@section styles{
+    @Styles.Render("~/Plugin/fileupload")
+}
+
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">
+    @ViewBag.Title
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index", "Estate")">房产管理</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">建筑管理</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">@ViewBag.Title</a>
+        </li>
+    </ul>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box green">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-th"></i>楼层信息
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+                    <a href="javascript:;" class="reload">
+                    </a>
+                    <a href="javascript:;" class="remove">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            <fieldset>
+                                <legend>楼层属性</legend>
+
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.Hidden("BuildingId")
+                                @Html.Hidden("OldSvg", Model.ImageUrl)
+
+                                <table class="table table-bordered table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-md-2">属性</th>
+                                            <th class="col-md-8">值</th>
+                                            <th class="col-md-2">验证</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                @Html.LabelFor(model => model.Id)
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                            </td>
+                                            <td>
+                                                @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @Html.LabelFor(model => model.Number)
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(model => model.Number, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                            </td>
+                                            <td>
+                                                @Html.ValidationMessageFor(model => model.Number, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @Html.LabelFor(model => model.Name)
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                            </td>
+                                            <td>
+                                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @Html.LabelFor(model => model.ImageUrl)
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(model => model.ImageUrl, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                            </td>
+                                            <td>
+                                                @Html.ValidationMessageFor(model => model.ImageUrl, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <hr />
+                                <p>
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;保存</button>
+                                    <a href="@Url.Action("Details", new { controller = "Building", id = ViewBag.BuildingId })" class="btn btn-default" role="button"><i class="fa fa-list"></i>&nbsp;取消</a>
+                                </p>
+                            </fieldset>
+                        }
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <hr />
+                        <span class="btn btn-success fileinput-button">
+                            <i class="fa fa-upload"></i>
+                            <span>选择文件</span>
+                            <!-- The file input field used as target for the file upload widget -->
+                            <input id="fileupload" type="file" name="files[]" multiple>
+                        </span>
+                        <br /><br />
+
+                        <!-- The global progress bar -->
+                        <div id="progress" class="progress progress-striped">
+                            <div class="progress-bar progress-bar-success"></div>
+                        </div>
+
+                        <!-- The container for the uploaded files -->
+                        <div id="files" class="files"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT-->
+
+@section scripts {
+<script src="/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js"></script>
+    @Scripts.Render("~/bundles/fileupload")
+
+    <script type="text/javascript">
+        $(function () {
+            Rhea.topNavActive($('#estate-nav'));
+            Rhea.leftNavActive($('#building-list-menu'));
+
+            var uploadButton = $('<button/>')
+                .addClass('btn btn-info')
+                .prop('disabled', true)
+                .text('处理中...')
+                .on('click', function () {
+                    var $this = $(this),
+                    data = $this.data();
+                    $this.off('click').text('中止').on('click', function () {
+                        $this.remove();
+                        data.abort();
+                    });
+                    data.submit().always(function () {
+                        $this.remove();
+                    });
+                });
+
+            $('#fileupload').fileupload({
+                url: "/Services/UploadHandler.ashx",
+                dataType: 'json',
+                autoUpload: false,
+                acceptFileTypes: /(\.|\/)(svg)$/i,
+                maxFileSize: 5000000, // 5 MB              
+                disableImageResize: /Android(?!.*Chrome)|Opera/
+                    .test(window.navigator.userAgent),
+                previewMaxWidth: 100,
+                previewMaxHeight: 100,
+                previewCrop: true,
+                maxNumberOfFiles: 1
+            }).on('fileuploadadd', function (e, data) {
+                data.context = $('<div/>').appendTo('#files');
+                $.each(data.files, function (index, file) {
+                    var node = $('<p/>')
+                            .append($('<span/>').text(file.name));
+                    if (!index) {
+                        node
+                            .append('<br>')
+                            .append(uploadButton.clone(true).data(data));
+                    }
+                    node.appendTo(data.context);
+                });
+            }).on('fileuploadprocessalways', function (e, data) {
+                var index = data.index,
+                    file = data.files[index],
+                    node = $(data.context.children()[index]);
+                if (file.preview) {
+                    node
+                        .prepend('<br>')
+                        .prepend(file.preview);
+                }
+                if (file.error) {
+                    node
+                        .append('<br>')
+                        .append($('<span class="text-danger"/>').text(file.error));
+                }
+                if (index + 1 === data.files.length) {
+                    data.context.find('button')
+                        .text('上传')
+                        .prop('disabled', !!data.files.error);
+                }
+            }).on('fileuploadprogressall', function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $('#progress .progress-bar').css(
+                    'width',
+                    progress + '%'
+                );
+            }).on('fileuploaddone', function (e, data) {
+                $.each(data.files, function (index, file) {
+                    $('<p/>').text(file.name + ", 上传完成!").appendTo('#files');
+                    $('#ImageUrl').val(file.name);
+                    if (file.url) {
+                        var link = $('<a>')
+                            .attr('target', '_blank')
+                            .prop('href', file.url);
+                        $(data.context.children()[index])
+                            .wrap(link);
+                    } else if (file.error) {
+                        var error = $('<span class="text-danger"/>').text(file.error);
+                        $(data.context.children()[index])
+                            .append('<br>')
+                            .append(error);
+                    }
+                });
+            }).on('fileuploadfail', function (e, data) {
+                $.each(data.files, function (index, file) {
+                    var error = $('<span class="text-danger"/>').text('文件上传失败.');
+                    $(data.context.children()[index])
+                        .append('<br>')
+                        .append(error);
+                });
+            }).prop('disabled', !$.support.fileInput)
+                .parent().addClass($.support.fileInput ? undefined : 'disabled');
+        });
+    </script>
+}

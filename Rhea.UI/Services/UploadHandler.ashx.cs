@@ -25,14 +25,6 @@ namespace Rhea.UI.Services
         #endregion //Constructor
 
         #region Function
-        private string StorageRoot
-        {
-            get
-            {
-                return Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Files/"));
-            } //Path should! always end with '/'
-        }
-
         // Handle request based on method
         private void HandleMethod(HttpContext context)
         {
@@ -199,12 +191,22 @@ namespace Rhea.UI.Services
         #region Method
         public void ProcessRequest(HttpContext context)
         {
-            context.Response.ContentType = "text/plain";
-            context.Response.Write("Hello World");
+            context.Response.AddHeader("Pragma", "no-cache");
+            context.Response.AddHeader("Cache-Control", "private, no-cache");
+
+            HandleMethod(context);
         }
         #endregion //Method
 
         #region Property
+        private string StorageRoot
+        {
+            get
+            {
+                return Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Attachment/svg2/"));
+            } //Path should! always end with '/'
+        }
+
         public bool IsReusable
         {
             get

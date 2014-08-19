@@ -2,6 +2,9 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";  
 }
 
+@section styles {
+    @RenderSection("styles", required: false)
+}
 
 <!-- BEGIN SIDEBAR -->
 <div class="page-sidebar-wrapper">
@@ -90,7 +93,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="@Url.Action("List", "Room")" id="room-list-menu">
+                        <a href="@Url.Action("Index", "Room")" id="room-list-menu">
                             房间列表
                         </a>
                     </li>

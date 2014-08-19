@@ -66,6 +66,15 @@ namespace Rhea.UI
             bundles.Add(new ScriptBundle("~/bundles/bootstrap-switch").Include(
                 "~/plugins/bootstrap-switch/js/bootstrap-switch.min.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/fileupload").Include(
+                "~/plugins/jquery-file-upload/js/vendor/load-image.min.js",
+                "~/plugins/jquery-file-upload/js/vendor/canvas-to-blob.min.js",
+                "~/plugins/jquery-file-upload/js/jquery.iframe-transport.js",
+                "~/plugins/jquery-file-upload/js/jquery.fileupload.js",
+                "~/plugins/jquery-file-upload/js/jquery.fileupload-process.js",
+                "~/plugins/jquery-file-upload/js/jquery.fileupload-image.js",
+                "~/plugins/jquery-file-upload/js/jquery.fileupload-validate.js"));
+
             // For css
             bundles.Add(new StyleBundle("~/Content/fontawesome").Include(
                       "~/Content/font-awesome.min.css"));
@@ -99,6 +108,11 @@ namespace Rhea.UI
 
             bundles.Add(new StyleBundle("~/Plugin/fileinput").Include(
                 "~/plugins/bootstrap-fileinput/bootstrap-fileinput.css"));
+
+            bundles.Add(new StyleBundle("~/Plugin/fileupload").Include(
+                "~/plugins/jquery-file-upload/blueimp-gallery/blueimp-gallery.min.css",
+                "~/plugins/jquery-file-upload/css/jquery.fileupload.css",
+                "~/plugins/jquery-file-upload/css/jquery.fileupload-ui.css"));
 
             // 将 EnableOptimizations 设为 false 以进行调试。有关详细信息，
             // 请访问 http://go.microsoft.com/fwlink/?LinkId=301862

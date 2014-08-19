@@ -37,6 +37,15 @@ namespace Rhea.UI.Areas.Admin.Controllers
 
         #region Action
         /// <summary>
+        /// 房间管理
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        /// <summary>
         /// 房间列表
         /// </summary>
         /// <returns></returns>
@@ -71,6 +80,52 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             var data = this.roomBusiness.Get(id);
             return View(data);
+        }
+
+        /// <summary>
+        /// 房间编辑
+        /// </summary>
+        /// <param name="id">房间ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var data = this.roomBusiness.Get(id);
+            return View(data);
+        }
+
+        /// <summary>
+        /// 房间编辑
+        /// </summary>
+        /// <param name="model">房间模型</param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Edit(Room model)
+        {
+            if (ModelState.IsValid)
+            {
+                string codeId = Request.Form["FunctionCodeId"];
+                DictionaryBusiness dictionaryBusiness = new DictionaryBusiness();
+                RoomFunctionCode codes = dictionaryBusiness.GetRoomFunctionCodes().Single(r => r.CodeId == codeId);
+
+                model.Function = codes;
+                model.Status = 0;
+                ErrorCode result = this.roomBusiness.Update(model);
+
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "编辑房间成功";
+                    return RedirectToAction("Details", new { controller = "Room", id = model.RoomId });
+                }
+                else
+                {
+                    TempData["Message"] = "编辑房间失败";
+                    ModelState.AddModelError("", result.DisplayName());
+                }
+            }
+
+            return View(model);
         }
         #endregion //Action
     }

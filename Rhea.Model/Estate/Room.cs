@@ -10,6 +10,9 @@ namespace Rhea.Model.Estate
     /// <summary>
     /// 房间类
     /// </summary>
+    /// <remarks>
+    /// 18个基本属性,18个附加属性
+    /// </remarks>
     [CollectionName("room")]
     public class Room : MongoEntity
     {
@@ -122,6 +125,7 @@ namespace Rhea.Model.Estate
         /// 开始使用日期
         /// </summary>
         [DataType(DataType.Date)]
+        [BsonDateTimeOptions(DateOnly = true)]
         [BsonElement("startDate")]
         [Display(Name = "开始使用日期")]
         public DateTime? StartDate { get; set; }

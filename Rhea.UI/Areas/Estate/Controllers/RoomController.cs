@@ -1,17 +1,19 @@
-﻿using System;
+﻿using Rhea.Business;
+using Rhea.Business.Estate;
+using Rhea.Model.Estate;
+using Rhea.UI.Filters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Rhea.Business;
-using Rhea.Business.Estate;
-using Rhea.Model.Estate;
 
 namespace Rhea.UI.Areas.Estate.Controllers
 {
     /// <summary>
     /// 房间控制器
     /// </summary>
+    [EnhancedAuthorize(Roles = "Root, Administrator, Estate")]
     public class RoomController : Controller
     {
         #region Action

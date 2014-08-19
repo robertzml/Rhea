@@ -178,6 +178,20 @@ namespace Rhea.Business.Estate
                 return ErrorCode.NotImplement;
             }
         }
+
+        /// <summary>
+        /// 编辑平面图
+        /// </summary>
+        /// <param name="buildingId">所属建筑ID</param>
+        /// <param name="data">楼层对象</param>
+        /// <returns></returns>
+        public ErrorCode UpdateSvg(int buildingId, Floor data)
+        {
+            Floor floor = this.GetFloor(buildingId, data.Id);
+            floor.ImageUrl = data.ImageUrl;
+
+            return this.UpdateFloor(buildingId, floor);
+        }
         #endregion //Building
 
         #region BuildingGroup

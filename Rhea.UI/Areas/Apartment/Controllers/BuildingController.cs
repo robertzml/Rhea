@@ -3,6 +3,7 @@ using Rhea.Business.Apartment;
 using Rhea.Business.Estate;
 using Rhea.Model.Estate;
 using Rhea.UI.Areas.Apartment.Models;
+using Rhea.UI.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
     /// <summary>
     /// 青教建筑控制器
     /// </summary>
+    [EnhancedAuthorize(Roles = "Root, Administrator, Apartment")]
     public class BuildingController : Controller
     {
         #region Action

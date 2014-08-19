@@ -5,12 +5,14 @@ using System.Web;
 using System.Web.Mvc;
 using Rhea.Business.Estate;
 using Rhea.Model.Estate;
+using Rhea.UI.Filters;
 
 namespace Rhea.UI.Areas.Estate.Controllers
 {
     /// <summary>
     /// 房产管理主控制器
     /// </summary>
+    [EnhancedAuthorize(Roles = "Root, Administrator, Estate")]
     public class HomeController : Controller
     {
         #region Action

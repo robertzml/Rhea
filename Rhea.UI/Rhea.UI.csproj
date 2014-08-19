@@ -830,6 +830,10 @@
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\DepartmentType.cshtml" />
     <Content Include="Areas\Admin\Views\User\ListByGroup.cshtml" />
     <Content Include="Areas\Admin\Views\UserGroup\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Room\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Room\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\FunctionCodeDropDownList.cshtml" />
+    <Content Include="Areas\Admin\Views\Building\UploadSvg.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="plugins\jquery-1.11.0.min.js" />

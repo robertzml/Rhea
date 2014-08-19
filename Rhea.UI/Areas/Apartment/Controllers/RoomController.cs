@@ -4,6 +4,7 @@ using Rhea.Common;
 using Rhea.Model;
 using Rhea.Model.Apartment;
 using Rhea.UI.Areas.Apartment.Models;
+using Rhea.UI.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
     /// <summary>
     /// 房间控制器
     /// </summary>
+    [EnhancedAuthorize(Roles = "Root, Administrator, Apartment")]
     public class RoomController : Controller
     {
         #region Field

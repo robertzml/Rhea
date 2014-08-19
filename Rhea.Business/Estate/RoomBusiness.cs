@@ -87,6 +87,16 @@ namespace Rhea.Business.Estate
             data.Status = 0;
             return this.roomRepository.Create(data);
         }
+
+        /// <summary>
+        /// 编辑房间
+        /// </summary>
+        /// <param name="data">房间对象</param>
+        /// <returns></returns>
+        public ErrorCode Update(Room data)
+        {
+            return this.roomRepository.Update(data);
+        }
         #endregion //Method
     }
 }
