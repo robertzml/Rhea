@@ -39,5 +39,12 @@ namespace Rhea.Data.Account
         /// <param name="data">用户组对象</param>
         /// <returns></returns>
         ErrorCode Create(UserGroup data);
+
+        /// <summary>
+        /// 编辑用户组
+        /// </summary>
+        /// <param name="data">用户组对象</param>
+        /// <returns></returns>
+        ErrorCode Update(UserGroup data);
     }
 }

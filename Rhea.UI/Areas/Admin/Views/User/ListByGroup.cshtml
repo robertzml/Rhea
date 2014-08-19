@@ -1,13 +1,13 @@
-﻿@model IEnumerable<Rhea.Model.Account.UserGroup>
+﻿@model IEnumerable<Rhea.Model.Account.User>
 
 @{
-    ViewBag.Title = "用户组列表";
+    ViewBag.Title = "用户列表";
     Layout = "~/Areas/Admin/Views/Shared/_Layout_Advance.cshtml";
 }
 
 <!-- BEGIN PAGE HEADER-->
 <h3 class="page-title">
-    @ViewBag.Title
+    @ViewBag.Title <small>@ViewBag.GroupName</small>
 </h3>
 <div class="page-bar">
     <ul class="page-breadcrumb">
@@ -32,7 +32,7 @@
         <div class="portlet box green">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-list"></i>用户组列表
+                    <i class="fa fa-list"></i>用户列表
                 </div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse">
@@ -48,19 +48,28 @@
                     <thead>
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.UserGroupId)
+                                照片
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.UserId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.UserName)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Name)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Title)
+                                @Html.DisplayNameFor(model => model.UserGroupId)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Rank)
+                                @Html.DisplayNameFor(model => model.LastLoginTime)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Remark)
+                                @Html.DisplayNameFor(model => model.CurrentLoginTime)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DepartmentId)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Status)
@@ -73,27 +82,42 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.UserGroupId)
+                                    <img src="@item.AvatarSmall" class="img-responsive" style="height:32px;width:32px;" />
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UserId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UserName)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Name)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Title)
+                                    @item.UserGroupTitle()
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Rank)
+                                    @Html.DisplayFor(modelItem => item.LastLoginTime)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Remark)
+                                    @Html.DisplayFor(modelItem => item.CurrentLoginTime)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Status)
+                                    @Html.DisplayFor(modelItem => item.DepartmentId)
                                 </td>
                                 <td>
-                                    <a href="@Url.Action("Details", new { controller = "UserGroup", id = item.UserGroupId })" class="btn btn-info btn-sm" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
-                                    <a href="@Url.Action("Edit", new { controller = "UserGroup", id = item.UserGroupId })" class="btn btn-warning btn-sm" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
-                                    <a href="@Url.Action("ListByGroup", new { controller = "User", groupId = item.UserGroupId })" class="btn btn-primary btn-sm" role="button"><i class="fa fa-th-list"></i>&nbsp;用户</a>
+                                    @if (item.Status == 0)
+                                    {
+                                        <span class="label label-success">正常</span>
+                                    }
+                                    else if (item.Status == (int)EntityStatus.UserDisable)
+                                    {
+                                        <span class="label label-danger">已禁用</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Details", new { controller = "User", id = item._id })" class="btn btn-info btn-sm" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
+                                    <a href="@Url.Action("Edit", new { controller = "User", id = item._id })" class="btn btn-warning btn-sm" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
                                 </td>
                             </tr>
                         }
@@ -109,7 +133,7 @@
     <script type="text/javascript">
         $(function () {
             Rhea.topNavActive($('#advance-nav'));
-            Rhea.leftNavActive($('#user-group-list-menu'));
+            Rhea.leftNavActive($('#user-list-menu'));
 
             Rhea.initDatatable2($('#user-table'));
         });

@@ -13,48 +13,48 @@ namespace Rhea.Model
     public enum EntityStatus
     {
         /// <summary>
-        /// 正常
+        /// 0:正常
         /// </summary>
         [Display(Name = "正常")]
         Normal = 0,
 
         /// <summary>
-        /// 已删除
+        /// 1:已删除
         /// </summary>
         [Display(Name = "已删除")]
         Deleted = 1,
 
         /// <summary>
         /// 用户类
-        /// 已禁用
+        /// 11:已禁用
         /// </summary>
         [Display(Name = "已禁用")]
-        UserDisable = 2,
+        UserDisable = 11,
 
         /// <summary>
         /// 居住记录类
-        /// 超期
+        /// 50:超期
         /// </summary>
         [Display(Name = "超期")]
         OverTime = 50,
 
         /// <summary>
         /// 居住记录类
-        /// 已搬出
+        /// 51:已搬出
         /// </summary>
         [Display(Name = "已搬出")]
         MoveOut = 51,
 
         /// <summary>
         /// 住户类
-        /// 已搬出
+        /// 55:已搬出
         /// </summary>
         [Display(Name = "已搬出")]
         InhabitantMoveOut = 55,
 
         /// <summary>
         /// 住户类
-        /// 延期居住
+        /// 56:延期居住
         /// </summary>
         [Display(Name = "延期居住")]
         InhabitantExtend = 56

@@ -4,7 +4,7 @@
 
 @section styles {
     <link href="/Content/profile.css" rel="stylesheet" type="text/css" />
-    <link href="/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css" />
+    @Styles.Render("~/Plugin/fileinput")
 }
 
 <!-- BEGIN SIDEBAR -->
@@ -106,7 +106,7 @@
 </div>
 <!-- END CONTENT -->
 @section scripts {
-    <script src="/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
+    @Scripts.Render("~/bundles/fileinput")
     <script src="/plugins/jquery-form/jquery.form.js" type="text/javascript"></script>
     <script src="~/Scripts/account.js" type="text/javascript"></script>
     @RenderSection("scripts", required: false)

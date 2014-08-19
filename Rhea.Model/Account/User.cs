@@ -129,7 +129,7 @@ namespace Rhea.Model.Account
         /// 系统状态
         /// </summary>
         /// <remarks>
-        /// 0:正常, 1:删除, 2:禁用
+        /// 0:正常, 1:删除, 11:禁用
         /// </remarks>
         [BsonElement("status")]
         [Display(Name = "用户状态")]

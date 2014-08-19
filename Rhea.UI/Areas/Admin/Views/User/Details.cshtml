@@ -151,6 +151,10 @@
                                         {
                                             <span class="label label-success">正常</span>
                                         }
+                                        else if (Model.Status == (int)EntityStatus.UserDisable)
+                                        {
+                                            <span class="label label-danger">已禁用</span>
+                                        }
                                     </td>
                                 </tr>
                             </tbody>
@@ -162,6 +166,14 @@
                 <p>
                     <a href="@Url.Action("List", new { controller = "User" })" class="btn btn-primary" role="button"><i class="fa fa-list"></i>&nbsp;回到列表</a>
                     <a href="@Url.Action("Edit", new { controller = "User", id = Model._id })" class="btn btn-warning" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
+                    @if (Model.Status == 0)
+                    {
+                        <a href="@Url.Action("Disable", new { controller = "User", id = Model._id })" class="btn btn-danger" role="button"><i class="fa fa-ban"></i>&nbsp;禁用</a>
+                    }
+                    else if (Model.Status == (int)EntityStatus.UserDisable)
+                    {
+                        <a href="@Url.Action("Enable", new { controller = "User", id = Model._id })" class="btn btn-danger" role="button"><i class="fa fa-check-circle-o"></i>&nbsp;启用</a>
+                    }
                 </p>
             </div>
         </div>

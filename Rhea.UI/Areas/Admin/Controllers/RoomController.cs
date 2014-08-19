@@ -3,6 +3,7 @@ using Rhea.Business.Estate;
 using Rhea.Common;
 using Rhea.Model;
 using Rhea.Model.Estate;
+using Rhea.UI.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,13 @@ using System.Web.Routing;
 
 namespace Rhea.UI.Areas.Admin.Controllers
 {
+    [EnhancedAuthorize(Rank = 900)]
     public class RoomController : Controller
     {
         #region Field
+        /// <summary>
+        /// 房间业务对象
+        /// </summary>
         private RoomBusiness roomBusiness;
         #endregion //Field
 

@@ -91,6 +91,25 @@ namespace Rhea.Data.Mongo.Account
 
             return ErrorCode.Success;
         }
+
+        /// <summary>
+        /// 编辑用户组
+        /// </summary>
+        /// <param name="data">用户组对象</param>
+        /// <returns></returns>
+        public ErrorCode Update(UserGroup data)
+        {
+            try
+            {
+                this.repository.Update(data);
+            }
+            catch(Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
         #endregion //Method
     }
 }

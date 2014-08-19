@@ -3,6 +3,7 @@ using Rhea.Business.Estate;
 using Rhea.Common;
 using Rhea.Model;
 using Rhea.Model.Estate;
+using Rhea.UI.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
     /// <summary>
     /// 建筑控制器
     /// </summary>
+    [EnhancedAuthorize(Rank = 900)]
     public class BuildingController : Controller
     {
         #region Field

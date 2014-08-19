@@ -8,12 +8,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Rhea.UI.Filters;
 
 namespace Rhea.UI.Areas.Admin.Controllers
 {
     /// <summary>
     /// 校区控制器
     /// </summary>
+    [EnhancedAuthorize(Rank = 900)]
     public class CampusController : Controller
     {
         #region Field

@@ -2,6 +2,7 @@
 using Rhea.Common;
 using Rhea.Model;
 using Rhea.Model.Personnel;
+using Rhea.UI.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
     /// <summary>
     /// 部门控制器
     /// </summary>
+    [EnhancedAuthorize(Rank = 900)]
     public class DepartmentController : Controller
     {
         #region Field

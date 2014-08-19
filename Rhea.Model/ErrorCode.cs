@@ -67,6 +67,12 @@ namespace Rhea.Model
         UserNotExist = 13,
 
         /// <summary>
+        /// 用户已禁用
+        /// </summary>
+        [Display(Name = "用户已禁用")]
+        UserDisabled = 14,
+
+        /// <summary>
         /// ID重复
         /// </summary>
         [Display(Name = "ID重复")]

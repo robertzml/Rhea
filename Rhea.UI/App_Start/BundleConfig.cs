@@ -48,6 +48,23 @@ namespace Rhea.UI
             bundles.Add(new ScriptBundle("~/bundles/fileinput").Include(
                 "~/plugins/bootstrap-fileinput/bootstrap-fileinput.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/cookie").Include(
+                "~/plugins/jquery.cokie.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/blockui").Include(
+                "~/plugins/jquery.blockui.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap-hover-dropdown").Include(
+                "~/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/slimscroll").Include(
+                "~/plugins/jquery-slimscroll/jquery.slimscroll.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/uniform").Include(
+                "~/plugins/uniform/jquery.uniform.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap-switch").Include(
+                "~/plugins/bootstrap-switch/js/bootstrap-switch.min.js"));
 
             // For css
             bundles.Add(new StyleBundle("~/Content/fontawesome").Include(
@@ -76,6 +93,9 @@ namespace Rhea.UI
 
             bundles.Add(new StyleBundle("~/Plugin/datepicker").Include(
                     "~/plugins/bootstrap-datepicker/css/datepicker3.css"));
+
+            bundles.Add(new StyleBundle("~/Plugin/bootstrap-switch").Include(
+                "~/plugins/bootstrap-switch/css/bootstrap-switch.min.css"));
 
             bundles.Add(new StyleBundle("~/Plugin/fileinput").Include(
                 "~/plugins/bootstrap-fileinput/bootstrap-fileinput.css"));

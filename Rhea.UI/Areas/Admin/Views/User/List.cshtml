@@ -110,6 +110,10 @@
                                     {
                                         <span class="label label-success">正常</span>
                                     }
+                                    else if (item.Status == (int)EntityStatus.UserDisable)
+                                    {
+                                        <span class="label label-danger">已禁用</span>
+                                    }
                                 </td>
                                 <td>
                                     <a href="@Url.Action("Details", new { controller = "User", id = item._id })" class="btn btn-info btn-sm" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>

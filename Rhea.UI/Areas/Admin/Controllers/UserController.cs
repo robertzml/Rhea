@@ -3,6 +3,7 @@ using Rhea.Business.Account;
 using Rhea.Common;
 using Rhea.Model;
 using Rhea.Model.Account;
+using Rhea.UI.Filters;
 using Rhea.UI.Services;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
     /// <summary>
     /// 用户控制器
     /// </summary>
+    [EnhancedAuthorize(Rank = 900)]
     public class UserController : Controller
     {
         #region Field
@@ -46,6 +48,24 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             var data = this.userBusiness.Get().ToList();
             data.ForEach(r => r.AvatarSmall = RheaConstant.AvatarRoot + r.AvatarSmall);
+            return View(data);
+        }
+
+        /// <summary>
+        /// 用户列表
+        /// </summary>
+        /// <param name="groupId">所属用户组ID</param>
+        /// <returns></returns>
+        public ActionResult ListByGroup(int groupId)
+        {
+            bool isRoot = User.IsInRole2("Root");
+
+            var data = this.userBusiness.GetByGroup(groupId, isRoot).ToList();
+            data.ForEach(r => r.AvatarSmall = RheaConstant.AvatarRoot + r.AvatarSmall);
+
+            var group = this.userBusiness.GetUserGroup(groupId);
+            ViewBag.GroupName = group.Name;
+
             return View(data);
         }
 
@@ -136,6 +156,28 @@ namespace Rhea.UI.Areas.Admin.Controllers
             }
 
             return View(model);
+        }
+
+        /// <summary>
+        /// 启用用户
+        /// </summary>
+        /// <param name="id">用户ID</param>
+        /// <returns></returns>
+        public ActionResult Enable(string id)
+        {
+            this.userBusiness.Enable(id);
+            return RedirectToAction("Details", "User", new { id = id });
+        }
+
+        /// <summary>
+        /// 禁用用户
+        /// </summary>
+        /// <param name="id">用户ID</param>
+        /// <returns></returns>
+        public ActionResult Disable(string id)
+        {
+            this.userBusiness.Disable(id);
+            return RedirectToAction("Details", "User", new { id = id });
         }
         #endregion //Action
     }

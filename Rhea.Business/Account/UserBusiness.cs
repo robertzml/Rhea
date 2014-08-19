@@ -74,14 +74,18 @@ namespace Rhea.Business.Account
             if (user.Password != Hasher.SHA1Encrypt(password))
                 return ErrorCode.WrongPassword;
 
-            if (user.Status == 1)
+            if (user.Status == (int)EntityStatus.Deleted)
                 return ErrorCode.ObjectDeleted;
+
+            if (user.Status == (int)EntityStatus.UserDisable)
+                return ErrorCode.UserDisabled;
 
             UpdateLoginTime(user, user.CurrentLoginTime, DateTime.Now);
 
             return ErrorCode.Success;
         }
 
+        #region User
         /// <summary>
         /// 获取所有用户
         /// </summary>
@@ -117,6 +121,22 @@ namespace Rhea.Business.Account
                 return null;
             else
                 return data;
+        }
+
+        /// <summary>
+        /// 根据用户组获取用户
+        /// </summary>
+        /// <param name="groupId">用户组ID</param>
+        /// <param name="isRoot">是否Root</param>
+        /// <returns></returns>
+        public IEnumerable<User> GetByGroup(int groupId, bool isRoot)
+        {
+            var group = this.userGroupRepository.Get(groupId);
+            if (!isRoot && group.Name == "Root")
+                return null;
+
+            var data = this.userRepository.Get().Where(r => r.UserGroupId == groupId).Where(r => r.Status != 1);
+            return data;
         }
 
         /// <summary>
@@ -214,13 +234,42 @@ namespace Rhea.Business.Account
         }
 
         /// <summary>
+        /// 启用用户
+        /// </summary>
+        /// <param name="_id">用户ID</param>
+        public void Enable(string _id)
+        {
+            var user = this.userRepository.Get(_id);
+            user.Status = (int)EntityStatus.Normal;
+            this.userRepository.Update(user);
+            return;
+        }
+
+        /// <summary>
+        /// 禁用用户
+        /// </summary>
+        /// <param name="_id">用户ID</param>
+        public void Disable(string _id)
+        {
+            var user = this.userRepository.Get(_id);
+            if (user.UserGroupId == 100001) //Root 不能禁用
+                return;
+
+            user.Status = (int)EntityStatus.UserDisable;
+            this.userRepository.Update(user);
+            return;
+        }
+        #endregion //User
+
+        #region UserGroup
+        /// <summary>
         /// 获取所有用户组
         /// </summary>
         /// <remarks>不包括Root</remarks>
         /// <returns></returns>
         public IEnumerable<UserGroup> GetUserGroup()
         {
-            return this.userGroupRepository.Get().Where(r => r.Name != "Root");
+            return this.userGroupRepository.Get().Where(r => r.Name != "Root").OrderByDescending(r => r.Rank);
         }
 
         /// <summary>
@@ -231,7 +280,7 @@ namespace Rhea.Business.Account
         public IEnumerable<UserGroup> GetUserGroup(bool isRoot)
         {
             if (isRoot)
-                return this.userGroupRepository.Get();
+                return this.userGroupRepository.Get().OrderByDescending(r => r.Rank);
             else
                 return GetUserGroup();
         }
@@ -266,6 +315,18 @@ namespace Rhea.Business.Account
             data.Status = 0;
             return this.userGroupRepository.Create(data);
         }
+
+        /// <summary>
+        /// 编辑用户组
+        /// </summary>
+        /// <param name="data">用户组对象</param>
+        /// <returns></returns>
+        public ErrorCode UpdateUserGroup(UserGroup data)
+        {
+            data.Status = 0;
+            return this.userGroupRepository.Update(data);
+        }
+        #endregion //UserGroup
         #endregion //Method
     }
 }
