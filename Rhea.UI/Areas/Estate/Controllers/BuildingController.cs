@@ -57,6 +57,8 @@ namespace Rhea.UI.Areas.Estate.Controllers
             if (!string.IsNullOrEmpty(data.Subregion.ImageUrl))
                 data.Subregion.ImageUrl = RheaConstant.ImagesRoot + data.Subregion.ImageUrl;
 
+            data.Subregion.Floors.ForEach(r => r.ImageUrl = RheaConstant.SvgRoot + r.ImageUrl);
+
             data.EnterDepartment = GetEnterDepartment(id);
 
             return data;
@@ -98,6 +100,8 @@ namespace Rhea.UI.Areas.Estate.Controllers
 
             if (!string.IsNullOrEmpty(data.Block.ImageUrl))
                 data.Block.ImageUrl = RheaConstant.ImagesRoot + data.Block.ImageUrl;
+
+            data.Block.Floors.ForEach(r => r.ImageUrl = RheaConstant.SvgRoot + r.ImageUrl);
 
             data.EnterDepartment = GetEnterDepartment(id);
 

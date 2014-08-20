@@ -70,6 +70,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// </summary>
         /// <param name="id">校区ID</param>
         /// <returns></returns>
+        [HttpGet]
         public ActionResult Edit(int id)
         {
             var data = this.campusBusiness.Get(id);
@@ -81,6 +82,8 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// </summary>
         /// <param name="model">校区对象</param>
         /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
         public ActionResult Edit(Campus model)
         {
             if (ModelState.IsValid)

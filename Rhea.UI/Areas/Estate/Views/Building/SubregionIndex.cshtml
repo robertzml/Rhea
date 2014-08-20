@@ -49,7 +49,7 @@
     <div class="col-md-12">
         <!--BEGIN TABS-->
         <div class="tabbable tabbable-custom tabbable-full-width">
-            <ul class="nav nav-tabs">
+            <ul class="nav nav-tabs" id="main-tab">
                 <li class="active">
                     <a href="#tab_1_1" data-toggle="tab">
                         摘要
@@ -61,7 +61,12 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#tab_1_3" data-toggle="tab">
+                    <a href="#tab_floor" data-toggle="tab">
+                        楼层
+                    </a>
+                </li>
+                <li>
+                    <a href="#tab_room" data-toggle="tab">
                         房间
                     </a>
                 </li>
@@ -152,7 +157,7 @@
                             <div class="list-group">
                                 @foreach (var item in Model.Subregion.Floors)
                                 {
-                                    <a href="#" class="list-group-item list-group-item-success" ref="@item.Id">
+                                    <a href="#" class="list-group-item list-group-item-success sub-floor-ajax-link" ref="@item.Id">
                                         <i class="fa fa-road"></i> @item.Name
                                     </a>
                                 }
@@ -205,7 +210,53 @@
                         </div>
                     </div>
                 </div>
-                <div id="tab_1_3" class="tab-pane">
+                <div id="tab_floor" class="tab-pane">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <ul class="ver-inline-menu tabbable margin-bottom-25" id="floor-svg-menu">
+                                @foreach (var item in Model.Subregion.Floors)
+                                {
+                                    <li>
+                                        <a href="#f_@item.Id" data-toggle="tab" data-url="@item.ImageUrl" class="floor-ajax-link">
+                                            <i class="fa fa-road"></i> @item.Name
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="portlet box blue">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-slack"></i>楼层平面图
+                                    </div>
+                                    <div class="tools">
+                                        <a href="javascript:;" class="collapse">
+                                        </a>
+                                        <a href="javascript:;" class="reload">
+                                        </a>
+                                        <a href="javascript:;" class="remove">
+                                        </a>
+                                    </div>
+                                    <div class="actions">
+                                        <a href="#" id="zoom-in" class="btn btn-default btn-sm">
+                                            <i class="fa fa-search-plus"></i> 放大
+                                        </a>
+                                        <a href="#" id="zoom-out" class="btn btn-default btn-sm">
+                                            <i class="fa fa-search-minus"></i> 缩小
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+                                    <div style="height:500px; overflow:auto;">
+                                        <div id="svg"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="tab_room" class="tab-pane">
                     <div class="portlet box blue">
                         <div class="portlet-title">
                             <div class="caption">
@@ -283,15 +334,35 @@
 <script type="text/javascript">
     $(function () {
 
-        $('a.sub-building-ajax-link').click(function (e) {
-            var url = "/Estate/Building/Index";
-            var buildingId = $(this).attr('ref');
-            var request = { id: buildingId };
+        $('a.sub-floor-ajax-link').click(function () {
+            $('#main-tab a[href="#tab_floor"]').tab('show')
 
-            Rhea.ajaxLoadPage($(this), e, url, request);
+            var id = $(this).attr('ref');
+            $('ul#floor-svg-menu a[href="#f_' + id + '"]').click();
+        });
+
+        $('a.floor-ajax-link').click(function (e) {
+
+            var url = $(this).attr('data-url');
+
+            Rhea.ajaxLoadSvg($('div#svg'), url);
+        });
+
+        $('#zoom-in').click(function (e) {
+            e.preventDefault();
+            var $dom = $('div#svg').children('svg');
+            Rhea.zoomSvg($dom, 'zoomIn');
             return false;
         });
 
+        $('#zoom-out').click(function (e) {
+            e.preventDefault();
+            var $dom = $('div#svg').children('svg');
+            Rhea.zoomSvg($dom, 'zoomOut');
+            return false;
+        });
+
+        $('ul#floor-svg-menu li:first-child a').click();
         $('.portlet .portlet-title a.reload[data-load="true"]').click();
 
     });

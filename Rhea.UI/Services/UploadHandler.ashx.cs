@@ -14,6 +14,11 @@ namespace Rhea.UI.Services
     {
         #region Field
         private readonly JavaScriptSerializer js;
+
+        /// <summary>
+        /// 保存子目录
+        /// </summary>
+        private string directory = "";
         #endregion //Field
 
         #region Constructor
@@ -32,9 +37,9 @@ namespace Rhea.UI.Services
             {
                 case "HEAD":
                 case "GET":
-                    if (GivenFilename(context)) 
+                    if (GivenFilename(context))
                         DeliverFile(context);
-                    else 
+                    else
                         ListCurrentFiles(context);
                     break;
 
@@ -95,7 +100,7 @@ namespace Rhea.UI.Services
         // Upload partial file
         private void UploadPartialFile(string fileName, HttpContext context, List<FilesStatus> statuses)
         {
-            if (context.Request.Files.Count != 1) 
+            if (context.Request.Files.Count != 1)
                 throw new HttpRequestValidationException("Attempt to upload chunked file containing more than one fragment per request");
             var inputStream = context.Request.Files[0].InputStream;
             var fullName = StorageRoot + Path.GetFileName(fileName);
@@ -191,6 +196,10 @@ namespace Rhea.UI.Services
         #region Method
         public void ProcessRequest(HttpContext context)
         {
+            string d = context.Request.QueryString["directory"];
+            if (!string.IsNullOrEmpty(d))
+                this.directory = d;
+
             context.Response.AddHeader("Pragma", "no-cache");
             context.Response.AddHeader("Cache-Control", "private, no-cache");
 
@@ -203,7 +212,7 @@ namespace Rhea.UI.Services
         {
             get
             {
-                return Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Attachment/svg2/"));
+                return Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Attachment/" + directory + "/"));
             } //Path should! always end with '/'
         }
 

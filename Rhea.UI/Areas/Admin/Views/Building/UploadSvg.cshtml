@@ -179,7 +179,7 @@
                 });
 
             $('#fileupload').fileupload({
-                url: "/Services/UploadHandler.ashx",
+                url: "/Services/UploadHandler.ashx?directory=svg",
                 dataType: 'json',
                 autoUpload: false,
                 acceptFileTypes: /(\.|\/)(svg)$/i,

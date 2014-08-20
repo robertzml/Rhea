@@ -142,6 +142,14 @@
                                         </li>
                                         <li>
                                             <span class="sale-info">
+                                                计划面积
+                                            </span>
+                                            <span class="sale-num">
+                                                @Model.Cluster.PlanningArea
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="sale-info">
                                                 建成日期
                                             </span>
                                             <span class="sale-num">
@@ -244,14 +252,14 @@
                             <ul class="ver-inline-menu tabbable margin-bottom-10">
                                 <li class="active">
                                     <a data-toggle="tab" href="#tab_1_2_1">
-                                        <i class="fa fa-info"></i> 楼宇信息
+                                        <i class="fa fa-info"></i> 组团信息
                                     </a>
                                     <span class="after">
                                     </span>
                                 </li>
                                 <li>
                                     <a data-toggle="tab" href="#tab_1_2_2">
-                                        <i class="fa fa-indent"></i> 分区信息
+                                        <i class="fa fa-indent"></i> 楼宇信息
                                     </a>
                                 </li>
                                 <li>
@@ -276,6 +284,63 @@
                                     </div>
                                 </div>
                                 <div class="tab-pane" id="tab_1_2_2">
+                                    <div class="portlet">
+                                        <div class="portlet-title">
+                                            <div class="caption">
+                                                <i class="fa fa-indent"></i> 下属楼宇信息
+                                            </div>
+                                        </div>
+                                        <div class="portlet-body">
+                                            <table class="table table-bordered table-striped table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            楼宇名称
+                                                        </th>
+                                                        <th>
+                                                            建筑面积(m<sup>2</sup>)
+                                                        </th>
+                                                        <th>
+                                                            使用面积(m<sup>2</sup>)
+                                                        </th>
+                                                        <th>
+                                                            地上楼层
+                                                        </th>
+                                                        <th>
+                                                            地下楼层
+                                                        </th>
+                                                        <th>
+                                                            使用类型
+                                                        </th>
+                                                        <th>
+                                                            操作
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var item in Model.Blocks)
+                                                    {
+                                                        <tr>
+                                                            <td>@item.Name</td>
+                                                            <td>@item.BuildArea</td>
+                                                            <td>@item.UsableArea</td>
+                                                            <td>@item.AboveGroundFloor</td>
+                                                            <td>@item.UnderGroundFloor</td>
+                                                            <td>
+                                                                @{
+                                                                    var type3 = (BuildingUseType)item.UseType;
+                                                                    @type3.DisplayName();
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                <a class="btn btn-success btn-sm ajaxify" href="/Estate/Building/Index/@item.BuildingId"><i class="fa fa-search-plus"></i>详细</a>
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
 
                                 </div>
                                 <div class="tab-pane" id="tab_1_2_3">
