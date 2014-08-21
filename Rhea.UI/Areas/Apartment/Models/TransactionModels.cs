@@ -1,23 +1,33 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
+using System.Web;
 
-namespace Rhea.Model.Apartment
+namespace Rhea.UI.Areas.Apartment.Models
 {
     /// <summary>
-    /// 住户类
+    /// 入住办理模型
     /// </summary>
-    [CollectionName("inhabitant")]
-    public class Inhabitant : MongoEntity
+    public class CheckInModel
     {
-        #region Property
+        /// <summary>
+        /// 楼宇选择
+        /// </summary>
+        [UIHint("BuildingList")]
+        [Display(Name = "楼宇选择")]
+        public int BuildingId { get; set; }
+
+        /// <summary>
+        /// 房间选择
+        /// </summary>
+        [Required]
+        [Display(Name = "房间选择")]
+        public int RoomId { get; set; }
+
         /// <summary>
         /// 工号、学号或其它
         /// </summary>
-        [BsonElement("jobNumber")]
         [Display(Name = "工号")]
         public string JobNumber { get; set; }
 
@@ -25,14 +35,12 @@ namespace Rhea.Model.Apartment
         /// 姓名
         /// </summary>
         [Required]
-        [BsonElement("name")]
         [Display(Name = "姓名")]
         public string Name { get; set; }
 
         /// <summary>
         /// 性别
         /// </summary>
-        [BsonElement("gender")]
         [Display(Name = "性别")]
         public string Gender { get; set; }
 
@@ -42,35 +50,30 @@ namespace Rhea.Model.Apartment
         /// </summary>
         [Required]
         [UIHint("InhabitantType")]
-        [BsonElement("type")]
         [Display(Name = "住户类型")]
-        public int Type { get; set; }
+        public int InhabitantType { get; set; }
 
         /// <summary>
         /// 所属部门
         /// </summary>
-        [BsonElement("departmentName")]
         [Display(Name = "所属部门")]
         public string DepartmentName { get; set; }
 
         /// <summary>
         /// 职务
         /// </summary>
-        [BsonElement("duty")]
         [Display(Name = "职务")]
         public string Duty { get; set; }
 
         /// <summary>
         /// 电话
         /// </summary>
-        [BsonElement("telephone")]
         [Display(Name = "电话")]
         public string Telephone { get; set; }
 
         /// <summary>
         /// 身份证
         /// </summary>
-        [BsonElement("identityCard")]
         [Display(Name = "身份证")]
         public string IdentityCard { get; set; }
 
@@ -78,15 +81,12 @@ namespace Rhea.Model.Apartment
         /// 公积金领取时间
         /// </summary>
         [DataType(DataType.Date)]
-        [BsonDateTimeOptions(DateOnly = true)]
-        [BsonElement("accumulatedFundsDate")]
         [Display(Name = "公积金领取时间")]
         public DateTime? AccumulatedFundsDate { get; set; }
 
         /// <summary>
         /// 婚姻状况
         /// </summary>
-        [BsonElement("marriage")]
         [Display(Name = "婚姻状况")]
         public string Marriage { get; set; }
 
@@ -94,8 +94,6 @@ namespace Rhea.Model.Apartment
         /// 蠡湖家园入住时间
         /// </summary>
         [DataType(DataType.Date)]
-        [BsonDateTimeOptions(DateOnly = true)]
-        [BsonElement("liHuEnterDate")]
         [Display(Name = "蠡湖家园入住时间")]
         public DateTime? LiHuEnterDate { get; set; }
 
@@ -103,19 +101,7 @@ namespace Rhea.Model.Apartment
         /// 备注
         /// </summary>
         [DataType(DataType.MultilineText)]
-        [BsonElement("remark")]
         [Display(Name = "备注")]
         public string Remark { get; set; }
-
-        /// <summary>
-        /// 状态
-        /// </summary>
-        /// <remarks>
-        /// 0:正常居住；1:删除；55:离开；56:延期居住
-        /// </remarks>
-        [BsonElement("status")]
-        [Display(Name = "状态")]
-        public int Status { get; set; }
-        #endregion //Property
     }
 }

@@ -2,6 +2,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section styles {
+    @Styles.Render("~/Plugin/select2")
+    @RenderSection("styles", required: false)
+}
+
 <!-- BEGIN SIDEBAR -->
 <div class="page-sidebar-wrapper">
     <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
@@ -78,13 +83,13 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="#" id="building-list-menu">
-                            入住登记
+                        <a class="ajaxify" href="/Apartment/Transaction/CheckIn">
+                            入住办理
                         </a>
                     </li>
                     <li>
                         <a href="#" id="building-create-menu">
-                            延期登记
+                            退房办理
                         </a>
                     </li>
                 </ul>
@@ -115,6 +120,9 @@
 <!-- END CONTENT -->
 
 @section scripts {
+    @Scripts.Render("~/bundles/select2")
+    <script type="text/javascript" src="/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+    <script src="~/Scripts/apartment.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(function () {
 

@@ -12,7 +12,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
     /// <summary>
     /// 青教公寓主页控制器
     /// </summary>
-    [EnhancedAuthorize(Roles = "Root, Administrator, Apartment")]
+    [EnhancedAuthorize(Roles = "Root,Administrator,Apartment")]
     public class HomeController : Controller
     {
         #region Field

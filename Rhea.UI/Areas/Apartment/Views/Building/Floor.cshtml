@@ -5,6 +5,14 @@
     Layout = null;
 }
 
+<style type="text/css">
+    g rect, g path, g text {
+        cursor: pointer;
+    }
+
+    
+</style>
+
 <!-- BEGIN PAGE HEADER-->
 <h3 class="page-title">
     @ViewBag.Title
@@ -99,6 +107,9 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row" id="select-room-info">
+
+                    </div>
                 </div>
                 <!--tab_1_3-->
                 <div class="tab-pane" id="tab_1_3">
@@ -133,7 +144,25 @@
 <script type="text/javascript">
     $(function () {
 
-        Rhea.ajaxLoadSvg($('div#svg'), '@Model.SvgPath');
+        Rhea.ajaxLoadSvg($('div#svg'), '@Model.SvgPath', function (svg) {
+            $("svg g[id^='g']").toggle(
+                function () {
+                    var id = $(this).attr('id').toString().substring(1);
+                    $(this).children('[ref=bound]').attr('class', 'fil1');
+
+                    var tdoc = $('<div id="s' + id + '" class="col-md-4"></div>');
+                    $(tdoc).load('/Apartment/Room/Summary', { id: id });
+                    $('#select-room-info').append(tdoc);
+                },
+                function () {
+                    var id = $(this).attr('id').toString().substring(1);
+                    $(this).children('[ref=bound]').attr('class', 'fil0');
+
+                    var tdoc = $('div#s' + id);
+                    tdoc.remove();
+                }
+            );
+        });
 
         $('.portlet .portlet-title a.reload[data-load="true"]').click();
 

@@ -231,7 +231,7 @@ var Rhea = function () {
 		});
 	}
 	
-	var handleAjaxSvg = function(container, url) {
+	var handleAjaxSvg = function(container, url, callback) {
 			
 		Metronic.startPageLoading();
 
@@ -246,8 +246,8 @@ var Rhea = function () {
 				container.html(res);
 				Layout.fixContentHeight(); // fix content height
 				Metronic.initAjax(); // initialize core stuff
-				
 				var svg = $(this).children('svg');
+				callback(svg);
 			},
 			error: function (xhr, ajaxOptions, thrownError) {
 				Metronic.stopPageLoading();
@@ -307,11 +307,11 @@ var Rhea = function () {
 			handleAjaxLoad2($dom, e, url, request);
 		},
 		
-		ajaxLoadSvg: function(container, url) {
+		ajaxLoadSvg: function(container, url, callback) {
 			if (url == '') {
 				container.html('无平面图');
 			} else {			
-				handleAjaxSvg(container, url);
+				handleAjaxSvg(container, url, callback);
 			}
 		},
 		

@@ -71,6 +71,9 @@
                                 @Html.DisplayNameFor(model => model.Name)
                             </th>
                             <th>
+                                @Html.DisplayNameFor(model => model.Gender)
+                            </th>
+                            <th>
                                 @Html.DisplayNameFor(model => model.Type)
                             </th>
                             <th>
@@ -83,13 +86,13 @@
                                 @Html.DisplayNameFor(model => model.Telephone)
                             </th>
                             <th class="hidden-xs">
-                                @Html.DisplayNameFor(model => model.ExtractAccumulatedFunds)
+                                @Html.DisplayNameFor(model => model.AccumulatedFundsDate)
                             </th>
                             <th class="hidden-xs">
                                 @Html.DisplayNameFor(model => model.Marriage)
                             </th>
                             <th class="hidden-xs">
-                                @Html.DisplayNameFor(model => model.LiHuStatus)
+                                @Html.DisplayNameFor(model => model.LiHuEnterDate)
                             </th>
                             <th class="hidden-xs">
                                 @Html.DisplayNameFor(model => model.Remark)
@@ -111,6 +114,9 @@
                                     @Html.DisplayFor(modelItem => item.Name)
                                 </td>
                                 <td>
+                                    @Html.DisplayFor(modelItem => item.Gender)
+                                </td>
+                                <td>
                                     @{
                                         var type1 = (InhabitantType)item.Type;
                                         @type1.DisplayName()
@@ -126,13 +132,13 @@
                                     @Html.DisplayFor(modelItem => item.Telephone)
                                 </td>
                                 <td class="hidden-xs">
-                                    @Html.DisplayFor(modelItem => item.ExtractAccumulatedFunds)
+                                    @item.AccumulatedFundsDate.ToDateString()
                                 </td>
                                 <td class="hidden-xs">
                                     @Html.DisplayFor(modelItem => item.Marriage)
                                 </td>
                                 <td class="hidden-xs">
-                                    @Html.DisplayFor(modelItem => item.LiHuStatus)
+                                    @item.LiHuEnterDate.ToDateString()
                                 </td>
                                 <td class="hidden-xs">
                                     @Html.DisplayFor(modelItem => item.Remark)

@@ -13,7 +13,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
     /// <summary>
     /// 房间控制器
     /// </summary>
-    [EnhancedAuthorize(Roles = "Root, Administrator, Estate")]
+    [EnhancedAuthorize(Roles = "Root,Administrator,Estate")]
     public class RoomController : Controller
     {
         #region Action

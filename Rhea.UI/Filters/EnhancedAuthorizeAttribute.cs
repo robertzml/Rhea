@@ -79,12 +79,12 @@ namespace Rhea.UI.Filters
             {
                 bool result;
                 string[] userRoles = authTicket.UserData.Split(',');
-                string[] roles = Roles.Split(',');
+                string[] actionRoles = Roles.Split(',');
 
                 if (string.IsNullOrEmpty(Roles))
                     result = true;
                 else
-                    result = CheckRole(userRoles, roles);
+                    result = CheckRole(userRoles, actionRoles);
 
                 return result;
             }

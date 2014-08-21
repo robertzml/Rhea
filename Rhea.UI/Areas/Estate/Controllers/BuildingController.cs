@@ -16,7 +16,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
     /// <summary>
     /// 建筑控制器
     /// </summary>
-    [EnhancedAuthorize(Roles = "Root, Administrator, Estate")]
+    [EnhancedAuthorize(Roles = "Root,Administrator,Estate")]
     public class BuildingController : Controller
     {
         #region Function

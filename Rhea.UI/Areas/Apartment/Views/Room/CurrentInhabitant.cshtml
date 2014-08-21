@@ -35,6 +35,14 @@
                 </tr>
                 <tr>
                     <td>
+                        @Html.DisplayNameFor(model => model.Gender)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Gender)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
                         @Html.DisplayNameFor(model => model.Type)
                     </td>
                     <td>
@@ -78,10 +86,10 @@
                 </tr>
                 <tr>
                     <td>
-                        @Html.DisplayNameFor(model => model.ExtractAccumulatedFunds)
+                        @Html.DisplayNameFor(model => model.AccumulatedFundsDate)
                     </td>
                     <td colspan="2">
-                        @Html.DisplayFor(model => model.ExtractAccumulatedFunds)
+                        @Model.AccumulatedFundsDate.ToDateString()
                     </td>
                 </tr>
                 <tr>
@@ -94,10 +102,10 @@
                 </tr>
                 <tr>
                     <td>
-                        @Html.DisplayNameFor(model => model.LiHuStatus)
+                        @Html.DisplayNameFor(model => model.LiHuEnterDate)
                     </td>
                     <td colspan="2">
-                        @Html.DisplayFor(model => model.LiHuStatus)
+                        @Model.LiHuEnterDate.ToDateString()
                     </td>
                 </tr>
                 <tr>

@@ -174,8 +174,10 @@
     <Compile Include="Areas\Apartment\Controllers\HomeController.cs" />
     <Compile Include="Areas\Apartment\Controllers\InhabitantController.cs" />
     <Compile Include="Areas\Apartment\Controllers\RoomController.cs" />
+    <Compile Include="Areas\Apartment\Controllers\TransactionController.cs" />
     <Compile Include="Areas\Apartment\Models\BuildingModels.cs" />
     <Compile Include="Areas\Apartment\Models\RoomModels.cs" />
+    <Compile Include="Areas\Apartment\Models\TransactionModels.cs" />
     <Compile Include="Areas\Estate\Controllers\BuildingController.cs" />
     <Compile Include="Areas\Estate\Controllers\HomeController.cs" />
     <Compile Include="Areas\Estate\Controllers\RoomController.cs" />
@@ -584,6 +586,8 @@
     <Content Include="plugins\bootstrap-switch\css\bootstrap-switch.min.css" />
     <Content Include="plugins\bootstrap-switch\js\bootstrap-switch.js" />
     <Content Include="plugins\bootstrap-switch\js\bootstrap-switch.min.js" />
+    <Content Include="plugins\bootstrap-wizard\jquery.bootstrap.wizard.js" />
+    <Content Include="plugins\bootstrap-wizard\jquery.bootstrap.wizard.min.js" />
     <Content Include="plugins\bootstrap\css\bootstrap.css" />
     <Content Include="plugins\bootstrap\css\bootstrap.min.css" />
     <Content Include="plugins\bootstrap\fonts\glyphicons-halflings-regular.svg" />
@@ -834,6 +838,10 @@
     <Content Include="Areas\Admin\Views\Room\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\FunctionCodeDropDownList.cshtml" />
     <Content Include="Areas\Admin\Views\Building\UploadSvg.cshtml" />
+    <Content Include="Areas\Apartment\Views\Room\Summary.cshtml" />
+    <Content Include="plugins\bootstrap-wizard\README.md" />
+    <Content Include="Areas\Apartment\Views\Transaction\CheckIn.cshtml" />
+    <Content Include="Areas\Apartment\Views\Shared\EditorTemplates\BuildingList.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="plugins\jquery-1.11.0.min.js" />
@@ -890,6 +898,7 @@
     <Content Include="plugins\uniform\jquery.uniform.min.js" />
     <Content Include="Scripts\account.js" />
     <Content Include="Scripts\admin.js" />
+    <Content Include="Scripts\apartment.js" />
     <Content Include="Scripts\datatable.js" />
     <Content Include="Scripts\html5shiv.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

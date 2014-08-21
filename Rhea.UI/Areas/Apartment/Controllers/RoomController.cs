@@ -17,7 +17,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
     /// <summary>
     /// 房间控制器
     /// </summary>
-    [EnhancedAuthorize(Roles = "Root, Administrator, Apartment")]
+    [EnhancedAuthorize(Roles = "Root,Administrator,Apartment")]
     public class RoomController : Controller
     {
         #region Field
@@ -31,36 +31,30 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         /// <summary>
         /// 模型绑定
         /// </summary>
-        /// <param name="rooms">房间对象</param>
+        /// <param name="room">房间对象</param>
         /// <returns>房间居住对象</returns>
-        private IEnumerable<RoomResideModel> BindRoom(IEnumerable<ApartmentRoom> rooms)
+        private RoomResideModel BindRoom(ApartmentRoom room)
         {
-            List<RoomResideModel> data = new List<RoomResideModel>();
+            RoomResideModel model = new RoomResideModel();
 
-            foreach (var room in rooms)
+            model.RoomId = room.RoomId;
+            model.Name = room.Name;
+            model.Number = room.Number;
+            model.Floor = room.Floor;
+            model.UsableArea = room.UsableArea;
+            model.HouseType = room.HouseType;
+            model.BuildingName = room.BuildingName();
+            model.RoomResideType = (ResideType)room.ResideType;
+
+            ResideRecord record = this.roomBusiness.GetCurrentRecord(room.RoomId);
+            if (record != null)
             {
-                RoomResideModel model = new RoomResideModel();
-                model.RoomId = room.RoomId;
-                model.Name = room.Name;
-                model.Number = room.Number;
-                model.Floor = room.Floor;
-                model.UsableArea = room.UsableArea;
-                model.HouseType = room.HouseType;
-                model.BuildingName = room.BuildingName();
-                model.RoomResideType = (ResideType)room.ResideType;
-
-                ResideRecord record = this.roomBusiness.GetCurrentRecord(room.RoomId);
-                if (record != null)
-                {
-                    model.InhabitantId = record.InhabitantId;
-                    model.InhabitantName = record.InhabitantName;
-                    model.InhabitantDepartment = record.InhabitantDepartment;
-                }
-
-                data.Add(model);
+                model.InhabitantId = record.InhabitantId;
+                model.InhabitantName = record.InhabitantName;
+                model.InhabitantDepartment = record.InhabitantDepartment;
             }
 
-            return data;
+            return model;
         }
 
         protected override void Initialize(RequestContext requestContext)
@@ -82,9 +76,15 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         /// <returns></returns>
         public ActionResult ListByBuilding(int buildingId)
         {
+            List<RoomResideModel> data = new List<RoomResideModel>();
             var rooms = this.roomBusiness.GetByBuilding(buildingId);
 
-            var data = BindRoom(rooms);
+            foreach (var room in rooms)
+            {
+                var item = BindRoom(room);
+                data.Add(item);
+            }
+
             return View(data);
         }
 
@@ -96,9 +96,15 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         /// <returns></returns>
         public ActionResult ListByFloor(int buildingId, int floor)
         {
+            List<RoomResideModel> data = new List<RoomResideModel>();
             var rooms = this.roomBusiness.GetByBuilding(buildingId).Where(r => r.Floor == floor);
 
-            var data = BindRoom(rooms);
+            foreach (var room in rooms)
+            {
+                var item = BindRoom(room);
+                data.Add(item);
+            }
+
             return View("ListByBuilding", data);
         }
 
@@ -115,6 +121,22 @@ namespace Rhea.UI.Areas.Apartment.Controllers
 
             ResideRecordBusiness recordBusiness = new ResideRecordBusiness();
             data.Records = recordBusiness.GetByRoom(id).ToList();
+
+            return View(data);
+        }
+
+        /// <summary>
+        /// 房间摘要
+        /// </summary>
+        /// <remarks>
+        /// SVG选择后显示信息
+        /// </remarks>
+        /// <param name="id">房间ID</param>
+        /// <returns></returns>
+        public ActionResult Summary(int id)
+        {
+            var room = this.roomBusiness.Get(id);
+            RoomResideModel data = BindRoom(room);
 
             return View(data);
         }
@@ -177,5 +199,18 @@ namespace Rhea.UI.Areas.Apartment.Controllers
             return View(data);
         }
         #endregion //Action
+
+        #region Json
+        /// <summary>
+        /// 获取可分配房间
+        /// </summary>
+        /// <param name="buildingId">所属楼宇ID</param>
+        /// <returns></returns>
+        public JsonResult GetAvailableRooms(int buildingId)
+        {
+            var data = this.roomBusiness.GetByBuilding(buildingId).Where(r => r.ResideType == (int)ResideType.Available);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        #endregion //Json
     }
 }
