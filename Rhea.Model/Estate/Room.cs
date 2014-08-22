@@ -125,7 +125,7 @@ namespace Rhea.Model.Estate
         /// 开始使用日期
         /// </summary>
         [DataType(DataType.Date)]
-        [BsonDateTimeOptions(DateOnly = true)]
+        [BsonDateTimeOptions(DateOnly = true, Kind = DateTimeKind.Local)]
         [BsonElement("startDate")]
         [Display(Name = "开始使用日期")]
         public DateTime? StartDate { get; set; }

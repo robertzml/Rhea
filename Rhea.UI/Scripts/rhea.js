@@ -273,6 +273,22 @@ var Rhea = function () {
 		$dom.attr('height', height);
 	}
 	
+	function handleParseDate(date) {
+		if (date == null || date == '')
+			return null;
+		var parsedDate = new Date(parseInt(date.substr(6)));
+		var jsDate = new Date(parsedDate); //Date object
+		var d = jsDate.getDate();
+		if (d < 10)
+			d = '0' + d;
+		var m = jsDate.getMonth();
+		m += 1;
+		if (m < 10)
+			m = '0' + m;
+		var y = jsDate.getFullYear();
+		return y + '-' + m + '-' + d;
+	}
+
 	return {
         //main function to initiate the module
         init: function () {
@@ -317,6 +333,10 @@ var Rhea = function () {
 		
 		zoomSvg: function($dom, zoomType) {
 			handleZoomSvg($dom, zoomType);
+		},
+		
+		parseDate: function(date) {
+			return handleParseDate(date);
 		}
 
     };

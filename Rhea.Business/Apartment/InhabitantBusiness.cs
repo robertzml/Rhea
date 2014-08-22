@@ -53,6 +53,16 @@ namespace Rhea.Business.Apartment
         }
 
         /// <summary>
+        /// 添加住户
+        /// </summary>
+        /// <param name="data">住户对象</param>
+        /// <returns></returns>
+        public ErrorCode Create(Inhabitant data)
+        {
+            return this.inhabitantRepository.Create(data);
+        }
+
+        /// <summary>
         /// 编辑住户
         /// </summary>
         /// <param name="data">住户对象</param>

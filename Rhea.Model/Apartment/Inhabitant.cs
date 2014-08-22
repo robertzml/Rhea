@@ -78,7 +78,7 @@ namespace Rhea.Model.Apartment
         /// 公积金领取时间
         /// </summary>
         [DataType(DataType.Date)]
-        [BsonDateTimeOptions(DateOnly = true)]
+        [BsonDateTimeOptions(DateOnly = true, Kind = DateTimeKind.Local)]        
         [BsonElement("accumulatedFundsDate")]
         [Display(Name = "公积金领取时间")]
         public DateTime? AccumulatedFundsDate { get; set; }
@@ -94,7 +94,7 @@ namespace Rhea.Model.Apartment
         /// 蠡湖家园入住时间
         /// </summary>
         [DataType(DataType.Date)]
-        [BsonDateTimeOptions(DateOnly = true)]
+        [BsonDateTimeOptions(DateOnly = true, Kind = DateTimeKind.Local)]
         [BsonElement("liHuEnterDate")]
         [Display(Name = "蠡湖家园入住时间")]
         public DateTime? LiHuEnterDate { get; set; }

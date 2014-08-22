@@ -26,6 +26,12 @@ namespace Rhea.UI.Areas.Apartment.Models
         public int RoomId { get; set; }
 
         /// <summary>
+        /// 历史住户
+        /// </summary>
+        [Display(Name = "历史住户")]
+        public string OldInhabitant { get; set; }
+
+        /// <summary>
         /// 工号、学号或其它
         /// </summary>
         [Display(Name = "工号")]
@@ -51,7 +57,7 @@ namespace Rhea.UI.Areas.Apartment.Models
         [Required]
         [UIHint("InhabitantType")]
         [Display(Name = "住户类型")]
-        public int InhabitantType { get; set; }
+        public int Type { get; set; }
 
         /// <summary>
         /// 所属部门
@@ -102,6 +108,39 @@ namespace Rhea.UI.Areas.Apartment.Models
         /// </summary>
         [DataType(DataType.MultilineText)]
         [Display(Name = "备注")]
-        public string Remark { get; set; }
+        public string InhabitantRemark { get; set; }
+
+        /// <summary>
+        /// 入住时间
+        /// </summary>
+        [DataType(DataType.Date)]
+        [Display(Name = "入住时间")]
+        public DateTime? EnterDate { get; set; }
+
+        /// <summary>
+        /// 到期时间
+        /// </summary>
+        [DataType(DataType.Date)]
+        [Display(Name = "到期时间")]
+        public DateTime? ExpireDate { get; set; }
+
+        /// <summary>
+        /// 年限
+        /// </summary>
+        [Display(Name = "年限")]
+        public string TermLimit { get; set; }
+
+        /// <summary>
+        /// 房租
+        /// </summary>
+        [Display(Name = "房租")]
+        public decimal Rent { get; set; }
+
+        /// <summary>
+        /// 备注
+        /// </summary>
+        [DataType(DataType.MultilineText)]
+        [Display(Name = "备注")]
+        public string RecordRemark { get; set; }
     }
 }

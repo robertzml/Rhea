@@ -749,7 +749,6 @@
     <Content Include="plugins\jquery-slimscroll\jquery.slimscroll.min.js" />
     <Content Include="plugins\jquery.blockui.min.js" />
     <Content Include="plugins\jquery.cokie.min.js" />
-    <Content Include="plugins\select2\README.md" />
     <Content Include="plugins\select2\select2-bootstrap.css" />
     <Content Include="plugins\select2\select2-spinner.gif" />
     <Content Include="plugins\select2\select2.css" />
@@ -842,6 +841,7 @@
     <Content Include="plugins\bootstrap-wizard\README.md" />
     <Content Include="Areas\Apartment\Views\Transaction\CheckIn.cshtml" />
     <Content Include="Areas\Apartment\Views\Shared\EditorTemplates\BuildingList.cshtml" />
+    <Content Include="Areas\Apartment\Views\Transaction\CheckInResult.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="plugins\jquery-1.11.0.min.js" />

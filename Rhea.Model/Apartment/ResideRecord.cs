@@ -65,7 +65,8 @@ namespace Rhea.Model.Apartment
         /// <summary>
         /// 入住时间
         /// </summary>
-        [BsonDateTimeOptions(DateOnly = true)]
+        [DataType(DataType.Date)]
+        [BsonDateTimeOptions(DateOnly = true, Kind = DateTimeKind.Local)]
         [BsonElement("enterDate")]
         [Display(Name = "入住时间")]
         public DateTime? EnterDate { get; set; }
@@ -73,7 +74,8 @@ namespace Rhea.Model.Apartment
         /// <summary>
         /// 到期时间
         /// </summary>
-        [BsonDateTimeOptions(DateOnly = true)]
+        [DataType(DataType.Date)]
+        [BsonDateTimeOptions(DateOnly = true, Kind = DateTimeKind.Local)]
         [BsonElement("expireDate")]
         [Display(Name = "到期时间")]
         public DateTime? ExpireDate { get; set; }
@@ -88,7 +90,8 @@ namespace Rhea.Model.Apartment
         /// <summary>
         /// 离开时间
         /// </summary>
-        [BsonDateTimeOptions(DateOnly = true)]
+        [DataType(DataType.Date)]
+        [BsonDateTimeOptions(DateOnly = true, Kind = DateTimeKind.Local)]
         [BsonElement("leaveDate")]
         [Display(Name = "离开时间")]
         public DateTime? LeaveDate { get; set; }
@@ -96,6 +99,7 @@ namespace Rhea.Model.Apartment
         /// <summary>
         /// 备注
         /// </summary>
+        [DataType(DataType.MultilineText)]
         [BsonElement("remark")]
         [Display(Name = "备注")]
         public string Remark { get; set; }

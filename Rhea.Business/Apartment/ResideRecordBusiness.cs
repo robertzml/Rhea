@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Rhea.Business.Estate;
 using Rhea.Data.Apartment;
 using Rhea.Data.Mongo.Apartment;
+using Rhea.Model;
 using Rhea.Model.Apartment;
 
 namespace Rhea.Business.Apartment
@@ -76,6 +77,16 @@ namespace Rhea.Business.Apartment
         {
             var data = this.recordRepository.GetByInhabitant(inhabitantId).Where(r => r.Status != 1);
             return data;
+        }
+
+        /// <summary>
+        /// 添加住户居住记录
+        /// </summary>
+        /// <param name="data">住户对象</param>
+        /// <returns></returns>
+        public ErrorCode Create(ResideRecord data)
+        {
+            return this.recordRepository.Create(data);
         }
         #endregion //Method
     }

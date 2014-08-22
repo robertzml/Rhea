@@ -116,5 +116,33 @@ namespace Rhea.UI.Areas.Apartment.Controllers
             return View(data);
         }
         #endregion //Action
+
+        #region Json
+        /// <summary>
+        /// 获取所有住户列表
+        /// </summary>
+        /// <param name="name">姓名</param>
+        /// <remarks>
+        /// 根据姓名搜索
+        /// </remarks>
+        /// <returns></returns>
+        public JsonResult GetList(string name)
+        {
+            var data = this.inhabitantBusiness.Get();
+            data = data.Where(r => r.Name.Contains(name));
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 获取住户
+        /// </summary>
+        /// <param name="id">住户ID</param>
+        /// <returns></returns>
+        public JsonResult Get(string id)
+        {
+            var data = this.inhabitantBusiness.Get(id);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        #endregion //Json
     }
 }

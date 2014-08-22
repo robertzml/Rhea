@@ -47,7 +47,6 @@ namespace Rhea.Model.Account
         /// 备注
         /// </summary>
         [BsonElement("remark")]
-        [StringLength(500)]
         [DataType(DataType.MultilineText)]
         [Display(Name = "备注")]
         public string Remark { get; set; }

@@ -76,7 +76,8 @@ namespace Rhea.UI
                 "~/plugins/jquery-file-upload/js/jquery.fileupload-validate.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/select2").Include(
-                "~/plugins/select2/select2.min.js"));
+                "~/plugins/select2/select2.min.js",
+                "~/plugins/select2/select2_locale_zh-CN.js"));
 
             // For css
             bundles.Add(new StyleBundle("~/Content/fontawesome").Include(
