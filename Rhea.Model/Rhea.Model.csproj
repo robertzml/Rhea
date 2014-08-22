@@ -75,6 +75,8 @@
     <Compile Include="Estate\RoomFunctionCode.cs" />
     <Compile Include="Estate\Subregion.cs" />
     <Compile Include="IEntity.cs" />
+    <Compile Include="Log.cs" />
+    <Compile Include="LogType.cs" />
     <Compile Include="MongoEntity.cs" />
     <Compile Include="Personnel\Department.cs" />
     <Compile Include="Personnel\PersonnelModels.cs" />

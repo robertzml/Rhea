@@ -247,7 +247,8 @@ var Rhea = function () {
 				Layout.fixContentHeight(); // fix content height
 				Metronic.initAjax(); // initialize core stuff
 				var svg = $(this).children('svg');
-				callback(svg);
+				if (callback != null)
+					callback(svg);
 			},
 			error: function (xhr, ajaxOptions, thrownError) {
 				Metronic.stopPageLoading();

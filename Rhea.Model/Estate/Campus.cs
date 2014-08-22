@@ -19,7 +19,7 @@ namespace Rhea.Model.Estate
         /// </summary>
         public Campus()
         {
-            //this.Log = new Log();
+            this.Log = new Log();
         }
         #endregion //Constructor
 
@@ -65,9 +65,9 @@ namespace Rhea.Model.Estate
         /// <summary>
         /// 日志属性
         /// </summary>
-        //[BsonElement("log")]
-        //[Display(Name = "日志属性")]
-        //public Log Log { get; set; }
+        [BsonElement("log")]
+        [Display(Name = "日志属性")]
+        public Log Log { get; set; }
         #endregion //Property
     }
 }

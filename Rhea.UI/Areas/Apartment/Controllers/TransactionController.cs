@@ -9,12 +9,14 @@ using Rhea.Common;
 using Rhea.Model;
 using Rhea.Model.Apartment;
 using Rhea.UI.Areas.Apartment.Models;
+using Rhea.UI.Filters;
 
 namespace Rhea.UI.Areas.Apartment.Controllers
 {
     /// <summary>
     /// 业务办理控制器
     /// </summary>
+    [EnhancedAuthorize(Roles = "Root,Administrator,Apartment")]
     public class TransactionController : Controller
     {
         #region Action
