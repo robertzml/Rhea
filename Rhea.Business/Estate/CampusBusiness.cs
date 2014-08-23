@@ -1,6 +1,5 @@
 ﻿using Rhea.Data;
 using Rhea.Data.Estate;
-using Rhea.Data.Mongo;
 using Rhea.Data.Mongo.Estate;
 using Rhea.Model;
 using Rhea.Model.Estate;
@@ -95,18 +94,17 @@ namespace Rhea.Business.Estate
         /// <summary>
         /// 记录日志
         /// </summary>
-        /// <param name="id">校区ID</param>
+        /// <param name="_id">校区系统ID</param>
         /// <param name="log">日志对象</param>
         /// <returns></returns>
-        public ErrorCode Log(int id, Log log)
+        public ErrorCode Log(string _id, Log log)
         {
             ErrorCode result = this.logBusiness.Create(log);
             if (result != ErrorCode.Success)
                 return result;
 
-            var data = this.campusRepository.Get(id);
-            data.Log = log;
-            return this.campusRepository.Update(data);
+            result = this.logBusiness.Log(RheaServer.EstateDatabase, EstateCollection.Campus, _id, log);
+            return result;
         }
         #endregion //Method
     }

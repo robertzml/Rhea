@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rhea.Data.Mongo
+namespace Rhea.Data
 {
     /// <summary>
     /// 房产Collection名称

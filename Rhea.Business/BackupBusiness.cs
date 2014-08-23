@@ -33,6 +33,7 @@ namespace Rhea.Business
 
             ObjectId oid = new ObjectId(_id);
             BsonDocument doc = repository.Collection.FindOneById(oid);
+            doc.Remove("_id");
 
             MongoRepository backupRepository = new MongoRepository(database, backupCollection);
             WriteConcernResult result = backupRepository.Collection.Insert(doc);

@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
+using MongoDB.Driver.Builders;
 using Rhea.Common;
 using Rhea.Data;
 using Rhea.Data.Mongo;
 using Rhea.Model;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Rhea.Business
 {
@@ -62,28 +65,33 @@ namespace Rhea.Business
             return this.logRepository.Create(data);
         }
 
-
-        public ErrorCode Log(MongoEntity entity, Log data)
+        /// <summary>
+        /// 更新记录日志
+        /// </summary>
+        /// <param name="database">数据库</param>
+        /// <param name="collection">集合</param>
+        /// <param name="_id">对象ID</param>
+        /// <param name="data">日志对象</param>
+        /// <returns></returns>
+        public ErrorCode Log(string database, string collection, string _id, Log data)
         {
-            string collectionName;
+            MongoRepository repository = new MongoRepository(database, collection);
+            ObjectId oid = new ObjectId(_id);
 
-            Type type = entity.GetType();
-            var att = Attribute.GetCustomAttribute(type, typeof(CollectionName));
-            if (att != null)
-            {
-                collectionName = ((CollectionName)att).Name;
-            }
-            else
-            {
-                while (!type.BaseType.Equals(typeof(MongoEntity)))
-                {
-                    type = type.BaseType;
-                }
+            var query = Query.EQ("_id", oid);
+            var update = Update.Set("log._id", data._id)
+                .Set("log.title", data.Title)
+                .Set("log.content", data.Content)
+                .Set("log.time", data.Time)
+                .Set("log.userId", data.UserId)
+                .Set("log.userName", data.UserName)
+                .Set("log.type", data.Type)
+                .Set("log.tag", data.Tag == null ? "" : data.Tag)
+                .Set("log.remark", data.Remark == null ? "" : data.Remark);
 
-                collectionName = type.Name;
-            }
-
-
+            WriteConcernResult result = repository.Collection.Update(query, update);
+            if (!result.Ok)
+                return ErrorCode.DatabaseWriteError;
 
             return ErrorCode.Success;
         }

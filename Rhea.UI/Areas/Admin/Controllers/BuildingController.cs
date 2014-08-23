@@ -2,8 +2,10 @@
 using Rhea.Business.Estate;
 using Rhea.Common;
 using Rhea.Model;
+using Rhea.Model.Account;
 using Rhea.Model.Estate;
 using Rhea.UI.Filters;
+using Rhea.UI.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -112,18 +114,36 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                //create
                 ErrorCode result = this.buildingBusiness.Create(model);
-
-                if (result == ErrorCode.Success)
-                {
-                    TempData["Message"] = "添加建筑成功";
-                    return RedirectToAction("List", "Building");
-                }
-                else
+                if (result != ErrorCode.Success)
                 {
                     ModelState.AddModelError("", "添加建筑失败");
                     ModelState.AddModelError("", result.DisplayName());
                 }
+
+                //log
+                User user = PageService.GetCurrentUser(User.Identity.Name);
+                Log log = new Log
+                {
+                    Title = "添加建筑",
+                    Time = DateTime.Now,
+                    Type = (int)LogType.BuildingCreate,
+                    Content = string.Format("添加建筑， ID:{0}，名称:{1}。", model.BuildingId, model.Name),
+                    UserId = user._id,
+                    UserName = user.Name
+                };
+
+                result = this.buildingBusiness.Log(model._id, log);
+                if (result != ErrorCode.Success)
+                {
+                    TempData["Message"] = "记录日志失败";
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
+                }
+
+                TempData["Message"] = "添加建筑成功";
+                return RedirectToAction("List", "Building");
             }
 
             return View(model);
@@ -174,17 +194,47 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                ErrorCode result = this.buildingBusiness.UpdateBuildingGroup(model);
-                if (result == ErrorCode.Success)
+                //backup
+                ErrorCode result = this.buildingBusiness.Backup(model._id);
+                if (result != ErrorCode.Success)
                 {
-                    TempData["Message"] = "编辑楼群成功";
-                    return RedirectToAction("Details", "Building", new { id = model.BuildingId });
+                    TempData["Message"] = "备份楼群失败";
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
                 }
-                else
+
+                //edit
+                model.Status = 0;
+                result = this.buildingBusiness.UpdateBuildingGroup(model);
+                if (result != ErrorCode.Success)
                 {
                     ModelState.AddModelError("", "编辑楼群失败");
                     ModelState.AddModelError("", result.DisplayName());
                 }
+
+                //log
+                User user = PageService.GetCurrentUser(User.Identity.Name);
+                Log log = new Log
+                {
+                    Title = "编辑楼群",
+                    Time = DateTime.Now,
+                    Type = (int)LogType.BuildingEdit,
+                    Content = string.Format("编辑楼群， ID:{0}，名称:{1}。", model.BuildingId, model.Name),
+                    UserId = user._id,
+                    UserName = user.Name
+                };
+
+                result = this.buildingBusiness.Log(model._id, log);
+                if (result != ErrorCode.Success)
+                {
+                    TempData["Message"] = "记录日志失败";
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
+                }
+
+                TempData["Message"] = "编辑楼群成功";
+                return RedirectToAction("Details", "Building", new { id = model.BuildingId });
+
             }
 
             return View(model);
@@ -201,17 +251,46 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                ErrorCode result = this.buildingBusiness.UpdateCluster(model);
-                if (result == ErrorCode.Success)
+                //backup
+                ErrorCode result = this.buildingBusiness.Backup(model._id);
+                if (result != ErrorCode.Success)
                 {
-                    TempData["Message"] = "编辑组团成功";
-                    return RedirectToAction("Details", "Building", new { id = model.BuildingId });
+                    TempData["Message"] = "备份组团失败";
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
                 }
-                else
+
+                //edit
+                model.Status = 0;
+                result = this.buildingBusiness.UpdateCluster(model);
+                if (result != ErrorCode.Success)
                 {
                     ModelState.AddModelError("", "编辑组团失败");
                     ModelState.AddModelError("", result.DisplayName());
                 }
+
+                //log
+                User user = PageService.GetCurrentUser(User.Identity.Name);
+                Log log = new Log
+                {
+                    Title = "编辑组团",
+                    Time = DateTime.Now,
+                    Type = (int)LogType.BuildingEdit,
+                    Content = string.Format("编辑组团， ID:{0}，名称:{1}。", model.BuildingId, model.Name),
+                    UserId = user._id,
+                    UserName = user.Name
+                };
+
+                result = this.buildingBusiness.Log(model._id, log);
+                if (result != ErrorCode.Success)
+                {
+                    TempData["Message"] = "记录日志失败";
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
+                }
+
+                TempData["Message"] = "编辑组团成功";
+                return RedirectToAction("Details", "Building", new { id = model.BuildingId });
             }
 
             return View(model);
@@ -228,17 +307,46 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                ErrorCode result = this.buildingBusiness.UpdateCottage(model);
-                if (result == ErrorCode.Success)
+                //backup
+                ErrorCode result = this.buildingBusiness.Backup(model._id);
+                if (result != ErrorCode.Success)
                 {
-                    TempData["Message"] = "编辑独栋成功";
-                    return RedirectToAction("Details", "Building", new { id = model.BuildingId });
+                    TempData["Message"] = "备份独栋失败";
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
                 }
-                else
+
+                //edit
+                model.Status = 0;
+                result = this.buildingBusiness.UpdateCottage(model);
+                if (result != ErrorCode.Success)
                 {
                     ModelState.AddModelError("", "编辑独栋失败");
                     ModelState.AddModelError("", result.DisplayName());
                 }
+
+                //log
+                User user = PageService.GetCurrentUser(User.Identity.Name);
+                Log log = new Log
+                {
+                    Title = "编辑独栋",
+                    Time = DateTime.Now,
+                    Type = (int)LogType.BuildingEdit,
+                    Content = string.Format("编辑独栋， ID:{0}，名称:{1}。", model.BuildingId, model.Name),
+                    UserId = user._id,
+                    UserName = user.Name
+                };
+
+                result = this.buildingBusiness.Log(model._id, log);
+                if (result != ErrorCode.Success)
+                {
+                    TempData["Message"] = "记录日志失败";
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
+                }
+
+                TempData["Message"] = "编辑独栋成功";
+                return RedirectToAction("Details", "Building", new { id = model.BuildingId });
             }
 
             return View(model);
@@ -255,17 +363,46 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                ErrorCode result = this.buildingBusiness.UpdateSubregion(model);
-                if (result == ErrorCode.Success)
+                //backup
+                ErrorCode result = this.buildingBusiness.Backup(model._id);
+                if (result != ErrorCode.Success)
                 {
-                    TempData["Message"] = "编辑分区成功";
-                    return RedirectToAction("Details", "Building", new { id = model.BuildingId });
+                    TempData["Message"] = "备份分区失败";
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
                 }
-                else
+
+                //edit
+                model.Status = 0;
+                result = this.buildingBusiness.UpdateSubregion(model);
+                if (result != ErrorCode.Success)
                 {
                     ModelState.AddModelError("", "编辑分区失败");
                     ModelState.AddModelError("", result.DisplayName());
                 }
+
+                //log
+                User user = PageService.GetCurrentUser(User.Identity.Name);
+                Log log = new Log
+                {
+                    Title = "编辑分区",
+                    Time = DateTime.Now,
+                    Type = (int)LogType.BuildingEdit,
+                    Content = string.Format("编辑分区， ID:{0}，名称:{1}。", model.BuildingId, model.Name),
+                    UserId = user._id,
+                    UserName = user.Name
+                };
+
+                result = this.buildingBusiness.Log(model._id, log);
+                if (result != ErrorCode.Success)
+                {
+                    TempData["Message"] = "记录日志失败";
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
+                }
+
+                TempData["Message"] = "编辑分区成功";
+                return RedirectToAction("Details", "Building", new { id = model.BuildingId });
             }
 
             return View(model);
@@ -282,17 +419,46 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                ErrorCode result = this.buildingBusiness.UpdateBlock(model);
-                if (result == ErrorCode.Success)
+                //backup
+                ErrorCode result = this.buildingBusiness.Backup(model._id);
+                if (result != ErrorCode.Success)
                 {
-                    TempData["Message"] = "编辑分区成功";
-                    return RedirectToAction("Details", "Building", new { id = model.BuildingId });
+                    TempData["Message"] = "备份楼宇失败";
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
                 }
-                else
+
+                //edit
+                model.Status = 0;
+                result = this.buildingBusiness.UpdateBlock(model);
+                if (result != ErrorCode.Success)
                 {
-                    ModelState.AddModelError("", "编辑分区失败");
+                    ModelState.AddModelError("", "编辑楼宇失败");
                     ModelState.AddModelError("", result.DisplayName());
                 }
+
+                //log
+                User user = PageService.GetCurrentUser(User.Identity.Name);
+                Log log = new Log
+                {
+                    Title = "编辑楼宇",
+                    Time = DateTime.Now,
+                    Type = (int)LogType.BuildingEdit,
+                    Content = string.Format("编辑楼宇， ID:{0}，名称:{1}。", model.BuildingId, model.Name),
+                    UserId = user._id,
+                    UserName = user.Name
+                };
+
+                result = this.buildingBusiness.Log(model._id, log);
+                if (result != ErrorCode.Success)
+                {
+                    TempData["Message"] = "记录日志失败";
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
+                }
+
+                TempData["Message"] = "编辑楼宇成功";
+                return RedirectToAction("Details", "Building", new { id = model.BuildingId });
             }
 
             return View(model);
@@ -309,17 +475,46 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                ErrorCode result = this.buildingBusiness.UpdatePlayground(model);
-                if (result == ErrorCode.Success)
+                //backup
+                ErrorCode result = this.buildingBusiness.Backup(model._id);
+                if (result != ErrorCode.Success)
                 {
-                    TempData["Message"] = "编辑操场成功";
-                    return RedirectToAction("Details", "Building", new { id = model.BuildingId });
+                    TempData["Message"] = "备份操场失败";
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
                 }
-                else
+
+                //edit
+                model.Status = 0;
+                result = this.buildingBusiness.UpdatePlayground(model);
+                if (result != ErrorCode.Success)
                 {
                     ModelState.AddModelError("", "编辑操场失败");
                     ModelState.AddModelError("", result.DisplayName());
                 }
+
+                //log
+                User user = PageService.GetCurrentUser(User.Identity.Name);
+                Log log = new Log
+                {
+                    Title = "编辑操场",
+                    Time = DateTime.Now,
+                    Type = (int)LogType.BuildingEdit,
+                    Content = string.Format("编辑操场， ID:{0}，名称:{1}。", model.BuildingId, model.Name),
+                    UserId = user._id,
+                    UserName = user.Name
+                };
+
+                result = this.buildingBusiness.Log(model._id, log);
+                if (result != ErrorCode.Success)
+                {
+                    TempData["Message"] = "记录日志失败";
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
+                }
+
+                TempData["Message"] = "编辑操场成功";
+                return RedirectToAction("Details", "Building", new { id = model.BuildingId });
             }
 
             return View(model);
@@ -349,23 +544,53 @@ namespace Rhea.UI.Areas.Admin.Controllers
         public ActionResult EditFloor(Floor model)
         {
             int buildingId = Convert.ToInt32(Request.Form["BuildingId"]);
+            ViewBag.BuildingId = buildingId;
 
             if (ModelState.IsValid)
             {
-                ErrorCode result = this.buildingBusiness.UpdateFloor(buildingId, model);
-                if (result == ErrorCode.Success)
+                Building building = this.buildingBusiness.Get(buildingId);
+
+                //backup
+                ErrorCode result = this.buildingBusiness.Backup(building._id);
+                if (result != ErrorCode.Success)
                 {
-                    TempData["Message"] = "编辑楼层成功";
-                    return RedirectToAction("Details", "Building", new { id = buildingId });
+                    TempData["Message"] = "备份建筑失败";
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
                 }
-                else
+
+                //edit
+                result = this.buildingBusiness.UpdateFloor(buildingId, model);
+                if (result != ErrorCode.Success)
                 {
                     ModelState.AddModelError("", "编辑楼层失败");
                     ModelState.AddModelError("", result.DisplayName());
                 }
+
+                //log
+                User user = PageService.GetCurrentUser(User.Identity.Name);
+                Log log = new Log
+                {
+                    Title = "编辑楼层",
+                    Time = DateTime.Now,
+                    Type = (int)LogType.FloorEdit,
+                    Content = string.Format("编辑楼层， ID:{0}，名称:{1}，建筑:{2}。", model.Id, model.Name, building.Name),
+                    UserId = user._id,
+                    UserName = user.Name
+                };
+
+                result = this.buildingBusiness.Log(building._id, log);
+                if (result != ErrorCode.Success)
+                {
+                    TempData["Message"] = "记录日志失败";
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
+                }
+
+                TempData["Message"] = "编辑楼层成功";
+                return RedirectToAction("Details", "Building", new { id = buildingId });
             }
 
-            ViewBag.BuildingId = buildingId;
             return View(model);
         }
 
@@ -380,7 +605,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             ViewBag.BuildingId = buildingId;
             var data = this.buildingBusiness.GetFloor(buildingId, floorId);
-            return View(data);            
+            return View(data);
         }
 
         /// <summary>

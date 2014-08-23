@@ -16,6 +16,16 @@ namespace Rhea.Model.Estate
     [CollectionName("building")]
     public class Building : MongoEntity
     {
+        #region Constructor
+        /// <summary>
+        /// 建筑基类
+        /// </summary>
+        public Building()
+        {
+            this.Log = new Log();
+        }
+        #endregion //Constructor
+
         #region Property
         /// <summary>
         /// ID
@@ -245,6 +255,13 @@ namespace Rhea.Model.Estate
         [BsonElement("status")]
         [Display(Name = "状态")]
         public int Status { get; set; }
+
+        /// <summary>
+        /// 日志属性
+        /// </summary>
+        [BsonElement("log")]
+        [Display(Name = "日志属性")]
+        public Log Log { get; set; }
         #endregion //Property
     }
 }

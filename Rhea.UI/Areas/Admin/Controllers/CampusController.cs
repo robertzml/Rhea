@@ -94,6 +94,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
                     return View(model);
                 }
 
+                //edit
                 model.Status = 0;
                 result = this.campusBusiness.Update(model);
                 if (result != ErrorCode.Success)
@@ -103,6 +104,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
                     return View(model);
                 }
 
+                //log
                 User user = PageService.GetCurrentUser(User.Identity.Name);
                 Log log = new Log
                 {
@@ -114,7 +116,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
                     UserName = user.Name
                 };
 
-                result = this.campusBusiness.Log(model.CampusId, log);
+                result = this.campusBusiness.Log(model._id, log);
                 if (result != ErrorCode.Success)
                 {
                     TempData["Message"] = "记录日志失败";

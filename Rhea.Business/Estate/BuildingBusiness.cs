@@ -1,4 +1,5 @@
-﻿using Rhea.Data.Estate;
+﻿using Rhea.Data;
+using Rhea.Data.Estate;
 using Rhea.Data.Mongo.Estate;
 using Rhea.Model;
 using Rhea.Model.Estate;
@@ -20,6 +21,16 @@ namespace Rhea.Business.Estate
         /// 建筑Repository
         /// </summary>
         private IBuildingRepository buildingRepository;
+
+        /// <summary>
+        /// 备份业务
+        /// </summary>
+        private BackupBusiness backupBusiness;
+
+        /// <summary>
+        /// 日志业务
+        /// </summary>
+        private LogBusiness logBusiness;
         #endregion //Field
 
         #region Constructor
@@ -29,6 +40,8 @@ namespace Rhea.Business.Estate
         public BuildingBusiness()
         {
             this.buildingRepository = new MongoBuildingRepository();
+            this.backupBusiness = new BackupBusiness();
+            this.logBusiness = new LogBusiness();
         }
         #endregion //Constructor
 
@@ -191,6 +204,33 @@ namespace Rhea.Business.Estate
             floor.ImageUrl = data.ImageUrl;
 
             return this.UpdateFloor(buildingId, floor);
+        }
+
+        /// <summary>
+        /// 备份建筑
+        /// </summary>
+        /// <param name="_id">建筑系统ID</param>
+        /// <returns></returns>
+        public ErrorCode Backup(string _id)
+        {
+            ErrorCode result = this.backupBusiness.Backup(RheaServer.EstateDatabase, EstateCollection.Building, EstateCollection.BuildingBackup, _id);
+            return result;
+        }
+
+        /// <summary>
+        /// 记录日志
+        /// </summary>
+        /// <param name="_id">建筑系统ID</param>
+        /// <param name="log">日志对象</param>
+        /// <returns></returns>
+        public ErrorCode Log(string _id, Log log)
+        {
+            ErrorCode result = this.logBusiness.Create(log);
+            if (result != ErrorCode.Success)
+                return result;
+
+            result = this.logBusiness.Log(RheaServer.EstateDatabase, EstateCollection.Building, _id, log);
+            return result;
         }
         #endregion //Building
 
