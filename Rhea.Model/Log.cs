@@ -14,6 +14,7 @@ namespace Rhea.Model
     [CollectionName("log")]
     public class Log : MongoEntity
     {
+        #region Property
         /// <summary>
         /// 标题
         /// </summary>
@@ -73,5 +74,6 @@ namespace Rhea.Model
         [BsonElement("remark")]
         [Display(Name = "备注")]
         public string Remark { get; set; }
+        #endregion //Property
     }
 }

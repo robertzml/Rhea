@@ -90,7 +90,7 @@ namespace Rhea.Data.Mongo
             {
                 return this.collection.FindOneByIdAs<T>(new ObjectId(_id as string));
             }
-
+            
             return this.collection.FindOneByIdAs<T>(BsonValue.Create(_id));
         }
 
@@ -399,11 +399,13 @@ namespace Rhea.Data.Mongo
         /// <summary>
         /// 初始化 MongoRepository 类
         /// </summary>
-        /// <param name="connectionString">连接字符串</param>
         /// <param name="databaseName">数据库名称</param>
-        public MongoRepository(string connectionString, string databaseName)
+        /// <param name="collectionName">Collection名称</param>
+        public MongoRepository(string databaseName, string collectionName)
         {
+            string connectionString = ConfigurationManager.ConnectionStrings["mongoConnection"].ConnectionString;
             this.database = GetDatabase(new MongoUrl(connectionString), databaseName);
+            this.collection = this.database.GetCollection<BsonDocument>(collectionName);
         }
 
         /// <summary>

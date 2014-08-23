@@ -25,7 +25,17 @@ namespace Rhea.Business.Account
         /// <summary>
         /// 用户组Repository
         /// </summary>
-        public IUserGroupRepository userGroupRepository;
+        private IUserGroupRepository userGroupRepository;
+
+        /// <summary>
+        /// Root用户组ID
+        /// </summary>
+        private int rootGroupId = 100001;
+
+        /// <summary>
+        /// Root用户组名称
+        /// </summary>
+        private string rootGroupName = "Root";
         #endregion //Field
 
         #region Constructor
@@ -93,6 +103,19 @@ namespace Rhea.Business.Account
         public IEnumerable<User> Get()
         {
             return this.userRepository.Get().Where(r => r.Status != 1);
+        }
+
+        /// <summary>
+        /// 获取所有用户
+        /// </summary>
+        /// <param name="isRoot"></param>
+        /// <returns></returns>
+        public IEnumerable<User> Get(bool isRoot)
+        {
+            if (isRoot)
+                return this.Get();
+            else
+                return this.userRepository.Get().Where(r => r.Status != 1 && r.UserGroupId != this.rootGroupId);
         }
 
         /// <summary>
@@ -252,7 +275,7 @@ namespace Rhea.Business.Account
         public void Disable(string _id)
         {
             var user = this.userRepository.Get(_id);
-            if (user.UserGroupId == 100001) //Root 不能禁用
+            if (user.UserGroupId == this.rootGroupId) //Root 不能禁用
                 return;
 
             user.Status = (int)EntityStatus.UserDisable;
@@ -269,7 +292,7 @@ namespace Rhea.Business.Account
         /// <returns></returns>
         public IEnumerable<UserGroup> GetUserGroup()
         {
-            return this.userGroupRepository.Get().Where(r => r.Name != "Root").OrderByDescending(r => r.Rank);
+            return this.userGroupRepository.Get().Where(r => r.Name != this.rootGroupName).OrderByDescending(r => r.Rank);
         }
 
         /// <summary>

@@ -46,7 +46,9 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult List()
         {
-            var data = this.userBusiness.Get().ToList();
+            bool isRoot = User.IsInRole2("Root");
+
+            var data = this.userBusiness.Get(isRoot).ToList();
             data.ForEach(r => r.AvatarSmall = RheaConstant.AvatarRoot + r.AvatarSmall);
             return View(data);
         }
@@ -126,7 +128,12 @@ namespace Rhea.UI.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Edit(string id)
         {
+            bool isRoot = User.IsInRole2("Root");
             var data = this.userBusiness.Get(id);
+
+            if (!isRoot && data.UserGroupId == 100001)
+                return View("List");
+
             return View(data);
         }
 

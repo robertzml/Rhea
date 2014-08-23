@@ -1,8 +1,8 @@
-﻿@model Rhea.Model.Estate.Campus
+﻿@model Rhea.Model.Log
 
 @{
-    ViewBag.Title = "校区信息";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout_Estate.cshtml";
+    ViewBag.Title = "日志信息";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Advance.cshtml";
 }
 
 <!-- BEGIN PAGE HEADER-->
@@ -13,15 +13,15 @@
     <ul class="page-breadcrumb">
         <li>
             <i class="fa fa-home"></i>
-            <a href="@Url.Action("Index", "Estate")">房产管理</a>
+            <a href="@Url.Action("Index", "Advance")">高级管理</a>
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
-            <a href="#">校区管理</a>
+            <a href="#">日志管理</a>
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
-            <a href="#">校区信息</a>
+            <a href="#">日志信息</a>
         </li>
     </ul>
 </div>
@@ -32,7 +32,7 @@
         <div class="portlet box green">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-shopping-cart"></i>&nbsp;校区信息
+                    <i class="fa fa-th"></i>&nbsp;日志信息
                 </div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse">
@@ -54,26 +54,69 @@
                     <tbody>
                         <tr>
                             <td>
-                                @Html.DisplayNameFor(model => model.CampusId)
+                                @Html.DisplayNameFor(model => model._id)
                             </td>
                             <td>
-                                @Html.DisplayFor(model => model.CampusId)
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                @Html.DisplayNameFor(model => model.Name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(model => model.Name)
+                                @Html.DisplayFor(model => model._id)
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                @Html.DisplayNameFor(model => model.ImageUrl)
+                                @Html.DisplayNameFor(model => model.Title)
                             </td>
                             <td>
-                                @Html.DisplayFor(model => model.ImageUrl)
+                                @Html.DisplayFor(model => model.Title)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Time)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.Time)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.UserId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.UserId)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.UserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.UserName)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Content)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.Content)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Type)
+                            </td>
+                            <td>
+                                @{
+                                    var type = (LogType)Model.Type;
+                                    @type.DisplayName();
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Tag)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.Tag)
                             </td>
                         </tr>
                         <tr>
@@ -84,50 +127,23 @@
                                 @Html.DisplayFor(model => model.Remark)
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                @Html.DisplayNameFor(model => model.Status)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(model => model.Status)
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                编辑时间
-                            </td>
-                            <td>
-                                @Html.DisplayFor(model => model.Log.Time)
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                编辑人
-                            </td>
-                            <td>
-                                @Html.DisplayFor(model => model.Log.UserName)
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
 
                 <hr />
                 <p>
-                    <a href="@Url.Action("List", new { controller = "Campus" })" class="btn btn-primary" role="button"><i class="fa fa-list"></i>&nbsp;回到列表</a>
-                    <a href="@Url.Action("Edit", new { controller = "Campus", id = Model.CampusId })" class="btn btn-warning" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
+                    <a href="@Url.Action("List", new { controller = "Log" })" class="btn btn-primary" role="button"><i class="fa fa-list"></i>&nbsp;回到列表</a>
                 </p>
             </div>
         </div>
     </div>
 </div>
 <!-- END PAGE CONTENT-->
-
 @section scripts {
     <script type="text/javascript">
         $(function () {
-            Rhea.topNavActive($('#estate-nav'));
-            Rhea.leftNavActive($('#campus-list-menu'));
+            Rhea.topNavActive($('#advance-nav'));
+            Rhea.leftNavActive($('#log-list-menu'));
         });
     </script>
 }
-

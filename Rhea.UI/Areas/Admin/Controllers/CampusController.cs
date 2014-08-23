@@ -1,14 +1,17 @@
-﻿using Rhea.Business.Estate;
+﻿using Rhea.Business;
+using Rhea.Business.Estate;
 using Rhea.Common;
 using Rhea.Model;
+using Rhea.Model.Account;
 using Rhea.Model.Estate;
+using Rhea.UI.Filters;
+using Rhea.UI.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Rhea.UI.Filters;
 
 namespace Rhea.UI.Areas.Admin.Controllers
 {
@@ -38,12 +41,6 @@ namespace Rhea.UI.Areas.Admin.Controllers
         #endregion //Function
 
         #region Action
-        // GET: Admin/Campus
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         /// <summary>
         /// 校区列表
         /// </summary>
@@ -88,19 +85,45 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                model.Status = 0;
-                ErrorCode result = this.campusBusiness.Update(model);
-
-                if (result == ErrorCode.Success)
+                //backup
+                ErrorCode result = this.campusBusiness.Backup(model._id);
+                if (result != ErrorCode.Success)
                 {
-                    TempData["Message"] = "编辑校区成功";
-                    return RedirectToAction("Details", new { controller = "Campus", id = model.CampusId });
+                    TempData["Message"] = "备份校区失败";
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
                 }
-                else
+
+                model.Status = 0;
+                result = this.campusBusiness.Update(model);
+                if (result != ErrorCode.Success)
                 {
                     TempData["Message"] = "编辑校区失败";
                     ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
                 }
+
+                User user = PageService.GetCurrentUser(User.Identity.Name);
+                Log log = new Log
+                {
+                    Title = "编辑校区",
+                    Time = DateTime.Now,
+                    Type = (int)LogType.CampusEdit,
+                    Content = string.Format("编辑校区: {0}。", model.Name),
+                    UserId = user._id,
+                    UserName = user.Name
+                };
+
+                result = this.campusBusiness.Log(model.CampusId, log);
+                if (result != ErrorCode.Success)
+                {
+                    TempData["Message"] = "记录日志失败";
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
+                }
+
+                TempData["Message"] = "编辑校区成功";
+                return RedirectToAction("Details", new { controller = "Campus", id = model.CampusId });
             }
 
             return View(model);

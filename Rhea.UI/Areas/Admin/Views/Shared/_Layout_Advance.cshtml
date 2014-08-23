@@ -1,5 +1,6 @@
 ﻿@{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    bool isRoot = User.IsInRole2("Root");
 }
 
 <!-- BEGIN SIDEBAR -->
@@ -59,11 +60,14 @@
                             用户组列表
                         </a>
                     </li>
+                    @if(isRoot)
+                    { 
                     <li>
                         <a href="@Url.Action("Create", "UserGroup")" id="user-group-create-menu">
                             添加用户组
                         </a>
                     </li>
+                    }
                 </ul>
             </li>
             <li class="left-nav-first">
@@ -88,6 +92,26 @@
                     </li>
                 </ul>
             </li>
+            @if(isRoot)
+            { 
+            <li class="left-nav-first">
+                <a href="javascript:;">
+                    <i class="fa fa-file-text-o"></i>
+                    <span class="title">
+                        日志管理
+                    </span>
+                    <span class="arrow ">
+                    </span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="@Url.Action("List", "Log")" id="log-list-menu">
+                            日志列表
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            }
             <li class="last">
                 <a href="#">
                     <i class="fa fa-user"></i>

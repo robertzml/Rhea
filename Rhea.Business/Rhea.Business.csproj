@@ -51,10 +51,12 @@
     <Compile Include="Apartment\ApartmentRoomBusiness.cs" />
     <Compile Include="Apartment\InhabitantBusiness.cs" />
     <Compile Include="Apartment\ResideRecordBusiness.cs" />
+    <Compile Include="BackupBusiness.cs" />
     <Compile Include="DictionaryBusiness.cs" />
     <Compile Include="Estate\BuildingBusiness.cs" />
     <Compile Include="Estate\CampusBusiness.cs" />
     <Compile Include="Estate\RoomBusiness.cs" />
+    <Compile Include="LogBusiness.cs" />
     <Compile Include="ModelExtension.cs" />
     <Compile Include="Personnel\DepartmentBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
