@@ -50,7 +50,6 @@
   <ItemGroup>
     <Compile Include="Account\MongoUserGroupRepository.cs" />
     <Compile Include="Account\MongoUserRepository.cs" />
-    <Compile Include="Apartment\MongoInhabitantRepository.cs" />
     <Compile Include="Estate\MongoBlockRepository.cs" />
     <Compile Include="Estate\MongoBuildingGroupRepository.cs" />
     <Compile Include="Estate\MongoBuildingRepository.cs" />
@@ -80,6 +79,9 @@
       <Project>{b422f49d-599d-4dd1-984f-409ee6fad18b}</Project>
       <Name>Rhea.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Apartment\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

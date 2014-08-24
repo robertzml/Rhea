@@ -162,7 +162,7 @@ namespace Rhea.Business
                     continue;
 
                 Floor floor = new Floor();
-                floor.Id = row["id"].AsInt32;
+                floor.FloorId = row["id"].AsInt32;
                 floor.Number = row["number"].AsInt32;
                 floor.Name = row["name"].AsString;
                 floor.ImageUrl = row["imageUrl"].AsString;
@@ -190,7 +190,7 @@ namespace Rhea.Business
                     continue;
 
                 Floor floor = new Floor();
-                floor.Id = row["id"].AsInt32;
+                floor.FloorId = row["id"].AsInt32;
                 floor.Number = row["number"].AsInt32;
                 floor.Name = row["name"].AsString;
                 floor.ImageUrl = row["imageUrl"].AsString;
@@ -228,7 +228,7 @@ namespace Rhea.Business
                     continue;
 
                 Floor floor = new Floor();
-                floor.Id = row["id"].AsInt32;
+                floor.FloorId = row["id"].AsInt32;
                 floor.Number = row["number"].AsInt32;
                 floor.Name = row["name"].AsString;
                 floor.ImageUrl = row["imageUrl"].AsString;

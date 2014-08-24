@@ -50,7 +50,7 @@ namespace Rhea.ConsoleTest
 
             List<OriginBuildingMap> maps = business.GetRelateData();
 
-            maps = maps.Where(r => r.NewId > 200077 && r.NewId <= 200123).ToList();
+            maps = maps.Where(r => r.NewId >= 200077 && r.NewId <= 200123).ToList();
 
             foreach (var row in maps)
             {
@@ -84,7 +84,7 @@ namespace Rhea.ConsoleTest
 
             List<OriginBuildingMap> maps = business.GetRelateData();
 
-            maps = maps.Where(r => r.NewId == 200027).ToList();
+            //maps = maps.Where(r => r.NewId == 200027).ToList();
 
             foreach (var row in maps)
             {

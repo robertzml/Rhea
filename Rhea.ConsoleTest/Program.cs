@@ -14,12 +14,12 @@ namespace Rhea.ConsoleTest
             //synchronization.SyncBuildingGroup();
             //synchronization.ShowBuildingMap();
             //synchronization.SyncBuilding();
-            //synchronization.SyncSubregion();
-            //synchronization.SyncBlock();
-            //synchronization.SyncCottage();
+            synchronization.SyncSubregion();
+            synchronization.SyncBlock();
+            synchronization.SyncCottage();
 
             //synchronization.ShowDepartmentMap();
-            synchronization.SyncDepartment();
+            //synchronization.SyncDepartment();
         }
     }
 }
