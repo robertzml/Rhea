@@ -5,6 +5,7 @@ using Rhea.Model;
 using Rhea.Model.Estate;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -132,17 +133,17 @@ namespace Rhea.Business.Estate
                     case BuildingOrganizeType.Cottage:
                         IBuildingRepository cottageRepository = new MongoCottageRepository();
                         var cottage = (Cottage)cottageRepository.Get(buildingId);
-                        return cottage.Floors.Single(r => r.Id == floorId);
+                        return cottage.Floors.Single(r => r.FloorId == floorId);
 
                     case BuildingOrganizeType.Subregion:
                         IBuildingRepository subregionRepository = new MongoSubregionRepository();
                         var subregion = (Subregion)subregionRepository.Get(buildingId);
-                        return subregion.Floors.Single(r => r.Id == floorId);
+                        return subregion.Floors.Single(r => r.FloorId == floorId);
 
                     case BuildingOrganizeType.Block:
                         IBuildingRepository blockRepository = new MongoBlockRepository();
                         var block = (Block)blockRepository.Get(buildingId);
-                        return block.Floors.Single(r => r.Id == floorId);
+                        return block.Floors.Single(r => r.FloorId == floorId);
 
                     case BuildingOrganizeType.Playground:
                         return null;
@@ -200,10 +201,40 @@ namespace Rhea.Business.Estate
         /// <returns></returns>
         public ErrorCode UpdateSvg(int buildingId, Floor data)
         {
-            Floor floor = this.GetFloor(buildingId, data.Id);
+            Floor floor = this.GetFloor(buildingId, data.FloorId);
             floor.ImageUrl = data.ImageUrl;
 
             return this.UpdateFloor(buildingId, floor);
+        }
+
+        /// <summary>
+        /// 备份平面图
+        /// </summary>
+        /// <param name="baseFolder">网站根目录</param>
+        /// <param name="svgFileName">原平面图名称</param>
+        /// <returns>备份SVG文件名</returns>
+        public string BackupFloorSvg(string baseFolder, string svgFileName)
+        {
+            string oldFilePath = baseFolder + RheaConstant.SvgRoot + svgFileName;
+
+            if (!File.Exists(oldFilePath))
+                return "";
+
+            string name = Path.GetFileNameWithoutExtension(svgFileName);
+            string ext = Path.GetExtension(svgFileName);
+            DateTime now = DateTime.Now;
+            string newFileName = string.Format("{0}-{1}{2}{3}{4}{5}{6}{7}", name, now.Year, now.Month, now.Day,
+                now.Hour, now.Minute, now.Second, ext);
+
+            try
+            {
+                File.Copy(oldFilePath, baseFolder + RheaConstant.SvgBackup + newFileName);
+            }
+            catch (Exception)
+            {
+                return "";
+            }
+            return newFileName;
         }
 
         /// <summary>

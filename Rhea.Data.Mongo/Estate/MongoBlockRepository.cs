@@ -85,7 +85,7 @@ namespace Rhea.Data.Mongo.Estate
             try
             {
                 Block block = this.repository.Single(r => r.BuildingId == buildingId);
-                Floor floor = block.Floors.Single(r => r.Id == data.Id);
+                Floor floor = block.Floors.Single(r => r.FloorId == data.FloorId);
                 floor.Number = data.Number;
                 floor.Name = data.Name;
                 floor.UsableArea = data.UsableArea;

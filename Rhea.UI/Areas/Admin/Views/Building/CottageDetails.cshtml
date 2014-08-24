@@ -346,6 +346,7 @@
                     <a href="@Url.Action("List", new { controller = "Building" })" class="btn btn-primary" role="button"><i class="fa fa-list"></i>&nbsp;回到列表</a>
                     <a href="@Url.Action("ListByBuilding", new { controller = "Room", buildingId = Model.BuildingId })" class="btn btn-success" role="button"><i class="fa fa-outdent"></i>&nbsp;房间</a>
                     <a href="@Url.Action("Edit", new { controller = "Building", id = Model.BuildingId })" class="btn btn-warning" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
+                    <a href="@Url.Action("FloorCreate", new { controller = "Building", buildingId = Model.BuildingId })" class="btn btn-warning yellow-gold" role="button"><i class="fa fa-plus"></i>&nbsp;添加楼层</a>
                 </p>
             </div>
         </div>
@@ -403,7 +404,7 @@
                         {
                             <tr>
                                 <td>
-                                    @item.Id
+                                    @item.FloorId
                                 </td>
                                 <td>
                                     @item.Number
@@ -424,8 +425,8 @@
                                     @item.Remark
                                 </td>
                                 <td>
-                                    <a href="@Url.Action("UploadSvg", new { controller = "Building", buildingId = Model.BuildingId, floorId = item.Id })" class="btn btn-primary btn-sm" role="button"><i class="fa fa-upload"></i>&nbsp;上传平面图</a>
-                                    <a href="@Url.Action("EditFloor", new { controller = "Building", buildingId = Model.BuildingId, floorId = item.Id })" class="btn btn-warning btn-sm" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
+                                    <a href="@Url.Action("UploadSvg", new { controller = "Building", buildingId = Model.BuildingId, floorId = item.FloorId })" class="btn btn-primary btn-sm" role="button"><i class="fa fa-upload"></i>&nbsp;上传平面图</a>
+                                    <a href="@Url.Action("FloorEdit", new { controller = "Building", buildingId = Model.BuildingId, floorId = item.FloorId })" class="btn btn-warning btn-sm" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
                                 </td>
                             </tr>
                         }

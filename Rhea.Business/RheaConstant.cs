@@ -23,6 +23,11 @@ namespace Rhea.Business
         public static readonly string SvgRoot = "/Attachment/svg/";
 
         /// <summary>
+        /// SVG备份目录
+        /// </summary>
+        public static readonly string SvgBackup = "/Attachment/svgbackup/";
+
+        /// <summary>
         /// 头像目录
         /// </summary>
         public static readonly string AvatarRoot = "/Attachment/avatar/";

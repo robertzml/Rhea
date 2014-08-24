@@ -155,7 +155,7 @@
                             <div class="list-group">
                                 @foreach (var item in Model.Block.Floors)
                                 {
-                                    <a href="#" class="list-group-item list-group-item-success sub-floor-ajax-link" ref="@item.Id">
+                                    <a href="#" class="list-group-item list-group-item-success sub-floor-ajax-link" ref="@item.FloorId">
                                         <i class="fa fa-road"></i> @item.Name
                                     </a>
                                 }
@@ -292,7 +292,7 @@
                                 @foreach (var item in Model.Block.Floors)
                                 {
                                     <li>
-                                        <a href="#f_@item.Id" data-toggle="tab" data-url="@item.ImageUrl" class="floor-ajax-link">
+                                        <a href="#f_@item.FloorId" data-toggle="tab" data-url="@item.ImageUrl" class="floor-ajax-link">
                                             <i class="fa fa-road"></i> @item.Name
                                         </a>
                                     </li>

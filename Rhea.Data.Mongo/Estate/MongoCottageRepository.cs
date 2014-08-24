@@ -73,7 +73,7 @@ namespace Rhea.Data.Mongo.Estate
             try
             {
                 Cottage cottage = this.repository.Single(r => r.BuildingId == buildingId);
-                Floor floor = cottage.Floors.Single(r => r.Id == data.Id);
+                Floor floor = cottage.Floors.Single(r => r.FloorId == data.FloorId);
                 floor.Number = data.Number;
                 floor.Name = data.Name;
                 floor.UsableArea = data.UsableArea;

@@ -85,7 +85,7 @@ namespace Rhea.Data.Mongo.Estate
             try
             {
                 Subregion subregion = this.repository.Single(r => r.BuildingId == buildingId);
-                Floor floor = subregion.Floors.Single(r => r.Id == data.Id);
+                Floor floor = subregion.Floors.Single(r => r.FloorId == data.FloorId);
                 floor.Number = data.Number;
                 floor.Name = data.Name;
                 floor.UsableArea = data.UsableArea;
