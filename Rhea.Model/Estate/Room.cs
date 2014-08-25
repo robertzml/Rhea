@@ -23,6 +23,7 @@ namespace Rhea.Model.Estate
         public Room()
         {
             this.Function = new RoomFunctionCode();
+            this.Log = new Log();
         }
         #endregion //Constructor
 
@@ -109,7 +110,7 @@ namespace Rhea.Model.Estate
         [Required]
         [BsonElement("buildingId")]
         [Display(Name = "所属建筑")]
-        [UIHint("BuildingDropDownList")]
+        [UIHint("SubBuildingList")]
         public int BuildingId { get; set; }
 
         /// <summary>
@@ -180,6 +181,13 @@ namespace Rhea.Model.Estate
         [BsonElement("status")]
         [Display(Name = "状态")]
         public int Status { get; set; }
+
+        /// <summary>
+        /// 日志属性
+        /// </summary>
+        [BsonElement("log")]
+        [Display(Name = "日志属性")]
+        public Log Log { get; set; }
         #endregion //Property
 
         #region Additional

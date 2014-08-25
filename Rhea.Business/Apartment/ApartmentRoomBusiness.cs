@@ -1,4 +1,5 @@
 ﻿using Rhea.Business.Estate;
+using Rhea.Data;
 using Rhea.Data.Apartment;
 using Rhea.Data.Estate;
 using Rhea.Data.Mongo.Apartment;
@@ -23,6 +24,16 @@ namespace Rhea.Business.Apartment
         /// 房间Repository
         /// </summary>
         private IRoomRepository roomRepository;
+
+        /// <summary>
+        /// 备份业务
+        /// </summary>
+        private BackupBusiness backupBusiness;
+
+        /// <summary>
+        /// 日志业务
+        /// </summary>
+        private LogBusiness logBusiness;
         #endregion //Field
 
         #region Constructor
@@ -32,6 +43,8 @@ namespace Rhea.Business.Apartment
         public ApartmentRoomBusiness()
         {
             this.roomRepository = new MongoApartmentRoomRepository();
+            this.backupBusiness = new BackupBusiness();
+            this.logBusiness = new LogBusiness();
         }
         #endregion //Constructor
 
@@ -128,6 +141,33 @@ namespace Rhea.Business.Apartment
         public ErrorCode Update(ApartmentRoom data)
         {
             return this.roomRepository.Update(data);
+        }
+
+        /// <summary>
+        /// 备份房间
+        /// </summary>
+        /// <param name="_id">房间系统ID</param>
+        /// <returns></returns>
+        public ErrorCode Backup(string _id)
+        {
+            ErrorCode result = this.backupBusiness.Backup(RheaServer.EstateDatabase, EstateCollection.Room, EstateCollection.RoomBackup, _id);
+            return result;
+        }
+
+        /// <summary>
+        /// 记录日志
+        /// </summary>
+        /// <param name="_id">房间系统ID</param>
+        /// <param name="log">日志对象</param>
+        /// <returns></returns>
+        public ErrorCode Log(string _id, Log log)
+        {
+            ErrorCode result = this.logBusiness.Create(log);
+            if (result != ErrorCode.Success)
+                return result;
+
+            result = this.logBusiness.Log(RheaServer.EstateDatabase, EstateCollection.Room, _id, log);
+            return result;
         }
         #endregion //Method
     }

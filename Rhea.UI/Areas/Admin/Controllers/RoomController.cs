@@ -2,8 +2,10 @@
 using Rhea.Business.Estate;
 using Rhea.Common;
 using Rhea.Model;
+using Rhea.Model.Account;
 using Rhea.Model.Estate;
 using Rhea.UI.Filters;
+using Rhea.UI.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -83,6 +85,71 @@ namespace Rhea.UI.Areas.Admin.Controllers
         }
 
         /// <summary>
+        /// 添加公用房
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Create()
+        {
+            int lastId = this.roomBusiness.GetLastRoomId(1);
+            ViewData["RoomId"] = lastId + 1;
+            return View();
+        }
+
+        /// <summary>
+        /// 添加公用房
+        /// </summary>
+        /// <param name="model">房间模型</param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Create(Room model)
+        {
+            if (ModelState.IsValid)
+            {
+                //create
+                string codeId = Request.Form["FunctionCodeId"];
+                DictionaryBusiness dictionaryBusiness = new DictionaryBusiness();
+                RoomFunctionCode codes = dictionaryBusiness.GetRoomFunctionCodes().Single(r => r.CodeId == codeId);
+
+                model.Function = codes;
+                model.Status = 0;
+                ErrorCode result = this.roomBusiness.Create(model);
+                if (result != ErrorCode.Success)
+                {
+                    ModelState.AddModelError("", "添加房间失败");
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
+                }
+
+                //log
+                User user = PageService.GetCurrentUser(User.Identity.Name);
+                Log log = new Log
+                {
+                    Title = "添加房间",
+                    Time = DateTime.Now,
+                    Type = (int)LogType.RoomCreate,
+                    Content = string.Format("添加房间， ID:{0}, 名称:{1}。", model.RoomId, model.Name),
+                    UserId = user._id,
+                    UserName = user.Name
+                };
+
+                result = this.roomBusiness.Log(model._id, log);
+                if (result != ErrorCode.Success)
+                {
+                    TempData["Message"] = "记录日志失败";
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
+                }
+
+                TempData["Message"] = "添加房间成功";
+                return RedirectToAction("Details", new { controller = "Room", id = model.RoomId });
+            }
+
+            return View(model);
+        }
+
+        /// <summary>
         /// 房间编辑
         /// </summary>
         /// <param name="id">房间ID</param>
@@ -105,24 +172,53 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                //backup
+                ErrorCode result = this.roomBusiness.Backup(model._id);
+                if (result != ErrorCode.Success)
+                {
+                    TempData["Message"] = "备份房间失败";
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
+                }
+
+                //edit
                 string codeId = Request.Form["FunctionCodeId"];
                 DictionaryBusiness dictionaryBusiness = new DictionaryBusiness();
                 RoomFunctionCode codes = dictionaryBusiness.GetRoomFunctionCodes().Single(r => r.CodeId == codeId);
 
                 model.Function = codes;
                 model.Status = 0;
-                ErrorCode result = this.roomBusiness.Update(model);
+                result = this.roomBusiness.Update(model);
 
-                if (result == ErrorCode.Success)
-                {
-                    TempData["Message"] = "编辑房间成功";
-                    return RedirectToAction("Details", new { controller = "Room", id = model.RoomId });
-                }
-                else
+                if (result != ErrorCode.Success)
                 {
                     TempData["Message"] = "编辑房间失败";
                     ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
                 }
+
+                //log
+                User user = PageService.GetCurrentUser(User.Identity.Name);
+                Log log = new Log
+                {
+                    Title = "编辑房间",
+                    Time = DateTime.Now,
+                    Type = (int)LogType.RoomEdit,
+                    Content = string.Format("编辑房间， ID:{0}, 名称:{1}。", model.RoomId, model.Name),
+                    UserId = user._id,
+                    UserName = user.Name
+                };
+
+                result = this.roomBusiness.Log(model._id, log);
+                if (result != ErrorCode.Success)
+                {
+                    TempData["Message"] = "记录日志失败";
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
+                }
+
+                TempData["Message"] = "编辑房间成功";
+                return RedirectToAction("Details", new { controller = "Room", id = model.RoomId });
             }
 
             return View(model);

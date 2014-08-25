@@ -1,11 +1,11 @@
 ﻿@model string
 
-<select class="form-control" id="Orientation" name="Orientation">
+<select class="form-control" id="TrashHandle" name="TrashHandle">
     <option value="">-- 请选择 --</option>
     @{
         DictionaryBusiness business = new DictionaryBusiness();
-        var dict = business.Get("Orientation");
-
+        var dict = business.Get("TrashHandle");
+      
         foreach (string item in dict.Property)
         {
             <option value="@item" @(Model == item ? "selected='selected'" : "")>@item</option>

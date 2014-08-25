@@ -2,9 +2,11 @@
 using Rhea.Business.Apartment;
 using Rhea.Common;
 using Rhea.Model;
+using Rhea.Model.Account;
 using Rhea.Model.Apartment;
 using Rhea.UI.Areas.Apartment.Models;
 using Rhea.UI.Filters;
+using Rhea.UI.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -164,8 +166,17 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         {
             if (ModelState.IsValid)
             {
-                ApartmentRoom data = this.roomBusiness.Get(model.RoomId);
+                //backup
+                ErrorCode result = this.roomBusiness.Backup(model._id);
+                if (result != ErrorCode.Success)
+                {
+                    ModelState.AddModelError("", "备份房间失败");
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
+                }
 
+                //edit
+                ApartmentRoom data = this.roomBusiness.Get(model.RoomId);
                 data.HouseType = model.HouseType;
                 data.Orientation = model.Orientation;
                 data.HasAirCondition = model.HasAirCondition;
@@ -173,15 +184,35 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                 data.ResideType = model.ResideType;
                 data.Remark = model.Remark;
 
-                ErrorCode result = this.roomBusiness.Update(data);
-                if (result == ErrorCode.Success)
+                result = this.roomBusiness.Update(data);
+                if (result != ErrorCode.Success)
                 {
-                    return RedirectToAction("Details", new { id = model.RoomId });
-                }
-                else
-                {
+                    ModelState.AddModelError("", "编辑房间失败");
                     ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
                 }
+
+                //log
+                User user = PageService.GetCurrentUser(User.Identity.Name);
+                Log log = new Log
+                {
+                    Title = "编辑青教房间",
+                    Time = DateTime.Now,
+                    Type = (int)LogType.RoomEdit,
+                    Content = string.Format("编辑青教房间， ID:{0}, 名称:{1}。", model.RoomId, model.Name),
+                    UserId = user._id,
+                    UserName = user.Name
+                };
+
+                result = this.roomBusiness.Log(model._id, log);
+                if (result != ErrorCode.Success)
+                {
+                    ModelState.AddModelError("", "记录日志失败");
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
+                }
+
+                return RedirectToAction("Details", new { id = model.RoomId });
             }
 
             return View(model);

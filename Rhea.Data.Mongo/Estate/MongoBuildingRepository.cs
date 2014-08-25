@@ -120,6 +120,17 @@ namespace Rhea.Data.Mongo.Estate
         }
 
         /// <summary>
+        /// 添加楼层
+        /// </summary>
+        /// <param name="buildingId">建筑ID</param>
+        /// <param name="data">楼层对象</param>
+        /// <returns></returns>
+        public virtual ErrorCode CreateFloor(int buildingId, Floor data)
+        {
+            return ErrorCode.NotImplement;
+        }
+
+        /// <summary>
         /// 更新楼层
         /// </summary>
         /// <param name="buildingId">建筑ID</param>

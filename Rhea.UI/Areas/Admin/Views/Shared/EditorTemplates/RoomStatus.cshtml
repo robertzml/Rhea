@@ -1,10 +1,10 @@
 ﻿@model string
 
-<select class="form-control" id="Orientation" name="Orientation">
+<select class="form-control" id="RoomStatus" name="RoomStatus">
     <option value="">-- 请选择 --</option>
     @{
         DictionaryBusiness business = new DictionaryBusiness();
-        var dict = business.Get("Orientation");
+        var dict = business.Get("RoomStatus");
 
         foreach (string item in dict.Property)
         {

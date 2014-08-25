@@ -1,0 +1,17 @@
+﻿@model int?
+
+<select class="form-control" id="BuildingId" name="BuildingId">
+    <option value="">-- 请选择 --</option>
+    @{
+        BuildingBusiness business = new BuildingBusiness();
+        IEnumerable<Building> buildings = business.GetChildBuildings();
+
+        foreach (var item in buildings)
+        {
+            <option value="@item.BuildingId" @(Model == item.BuildingId ? "selected='selected'" : "")>
+                @item.Name
+            </option>
+        }
+    }
+</select>
+

@@ -115,6 +115,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 //create
+                model.Status = 0;
                 ErrorCode result = this.buildingBusiness.Create(model);
                 if (result != ErrorCode.Success)
                 {
@@ -537,7 +538,62 @@ namespace Rhea.UI.Areas.Admin.Controllers
         public ActionResult FloorCreate(int buildingId)
         {
             ViewBag.BuildingId = buildingId;
+            int lastId = this.buildingBusiness.GetLastFloorId();
+            ViewData["FloorId"] = lastId + 1;
             return View();
+        }
+
+        /// <summary>
+        /// 添加楼层
+        /// </summary>
+        /// <param name="model">楼层对象</param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult FloorCreate(Floor model)
+        {
+            int buildingId = Convert.ToInt32(Request.Form["BuildingId"]);
+            ViewBag.BuildingId = buildingId;
+
+            if (ModelState.IsValid)
+            {
+                Building building = this.buildingBusiness.Get(buildingId);
+
+                //create
+                model.Status = 0;
+                ErrorCode result = this.buildingBusiness.CreateFloor(buildingId, model);
+                if (result != ErrorCode.Success)
+                {
+                    ModelState.AddModelError("", "添加楼层失败");
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
+                }
+
+                //log
+                User user = PageService.GetCurrentUser(User.Identity.Name);
+                Log log = new Log
+                {
+                    Title = "添加楼层",
+                    Time = DateTime.Now,
+                    Type = (int)LogType.FloorCreate,
+                    Content = string.Format("添加楼层，楼层ID:{0}，名称:{1}，建筑ID:{2}，建筑名称:{3}。", model.FloorId, model.Name, building.BuildingId, building.Name),
+                    UserId = user._id,
+                    UserName = user.Name
+                };
+
+                result = this.buildingBusiness.Log(building._id, log);
+                if (result != ErrorCode.Success)
+                {
+                    TempData["Message"] = "记录日志失败";
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
+                }
+
+                TempData["Message"] = "添加楼层成功";
+                return RedirectToAction("Details", "Building", new { id = buildingId });
+            }
+
+            return View(model);
         }
 
         /// <summary>
@@ -673,9 +729,11 @@ namespace Rhea.UI.Areas.Admin.Controllers
                     Title = "修改平面图",
                     Time = DateTime.Now,
                     Type = (int)LogType.FloorSvgUpload,
-                    Content = string.Format("修改平面图， 楼层ID:{0}，名称:{1}，建筑ID:{2}，建筑名称{3}。", model.FloorId, model.Name, building.BuildingId, building.Name),
+                    Content = string.Format("修改平面图, 楼层ID:{0}, 名称:{1}, 建筑ID:{2}, 建筑名称:{3}, 备份平面图:{4}, 新平面图:{5}.",
+                        model.FloorId, model.Name, building.BuildingId, building.Name, backsvg, model.ImageUrl),
                     UserId = user._id,
-                    UserName = user.Name
+                    UserName = user.Name,
+                    Tag = backsvg
                 };
 
                 result = this.buildingBusiness.Log(building._id, log);

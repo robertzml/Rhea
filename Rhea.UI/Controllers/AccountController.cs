@@ -97,6 +97,7 @@ namespace Rhea.UI.Controllers
             {
                 formsService.SignOut();
                 HttpContext.Session.Clear();
+                LogBusiness logBusiness = new LogBusiness();
 
                 ErrorCode result = this.userBusiness.Login(model.UserName, model.Password);
                 if (result == ErrorCode.Success)
@@ -105,10 +106,39 @@ namespace Rhea.UI.Controllers
                     HttpCookie cookie = formsService.SignIn(user.UserName, user.UserGroupName(), model.RememberMe);
                     Response.Cookies.Add(cookie);
 
+                    Log log = new Log
+                    {
+                        Title = "用户登录成功",
+                        Time = DateTime.Now,
+                        Type = (int)LogType.UserLoginSuccess,
+                        Content = string.Format("用户登录成功, 用户名：{0}。", user.Name),
+                        UserId = user._id,
+                        UserName = user.Name
+                    };
+                    result = logBusiness.Create(log);
+                    if (result != ErrorCode.Success)
+                    {
+                        TempData["Message"] = "记录日志失败";
+                        ModelState.AddModelError("", result.DisplayName());
+                        return View(model);
+                    }
+
                     return RedirectToAction("Index", "Home");
                 }
                 else
                 {
+                    Log log = new Log
+                    {
+                        Title = "用户登录失败",
+                        Time = DateTime.Now,
+                        Type = (int)LogType.UserLoginFailed,
+                        Content = string.Format("用户登录失败, 用户名：{0}。", model.UserName),
+                        UserId = null,
+                        UserName = ""
+                    };
+
+                    logBusiness.Create(log);
+
                     ModelState.AddModelError("", result.DisplayName());
                 }
             }

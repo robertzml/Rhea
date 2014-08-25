@@ -234,6 +234,22 @@
                                             @Html.DisplayFor(model => model.Status)
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <td>
+                                            编辑人
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => model.Log.UserName)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            编辑时间
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => model.Log.Time)
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -419,6 +435,7 @@
 <div class="row">
     <div class="col-md-12">
         <p>
+            <a href="@Url.Action("Details", new { controller = "Building", id = Model.BuildingId })" class="btn btn-primary blue-hoki" role="button"><i class="fa fa-building"></i>&nbsp;回到建筑</a>
             <a href="@Url.Action("ListByBuilding", new { controller = "Room", buildingId = Model.BuildingId })" class="btn btn-primary" role="button"><i class="fa fa-list"></i>&nbsp;回到列表</a>
             <a href="@Url.Action("Edit", new { controller = "Room", id = Model.RoomId })" class="btn btn-warning" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
         </p>

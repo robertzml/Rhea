@@ -6,11 +6,23 @@
         DictionaryBusiness business = new DictionaryBusiness();
         List<RoomFunctionCode> codes = business.GetRoomFunctionCodes();
 
-        foreach (var item in codes)
-        {
-            <option value="@item.CodeId" @(Model.CodeId == item.CodeId ? "selected='selected'" : "")>
-                @item.CodeId - @item.FunctionProperty
-            </option>
+        if(Model != null)
+        { 
+            foreach (var item in codes)
+            {
+                <option value="@item.CodeId" @(Model.CodeId == item.CodeId ? "selected='selected'" : "")>
+                    @item.CodeId - @item.FunctionProperty
+                </option>
+            }
         }
-    }
+        else
+        {
+            foreach (var item in codes)
+            {
+                <option value="@item.CodeId">
+                    @item.CodeId - @item.FunctionProperty
+                </option>
+            }
+        }
+}
 </select>

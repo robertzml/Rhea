@@ -88,6 +88,12 @@ namespace Rhea.Model
         /// 名称重复
         /// </summary>
         [Display(Name = "名称重复")]
-        DuplicateName = 31
+        DuplicateName = 31,
+
+        /// <summary>
+        /// 楼层已存在
+        /// </summary>
+        [Display(Name = "楼层已存在")]
+        FloorExist = 32
     }
 }

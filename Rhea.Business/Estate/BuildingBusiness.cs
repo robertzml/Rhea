@@ -1,5 +1,6 @@
 ﻿using Rhea.Data;
 using Rhea.Data.Estate;
+using Rhea.Data.Mongo;
 using Rhea.Data.Mongo.Estate;
 using Rhea.Model;
 using Rhea.Model.Estate;
@@ -89,13 +90,26 @@ namespace Rhea.Business.Estate
         }
 
         /// <summary>
+        /// 获取所有子建筑
+        /// </summary>
+        /// <remarks>
+        /// 仅子建筑能包含房间
+        /// </remarks>
+        /// <returns></returns>
+        public IEnumerable<Building> GetChildBuildings()
+        {
+            var data = this.buildingRepository.Get().Where(r => r.HasChild == false && r.Status != 1);
+            return data;
+        }
+
+        /// <summary>
         /// 获取子建筑
         /// </summary>
         /// <param name="parentId">父级建筑ID</param>
         /// <returns></returns>
         public IEnumerable<Building> GetChildBuildings(int parentId)
         {
-            var data = this.buildingRepository.Get().Where(r => r.ParentId == parentId);
+            var data = this.buildingRepository.Get().Where(r => r.ParentId == parentId && r.Status != 1);
             return data;
         }
 
@@ -106,7 +120,6 @@ namespace Rhea.Business.Estate
         /// <returns></returns>
         public ErrorCode Create(Building data)
         {
-            data.Status = 0;
             return this.buildingRepository.Create(data);
         }
 
@@ -149,6 +162,57 @@ namespace Rhea.Business.Estate
                         return null;
                 }
                 return null;
+            }
+        }
+
+        /// <summary>
+        /// 获取最后楼层ID
+        /// </summary>
+        /// <returns></returns>
+        public int GetLastFloorId()
+        {
+            BsonRepository br = new BsonRepository();
+            return br.GetLastFloorId();
+        }
+
+        /// <summary>
+        /// 添加楼层
+        /// </summary>
+        /// <param name="buildingId">所属建筑ID</param>
+        /// <param name="data">楼层对象</param>
+        /// <returns></returns>
+        public ErrorCode CreateFloor(int buildingId, Floor data)
+        {
+            var building = this.buildingRepository.Get(buildingId);
+            if (building == null || building.Status == 1)
+                return ErrorCode.ObjectDeleted;
+            else
+            {
+                switch ((BuildingOrganizeType)building.OrganizeType)
+                {
+                    case BuildingOrganizeType.BuildingGroup:
+                        return ErrorCode.NotImplement;
+
+                    case BuildingOrganizeType.Cluster:
+                        return ErrorCode.NotImplement;
+
+                    case BuildingOrganizeType.Cottage:
+                        IBuildingRepository cottageRepository = new MongoCottageRepository();
+                        return cottageRepository.CreateFloor(buildingId, data);
+
+                    case BuildingOrganizeType.Subregion:
+                        IBuildingRepository subregionRepository = new MongoSubregionRepository();
+                        return subregionRepository.CreateFloor(buildingId, data);
+
+                    case BuildingOrganizeType.Block:
+                        IBuildingRepository blockRepository = new MongoBlockRepository();
+                        return blockRepository.CreateFloor(buildingId, data);
+
+                    case BuildingOrganizeType.Playground:
+                        return ErrorCode.NotImplement;
+                }
+
+                return ErrorCode.NotImplement;
             }
         }
 

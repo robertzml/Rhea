@@ -1,0 +1,16 @@
+﻿@model int?
+
+<select class="form-control" id="DepartmentId" name="DepartmentId">
+    <option value="">-- 请选择 --</option>
+    @{
+        DepartmentBusiness departmentBusiness = new DepartmentBusiness();
+        var departments = departmentBusiness.Get().OrderBy(r => r.DepartmentId);
+
+        foreach (var item in departments)
+        {
+            <option value="@item.DepartmentId" @(Model == item.DepartmentId ? "selected='selected'" : "")>
+                @item.Name
+            </option>
+        }
+    }
+</select>

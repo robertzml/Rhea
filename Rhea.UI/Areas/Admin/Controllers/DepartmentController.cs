@@ -3,12 +3,14 @@ using Rhea.Common;
 using Rhea.Model;
 using Rhea.Model.Personnel;
 using Rhea.UI.Filters;
+using Rhea.UI.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Rhea.Model.Account;
 
 namespace Rhea.UI.Areas.Admin.Controllers
 {
@@ -82,19 +84,47 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                model.Status = 0;
-                ErrorCode result = this.departmentBusiness.Update(model);
-
-                if (result == ErrorCode.Success)
+                //backup
+                ErrorCode result = this.departmentBusiness.Backup(model._id);
+                if (result != ErrorCode.Success)
                 {
-                    TempData["Message"] = "编辑部门成功";
-                    return RedirectToAction("Details", new { controller = "Department", id = model.DepartmentId });
+                    TempData["Message"] = "备份部门失败";
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
                 }
-                else
+
+                //edit
+                model.Status = 0;
+                result = this.departmentBusiness.Update(model);
+
+                if (result != ErrorCode.Success)
                 {
                     TempData["Message"] = "编辑部门失败";
                     ModelState.AddModelError("", result.DisplayName());
                 }
+
+                //log
+                User user = PageService.GetCurrentUser(User.Identity.Name);
+                Log log = new Log
+                {
+                    Title = "编辑部门",
+                    Time = DateTime.Now,
+                    Type = (int)LogType.DepartmentEdit,
+                    Content = string.Format("编辑部门， ID:{0}, 名称:{1}。", model.DepartmentId, model.Name),
+                    UserId = user._id,
+                    UserName = user.Name
+                };
+
+                result = this.departmentBusiness.Log(model._id, log);
+                if (result != ErrorCode.Success)
+                {
+                    TempData["Message"] = "记录日志失败";
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
+                }
+
+                TempData["Message"] = "编辑部门成功";
+                return RedirectToAction("Details", new { controller = "Department", id = model.DepartmentId });
             }
 
             return View(model);

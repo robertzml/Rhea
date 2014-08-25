@@ -51,16 +51,13 @@
                                 @Html.DisplayNameFor(model => model.Title)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Time)
-                            </th>
-                            <th>
                                 @Html.DisplayNameFor(model => model.Type)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.UserName)
+                                @Html.DisplayNameFor(model => model.Time)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Content)
+                                @Html.DisplayNameFor(model => model.UserName)
                             </th>
                             <th>操作</th>
                         </tr>
@@ -73,19 +70,16 @@
                                     @Html.DisplayFor(modelItem => item.Title)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Time)
-                                </td>
-                                <td>
                                     @{
                                         var type = (LogType)item.Type;
                                         @type.DisplayName();
                                     }
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.UserName)
+                                    @Html.DisplayFor(modelItem => item.Time)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Content)
+                                    @Html.DisplayFor(modelItem => item.UserName)
                                 </td>
                                 <td>
                                     <a href="@Url.Action("Details", new { controller = "Log", id = item._id })" class="btn btn-info btn-sm" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>

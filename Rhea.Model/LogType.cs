@@ -142,6 +142,18 @@ namespace Rhea.Model
         /// 房间分配
         /// </summary>
         [Display(Name = "房间分配")]
-        RoomAssign = 70
+        RoomAssign = 70,
+
+        /// <summary>
+        /// 用户登录成功
+        /// </summary>
+        [Display(Name = "用户登录成功")]
+        UserLoginSuccess = 100,
+
+        /// <summary>
+        /// 用户登录失败
+        /// </summary>
+        [Display(Name = "用户登录失败")]
+        UserLoginFailed = 101
     }
 }

@@ -587,6 +587,14 @@
     <Content Include="Areas\Admin\Views\Log\List.cshtml" />
     <Content Include="Areas\Admin\Views\Log\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Building\FloorCreate.cshtml" />
+    <Content Include="Areas\Admin\Views\Room\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\AirCondition.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\FireControl.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\PowerSupply.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\RoomStatus.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\TrashHandle.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\DepartmentDropDownList.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\SubBuildingList.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="plugins\jquery-1.11.0.min.js" />

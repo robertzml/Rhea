@@ -75,6 +75,32 @@ namespace Rhea.Data.Mongo.Estate
         }
 
         /// <summary>
+        /// 添加楼层
+        /// </summary>
+        /// <param name="buildingId">建筑ID</param>
+        /// <param name="data">楼层对象</param>
+        /// <returns></returns>
+        public override ErrorCode CreateFloor(int buildingId, Floor data)
+        {
+            try
+            {
+                Block block = this.repository.Single(r => r.BuildingId == buildingId);
+                if (block.Floors.Any(r => r.Number == data.Number))
+                    return ErrorCode.FloorExist;
+
+                block.Floors.Add(data);
+
+                this.repository.Update(block);
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
+
+        /// <summary>
         /// 更新楼层
         /// </summary>
         /// <param name="buildingId">建筑ID</param>
