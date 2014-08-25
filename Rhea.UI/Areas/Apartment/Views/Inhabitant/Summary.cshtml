@@ -1,0 +1,80 @@
+﻿@model Rhea.Model.Apartment.Inhabitant
+
+@{
+    Layout = null;
+}
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title">@Model.Name</h3>
+    </div>
+    <table class="table table-bordered" style="margin-bottom:0px;">
+        <tbody>
+            <tr>
+                <td>
+                    工号
+                </td>
+                <td>
+                    @Model.JobNumber
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    性别
+                </td>
+                <td>
+                    @Model.Gender
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    部门
+                </td>
+                <td>
+                    @Model.DepartmentName
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    住户类型
+                </td>
+                <td>
+                    @{
+                        var type1 = (InhabitantType)Model.Type;
+                        @type1.DisplayName()
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    备注
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Remark)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    状态
+                </td>
+                <td>
+                    @switch ((EntityStatus)Model.Status)
+                    {
+                        case EntityStatus.Normal:
+                            <span class="label label-success">正常居住</span>
+                            break;
+                        case EntityStatus.InhabitantMoveOut:
+                        <span class="label label-normal">已搬出</span>
+                            break;
+                        case EntityStatus.InhabitantExtend:
+                        <span class="label label-warning">延期居住</span>
+                            break;
+                        case EntityStatus.InhabitantExpire:
+                        <span class="label label-danger">超期居住</span>
+                            break;
+                    }
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

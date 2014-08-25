@@ -138,6 +138,17 @@ namespace Rhea.UI.Areas.Apartment.Controllers
             var data = business.GetByInhabitant(id);
             return View(data);
         }
+        
+        /// <summary>
+        /// 住户摘要
+        /// </summary>
+        /// <param name="id">住户ID</param>
+        /// <returns></returns>
+        public ActionResult Summary(string id)
+        {
+            var data = this.inhabitantBusiness.Get(id);
+            return View(data);
+        }
         #endregion //Action
 
         #region Json

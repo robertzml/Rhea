@@ -101,7 +101,7 @@ namespace Rhea.UI.Areas.Apartment.Models
         /// </summary>
         [DataType(DataType.Date)]
         [Display(Name = "公积金领取时间")]
-        public DateTime? AccumulatedFundsDate { get; set; }        
+        public DateTime? AccumulatedFundsDate { get; set; }
 
         /// <summary>
         /// 蠡湖家园入住时间
@@ -149,5 +149,44 @@ namespace Rhea.UI.Areas.Apartment.Models
         [DataType(DataType.MultilineText)]
         [Display(Name = "备注")]
         public string RecordRemark { get; set; }
+    }
+
+    /// <summary>
+    /// 退房办理模型
+    /// </summary>
+    public class CheckOutModel
+    {
+        /// <summary>
+        /// 住户ID
+        /// </summary>
+        [Required]
+        [Display(Name = "住户ID")]
+        public string InhabitantId { get; set; }
+
+        /// <summary>
+        /// 住户姓名
+        /// </summary>
+        [Display(Name = "住户姓名")]
+        public string InhabitantName { get; set; }
+
+        /// <summary>
+        /// 住户部门
+        /// </summary>
+        [Display(Name = "住户部门")]
+        public string InhabitantDepartment { get; set; }
+
+        /// <summary>
+        /// 楼宇选择
+        /// </summary>
+        [UIHint("BuildingList")]
+        [Display(Name = "楼宇选择")]
+        public int BuildingId { get; set; }
+
+        /// <summary>
+        /// 房间选择
+        /// </summary>
+        [Required]
+        [Display(Name = "房间选择")]
+        public int RoomId { get; set; }
     }
 }

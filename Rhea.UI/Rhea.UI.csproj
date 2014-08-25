@@ -605,6 +605,8 @@
     <Content Include="Areas\Apartment\Views\Shared\EditorTemplates\Boolean2.cshtml" />
     <Content Include="Areas\Apartment\Views\ResideRecord\Details.cshtml" />
     <Content Include="Areas\Apartment\Views\ResideRecord\Edit.cshtml" />
+    <Content Include="Areas\Apartment\Views\Transaction\CheckOut.cshtml" />
+    <Content Include="Areas\Apartment\Views\Inhabitant\Summary.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="plugins\jquery-1.11.0.min.js" />

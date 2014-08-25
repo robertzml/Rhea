@@ -176,6 +176,16 @@ namespace Rhea.UI.Areas.Apartment.Controllers
 
             return View(model);
         }
+
+        /// <summary>
+        /// 退房办理
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult CheckOut()
+        {
+            return View();
+        }
         #endregion //Action
     }
 }

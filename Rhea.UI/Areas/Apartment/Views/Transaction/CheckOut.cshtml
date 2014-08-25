@@ -1,0 +1,180 @@
+﻿@model Rhea.UI.Areas.Apartment.Models.CheckOutModel
+
+@{
+    Layout = null;
+    ViewBag.Title = "退房办理";
+}
+
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">
+    @ViewBag.Title
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index", new { area = "Apartment", controller = "Home" })">青教管理</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">业务办理</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">@ViewBag.Title</a>
+        </li>
+    </ul>
+    <div class="page-toolbar">
+        <div class="btn-group pull-right">
+            <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
+                Actions <i class="fa fa-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu pull-right" role="menu">
+                <li>
+                    <a href="#">Action</a>
+                </li>
+                <li class="divider">
+                </li>
+                <li>
+                    <a href="#">Separated link</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12" id="check-out-body">
+        <div class="portlet box blue" id="form_wizard_check_out">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-gift"></i> 业务流程 - <span class="step-title">
+                        Step 1 of 4
+                    </span>
+                </div>
+                <div class="tools hidden-xs">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+                    <a href="javascript:;" class="reload">
+                    </a>
+                    <a href="javascript:;" class="remove">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <form action="#" class="form-horizontal" id="submit_form" method="POST">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-wizard">
+                        <div class="form-body">
+                            <ul class="nav nav-pills nav-justified steps">
+                                <li>
+                                    <a href="#tab1" data-toggle="tab" class="step">
+                                        <span class="number">
+                                            1
+                                        </span>
+                                        <span class="desc">
+                                            <i class="fa fa-check"></i> 住户选择
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#tab2" data-toggle="tab" class="step">
+                                        <span class="number">
+                                            2
+                                        </span>
+                                        <span class="desc">
+                                            <i class="fa fa-check"></i> 房间选择
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#tab3" data-toggle="tab" class="step">
+                                        <span class="number">
+                                            3
+                                        </span>
+                                        <span class="desc">
+                                            <i class="fa fa-check"></i> 入住信息
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#tab4" data-toggle="tab" class="step">
+                                        <span class="number">
+                                            4
+                                        </span>
+                                        <span class="desc">
+                                            <i class="fa fa-check"></i> 确认
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div id="bar" class="progress progress-striped" role="progressbar">
+                                <div class="progress-bar progress-bar-success">
+                                </div>
+                            </div>
+                            <div class="tab-content">
+                                <div class="alert alert-danger display-none">
+                                    <button class="close" data-dismiss="alert"></button>
+                                    请检查输入！
+                                </div>
+                                <div class="alert alert-success display-none">
+                                    <button class="close" data-dismiss="alert"></button>
+                                    输入验证成功!
+                                </div>
+                                <div class="tab-pane active" id="tab1">
+                                    <div class="note note-info">
+                                        <h4 class="block">提示：</h4>
+                                        <p>
+                                            本业务主要为一般教职工退房办理流程，部门，挂职，特殊情况请选择其它业务。
+                                        </p>
+                                    </div>
+                                    <h3 class="block">请选择住户</h3>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            住户选择 <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            <input type="hidden" id="InhabitantId" name="InhabitantId" class="form-control select2">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-4 col-md-offset-3" id="inhabitant-info">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab2">
+                                    <h3 class="block">请选择房间</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <a href="javascript:;" class="btn default button-previous">
+                                        <i class="m-icon-swapleft"></i> 上一步
+                                    </a>
+                                    <a href="javascript:;" class="btn blue button-next">
+                                        下一步 <i class="m-icon-swapright m-icon-white"></i>
+                                    </a>
+                                    <a href="javascript:;" class="btn green button-submit">
+                                        提交 <i class="m-icon-swapright m-icon-white"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT-->
+
+<script type="text/javascript">
+    $(function () {
+        CheckOut.init();
+    });
+</script>
