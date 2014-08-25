@@ -47,8 +47,9 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult List()
         {
-            var data = this.campusBusiness.Get();
-            return View(data);
+            //var data = this.campusBusiness.Get();
+            //return View(data);
+            return View();
         }
 
         /// <summary>
@@ -60,6 +61,64 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             var data = this.campusBusiness.Get(id);
             return View(data);
+        }
+
+        /// <summary>
+        /// 添加校区
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 添加校区
+        /// </summary>
+        /// <param name="model">校区对象</param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Create(Campus model)
+        {
+            if (ModelState.IsValid)
+            {
+                //create
+                model.Status = 0;
+                ErrorCode result = this.campusBusiness.Create(model);
+                if (result != ErrorCode.Success)
+                {
+                    TempData["Message"] = "添加校区失败";
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
+                }
+
+                //log
+                User user = PageService.GetCurrentUser(User.Identity.Name);
+                Log log = new Log
+                {
+                    Title = "添加校区",
+                    Time = DateTime.Now,
+                    Type = (int)LogType.CampusCreate,
+                    Content = string.Format("添加校区, ID:{0}, 名称:{1}。", model.CampusId, model.Name),
+                    UserId = user._id,
+                    UserName = user.Name
+                };
+
+                result = this.campusBusiness.Log(model._id, log);
+                if (result != ErrorCode.Success)
+                {
+                    TempData["Message"] = "记录日志失败";
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
+                }
+
+                TempData["Message"] = "添加校区成功";
+                return RedirectToAction("Details", new { controller = "Campus", id = model.CampusId });
+            }
+
+            return View(model);
         }
 
         /// <summary>

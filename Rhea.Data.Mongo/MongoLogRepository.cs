@@ -68,6 +68,15 @@ namespace Rhea.Data.Mongo
 
             return ErrorCode.Success;
         }
+
+        /// <summary>
+        /// 日志数量
+        /// </summary>
+        /// <returns></returns>
+        public long Count()
+        {
+            return this.repository.Count();
+        }
         #endregion //Method
     }
 }

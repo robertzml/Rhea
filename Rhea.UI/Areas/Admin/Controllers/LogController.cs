@@ -58,5 +58,23 @@ namespace Rhea.UI.Areas.Admin.Controllers
             return View(data);
         }
         #endregion //Action
+
+        #region Json
+        public JsonResult GetData(int draw, int start, int length)
+        {
+            var data = this.logBusiness.Get(start, length);
+            long count = this.logBusiness.Count();
+
+            var model = new
+            {
+                draw = draw,
+                recordsTotal = count,
+                recordsFiltered = count,
+                data = data.Select(g => new { g._id, g.Title, g.Time, g.UserName, TypeName = ((LogType)g.Type).DisplayName(), g.Type })
+            };
+
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        #endregion //Json
     }
 }

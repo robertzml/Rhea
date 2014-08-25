@@ -44,49 +44,25 @@
                 </div>
             </div>
             <div class="portlet-body">
-                <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="dictionary-table">
+                <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="log-table">
                     <thead>
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.Title)
+                                标题
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Type)
+                                日志类型
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Time)
+                                记录时间
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.UserName)
+                                编辑人
                             </th>
                             <th>操作</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Title)
-                                </td>
-                                <td>
-                                    @{
-                                        var type = (LogType)item.Type;
-                                        @type.DisplayName();
-                                    }
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Time)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.UserName)
-                                </td>
-                                <td>
-                                    <a href="@Url.Action("Details", new { controller = "Log", id = item._id })" class="btn btn-info btn-sm" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
-                                </td>
-                            </tr>
-                        }
-
                     </tbody>
                 </table>
             </div>
@@ -101,7 +77,7 @@
             Rhea.topNavActive($('#advance-nav'));
             Rhea.leftNavActive($('#log-list-menu'));
 
-            Rhea.initDatatable2($('#log-table'));
+            Rhea.initLogTable($('#log-table'));
         });
     </script>
 }

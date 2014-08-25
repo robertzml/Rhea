@@ -31,5 +31,11 @@ namespace Rhea.Data
         /// <param name="data">日志对象</param>
         /// <returns></returns>
         ErrorCode Create(Log data);
+
+        /// <summary>
+        /// 日志数量
+        /// </summary>
+        /// <returns></returns>
+        long Count();
     }
 }

@@ -98,31 +98,56 @@ var Rhea = function () {
 	}
 	
 	var handleInitDatatable2 = function($dom) {
-		/* Set tabletools buttons and button container */
 
-		$.extend(true, $.fn.DataTable.TableTools.classes, {
-			"container": "btn-group tabletools-dropdown-on-portlet",
-			"buttons": {
-				"normal": "btn btn-sm default",
-				"disabled": "btn btn-sm default disabled"
-			},
-			"collection": {
-				"container": "DTTT_dropdown dropdown-menu tabletools-dropdown-menu"
-			}
-		});
-				
 		var oTable = $dom.dataTable({
 			"order": [
 				[0, 'asc']
 			],
-			
+
 			"lengthMenu": [
 				[5, 10, 20, -1],
 				[5, 10, 20, "All"] // change per page values here
 			],
 			// set the initial value
 			"pageLength": 10,
-			
+
+			"pagingType": "bootstrap_full_number",
+
+			"language": {
+					"lengthMenu": "  _MENU_ 记录",
+					"sLengthMenu": "每页 _MENU_ 条记录",
+					"sInfo": "显示 _START_ 至 _END_ 共有 _TOTAL_ 条记录",
+					"sInfoEmpty": "记录为空",
+					"sInfoFiltered": " - 从 _MAX_ 条记录中",
+					"sZeroRecords": "结果为空",
+					"sSearch": "搜索:",
+					"paginate": {
+						"previous":"Prev",
+						"next": "Next",
+						"last": "Last",
+						"first": "First"
+					}
+				},
+
+			"dom": "<'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r><'table-scrollable't><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12' p>>", // horizobtal scrollable datatable
+		});	
+
+	}
+	
+	var handleInitLogTable = function($dom) {
+	
+		var oTable = $dom.dataTable({
+			"processing": true,
+			"serverSide": true,
+			"order": [
+				[0, 'asc']
+			],
+			"lengthMenu": [
+				[10, 20, 50, -1],
+				[10, 20, 50, "All"] // change per page values here
+			],
+			// set the initial value
+			"pageLength": 20,
 			"pagingType": "bootstrap_full_number",
 			
 			"language": {
@@ -141,11 +166,33 @@ var Rhea = function () {
 					}
 				},
 			
-			"dom": "<'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r><'table-scrollable't><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12' p>>", // horizobtal scrollable datatable			
-		});	
+			"dom": "<'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r><'table-scrollable't><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12' p>>", // horizobtal scrollable datatable
+			
+			"ajax": "/Admin/Log/GetData",
+			"columns": [
+				{ "data": "Title" },
+				{ "data": "TypeName" },
+				{ "data": "Time" },
+				{ "data": "UserName" },
+				{ "data": "_id" }
+			],			
+			"columnDefs": [{
+				"targets": 2,
+				"data": "Time",
+				"render": function (data, type, full, meta) {
+					return handleParseDateTime(data);
+				}
+			}, {
+				"targets": 4,
+				"data": "_id",
+				"render": function (data, type, full, meta) {
+					return '<a href="/Admin/Log/Details/'+data+'" class="btn btn-info btn-sm" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>';
+				}
+			}]
+		});
 		
 	}
-	
+
 	var handleAjaxLoad = function($dom, e, url, request) {
 		e.preventDefault();
 		Metronic.scrollTop();
@@ -290,6 +337,31 @@ var Rhea = function () {
 		return y + '-' + m + '-' + d;
 	}
 
+	function handleParseDateTime(dt) {
+		if (dt == null || dt == '')
+			return null;
+		var parsedDate = new Date(parseInt(dt.substr(6)));
+		var jsDate = new Date(parsedDate); //Date object
+		var d = jsDate.getDate();
+		if (d < 10)
+			d = '0' + d;
+		var m = jsDate.getMonth();
+		m += 1;
+		if (m < 10)
+			m = '0' + m;
+		var y = jsDate.getFullYear();
+		var h = jsDate.getHours();
+		if (h < 10)
+			h = '0' + h;
+		var min = jsDate.getMinutes();
+		if (min < 10)
+			min = '0' + min;
+		var s = jsDate.getSeconds();
+		if (s < 10)
+			s = '0' + s;
+		return y + '-' + m + '-' + d + " " + h + ":" + min + ":" + s;
+	}
+	
 	return {
         //main function to initiate the module
         init: function () {
@@ -314,6 +386,10 @@ var Rhea = function () {
 		
 		initDatatable2: function($dom) {
 			handleInitDatatable2($dom);
+		},
+		
+		initLogTable: function($dom) {
+			handleInitLogTable($dom);
 		},
 		
 		ajaxNavPage: function($dom, e, url, request) {

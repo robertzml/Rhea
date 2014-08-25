@@ -26,16 +26,17 @@ namespace Rhea.Data.Estate
         Campus Get(int id);
 
         /// <summary>
+        /// 添加校区
+        /// </summary>
+        /// <param name="data">校区对象</param>
+        /// <returns></returns>
+        ErrorCode Create(Campus data);
+
+        /// <summary>
         /// 更新校区
         /// </summary>
         /// <param name="data">校区对象</param>
         /// <returns></returns>
         ErrorCode Update(Campus data);
-
-        /// <summary>
-        /// 校区计数
-        /// </summary>
-        /// <returns></returns>
-        int Count();
     }
 }

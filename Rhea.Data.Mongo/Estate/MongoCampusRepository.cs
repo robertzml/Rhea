@@ -51,13 +51,22 @@ namespace Rhea.Data.Mongo.Estate
         }
 
         /// <summary>
-        /// 校区计数
+        /// 添加校区
         /// </summary>
-        /// <returns>状态不为1的校区数量</returns>
-        public int Count()
+        /// <param name="data">校区对象</param>
+        /// <returns></returns>
+        public ErrorCode Create(Campus data)
         {
-            long count = this.repository.Count(r => r.Status != 1);
-            return (int)count;
+            try
+            {
+                this.repository.Add(data);
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
         }
 
         /// <summary>

@@ -116,6 +116,33 @@ namespace Rhea.Data.Mongo.Estate
 
             return ErrorCode.Success;
         }
+
+        /// <summary>
+        /// 删除楼层
+        /// </summary>
+        /// <param name="buildingId">建筑ID</param>
+        /// <param name="floorId">楼层ID</param>
+        /// <returns></returns>
+        public override ErrorCode DeleteFloor(int buildingId, int floorId)
+        {
+            try
+            {
+                Cottage cottage = this.repository.Single(r => r.BuildingId == buildingId);
+                Floor floor = cottage.Floors.SingleOrDefault(r => r.FloorId == floorId);
+                if (floor == null)
+                    return ErrorCode.ObjectNotFound;
+
+                cottage.Floors.Remove(floor);
+
+                this.repository.Update(cottage);
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
         #endregion //Method
     }
 }

@@ -71,6 +71,16 @@ namespace Rhea.Business.Estate
         }
 
         /// <summary>
+        /// 添加校区
+        /// </summary>
+        /// <param name="data">校区对象</param>
+        /// <returns></returns>
+        public ErrorCode Create(Campus data)
+        {
+            return this.campusRepository.Create(data);
+        }
+
+        /// <summary>
         /// 更新校区
         /// </summary>
         /// <param name="data">校区对象</param>

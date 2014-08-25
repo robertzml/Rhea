@@ -750,6 +750,73 @@ namespace Rhea.UI.Areas.Admin.Controllers
 
             return View(model);
         }
+
+        /// <summary>
+        /// 楼层删除
+        /// </summary>
+        /// <param name="buildingId">建筑ID</param>
+        /// <param name="floorId">楼层ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult FloorDelete(int buildingId, int floorId)
+        {
+            ViewBag.BuildingId = buildingId;
+            var data = this.buildingBusiness.GetFloor(buildingId, floorId);
+
+            return View(data);
+        }
+
+        /// <summary>
+        /// 楼层删除
+        /// </summary>
+        /// <param name="buildingId">建筑ID</param>
+        /// <param name="floorId">楼层ID</param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost, ActionName("FloorDelete")]
+        public ActionResult DeleteFloorConfirm(int buildingId, int floorId)
+        {
+            Building building = this.buildingBusiness.Get(buildingId);
+
+            //backup
+            ErrorCode result = this.buildingBusiness.Backup(building._id);
+            if (result != ErrorCode.Success)
+            {
+                TempData["Message"] = "备份失败";
+                return RedirectToAction("FloorDelete", new { buildingId = buildingId, floorId = floorId });
+            }
+
+            //delete
+            result = this.buildingBusiness.DeleteFloor(buildingId, floorId);
+            if (result != ErrorCode.Success)
+            {
+                TempData["Message"] = "删除失败";
+                return View("FloorDelete", new { buildingId = buildingId, floorId = floorId });
+            }
+
+            //log
+            var user = PageService.GetCurrentUser(User.Identity.Name);
+            string fname = Request.Form["Name"];
+            Log log = new Log
+            {
+                Title = "删除楼层",
+                Time = DateTime.Now,
+                Type = (int)LogType.FloorDelete,
+                Content = string.Format("删除楼层, 建筑ID:{0}, 建筑名称:{1}, 楼层ID:{2}, 楼层名称:{3}。", building.BuildingId, building.Name, floorId, fname),
+                UserId = user._id,
+                UserName = user.Name
+            };
+
+            result = this.buildingBusiness.Log(building._id, log);
+            if (result != ErrorCode.Success)
+            {
+                TempData["Message"] = "记录日志失败";
+                return RedirectToAction("FloorDelete", new { buildingId = buildingId, floorId = floorId });
+            }
+
+            TempData["Message"] = "删除成功";
+            return RedirectToAction("Details", "Building", new { id = buildingId });
+        }
         #endregion //Action
     }
 }

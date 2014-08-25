@@ -46,6 +46,18 @@ namespace Rhea.Business
         }
 
         /// <summary>
+        /// 获取日志列表
+        /// </summary>
+        /// <param name="start">起始位置</param>
+        /// <param name="length">数量</param>
+        /// <returns></returns>
+        public IEnumerable<Log> Get(int start, int length)
+        {
+            var data = this.logRepository.Get().OrderByDescending(r => r.Time).Skip(start).Take(length);
+            return data;
+        }
+
+        /// <summary>
         /// 获取日志
         /// </summary>
         /// <param name="id">日志ID</param>
@@ -63,6 +75,15 @@ namespace Rhea.Business
         public ErrorCode Create(Log data)
         {
             return this.logRepository.Create(data);
+        }
+
+        /// <summary>
+        /// 日志数量
+        /// </summary>
+        /// <returns></returns>
+        public long Count()
+        {
+            return this.logRepository.Count();
         }
 
         /// <summary>

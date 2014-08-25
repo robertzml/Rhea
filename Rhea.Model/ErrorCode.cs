@@ -43,10 +43,16 @@ namespace Rhea.Model
         ObjectDeleted = 4,
 
         /// <summary>
+        /// 对象未找到
+        /// </summary>
+        [Display(Name = "对象未找到")]
+        ObjectNotFound = 5,
+
+        /// <summary>
         /// 数据库写入失败
         /// </summary>
         [Display(Name = "数据库写入失败")]
-        DatabaseWriteError = 5,
+        DatabaseWriteError = 6,
 
         /// <summary>
         /// 用户ID重复

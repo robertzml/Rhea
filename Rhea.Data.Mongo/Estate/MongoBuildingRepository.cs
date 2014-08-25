@@ -140,6 +140,17 @@ namespace Rhea.Data.Mongo.Estate
         {
             return ErrorCode.NotImplement;
         }
+
+        /// <summary>
+        /// 删除楼层
+        /// </summary>
+        /// <param name="buildingId">建筑ID</param>
+        /// <param name="floorId">楼层ID</param>
+        /// <returns></returns>
+        public virtual ErrorCode DeleteFloor(int buildingId, int floorId)
+        {
+            return ErrorCode.NotImplement;
+        }
         #endregion //Method
     }
 }

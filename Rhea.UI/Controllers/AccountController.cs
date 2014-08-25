@@ -127,18 +127,6 @@ namespace Rhea.UI.Controllers
                 }
                 else
                 {
-                    Log log = new Log
-                    {
-                        Title = "用户登录失败",
-                        Time = DateTime.Now,
-                        Type = (int)LogType.UserLoginFailed,
-                        Content = string.Format("用户登录失败, 用户名：{0}。", model.UserName),
-                        UserId = null,
-                        UserName = ""
-                    };
-
-                    logBusiness.Create(log);
-
                     ModelState.AddModelError("", result.DisplayName());
                 }
             }

@@ -595,6 +595,8 @@
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\TrashHandle.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\DepartmentDropDownList.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\SubBuildingList.cshtml" />
+    <Content Include="Areas\Admin\Views\Building\FloorDelete.cshtml" />
+    <Content Include="Areas\Admin\Views\Campus\Create.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="plugins\jquery-1.11.0.min.js" />

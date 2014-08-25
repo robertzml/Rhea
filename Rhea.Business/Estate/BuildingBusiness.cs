@@ -302,6 +302,47 @@ namespace Rhea.Business.Estate
         }
 
         /// <summary>
+        /// 删除楼层
+        /// </summary>
+        /// <param name="buildingId">建筑ID</param>
+        /// <param name="floorId">楼层ID</param>
+        /// <returns></returns>
+        public ErrorCode DeleteFloor(int buildingId, int floorId)
+        {
+            var building = this.buildingRepository.Get(buildingId);
+            if (building == null || building.Status == 1)
+                return ErrorCode.ObjectDeleted;
+            else
+            {
+                switch ((BuildingOrganizeType)building.OrganizeType)
+                {
+                    case BuildingOrganizeType.BuildingGroup:
+                        return ErrorCode.NotImplement;
+
+                    case BuildingOrganizeType.Cluster:
+                        return ErrorCode.NotImplement;
+
+                    case BuildingOrganizeType.Cottage:
+                        IBuildingRepository cottageRepository = new MongoCottageRepository();
+                        return cottageRepository.DeleteFloor(buildingId, floorId);
+
+                    case BuildingOrganizeType.Subregion:
+                        IBuildingRepository subregionRepository = new MongoSubregionRepository();
+                        return subregionRepository.DeleteFloor(buildingId, floorId);
+
+                    case BuildingOrganizeType.Block:
+                        IBuildingRepository blockRepository = new MongoBlockRepository();
+                        return blockRepository.DeleteFloor(buildingId, floorId);
+
+                    case BuildingOrganizeType.Playground:
+                        return ErrorCode.NotImplement;
+                }
+
+                return ErrorCode.NotImplement;
+            }
+        }
+
+        /// <summary>
         /// 备份建筑
         /// </summary>
         /// <param name="_id">建筑系统ID</param>
