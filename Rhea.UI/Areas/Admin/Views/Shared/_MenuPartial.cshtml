@@ -1,4 +1,8 @@
-﻿<!-- BEGIN RESPONSIVE MENU FOR HORIZONTAL & SIDEBAR MENU -->
+﻿@{
+    bool isRootm = User.IsInRole2("Root");
+}
+
+<!-- BEGIN RESPONSIVE MENU FOR HORIZONTAL & SIDEBAR MENU -->
 <ul class="page-sidebar-menu visible-sm visible-xs" data-slide-speed="200" data-auto-scroll="true">
     <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
     <!-- DOC: This is mobile version of the horizontal menu. The desktop version is defined(duplicated) in the header above -->
@@ -6,283 +10,86 @@
         <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
         <!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box -->
         <!-- DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box -->
-        <form class="sidebar-search sidebar-search-bordered" action="extra_search.html" method="POST">
+        <form class="sidebar-search sidebar-search-bordered" action="#" method="POST">
             <a href="javascript:;" class="remove">
                 <i class="icon-close"></i>
             </a>
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Search...">
                 <span class="input-group-btn">
-                    <button class="btn submit"><i class="icon-magnifier"></i></button>
+                    <button class="btn submit"><i class="fa fa-search"></i></button>
                 </span>
             </div>
         </form>
         <!-- END RESPONSIVE QUICK SEARCH FORM -->
     </li>
-    <li class="start active open">
+    <li class="start">
         <a href="#">
-            Dashboard <span class="selected">
-            </span>
-            <span class="arrow open">
-            </span>
+            房产管理 <span class="arrow"></span>
         </a>
         <ul class="sub-menu">
-            <li class="active open">
+            <li>
                 <a href="javascript:;">
-                    <i class="fa fa-cogs"></i>
+                    <i class="fa fa-bank"></i>
                     <span class="title">
-                        Page Layouts
+                        校区管理
                     </span>
-                    <span class="arrow open">
+                    <span class="arrow">
                     </span>
                 </a>
                 <ul class="sub-menu">
-                    <li class="active">
-                        <a href="layout_horizontal_sidebar_menu.html">
-                            Horizontal & Sidebar Menu
+                    <li>
+                        <a href="@Url.Action("List", "Campus")" id="campus-list-menu">
+                            校区列表
                         </a>
                     </li>
                     <li>
-                        <a href="index_horizontal_menu.html">
-                            Dashboard & Mega Menu
-                        </a>
-                    </li>
-                    <li>
-                        <a href="layout_fontawesome_icons.html">
-                            <span class="badge badge-roundless badge-danger">new</span>Layout with Fontawesome Icons
-                        </a>
-                    </li>
-                    <li>
-                        <a href="layout_glyphicons.html">
-                            Layout with Glyphicon
-                        </a>
-                    </li>
-                    <li>
-                        <a href="layout_full_height_portlet.html">
-                            <span class="badge badge-roundless badge-success">new</span>Full Height Portlet
-                        </a>
-                    </li>
-                    <li>
-                        <a href="layout_sidebar_search_option2.html">
-                            Sidebar Search Option 2
-                        </a>
-                    </li>
-                    <li>
-                        <a href="layout_sidebar_reversed.html">
-                            <span class="badge badge-roundless badge-warning">
-                                new
-                            </span>
-                            Right Sidebar Page
-                        </a>
-                    </li>
-                    <li>
-                        <a href="layout_sidebar_fixed.html">
-                            Sidebar Fixed Page
-                        </a>
-                    </li>
-                    <li>
-                        <a href="layout_boxed_page.html">
-                            Boxed Page
-                        </a>
-                    </li>
-                    <li>
-                        <a href="layout_language_bar.html">
-                            Language Switch Bar
+                        <a href="@Url.Action("Create", "Campus")" id="campus-create-menu">
+                            添加校区
                         </a>
                     </li>
                 </ul>
             </li>
             <li>
                 <a href="javascript:;">
-                    <i class="fa fa-th-list"></i>
+                    <i class="fa fa-building"></i>
                     <span class="title">
-                        Portlets
+                        建筑管理
                     </span>
                     <span class="arrow ">
                     </span>
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="portlet_general.html">
-                            General Portlets
+                        <a href="@Url.Action("List", "Building")" id="building-list-menu">
+                            建筑列表
                         </a>
                     </li>
                     <li>
-                        <a href="portlet_draggable.html">
-                            Draggable Portlets
+                        <a href="@Url.Action("Create", "Building")" id="building-create-menu">
+                            添加建筑
                         </a>
                     </li>
                 </ul>
             </li>
             <li>
                 <a href="javascript:;">
-                    <i class="fa fa-map-marker"></i>
+                    <i class="fa fa-columns"></i>
                     <span class="title">
-                        Maps
+                        房间管理
                     </span>
                     <span class="arrow ">
                     </span>
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="maps_google.html">
-                            Google Maps
+                        <a href="@Url.Action("Index", "Room")" id="room-list-menu">
+                            房间列表
                         </a>
                     </li>
                     <li>
-                        <a href="maps_vector.html">
-                            Vector Maps
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="charts.html">
-                    <i class="fa fa-bar-chart-o"></i>
-                    <span class="title">
-                        Visual Charts
-                    </span>
-                </a>
-            </li>
-            <li>
-                <a href="login.html">
-                    <i class="fa fa-user"></i>
-                    <span class="title">
-                        Login Page
-                    </span>
-                </a>
-            </li>
-        </ul>
-    </li>
-    <li>
-        <a href="#">
-            Mega <span class="arrow">
-            </span>
-        </a>
-        <ul class="sub-menu">
-            <li>
-                <a href="#">
-                    Layouts <span class="arrow">
-                    </span>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a href="index_horizontal_menu.html">
-                            Dashboard & Mega Menu
-                        </a>
-                    </li>
-                    <li>
-                        <a href="layout_fontawesome_icons.html">
-                            <span class="badge badge-roundless badge-danger">new</span>Layout with Fontawesome Icons
-                        </a>
-                    </li>
-                    <li>
-                        <a href="layout_glyphicons.html">
-                            Layout with Glyphicon
-                        </a>
-                    </li>
-                    <li>
-                        <a href="layout_full_height_portlet.html">
-                            <span class="badge badge-roundless badge-success">new</span>Full Height Portlet
-                        </a>
-                    </li>
-                    <li>
-                        <a href="layout_full_height_content.html">
-                            <span class="badge badge-roundless badge-warning">new</span>Full Height Content
-                        </a>
-                    </li>
-                    <li>
-                        <a href="layout_horizontal_sidebar_menu.html">
-                            Horizontal & Sidebar Menu
-                        </a>
-                    </li>
-                    <li>
-                        <a href="layout_horizontal_menu1.html">
-                            Horizontal Mega Menu 1
-                        </a>
-                    </li>
-                    <li>
-                        <a href="layout_horizontal_menu2.html">
-                            Horizontal Mega Menu 2
-                        </a>
-                    </li>
-                    <li>
-                        <a href="layout_search_on_header1.html">
-                            Search Box On Header 1
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">
-                    More Layouts <span class="arrow">
-                    </span>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a href="layout_search_on_header2.html">
-                            Search Box On Header 2
-                        </a>
-                    </li>
-                    <li>
-                        <a href="layout_sidebar_search_option1.html">
-                            Sidebar Search Option 1
-                        </a>
-                    </li>
-                    <li>
-                        <a href="layout_sidebar_search_option2.html">
-                            Sidebar Search Option 2
-                        </a>
-                    </li>
-                    <li>
-                        <a href="layout_sidebar_reversed.html">
-                            <span class="badge badge-roundless badge-success">
-                                new
-                            </span>
-                            Right Sidebar Page
-                        </a>
-                    </li>
-                    <li>
-                        <a href="layout_sidebar_fixed.html">
-                            Sidebar Fixed Page
-                        </a>
-                    </li>
-                    <li>
-                        <a href="layout_sidebar_closed.html">
-                            Sidebar Closed Page
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">
-                    Even More <span class="arrow">
-                    </span>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a href="layout_ajax.html">
-                            Content Loading via Ajax
-                        </a>
-                    </li>
-                    <li>
-                        <a href="layout_disabled_menu.html">
-                            Disabled Menu Links
-                        </a>
-                    </li>
-                    <li>
-                        <a href="layout_blank_page.html">
-                            Blank Page
-                        </a>
-                    </li>
-                    <li>
-                        <a href="layout_boxed_page.html">
-                            Boxed Page
-                        </a>
-                    </li>
-                    <li>
-                        <a href="layout_language_bar.html">
-                            Language Switch Bar
+                        <a href="@Url.Action("Create", "Room")" id="room-create-menu">
+                            添加公用房
                         </a>
                     </li>
                 </ul>
@@ -291,25 +98,115 @@
     </li>
     <li>
         <a>
-            Classic <span class="arrow">
-            </span>
+            人事管理 <span class="arrow"></span>
         </a>
         <ul class="sub-menu">
             <li>
-                <a href="#">
-                    Section 1
+                <a href="javascript:;">
+                    <i class="fa fa-joomla"></i>
+                    <span class="title">
+                        部门管理
+                    </span>
+                    <span class="arrow ">
+                    </span>
                 </a>
-            </li>
-            <li>
-                <a href="#">
-                    Section 2
-                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="@Url.Action("List", "Department")" id="department-list-menu">
+                            部门列表
+                        </a>
+                    </li>
+                </ul>
             </li>
         </ul>
     </li>
     <li>
-        <a href="">
-            Link
+        <a>
+            高级管理 <span class="arrow"></span>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a href="javascript:;">
+                    <i class="fa fa-users"></i>
+                    <span class="title">
+                        用户管理
+                    </span>
+                    <span class="arrow ">
+                    </span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="@Url.Action("List", "User")" id="user-list-menu">
+                            用户列表
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Create", "User")" id="user-create-menu">
+                            添加用户
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("List", "UserGroup")" id="user-group-list-menu">
+                            用户组列表
+                        </a>
+                    </li>
+                    @if (isRootm)
+                    {
+                        <li>
+                            <a href="@Url.Action("Create", "UserGroup")" id="user-group-create-menu">
+                                添加用户组
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="fa fa-book"></i>
+                    <span class="title">
+                        字典管理
+                    </span>
+                    <span class="arrow ">
+                    </span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="@Url.Action("List", "Dictionary")" id="dictionary-list-menu">
+                            字典列表
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Create", "Dictionary")" id="dictionary-create-menu">
+                            添加字典
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            @if(isRootm)
+            { 
+            <li>
+                <a href="javascript:;">
+                    <i class="fa fa-file-text-o"></i>
+                    <span class="title">
+                        日志管理
+                    </span>
+                    <span class="arrow ">
+                    </span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="@Url.Action("List", "Log")" id="log-list-menu">
+                            日志列表
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            }
+        </ul>
+    </li>
+    <li class="last">
+        <a href="@Url.Action("Index", new { area = "", controller = "Home" })">
+            回到主页 <span class="arrow"></span>
         </a>
     </li>
 </ul>

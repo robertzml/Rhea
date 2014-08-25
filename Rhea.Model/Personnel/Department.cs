@@ -7,9 +7,22 @@ using System.Text;
 
 namespace Rhea.Model.Personnel
 {
+    /// <summary>
+    /// 部门类
+    /// </summary>
     [CollectionName("department")]
     public class Department : MongoEntity
     {
+        #region Constructor
+        /// <summary>
+        /// 部门类
+        /// </summary>
+        public Department()
+        {
+            this.Log = new Log();
+        }
+        #endregion //Constructor
+
         #region Property
         /// <summary>
         /// 部门代码
@@ -85,6 +98,13 @@ namespace Rhea.Model.Personnel
         [BsonElement("status")]
         [Display(Name = "状态")]
         public int Status { get; set; }
+
+        /// <summary>
+        /// 日志属性
+        /// </summary>
+        [BsonElement("log")]
+        [Display(Name = "日志属性")]
+        public Log Log { get; set; }
         #endregion //Property
     }
 }

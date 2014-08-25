@@ -70,6 +70,25 @@ namespace Rhea.Data.Mongo
         }
 
         /// <summary>
+        /// 删除日志
+        /// </summary>
+        /// <param name="_id">日志ID</param>
+        /// <returns></returns>
+        public ErrorCode Delete(string _id)
+        {
+            try
+            {
+                this.repository.Delete(_id);
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
+
+        /// <summary>
         /// 日志数量
         /// </summary>
         /// <returns></returns>

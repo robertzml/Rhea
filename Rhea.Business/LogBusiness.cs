@@ -78,6 +78,17 @@ namespace Rhea.Business
         }
 
         /// <summary>
+        /// 删除日志
+        /// </summary>
+        /// <param name="_id">日志ID</param>
+        /// <returns></returns>
+        public ErrorCode Delete(string _id)
+        {
+            return this.logRepository.Delete(_id);
+        }
+
+
+        /// <summary>
         /// 日志数量
         /// </summary>
         /// <returns></returns>

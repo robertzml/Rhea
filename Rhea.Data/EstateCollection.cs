@@ -28,13 +28,7 @@ namespace Rhea.Data
         /// 房间表
         /// room
         /// </summary>
-        public static readonly string Room = "room";
-
-        /// <summary>
-        /// 字典表
-        /// dictionary
-        /// </summary>
-        public static readonly string Dictionary = "dictionary";
+        public static readonly string Room = "room";   
      
         /// <summary>
         /// 校区备份表
@@ -59,6 +53,18 @@ namespace Rhea.Data
         /// roomArchive
         /// </summary>
         public static readonly string RoomArchive = "roomArchive";
+
+        /// <summary>
+        /// 青教住户表
+        /// inhabitant
+        /// </summary>
+        public static readonly string Inhabitant = "inhabitant";
+
+        /// <summary>
+        /// 青教入住记录表
+        /// resideRecord
+        /// </summary>
+        public static readonly string ResideRecord = "resideRecord";
         #endregion //Field
     }
 }

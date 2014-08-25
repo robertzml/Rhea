@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Rhea.Business.Estate;
+using Rhea.Data;
 using Rhea.Data.Apartment;
 using Rhea.Data.Mongo.Apartment;
 using Rhea.Model;
@@ -21,6 +22,11 @@ namespace Rhea.Business.Apartment
         /// 居住记录Repository
         /// </summary>
         IResideRecordRepository recordRepository;
+
+        /// <summary>
+        /// 日志业务
+        /// </summary>
+        private LogBusiness logBusiness;
         #endregion //Field
 
         #region Constructor
@@ -30,6 +36,7 @@ namespace Rhea.Business.Apartment
         public ResideRecordBusiness()
         {
             this.recordRepository = new MongoResideRecordRepository();
+            this.logBusiness = new LogBusiness();
         }
         #endregion //Constructor
 
@@ -80,13 +87,63 @@ namespace Rhea.Business.Apartment
         }
 
         /// <summary>
+        /// 获取居住记录
+        /// </summary>
+        /// <param name="_id">居住记录ID</param>
+        /// <returns></returns>
+        public ResideRecord Get(string _id)
+        {
+            return this.recordRepository.Get(_id);
+        }
+
+        /// <summary>
         /// 添加住户居住记录
         /// </summary>
-        /// <param name="data">住户对象</param>
+        /// <param name="data">居住记录对象</param>
         /// <returns></returns>
         public ErrorCode Create(ResideRecord data)
         {
             return this.recordRepository.Create(data);
+        }
+
+        /// <summary>
+        /// 更新居住记录
+        /// </summary>
+        /// <param name="data">居住记录对象</param>
+        /// <returns></returns>
+        public ErrorCode Update(ResideRecord data)
+        {
+            return this.recordRepository.Update(data);
+        }
+
+        /// <summary>
+        /// 记录日志
+        /// </summary>
+        /// <param name="_id">居住记录系统ID</param>
+        /// <param name="log">日志对象</param>
+        /// <returns></returns>
+        public ErrorCode Log(string _id, Log log)
+        {
+            ErrorCode result = this.logBusiness.Create(log);
+            if (result != ErrorCode.Success)
+                return result;
+
+            result = this.logBusiness.Log(RheaServer.EstateDatabase, EstateCollection.ResideRecord, _id, log);
+            return result;
+        }
+
+        /// <summary>
+        /// 更新居住记录日志信息
+        /// </summary>
+        /// <param name="_id">居住记录系统ID</param>
+        /// <param name="log">日志对象</param>
+        /// <returns></returns>
+        /// <remarks>
+        /// 日志信息已存在
+        /// </remarks>
+        public ErrorCode LogItem(string _id, Log log)
+        {
+            return this.logBusiness.Log(RheaServer.EstateDatabase, EstateCollection.ResideRecord, _id, log);
         }
         #endregion //Method
     }

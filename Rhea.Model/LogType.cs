@@ -154,6 +154,24 @@ namespace Rhea.Model
         /// 用户登录失败
         /// </summary>
         [Display(Name = "用户登录失败")]
-        UserLoginFailed = 101
+        UserLoginFailed = 101,
+
+        /// <summary>
+        /// 编辑青教住户
+        /// </summary>
+        [Display(Name = "编辑青教住户")]
+        InhabitantEdit = 151,
+
+        /// <summary>
+        /// 编辑居住记录
+        /// </summary>
+        [Display(Name = "编辑居住记录")]
+        ResideRecordEdit = 156,
+
+        /// <summary>
+        /// 入住业务办理
+        /// </summary>
+        [Display(Name = "入住业务办理")]
+        ApartmentCheckIn = 160
     }
 }

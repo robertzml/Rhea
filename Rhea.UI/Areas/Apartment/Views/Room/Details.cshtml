@@ -154,7 +154,7 @@
                         <hr />
                         <p>
                             <a href="/Apartment/Building/Block/@Model.Room.BuildingId" class="btn btn-primary ajaxify" role="button"><i class="fa fa-list"></i>&nbsp;回到楼宇</a>
-                            <a href="/Apartment/Building/Floor?buildingId=@Model.Room.BuildingId&floor=@Model.Room.Floor" class="btn btn-primary ajaxify" role="button"><i class="fa fa-align-center"></i>&nbsp;回到楼层</a>
+                            <a href="/Apartment/Building/Floor?buildingId=@Model.Room.BuildingId&floor=@Model.Room.Floor" class="btn blue-hoki ajaxify" role="button"><i class="fa fa-align-center"></i>&nbsp;回到楼层</a>
                             <a href="/Apartment/Room/Edit/@Model.Room.RoomId" class="btn btn-warning ajaxify" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
                         </p>
                     </div>
@@ -211,6 +211,7 @@
                                     <th>离开时间</th>
                                     <th>备注</th>
                                     <th>状态</th>
+                                    <th>&nbsp;</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -260,6 +261,9 @@
                                                     <span class="label label-default">已搬出</span>
                                                     break;
                                             }
+                                        </td>
+                                        <td>
+                                            <a href="/Apartment/ResideRecord/Details/@item._id" class="btn btn-sm btn-primary ajaxify" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
                                         </td>
                                     </tr>
                                 }

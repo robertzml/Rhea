@@ -48,11 +48,7 @@
             <div class="hor-menu hor-menu-light hidden-sm hidden-xs">
                 <ul class="nav navbar-nav" id="top-nav">
                     <!-- DOC: Remove data-hover="dropdown" and data-close-others="true" attributes below to disable the horizontal opening on mouse hover -->
-                    <li class="classic-menu-dropdown active">
-                        <a href="@Url.Action("Index", "Estate")" id="estate-nav">
-                            房 产 管 理
-                        </a>
-                    </li>
+                    <li class="classic-menu-dropdown active"><a href="@Url.Action("Index", "Estate")" id="estate-nav">房 产 管 理</a></li>
                     <li><a href="@Url.Action("Index", "Personnel")" id="personnel-nav">人 事 管 理</a></li>
                     <li><a href="@Url.Action("Index", "Advance")" id="advance-nav">高 级 管 理</a></li>
                     <li><a href="@Url.Action("Index", new { area = "", controller = "Home" })" target="_blank">回 到 主 页</a></li>

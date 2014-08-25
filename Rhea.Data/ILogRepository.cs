@@ -33,6 +33,13 @@ namespace Rhea.Data
         ErrorCode Create(Log data);
 
         /// <summary>
+        /// 删除日志
+        /// </summary>
+        /// <param name="_id">日志ID</param>
+        /// <returns></returns>
+        ErrorCode Delete(string _id);
+
+        /// <summary>
         /// 日志数量
         /// </summary>
         /// <returns></returns>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Rhea.Data;
 using Rhea.Data.Apartment;
 using Rhea.Data.Mongo.Apartment;
 using Rhea.Model;
@@ -20,6 +21,11 @@ namespace Rhea.Business.Apartment
         /// 住户Repository
         /// </summary>
         private IInhabitantRepository inhabitantRepository;
+
+        /// <summary>
+        /// 日志业务
+        /// </summary>
+        private LogBusiness logBusiness;
         #endregion //Field
 
         #region Constructor
@@ -29,6 +35,7 @@ namespace Rhea.Business.Apartment
         public InhabitantBusiness()
         {
             this.inhabitantRepository = new MongoInhabitantRepository();
+            this.logBusiness = new LogBusiness();
         }
         #endregion //Constructor
 
@@ -70,7 +77,37 @@ namespace Rhea.Business.Apartment
         public ErrorCode Update(Inhabitant data)
         {
             return this.inhabitantRepository.Update(data);
-        }            
+        }
+
+        /// <summary>
+        /// 记录日志
+        /// </summary>
+        /// <param name="_id">住户系统ID</param>
+        /// <param name="log">日志对象</param>
+        /// <returns></returns>
+        public ErrorCode Log(string _id, Log log)
+        {
+            ErrorCode result = this.logBusiness.Create(log);
+            if (result != ErrorCode.Success)
+                return result;
+
+            result = this.logBusiness.Log(RheaServer.EstateDatabase, EstateCollection.Inhabitant, _id, log);
+            return result;
+        }
+
+        /// <summary>
+        /// 更新住户日志信息
+        /// </summary>
+        /// <param name="_id">住户系统ID</param>
+        /// <param name="log">日志对象</param>
+        /// <returns></returns>
+        /// <remarks>
+        /// 日志信息已存在
+        /// </remarks>
+        public ErrorCode LogItem(string _id, Log log)
+        {
+            return this.logBusiness.Log(RheaServer.EstateDatabase, EstateCollection.Inhabitant, _id, log);
+        }
         #endregion //Method
     }
 }

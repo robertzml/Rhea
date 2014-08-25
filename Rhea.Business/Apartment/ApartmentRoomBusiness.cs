@@ -169,6 +169,20 @@ namespace Rhea.Business.Apartment
             result = this.logBusiness.Log(RheaServer.EstateDatabase, EstateCollection.Room, _id, log);
             return result;
         }
+
+        /// <summary>
+        /// 更新房间日志信息
+        /// </summary>
+        /// <param name="_id">房间系统ID</param>
+        /// <param name="log">日志对象</param>
+        /// <returns></returns>
+        /// <remarks>
+        /// 日志信息已存在
+        /// </remarks>
+        public ErrorCode LogItem(string _id, Log log)
+        {
+            return this.logBusiness.Log(RheaServer.EstateDatabase, EstateCollection.Room, _id, log);
+        }
         #endregion //Method
     }
 }

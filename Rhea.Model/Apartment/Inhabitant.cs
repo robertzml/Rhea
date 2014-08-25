@@ -13,6 +13,16 @@ namespace Rhea.Model.Apartment
     [CollectionName("inhabitant")]
     public class Inhabitant : MongoEntity
     {
+        #region Constructor
+        /// <summary>
+        /// 住户类
+        /// </summary>
+        public Inhabitant()
+        {
+            this.Log = new Log();
+        }
+        #endregion //Constructor
+
         #region Property
         /// <summary>
         /// 工号、学号或其它
@@ -75,13 +85,12 @@ namespace Rhea.Model.Apartment
         public string IdentityCard { get; set; }
 
         /// <summary>
-        /// 公积金领取时间
+        /// 是否双职工
         /// </summary>
-        [DataType(DataType.Date)]
-        [BsonDateTimeOptions(DateOnly = true, Kind = DateTimeKind.Local)]        
-        [BsonElement("accumulatedFundsDate")]
-        [Display(Name = "公积金领取时间")]
-        public DateTime? AccumulatedFundsDate { get; set; }
+        [UIHint("Boolean2")]
+        [BsonElement("isCouple")]
+        [Display(Name = "是否双职工")]
+        public bool? IsCouple { get; set; }
 
         /// <summary>
         /// 婚姻状况
@@ -89,6 +98,15 @@ namespace Rhea.Model.Apartment
         [BsonElement("marriage")]
         [Display(Name = "婚姻状况")]
         public string Marriage { get; set; }
+
+        /// <summary>
+        /// 公积金领取时间
+        /// </summary>
+        [DataType(DataType.Date)]
+        [BsonDateTimeOptions(DateOnly = true, Kind = DateTimeKind.Local)]        
+        [BsonElement("accumulatedFundsDate")]
+        [Display(Name = "公积金领取时间")]
+        public DateTime? AccumulatedFundsDate { get; set; }
 
         /// <summary>
         /// 蠡湖家园入住时间
@@ -111,11 +129,18 @@ namespace Rhea.Model.Apartment
         /// 状态
         /// </summary>
         /// <remarks>
-        /// 0:正常居住；1:删除；55:离开；56:延期居住
+        /// 0:正常居住；1:删除；55:离开；56:延期居住; 57:超期居住
         /// </remarks>
         [BsonElement("status")]
         [Display(Name = "状态")]
         public int Status { get; set; }
+
+        /// <summary>
+        /// 日志属性
+        /// </summary>
+        [BsonElement("log")]
+        [Display(Name = "日志属性")]
+        public Log Log { get; set; }
         #endregion //Property
     }
 }

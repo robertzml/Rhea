@@ -1,0 +1,15 @@
+﻿@model bool?
+@{
+    SelectList list = ViewData.ModelMetadata.IsNullableValueType ?
+        new SelectList(new[] {
+            new SelectListItem { Text = "-- 请选择 --", Value = "" },
+            new SelectListItem { Text = "是", Value = "true" },
+            new SelectListItem { Text = "否", Value = "false" }
+            }, "Value", "Text", Model) :
+        new SelectList(new[] {
+            new SelectListItem { Text = "是", Value = "true" },
+            new SelectListItem { Text = "否", Value = "false" }
+         }, "Value", "Text", Model);
+
+    @Html.DropDownListFor(m => m, list, new { @class = "form-control" })
+}

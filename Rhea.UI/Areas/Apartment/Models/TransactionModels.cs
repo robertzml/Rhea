@@ -84,17 +84,24 @@ namespace Rhea.UI.Areas.Apartment.Models
         public string IdentityCard { get; set; }
 
         /// <summary>
-        /// 公积金领取时间
+        /// 是否双职工
         /// </summary>
-        [DataType(DataType.Date)]
-        [Display(Name = "公积金领取时间")]
-        public DateTime? AccumulatedFundsDate { get; set; }
+        [UIHint("Boolean2")]
+        [Display(Name = "是否双职工")]
+        public bool? IsCouple { get; set; }
 
         /// <summary>
         /// 婚姻状况
         /// </summary>
         [Display(Name = "婚姻状况")]
         public string Marriage { get; set; }
+
+        /// <summary>
+        /// 公积金领取时间
+        /// </summary>
+        [DataType(DataType.Date)]
+        [Display(Name = "公积金领取时间")]
+        public DateTime? AccumulatedFundsDate { get; set; }        
 
         /// <summary>
         /// 蠡湖家园入住时间

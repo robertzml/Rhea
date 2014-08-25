@@ -1,8 +1,10 @@
 ﻿using Rhea.Business.Apartment;
 using Rhea.Common;
 using Rhea.Model;
+using Rhea.Model.Account;
 using Rhea.Model.Apartment;
 using Rhea.UI.Filters;
+using Rhea.UI.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -90,15 +92,36 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         {
             if (ModelState.IsValid)
             {
+                //edit
                 ErrorCode result = this.inhabitantBusiness.Update(model);
-                if (result == ErrorCode.Success)
+                if (result != ErrorCode.Success)
                 {
-                    return RedirectToAction("Details", new { id = model._id });
-                }
-                else
-                {
+                    ModelState.AddModelError("", "编辑住户失败");
                     ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
                 }
+
+                //log
+                User user = PageService.GetCurrentUser(User.Identity.Name);
+                Log log = new Log
+                {
+                    Title = "编辑青教住户",
+                    Time = DateTime.Now,
+                    Type = (int)LogType.InhabitantEdit,
+                    Content = string.Format("编辑青教住户， ID:{0}, 姓名:{1}, 部门:{2}。", model._id, model.Name, model.DepartmentName),
+                    UserId = user._id,
+                    UserName = user.Name
+                };
+
+                result = this.inhabitantBusiness.Log(model._id, log);
+                if (result != ErrorCode.Success)
+                {
+                    ModelState.AddModelError("", "记录日志失败");
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
+                }
+
+                return RedirectToAction("Details", new { id = model._id });
             }
 
             return View(model);

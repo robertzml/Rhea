@@ -14,6 +14,16 @@ namespace Rhea.Model.Apartment
     [CollectionName("resideRecord")]
     public class ResideRecord : MongoEntity
     {
+        #region Constructor
+        /// <summary>
+        /// 居住记录类
+        /// </summary>
+        public ResideRecord()
+        {
+            this.Log = new Log();
+        }
+        #endregion //Constructor
+
         #region Property
         /// <summary>
         /// 房间ID
@@ -51,6 +61,7 @@ namespace Rhea.Model.Apartment
         /// 0:可分配；1:正常居住；2:挂职居住；3:部门占用；4:仓库；5:保留
         /// 仅1,2类型有住户对象
         /// </remarks>
+        [UIHint("ResideType")]
         [BsonElement("resideType")]
         [Display(Name = "居住类型")]
         public int ResideType { get; set; }
@@ -105,14 +116,29 @@ namespace Rhea.Model.Apartment
         public string Remark { get; set; }
 
         /// <summary>
+        /// 登记时间
+        /// </summary>
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
+        [BsonElement("registerTime")]
+        [Display(Name = "登记时间")]
+        public DateTime RegisterTime { get; set; }
+
+        /// <summary>
         /// 状态
         /// </summary>
         /// <remarks>
-        /// 0:居住中； 1:已删除； 50:超期; 51:已搬出
+        /// 0:居住中； 1:已删除； 50:超期; 51:延期; 52:已搬出;
         /// </remarks>
         [BsonElement("status")]
         [Display(Name = "状态")]
         public int Status { get; set; }
+
+        /// <summary>
+        /// 日志属性
+        /// </summary>
+        [BsonElement("log")]
+        [Display(Name = "日志属性")]
+        public Log Log { get; set; }
         #endregion //Property
     }
 }

@@ -116,6 +116,7 @@ var CheckIn = function () {
 					$('#Telephone').val(item.Telephone);
 					$('#IdentityCard').val(item.IdentityCard);
 					$('#AccumulatedFundsDate').val(Rhea.parseDate(item.AccumulatedFundsDate));
+					$('#IsCouple').val(item.IsCouple.toString());
 					$('#Marriage').val(item.Marriage);
 					$('#LiHuEnterDate').val(Rhea.parseDate(item.LiHuEnterDate));
 					$('#InhabitantRemark').val(item.InhabitantRemark);
@@ -129,6 +130,7 @@ var CheckIn = function () {
 					$('#Telephone').val('');
 					$('#IdentityCard').val('');				
 					$('#AccumulatedFundsDate').val('');
+					$('#IsCouple').val('');
 					$('#Marriage').val('');
 					$('#LiHuEnterDate').val('');
 					$('#InhabitantRemark').val('');

@@ -99,6 +99,25 @@ namespace Rhea.Data.Mongo.Apartment
 
             return ErrorCode.Success;
         }
+
+        /// <summary>
+        /// 更新居住记录
+        /// </summary>
+        /// <param name="data">居住记录对象</param>
+        /// <returns></returns>
+        public ErrorCode Update(ResideRecord data)
+        {
+            try
+            {
+                this.repository.Update(data);
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
         #endregion //Method
     }
 }

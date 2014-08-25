@@ -57,6 +57,25 @@ namespace Rhea.UI.Areas.Admin.Controllers
             var data = this.logBusiness.Get(id);
             return View(data);
         }
+
+        /// <summary>
+        /// 删除日志
+        /// </summary>
+        /// <param name="id">日志ID</param>
+        /// <returns></returns>
+        [EnhancedAuthorize(Roles = "Root")]
+        public ActionResult Delete(string id)
+        {
+            ErrorCode result = this.logBusiness.Delete(id);
+            if (result != ErrorCode.Success)
+            {
+                TempData["Message"] = "删除日志失败";
+                return RedirectToAction("Details", new { id = id });
+            }
+
+            TempData["Message"] = "删除日志成功";
+            return RedirectToAction("List");
+        }
         #endregion //Action
 
         #region Json

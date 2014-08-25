@@ -40,10 +40,17 @@ namespace Rhea.Model
 
         /// <summary>
         /// 居住记录类
-        /// 51:已搬出
+        /// 51:延期
+        /// </summary>
+        [Display(Name = "延期")]
+        ExtendTime = 51,
+
+        /// <summary>
+        /// 居住记录类
+        /// 52:已搬出
         /// </summary>
         [Display(Name = "已搬出")]
-        MoveOut = 51,
+        MoveOut = 52,
 
         /// <summary>
         /// 住户类
@@ -57,7 +64,14 @@ namespace Rhea.Model
         /// 56:延期居住
         /// </summary>
         [Display(Name = "延期居住")]
-        InhabitantExtend = 56
+        InhabitantExtend = 56,
+
+        /// <summary>
+        /// 住户类
+        /// 57:超期居住
+        /// </summary>
+        [Display(Name = "超期居住")]
+        InhabitantExpire = 57
     }
  
 }

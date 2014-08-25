@@ -21,8 +21,8 @@
                     <td>
                         @Html.DisplayFor(model => model.JobNumber)
                     </td>
-                    <td rowspan="4">
-                        照片
+                    <td rowspan="5">
+                        <img class="media-object" alt="照片">
                     </td>
                 </tr>
                 <tr>
@@ -86,10 +86,10 @@
                 </tr>
                 <tr>
                     <td>
-                        @Html.DisplayNameFor(model => model.AccumulatedFundsDate)
+                        @Html.DisplayNameFor(model => model.IsCouple)
                     </td>
                     <td colspan="2">
-                        @Model.AccumulatedFundsDate.ToDateString()
+                        @Html.DisplayFor(model => model.IsCouple)
                     </td>
                 </tr>
                 <tr>
@@ -98,6 +98,14 @@
                     </td>
                     <td colspan="2">
                         @Html.DisplayFor(model => model.Marriage)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.AccumulatedFundsDate)
+                    </td>
+                    <td colspan="2">
+                        @Model.AccumulatedFundsDate.ToDateString()
                     </td>
                 </tr>
                 <tr>

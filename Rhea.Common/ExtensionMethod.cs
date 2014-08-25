@@ -50,5 +50,51 @@ namespace Rhea.Common
                 return dt.ToString("yyyy-MM-dd");
             }
         }
+
+        /// <summary>
+        /// 显示DateTime
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static string ToDateString(this DateTime value)
+        {
+            if (value == null)
+                return "";
+            else
+            {
+                return value.ToString("yyyy-MM-dd");
+            }
+        }
+
+        /// <summary>
+        /// 显示DateTime
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static string ToDateTimeString(this DateTime? value)
+        {
+            if (value == null)
+                return "";
+            else
+            {
+                DateTime dt = (DateTime)value;
+                return dt.ToString("yyyy-MM-dd HH:mm:ss");
+            }
+        }
+
+        /// <summary>
+        /// 显示DateTime
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static string ToDateTimeString(this DateTime value)
+        {
+            if (value == null)
+                return "";
+            else
+            {
+                return value.ToString("yyyy-MM-dd HH:mm:ss");
+            }
+        }
     }
 }
