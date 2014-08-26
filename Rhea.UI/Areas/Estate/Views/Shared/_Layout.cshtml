@@ -4,7 +4,9 @@
 
 @section styles {
     <link href="/Content/profile.css" rel="stylesheet" type="text/css" />
+    @Styles.Render("~/Plugin/colorbox")
 }
+
 
 <!-- BEGIN SIDEBAR -->
 <div class="page-sidebar-wrapper">
@@ -71,7 +73,7 @@
             </li>
         </ul>
         <!-- END SIDEBAR MENU1 -->
-
+        @Html.Action("MobileMenu", new { area = "", controller = "Home" })
     </div>
 </div>
 <!-- END SIDEBAR -->
@@ -86,6 +88,8 @@
 </div>
 <!-- END CONTENT -->
 @section scripts {
+    @Scripts.Render("~/bundles/colorbox")
+
     <script type="text/javascript">
         $(function () {
 

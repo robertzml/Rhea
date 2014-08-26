@@ -1,0 +1,32 @@
+﻿@model Rhea.UI.Areas.Apartment.Models.RoomTreeModel
+
+@{
+    Layout = null;
+}
+
+<div id="room-tree">
+    <ul>
+        @foreach(var block in Model.Blocks)
+        {
+            <li id="tb_@block.BuildingId">
+                @block.Name
+                <ul>
+                    @foreach (var floor in block.Floors)
+                    {
+                        <li id="tf_@block.BuildingId@floor.Number">
+                            @floor.Name
+                            <ul>
+                                @foreach (var room in Model.Rooms.Where(r => r.BuildingId == block.BuildingId && r.Floor == floor.Number))
+                                {
+                                    <li data-jstree='{ "type" : "file" }'>
+                                        <a href="/Apartment/Room/Details/@room.RoomId" id="tr_@room.RoomId" class="ajaxify">@room.Name</a>
+                                    </li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                </ul>
+            </li>
+        }
+    </ul>
+</div>

@@ -1,0 +1,21 @@
+/* estate css */
+.profile {
+  position: relative;
+}
+
+.profile p {
+  color: #636363;
+  font-size: 13px;
+}
+
+.profile p a {
+  color: #169ef4;
+}
+
+.profile label {
+  margin-top: 10px;
+}
+
+.profile label:first-child {
+  margin-top: 0;
+}

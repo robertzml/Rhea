@@ -25,7 +25,7 @@ namespace Rhea.UI
                         "~/Scripts/localization/messages_zh.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-*"));           
+                        "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                       "~/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js"));
@@ -79,6 +79,12 @@ namespace Rhea.UI
                 "~/plugins/select2/select2.min.js",
                 "~/plugins/select2/select2_locale_zh-CN.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/jstree").Include(
+                "~/plugins/jstree/jstree.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/colorbox").Include(
+                "~/plugins/colorbox/jquery.colorbox-min.js"));
+
             // For css
             bundles.Add(new StyleBundle("~/Content/fontawesome").Include(
                       "~/Content/font-awesome.min.css"));
@@ -120,6 +126,12 @@ namespace Rhea.UI
 
             bundles.Add(new StyleBundle("~/Plugin/select2").Include(
                 "~/plugins/select2/select2.css"));
+
+            bundles.Add(new StyleBundle("~/Plugin/jstree").Include(
+                "~/plugins/jstree/themes/default/style.min.css"));
+
+            bundles.Add(new StyleBundle("~/Plugin/colorbox").Include(
+                "~/plugins/colorbox/colorbox.css"));
 
             // 将 EnableOptimizations 设为 false 以进行调试。有关详细信息，
             // 请访问 http://go.microsoft.com/fwlink/?LinkId=301862

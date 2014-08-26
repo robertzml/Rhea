@@ -128,18 +128,6 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         }
 
         /// <summary>
-        /// 居住记录
-        /// </summary>
-        /// <param name="id">住户ID</param>
-        /// <returns></returns>
-        public ActionResult Record(string id)
-        {
-            ResideRecordBusiness business = new ResideRecordBusiness();
-            var data = business.GetByInhabitant(id).OrderByDescending(r => r.RegisterTime);
-            return View(data);
-        }
-
-        /// <summary>
         /// 住户摘要
         /// </summary>
         /// <param name="id">住户ID</param>

@@ -1,4 +1,6 @@
 ﻿using Rhea.Model.Apartment;
+using Rhea.Model.Apartment;
+using Rhea.Model.Estate;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,25 +9,6 @@ using System.Web;
 
 namespace Rhea.UI.Areas.Apartment.Models
 {
-    /// <summary>
-    /// 青教房间模型
-    /// </summary>
-    public class ApartmentRoomModel
-    {
-        /// <summary>
-        /// 房间信息
-        /// </summary>
-        [Display(Name = "房间信息")]
-        public ApartmentRoom Room { get; set; }
-
-        /// <summary>
-        /// 居住记录
-        /// </summary>
-        [Display(Name = "居住记录")]
-        public List<ResideRecord> Records { get; set; }
-    }
-
-
     /// <summary>
     /// 房间居住模型
     /// </summary>
@@ -102,5 +85,15 @@ namespace Rhea.UI.Areas.Apartment.Models
         /// </summary>       
         [Display(Name = "部门")]
         public string InhabitantDepartment { get; set; }
+    }
+
+    /// <summary>
+    /// 房间树模型
+    /// </summary>
+    public class RoomTreeModel
+    {
+        public List<Block> Blocks;
+
+        public List<ApartmentRoom> Rooms;
     }
 }

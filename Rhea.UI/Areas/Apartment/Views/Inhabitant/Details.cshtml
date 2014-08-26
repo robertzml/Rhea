@@ -232,7 +232,7 @@
                 </div>
             </div>
             <div class="portlet-body">
-                @Html.Action("Record", new { controller = "Inhabitant", id = Model._id })
+                @Html.Action("ListByInhabitant", new { controller = "ResideRecord", inhabitantId = Model._id })
             </div>
         </div>
     </div>

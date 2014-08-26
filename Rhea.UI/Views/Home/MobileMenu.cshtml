@@ -1,0 +1,182 @@
+﻿@model Rhea.Model.Account.User
+
+@{
+    Layout = null;         
+}
+
+<!-- BEGIN RESPONSIVE MENU FOR HORIZONTAL & SIDEBAR MENU -->
+<ul class="page-sidebar-menu visible-sm visible-xs" data-slide-speed="200" data-auto-scroll="true">
+    <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
+    <!-- DOC: This is mobile version of the horizontal menu. The desktop version is defined(duplicated) in the header above -->
+    <li class="sidebar-search-wrapper">
+        <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+        <!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box -->
+        <!-- DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box -->
+        <form class="sidebar-search sidebar-search-bordered" action="#" method="POST">
+            <a href="javascript:;" class="remove">
+                <i class="icon-close"></i>
+            </a>
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search...">
+                <span class="input-group-btn">
+                    <button class="btn submit"><i class="fa fa-search"></i></button>
+                </span>
+            </div>
+        </form>
+        <!-- END RESPONSIVE QUICK SEARCH FORM -->
+    </li>
+    <li class="start">
+        <a href="#">
+            房产管理 <span class="arrow"></span>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a href="javascript:;">
+                    <i class="fa fa-bank"></i>
+                    <span class="title">
+                        校区管理
+                    </span>
+                    <span class="arrow">
+                    </span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="@Url.Action("List", "Campus")" id="campus-list-menu">
+                            校区列表
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Create", "Campus")" id="campus-create-menu">
+                            添加校区
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="fa fa-building"></i>
+                    <span class="title">
+                        建筑管理
+                    </span>
+                    <span class="arrow ">
+                    </span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="@Url.Action("List", "Building")" id="building-list-menu">
+                            建筑列表
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Create", "Building")" id="building-create-menu">
+                            添加建筑
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="fa fa-columns"></i>
+                    <span class="title">
+                        房间管理
+                    </span>
+                    <span class="arrow ">
+                    </span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="@Url.Action("Index", "Room")" id="room-list-menu">
+                            房间列表
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Create", "Room")" id="room-create-menu">
+                            添加公用房
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a>
+            部门管理 <span class="arrow"></span>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a href="javascript:;">
+                    <i class="fa fa-joomla"></i>
+                    <span class="title">
+                        部门管理
+                    </span>
+                    <span class="arrow ">
+                    </span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="@Url.Action("List", "Department")" id="department-list-menu">
+                            部门列表
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li class="last">
+        <a>
+            青教管理 <span class="arrow"></span>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a href="javascript:;">
+                    <i class="fa fa-users"></i>
+                    <span class="title">
+                        用户管理
+                    </span>
+                    <span class="arrow ">
+                    </span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="@Url.Action("List", "User")" id="user-list-menu">
+                            用户列表
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Create", "User")" id="user-create-menu">
+                            添加用户
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("List", "UserGroup")" id="user-group-list-menu">
+                            用户组列表
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="fa fa-book"></i>
+                    <span class="title">
+                        字典管理
+                    </span>
+                    <span class="arrow ">
+                    </span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="@Url.Action("List", "Dictionary")" id="dictionary-list-menu">
+                            字典列表
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Create", "Dictionary")" id="dictionary-create-menu">
+                            添加字典
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+<!-- END RESPONSIVE MENU FOR HORIZONTAL & SIDEBAR MENU -->

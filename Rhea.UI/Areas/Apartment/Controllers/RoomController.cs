@@ -1,9 +1,11 @@
 ﻿using Rhea.Business;
 using Rhea.Business.Apartment;
+using Rhea.Business.Estate;
 using Rhea.Common;
 using Rhea.Model;
 using Rhea.Model.Account;
 using Rhea.Model.Apartment;
+using Rhea.Model.Estate;
 using Rhea.UI.Areas.Apartment.Models;
 using Rhea.UI.Filters;
 using Rhea.UI.Services;
@@ -117,13 +119,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         /// <returns></returns>
         public ActionResult Details(int id)
         {
-            ApartmentRoomModel data = new ApartmentRoomModel();
-
-            data.Room = this.roomBusiness.Get(id);
-
-            ResideRecordBusiness recordBusiness = new ResideRecordBusiness();
-            data.Records = recordBusiness.GetByRoom(id).OrderByDescending(r => r.RegisterTime).ToList();
-
+            var data = this.roomBusiness.Get(id);
             return View(data);
         }
 
@@ -139,6 +135,35 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         {
             var room = this.roomBusiness.Get(id);
             RoomResideModel data = BindRoom(room);
+
+            return View(data);
+        }
+
+        /// <summary>
+        /// 房间当前住户
+        /// </summary>
+        /// <param name="id">房间ID</param>
+        /// <returns></returns>
+        public ActionResult CurrentInhabitant(int id)
+        {
+            var data = this.roomBusiness.GetCurrentInhabitant(id);
+
+            return View(data);
+        }
+
+        /// <summary>
+        /// 房间树列表
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Tree()
+        {
+            RoomTreeModel data = new RoomTreeModel();
+
+            BuildingBusiness business = new BuildingBusiness();
+            data.Blocks = business.GetChildBlocks(RheaConstant.ApartmentBuildingId).ToList();
+
+            ApartmentRoomBusiness roomBusiness = new ApartmentRoomBusiness();
+            data.Rooms = roomBusiness.GetByBuilding(RheaConstant.ApartmentBuildingId).OrderBy(r => r.Number).ToList();
 
             return View(data);
         }
@@ -216,18 +241,6 @@ namespace Rhea.UI.Areas.Apartment.Controllers
             }
 
             return View(model);
-        }
-
-        /// <summary>
-        /// 房间当前住户
-        /// </summary>
-        /// <param name="id">房间ID</param>
-        /// <returns></returns>
-        public ActionResult CurrentInhabitant(int id)
-        {
-            var data = this.roomBusiness.GetCurrentInhabitant(id);
-
-            return View(data);
         }
         #endregion //Action
 

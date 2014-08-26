@@ -41,6 +41,11 @@ namespace Rhea.Business
         /// 面积保留小数点位数
         /// </summary>
         public static readonly int AreaDecimalDigits = 2;
+
+        /// <summary>
+        /// 青教公寓建筑ID
+        /// </summary>
+        public static readonly int ApartmentBuildingId = 200037;
         #endregion //Field
     }
 }

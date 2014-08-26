@@ -79,7 +79,9 @@
                                     <h3 class="panel-title">楼宇全景</h3>
                                 </div>
                                 <div class="panel-body no-padding">
-                                    <img src="@Model.Block.ImageUrl" class="img-responsive" alt="" />
+                                    <a class="colorbox-pic" id="building-group-pic" title="@Model.Block.Name" href="@Model.Block.ImageUrl">
+                                        <img src="@Model.Block.ImageUrl" alt="楼宇全景" />
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -322,7 +324,9 @@
 <script type="text/javascript">
     $(function () {
 
+        $('a.colorbox-pic').colorbox({ transition: "elastic", maxWidth: "95%", maxHeight: "95%" });
         $('.portlet .portlet-title a.reload[data-load="true"]').click();
         Rhea.initDatatable2($('#empty-room-table'));
+
     });
 </script>

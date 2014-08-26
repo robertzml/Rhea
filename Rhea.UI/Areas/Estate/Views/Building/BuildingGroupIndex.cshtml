@@ -79,7 +79,9 @@
                                     <h3 class="panel-title">楼群全景</h3>
                                 </div>
                                 <div class="panel-body no-padding">
-                                    <img src="@Model.BuildingGroup.ImageUrl" class="img-responsive" alt="" />
+                                    <a class="colorbox-pic" id="building-group-pic" title="@Model.BuildingGroup.Name" href="@Model.BuildingGroup.ImageUrl">
+                                        <img src="@Model.BuildingGroup.ImageUrl" alt="楼群全景" class="img-responsive" />
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -299,7 +301,7 @@
                 </div>
                 <!--tab_1_2-->
                 <div class="tab-pane" id="tab_1_2">
-                    <div class="row profile-account">
+                    <div class="row">
                         <div class="col-md-2">
                             <ul class="ver-inline-menu tabbable margin-bottom-10">
                                 <li class="active">
@@ -423,7 +425,6 @@
                                                 </td>
                                             </tr>
                                         </table>
-                                        <!--end profile-settings-->
                                         <div class="margin-top-10">
                                             <a href="#" class="btn green">
                                                 Save Changes
@@ -666,6 +667,7 @@
 <script type="text/javascript">
     $(function () {
 
+        $('a.colorbox-pic').colorbox({ transition: "elastic", maxWidth: "95%", maxHeight: "95%" });
         $('.portlet .portlet-title a.reload[data-load="true"]').click();
 
     });

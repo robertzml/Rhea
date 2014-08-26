@@ -33,7 +33,7 @@ namespace Rhea.Business.Apartment
         /// <summary>
         /// 日志业务
         /// </summary>
-        private LogBusiness logBusiness;
+        private LogBusiness logBusiness;    
         #endregion //Field
 
         #region Constructor
@@ -62,7 +62,8 @@ namespace Rhea.Business.Apartment
             if (building.HasChild)
             {
                 var children = buildingBusiness.GetChildBuildings(buildingId);
-                return this.roomRepository.GetByBuildings(children.Select(r => r.BuildingId).ToArray()).Where(r => r.Status != 1) as IEnumerable<ApartmentRoom>;
+                var data = this.roomRepository.GetByBuildings(children.Select(r => r.BuildingId).ToArray()).Where(r => r.Status != 1).Cast<ApartmentRoom>();
+                return data;
             }
             else
             {

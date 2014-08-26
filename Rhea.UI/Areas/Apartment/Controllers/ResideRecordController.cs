@@ -53,6 +53,28 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         }
 
         /// <summary>
+        /// 按房间显示
+        /// </summary>
+        /// <param name="roomId">房间ID</param>
+        /// <returns></returns>
+        public ActionResult ListByRoom(int roomId)
+        {
+            var data = this.recordBusiness.GetByRoom(roomId).OrderByDescending(r => r.RegisterTime).ToList();
+            return View(data);
+        }
+
+        /// <summary>
+        /// 按住户显示
+        /// </summary>
+        /// <param name="inhabitantId">住户ID</param>
+        /// <returns></returns>
+        public ActionResult ListByInhabitant(string inhabitantId)
+        {
+            var data = this.recordBusiness.GetByInhabitant(inhabitantId).OrderByDescending(r => r.RegisterTime).ToList();
+            return View(data);
+        }
+
+        /// <summary>
         /// 编辑居住记录
         /// </summary>
         /// <param name="id">居住记录ID</param>

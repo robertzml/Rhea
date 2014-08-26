@@ -1,7 +1,7 @@
-﻿@model Rhea.UI.Areas.Apartment.Models.ApartmentRoomModel
+﻿@model Rhea.Model.Apartment.ApartmentRoom
 
 @{
-    ViewBag.Title = Model.Room.Name;
+    ViewBag.Title = Model.Name;
     Layout = null;
 }
 
@@ -67,85 +67,85 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        @Html.DisplayNameFor(model => model.Room.Name)
+                                        @Html.DisplayNameFor(model => model.Name)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(model => model.Room.Name)
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        @Html.DisplayNameFor(model => model.Room.Number)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(model => model.Room.Number)
+                                        @Html.DisplayFor(model => model.Name)
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        @Html.DisplayNameFor(model => model.Room.Floor)
+                                        @Html.DisplayNameFor(model => model.Number)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(model => model.Room.Floor)
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        @Html.DisplayNameFor(model => model.Room.UsableArea)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(model => model.Room.UsableArea) m<sup>2</sup>
+                                        @Html.DisplayFor(model => model.Number)
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        @Html.DisplayNameFor(model => model.Room.HouseType)
+                                        @Html.DisplayNameFor(model => model.Floor)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(model => model.Room.HouseType)
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        @Html.DisplayNameFor(model => model.Room.HasAirCondition)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(model => model.Room.HasAirCondition)
+                                        @Html.DisplayFor(model => model.Floor)
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        @Html.DisplayNameFor(model => model.Room.HasWaterHeater)
+                                        @Html.DisplayNameFor(model => model.UsableArea)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(model => model.Room.HasWaterHeater)
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        @Html.DisplayNameFor(model => model.Room.Orientation)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(model => model.Room.Orientation)
+                                        @Html.DisplayFor(model => model.UsableArea) m<sup>2</sup>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        @Html.DisplayNameFor(model => model.Room.ResideType)
+                                        @Html.DisplayNameFor(model => model.HouseType)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.HouseType)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.HasAirCondition)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.HasAirCondition)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.HasWaterHeater)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.HasWaterHeater)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Orientation)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Orientation)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.ResideType)
                                     </td>
                                     <td>
                                         @{
-                                            var type1 = (ResideType)Model.Room.ResideType;
+                                            var type1 = (ResideType)Model.ResideType;
                                             @type1.DisplayName();
                                         }
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        @Html.DisplayNameFor(model => model.Room.Remark)
+                                        @Html.DisplayNameFor(model => model.Remark)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(model => model.Room.Remark)
+                                        @Html.DisplayFor(model => model.Remark)
                                     </td>
                                 </tr>
                             </tbody>
@@ -153,9 +153,9 @@
 
                         <hr />
                         <p>
-                            <a href="/Apartment/Building/Block/@Model.Room.BuildingId" class="btn btn-primary ajaxify" role="button"><i class="fa fa-list"></i>&nbsp;回到楼宇</a>
-                            <a href="/Apartment/Building/Floor?buildingId=@Model.Room.BuildingId&floor=@Model.Room.Floor" class="btn blue-hoki ajaxify" role="button"><i class="fa fa-align-center"></i>&nbsp;回到楼层</a>
-                            <a href="/Apartment/Room/Edit/@Model.Room.RoomId" class="btn btn-warning ajaxify" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
+                            <a href="/Apartment/Building/Block/@Model.BuildingId" class="btn btn-primary ajaxify" role="button"><i class="fa fa-list"></i>&nbsp;回到楼宇</a>
+                            <a href="/Apartment/Building/Floor?buildingId=@Model.BuildingId&floor=@Model.Floor" class="btn blue-hoki ajaxify" role="button"><i class="fa fa-align-center"></i>&nbsp;回到楼层</a>
+                            <a href="/Apartment/Room/Edit/@Model.RoomId" class="btn btn-warning ajaxify" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
                         </p>
                     </div>
                 </div>
@@ -176,7 +176,7 @@
                         </div>
                     </div>
                     <div class="portlet-body">
-                        @Html.Action("CurrentInhabitant", new { id = Model.Room.RoomId })
+                        @Html.Action("CurrentInhabitant", new { id = Model.RoomId })
                     </div>
                 </div>
             </div>
@@ -198,87 +198,40 @@
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <table class="table table-bordered table-striped table-hover table-advance">
-                            <thead>
-                                <tr>
-                                    <th>姓名</th>
-                                    <th>部门</th>
-                                    <th>房租</th>
-                                    <th>居住类型</th>
-                                    <th>入住时间</th>
-                                    <th>到期时间</th>
-                                    <th>年限</th>
-                                    <th>离开时间</th>
-                                    <th>备注</th>
-                                    <th>状态</th>
-                                    <th>&nbsp;</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach(var item in Model.Records)
-                                {
-                                    <tr>
-                                        <td>
-                                            @item.InhabitantName
-                                        </td>
-                                        <td>
-                                            @item.InhabitantDepartment
-                                        </td>
-                                        <td>
-                                            @item.Rent
-                                        </td>
-                                        <td>
-                                            @{
-                                                var type2 = (ResideType)item.ResideType;
-                                                @type2.DisplayName();
-                                            }
-                                        </td>
-                                        <td>
-                                            @item.EnterDate.ToDateString()
-                                        </td>
-                                        <td>
-                                            @item.ExpireDate.ToDateString()
-                                        </td>
-                                        <td>
-                                            @item.TermLimit
-                                        </td>
-                                        <td>
-                                            @item.LeaveDate.ToDateString()
-                                        </td>
-                                        <td>
-                                            @item.Remark
-                                        </td>
-                                        <td>
-                                            @switch ((EntityStatus)item.Status)
-                                            {
-                                                case EntityStatus.Normal:
-                                                    <span class="label label-success">居住中</span>
-                                                    break;
-                                                case EntityStatus.OverTime:
-                                                    <span class="label label-danger">超期</span>
-                                                    break;
-                                                case EntityStatus.ExtendTime:
-                                                <span class="label label-warning">延期</span>
-                                                    break;
-                                                case EntityStatus.MoveOut:
-                                                    <span class="label label-default">已搬出</span>
-                                                    break;
-                                            }
-                                        </td>
-                                        <td>
-                                            <a href="/Apartment/ResideRecord/Details/@item._id" class="btn btn-sm btn-primary ajaxify" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
+                        @Html.Action("ListByRoom", new { controller = "ResideRecord", roomId = Model.RoomId })
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-md-2">
-
+        <div class="portlet">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-tree"></i>房间列表
+                </div>
+                <div class="tools">
+                    <a href="#" class="collapse">
+                    </a>
+                    <a href="#" class="reload">
+                    </a>
+                    <a href="#" class="remove">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                @Html.Action("Tree", new { controller = "Room" })
+            </div>
+        </div>
     </div>
 </div>
 <!-- END PAGE CONTENT-->
+
+<script type="text/javascript">
+    $(function () {
+        RoomTree.init($('#room-tree'));
+
+        $('#room-tree').jstree('open_node', ['#tb_@Model.BuildingId', '#tf_@Model.BuildingId@Model.Floor']);
+        $('#room-tree').jstree('select_node', '#tr_@Model.RoomId');
+    })
+</script>

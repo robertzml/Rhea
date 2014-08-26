@@ -195,6 +195,7 @@
   <ItemGroup>
     <Content Include="Content\components.css" />
     <Content Include="Content\custom.css" />
+    <Content Include="Content\estate.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\layout.css" />
@@ -372,6 +373,14 @@
     <Content Include="plugins\bootstrap\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="plugins\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="plugins\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="plugins\colorbox\colorbox.css" />
+    <Content Include="plugins\colorbox\images\border.png" />
+    <Content Include="plugins\colorbox\images\controls.png" />
+    <Content Include="plugins\colorbox\images\loading.gif" />
+    <Content Include="plugins\colorbox\images\loading_background.png" />
+    <Content Include="plugins\colorbox\images\overlay.png" />
+    <Content Include="plugins\colorbox\jquery.colorbox-min.js" />
+    <Content Include="plugins\colorbox\jquery.colorbox.js" />
     <Content Include="plugins\datatables\extensions\AutoFill\css\dataTables.autoFill.css" />
     <Content Include="plugins\datatables\extensions\AutoFill\css\dataTables.autoFill.min.css" />
     <Content Include="plugins\datatables\extensions\AutoFill\images\filler.png" />
@@ -494,6 +503,17 @@
     <Content Include="plugins\jquery.blockui.min.js" />
     <Content Include="plugins\jquery.cokie.min.js" />
     <Content Include="plugins\jquery.scrollTo.min.js" />
+    <Content Include="plugins\jstree\jstree.js" />
+    <Content Include="plugins\jstree\jstree.min.js" />
+    <Content Include="plugins\jstree\libs\jquery.js" />
+    <Content Include="plugins\jstree\libs\require.js" />
+    <Content Include="plugins\jstree\themes\default\32px.png" />
+    <Content Include="plugins\jstree\themes\default\32px_line.png" />
+    <Content Include="plugins\jstree\themes\default\32px_original.png" />
+    <Content Include="plugins\jstree\themes\default\40px.png" />
+    <Content Include="plugins\jstree\themes\default\style.css" />
+    <Content Include="plugins\jstree\themes\default\style.min.css" />
+    <Content Include="plugins\jstree\themes\default\throbber.gif" />
     <Content Include="plugins\moment.min.js" />
     <Content Include="plugins\select2\select2-bootstrap.css" />
     <Content Include="plugins\select2\select2-spinner.gif" />
@@ -560,7 +580,6 @@
     <Content Include="Areas\Apartment\Views\Inhabitant\Index.cshtml" />
     <Content Include="Areas\Apartment\Views\Inhabitant\List.cshtml" />
     <Content Include="Areas\Apartment\Views\Inhabitant\Details.cshtml" />
-    <Content Include="Areas\Apartment\Views\Inhabitant\Record.cshtml" />
     <Content Include="Areas\Apartment\Views\Inhabitant\Edit.cshtml" />
     <Content Include="Areas\Apartment\Views\Shared\EditorTemplates\InhabitantType.cshtml" />
     <Content Include="Areas\Apartment\Views\Shared\EditorTemplates\Boolean.cshtml" />
@@ -608,6 +627,9 @@
     <Content Include="Areas\Apartment\Views\Transaction\CheckOut.cshtml" />
     <Content Include="Areas\Apartment\Views\Inhabitant\Summary.cshtml" />
     <Content Include="Areas\Apartment\Views\Transaction\CheckOutResult.cshtml" />
+    <Content Include="Areas\Apartment\Views\ResideRecord\ListByInhabitant.cshtml" />
+    <Content Include="Areas\Apartment\Views\ResideRecord\ListByRoom.cshtml" />
+    <Content Include="Areas\Apartment\Views\Room\Tree.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="plugins\jquery-1.11.0.min.js" />
@@ -707,6 +729,7 @@
     <Content Include="Services\UploadHandler.ashx" />
     <Content Include="Views\Account\UploadAvatarResult.cshtml" />
     <Content Include="Views\Home\Menu.cshtml" />
+    <Content Include="Views\Home\MobileMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

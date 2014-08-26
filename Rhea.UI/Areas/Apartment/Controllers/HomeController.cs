@@ -1,4 +1,5 @@
-﻿using Rhea.Business.Estate;
+﻿using Rhea.Business;
+using Rhea.Business.Estate;
 using Rhea.Model.Estate;
 using Rhea.UI.Filters;
 using System;
@@ -16,10 +17,6 @@ namespace Rhea.UI.Areas.Apartment.Controllers
     public class HomeController : Controller
     {
         #region Field
-        /// <summary>
-        /// 青教公寓ID
-        /// </summary>
-        private int apartmentId = 200037;
         #endregion //Field
 
         #region Action
@@ -40,7 +37,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         public ActionResult BuildingMenu()
         {
             BuildingBusiness business = new BuildingBusiness();
-            var data = business.GetChildBlocks(this.apartmentId);
+            var data = business.GetChildBlocks(RheaConstant.ApartmentBuildingId);
             return View(data);
         }
         #endregion //Action

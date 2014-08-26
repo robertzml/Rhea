@@ -568,3 +568,27 @@ var CheckOut = function() {
 		}
 	};
 }();
+
+
+var RoomTree = function() {
+	return {
+		init: function($dom) {
+			$dom.jstree({
+				"core" : {
+					"themes" : {
+						"responsive": false
+					}
+				},
+				"types" : {
+					"default" : {
+						"icon" : "fa fa-folder icon-state-info icon-lg"
+					},
+					"file" : {
+						"icon" : "fa fa-file icon-state-info icon-lg"
+					}
+				},
+				"plugins": ["types"]				
+			});
+		}
+	}
+}();

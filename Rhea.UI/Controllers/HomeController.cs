@@ -29,6 +29,17 @@ namespace Rhea.UI.Controllers
 
             return View(user);
         }
+
+        /// <summary>
+        /// 手机导航菜单
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult MobileMenu()
+        {
+            UserBusiness userBusiness = new UserBusiness();
+            var user = userBusiness.GetByUserName(User.Identity.Name);
+            return View(user);
+        }
         #endregion //Action
     }
 }
