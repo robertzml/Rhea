@@ -172,6 +172,12 @@ namespace Rhea.Model
         /// 入住业务办理
         /// </summary>
         [Display(Name = "入住业务办理")]
-        ApartmentCheckIn = 160
+        ApartmentCheckIn = 160,
+
+        /// <summary>
+        /// 退房业务办理
+        /// </summary>
+        [Display(Name = "退房业务办理")]
+        ApartmentCheckOut = 161
     }
 }

@@ -90,6 +90,7 @@ namespace Rhea.Business.Apartment
         /// </summary>
         /// <param name="id">房间ID</param>
         /// <remarks>
+        /// 仅包括记录居住中，超期，延期状态
         /// 仅限正常居住和挂职居住
         /// </remarks>
         /// <returns></returns>
@@ -100,7 +101,8 @@ namespace Rhea.Business.Apartment
                 return null;
 
             ResideRecordBusiness recordBusiness = new ResideRecordBusiness();
-            var records = recordBusiness.GetByRoom(id).Where(r => (EntityStatus)r.Status != EntityStatus.Deleted && (EntityStatus)r.Status != EntityStatus.MoveOut);
+            var records = recordBusiness.GetByRoom(id)
+                .Where(r => r.Status == (int)EntityStatus.Normal || r.Status == (int)EntityStatus.OverTime || r.Status == (int)EntityStatus.ExtendTime);
             if (records == null || records.Count() == 0)
                 return null;
 
@@ -118,6 +120,9 @@ namespace Rhea.Business.Apartment
         /// 获取房间当前居住记录
         /// </summary>
         /// <param name="id">房间ID</param>
+        /// <remarks>
+        /// 仅包括记录居住中，超期，延期状态
+        /// </remarks>
         /// <returns></returns>
         public ResideRecord GetCurrentRecord(int id)
         {
@@ -126,7 +131,8 @@ namespace Rhea.Business.Apartment
                 return null;
 
             ResideRecordBusiness recordBusiness = new ResideRecordBusiness();
-            var records = recordBusiness.GetByRoom(id).Where(r => (EntityStatus)r.Status != EntityStatus.Deleted && (EntityStatus)r.Status != EntityStatus.MoveOut);
+            var records = recordBusiness.GetByRoom(id)
+                .Where(r => r.Status == (int)EntityStatus.Normal || r.Status == (int)EntityStatus.OverTime || r.Status == (int)EntityStatus.ExtendTime);
             if (records == null || records.Count() == 0)
                 return null;
 

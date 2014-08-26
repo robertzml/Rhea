@@ -122,7 +122,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
             data.Room = this.roomBusiness.Get(id);
 
             ResideRecordBusiness recordBusiness = new ResideRecordBusiness();
-            data.Records = recordBusiness.GetByRoom(id).ToList();
+            data.Records = recordBusiness.GetByRoom(id).OrderByDescending(r => r.RegisterTime).ToList();
 
             return View(data);
         }
@@ -239,7 +239,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         /// <returns></returns>
         public JsonResult GetAvailableRooms(int buildingId)
         {
-            var data = this.roomBusiness.GetByBuilding(buildingId).Where(r => r.ResideType == (int)ResideType.Available);
+            var data = this.roomBusiness.GetByBuilding(buildingId).Where(r => r.ResideType == (int)ResideType.Available).OrderBy(r => r.Number);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
         #endregion //Json

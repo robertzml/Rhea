@@ -135,10 +135,10 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         public ActionResult Record(string id)
         {
             ResideRecordBusiness business = new ResideRecordBusiness();
-            var data = business.GetByInhabitant(id);
+            var data = business.GetByInhabitant(id).OrderByDescending(r => r.RegisterTime);
             return View(data);
         }
-        
+
         /// <summary>
         /// 住户摘要
         /// </summary>
@@ -175,6 +175,17 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         public JsonResult Get(string id)
         {
             var data = this.inhabitantBusiness.Get(id);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 获取当前居住房间
+        /// </summary>
+        /// <param name="id">住户ID</param>
+        /// <returns></returns>
+        public JsonResult GetCurrentRooms(string id)
+        {
+            var data = this.inhabitantBusiness.GetCurrentRooms(id);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
         #endregion //Json

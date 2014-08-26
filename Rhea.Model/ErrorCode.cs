@@ -100,6 +100,30 @@ namespace Rhea.Model
         /// 楼层已存在
         /// </summary>
         [Display(Name = "楼层已存在")]
-        FloorExist = 32
+        FloorExist = 32,
+
+        /// <summary>
+        /// 房间被占用
+        /// </summary>
+        [Display(Name = "房间被占用")]
+        RoomNotAvailable = 50,
+
+        /// <summary>
+        /// 房间可用
+        /// </summary>
+        [Display(Name = "房间可用")]
+        RoomAvailable = 51,
+
+        /// <summary>
+        /// 住户已搬出
+        /// </summary>
+        [Display(Name = "住户已搬出")]
+        InhabitantMoveOut = 55,
+
+        /// <summary>
+        /// 居住记录不存在
+        /// </summary>
+        [Display(Name = "居住记录不存在")]
+        ResideRecordNotExist = 60
     }
 }

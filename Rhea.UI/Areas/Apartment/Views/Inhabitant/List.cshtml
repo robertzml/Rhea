@@ -147,13 +147,16 @@
                                     @switch((EntityStatus)item.Status)
                                     {
                                         case EntityStatus.Normal:
-                                            <span class="label label-success">正常居住</span>
+                                            <span class="label label-success">居住中</span>
                                             break;
                                         case EntityStatus.InhabitantMoveOut:
                                             <span class="label label-normal">已搬出</span>
                                             break;
                                         case EntityStatus.InhabitantExtend:
                                             <span class="label label-warning">延期居住</span>
+                                            break;
+                                        case EntityStatus.InhabitantExpire:
+                                        <span class="label label-danger">超期居住</span>
                                             break;
                                     }
                                 </td>

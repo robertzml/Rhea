@@ -127,7 +127,7 @@ namespace Rhea.Business.Account
         public User Get(string _id)
         {
             var data = this.userRepository.Get(_id);
-            if (data.Status == 1)
+            if (data == null || data.Status == 1)
                 return null;
             else
                 return data;
@@ -141,7 +141,7 @@ namespace Rhea.Business.Account
         public User GetByUserName(string userName)
         {
             var data = this.userRepository.GetByUserName(userName);
-            if (data.Status == 1)
+            if (data == null || data.Status == 1)
                 return null;
             else
                 return data;

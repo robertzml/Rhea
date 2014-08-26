@@ -93,7 +93,11 @@ namespace Rhea.Business.Apartment
         /// <returns></returns>
         public ResideRecord Get(string _id)
         {
-            return this.recordRepository.Get(_id);
+            var data = this.recordRepository.Get(_id);
+            if (data == null || data.Status == 1)
+                return null;
+            else
+                return data;
         }
 
         /// <summary>

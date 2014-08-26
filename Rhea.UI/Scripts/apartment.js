@@ -301,9 +301,17 @@ var CheckIn = function () {
             wizard.find('.button-previous').hide();
 			wizard.find('.button-submit').click(function() {
                 //alert('Finished! Hope you like it :)');
+				Metronic.startPageLoading();
+				
 				form.ajaxSubmit({
 					target: '#check-in-body',
-					url: '/Apartment/Transaction/CheckIn'
+					url: '/Apartment/Transaction/CheckIn',
+					success: function(responseText, statusText, xhr, e) {
+						Metronic.stopPageLoading();
+					},
+					error: function(e) {
+						Metronic.stopPageLoading();
+					}
 				})
             }).hide();
         }
@@ -320,6 +328,13 @@ var CheckOut = function() {
             }
 			
 			var wizard = $('#form_wizard_check_out');
+
+			$('#LeaveDate').datepicker({
+				format: "yyyy-mm-dd",
+				weekStart: 7,
+				language: "zh-CN",
+				autoclose: true
+			});
 
 			$("#InhabitantId").select2({
 				placeholder: "输入住户姓名进行搜索",
@@ -365,16 +380,25 @@ var CheckOut = function() {
 					}
 				}
 			}).on("change", function(e) {
+				var roomList = $('#room-list');
 				var item = e.added;
 				if (item != null) {
 					$('#inhabitant-info').load('/Apartment/Inhabitant/Summary', { id: item._id });
+					$('#InhabitantName').val(item.Name);
+					roomList.empty();
+
+					$.getJSON('/Apartment/Inhabitant/GetCurrentRooms', { id: item._id }, function (response) {
+						$.each(response, function (i, item) {
+							roomList.append('<label><input type="radio" name="RoomId" id="RoomNum' + i +'" value="' + item.RoomId + '" data-title="' + item.Name +'"> ' + item.Name +'</label>');							
+						});
+						roomList.find(':radio').uniform();
+					});
 				} else {
 					$('#inhabitant-info').empty();
+					$('#InhabitantName').val('');
+					roomList.empty();
 				}
-			});
-			
-			
-			
+			});			
 			
 			var form = $('#submit_form');
             var error = $('.alert-danger', form);
@@ -386,28 +410,16 @@ var CheckOut = function() {
                 errorClass: 'help-block help-block-error', // default input error message class
                 focusInvalid: false, // do not focus the last invalid input
                 rules: {
-					//inhabitant
                     InhabitantId: {
                         required: true
                     },
-                    InhabitantType: {
-                        required: true
-                    },
-                    //room
-                    BuildingId: {
-                        required: true
-                    },
+					InhabitantName: {
+						required: true
+					},
                     RoomId: {
                         required: true
                     },
-					//record
-					EnterDate: {
-						required: true
-					},
-					ExpireDate: {
-						required: true
-					},
-					Rent: {
+					LeaveDate: {
 						required: true
 					}
                 },
@@ -539,11 +551,19 @@ var CheckOut = function() {
 
             wizard.find('.button-previous').hide();
 			wizard.find('.button-submit').click(function() {
-
+				Metronic.startPageLoading();
+				
 				form.ajaxSubmit({
 					target: '#check-out-body',
-					url: '/Apartment/Transaction/CheckOut'
+					url: '/Apartment/Transaction/CheckOut',
+					success: function(responseText, statusText, xhr, e) {
+						Metronic.stopPageLoading();
+					},
+					error: function(e) {
+						Metronic.stopPageLoading();
+					}
 				})
+				
             }).hide();
 		}
 	};

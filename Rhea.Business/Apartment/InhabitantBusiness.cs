@@ -46,7 +46,7 @@ namespace Rhea.Business.Apartment
         /// <returns></returns>
         public IEnumerable<Inhabitant> Get()
         {
-            return this.inhabitantRepository.Get();
+            return this.inhabitantRepository.Get().Where(r => r.Status != 1);
         }
 
         /// <summary>
@@ -56,7 +56,11 @@ namespace Rhea.Business.Apartment
         /// <returns></returns>
         public Inhabitant Get(string _id)
         {
-            return this.inhabitantRepository.Get(_id);
+            var data = this.inhabitantRepository.Get(_id);
+            if (data == null || data.Status == 1)
+                return null;
+            else
+                return data;
         }
 
         /// <summary>
@@ -77,6 +81,37 @@ namespace Rhea.Business.Apartment
         public ErrorCode Update(Inhabitant data)
         {
             return this.inhabitantRepository.Update(data);
+        }
+
+        /// <summary>
+        /// 获取住户当前居住房间
+        /// </summary>
+        /// <param name="id">住户ID</param>
+        /// <returns>
+        /// 仅包括记录居住中，超期，延期房间
+        /// </returns>
+        public IEnumerable<ApartmentRoom> GetCurrentRooms(string id)
+        {
+            List<ApartmentRoom> rooms = new List<ApartmentRoom>();
+            var data = this.inhabitantRepository.Get(id);
+            if (data == null || data.Status == 1)
+                return rooms;
+
+            ResideRecordBusiness recordBusiness = new ResideRecordBusiness();
+            var records = recordBusiness.GetByInhabitant(id)
+                .Where(r => r.Status == (int)EntityStatus.Normal || r.Status == (int)EntityStatus.OverTime || r.Status == (int)EntityStatus.ExtendTime);
+            if (records == null || records.Count() == 0)
+                return rooms;
+
+            ApartmentRoomBusiness roomBusiness = new ApartmentRoomBusiness();
+            foreach (var item in records)
+            {
+                var room = roomBusiness.Get(item.RoomId);
+                if (room != null && room.Status != 1)
+                    rooms.Add(room);
+            }
+
+            return rooms;
         }
 
         /// <summary>

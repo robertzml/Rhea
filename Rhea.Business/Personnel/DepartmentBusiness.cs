@@ -63,7 +63,7 @@ namespace Rhea.Business.Personnel
         public Department Get(int id)
         {
             var data = this.departmentRepository.Get(id);
-            if (data.Status == 1)
+            if (data == null || data.Status == 1)
                 return null;
             else
                 return data;

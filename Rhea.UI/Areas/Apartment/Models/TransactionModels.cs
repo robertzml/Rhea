@@ -159,34 +159,27 @@ namespace Rhea.UI.Areas.Apartment.Models
         /// <summary>
         /// 住户ID
         /// </summary>
-        [Required]
+        [Required(AllowEmptyStrings = false)]
         [Display(Name = "住户ID")]
         public string InhabitantId { get; set; }
 
         /// <summary>
-        /// 住户姓名
-        /// </summary>
-        [Display(Name = "住户姓名")]
-        public string InhabitantName { get; set; }
-
-        /// <summary>
-        /// 住户部门
-        /// </summary>
-        [Display(Name = "住户部门")]
-        public string InhabitantDepartment { get; set; }
-
-        /// <summary>
-        /// 楼宇选择
-        /// </summary>
-        [UIHint("BuildingList")]
-        [Display(Name = "楼宇选择")]
-        public int BuildingId { get; set; }
-
-        /// <summary>
         /// 房间选择
         /// </summary>
-        [Required]
         [Display(Name = "房间选择")]
         public int RoomId { get; set; }
+
+        /// <summary>
+        /// 退房时间
+        /// </summary>
+        [Required]
+        [Display(Name = "退房时间")]
+        public DateTime LeaveDate { get; set; }
+
+        /// <summary>
+        /// 备注
+        /// </summary>
+        [Display(Name = "备注")]
+        public string Remark { get; set; }
     }
 }

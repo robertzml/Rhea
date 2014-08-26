@@ -66,7 +66,7 @@ namespace Rhea.Business.Estate
         public Building Get(int id)
         {
             var data = this.buildingRepository.Get(id);
-            if (data.Status == 1)
+            if (data == null || data.Status == 1)
                 return null;
             else
                 return data;
@@ -146,17 +146,17 @@ namespace Rhea.Business.Estate
                     case BuildingOrganizeType.Cottage:
                         IBuildingRepository cottageRepository = new MongoCottageRepository();
                         var cottage = (Cottage)cottageRepository.Get(buildingId);
-                        return cottage.Floors.Single(r => r.FloorId == floorId);
+                        return cottage.Floors.SingleOrDefault(r => r.FloorId == floorId);
 
                     case BuildingOrganizeType.Subregion:
                         IBuildingRepository subregionRepository = new MongoSubregionRepository();
                         var subregion = (Subregion)subregionRepository.Get(buildingId);
-                        return subregion.Floors.Single(r => r.FloorId == floorId);
+                        return subregion.Floors.SingleOrDefault(r => r.FloorId == floorId);
 
                     case BuildingOrganizeType.Block:
                         IBuildingRepository blockRepository = new MongoBlockRepository();
                         var block = (Block)blockRepository.Get(buildingId);
-                        return block.Floors.Single(r => r.FloorId == floorId);
+                        return block.Floors.SingleOrDefault(r => r.FloorId == floorId);
 
                     case BuildingOrganizeType.Playground:
                         return null;
@@ -266,6 +266,9 @@ namespace Rhea.Business.Estate
         public ErrorCode UpdateSvg(int buildingId, Floor data)
         {
             Floor floor = this.GetFloor(buildingId, data.FloorId);
+            if (floor == null)
+                return ErrorCode.ObjectNotFound;
+
             floor.ImageUrl = data.ImageUrl;
 
             return this.UpdateFloor(buildingId, floor);
@@ -381,7 +384,7 @@ namespace Rhea.Business.Estate
             IBuildingRepository buildingRepository = new MongoBuildingGroupRepository();
             BuildingGroup data = (BuildingGroup)buildingRepository.Get(id);
 
-            if (data.OrganizeType != (int)BuildingOrganizeType.BuildingGroup || data.Status == 1)
+            if (data == null || data.OrganizeType != (int)BuildingOrganizeType.BuildingGroup || data.Status == 1)
                 return null;
             else
                 return data;
@@ -410,7 +413,7 @@ namespace Rhea.Business.Estate
             IBuildingRepository buildingRepository = new MongoClusterRepository();
             Cluster data = (Cluster)buildingRepository.Get(id);
 
-            if (data.Status == 1)
+            if (data == null || data.Status == 1 || data.OrganizeType != (int)BuildingOrganizeType.Cluster)
                 return null;
             else
                 return data;
@@ -440,7 +443,7 @@ namespace Rhea.Business.Estate
             Cottage data = (Cottage)buildingRepository.Get(id);
             data.Floors = data.Floors.OrderBy(r => r.Number).ToList();
 
-            if (data.Status == 1)
+            if (data == null || data.Status == 1 || data.OrganizeType != (int)BuildingOrganizeType.Cottage)
                 return null;
             else
                 return data;
@@ -473,7 +476,7 @@ namespace Rhea.Business.Estate
             Subregion data = (Subregion)buildingRepository.Get(id);
             data.Floors = data.Floors.OrderBy(r => r.Number).ToList();
 
-            if (data.Status == 1)
+            if (data == null || data.Status == 1 || data.OrganizeType != (int)BuildingOrganizeType.Subregion)
                 return null;
             else
                 return data;
@@ -518,7 +521,7 @@ namespace Rhea.Business.Estate
             Block data = (Block)buildingRepository.Get(id);
             data.Floors = data.Floors.OrderBy(r => r.Number).ToList();
 
-            if (data.Status == 1)
+            if (data == null || data.Status == 1 || data.OrganizeType != (int)BuildingOrganizeType.Block)
                 return null;
             else
                 return data;
@@ -562,7 +565,7 @@ namespace Rhea.Business.Estate
             IBuildingRepository buildingRepository = new MongoPlaygroundRepository();
             Playground data = (Playground)buildingRepository.Get(id);
 
-            if (data.Status == 1)
+            if (data == null || data.Status == 1 || data.OrganizeType != (int)BuildingOrganizeType.Playground)
                 return null;
             else
                 return data;
