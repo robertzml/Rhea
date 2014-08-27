@@ -51,7 +51,8 @@ var CheckIn = function () {
 				format: "yyyy-mm-dd",
 				weekStart: 7,
 				language: "zh-CN",
-				autoclose: true
+				autoclose: true,
+				todayHighlight: true
 			});
 
 			$('#ExpireDate').datepicker({
@@ -333,7 +334,8 @@ var CheckOut = function() {
 				format: "yyyy-mm-dd",
 				weekStart: 7,
 				language: "zh-CN",
-				autoclose: true
+				autoclose: true,
+				todayHighlight: true
 			});
 
 			$("#InhabitantId").select2({
@@ -350,7 +352,7 @@ var CheckOut = function() {
 					return obj.Name + "  <small class='text-muted'>" + obj['DepartmentName'] + "</small>";
 				},
 				ajax: {
-					url: "/Apartment/Inhabitant/GetList",
+					url: "/Apartment/Inhabitant/GetCurrentList",
 					dataType: 'json',
 					data: function (term, page) {
 						return {
@@ -570,6 +572,20 @@ var CheckOut = function() {
 }();
 
 
+var Extend = function() {
+	return {
+		init: function() {
+			if (!jQuery().bootstrapWizard) {
+                return;
+            }
+			
+			var wizard = $('#form_wizard_check_out');
+			
+			
+		}
+	};
+}();
+
 var RoomTree = function() {
 	return {
 		init: function($dom) {
@@ -588,6 +604,52 @@ var RoomTree = function() {
 					}
 				},
 				"plugins": ["types"]				
+			});
+		}
+	}
+}();
+
+var FloorAction = function() {
+	return {
+		init: function() {
+			$('#zoom-in').click(function (e) {
+				e.preventDefault();
+				var $dom = $('div#svg').children('svg');
+				Rhea.zoomSvg($dom, 'zoomIn');
+				return false;
+			});
+
+			$('#zoom-out').click(function (e) {
+				e.preventDefault();
+				var $dom = $('div#svg').children('svg');
+				Rhea.zoomSvg($dom, 'zoomOut');
+				return false;
+			});
+		}
+	}
+}();
+
+
+var DashboardAction = function() {
+	return {
+		init: function() {			
+			$('#checkStatus').click(function(){
+				Metronic.blockUI();
+				
+				$.ajax({
+					url: '/Apartment/Home/CheckStatus',
+					type: 'POST',
+					success: function(msg){
+						Rhea.showMessage(msg);
+						Metronic.unblockUI();
+					},
+					error: function(xhr, ajaxOptions, thrownError) {
+						Rhea.showMessage('更新出错');
+						Metronic.unblockUI();
+					}
+				});
+
+				return false;
 			});
 		}
 	}

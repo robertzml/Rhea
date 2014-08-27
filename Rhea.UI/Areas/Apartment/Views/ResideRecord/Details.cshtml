@@ -164,6 +164,14 @@
                                 </tr>
                                 <tr>
                                     <td>
+                                        @Html.DisplayNameFor(model => model.ReceiptNumber)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.ReceiptNumber)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
                                         @Html.DisplayNameFor(model => model.Remark)
                                     </td>
                                     <td>
@@ -197,6 +205,9 @@
                                             case EntityStatus.MoveOut:
                                             <span class="label label-default">已搬出</span>
                                                 break;
+                                            case EntityStatus.ExtendOut:
+                                            <span class="label label-default">已延期</span>
+                                                break;
                                         }
                                     </td>
                                 </tr>
@@ -216,7 +227,10 @@
                 <hr />
                 <p>
                     <a href="/Apartment/Room/Details/@Model.RoomId" class="btn btn-primary ajaxify" role="button"><i class="fa fa-align-left"></i>&nbsp;回到房间</a>
-                    <a href="/Apartment/Inhabitant/Details/@Model.InhabitantId" class="btn blue-ebonyclay ajaxify" role="button"><i class="fa fa-align-right"></i>&nbsp;回到住户</a>
+                    @if (!string.IsNullOrEmpty(Model.InhabitantId))
+                    {
+                        <a href="/Apartment/Inhabitant/Details/@Model.InhabitantId" class="btn blue-ebonyclay ajaxify" role="button"><i class="fa fa-align-right"></i>&nbsp;回到住户</a>
+                    }
                     <a href="/Apartment/ResideRecord/Edit/@Model._id" class="btn btn-warning ajaxify" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
                 </p>
             </div>

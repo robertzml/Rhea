@@ -1,5 +1,4 @@
 ﻿using Rhea.Model.Apartment;
-using Rhea.Model.Apartment;
 using Rhea.Model.Estate;
 using System;
 using System.Collections.Generic;

@@ -19,3 +19,31 @@
 .profile label:first-child {
   margin-top: 0;
 }
+
+.profile-info h1 {
+  color: #383839;
+  font-size: 24px;
+  font-weight: 400;
+  margin: 0 0 10px 0;
+}
+
+.profile-info ul {
+  margin-bottom: 15px;
+}
+
+.profile-info li {
+  color: #6b6b6b;
+  font-size: 13px;
+  margin-right: 15px;
+  margin-bottom: 5px;
+  padding: 0 !important;
+}
+
+.profile-info li i {
+  color: #b5c1c9;
+  font-size: 15px;
+}
+
+.profile-info li:hover i {
+  color: #169ef4;
+}

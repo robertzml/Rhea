@@ -234,6 +234,7 @@
     <Content Include="img\bg\2.jpg" />
     <Content Include="img\bg\3.jpg" />
     <Content Include="img\bg\4.jpg" />
+    <Content Include="img\bg\5.jpg" />
     <Content Include="img\datatable-row-openclose.png" />
     <Content Include="img\hor-menu-red-arrow.png" />
     <Content Include="img\icon-color-close.png" />
@@ -630,6 +631,9 @@
     <Content Include="Areas\Apartment\Views\ResideRecord\ListByInhabitant.cshtml" />
     <Content Include="Areas\Apartment\Views\ResideRecord\ListByRoom.cshtml" />
     <Content Include="Areas\Apartment\Views\Room\Tree.cshtml" />
+    <Content Include="Areas\Apartment\Views\Home\ExpireInDays.cshtml" />
+    <Content Include="Areas\Apartment\Views\Home\ExpireRecords.cshtml" />
+    <Content Include="Areas\Apartment\Views\Transaction\Extend.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="plugins\jquery-1.11.0.min.js" />

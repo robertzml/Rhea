@@ -45,7 +45,7 @@
 <!-- END PAGE HEADER-->
 <!-- BEGIN PAGE CONTENT-->
 <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-10 col-xs-12">
         <div class="row">
             <div class="col-md-6">
                 <div class="portlet">
@@ -204,7 +204,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-2 hidden-xs">
         <div class="portlet">
             <div class="portlet-title">
                 <div class="caption">
@@ -219,12 +219,13 @@
                     </a>
                 </div>
             </div>
-            <div class="portlet-body">
+            <div class="portlet-body">                
                 @Html.Action("Tree", new { controller = "Room" })
             </div>
         </div>
     </div>
 </div>
+
 <!-- END PAGE CONTENT-->
 
 <script type="text/javascript">

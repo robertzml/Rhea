@@ -1,5 +1,9 @@
 ﻿using Rhea.Business;
+using Rhea.Business.Apartment;
 using Rhea.Business.Estate;
+using Rhea.Common;
+using Rhea.Model;
+using Rhea.Model.Apartment;
 using Rhea.Model.Estate;
 using Rhea.UI.Filters;
 using System;
@@ -39,6 +43,41 @@ namespace Rhea.UI.Areas.Apartment.Controllers
             BuildingBusiness business = new BuildingBusiness();
             var data = business.GetChildBlocks(RheaConstant.ApartmentBuildingId);
             return View(data);
+        }
+
+        /// <summary>
+        /// 获取快要到期的居住记录
+        /// </summary>
+        /// <param name="day">到期天数</param>
+        /// <returns></returns>
+        public ActionResult ExpireInDays(int day)
+        {
+            ResideRecordBusiness recordBusiness = new ResideRecordBusiness();
+            var data = recordBusiness.GetExpireInDays(day);
+            return View(data);
+        }
+
+        /// <summary>
+        /// 获取超期居住记录
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ExpireRecords()
+        {
+            ResideRecordBusiness recordBusiness = new ResideRecordBusiness();
+            var data = recordBusiness.GetExpired();
+            return View(data);
+        }
+
+        /// <summary>
+        /// 检测更新居住记录和住户状态
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public string CheckStatus()
+        {
+            TransactionBusiness business = new TransactionBusiness();
+            ErrorCode result = business.UpdateStatus();
+            return result.DisplayName();
         }
         #endregion //Action
     }

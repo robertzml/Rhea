@@ -33,6 +33,18 @@
                     <th>操作</th>
                 </tr>
             </thead>
+            <tfoot>
+                <tr>
+                    <th>房间名称</th>
+                    <th data-filter="true">户型</th>
+                    <th>朝向</th>
+                    <th data-filter="true">使用面积</th>
+                    <th data-filter="true">居住类型</th>
+                    <th>居住人姓名</th>
+                    <th data-filter="true">居住人部门</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </tfoot>
             <tbody>
                 @foreach (var item in Model)
                 {
@@ -70,6 +82,26 @@
 
 <script type="text/javascript">
     $(function () {
-        Rhea.initDatatable2($('#room-table'));
+        var oTable = Rhea.initDatatable2($('#room-table'));
+
+        $("#room-table tfoot th").each(function (i) {
+            if ($(this).attr('data-filter') == 'true') {
+
+                var select = $('<select class="form-control"><option value=""></option></select>')
+                    .appendTo($(this).empty())
+                    .on('change', function () {
+                        var val = $(this).val();
+
+                        oTable.api().column(i)
+                            .search(val ? '^' + $(this).val() + '$' : val, true, false)
+                            .draw();
+                    });
+
+                oTable.api().column(i).data().unique().sort().each(function (d, j) {
+                    select.append('<option value="' + d + '">' + d + '</option>')
+                });
+            }
+        });
+
     });
 </script>

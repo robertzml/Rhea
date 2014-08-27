@@ -1,7 +1,8 @@
 ﻿@model Rhea.Model.Account.User
 
 @{
-    Layout = null;         
+    Layout = null;
+    string groupName = Model.UserGroupName();
 }
 
 <!-- BEGIN RESPONSIVE MENU FOR HORIZONTAL & SIDEBAR MENU -->
@@ -26,76 +27,26 @@
         <!-- END RESPONSIVE QUICK SEARCH FORM -->
     </li>
     <li class="start">
+        <a href="@Url.Action("Index", new { area = "", controller = "Home" })">
+            主页 <span class="arrow"></span>
+        </a>
+    </li>
+    @if (new string[] { "Root", "Administrator", "Estate" }.Contains(groupName))
+    {
+    <li>
         <a href="#">
             房产管理 <span class="arrow"></span>
         </a>
         <ul class="sub-menu">
             <li>
-                <a href="javascript:;">
-                    <i class="fa fa-bank"></i>
+                <a href="@Url.Action("Index", new { area = "Estate", controller = "Home" })">
+                    <i class="fa fa-dashboard"></i>
                     <span class="title">
-                        校区管理
-                    </span>
-                    <span class="arrow">
+                        房产主页
                     </span>
                 </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a href="@Url.Action("List", "Campus")" id="campus-list-menu">
-                            校区列表
-                        </a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("Create", "Campus")" id="campus-create-menu">
-                            添加校区
-                        </a>
-                    </li>
-                </ul>
             </li>
-            <li>
-                <a href="javascript:;">
-                    <i class="fa fa-building"></i>
-                    <span class="title">
-                        建筑管理
-                    </span>
-                    <span class="arrow ">
-                    </span>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a href="@Url.Action("List", "Building")" id="building-list-menu">
-                            建筑列表
-                        </a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("Create", "Building")" id="building-create-menu">
-                            添加建筑
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:;">
-                    <i class="fa fa-columns"></i>
-                    <span class="title">
-                        房间管理
-                    </span>
-                    <span class="arrow ">
-                    </span>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a href="@Url.Action("Index", "Room")" id="room-list-menu">
-                            房间列表
-                        </a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("Create", "Room")" id="room-create-menu">
-                            添加公用房
-                        </a>
-                    </li>
-                </ul>
-            </li>
+            @Html.Action("BuildingMenu", new { area = "Estate", controller = "Home" })
         </ul>
     </li>
     <li>
@@ -114,7 +65,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="@Url.Action("List", "Department")" id="department-list-menu">
+                        <a href="#" id="department-list-menu">
                             部门列表
                         </a>
                     </li>
@@ -122,61 +73,79 @@
             </li>
         </ul>
     </li>
+    }
+    @if (new string[] { "Root", "Administrator", "Estate", "Apartment" }.Contains(groupName))
+    { 
     <li class="last">
         <a>
             青教管理 <span class="arrow"></span>
         </a>
         <ul class="sub-menu">
             <li>
+                <a href="@Url.Action("Index", new { area = "Apartment", controller = "Home" })">
+                    <i class="fa fa-dashboard"></i>
+                    <span class="title">
+                        青教主页
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="fa fa-bank"></i>
+                    <span class="title">
+                        青教公寓
+                    </span>
+                    <span class="arrow">
+                    </span>
+                </a>
+                @Html.Action("BuildingMenu", new { area = "Apartment", controller = "Home" })
+            </li>
+            <li>
                 <a href="javascript:;">
                     <i class="fa fa-users"></i>
                     <span class="title">
-                        用户管理
+                        住户管理
                     </span>
                     <span class="arrow ">
                     </span>
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="@Url.Action("List", "User")" id="user-list-menu">
-                            用户列表
+                        <a class="ajaxify" href="/Apartment/Inhabitant/Index">
+                            住户概况
                         </a>
                     </li>
                     <li>
-                        <a href="@Url.Action("Create", "User")" id="user-create-menu">
-                            添加用户
-                        </a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("List", "UserGroup")" id="user-group-list-menu">
-                            用户组列表
+                        <a class="ajaxify" href="/Apartment/Inhabitant/List">
+                            住户列表
                         </a>
                     </li>
                 </ul>
             </li>
             <li>
                 <a href="javascript:;">
-                    <i class="fa fa-book"></i>
+                    <i class="fa fa-cogs"></i>
                     <span class="title">
-                        字典管理
+                        业务办理
                     </span>
                     <span class="arrow ">
                     </span>
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="@Url.Action("List", "Dictionary")" id="dictionary-list-menu">
-                            字典列表
+                        <a class="ajaxify" href="/Apartment/Transaction/CheckIn">
+                            入住办理
                         </a>
                     </li>
                     <li>
-                        <a href="@Url.Action("Create", "Dictionary")" id="dictionary-create-menu">
-                            添加字典
+                        <a class="ajaxify" href="/Apartment/Transaction/CheckOut">
+                            退房办理
                         </a>
                     </li>
                 </ul>
             </li>
         </ul>
     </li>
+    }
 </ul>
 <!-- END RESPONSIVE MENU FOR HORIZONTAL & SIDEBAR MENU -->

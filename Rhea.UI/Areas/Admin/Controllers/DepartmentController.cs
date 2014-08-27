@@ -110,7 +110,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
                     Title = "编辑部门",
                     Time = DateTime.Now,
                     Type = (int)LogType.DepartmentEdit,
-                    Content = string.Format("编辑部门， ID:{0}, 名称:{1}。", model.DepartmentId, model.Name),
+                    Content = string.Format("编辑部门, ID:{0}, 名称:{1}。", model.DepartmentId, model.Name),
                     UserId = user._id,
                     UserName = user.Name
                 };

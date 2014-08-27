@@ -17,10 +17,6 @@
         </li>
         <li>
             <a href="#">青教主页</a>
-            <i class="fa fa-angle-right"></i>
-        </li>
-        <li>
-            <a href="#">Horizontal & Sidebar Menu</a>
         </li>
     </ul>
     <div class="page-toolbar">
@@ -45,7 +41,76 @@
 <!-- BEGIN PAGE CONTENT-->
 <div class="row">
     <div class="col-md-12">
-        Page content goes here
+        
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-xs-12">
+        <div class="portlet box blue-steel">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-bell-o"></i>&nbsp;15天内到期房间
+                </div>
+                <div class="tools">
+                    <a href="#" class="collapse">
+                    </a>
+                    <a href="#" class="reload">
+                    </a>
+                    <a href="#" class="remove">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="scroller" style="height: 200px;" data-always-visible="1" data-rail-visible="0">
+                    @Html.Action("ExpireInDays", new { controller = "Home", day = 15 })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xs-12">
+        <div class="portlet box red-sunglo">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-bullhorn"></i>&nbsp;超期居住房间
+                </div>
+                <div class="tools">
+                    <a href="#" class="collapse">
+                    </a>
+                    <a href="#" class="reload">
+                    </a>
+                    <a href="#" class="remove">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="scroller" style="height: 200px;" data-always-visible="1" data-rail-visible="0">
+                    @Html.Action("ExpireRecords", new { controller = "Home" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box red-pink ">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-gear"></i>&nbsp;高级操作
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="expand">
+                    </a>
+                    <a href="javascript:;" class="reload">
+                    </a>
+                    <a href="javascript:;" class="remove">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body display-hide">
+                <a href="#" id="checkStatus" class="btn btn-primary"><i class="fa fa-bell"></i>&nbsp;检测状态</a>
+            </div>
+        </div>
     </div>
 </div>
 <!-- END PAGE CONTENT-->
@@ -55,6 +120,8 @@
         $(function () {
             Rhea.topNavActive($('#apartment-nav'));
             Rhea.leftNavActive($('#apartment-home-menu'));
+
+            DashboardAction.init();
         });
     </script>
 }

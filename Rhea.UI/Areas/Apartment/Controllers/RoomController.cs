@@ -255,6 +255,12 @@ namespace Rhea.UI.Areas.Apartment.Controllers
             var data = this.roomBusiness.GetByBuilding(buildingId).Where(r => r.ResideType == (int)ResideType.Available).OrderBy(r => r.Number);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult GetRoom(int id)
+        {
+            var data = this.roomBusiness.Get(id);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
         #endregion //Json
     }
 }

@@ -53,6 +53,13 @@ namespace Rhea.Model
         MoveOut = 52,
 
         /// <summary>
+        /// 居住记录类
+        /// 53:已延期
+        /// </summary>
+        [Display(Name = "已延期")]
+        ExtendOut = 53,
+
+        /// <summary>
         /// 住户类
         /// 55:已搬出
         /// </summary>

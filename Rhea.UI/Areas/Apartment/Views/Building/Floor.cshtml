@@ -10,7 +10,14 @@
         cursor: pointer;
     }
 
-    
+    #pic-legend {
+        z-index: 9000;
+        display: block;        
+        position: absolute;
+        right: 50px;
+        top: 50px;
+        padding:10px;
+    }
 </style>
 
 <!-- BEGIN PAGE HEADER-->
@@ -102,6 +109,14 @@
                                 <div class="portlet-body">
                                     <div style="height:500px; overflow:auto;">
                                         <div id="svg"></div>
+                                        <div id="pic-legend">
+                                            <p><label class="label" style="background-color: #57FC05;">可分配</label></p>
+                                            <p><label class="label" style="background-color: #0BFDBC;">正常居住</label></p>
+                                            <p><label class="label" style="background-color: #0B88FD;">挂职居住</label></p>
+                                            <p><label class="label" style="background-color: #A00BFD;">部门占用</label></p>
+                                            <p><label class="label" style="background-color: #FB0CDB;">仓库</label></p>
+                                            <p><label class="label" style="background-color: #B1C893;">保留</label></p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -162,23 +177,41 @@
                     tdoc.remove();
                 }
             );
+            
+            $('svg').find("g[id^='g']").each(function (i, item) {
+                var g = $(item); 
+                var id = g.attr('id').toString().substring(1);
+
+                $.getJSON('/Apartment/Room/GetRoom', { id: id }, function (response) {
+                    
+                    switch (parseInt(response.ResideType)) {
+                        case 0:
+                            g.children('[ref=bound]').attr('class', 'fil4');
+                            break;
+                        case 1:
+                            g.children('[ref=bound]').attr('class', 'fil5');
+                            break;
+                        case 2:
+                            g.children('[ref=bound]').attr('class', 'fil6');
+                            break;
+                        case 3:
+                            g.children('[ref=bound]').attr('class', 'fil7');
+                            break;
+                        case 4:
+                            g.children('[ref=bound]').attr('class', 'fil8');
+                            break;
+                        case 5:
+                            g.children('[ref=bound]').attr('class', 'fil9');
+                            break;
+                    }
+                });
+            })
+
         });
+
+        FloorAction.init();
 
         $('.portlet .portlet-title a.reload[data-load="true"]').click();
-
-        $('#zoom-in').click(function (e) {
-            e.preventDefault();
-            var $dom = $('div#svg').children('svg');
-            Rhea.zoomSvg($dom, 'zoomIn');
-            return false;
-        });
-
-        $('#zoom-out').click(function (e) {
-            e.preventDefault();
-            var $dom = $('div#svg').children('svg');
-            Rhea.zoomSvg($dom, 'zoomOut');
-            return false;
-        });
 
     });
 </script>

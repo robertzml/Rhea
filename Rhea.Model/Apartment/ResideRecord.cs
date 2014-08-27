@@ -124,10 +124,17 @@ namespace Rhea.Model.Apartment
         public DateTime RegisterTime { get; set; }
 
         /// <summary>
+        /// 财务收据号码
+        /// </summary>
+        [BsonElement("receiptNumber")]
+        [Display(Name = "财务收据号码")]
+        public string ReceiptNumber { get; set; }
+
+        /// <summary>
         /// 状态
         /// </summary>
         /// <remarks>
-        /// 0:居住中； 1:已删除； 50:超期; 51:延期; 52:已搬出;
+        /// 0:居住中； 1:已删除； 50:超期; 51:延期; 52:已搬出; 53:已延期
         /// </remarks>
         [BsonElement("status")]
         [Display(Name = "状态")]

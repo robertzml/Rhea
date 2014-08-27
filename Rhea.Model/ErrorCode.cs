@@ -121,6 +121,12 @@ namespace Rhea.Model
         InhabitantMoveOut = 55,
 
         /// <summary>
+        /// 住户不存在
+        /// </summary>
+        [Display(Name = "住户不存在")]
+        InhabitantNotExist = 56,
+
+        /// <summary>
         /// 居住记录不存在
         /// </summary>
         [Display(Name = "居住记录不存在")]

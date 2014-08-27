@@ -131,7 +131,7 @@ var Rhea = function () {
 
 			"dom": "<'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r><'table-scrollable't><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12' p>>", // horizobtal scrollable datatable
 		});	
-
+		return oTable;
 	}
 	
 	var handleInitLogTable = function($dom) {
@@ -385,7 +385,7 @@ var Rhea = function () {
 		},
 		
 		initDatatable2: function($dom) {
-			handleInitDatatable2($dom);
+			return handleInitDatatable2($dom);
 		},
 		
 		initLogTable: function($dom) {

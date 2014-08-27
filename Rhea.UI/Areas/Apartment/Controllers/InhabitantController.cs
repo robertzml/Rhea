@@ -156,6 +156,21 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         }
 
         /// <summary>
+        /// 获取所有在住住户列表
+        /// </summary>
+        /// <param name="name">姓名</param>
+        /// <remarks>
+        /// 根据姓名搜索
+        /// </remarks>
+        /// <returns></returns>
+        public JsonResult GetCurrentList(string name)
+        {
+            var data = this.inhabitantBusiness.GetByMoveOut(false);
+            data = data.Where(r => r.Name.Contains(name));
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
         /// 获取住户
         /// </summary>
         /// <param name="id">住户ID</param>

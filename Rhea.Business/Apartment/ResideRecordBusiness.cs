@@ -51,6 +51,20 @@ namespace Rhea.Business.Apartment
         }
 
         /// <summary>
+        /// 获取居住记录
+        /// </summary>
+        /// <param name="_id">居住记录ID</param>
+        /// <returns></returns>
+        public ResideRecord Get(string _id)
+        {
+            var data = this.recordRepository.Get(_id);
+            if (data == null || data.Status == 1)
+                return null;
+            else
+                return data;
+        }
+
+        /// <summary>
         /// 根据楼宇获取居住记录
         /// </summary>
         /// <param name="buildingId">楼宇ID</param>
@@ -87,17 +101,40 @@ namespace Rhea.Business.Apartment
         }
 
         /// <summary>
-        /// 获取居住记录
+        /// 获取快要到期的居住记录
         /// </summary>
-        /// <param name="_id">居住记录ID</param>
+        /// <param name="day">到期天数</param>
         /// <returns></returns>
-        public ResideRecord Get(string _id)
+        public IEnumerable<ResideRecord> GetExpireInDays(int day)
         {
-            var data = this.recordRepository.Get(_id);
-            if (data == null || data.Status == 1)
-                return null;
-            else
-                return data;
+            List<ResideRecord> data = new List<ResideRecord>();
+            DateTime now = DateTime.Now;
+            var records = this.recordRepository.Get().Where(r => r.Status == (int)EntityStatus.Normal || r.Status == (int)EntityStatus.ExtendTime);
+
+            foreach(var record in records)
+            {
+                if (record.ExpireDate == null)
+                    continue;
+
+                DateTime expireDate = record.ExpireDate.Value;
+                if (expireDate.AddDays(day) <= now)
+                {
+                    data.Add(record);
+                }
+            }
+
+            data = data.OrderBy(r => r.ExpireDate).ToList();
+            return data;
+        }
+
+        /// <summary>
+        /// 获取超期居住记录
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<ResideRecord> GetExpired()
+        {
+            var records = this.recordRepository.Get().Where(r => r.Status == (int)EntityStatus.OverTime).OrderBy(r => r.ExpireDate);
+            return records;
         }
 
         /// <summary>

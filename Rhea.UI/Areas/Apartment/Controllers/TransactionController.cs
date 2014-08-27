@@ -72,6 +72,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                 record.EnterDate = model.EnterDate;
                 record.ExpireDate = model.ExpireDate;
                 record.TermLimit = model.TermLimit;
+                record.ReceiptNumber = model.ReceiptNumber;
                 record.Remark = model.RecordRemark;
                 record.Status = 0;
 
@@ -134,6 +135,28 @@ namespace Rhea.UI.Areas.Apartment.Controllers
 
             ViewBag.Message = "输入有误，请重新输入。";
             return View("CheckOutResult");
+        }
+
+        /// <summary>
+        /// 延期申请
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Extend()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 延期申请
+        /// </summary>
+        /// <param name="model">延期模型</param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Extend(ExtendModel model)
+        {
+            return View();
         }
         #endregion //Action
     }

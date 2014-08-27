@@ -144,6 +144,12 @@ namespace Rhea.UI.Areas.Apartment.Models
         public decimal Rent { get; set; }
 
         /// <summary>
+        /// 财务收据号码
+        /// </summary>
+        [Display(Name = "财务收据号码")]
+        public string ReceiptNumber { get; set; }
+
+        /// <summary>
         /// 备注
         /// </summary>
         [DataType(DataType.MultilineText)]
@@ -175,6 +181,57 @@ namespace Rhea.UI.Areas.Apartment.Models
         [Required]
         [Display(Name = "退房时间")]
         public DateTime LeaveDate { get; set; }
+
+        /// <summary>
+        /// 备注
+        /// </summary>
+        [Display(Name = "备注")]
+        public string Remark { get; set; }
+    }
+
+    /// <summary>
+    /// 延期申请模型
+    /// </summary>
+    public class ExtendModel
+    {
+        /// <summary>
+        /// 住户ID
+        /// </summary>
+        [Required(AllowEmptyStrings = false)]
+        [Display(Name = "住户ID")]
+        public string InhabitantId { get; set; }
+
+        /// <summary>
+        /// 入住时间
+        /// </summary>
+        [Display(Name = "房间ID")]
+        public int RoomId { get; set; }
+
+        /// <summary>
+        /// 入住时间
+        /// </summary>
+        [DataType(DataType.Date)]
+        [Display(Name = "入住时间")]
+        public DateTime? EnterDate { get; set; }
+
+        /// <summary>
+        /// 到期时间
+        /// </summary>
+        [DataType(DataType.Date)]
+        [Display(Name = "到期时间")]
+        public DateTime? ExpireDate { get; set; }
+
+        /// <summary>
+        /// 月份数
+        /// </summary>
+        [Display(Name = "月份数")]
+        public string MonthCount { get; set; }
+
+        /// <summary>
+        /// 房租
+        /// </summary>
+        [Display(Name = "房租")]
+        public decimal Rent { get; set; }
 
         /// <summary>
         /// 备注

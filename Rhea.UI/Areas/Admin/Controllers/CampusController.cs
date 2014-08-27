@@ -47,9 +47,8 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult List()
         {
-            //var data = this.campusBusiness.Get();
-            //return View(data);
-            return View();
+            var data = this.campusBusiness.Get();
+            return View(data);
         }
 
         /// <summary>
@@ -170,7 +169,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
                     Title = "编辑校区",
                     Time = DateTime.Now,
                     Type = (int)LogType.CampusEdit,
-                    Content = string.Format("编辑校区: {0}。", model.Name),
+                    Content = string.Format("编辑校区, 名称:{0}。", model.Name),
                     UserId = user._id,
                     UserName = user.Name
                 };

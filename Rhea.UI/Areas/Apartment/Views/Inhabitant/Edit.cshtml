@@ -76,6 +76,7 @@
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             
                             @Html.HiddenFor(model => model._id)
+                            @Html.HiddenFor(model => model.Status)
 
                             <div class="form-body">
                                 <div class="form-group">

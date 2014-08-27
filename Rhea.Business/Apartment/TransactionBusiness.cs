@@ -266,6 +266,69 @@ namespace Rhea.Business.Apartment
 
             return ErrorCode.Success;
         }
+
+        /// <summary>
+        /// 更新所有居住状态
+        /// </summary>
+        /// <remarks>
+        /// 根据到期时间更新房间居住记录状态为超期，同时更新对应住户状态。
+        /// 仅检查正常居住和延期居住的情况
+        /// </remarks>
+        /// <returns></returns>
+        public ErrorCode UpdateStatus()
+        {
+            try
+            {
+                DateTime now = DateTime.Now;
+                ErrorCode result;
+
+                //获取相关居住记录
+                InhabitantBusiness inhabitantBusiness = new InhabitantBusiness();
+                ResideRecordBusiness recordBusiness = new ResideRecordBusiness();
+                var records = recordBusiness.Get().Where(r => r.Status == (int)EntityStatus.Normal || r.Status == (int)EntityStatus.ExtendTime);
+
+                foreach (var record in records)
+                {
+                    if (record.ExpireDate == null)
+                        continue;
+
+                    DateTime expireDate = record.ExpireDate.Value;
+                    if (expireDate >= now)
+                        continue;
+
+                    //更新居住记录
+                    record.Status = (int)EntityStatus.OverTime;
+                    result = recordBusiness.Update(record);
+                    if (result != ErrorCode.Success)
+                    {
+                        this.errorMessage = result.DisplayName();
+                        return result;
+                    }
+
+                    Inhabitant inhabitant = inhabitantBusiness.Get(record.InhabitantId);
+                    if (inhabitant == null)
+                    {
+                        this.errorMessage = ErrorCode.InhabitantNotExist.DisplayName();
+                        return ErrorCode.InhabitantNotExist;
+                    }
+                    inhabitant.Status = (int)EntityStatus.InhabitantExpire;
+                    result = inhabitantBusiness.Update(inhabitant);
+                    if (result != ErrorCode.Success)
+                    {
+                        this.errorMessage = result.DisplayName();
+                        return result;
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                this.errorMessage = e.Message;
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
         #endregion //Method
 
         #region Property

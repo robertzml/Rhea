@@ -64,6 +64,23 @@ namespace Rhea.Business.Apartment
         }
 
         /// <summary>
+        /// 获取住户列表
+        /// </summary>
+        /// <param name="isMoveOut">是否已搬出</param>
+        /// <returns></returns>
+        public IEnumerable<Inhabitant> GetByMoveOut(bool isMoveOut)
+        {
+            if (isMoveOut)
+            {
+                return this.inhabitantRepository.Get().Where(r => r.Status != 1 && r.Status == (int)EntityStatus.InhabitantMoveOut);
+            }
+            else
+            {
+                return this.inhabitantRepository.Get().Where(r => r.Status != 1 && r.Status != (int)EntityStatus.InhabitantMoveOut);
+            }
+        }
+
+        /// <summary>
         /// 添加住户
         /// </summary>
         /// <param name="data">住户对象</param>
