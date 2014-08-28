@@ -159,6 +159,32 @@
 <script type="text/javascript">
     $(function () {
 
+        var setColor = function (g, roomId) {
+
+            $.getJSON('/Apartment/Room/GetRoom', { id: roomId }, function (response) {
+                switch (parseInt(response.ResideType)) {
+                    case 0:
+                        g.children('[ref=bound]').attr('class', 'fil4');
+                        break;
+                    case 1:
+                        g.children('[ref=bound]').attr('class', 'fil5');
+                        break;
+                    case 2:
+                        g.children('[ref=bound]').attr('class', 'fil6');
+                        break;
+                    case 3:
+                        g.children('[ref=bound]').attr('class', 'fil7');
+                        break;
+                    case 4:
+                        g.children('[ref=bound]').attr('class', 'fil8');
+                        break;
+                    case 5:
+                        g.children('[ref=bound]').attr('class', 'fil9');
+                        break;
+                }
+            });
+        }
+
         Rhea.ajaxLoadSvg($('div#svg'), '@Model.SvgPath', function (svg) {
             $("svg g[id^='g']").toggle(
                 function () {
@@ -171,7 +197,8 @@
                 },
                 function () {
                     var id = $(this).attr('id').toString().substring(1);
-                    $(this).children('[ref=bound]').attr('class', 'fil0');
+                    //$(this).children('[ref=bound]').attr('class', 'fil0');
+                    setColor($(this), id);
 
                     var tdoc = $('div#s' + id);
                     tdoc.remove();
@@ -182,34 +209,12 @@
                 var g = $(item); 
                 var id = g.attr('id').toString().substring(1);
 
-                $.getJSON('/Apartment/Room/GetRoom', { id: id }, function (response) {
-                    
-                    switch (parseInt(response.ResideType)) {
-                        case 0:
-                            g.children('[ref=bound]').attr('class', 'fil4');
-                            break;
-                        case 1:
-                            g.children('[ref=bound]').attr('class', 'fil5');
-                            break;
-                        case 2:
-                            g.children('[ref=bound]').attr('class', 'fil6');
-                            break;
-                        case 3:
-                            g.children('[ref=bound]').attr('class', 'fil7');
-                            break;
-                        case 4:
-                            g.children('[ref=bound]').attr('class', 'fil8');
-                            break;
-                        case 5:
-                            g.children('[ref=bound]').attr('class', 'fil9');
-                            break;
-                    }
-                });
+                setColor(g, id);
             })
 
         });
 
-        FloorAction.init();
+        apartment.initFloorAction();
 
         $('.portlet .portlet-title a.reload[data-load="true"]').click();
 

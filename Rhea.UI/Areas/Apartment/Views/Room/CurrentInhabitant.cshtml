@@ -86,18 +86,14 @@
                 </tr>
                 <tr>
                     <td>
-                        @Html.DisplayNameFor(model => model.IsCouple)
-                    </td>
-                    <td colspan="2">
-                        @Html.DisplayFor(model => model.IsCouple)
-                    </td>
-                </tr>
-                <tr>
-                    <td>
                         @Html.DisplayNameFor(model => model.Marriage)
                     </td>
                     <td colspan="2">
                         @Html.DisplayFor(model => model.Marriage)
+                        @if (Model.IsCouple == true)
+                        {
+                            <span>(双职工)</span>
+                        }
                     </td>
                 </tr>
                 <tr>

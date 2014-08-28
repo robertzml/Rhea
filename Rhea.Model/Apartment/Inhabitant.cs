@@ -85,6 +85,13 @@ namespace Rhea.Model.Apartment
         public string IdentityCard { get; set; }
 
         /// <summary>
+        /// 学历
+        /// </summary>
+        [BsonElement("education")]
+        [Display(Name = "学历")]
+        public string Education { get; set; }
+
+        /// <summary>
         /// 是否双职工
         /// </summary>
         [UIHint("Boolean2")]

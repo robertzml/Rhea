@@ -99,6 +99,13 @@ namespace Rhea.Model.Apartment
         public string TermLimit { get; set; }
 
         /// <summary>
+        /// 月数
+        /// </summary>
+        [BsonElement("monthCount")]
+        [Display(Name = "月数")]
+        public int MonthCount { get; set; }
+
+        /// <summary>
         /// 离开时间
         /// </summary>
         [DataType(DataType.Date)]
@@ -120,6 +127,7 @@ namespace Rhea.Model.Apartment
         /// </summary>
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         [BsonElement("registerTime")]
+        [DataType(DataType.DateTime)]
         [Display(Name = "登记时间")]
         public DateTime RegisterTime { get; set; }
 

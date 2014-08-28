@@ -65,6 +65,12 @@ namespace Rhea.Data
         /// resideRecord
         /// </summary>
         public static readonly string ResideRecord = "resideRecord";
+
+        /// <summary>
+        /// 青教业务记录表
+        /// apartmentTransaction
+        /// </summary>
+        public static readonly string ApartmentTransaction = "apartmentTransaction";
         #endregion //Field
     }
 }

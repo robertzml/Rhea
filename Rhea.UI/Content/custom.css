@@ -70,3 +70,12 @@ h1, h2, h3, h4, h5, h6 , .label, .page-title, .dropdown-menu {
 .profile .profile-summary .caption {
   border-color: #c9c9c9;
 }
+
+.feeds li .col1 > .cont {
+	margin-right: 150px;
+}
+
+.feeds li .col2 {
+	margin-left: -150px;
+	width: 150px;	
+}

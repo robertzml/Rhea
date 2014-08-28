@@ -84,6 +84,12 @@ namespace Rhea.UI.Areas.Apartment.Models
         public string IdentityCard { get; set; }
 
         /// <summary>
+        /// 学历
+        /// </summary>
+        [Display(Name = "学历")]
+        public string Education { get; set; }
+
+        /// <summary>
         /// 是否双职工
         /// </summary>
         [UIHint("Boolean2")]
@@ -130,6 +136,12 @@ namespace Rhea.UI.Areas.Apartment.Models
         [DataType(DataType.Date)]
         [Display(Name = "到期时间")]
         public DateTime? ExpireDate { get; set; }
+
+        /// <summary>
+        /// 月数
+        /// </summary>
+        [Display(Name = "月数")]
+        public int MonthCount { get; set; }
 
         /// <summary>
         /// 年限

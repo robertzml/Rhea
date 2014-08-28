@@ -143,6 +143,14 @@
                                 </div>
 
                                 <div class="form-group">
+                                    @Html.LabelFor(model => model.MonthCount, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-6">
+                                        @Html.EditorFor(model => model.MonthCount, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.MonthCount, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
                                     @Html.LabelFor(model => model.ExpireDate, htmlAttributes: new { @class = "control-label col-md-3" })
                                     <div class="col-md-6">
                                         @Html.EditorFor(model => model.ExpireDate, new { htmlAttributes = new { @class = "form-control" } })

@@ -1,5 +1,6 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    string role = User.GetRole();
 }
 
 @section styles {
@@ -74,33 +75,36 @@
                     </li>
                 </ul>
             </li>
-            <li class="left-nav-first">
-                <a href="javascript:;">
-                    <i class="fa fa-cogs"></i>
-                    <span class="title">
-                        业务办理
-                    </span>
-                    <span class="arrow ">
-                    </span>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a class="ajaxify" href="/Apartment/Transaction/CheckIn">
-                            入住办理
-                        </a>
-                    </li>
-                    <li>
-                        <a class="ajaxify" href="/Apartment/Transaction/CheckOut">
-                            退房办理
-                        </a>
-                    </li>
-                    <li>
-                        <a class="ajaxify" href="/Apartment/Transaction/Extend">
-                            延期申请
-                        </a>
-                    </li>
-                </ul>
-            </li>
+            @if (new string[] { "Root", "Administrator", "Estate", "Apartment" }.Contains(role))
+            {
+                <li class="left-nav-first">
+                    <a href="javascript:;">
+                        <i class="fa fa-cogs"></i>
+                        <span class="title">
+                            业务办理
+                        </span>
+                        <span class="arrow ">
+                        </span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a class="ajaxify" href="/Apartment/Transaction/CheckIn">
+                                入住办理
+                            </a>
+                        </li>
+                        <li>
+                            <a class="ajaxify" href="/Apartment/Transaction/CheckOut">
+                                退房办理
+                            </a>
+                        </li>
+                        <li>
+                            <a class="ajaxify" href="/Apartment/Transaction/Extend">
+                                延期申请
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            }
             <li class="last">
                 <a href="#">
                     <i class="fa fa-user"></i>

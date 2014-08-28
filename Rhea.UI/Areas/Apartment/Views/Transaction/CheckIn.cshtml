@@ -101,7 +101,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#tab4" data-toggle="tab" class="step">
+                                    <a href="#tabConfirm" data-toggle="tab" class="step">
                                         <span class="number">
                                             4
                                         </span>
@@ -234,6 +234,14 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-md-3">
+                                            学历
+                                        </label>
+                                        <div class="col-md-4">
+                                            @Html.EditorFor(model => model.Education, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
                                             是否双职工
                                         </label>
                                         <div class="col-md-4">
@@ -285,6 +293,14 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-md-3">
+                                            月数 <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            @Html.EditorFor(model => model.MonthCount, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
                                             到期时间 <span class="required">*</span>
                                         </label>
                                         <div class="col-md-4">
@@ -324,7 +340,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane" id="tab4">
+                                <div class="tab-pane" id="tabConfirm">
                                     <h3 class="block">确认信息</h3>
                                     <h4 class="form-section">房间</h4>
                                     <div class="form-group">
@@ -399,6 +415,13 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <label class="control-label col-md-3">学历:</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="Education">
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label class="control-label col-md-3">是否双职工:</label>
                                         <div class="col-md-4">
                                             <p class="form-control-static" data-display="IsCouple">
@@ -438,6 +461,13 @@
                                         <label class="control-label col-md-3">入住时间:</label>
                                         <div class="col-md-4">
                                             <p class="form-control-static" data-display="EnterDate">
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">月数:</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="MonthCount">
                                             </p>
                                         </div>
                                     </div>
@@ -504,6 +534,6 @@
 
 <script type="text/javascript">
     $(function () {
-        CheckIn.init();
+        apartment.initCheckIn();
     });
 </script>

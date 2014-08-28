@@ -17,7 +17,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
     /// <summary>
     /// 青教公寓主页控制器
     /// </summary>
-    [EnhancedAuthorize(Roles = "Root,Administrator,Apartment")]
+    [EnhancedAuthorize(Roles = "Root,Administrator,Apartment,Leader")]
     public class HomeController : Controller
     {
         #region Field
@@ -69,9 +69,34 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         }
 
         /// <summary>
+        /// 最新入住办理
+        /// </summary>
+        /// <param name="count">数量</param>
+        /// <returns></returns>
+        public ActionResult LastCheckIn(int count)
+        {
+            TransactionBusiness business = new TransactionBusiness();
+            var data = business.GetCheckInTransaction().Take(count);
+            return View(data);
+        }
+
+        /// <summary>
+        /// 最新退房办理
+        /// </summary>
+        /// <param name="count">数量</param>
+        /// <returns></returns>
+        public ActionResult LastCheckOut(int count)
+        {
+            TransactionBusiness business = new TransactionBusiness();
+            var data = business.GetCheckOutTransaction().Take(count);
+            return View(data);
+        }
+
+        /// <summary>
         /// 检测更新居住记录和住户状态
         /// </summary>
         /// <returns></returns>
+        [EnhancedAuthorize(Roles = "Root,Administrator,Apartment")]
         [HttpPost]
         public string CheckStatus()
         {

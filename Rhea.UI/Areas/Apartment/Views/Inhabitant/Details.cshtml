@@ -3,6 +3,7 @@
 @{
     Layout = null;
     ViewBag.Title = "住户信息";
+    var role = User.GetRole();
 }
 
 <!-- BEGIN PAGE HEADER-->
@@ -140,6 +141,14 @@
                                 </tr>
                                 <tr>
                                     <td>
+                                        @Html.DisplayNameFor(model => model.Education)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Education)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
                                         @Html.DisplayNameFor(model => model.IsCouple)
                                     </td>
                                     <td>
@@ -208,7 +217,10 @@
                 <hr />
                 <p>
                     <a href="/Apartment/Inhabitant/List" class="btn btn-primary ajaxify" role="button"><i class="fa fa-list"></i>&nbsp;回到列表</a>
-                    <a href="/Apartment/Inhabitant/Edit/@Model._id" class="btn btn-warning ajaxify" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
+                    @if (new string[] { "Root", "Administrator", "Estate", "Apartment" }.Contains(role))
+                    {
+                        <a href="/Apartment/Inhabitant/Edit/@Model._id" class="btn btn-warning ajaxify" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
+                    }
                 </p>
             </div>
         </div>

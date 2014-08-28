@@ -222,6 +222,7 @@
     <Content Include="Images\admin-logo.png" />
     <Content Include="Images\avatar.png" />
     <Content Include="Images\bg-logo.png" />
+    <Content Include="Images\home.jpg" />
     <Content Include="Images\loginbg.jpg" />
     <Content Include="Images\logo.png" />
     <Content Include="img\accordion-plusminus.png" />
@@ -235,6 +236,8 @@
     <Content Include="img\bg\3.jpg" />
     <Content Include="img\bg\4.jpg" />
     <Content Include="img\bg\5.jpg" />
+    <Content Include="img\bg\6.jpg" />
+    <Content Include="img\bg\7.jpg" />
     <Content Include="img\datatable-row-openclose.png" />
     <Content Include="img\hor-menu-red-arrow.png" />
     <Content Include="img\icon-color-close.png" />
@@ -634,6 +637,8 @@
     <Content Include="Areas\Apartment\Views\Home\ExpireInDays.cshtml" />
     <Content Include="Areas\Apartment\Views\Home\ExpireRecords.cshtml" />
     <Content Include="Areas\Apartment\Views\Transaction\Extend.cshtml" />
+    <Content Include="Areas\Apartment\Views\Home\LastCheckIn.cshtml" />
+    <Content Include="Areas\Apartment\Views\Home\LastCheckOut.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="plugins\jquery-1.11.0.min.js" />

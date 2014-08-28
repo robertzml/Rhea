@@ -37,7 +37,7 @@
                     </span>
                 </a>
             </li>
-            @if (User.Rank() >= 900)
+            @if (User.GetRank() >= 900)
             {
                 <li>
                     <a href="@Url.Action("Index", new { area = "Admin", controller = "Home" })" target="_blank">

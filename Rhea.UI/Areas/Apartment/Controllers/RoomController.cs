@@ -21,7 +21,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
     /// <summary>
     /// 房间控制器
     /// </summary>
-    [EnhancedAuthorize(Roles = "Root,Administrator,Apartment")]
+    [EnhancedAuthorize(Roles = "Root,Administrator,Apartment,Leader")]
     public class RoomController : Controller
     {
         #region Field
@@ -173,6 +173,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         /// </summary>
         /// <param name="id">房间ID</param>
         /// <returns></returns>
+        [EnhancedAuthorize(Roles = "Root,Administrator,Apartment")]
         [HttpGet]
         public ActionResult Edit(int id)
         {
@@ -185,6 +186,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         /// </summary>
         /// <param name="model">房间对象</param>
         /// <returns></returns>
+        [EnhancedAuthorize(Roles = "Root,Administrator,Apartment")]
         [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult Edit(ApartmentRoom model)
@@ -256,6 +258,11 @@ namespace Rhea.UI.Areas.Apartment.Controllers
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        /// 获取房间数据
+        /// </summary>
+        /// <param name="id">房间ID</param>
+        /// <returns></returns>
         public JsonResult GetRoom(int id)
         {
             var data = this.roomBusiness.Get(id);

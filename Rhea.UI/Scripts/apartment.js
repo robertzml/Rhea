@@ -1,9 +1,95 @@
-var CheckIn = function () {
+var apartment = function() {
+	
+	var displayConfirm = function(form) {
+		$('#tabConfirm .form-control-static', form).each(function(){
+			var input = $('[name="'+$(this).attr("data-display")+'"]', form);
+			if (input.is(":radio")) {
+				input = $('[name="'+$(this).attr("data-display")+'"]:checked', form);
+			}
+			if (input.is(":text") || input.is("textarea")) {
+				$(this).html(input.val());
+			} else if (input.is("select")) {
+				$(this).html(input.find('option:selected').text());
+			} else if (input.is(":radio") && input.is(":checked")) {
+				$(this).html(input.attr("data-title"));
+			} else {
+				$(this).html(input.val());
+			}
+		});
+	}
 
-    return {
-        //main function to initiate the module
-        init: function () {
-            if (!jQuery().bootstrapWizard) {
+	var handleTitle = function(wizard, form, tab, navigation, index) {
+		var total = navigation.find('li').length;
+		var current = index + 1;
+		// set wizard title
+		$('.step-title', wizard).text('Step ' + (index + 1) + ' of ' + total);
+		// set done steps
+		jQuery('li', wizard).removeClass("done");
+		var li_list = navigation.find('li');
+		for (var i = 0; i < index; i++) {
+			jQuery(li_list[i]).addClass("done");
+		}
+
+		if (current == 1) {
+			wizard.find('.button-previous').hide();
+		} else {
+			wizard.find('.button-previous').show();
+		}
+
+		if (current >= total) {
+			wizard.find('.button-next').hide();
+			wizard.find('.button-submit').show();
+			displayConfirm(form);
+		} else {
+			wizard.find('.button-next').show();
+			wizard.find('.button-submit').hide();
+		}
+		Metronic.scrollTo($('.page-title'));
+	}
+
+	var initWizard = function(wizard, form, error, success) {
+		// default form wizard
+		wizard.bootstrapWizard({
+			'nextSelector': '.button-next',
+			'previousSelector': '.button-previous',
+			onTabClick: function (tab, navigation, index, clickedIndex) {
+				success.hide();
+				error.hide();
+				if (form.valid() == false) {
+					return false;
+				}
+				handleTitle(wizard, form, tab, navigation, clickedIndex);
+			},
+			onNext: function (tab, navigation, index) {
+				success.hide();
+				error.hide();
+
+				if (form.valid() == false) {
+					return false;
+				}
+
+				handleTitle(wizard, form, tab, navigation, index);
+			},
+			onPrevious: function (tab, navigation, index) {
+				success.hide();
+				error.hide();
+
+				handleTitle(wizard, form, tab, navigation, index);
+			},
+			onTabShow: function (tab, navigation, index) {
+				var total = navigation.find('li').length;
+				var current = index + 1;
+				var $percent = (current / total) * 100;
+				wizard.find('.progress-bar').css({
+					width: $percent + '%'
+				});
+			}
+		});
+	}
+	
+	return {
+		initCheckIn: function() {
+			if (!jQuery().bootstrapWizard) {
                 return;
             }
 
@@ -32,7 +118,7 @@ var CheckIn = function () {
 
 				$('#room-info').load('/Apartment/Room/Summary', { id: rid });
 			});
-			
+
 			$('#AccumulatedFundsDate').datepicker({
 				format: "yyyy-mm-dd",
 				weekStart: 7,
@@ -61,7 +147,20 @@ var CheckIn = function () {
 				language: "zh-CN",
 				autoclose: true
 			});
-			
+
+			$('#MonthCount').change(function() {
+				var enter = $('#EnterDate').datepicker('getDate');
+				if (isNaN(enter))
+					return;
+				if (enter == null || enter == '')
+					return;
+
+				var count = parseInt($(this).val());
+
+				enter.setMonth(enter.getMonth() + count);
+				$('#ExpireDate').datepicker('setDate', enter);
+			});
+
 			$("#OldInhabitant").select2({
 				placeholder: "输入住户姓名进行搜索",
 				minimumInputLength: 1,
@@ -116,6 +215,7 @@ var CheckIn = function () {
 					$('#Duty').val(item.Duty);
 					$('#Telephone').val(item.Telephone);
 					$('#IdentityCard').val(item.IdentityCard);
+					$('#Education').val(item.Education);
 					$('#AccumulatedFundsDate').val(Rhea.parseDate(item.AccumulatedFundsDate));
 					$('#IsCouple').val(item.IsCouple.toString());
 					$('#Marriage').val(item.Marriage);
@@ -129,7 +229,8 @@ var CheckIn = function () {
 					$('#DepartmentName').val('');
 					$('#Duty').val('');
 					$('#Telephone').val('');
-					$('#IdentityCard').val('');				
+					$('#IdentityCard').val('');
+					$('#Education').val('');
 					$('#AccumulatedFundsDate').val('');
 					$('#IsCouple').val('');
 					$('#Marriage').val('');
@@ -141,8 +242,8 @@ var CheckIn = function () {
             var form = $('#submit_form');
             var error = $('.alert-danger', form);
             var success = $('.alert-success', form);
-
-            form.validate({
+			
+			form.validate({
                 doNotHideMessage: true, //this option enables to show the error/success messages on tab switch.
                 errorElement: 'span', //default input error message container
                 errorClass: 'help-block help-block-error', // default input error message class
@@ -167,6 +268,9 @@ var CheckIn = function () {
 						required: true
 					},
 					ExpireDate: {
+						required: true
+					},
+					MonthCount: {
 						required: true
 					},
 					Rent: {
@@ -214,90 +318,7 @@ var CheckIn = function () {
 
             });
 
-            var displayConfirm = function() {
-                $('#tab4 .form-control-static', form).each(function(){
-                    var input = $('[name="'+$(this).attr("data-display")+'"]', form);
-                    if (input.is(":radio")) {
-                        input = $('[name="'+$(this).attr("data-display")+'"]:checked', form);
-                    }
-                    if (input.is(":text") || input.is("textarea")) {
-                        $(this).html(input.val());
-                    } else if (input.is("select")) {
-                        $(this).html(input.find('option:selected').text());
-                    } else if (input.is(":radio") && input.is(":checked")) {
-                        $(this).html(input.attr("data-title"));
-                    } else {
-						$(this).html(input.val());
-					}
-                });
-            }
-
-            var handleTitle = function(tab, navigation, index) {
-                var total = navigation.find('li').length;
-                var current = index + 1;
-                // set wizard title
-                $('.step-title', wizard).text('Step ' + (index + 1) + ' of ' + total);
-                // set done steps
-                jQuery('li', wizard).removeClass("done");
-                var li_list = navigation.find('li');
-                for (var i = 0; i < index; i++) {
-                    jQuery(li_list[i]).addClass("done");
-                }
-
-                if (current == 1) {
-                    wizard.find('.button-previous').hide();
-                } else {
-                    wizard.find('.button-previous').show();
-                }
-
-                if (current >= total) {
-                    wizard.find('.button-next').hide();
-                    wizard.find('.button-submit').show();
-                    displayConfirm();
-                } else {
-                    wizard.find('.button-next').show();
-                    wizard.find('.button-submit').hide();
-                }
-                Metronic.scrollTo($('.page-title'));
-            }
-
-            // default form wizard
-            wizard.bootstrapWizard({
-                'nextSelector': '.button-next',
-                'previousSelector': '.button-previous',
-                onTabClick: function (tab, navigation, index, clickedIndex) {
-                    success.hide();
-                    error.hide();
-                    if (form.valid() == false) {
-                        return false;
-                    }
-                    handleTitle(tab, navigation, clickedIndex);
-                },
-                onNext: function (tab, navigation, index) {
-                    success.hide();
-                    error.hide();
-
-                    if (form.valid() == false) {
-                        return false;
-                    }
-
-                    handleTitle(tab, navigation, index);
-                },
-                onPrevious: function (tab, navigation, index) {
-                    success.hide();
-                    error.hide();
-
-                    handleTitle(tab, navigation, index);
-                },
-                onTabShow: function (tab, navigation, index) {
-                    var total = navigation.find('li').length;
-                    var current = index + 1;
-                    var $percent = (current / total) * 100;
-                    wizard.find('.progress-bar').css({
-                        width: $percent + '%'
-                    });
-                }
-            });
+			initWizard(wizard, form, error, success);
 
             wizard.find('.button-previous').hide();
 			wizard.find('.button-submit').click(function() {
@@ -315,19 +336,13 @@ var CheckIn = function () {
 					}
 				})
             }).hide();
-        }
+        },
 
-    };
-}();
-
-var CheckOut = function() {
-	
-	return {
-		init: function() {
+		initCheckOut: function() {
 			if (!jQuery().bootstrapWizard) {
                 return;
             }
-			
+
 			var wizard = $('#form_wizard_check_out');
 
 			$('#LeaveDate').datepicker({
@@ -400,12 +415,12 @@ var CheckOut = function() {
 					$('#InhabitantName').val('');
 					roomList.empty();
 				}
-			});			
+			});
 			
 			var form = $('#submit_form');
             var error = $('.alert-danger', form);
             var success = $('.alert-success', form);
-			
+
 			form.validate({
                 doNotHideMessage: true, //this option enables to show the error/success messages on tab switch.
                 errorElement: 'span', //default input error message container
@@ -465,93 +480,10 @@ var CheckOut = function() {
                 }
 
             });
-			
-			var displayConfirm = function() {
-                $('#tab4 .form-control-static', form).each(function(){
-                    var input = $('[name="'+$(this).attr("data-display")+'"]', form);
-                    if (input.is(":radio")) {
-                        input = $('[name="'+$(this).attr("data-display")+'"]:checked', form);
-                    }
-                    if (input.is(":text") || input.is("textarea")) {
-                        $(this).html(input.val());
-                    } else if (input.is("select")) {
-                        $(this).html(input.find('option:selected').text());
-                    } else if (input.is(":radio") && input.is(":checked")) {
-                        $(this).html(input.attr("data-title"));
-                    } else {
-						$(this).html(input.val());
-					}
-                });
-            }
 
-            var handleTitle = function(tab, navigation, index) {
-                var total = navigation.find('li').length;
-                var current = index + 1;
-                // set wizard title
-                $('.step-title', wizard).text('Step ' + (index + 1) + ' of ' + total);
-                // set done steps
-                jQuery('li', wizard).removeClass("done");
-                var li_list = navigation.find('li');
-                for (var i = 0; i < index; i++) {
-                    jQuery(li_list[i]).addClass("done");
-                }
+			initWizard(wizard, form, error, success);
 
-                if (current == 1) {
-                    wizard.find('.button-previous').hide();
-                } else {
-                    wizard.find('.button-previous').show();
-                }
-
-                if (current >= total) {
-                    wizard.find('.button-next').hide();
-                    wizard.find('.button-submit').show();
-                    displayConfirm();
-                } else {
-                    wizard.find('.button-next').show();
-                    wizard.find('.button-submit').hide();
-                }
-                Metronic.scrollTo($('.page-title'));
-            }
-			
-			// default form wizard
-            wizard.bootstrapWizard({
-                'nextSelector': '.button-next',
-                'previousSelector': '.button-previous',
-                onTabClick: function (tab, navigation, index, clickedIndex) {
-                    success.hide();
-                    error.hide();
-                    if (form.valid() == false) {
-                        return false;
-                    }
-                    handleTitle(tab, navigation, clickedIndex);
-                },
-                onNext: function (tab, navigation, index) {
-                    success.hide();
-                    error.hide();
-
-                    if (form.valid() == false) {
-                        return false;
-                    }
-
-                    handleTitle(tab, navigation, index);
-                },
-                onPrevious: function (tab, navigation, index) {
-                    success.hide();
-                    error.hide();
-
-                    handleTitle(tab, navigation, index);
-                },
-                onTabShow: function (tab, navigation, index) {
-                    var total = navigation.find('li').length;
-                    var current = index + 1;
-                    var $percent = (current / total) * 100;
-                    wizard.find('.progress-bar').css({
-                        width: $percent + '%'
-                    });
-                }
-            });
-
-            wizard.find('.button-previous').hide();
+			wizard.find('.button-previous').hide();
 			wizard.find('.button-submit').click(function() {
 				Metronic.startPageLoading();
 				
@@ -565,30 +497,20 @@ var CheckOut = function() {
 						Metronic.stopPageLoading();
 					}
 				})
-				
+
             }).hide();
-		}
-	};
-}();
 
+		},
 
-var Extend = function() {
-	return {
-		init: function() {
+		initExtend: function() {
 			if (!jQuery().bootstrapWizard) {
                 return;
             }
 			
-			var wizard = $('#form_wizard_check_out');
-			
-			
-		}
-	};
-}();
+			//var wizard = $('#form_wizard_extend');
+		},
 
-var RoomTree = function() {
-	return {
-		init: function($dom) {
+		initRoomTree: function($dom) {
 			$dom.jstree({
 				"core" : {
 					"themes" : {
@@ -603,15 +525,11 @@ var RoomTree = function() {
 						"icon" : "fa fa-file icon-state-info icon-lg"
 					}
 				},
-				"plugins": ["types"]				
+				"plugins": ["types"]
 			});
-		}
-	}
-}();
+		},
 
-var FloorAction = function() {
-	return {
-		init: function() {
+		initFloorAction: function() {
 			$('#zoom-in').click(function (e) {
 				e.preventDefault();
 				var $dom = $('div#svg').children('svg');
@@ -625,17 +543,13 @@ var FloorAction = function() {
 				Rhea.zoomSvg($dom, 'zoomOut');
 				return false;
 			});
-		}
-	}
-}();
+		},
 
+		initDashboardAction: function() {
 
-var DashboardAction = function() {
-	return {
-		init: function() {			
 			$('#checkStatus').click(function(){
 				Metronic.blockUI();
-				
+
 				$.ajax({
 					url: '/Apartment/Home/CheckStatus',
 					type: 'POST',
@@ -652,5 +566,6 @@ var DashboardAction = function() {
 				return false;
 			});
 		}
-	}
+		
+	};
 }();

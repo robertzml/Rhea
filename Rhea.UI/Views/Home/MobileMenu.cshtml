@@ -31,7 +31,7 @@
             主页 <span class="arrow"></span>
         </a>
     </li>
-    @if (new string[] { "Root", "Administrator", "Estate" }.Contains(groupName))
+    @if (new string[] { "Root", "Administrator", "Estate", "Leader" }.Contains(groupName))
     {
     <li>
         <a href="#">
@@ -74,7 +74,7 @@
         </ul>
     </li>
     }
-    @if (new string[] { "Root", "Administrator", "Estate", "Apartment" }.Contains(groupName))
+    @if (new string[] { "Root", "Administrator", "Estate", "Apartment", "Leader" }.Contains(groupName))
     { 
     <li class="last">
         <a>
@@ -122,28 +122,31 @@
                     </li>
                 </ul>
             </li>
-            <li>
-                <a href="javascript:;">
-                    <i class="fa fa-cogs"></i>
-                    <span class="title">
-                        业务办理
-                    </span>
-                    <span class="arrow ">
-                    </span>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a class="ajaxify" href="/Apartment/Transaction/CheckIn">
-                            入住办理
-                        </a>
-                    </li>
-                    <li>
-                        <a class="ajaxify" href="/Apartment/Transaction/CheckOut">
-                            退房办理
-                        </a>
-                    </li>
-                </ul>
-            </li>
+            @if (new string[] { "Root", "Administrator", "Estate", "Apartment" }.Contains(groupName))
+            {
+                <li>
+                    <a href="javascript:;">
+                        <i class="fa fa-cogs"></i>
+                        <span class="title">
+                            业务办理
+                        </span>
+                        <span class="arrow ">
+                        </span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a class="ajaxify" href="/Apartment/Transaction/CheckIn">
+                                入住办理
+                            </a>
+                        </li>
+                        <li>
+                            <a class="ajaxify" href="/Apartment/Transaction/CheckOut">
+                                退房办理
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            }
         </ul>
     </li>
     }

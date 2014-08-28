@@ -18,7 +18,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
     /// <summary>
     /// 入住记录控制器
     /// </summary>
-    [EnhancedAuthorize(Roles = "Root,Administrator,Apartment")]
+    [EnhancedAuthorize(Roles = "Root,Administrator,Apartment,Leader")]
     public class ResideRecordController : Controller
     {
         #region Field
@@ -79,6 +79,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         /// </summary>
         /// <param name="id">居住记录ID</param>
         /// <returns></returns>
+        [EnhancedAuthorize(Roles = "Root,Administrator,Apartment")]
         [HttpGet]
         public ActionResult Edit(string id)
         {
@@ -91,6 +92,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         /// </summary>
         /// <param name="model">居住记录对象</param>
         /// <returns></returns>
+        [EnhancedAuthorize(Roles = "Root,Administrator,Apartment")]
         [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult Edit(ResideRecord model)

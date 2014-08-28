@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = Model.Name;
     Layout = null;
+    var role = User.GetRole();
 }
 
 <!-- BEGIN PAGE HEADER-->
@@ -155,7 +156,10 @@
                         <p>
                             <a href="/Apartment/Building/Block/@Model.BuildingId" class="btn btn-primary ajaxify" role="button"><i class="fa fa-list"></i>&nbsp;回到楼宇</a>
                             <a href="/Apartment/Building/Floor?buildingId=@Model.BuildingId&floor=@Model.Floor" class="btn blue-hoki ajaxify" role="button"><i class="fa fa-align-center"></i>&nbsp;回到楼层</a>
-                            <a href="/Apartment/Room/Edit/@Model.RoomId" class="btn btn-warning ajaxify" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
+                            @if (new string[] { "Root", "Administrator", "Estate", "Apartment" }.Contains(role))
+                            {
+                                <a href="/Apartment/Room/Edit/@Model.RoomId" class="btn btn-warning ajaxify" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
+                            }
                         </p>
                     </div>
                 </div>
@@ -230,7 +234,7 @@
 
 <script type="text/javascript">
     $(function () {
-        RoomTree.init($('#room-tree'));
+        apartment.initRoomTree($('#room-tree'));
 
         $('#room-tree').jstree('open_node', ['#tb_@Model.BuildingId', '#tf_@Model.BuildingId@Model.Floor']);
         $('#room-tree').jstree('select_node', '#tr_@Model.RoomId');

@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Rhea.Model.Apartment.CheckInTransaction>
+
+@{
+    Layout = null;
+}
+
+<ul class="feeds">
+    @foreach (var item in Model)
+    {
+        <li>
+            <div class="col1">
+                <div class="cont">
+                    <div class="cont-col1">
+                        <div class="label label-sm label-info">
+                            <i class="fa fa-share"></i>
+                        </div>
+                    </div>
+                    <div class="cont-col2">
+                        <div class="desc">
+                            <span class="label label-sm label-primary">房间名称</span>
+                            @item.RoomName &nbsp;
+                            <span class="label label-sm bg-green-haze">住户姓名</span>
+                            @item.InhabitantName &nbsp;
+                            <span class="label label-sm bg-green-jungle">办理人</span>
+                            @item.UserName
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col2">
+                <div class="date">
+                    @item.Time.ToDateTimeString()
+                </div>
+            </div>
+        </li>
+    }
+</ul>
+

@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "居住记录信息";
     Layout = null;
+    var role = User.GetRole();
 }
 
 <!-- BEGIN PAGE HEADER-->
@@ -148,6 +149,14 @@
                                 </tr>
                                 <tr>
                                     <td>
+                                        @Html.DisplayNameFor(model => model.MonthCount)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.MonthCount)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
                                         @Html.DisplayNameFor(model => model.TermLimit)
                                     </td>
                                     <td>
@@ -231,7 +240,10 @@
                     {
                         <a href="/Apartment/Inhabitant/Details/@Model.InhabitantId" class="btn blue-ebonyclay ajaxify" role="button"><i class="fa fa-align-right"></i>&nbsp;回到住户</a>
                     }
-                    <a href="/Apartment/ResideRecord/Edit/@Model._id" class="btn btn-warning ajaxify" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
+                    @if (new string[] { "Root", "Administrator", "Estate", "Apartment" }.Contains(role))
+                    {
+                        <a href="/Apartment/ResideRecord/Edit/@Model._id" class="btn btn-warning ajaxify" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
+                    }
                 </p>
             </div>
         </div>
