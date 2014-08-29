@@ -16,9 +16,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />    
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
-    @Styles.Render("~/Content/fontawesome")
-    @Styles.Render("~/Plugin/bootstrap")
-    @Styles.Render("~/Plugin/uniform")   
+    @Styles.Render("~/Content2/core")
+    <link href="/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css" />
     <!-- END GLOBAL MANDATORY STYLES -->
     <!-- BEGIN PAGE LEVEL STYLES -->
     <link href="/Content/login-soft.css" rel="stylesheet" type="text/css" />
@@ -106,17 +105,14 @@
     <script src="/plugins/respond.min.js"></script>
     <script src="/plugins/excanvas.min.js"></script>
     <![endif]-->
-    @Scripts.Render("~/bundles/jqueryui")
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/bootstrap")   
-    <script src="/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+    @Scripts.Render("~/bundles2/core")
+    @Scripts.Render("~/bundles2/core-plugin")
     <!-- END CORE PLUGINS -->
     <!-- BEGIN PAGE LEVEL PLUGINS -->
     <script src="/plugins/backstretch/jquery.backstretch.min.js" type="text/javascript"></script>  
     <!-- END PAGE LEVEL PLUGINS -->
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
-    <script src="/scripts/metronic.js" type="text/javascript"></script>
-    <script src="/scripts/layout.js" type="text/javascript"></script>   
+    @Scripts.Render("~/bundles2/rhea")
     <script src="/scripts/login-soft.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL SCRIPTS -->
     <script type="text/javascript">

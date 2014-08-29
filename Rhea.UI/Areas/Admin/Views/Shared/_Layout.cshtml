@@ -11,20 +11,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
-    @Styles.Render("~/Content/fontawesome")
-    @Styles.Render("~/Plugin/bootstrap")
-    @Styles.Render("~/Plugin/uniform")
-    @Styles.Render("~/Plugin/bootstrap-switch")
-    @Styles.Render("~/Plugin/datatables")
-    @Styles.Render("~/Plugin/datepicker")
+    @Styles.Render("~/Content2/core")
+    <link href="/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css" />
+    <link href="/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+    <link href="/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css" rel="stylesheet" type="text/css" />
+    <link href="/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" type="text/css" />
     <!-- END GLOBAL MANDATORY STYLES -->
     @RenderSection("styles", required: false)
     <!-- BEGIN THEME STYLES -->
-    <link href="@Url.Content("~/Content/components.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/plugins.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/layout.css")" rel="stylesheet" type="text/css" />
-    <link id="style_color" href="@Url.Content("~/Content/themes/default.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/custom.css")" rel="stylesheet" type="text/css" />
+    @Styles.Render("~/Content2/core-style-admin")
     <!-- END THEME STYLES -->
     <link rel="shortcut icon" href="favicon.ico" />
     @Scripts.Render("~/bundles/jqueryv1")
@@ -252,22 +248,10 @@
     <script src="/plugins/excanvas.min.js"></script>
     <![endif]-->
     <!-- IMPORTANT! Load jquery-ui-1.10.3.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
-    @Scripts.Render("~/bundles/jqueryui")
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/bootstrap-hover-dropdown")
-    @Scripts.Render("~/bundles/slimscroll")
-    @Scripts.Render("~/bundles/blockui")
-    @Scripts.Render("~/bundles/cookie")
-    @Scripts.Render("~/bundles/uniform")
-    @Scripts.Render("~/bundles/bootstrap-switch")
-    @Scripts.Render("~/bundles/datatables")
-    @Scripts.Render("~/bundles/datepicker")
-    @Scripts.Render("~/bundles/noty")
+    @Scripts.Render("~/bundles2/core")
+    @Scripts.Render("~/bundles2/core-plugin")
     <!-- END CORE PLUGINS -->
-    <script src="/scripts/metronic.js" type="text/javascript"></script>
-    <script src="/scripts/layout.js" type="text/javascript"></script>
-    <script src="@Url.Content("~/Scripts/rhea.js")" type="text/javascript"></script>
+    @Scripts.Render("~/bundles2/rhea")
     <script type="text/javascript">
         jQuery(document).ready(function () {
             Metronic.init(); // init metronic core components

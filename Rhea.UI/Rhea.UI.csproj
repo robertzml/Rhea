@@ -193,6 +193,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\components.css" />
     <Content Include="Content\custom.css" />
     <Content Include="Content\estate.css" />
@@ -210,6 +214,7 @@
     <Content Include="Content\themes\light2.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Areas\Admin\Views\web.config" />
@@ -639,6 +644,11 @@
     <Content Include="Areas\Apartment\Views\Transaction\Extend.cshtml" />
     <Content Include="Areas\Apartment\Views\Home\LastCheckIn.cshtml" />
     <Content Include="Areas\Apartment\Views\Home\LastCheckOut.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="plugins\jquery-1.11.0.min.js" />
@@ -696,6 +706,8 @@
     <Content Include="Scripts\account.js" />
     <Content Include="Scripts\admin.js" />
     <Content Include="Scripts\apartment.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\datatable.js" />
     <Content Include="Scripts\html5shiv.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

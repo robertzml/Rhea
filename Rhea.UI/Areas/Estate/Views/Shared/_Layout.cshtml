@@ -3,10 +3,9 @@
 }
 
 @section styles {
-    <link href="/Content/estate.css" rel="stylesheet" type="text/css" />
-    @Styles.Render("~/Plugin/colorbox")
+    <link href="/Content/estate.css" rel="stylesheet" type="text/css" /> 
+    <link href="/plugins/colorbox/colorbox.css" rel="stylesheet" type="text/css" />
 }
-
 
 <!-- BEGIN SIDEBAR -->
 <div class="page-sidebar-wrapper">
@@ -88,7 +87,7 @@
 </div>
 <!-- END CONTENT -->
 @section scripts {
-    @Scripts.Render("~/bundles/colorbox")
+    <script src="/plugins/colorbox/jquery.colorbox-min.js" type="text/javascript"></script>
 
     <script type="text/javascript">
         $(function () {

@@ -46,25 +46,7 @@ namespace Rhea.UI
                       "~/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-CN.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/fileinput").Include(
-                "~/plugins/bootstrap-fileinput/bootstrap-fileinput.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/cookie").Include(
-                "~/plugins/jquery.cokie.min.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/blockui").Include(
-                "~/plugins/jquery.blockui.min.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap-hover-dropdown").Include(
-                "~/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/slimscroll").Include(
-                "~/plugins/jquery-slimscroll/jquery.slimscroll.min.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/uniform").Include(
-                "~/plugins/uniform/jquery.uniform.min.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap-switch").Include(
-                "~/plugins/bootstrap-switch/js/bootstrap-switch.min.js"));
+                "~/plugins/bootstrap-fileinput/bootstrap-fileinput.js"));                          
 
             bundles.Add(new ScriptBundle("~/bundles/fileupload").Include(
                 "~/plugins/jquery-file-upload/js/vendor/load-image.min.js",
@@ -75,33 +57,72 @@ namespace Rhea.UI
                 "~/plugins/jquery-file-upload/js/jquery.fileupload-image.js",
                 "~/plugins/jquery-file-upload/js/jquery.fileupload-validate.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/select2").Include(
-                "~/plugins/select2/select2.min.js",
-                "~/plugins/select2/select2_locale_zh-CN.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/jstree").Include(
-                "~/plugins/jstree/jstree.min.js"));
+          
 
             bundles.Add(new ScriptBundle("~/bundles/colorbox").Include(
                 "~/plugins/colorbox/jquery.colorbox-min.js"));
 
+
+            bundles.Add(new ScriptBundle("~/bundles2/core").Include(
+                "~/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js",
+                "~/plugins/jquery-slimscroll/jquery.slimscroll.min.js",
+                "~/Scripts/jquery.validate*",
+                "~/Scripts/localization/messages_zh.js",
+                "~/Scripts/bootstrap.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles2/core-plugin").Include(
+                "~/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js",
+                "~/plugins/jquery-slimscroll/jquery.slimscroll.min.js",
+                "~/plugins/jquery.blockui.min.js",
+                "~/plugins/jquery.cokie.min.js",
+                "~/plugins/uniform/jquery.uniform.min.js",
+                "~/plugins/bootstrap-switch/js/bootstrap-switch.min.js",
+                "~/plugins/datatables/media/js/jquery.dataTables.min.js",
+                "~/plugins/datatables/extensions/TableTools/js/dataTables.tableTools.min.js",
+                "~/plugins/datatables/extensions/Scroller/js/dataTables.scroller.min.js",
+                "~/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js",
+                "~/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js",
+                "~/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-CN.js",
+                "~/plugins/noty/jquery.noty.js",
+                "~/plugins/noty/layouts/top.js",
+                "~/plugins/noty/themes/default.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles2/rhea").Include(
+                "~/scripts/metronic.js",
+                "~/scripts/layout.js",
+                "~/scripts/rhea.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles2/apartment").Include(
+                "~/plugins/select2/select2.min.js",
+                "~/plugins/select2/select2_locale_zh-CN.js",
+                "~/plugins/jstree/jstree.min.js",
+                "~/plugins/colorbox/jquery.colorbox-min.js",
+                "~/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js",
+                "~/plugins/jquery-form/jquery.form.js",
+                "~/Scripts/apartment.js"));
+
             // For css
-            bundles.Add(new StyleBundle("~/Content/fontawesome").Include(
-                      "~/Content/font-awesome.min.css"));
+            bundles.Add(new StyleBundle("~/Content2/core").Include(
+                     "~/Content/font-awesome.css",
+                     "~/Content/bootstrap.css"));
 
-            bundles.Add(new StyleBundle("~/Content/admin").Include(
-                     "~/Content/admin.css",
-                     "~/Content/admin.custom.css"));
+            bundles.Add(new StyleBundle("~/Content2/core-style").Include(
+                     "~/Content/components.css",
+                     "~/Content/plugins.css",
+                     "~/Content/layout.css",
+                     "~/Content/themes/grey.css",
+                     "~/Content/custom.css"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+            bundles.Add(new StyleBundle("~/Content2/core-style-admin").Include(
+                     "~/Content/components.css",
+                     "~/Content/plugins.css",
+                     "~/Content/layout.css",
+                     "~/Content/themes/default.css",
+                     "~/Content/custom.css"));
+         
 
             bundles.Add(new StyleBundle("~/Plugin/bootstrap").Include(
-                     "~/plugins/bootstrap/css/bootstrap.min.css"));
-
-            bundles.Add(new StyleBundle("~/Plugin/uniform").Include(
-                     "~/plugins/uniform/css/uniform.default.css"));
+                     "~/plugins/bootstrap/css/bootstrap.min.css"));         
 
             bundles.Add(new StyleBundle("~/Plugin/datatables").Include(
                 "~/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css",
@@ -111,10 +132,7 @@ namespace Rhea.UI
                      "~/plugins/jquery-ui/jquery-ui.min.css"));
 
             bundles.Add(new StyleBundle("~/Plugin/datepicker").Include(
-                    "~/plugins/bootstrap-datepicker/css/datepicker3.css"));
-
-            bundles.Add(new StyleBundle("~/Plugin/bootstrap-switch").Include(
-                "~/plugins/bootstrap-switch/css/bootstrap-switch.min.css"));
+                    "~/plugins/bootstrap-datepicker/css/datepicker3.css"));         
 
             bundles.Add(new StyleBundle("~/Plugin/fileinput").Include(
                 "~/plugins/bootstrap-fileinput/bootstrap-fileinput.css"));
@@ -138,7 +156,7 @@ namespace Rhea.UI
 #if DEBUG
             BundleTable.EnableOptimizations = false;
 #else
-            BundleTable.EnableOptimizations = false;
+            BundleTable.EnableOptimizations = true;
 #endif
         }
     }
