@@ -73,6 +73,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                 record.EnterDate = model.EnterDate;
                 record.ExpireDate = model.ExpireDate;
                 record.TermLimit = model.TermLimit;
+                record.MonthCount = model.MonthCount;
                 record.ReceiptNumber = model.ReceiptNumber;
                 record.Remark = model.RecordRemark;
                 record.Status = 0;
@@ -157,7 +158,38 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         [HttpPost]
         public ActionResult Extend(ExtendModel model)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                ResideRecord record = new ResideRecord();
+                record.RoomId = model.RoomId;
+                record.ResideType = (int)ResideType.Normal;
+                record.Rent = model.Rent;
+                record.EnterDate = model.EnterDate;
+                record.ExpireDate = model.ExpireDate;
+                record.TermLimit = model.TermLimit;
+                record.MonthCount = model.MonthCount;
+                record.Remark = model.Remark;
+                record.Status = (int)EntityStatus.ExtendTime;
+                record.Files = model.RecordFile.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+
+                User user = PageService.GetCurrentUser(User.Identity.Name);
+                TransactionBusiness business = new TransactionBusiness();
+                ErrorCode result = business.Extend(model.InhabitantId, record, model.RoomId, user);
+
+                if (result == ErrorCode.Success)
+                {
+                    ViewBag.Message = "延期办理成功。";
+                    return View("ExtendResult");
+                }
+                else
+                {
+                    ViewBag.Message = "延期办理失败。" + business.ErrorMessage;
+                    return View("ExtendResult");
+                }
+            }
+
+            ViewBag.Message = "输入有误，请重新输入。";
+            return View("ExtendResult");
         }
         #endregion //Action
     }

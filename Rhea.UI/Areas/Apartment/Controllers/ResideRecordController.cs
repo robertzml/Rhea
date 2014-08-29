@@ -49,6 +49,13 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         public ActionResult Details(string id)
         {
             var data = this.recordBusiness.Get(id);
+            if (data.Files != null && data.Files.Length != 0)
+            {
+                for (int i = 0; i < data.Files.Length; i++)
+                {
+                    data.Files[i] = RheaConstant.ApartmentRecord + data.Files[i];
+                }
+            }
             return View(data);
         }
 
@@ -99,6 +106,9 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         {
             if (ModelState.IsValid)
             {
+                ResideRecord old = this.recordBusiness.Get(model._id);
+                model.Files = old.Files;
+
                 ErrorCode result = this.recordBusiness.Update(model);
                 if (result != ErrorCode.Success)
                 {
@@ -129,6 +139,71 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                 }
 
                 return RedirectToAction("Details", new { id = model._id });
+            }
+
+            return View(model);
+        }
+
+        /// <summary>
+        /// 上传附件
+        /// </summary>
+        /// <param name="id">居住记录ID</param>
+        /// <returns></returns>
+        [EnhancedAuthorize(Roles = "Root,Administrator,Apartment")]
+        [HttpGet]
+        public ActionResult UploadFiles(string id)
+        {
+            var data = this.recordBusiness.Get(id);
+            return View(data);
+        }
+
+        /// <summary>
+        /// 上传附件
+        /// </summary>
+        /// <param name="model">居住记录模型</param>
+        /// <returns></returns>
+        [EnhancedAuthorize(Roles = "Root,Administrator,Apartment")]
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult UploadFiles(ResideRecord model)
+        {
+            if (ModelState.IsValid)
+            {
+                string files = Request.Form["recordFile"];
+
+                ResideRecord record = this.recordBusiness.Get(model._id);
+                record.Files = files.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+
+                ErrorCode result = this.recordBusiness.Update(record);
+                if (result != ErrorCode.Success)
+                {
+                    ModelState.AddModelError("", "保存居住记录失败");
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
+                }
+
+                //log
+                User user = PageService.GetCurrentUser(User.Identity.Name);
+                Log log = new Log
+                {
+                    Title = "上传居住记录附件",
+                    Time = DateTime.Now,
+                    Type = (int)LogType.ResideRecordUploadFile,
+                    Content = string.Format("上传居住记录附件， ID:{0}, 住户姓名:{1}, 部门:{2}, 房间ID:{3}, 房间名称:{4}。",
+                        record._id, record.InhabitantName, record.InhabitantDepartment, record.RoomId, record.GetApartmentRoom().Name),
+                    UserId = user._id,
+                    UserName = user.Name
+                };
+
+                result = this.recordBusiness.Log(record._id, log);
+                if (result != ErrorCode.Success)
+                {
+                    ModelState.AddModelError("", "记录日志失败");
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
+                }
+
+                return RedirectToAction("Details", new { id = record._id });
             }
 
             return View(model);

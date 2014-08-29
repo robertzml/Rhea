@@ -174,6 +174,7 @@
     <Compile Include="Areas\Estate\EstateAreaRegistration.cs" />
     <Compile Include="Areas\Estate\Models\BuildingModels.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\EnhancedAuthorizeAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -199,6 +200,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\components.css" />
     <Content Include="Content\custom.css" />
+    <Content Include="Content\error.css" />
     <Content Include="Content\estate.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
@@ -649,6 +651,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Areas\Apartment\Views\Transaction\ExtendResult.cshtml" />
+    <Content Include="Areas\Apartment\Views\ResideRecord\UploadFiles.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="plugins\jquery-1.11.0.min.js" />
@@ -751,6 +755,7 @@
     <Content Include="Views\Account\UploadAvatarResult.cshtml" />
     <Content Include="Views\Home\Menu.cshtml" />
     <Content Include="Views\Home\MobileMenu.cshtml" />
+    <Content Include="Views\Error\E500.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

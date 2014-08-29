@@ -54,7 +54,7 @@ namespace Rhea.Model
 
         /// <summary>
         /// 居住记录类
-        /// 53:已延期
+        /// 53:已延期，记录关闭
         /// </summary>
         [Display(Name = "已延期")]
         ExtendOut = 53,

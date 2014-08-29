@@ -23,29 +23,33 @@ namespace Rhea.UI.Services
             SetValues(fileInfo.Name, (int)fileInfo.Length, fileInfo.FullName);
         }
 
-        public FilesStatus(string fileName, int fileLength, string fullPath)
+        public FilesStatus(string fileName, int fileLength, string fullPath, string directory)
         {
-            SetValues(fileName, fileLength, fullPath);
+            SetValues(fileName, fileLength, fullPath, directory);
         }
         #endregion //Constructor
 
         #region Function
-        private void SetValues(string fileName, int fileLength, string fullPath)
+        private void SetValues(string fileName, int fileLength, string fullPath, string directory = "")
         {
             name = fileName;
             type = "image/png";
             size = fileLength;
             progress = "1.0";
-            url = HandlerPath + "UploadHandler.ashx?f=" + fileName;
+            this.directory = directory;
+            if (directory == "")
+                url = HandlerPath + "UploadHandler.ashx?f=" + fileName;
+            else
+                url = HandlerPath + "UploadHandler.ashx?f=" + directory + "/" + fileName;
             delete_url = HandlerPath + "UploadHandler.ashx?f=" + fileName;
             delete_type = "DELETE";
 
             var ext = Path.GetExtension(fullPath);
 
             var fileSize = ConvertBytesToMegabytes(new FileInfo(fullPath).Length);
-            if (fileSize > 3 || !IsImage(ext)) 
+            if (fileSize > 3 || !IsImage(ext))
                 thumbnail_url = "/Content/img/generalFile.png";
-            else                 
+            else
                 thumbnail_url = @"data:image/png;base64," + EncodeFile(fullPath);
         }
 
@@ -73,6 +77,12 @@ namespace Rhea.UI.Services
         public string type { get; set; }
         public int size { get; set; }
         public string progress { get; set; }
+
+        /// <summary>
+        /// 子目录
+        /// </summary>
+        public string directory { get; set; }
+
         public string url { get; set; }
         public string thumbnail_url { get; set; }
         public string delete_url { get; set; }

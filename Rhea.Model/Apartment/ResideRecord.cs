@@ -139,6 +139,13 @@ namespace Rhea.Model.Apartment
         public string ReceiptNumber { get; set; }
 
         /// <summary>
+        /// 附件
+        /// </summary>
+        [BsonElement("files")]
+        [Display(Name = "附件")]
+        public string[] Files { get; set; }
+
+        /// <summary>
         /// 状态
         /// </summary>
         /// <remarks>

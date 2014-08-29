@@ -239,6 +239,7 @@ var Rhea = function () {
 			error: function (xhr, ajaxOptions, thrownError) {
 				Metronic.stopPageLoading();
 				pageContentBody.html('<h4>Could not load the requested content.</h4>');
+				//pageContentBody.load('/Error_500_1');
 			}
 		});
 	}
@@ -274,6 +275,7 @@ var Rhea = function () {
 			error: function (xhr, ajaxOptions, thrownError) {
 				Metronic.stopPageLoading();
 				pageContentBody.html('<h4>Could not load the requested content.</h4>');
+				//pageContentBody.load('/Error_500_1');
 			}
 		});
 	}

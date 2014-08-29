@@ -62,11 +62,22 @@ namespace Rhea.Business.Apartment
         /// <summary>
         /// 添加退房办理业务记录
         /// </summary>
-        /// <param name="data">退房办理业务记录</param>
+        /// <param name="data">退房办理业务记录对象</param>
         /// <returns></returns>
         private ErrorCode CreateCheckOutTransaction(CheckOutTransaction data)
         {
             ITransactionRepository repository = new MongoCheckOutTransactionRepository();
+            return repository.Create(data);
+        }
+
+        /// <summary>
+        /// 添加延期办理业务记录
+        /// </summary>
+        /// <param name="data">延期办理业务记录对象</param>
+        /// <returns></returns>
+        private ErrorCode CreateExtendTransaction(ExtendTransaction data)
+        {
+            ITransactionRepository repository = new MongoExtendTransactionRepository();
             return repository.Create(data);
         }
         #endregion //Function
@@ -170,8 +181,8 @@ namespace Rhea.Business.Apartment
                     Title = "入住业务办理",
                     Time = now,
                     Type = (int)LogType.ApartmentCheckIn,
-                    Content = string.Format("青教普通入住业务办理, 住户ID:{0}, 姓名:{1}, 部门:{2}, 入住房间ID:{3}, 房间名称:{4}, 入住时间:{5}, 到期时间:{6}, 居住类型:正常居住, 记录ID:{7}。",
-                        inhabitant._id, inhabitant.Name, inhabitant.DepartmentName, room.RoomId, room.Name, record.EnterDate, record.ExpireDate, record._id),
+                    Content = string.Format("青教普通入住业务办理, 住户ID:{0}, 姓名:{1}, 部门:{2}, 入住房间ID:{3}, 房间名称:{4}, 入住时间:{5}, 到期时间:{6}, 居住类型:正常居住, 记录ID:{7}, 业务ID:{8}。",
+                        inhabitant._id, inhabitant.Name, inhabitant.DepartmentName, room.RoomId, room.Name, record.EnterDate, record.ExpireDate, record._id, transaction._id),
                     UserId = user._id,
                     UserName = user.Name,
                     Tag = record._id
@@ -303,8 +314,8 @@ namespace Rhea.Business.Apartment
                     Title = "退房业务办理",
                     Time = now,
                     Type = (int)LogType.ApartmentCheckOut,
-                    Content = string.Format("退房业务办理, 住户ID:{0}, 姓名:{1}, 部门:{2}, 入住房间ID:{3}, 房间名称:{4}, 入住时间:{5}, 退房时间:{6}, 记录ID:{7}。",
-                        inhabitant._id, inhabitant.Name, inhabitant.DepartmentName, room.RoomId, room.Name, record.EnterDate, record.LeaveDate, record._id),
+                    Content = string.Format("退房业务办理, 住户ID:{0}, 姓名:{1}, 部门:{2}, 入住房间ID:{3}, 房间名称:{4}, 入住时间:{5}, 退房时间:{6}, 记录ID:{7}, 业务ID:{8}。",
+                        inhabitant._id, inhabitant.Name, inhabitant.DepartmentName, room.RoomId, room.Name, record.EnterDate, record.LeaveDate, record._id, transaction._id),
                     UserId = user._id,
                     UserName = user.Name,
                     Tag = record._id
@@ -318,6 +329,138 @@ namespace Rhea.Business.Apartment
 
                 //更新日志
                 inhabitantBusiness.LogItem(inhabitant._id, log);
+                recordBusiness.LogItem(record._id, log);
+                roomBusiness.LogItem(room._id, log);
+            }
+            catch (Exception e)
+            {
+                this.errorMessage = e.Message;
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
+
+        /// <summary>
+        /// 延期办理
+        /// </summary>
+        /// <param name="inhabitantId">住户ID</param>
+        /// <param name="record">居住记录对象</param>
+        /// <param name="roomId">房间ID</param>
+        /// <param name="user">操作用户</param>
+        /// <returns></returns>
+        public ErrorCode Extend(string inhabitantId, ResideRecord record, int roomId, User user)
+        {
+            try
+            {
+                ErrorCode result;
+                DateTime now = DateTime.Now;
+
+                //检查用户
+                InhabitantBusiness inhabitantBusiness = new InhabitantBusiness();
+                Inhabitant inhabitant = inhabitantBusiness.Get(inhabitantId);
+                if (inhabitant == null)
+                    return ErrorCode.ObjectNotFound;
+                if (inhabitant.Status == (int)EntityStatus.InhabitantMoveOut)
+                    return ErrorCode.InhabitantMoveOut;
+
+                //检查房间
+                ApartmentRoomBusiness roomBusiness = new ApartmentRoomBusiness();
+                ApartmentRoom room = roomBusiness.Get(roomId);
+                if (room == null)
+                    return ErrorCode.ObjectNotFound;
+                if (room.ResideType == (int)ResideType.Available)
+                    return ErrorCode.RoomAvailable;
+
+                //检查原记录
+                ResideRecordBusiness recordBusiness = new ResideRecordBusiness();
+                var records = recordBusiness.GetByInhabitant(inhabitantId); //住户所有居住记录
+                if (records == null || records.Count() == 0)
+                    return ErrorCode.ResideRecordNotExist;
+                ResideRecord lastRecord = records.SingleOrDefault(r => r.RoomId == roomId &&
+                    (r.Status == (int)EntityStatus.Normal || r.Status == (int)EntityStatus.ExtendTime || r.Status == (int)EntityStatus.OverTime));
+                if (lastRecord == null)
+                    return ErrorCode.ResideRecordNotExist;
+
+
+                //更新原居住记录
+                lastRecord.LeaveDate = record.EnterDate;
+                lastRecord.Status = (int)EntityStatus.ExtendOut;
+                result = recordBusiness.Update(lastRecord);
+                if (result != ErrorCode.Success)
+                {
+                    this.errorMessage = "居住记录更新出错：" + result.DisplayName();
+                    return result;
+                }
+
+                //更新住户状态
+                inhabitant.Status = (int)GetInhabitantStatus(inhabitant._id);
+                if (inhabitant.Status != (int)EntityStatus.InhabitantExpire)
+                    inhabitant.Status = (int)EntityStatus.InhabitantExtend;
+                result = inhabitantBusiness.Update(inhabitant);
+                if (result != ErrorCode.Success)
+                {
+                    this.errorMessage = "住户状态更新出错：" + result.DisplayName();
+                    return result;
+                }
+
+                //添加新居住记录
+                record.InhabitantId = inhabitant._id;
+                record.InhabitantName = inhabitant.Name;
+                record.InhabitantDepartment = inhabitant.DepartmentName;
+                record.RoomId = roomId;
+                record.RegisterTime = now;
+                result = recordBusiness.Create(record);
+                if (result != ErrorCode.Success)
+                {
+                    this.errorMessage = "居住记录添加出错：" + result.DisplayName();
+                    return result;
+                }
+
+                //添加业务记录
+                ExtendTransaction transaction = new ExtendTransaction();
+                transaction.Type = (int)LogType.ApartmentExtend;
+                transaction.Time = now;
+                transaction.UserId = user._id;
+                transaction.UserName = user.Name;
+                transaction.RoomId = room.RoomId;
+                transaction.RoomName = room.Name;
+                transaction.InhabitantId = inhabitant._id;
+                transaction.InhabitantName = inhabitant.Name;
+                transaction.ResideRecordId = record._id;
+                transaction.OldResideRecordId = lastRecord._id;
+                transaction.Remark = "";
+                transaction.Status = 0;
+                result = CreateExtendTransaction(transaction);
+                if (result != ErrorCode.Success)
+                {
+                    this.errorMessage = "添加业务记录失败:" + result.DisplayName();
+                    return result;
+                }
+
+                //生成日志
+                LogBusiness logBusiness = new LogBusiness();
+                Log log = new Log
+                {
+                    Title = "延期业务办理",
+                    Time = now,
+                    Type = (int)LogType.ApartmentExtend,
+                    Content = string.Format("青教延期业务办理, 住户ID:{0}, 姓名:{1}, 部门:{2}, 入住房间ID:{3}, 房间名称:{4}, 入住时间:{5}, 到期时间:{6}, 居住类型:延期居住, 记录ID:{7}, 业务ID:{8}。",
+                        inhabitant._id, inhabitant.Name, inhabitant.DepartmentName, room.RoomId, room.Name, record.EnterDate, record.ExpireDate, record._id, transaction._id),
+                    UserId = user._id,
+                    UserName = user.Name,
+                    Tag = record._id
+                };
+                result = logBusiness.Create(log);
+                if (result != ErrorCode.Success)
+                {
+                    this.errorMessage = "记录日志失败:" + result.DisplayName();
+                    return result;
+                }
+
+                //更新日志
+                inhabitantBusiness.LogItem(inhabitant._id, log);
+                recordBusiness.LogItem(lastRecord._id, log);
                 recordBusiness.LogItem(record._id, log);
                 roomBusiness.LogItem(room._id, log);
             }

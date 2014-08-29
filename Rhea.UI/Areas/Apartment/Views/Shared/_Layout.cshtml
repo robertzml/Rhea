@@ -7,6 +7,7 @@
     <link href="/plugins/select2/select2.css" rel="stylesheet" type="text/css" />
     <link href="/plugins/jstree/themes/default/style.min.css" rel="stylesheet" type="text/css" />
     <link href="/plugins/colorbox/colorbox.css" rel="stylesheet" type="text/css" />
+    @Styles.Render("~/Plugin/fileupload")
     @RenderSection("styles", required: false)
 }
 
@@ -131,17 +132,11 @@
 <!-- END CONTENT -->
 
 @section scripts {
+    @Scripts.Render("~/bundles/fileupload")
     @Scripts.Render("~/bundles2/apartment")
     <script type="text/javascript">
         $(function () {
-            $('.page-sidebar i.ajax-link').click(function (e) {
-                var url = "/Apartment/Building/Block";
-                var id = $(this).attr('ref');
-                var request = { id: id };
-
-                Rhea.ajaxNavPage($(this), e, url, request);
-                return false;
-            });
+            apartment.initSidebarLink();
         })
     </script>
     @RenderSection("scripts", required: false)

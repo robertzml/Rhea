@@ -237,7 +237,13 @@ namespace Rhea.UI.Areas.Apartment.Models
         /// 月份数
         /// </summary>
         [Display(Name = "月份数")]
-        public string MonthCount { get; set; }
+        public int MonthCount { get; set; }
+
+        /// <summary>
+        /// 年限
+        /// </summary>
+        [Display(Name = "年限")]
+        public string TermLimit { get; set; }
 
         /// <summary>
         /// 房租
@@ -250,5 +256,11 @@ namespace Rhea.UI.Areas.Apartment.Models
         /// </summary>
         [Display(Name = "备注")]
         public string Remark { get; set; }
+
+        /// <summary>
+        /// 附件
+        /// </summary>
+        [Display(Name = "附件")]
+        public string RecordFile { get; set; }
     }
 }

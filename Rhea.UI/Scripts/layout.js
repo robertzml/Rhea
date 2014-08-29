@@ -159,7 +159,7 @@ var Layout = function () {
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     Metronic.stopPageLoading();
-                    pageContentBody.html('<h4>Could not load the requested content.</h4>');
+					pageContentBody.load('/Error/E500');
                 }
             });
         });
@@ -191,7 +191,7 @@ var Layout = function () {
                     Metronic.initAjax(); // initialize core stuff
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
-                    pageContentBody.html('<h4>Could not load the requested content.</h4>');
+					pageContentBody.load('/Error/E500');
                     Metronic.stopPageLoading();
                 }
             });

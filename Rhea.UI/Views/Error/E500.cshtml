@@ -1,0 +1,57 @@
+﻿@{
+    Layout = null;
+}
+<link href="~/Content/error.css" rel="stylesheet" type="text/css" />
+
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">
+    500 Page
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index", new { area = "", controller ="Home" })">主页</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">500 Page</a>
+        </li>
+    </ul>
+    <div class="page-toolbar">
+        <div class="btn-group pull-right">
+            <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
+                Actions <i class="fa fa-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu pull-right" role="menu">
+                <li>
+                    <a href="#">Action</a>
+                </li>
+                <li>
+                    <a href="#">Another action</a>
+                </li>
+                <li>
+                    <a href="#">Something else here</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12 page-500">
+        <div class=" number">
+            500
+        </div>
+        <div class=" details">
+            <h3>Oops! Something went wrong.</h3>
+            <p>
+                We are fixing it!<br />
+                Please come back in a while.<br /><br />
+            </p>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT-->
+

@@ -49,6 +49,7 @@ namespace Rhea.UI
                 "~/plugins/bootstrap-fileinput/bootstrap-fileinput.js"));                          
 
             bundles.Add(new ScriptBundle("~/bundles/fileupload").Include(
+                "~/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js",
                 "~/plugins/jquery-file-upload/js/vendor/load-image.min.js",
                 "~/plugins/jquery-file-upload/js/vendor/canvas-to-blob.min.js",
                 "~/plugins/jquery-file-upload/js/jquery.iframe-transport.js",
@@ -66,6 +67,7 @@ namespace Rhea.UI
             bundles.Add(new ScriptBundle("~/bundles2/core").Include(
                 "~/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js",
                 "~/plugins/jquery-slimscroll/jquery.slimscroll.min.js",
+                "~/Scripts/jquery.unobtrusive*",
                 "~/Scripts/jquery.validate*",
                 "~/Scripts/localization/messages_zh.js",
                 "~/Scripts/bootstrap.js"));

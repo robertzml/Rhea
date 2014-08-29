@@ -236,15 +236,14 @@
     <script src="/plugins/respond.min.js"></script>
     <script src="/plugins/excanvas.min.js"></script>
     <![endif]-->
-    <!-- IMPORTANT! Load jquery-ui-1.10.3.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
     @Scripts.Render("~/bundles2/core")
     @Scripts.Render("~/bundles2/core-plugin")
     <!-- END CORE PLUGINS -->
     @Scripts.Render("~/bundles2/rhea")
     <script type="text/javascript">
         jQuery(document).ready(function () {
-            Metronic.init(); // init metronic core components
-            Layout.init(); // init current layout
+            Metronic.init();
+            Layout.init();
         });
     </script>
     @if (TempData["Message"] != null && !String.IsNullOrEmpty(TempData["Message"].ToString()))

@@ -19,6 +19,11 @@ namespace Rhea.UI.Services
         /// 保存子目录
         /// </summary>
         private string directory = "";
+
+        /// <summary>
+        /// 是否重命名
+        /// </summary>
+        private bool randomName = false;
         #endregion //Field
 
         #region Constructor
@@ -127,13 +132,21 @@ namespace Rhea.UI.Services
             for (int i = 0; i < context.Request.Files.Count; i++)
             {
                 var file = context.Request.Files[i];
+                string newName = file.FileName;
+                if (randomName)
+                {
+                    DateTime now = DateTime.Now;
+                    newName = string.Format("{0}{1}{2}{3}{4}{5}{6}{7}", now.Year, now.Month.ToString().PadLeft(2, '0'), now.Day.ToString().PadLeft(2, '0'),
+                        now.Hour.ToString().PadLeft(2, '0'), now.Minute.ToString().PadLeft(2, '0'), now.Second.ToString().PadLeft(2, '0'), now.Millisecond.ToString().PadLeft(3, '0'),
+                        Path.GetExtension(file.FileName).ToLower());
+                }
 
-                var fullPath = StorageRoot + Path.GetFileName(file.FileName);
+                var fullPath = StorageRoot + Path.GetFileName(newName);
+                string fullName = Path.GetFileName(newName);
 
                 file.SaveAs(fullPath);
-
-                string fullName = Path.GetFileName(file.FileName);
-                statuses.Add(new FilesStatus(fullName, file.ContentLength, fullPath));
+               
+                statuses.Add(new FilesStatus(fullName, file.ContentLength, fullPath, this.directory));
             }
         }
 
@@ -199,6 +212,10 @@ namespace Rhea.UI.Services
             string d = context.Request.QueryString["directory"];
             if (!string.IsNullOrEmpty(d))
                 this.directory = d;
+
+            string random = context.Request.QueryString["random"];
+            if (random == "time")
+                this.randomName = true;
 
             context.Response.AddHeader("Pragma", "no-cache");
             context.Response.AddHeader("Cache-Control", "private, no-cache");

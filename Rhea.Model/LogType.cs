@@ -169,6 +169,12 @@ namespace Rhea.Model
         ResideRecordEdit = 156,
 
         /// <summary>
+        /// 上传居住记录附件
+        /// </summary>
+        [Display(Name = "上传居住记录附件")]
+        ResideRecordUploadFile = 157,
+
+        /// <summary>
         /// 入住业务办理
         /// </summary>
         [Display(Name = "入住业务办理")]
@@ -178,6 +184,12 @@ namespace Rhea.Model
         /// 退房业务办理
         /// </summary>
         [Display(Name = "退房业务办理")]
-        ApartmentCheckOut = 161
+        ApartmentCheckOut = 161,
+
+        /// <summary>
+        /// 延期业务办理
+        /// </summary>
+        [Display(Name = "延期业务办理")]
+        ApartmentExtend = 162
     }
 }

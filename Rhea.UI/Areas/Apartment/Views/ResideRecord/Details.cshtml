@@ -222,6 +222,20 @@
                                 </tr>
                                 <tr>
                                     <td>
+                                        附件
+                                    </td>
+                                    <td>
+                                        @if (Model.Files != null && Model.Files.Length != 0) 
+                                        { 
+                                            for(int i = 0; i < Model.Files.Length; i++)
+                                            {
+                                                <a class="file-attach" href="@Model.Files[i]">附件_@i</a>
+                                            }
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
                                         最后编辑时间
                                     </td>
                                     <td>
@@ -243,6 +257,7 @@
                     @if (new string[] { "Root", "Administrator", "Estate", "Apartment" }.Contains(role))
                     {
                         <a href="/Apartment/ResideRecord/Edit/@Model._id" class="btn btn-warning ajaxify" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
+                        <a href="/Apartment/ResideRecord/UploadFiles/@Model._id" class="btn purple ajaxify" role="button"><i class="fa fa-upload"></i>&nbsp;上传附件</a>
                     }
                 </p>
             </div>
@@ -250,3 +265,9 @@
     </div>
 </div>
 <!-- END PAGE CONTENT-->
+
+<script type="text/javascript">
+    $(function () {
+        $(".file-attach").colorbox({ rel: 'file-attach' });
+    })
+</script>
