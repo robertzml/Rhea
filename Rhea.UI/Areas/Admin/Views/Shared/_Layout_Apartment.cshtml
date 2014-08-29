@@ -1,0 +1,100 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    bool isRoot = User.IsInRole2("Root");
+}
+
+<!-- BEGIN SIDEBAR -->
+<div class="page-sidebar-wrapper">
+    <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+    <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+    <div class="page-sidebar navbar-collapse collapse">
+        <!-- BEGIN SIDEBAR MENU1 -->
+        <ul class="page-sidebar-menu hidden-sm hidden-xs" id="left-nav" data-auto-scroll="true" data-slide-speed="200">
+            <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
+            <!-- DOC: This is mobile version of the horizontal menu. The desktop version is defined(duplicated) in the header above -->
+            <li class="sidebar-search-wrapper">
+                <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+                <form class="sidebar-search sidebar-search-bordered" action="#" method="POST">
+                    <a href="javascript:;" class="remove">
+                        <i class="icon-close"></i>
+                    </a>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search...">
+                        <span class="input-group-btn">
+                            <button class="btn submit"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                </form>
+                <!-- END RESPONSIVE QUICK SEARCH FORM -->
+            </li>
+            <li class="start left-nav-first">
+                <a href="@Url.Action("Index", "Apartment")" id="apartment-home-menu">
+                    <i class="fa fa-dashboard"></i>
+                    <span class="title">
+                        青教管理
+                    </span>
+                </a>
+            </li>
+            <li class="left-nav-first">
+                <a href="javascript:;">
+                    <i class="fa fa-users"></i>
+                    <span class="title">
+                        住户管理
+                    </span>
+                    <span class="arrow">
+                    </span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="@Url.Action("List", "Inhabitant")" id="inhabitant-list-menu">
+                            住户列表
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" id="user-create-menu">
+                            添加住户
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="left-nav-first">
+                <a href="javascript:;">
+                    <i class="fa fa-book"></i>
+                    <span class="title">
+                        居住记录管理
+                    </span>
+                    <span class="arrow ">
+                    </span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="@Url.Action("List", "ResideRecord")" id="reside-record-list-menu">
+                            居住记录列表
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="last">
+                <a href="#">
+                    <i class="fa fa-user"></i>
+                    <span class="title">
+                        Login Page
+                    </span>
+                </a>
+            </li>
+        </ul>
+        <!-- END SIDEBAR MENU1 -->
+        @Html.Partial("_MenuPartial")
+    </div>
+</div>
+<!-- END SIDEBAR -->
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <div class="page-content">
+        @RenderBody()
+    </div>
+</div>
+<!-- END CONTENT -->
+@section scripts {
+    @RenderSection("scripts", required: false)
+}

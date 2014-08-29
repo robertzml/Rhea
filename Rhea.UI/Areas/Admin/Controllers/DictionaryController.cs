@@ -9,6 +9,8 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Rhea.Model.Account;
+using Rhea.UI.Services;
 
 namespace Rhea.UI.Areas.Admin.Controllers
 {
@@ -90,17 +92,37 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 model.IsCombined = false;
 
                 ErrorCode result = this.dictionaryBusiness.Create(model);
-                if (result == ErrorCode.Success)
-                {
-                    TempData["Message"] = "添加字典成功";
-                    return RedirectToAction("List", "Dictionary");
-                }
-                else
+                if (result != ErrorCode.Success)
                 {
                     TempData["Message"] = "添加字典失败";
                     ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
                 }
+
+                //log
+                User user = PageService.GetCurrentUser(User.Identity.Name);
+                Log log = new Log
+                {
+                    Title = "后台添加字典",
+                    Time = DateTime.Now,
+                    Type = (int)LogType.DictionaryCreate,
+                    Content = string.Format("添加字典, 名称:{0}, 标题:{1}。", model.Name, model.Title),
+                    UserId = user._id,
+                    UserName = user.Name
+                };
+                LogBusiness logBusiness = new LogBusiness();
+                result = logBusiness.Create(log);
+                if (result != ErrorCode.Success)
+                {
+                    TempData["Message"] = "记录日志失败";
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
+                }
+
+                TempData["Message"] = "添加字典成功";
+                return RedirectToAction("List", "Dictionary");
             }
+
             return View(model);
         }
 
@@ -132,16 +154,35 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 model.IsCombined = false;
 
                 ErrorCode result = this.dictionaryBusiness.Edit(model);
-                if (result == ErrorCode.Success)
-                {
-                    TempData["Message"] = "编辑字典成功";
-                    return RedirectToAction("List", "Dictionary");
-                }
-                else
+                if (result != ErrorCode.Success)
                 {
                     TempData["Message"] = "编辑字典失败";
                     ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
                 }
+
+                //log
+                User user = PageService.GetCurrentUser(User.Identity.Name);
+                Log log = new Log
+                {
+                    Title = "后台编辑字典",
+                    Time = DateTime.Now,
+                    Type = (int)LogType.DictionaryEdit,
+                    Content = string.Format("编辑字典, 名称:{0}, 标题:{1}。", model.Name, model.Title),
+                    UserId = user._id,
+                    UserName = user.Name
+                };
+                LogBusiness logBusiness = new LogBusiness();
+                result = logBusiness.Create(log);
+                if (result != ErrorCode.Success)
+                {
+                    TempData["Message"] = "记录日志失败";
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
+                }
+
+                TempData["Message"] = "编辑字典成功";
+                return RedirectToAction("List", "Dictionary");
             }
 
             return View(model);

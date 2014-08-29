@@ -1,0 +1,290 @@
+﻿@model Rhea.Model.Apartment.Inhabitant
+
+@{
+    ViewBag.Title = "住户编辑";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Apartment.cshtml";
+}
+
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">
+    @ViewBag.Title
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index", "Apartment")">青教管理</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">青教主页</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">@ViewBag.Title</a>
+        </li>
+    </ul>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box green">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-edit"></i>住户编辑
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+                    <a href="javascript:;" class="reload">
+                    </a>
+                    <a href="javascript:;" class="remove">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <fieldset>
+                        <legend>住户属性</legend>
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model._id)
+
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="col-md-2">属性</th>
+                                    <th class="col-md-8">值</th>
+                                    <th class="col-md-2">验证</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.JobNumber)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.JobNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td>
+                                        @Html.ValidationMessageFor(model => model.JobNumber, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.Name)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td>
+                                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.Gender)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.Gender, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td>
+                                        @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.Type)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td>
+                                        @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.DepartmentId)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.DepartmentId, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td>
+                                        @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.DepartmentName)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.DepartmentName, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td>
+                                        @Html.ValidationMessageFor(model => model.DepartmentName, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.Duty)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.Duty, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td>
+                                        @Html.ValidationMessageFor(model => model.Duty, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.Telephone)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.Telephone, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td>
+                                        @Html.ValidationMessageFor(model => model.Telephone, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.IdentityCard)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.IdentityCard, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td>
+                                        @Html.ValidationMessageFor(model => model.IdentityCard, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.Education)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.Education, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td>
+                                        @Html.ValidationMessageFor(model => model.Education, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.IsCouple)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.IsCouple, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td>
+                                        @Html.ValidationMessageFor(model => model.IsCouple, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.Marriage)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.Marriage, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td>
+                                        @Html.ValidationMessageFor(model => model.Marriage, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.AccumulatedFundsDate)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.AccumulatedFundsDate, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td>
+                                        @Html.ValidationMessageFor(model => model.AccumulatedFundsDate, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.LiHuEnterDate)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.LiHuEnterDate, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td>
+                                        @Html.ValidationMessageFor(model => model.LiHuEnterDate, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.PhotoUrl)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.PhotoUrl, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td>
+                                        @Html.ValidationMessageFor(model => model.PhotoUrl, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.Remark)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td>
+                                        @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.Status)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td>
+                                        @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <hr />
+                        <p>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;保存</button>
+                            <a href="@Url.Action("List", new { controller = "Inhabitant" })" class="btn btn-default" role="button"><i class="fa fa-list"></i>&nbsp;回到列表</a>
+                        </p>
+                    </fieldset>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT-->
+
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            Rhea.topNavActive($('#apartment-nav'));
+            Rhea.leftNavActive($('#inhabitant-list-menu'));
+
+            $('#AccumulatedFundsDate').datepicker({
+                format: "yyyy-mm-dd",
+                weekStart: 7,
+                language: "zh-CN",
+                autoclose: true
+            });
+
+            $('#LiHuEnterDate').datepicker({
+                format: "yyyy-mm-dd",
+                weekStart: 7,
+                language: "zh-CN",
+                autoclose: true
+            });
+        });
+    </script>
+}
+

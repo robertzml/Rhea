@@ -1,7 +1,9 @@
-﻿using Rhea.Business.Personnel;
+﻿using Rhea.Business;
+using Rhea.Business.Apartment;
 using Rhea.Common;
 using Rhea.Model;
-using Rhea.Model.Personnel;
+using Rhea.Model.Account;
+using Rhea.Model.Apartment;
 using Rhea.UI.Filters;
 using Rhea.UI.Services;
 using System;
@@ -10,29 +12,28 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Rhea.Model.Account;
 
 namespace Rhea.UI.Areas.Admin.Controllers
 {
     /// <summary>
-    /// 部门控制器
+    /// 住户管理控制器
     /// </summary>
     [EnhancedAuthorize(Rank = 900)]
-    public class DepartmentController : Controller
+    public class InhabitantController : Controller
     {
         #region Field
         /// <summary>
-        /// 部门业务对象
+        /// 住户业务
         /// </summary>
-        private DepartmentBusiness departmentBusiness;
+        private InhabitantBusiness inhabitantBusiness;
         #endregion //Field
 
         #region Function
         protected override void Initialize(RequestContext requestContext)
         {
-            if (departmentBusiness == null)
+            if (inhabitantBusiness == null)
             {
-                departmentBusiness = new DepartmentBusiness();
+                inhabitantBusiness = new InhabitantBusiness();
             }
 
             base.Initialize(requestContext);
@@ -41,81 +42,71 @@ namespace Rhea.UI.Areas.Admin.Controllers
 
         #region Action
         /// <summary>
-        /// 部门列表
+        /// 住户列表
         /// </summary>
         /// <returns></returns>
         public ActionResult List()
         {
-            var data = this.departmentBusiness.Get();
+            var data = this.inhabitantBusiness.Get();
             return View(data);
         }
 
         /// <summary>
-        /// 部门详细
+        /// 住户详细
         /// </summary>
-        /// <param name="id">部门ID</param>
+        /// <param name="id">住户ID</param>
         /// <returns></returns>
-        public ActionResult Details(int id)
+        public ActionResult Details(string id)
         {
-            var data = this.departmentBusiness.Get(id);
+            var data = this.inhabitantBusiness.Get(id);
             return View(data);
         }
 
         /// <summary>
-        /// 部门编辑
+        /// 住户编辑
         /// </summary>
-        /// <param name="id">部门ID</param>
+        /// <param name="id">住户ID</param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
-            var data = this.departmentBusiness.Get(id);
+            var data = this.inhabitantBusiness.Get(id);
             return View(data);
         }
 
         /// <summary>
-        /// 部门编辑
+        /// 住户编辑
         /// </summary>
-        /// <param name="model">部门对象</param>
+        /// <param name="model">住户对象</param>
         /// <returns></returns>
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult Edit(Department model)
+        public ActionResult Edit(Inhabitant model)
         {
             if (ModelState.IsValid)
             {
-                //backup
-                ErrorCode result = this.departmentBusiness.Backup(model._id);
+                //edit
+                ErrorCode result = this.inhabitantBusiness.Update(model);
                 if (result != ErrorCode.Success)
                 {
-                    TempData["Message"] = "备份部门失败";
+                    TempData["Message"] = "编辑住户失败";
                     ModelState.AddModelError("", result.DisplayName());
                     return View(model);
-                }
-
-                //edit
-                model.Status = 0;
-                result = this.departmentBusiness.Update(model);
-
-                if (result != ErrorCode.Success)
-                {
-                    TempData["Message"] = "编辑部门失败";
-                    ModelState.AddModelError("", result.DisplayName());
                 }
 
                 //log
                 User user = PageService.GetCurrentUser(User.Identity.Name);
                 Log log = new Log
                 {
-                    Title = "后台编辑部门",
+                    Title = "后台编辑青教住户",
                     Time = DateTime.Now,
-                    Type = (int)LogType.DepartmentEdit,
-                    Content = string.Format("编辑部门, ID:{0}, 名称:{1}。", model.DepartmentId, model.Name),
+                    Type = (int)LogType.InhabitantEdit,
+                    Content = string.Format("编辑青教住户， ID:{0}, 姓名:{1}, 部门:{2}。", model._id, model.Name, model.DepartmentName),
                     UserId = user._id,
                     UserName = user.Name
                 };
 
-                result = this.departmentBusiness.Log(model._id, log);
+                result = this.inhabitantBusiness.Log(model._id, log);
                 if (result != ErrorCode.Success)
                 {
                     TempData["Message"] = "记录日志失败";
@@ -123,8 +114,8 @@ namespace Rhea.UI.Areas.Admin.Controllers
                     return View(model);
                 }
 
-                TempData["Message"] = "编辑部门成功";
-                return RedirectToAction("Details", new { controller = "Department", id = model.DepartmentId });
+                TempData["Message"] = "编辑住户成功";
+                return RedirectToAction("Details", new { id = model._id });
             }
 
             return View(model);

@@ -139,10 +139,16 @@ namespace Rhea.Model
         DepartmentArchive = 63,
 
         /// <summary>
-        /// 房间分配
+        /// 字典添加
         /// </summary>
-        [Display(Name = "房间分配")]
-        RoomAssign = 70,
+        [Display(Name = "字典添加")]
+        DictionaryCreate = 70,
+
+        /// <summary>
+        /// 字典编辑
+        /// </summary>
+        [Display(Name = "字典编辑")]
+        DictionaryEdit = 71,
 
         /// <summary>
         /// 用户登录成功

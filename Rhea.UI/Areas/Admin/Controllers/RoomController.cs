@@ -126,7 +126,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 User user = PageService.GetCurrentUser(User.Identity.Name);
                 Log log = new Log
                 {
-                    Title = "添加房间",
+                    Title = "后台添加房间",
                     Time = DateTime.Now,
                     Type = (int)LogType.RoomCreate,
                     Content = string.Format("添加房间， ID:{0}, 名称:{1}。", model.RoomId, model.Name),
@@ -201,7 +201,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 User user = PageService.GetCurrentUser(User.Identity.Name);
                 Log log = new Log
                 {
-                    Title = "编辑房间",
+                    Title = "后台编辑房间",
                     Time = DateTime.Now,
                     Type = (int)LogType.RoomEdit,
                     Content = string.Format("编辑房间， ID:{0}, 名称:{1}。", model.RoomId, model.Name),

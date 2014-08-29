@@ -1,7 +1,9 @@
-﻿using Rhea.Business.Personnel;
+﻿using Rhea.Business;
+using Rhea.Business.Apartment;
 using Rhea.Common;
 using Rhea.Model;
-using Rhea.Model.Personnel;
+using Rhea.Model.Account;
+using Rhea.Model.Apartment;
 using Rhea.UI.Filters;
 using Rhea.UI.Services;
 using System;
@@ -10,29 +12,28 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Rhea.Model.Account;
 
 namespace Rhea.UI.Areas.Admin.Controllers
 {
     /// <summary>
-    /// 部门控制器
+    /// 居住记录控制器
     /// </summary>
     [EnhancedAuthorize(Rank = 900)]
-    public class DepartmentController : Controller
+    public class ResideRecordController : Controller
     {
         #region Field
         /// <summary>
-        /// 部门业务对象
+        /// 居住记录业务
         /// </summary>
-        private DepartmentBusiness departmentBusiness;
+        private ResideRecordBusiness recordBusiness;
         #endregion //Field
 
         #region Function
         protected override void Initialize(RequestContext requestContext)
         {
-            if (departmentBusiness == null)
+            if (recordBusiness == null)
             {
-                departmentBusiness = new DepartmentBusiness();
+                recordBusiness = new ResideRecordBusiness();
             }
 
             base.Initialize(requestContext);
@@ -41,81 +42,81 @@ namespace Rhea.UI.Areas.Admin.Controllers
 
         #region Action
         /// <summary>
-        /// 部门列表
+        /// 居住记录列表
         /// </summary>
         /// <returns></returns>
         public ActionResult List()
         {
-            var data = this.departmentBusiness.Get();
+            var data = this.recordBusiness.Get();
             return View(data);
         }
 
         /// <summary>
-        /// 部门详细
+        /// 居住记录详细
         /// </summary>
-        /// <param name="id">部门ID</param>
+        /// <param name="id">居住记录ID</param>
         /// <returns></returns>
-        public ActionResult Details(int id)
+        public ActionResult Details(string id)
         {
-            var data = this.departmentBusiness.Get(id);
+            var data = this.recordBusiness.Get(id);
+            if (data.Files != null && data.Files.Length != 0)
+            {
+                for (int i = 0; i < data.Files.Length; i++)
+                {
+                    data.Files[i] = RheaConstant.ApartmentRecord + data.Files[i];
+                }
+            }
             return View(data);
         }
 
         /// <summary>
-        /// 部门编辑
+        /// 居住记录编辑
         /// </summary>
-        /// <param name="id">部门ID</param>
+        /// <param name="id">居住记录ID</param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
-            var data = this.departmentBusiness.Get(id);
+            var data = this.recordBusiness.Get(id);
             return View(data);
         }
 
         /// <summary>
-        /// 部门编辑
+        /// 居住记录编辑
         /// </summary>
-        /// <param name="model">部门对象</param>
+        /// <param name="model">居住记录对象</param>
         /// <returns></returns>
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult Edit(Department model)
+        public ActionResult Edit(ResideRecord model)
         {
             if (ModelState.IsValid)
             {
-                //backup
-                ErrorCode result = this.departmentBusiness.Backup(model._id);
+                ResideRecord old = this.recordBusiness.Get(model._id);
+                model.Files = old.Files;
+
+                ErrorCode result = this.recordBusiness.Update(model);
                 if (result != ErrorCode.Success)
                 {
-                    TempData["Message"] = "备份部门失败";
+                    TempData["Message"] = "编辑居住记录失败";
                     ModelState.AddModelError("", result.DisplayName());
                     return View(model);
-                }
-
-                //edit
-                model.Status = 0;
-                result = this.departmentBusiness.Update(model);
-
-                if (result != ErrorCode.Success)
-                {
-                    TempData["Message"] = "编辑部门失败";
-                    ModelState.AddModelError("", result.DisplayName());
                 }
 
                 //log
                 User user = PageService.GetCurrentUser(User.Identity.Name);
                 Log log = new Log
                 {
-                    Title = "后台编辑部门",
+                    Title = "后台编辑居住记录",
                     Time = DateTime.Now,
-                    Type = (int)LogType.DepartmentEdit,
-                    Content = string.Format("编辑部门, ID:{0}, 名称:{1}。", model.DepartmentId, model.Name),
+                    Type = (int)LogType.ResideRecordEdit,
+                    Content = string.Format("编辑居住记录， ID:{0}, 住户姓名:{1}, 部门:{2}, 房间ID:{3}, 房间名称:{4}。",
+                        model._id, model.InhabitantName, model.InhabitantDepartment, model.RoomId, model.GetApartmentRoom().Name),
                     UserId = user._id,
                     UserName = user.Name
                 };
 
-                result = this.departmentBusiness.Log(model._id, log);
+                result = this.recordBusiness.Log(model._id, log);
                 if (result != ErrorCode.Success)
                 {
                     TempData["Message"] = "记录日志失败";
@@ -123,8 +124,8 @@ namespace Rhea.UI.Areas.Admin.Controllers
                     return View(model);
                 }
 
-                TempData["Message"] = "编辑部门成功";
-                return RedirectToAction("Details", new { controller = "Department", id = model.DepartmentId });
+                TempData["Message"] = "编辑居住记录成功";
+                return RedirectToAction("Details", new { id = model._id });
             }
 
             return View(model);

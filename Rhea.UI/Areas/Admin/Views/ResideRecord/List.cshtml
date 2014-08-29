@@ -1,0 +1,159 @@
+﻿@model IEnumerable<Rhea.Model.Apartment.ResideRecord>
+
+@{
+    ViewBag.Title = "居住记录列表";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Apartment.cshtml";
+}
+
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">
+    @ViewBag.Title
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index", "Apartment")">青教管理</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">青教主页</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">@ViewBag.Title</a>
+        </li>
+    </ul>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box green">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-list"></i>居住记录列表
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+                    <a href="javascript:;" class="reload">
+                    </a>
+                    <a href="javascript:;" class="remove">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="record-table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.RoomId)
+                            </th>
+                            <th>
+                                房间名称
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.InhabitantName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.InhabitantDepartment)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ResideType)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Rent)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.EnterDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ExpireDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.LeaveDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Status)
+                            </th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.RoomId)
+                                </td>
+                                <td>
+                                    @item.GetApartmentRoom().Name
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.InhabitantName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.InhabitantDepartment)
+                                </td>
+                                <td>
+                                    @{
+                                        var type1 = (ResideType)item.ResideType;
+                                        @type1.DisplayName()
+                                    }
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Rent)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.EnterDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ExpireDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LeaveDate)
+                                </td>
+                                <td>
+                                    @switch ((EntityStatus)item.Status)
+                                    {
+                                        case EntityStatus.Normal:
+                                            <span class="label label-success">居住中</span>
+                                            break;
+                                        case EntityStatus.OverTime:
+                                        <span class="label label-danger">超期</span>
+                                            break;
+                                        case EntityStatus.ExtendTime:
+                                        <span class="label label-warning">延期</span>
+                                            break;
+                                        case EntityStatus.MoveOut:
+                                        <span class="label label-default">已搬出</span>
+                                            break;
+                                        case EntityStatus.ExtendOut:
+                                        <span class="label bg-grey-cascade">已延期</span>
+                                            break;
+                                    }
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Details", new { controller = "ResideRecord", id = item._id })" class="btn btn-info btn-sm" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
+                                    <a href="@Url.Action("Edit", new { controller = "ResideRecord", id = item._id })" class="btn btn-warning btn-sm" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT-->
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            Rhea.topNavActive($('#apartment-nav'));
+            Rhea.leftNavActive($('#reside-record-list-menu'));
+
+            Rhea.initDatatable2($('#record-table'));
+        });
+    </script>
+}

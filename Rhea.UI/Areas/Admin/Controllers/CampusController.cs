@@ -97,7 +97,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 User user = PageService.GetCurrentUser(User.Identity.Name);
                 Log log = new Log
                 {
-                    Title = "添加校区",
+                    Title = "后台添加校区",
                     Time = DateTime.Now,
                     Type = (int)LogType.CampusCreate,
                     Content = string.Format("添加校区, ID:{0}, 名称:{1}。", model.CampusId, model.Name),
@@ -166,7 +166,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 User user = PageService.GetCurrentUser(User.Identity.Name);
                 Log log = new Log
                 {
-                    Title = "编辑校区",
+                    Title = "后台编辑校区",
                     Time = DateTime.Now,
                     Type = (int)LogType.CampusEdit,
                     Content = string.Format("编辑校区, 名称:{0}。", model.Name),

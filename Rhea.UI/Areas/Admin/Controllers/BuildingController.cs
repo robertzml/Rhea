@@ -128,7 +128,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 User user = PageService.GetCurrentUser(User.Identity.Name);
                 Log log = new Log
                 {
-                    Title = "添加建筑",
+                    Title = "后台添加建筑",
                     Time = DateTime.Now,
                     Type = (int)LogType.BuildingCreate,
                     Content = string.Format("添加建筑， ID:{0}，名称:{1}。", model.BuildingId, model.Name),
@@ -220,7 +220,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 User user = PageService.GetCurrentUser(User.Identity.Name);
                 Log log = new Log
                 {
-                    Title = "编辑楼群",
+                    Title = "后台编辑楼群",
                     Time = DateTime.Now,
                     Type = (int)LogType.BuildingEdit,
                     Content = string.Format("编辑楼群， ID:{0}，名称:{1}。", model.BuildingId, model.Name),
@@ -278,7 +278,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 User user = PageService.GetCurrentUser(User.Identity.Name);
                 Log log = new Log
                 {
-                    Title = "编辑组团",
+                    Title = "后台编辑组团",
                     Time = DateTime.Now,
                     Type = (int)LogType.BuildingEdit,
                     Content = string.Format("编辑组团， ID:{0}，名称:{1}。", model.BuildingId, model.Name),
@@ -335,7 +335,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 User user = PageService.GetCurrentUser(User.Identity.Name);
                 Log log = new Log
                 {
-                    Title = "编辑独栋",
+                    Title = "后台编辑独栋",
                     Time = DateTime.Now,
                     Type = (int)LogType.BuildingEdit,
                     Content = string.Format("编辑独栋， ID:{0}，名称:{1}。", model.BuildingId, model.Name),
@@ -392,7 +392,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 User user = PageService.GetCurrentUser(User.Identity.Name);
                 Log log = new Log
                 {
-                    Title = "编辑分区",
+                    Title = "后台编辑分区",
                     Time = DateTime.Now,
                     Type = (int)LogType.BuildingEdit,
                     Content = string.Format("编辑分区， ID:{0}，名称:{1}。", model.BuildingId, model.Name),
@@ -449,7 +449,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 User user = PageService.GetCurrentUser(User.Identity.Name);
                 Log log = new Log
                 {
-                    Title = "编辑楼宇",
+                    Title = "后台编辑楼宇",
                     Time = DateTime.Now,
                     Type = (int)LogType.BuildingEdit,
                     Content = string.Format("编辑楼宇， ID:{0}，名称:{1}。", model.BuildingId, model.Name),
@@ -506,7 +506,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 User user = PageService.GetCurrentUser(User.Identity.Name);
                 Log log = new Log
                 {
-                    Title = "编辑操场",
+                    Title = "后台编辑操场",
                     Time = DateTime.Now,
                     Type = (int)LogType.BuildingEdit,
                     Content = string.Format("编辑操场， ID:{0}，名称:{1}。", model.BuildingId, model.Name),
@@ -573,7 +573,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 User user = PageService.GetCurrentUser(User.Identity.Name);
                 Log log = new Log
                 {
-                    Title = "添加楼层",
+                    Title = "后台添加楼层",
                     Time = DateTime.Now,
                     Type = (int)LogType.FloorCreate,
                     Content = string.Format("添加楼层，楼层ID:{0}，名称:{1}，建筑ID:{2}，建筑名称:{3}。", model.FloorId, model.Name, building.BuildingId, building.Name),
@@ -648,7 +648,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 User user = PageService.GetCurrentUser(User.Identity.Name);
                 Log log = new Log
                 {
-                    Title = "编辑楼层",
+                    Title = "后台编辑楼层",
                     Time = DateTime.Now,
                     Type = (int)LogType.FloorEdit,
                     Content = string.Format("编辑楼层， 楼层ID:{0}，名称:{1}，建筑ID:{2}，建筑名称{3}。", model.FloorId, model.Name, building.BuildingId, building.Name),
@@ -726,7 +726,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 User user = PageService.GetCurrentUser(User.Identity.Name);
                 Log log = new Log
                 {
-                    Title = "修改平面图",
+                    Title = "后台修改平面图",
                     Time = DateTime.Now,
                     Type = (int)LogType.FloorSvgUpload,
                     Content = string.Format("修改平面图, 楼层ID:{0}, 名称:{1}, 建筑ID:{2}, 建筑名称:{3}, 备份平面图:{4}, 新平面图:{5}.",
@@ -799,7 +799,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
             string fname = Request.Form["Name"];
             Log log = new Log
             {
-                Title = "删除楼层",
+                Title = "后台删除楼层",
                 Time = DateTime.Now,
                 Type = (int)LogType.FloorDelete,
                 Content = string.Format("删除楼层, 建筑ID:{0}, 建筑名称:{1}, 楼层ID:{2}, 楼层名称:{3}。", building.BuildingId, building.Name, floorId, fname),

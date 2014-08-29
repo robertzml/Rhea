@@ -57,6 +57,14 @@ namespace Rhea.Model.Apartment
         public int Type { get; set; }
 
         /// <summary>
+        /// 所属部门ID
+        /// </summary>
+        [UIHint("DepartmentDropDownList")]
+        [BsonElement("departmentId")]
+        [Display(Name = "所属部门ID")]
+        public int DepartmentId { get; set; }
+
+        /// <summary>
         /// 所属部门
         /// </summary>
         [BsonElement("departmentName")]
