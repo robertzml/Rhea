@@ -80,6 +80,17 @@ namespace Rhea.Business.Apartment
             ITransactionRepository repository = new MongoExtendTransactionRepository();
             return repository.Create(data);
         }
+
+        /// <summary>
+        /// 添加特殊换房办理业务记录
+        /// </summary>
+        /// <param name="data">特殊换房办理业务记录对象</param>
+        /// <returns></returns>
+        private ErrorCode CreateSpecialExchangeTransaction(SpecialExchangeTransaction data)
+        {
+            ITransactionRepository repository = new MongoSpecialExchangeTransaction();
+            return repository.Create(data);
+        }
         #endregion //Function
 
         #region Method
@@ -445,8 +456,8 @@ namespace Rhea.Business.Apartment
                     Title = "延期业务办理",
                     Time = now,
                     Type = (int)LogType.ApartmentExtend,
-                    Content = string.Format("青教延期业务办理, 住户ID:{0}, 姓名:{1}, 部门:{2}, 入住房间ID:{3}, 房间名称:{4}, 入住时间:{5}, 到期时间:{6}, 居住类型:延期居住, 记录ID:{7}, 业务ID:{8}。",
-                        inhabitant._id, inhabitant.Name, inhabitant.DepartmentName, room.RoomId, room.Name, record.EnterDate, record.ExpireDate, record._id, transaction._id),
+                    Content = string.Format("青教延期业务办理, 住户ID:{0}, 姓名:{1}, 部门:{2}, 入住房间ID:{3}, 房间名称:{4}, 入住时间:{5}, 到期时间:{6}, 居住类型:延期居住, 记录ID:{7}, 业务ID:{8}, 附件:{9}。",
+                        inhabitant._id, inhabitant.Name, inhabitant.DepartmentName, room.RoomId, room.Name, record.EnterDate, record.ExpireDate, record._id, transaction._id, string.Join(",", record.Files)),
                     UserId = user._id,
                     UserName = user.Name,
                     Tag = record._id
@@ -472,6 +483,159 @@ namespace Rhea.Business.Apartment
 
             return ErrorCode.Success;
         }
+
+        /// <summary>
+        /// 特殊换房业务办理
+        /// </summary>
+        /// <param name="inhabitantId">住户ID</param>
+        /// <param name="oldRoomId">原房间ID</param>
+        /// <param name="newRoomId">新房间ID</param>
+        /// <param name="remark">备注</param>
+        /// <param name="user">操作用户</param>
+        /// <remarks>
+        /// 该业务直接将入住记录从原房间绑定到新房间上，记录信息不做更改。仅限因特殊原因入住前换房。
+        /// </remarks>
+        /// <returns></returns>
+        public ErrorCode SpecialExchange(string inhabitantId, int oldRoomId, int newRoomId, string remark, User user)
+        {
+            try
+            {
+                ErrorCode result;
+                DateTime now = DateTime.Now;
+
+                //检查用户
+                InhabitantBusiness inhabitantBusiness = new InhabitantBusiness();
+                Inhabitant inhabitant = inhabitantBusiness.Get(inhabitantId);
+                if (inhabitant == null)
+                    return ErrorCode.ObjectNotFound;
+                if (inhabitant.Status == (int)EntityStatus.InhabitantMoveOut)
+                    return ErrorCode.InhabitantMoveOut;
+
+                //检查新房间
+                ApartmentRoomBusiness roomBusiness = new ApartmentRoomBusiness();
+                ApartmentRoom room = roomBusiness.Get(newRoomId);
+                if (room == null)
+                    return ErrorCode.ObjectNotFound;
+                if (room.ResideType != (int)ResideType.Available)
+                    return ErrorCode.RoomNotAvailable;
+
+                //备份新房间
+                result = roomBusiness.Backup(room._id);
+                if (result != ErrorCode.Success)
+                {
+                    this.errorMessage = "备份新房间失败: " + result.DisplayName();
+                    return result;
+                }
+
+                //检查原房间
+                ApartmentRoom oldRoom = roomBusiness.Get(oldRoomId);
+                if (oldRoom == null)
+                    return ErrorCode.ObjectNotFound;
+                if (oldRoom.ResideType != (int)ResideType.Normal)
+                    return ErrorCode.RoomAvailable;
+
+                //备份原房间
+                result = roomBusiness.Backup(oldRoom._id);
+                if (result != ErrorCode.Success)
+                {
+                    this.errorMessage = "备份原房间失败: " + result.DisplayName();
+                    return result;
+                }
+
+                //检查居住记录
+                ResideRecordBusiness recordBusiness = new ResideRecordBusiness();
+                var records = recordBusiness.GetByInhabitant(inhabitantId); //住户所有居住记录
+                if (records == null || records.Count() == 0)
+                    return ErrorCode.ResideRecordNotExist;
+                ResideRecord record = records.SingleOrDefault(r => r.RoomId == oldRoomId &&
+                    (r.Status == (int)EntityStatus.Normal || r.Status == (int)EntityStatus.ExtendTime || r.Status == (int)EntityStatus.OverTime));
+                if (record == null)
+                    return ErrorCode.ResideRecordNotExist;
+
+                //更新原房间状态              
+                oldRoom.ResideType = (int)ResideType.Available;
+                result = roomBusiness.Update(oldRoom);
+                if (result != ErrorCode.Success)
+                {
+                    this.errorMessage = "原房间状态更新出错：" + result.DisplayName();
+                    return result;
+                }
+
+                //更新新房间状态
+                room.ResideType = (int)ResideType.Normal;
+                result = roomBusiness.Update(room);
+                if (result != ErrorCode.Success)
+                {
+                    this.errorMessage = "新房间状态更新出错：" + result.DisplayName();
+                    return result;
+                }
+
+                //修改居住记录
+                record.RoomId = room.RoomId;
+                result = recordBusiness.Update(record);
+                if (result != ErrorCode.Success)
+                {
+                    this.errorMessage = "修改居住记录出错：" + result.DisplayName();
+                    return result;
+                }
+
+                //添加业务记录
+                SpecialExchangeTransaction transaction = new SpecialExchangeTransaction();
+                transaction.Type = (int)LogType.ApartmentSpecialExchange;
+                transaction.Time = now;
+                transaction.UserId = user._id;
+                transaction.UserName = user.Name;
+                transaction.OldRoomId = oldRoom.RoomId;
+                transaction.OldRoomName = oldRoom.Name;
+                transaction.NewRoomId = room.RoomId;
+                transaction.NewRoomName = room.Name;
+                transaction.InhabitantId = inhabitant._id;
+                transaction.InhabitantName = inhabitant.Name;
+                transaction.ResideRecordId = record._id;
+                transaction.Remark = remark;
+                transaction.Status = 0;
+                result = CreateSpecialExchangeTransaction(transaction);
+                if (result != ErrorCode.Success)
+                {
+                    this.errorMessage = "添加业务记录失败:" + result.DisplayName();
+                    return result;
+                }
+
+                //生成日志
+                LogBusiness logBusiness = new LogBusiness();
+                Log log = new Log
+                {
+                    Title = "特殊换房业务办理",
+                    Time = now,
+                    Type = (int)LogType.ApartmentSpecialExchange,
+                    Content = string.Format("青教特殊换房业务办理, 住户ID:{0}, 姓名:{1}, 部门:{2}, 原房间ID:{3}, 原房间名称:{4}, 新房间ID:{5}, 新房间名称:{6}, 入住时间:{7}, 到期时间:{8}, 记录ID:{9}, 业务ID:{10}。",
+                        inhabitant._id, inhabitant.Name, inhabitant.DepartmentName, oldRoom.RoomId, oldRoom.Name, room.RoomId, room.Name, record.EnterDate, record.ExpireDate, record._id, transaction._id),
+                    UserId = user._id,
+                    UserName = user.Name,
+                    Tag = record._id
+                };
+                result = logBusiness.Create(log);
+                if (result != ErrorCode.Success)
+                {
+                    this.errorMessage = "记录日志失败:" + result.DisplayName();
+                    return result;
+                }
+
+                //更新日志
+                inhabitantBusiness.LogItem(inhabitant._id, log);
+                recordBusiness.LogItem(record._id, log);
+                roomBusiness.LogItem(room._id, log);
+                roomBusiness.LogItem(oldRoom._id, log);
+            }
+            catch (Exception e)
+            {
+                this.errorMessage = e.Message;
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
+
 
         /// <summary>
         /// 更新所有居住状态
@@ -622,6 +786,29 @@ namespace Rhea.Business.Apartment
         {
             ITransactionRepository repository = new MongoExtendTransactionRepository();
             var data = (ExtendTransaction)repository.Get(id);
+            return data;
+        }
+
+        /// <summary>
+        /// 获取所有特殊换房业务记录
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<SpecialExchangeTransaction> GetSpecialExchangeTransaction()
+        {
+            ITransactionRepository repository = new MongoSpecialExchangeTransaction();
+            var data = repository.Get().Cast<SpecialExchangeTransaction>().OrderByDescending(r => r.Time);
+            return data;
+        }
+
+        /// <summary>
+        /// 获取特殊换房业务记录
+        /// </summary>
+        /// <param name="id">业务记录ID</param>
+        /// <returns></returns>
+        public SpecialExchangeTransaction GetSpecialExchangeTransaction(string id)
+        {
+            ITransactionRepository repository = new MongoSpecialExchangeTransaction();
+            var data = (SpecialExchangeTransaction)repository.Get(id);
             return data;
         }
         #endregion //Method

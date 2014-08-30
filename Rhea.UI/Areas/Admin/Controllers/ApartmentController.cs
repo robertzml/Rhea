@@ -1,13 +1,16 @@
-﻿using System;
+﻿using Rhea.Business.Apartment;
+using Rhea.Common;
+using Rhea.Model;
+using Rhea.Model.Account;
+using Rhea.Model.Apartment;
+using Rhea.UI.Areas.Admin.Models;
+using Rhea.UI.Filters;
+using Rhea.UI.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Rhea.UI.Filters;
-using Rhea.Business.Apartment;
-using Rhea.Model.Apartment;
-using Rhea.Model;
-using Rhea.Common;
 
 namespace Rhea.UI.Areas.Admin.Controllers
 {
@@ -45,12 +48,12 @@ namespace Rhea.UI.Areas.Admin.Controllers
             TransactionBusiness business = new TransactionBusiness();
             var data = business.GetTransaction(id);
 
-            switch((LogType)data.Type)
+            switch ((LogType)data.Type)
             {
                 case LogType.ApartmentCheckIn:
                     var checkIn = business.GetCheckInTransaction(id);
                     return View("CheckInDetails", checkIn);
-                    
+
                 case LogType.ApartmentCheckOut:
                     var checkOut = business.GetCheckOutTransaction(id);
                     return View("CheckOutDetails", checkOut);
@@ -58,9 +61,53 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 case LogType.ApartmentExtend:
                     var extend = business.GetExtendTransaction(id);
                     return View("ExtendDetails", extend);
+
+                case LogType.ApartmentSpecialExchange:
+                    var special = business.GetSpecialExchangeTransaction(id);
+                    return View("SpecialExchangeDetails", special);
             }
 
             return View();
+        }
+
+        /// <summary>
+        /// 特殊换房业务
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult SpecialExchange()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 特殊换房业务
+        /// </summary>
+        /// <param name="model">特殊换房对象</param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult SpecialExchange(SpecialExchangeModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = PageService.GetCurrentUser(User.Identity.Name);
+                TransactionBusiness business = new TransactionBusiness();
+                ErrorCode result = business.SpecialExchange(model.InhabitantId, model.OldRoomId, model.NewRoomId, model.Remark, user);
+
+                if (result != ErrorCode.Success)
+                {
+                    TempData["Message"] = "特殊换房办理失败";
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
+                }
+
+                TempData["Message"] = "业务办理成功";
+                return RedirectToAction("TransactionList");
+            }
+
+            ModelState.AddModelError("", "输入有误，请重新输入。");
+            return View(model);
         }
         #endregion //Action
     }

@@ -196,6 +196,18 @@ namespace Rhea.Model
         /// 延期业务办理
         /// </summary>
         [Display(Name = "延期业务办理")]
-        ApartmentExtend = 162
+        ApartmentExtend = 162,
+
+        /// <summary>
+        /// 换房业务办理
+        /// </summary>
+        [Display(Name = "换房业务办理")]
+        ApartmentExchange = 163,
+
+        /// <summary>
+        /// 特殊换房业务办理
+        /// </summary>
+        [Display(Name = "特殊换房业务办理")]
+        ApartmentSpecialExchange = 164
     }
 }

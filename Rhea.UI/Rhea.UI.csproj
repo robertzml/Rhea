@@ -161,6 +161,7 @@
     <Compile Include="Areas\Admin\Controllers\RoomController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserGroupController.cs" />
+    <Compile Include="Areas\Admin\Models\ApartmentModels.cs" />
     <Compile Include="Areas\Apartment\ApartmentAreaRegistration.cs" />
     <Compile Include="Areas\Apartment\Controllers\BuildingController.cs" />
     <Compile Include="Areas\Apartment\Controllers\HomeController.cs" />
@@ -672,6 +673,9 @@
     <Content Include="Areas\Admin\Views\Apartment\CheckInDetails.cshtml" />
     <Content Include="Areas\Admin\Views\Apartment\CheckOutDetails.cshtml" />
     <Content Include="Areas\Admin\Views\Apartment\ExtendDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\Apartment\SpecialExchange.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\ApartmentBuildingList.cshtml" />
+    <Content Include="Areas\Admin\Views\Apartment\SpecialExchangeDetails.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="plugins\jquery-1.11.0.min.js" />
@@ -780,7 +784,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

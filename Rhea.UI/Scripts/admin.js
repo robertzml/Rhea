@@ -1,195 +1,272 @@
 //
 //    Admin script
 //
-"use strict";
 
+var admin = function() {
 
-/*-------------------------------------------
-	Main scripts used by theme
----------------------------------------------*/
-//
-//  Function for load content from url and put in $('.ajax-content') block
-//
-function LoadAjaxContent(url){
-	$('.preloader').show();
-	$.ajax({
-		mimeType: 'text/html; charset=utf-8', // ! Need set mimeType only when run from local file
-		url: url,
-		type: 'GET',
-		success: function(data) {
-			$('#ajax-content').html(data);
-			$('.preloader').hide();
-		},
-		error: function (jqXHR, textStatus, errorThrown) {
-			alert(errorThrown);
-		},
-		dataType: "html",
-		async: false
-	});
-}
+	var displayConfirm = function(form) {
+		$('#tabConfirm .form-control-static', form).each(function(){
+			var input = $('[name="'+$(this).attr("data-display")+'"]', form);
+			if (input.is(":radio")) {
+				input = $('[name="'+$(this).attr("data-display")+'"]:checked', form);
+			}
+			if (input.is(":text") || input.is("textarea")) {
+				$(this).html(input.val());
+			} else if (input.is("select")) {
+				$(this).html(input.find('option:selected').text());
+			} else if (input.is(":radio") && input.is(":checked")) {
+				$(this).html(input.attr("data-title"));
+			} else {
+				$(this).html(input.val());
+			}
+		});
+	}
 
-//
-//  Function set min-height of window (required for this theme)
-//
-function SetMinBlockHeight(elem){
-	elem.css('min-height', window.innerHeight - 49)
-}
+	var handleTitle = function(wizard, form, tab, navigation, index) {
+		var total = navigation.find('li').length;
+		var current = index + 1;
+		// set wizard title
+		$('.step-title', wizard).text('Step ' + (index + 1) + ' of ' + total);
+		// set done steps
+		jQuery('li', wizard).removeClass("done");
+		var li_list = navigation.find('li');
+		for (var i = 0; i < index; i++) {
+			jQuery(li_list[i]).addClass("done");
+		}
 
-//
-//  Helper for open ModalBox with requested header, content and bottom
-//
-//
-function OpenModalBox(header, inner, bottom){
-	var modalbox = $('#modalbox');
-	modalbox.find('.modal-header-name span').html(header);
-	modalbox.find('.devoops-modal-inner').html(inner);
-	modalbox.find('.devoops-modal-bottom').html(bottom);
-	modalbox.fadeIn('fast');
-	$('body').addClass("body-expanded");
-}
-//
-//  Close modalbox
-//
-//
-function CloseModalBox(){
-	var modalbox = $('#modalbox');
-	modalbox.fadeOut('fast', function(){
-		modalbox.find('.modal-header-name span').children().remove();
-		modalbox.find('.devoops-modal-inner').children().remove();
-		modalbox.find('.devoops-modal-bottom').children().remove();
-		$('body').removeClass("body-expanded");
-	});
-}
+		if (current == 1) {
+			wizard.find('.button-previous').hide();
+		} else {
+			wizard.find('.button-previous').show();
+		}
 
-//
-//  Function convert values of inputs in table to JSON data
-//
-//
-function Table2Json(table) {
-	var result = {};
-	table.find("tr").each(function () {
-		var oneRow = [];
-		var varname = $(this).index();
-		$("td", this).each(function (index) { if (index != 0) {oneRow.push($("input", this).val());}});
-		result[varname] = oneRow;
-	});
-	var result_json = JSON.stringify(result);
-	OpenModalBox('Table to JSON values', result_json);
-}
+		if (current >= total) {
+			wizard.find('.button-next').hide();
+			wizard.find('.button-submit').show();
+			displayConfirm(form);
+		} else {
+			wizard.find('.button-next').show();
+			wizard.find('.button-submit').hide();
+		}
+		Metronic.scrollTo($('.page-title'));
+	}
 
-//////////////////////////////////////////////////////
-//////////////////////////////////////////////////////
-//
-//      MAIN DOCUMENT READY SCRIPT OF DEVOOPS THEME
-//
-//      In this script main logic of theme
-//
-//////////////////////////////////////////////////////
-//////////////////////////////////////////////////////
-$(document).ready(function () {
-	$('.show-sidebar').on('click', function () {
-		$('div#main').toggleClass('sidebar-show');
-		setTimeout(MessagesMenuWidth, 250);
-	});
+	var initWizard = function(wizard, form, error, success) {
+		// default form wizard
+		wizard.bootstrapWizard({
+			'nextSelector': '.button-next',
+			'previousSelector': '.button-previous',
+			onTabClick: function (tab, navigation, index, clickedIndex) {
+				success.hide();
+				error.hide();
+				if (form.valid() == false) {
+					return false;
+				}
+				handleTitle(wizard, form, tab, navigation, clickedIndex);
+			},
+			onNext: function (tab, navigation, index) {
+				success.hide();
+				error.hide();
+
+				if (form.valid() == false) {
+					return false;
+				}
+
+				handleTitle(wizard, form, tab, navigation, index);
+			},
+			onPrevious: function (tab, navigation, index) {
+				success.hide();
+				error.hide();
+
+				handleTitle(wizard, form, tab, navigation, index);
+			},
+			onTabShow: function (tab, navigation, index) {
+				var total = navigation.find('li').length;
+				var current = index + 1;
+				var $percent = (current / total) * 100;
+				wizard.find('.progress-bar').css({
+					width: $percent + '%'
+				});
+			}
+		});
+	}
+
+	var handleSpecialExchange = function() {
+		if (!jQuery().bootstrapWizard) {
+                return;
+		}
+			
+		var wizard = $('#form_wizard_special_exchange');
+			
+		$('#BuildingId').change(function () {
+			var bid = $(this).val();
+			var roomList = $('#NewRoomId');
+			roomList.empty();
+			roomList.append("<option value=''>-- 请选择 --</option>");
+
+			if (bid == null || bid == '')
+				return;
+
+			$.getJSON('/Apartment/Room/GetAvailableRooms', { buildingId: bid }, function (response) {
+				$.each(response, function (i, item) {
+					roomList.append("<option value='" + item.RoomId + "'>" + item.Name + "</option>");
+				});
+			});
+		});
 		
-	
-	$('.main-menu').on('click', 'a', function (e) {
-		var parents = $(this).parents('li');
-		var li = $(this).closest('li.dropdown');
-		var another_items = $('.main-menu li').not(parents);
-		another_items.find('a').removeClass('active');
-		another_items.find('a').removeClass('active-parent');
-		if ($(this).hasClass('dropdown-toggle') || $(this).closest('li').find('ul').length == 0) {
-			$(this).addClass('active-parent');
-			var current = $(this).next();
-			if (current.is(':visible')) {
-				li.find("ul.dropdown-menu").slideUp('fast');
-				li.find("ul.dropdown-menu a").removeClass('active')
-			}
-			else {
-				another_items.find("ul.dropdown-menu").slideUp('fast');
-				current.slideDown('fast');
-			}
-		}
-		else {
-			if (li.find('a.dropdown-toggle').hasClass('active-parent')) {
-				var pre = $(this).closest('ul.dropdown-menu');
-				pre.find("li.dropdown").not($(this).closest('li')).find('ul.dropdown-menu').slideUp('fast');
-			}
-		}
-		if ($(this).hasClass('active') == false) {
-			$(this).parents("ul.dropdown-menu").find('a').removeClass('active');
-			$(this).addClass('active')
-		}	
-		if ($(this).attr('href') == '#') {
-			e.preventDefault();
-		}
-	});
-	var height = window.innerHeight - 49;
-	$('#main').css('min-height', height)
-		.on('click', '.expand-link', function (e) {
-			var body = $('body');
-			e.preventDefault();
-			var box = $(this).closest('div.box');
-			var button = $(this).find('i');
-			button.toggleClass('fa-expand').toggleClass('fa-compress');
-			box.toggleClass('expanded');
-			body.toggleClass('body-expanded');
-			var timeout = 0;
-			if (body.hasClass('body-expanded')) {
-				timeout = 100;
-			}
-			setTimeout(function () {
-				box.toggleClass('expanded-padding');
-			}, timeout);
-			setTimeout(function () {
-				box.resize();
-				box.find('[id^=map-]').resize();
-			}, timeout + 50);
-		})
-		.on('click', '.collapse-link', function (e) {
-			e.preventDefault();
-			var box = $(this).closest('div.box');
-			var button = $(this).find('i');
-			var content = box.find('div.box-content');
-			content.slideToggle('fast');
-			button.toggleClass('fa-chevron-up').toggleClass('fa-chevron-down');
-			setTimeout(function () {
-				box.resize();
-				box.find('[id^=map-]').resize();
-			}, 50);
-		})
-		.on('click', '.close-link', function (e) {
-			e.preventDefault();
-			var content = $(this).closest('div.box');
-			content.remove();
-		});	
-	$('body').on('click', 'a.close-link', function(e){
-		e.preventDefault();
-		CloseModalBox();
-	});
-	$('#top-panel').on('click','a', function(e){
-		if ($(this).hasClass('ajax-link')) {
-			e.preventDefault();
-			if ($(this).hasClass('add-full')) {
-				$('#content').addClass('full-content');
-			}
-			else {
-				$('#content').removeClass('full-content');
-			}
-			var url = $(this).attr('href');
-			window.location.hash = url;
-			LoadAjaxContent(url);
-		}
-	});
-	$('#search').on('keydown', function(e){
-		if (e.keyCode == 13){
-			e.preventDefault();
-			$('#content').removeClass('full-content');
-			ajax_url = 'ajax/page_search.html';
-			window.location.hash = ajax_url;
-			LoadAjaxContent(ajax_url);
-		}
-	});
-});
+		$('#NewRoomId').change(function() {
+			var rid = $(this).val();
+			if (rid == null || rid == '')
+				$('#room-info').empty();
 
+			$('#room-info').load('/Apartment/Room/Summary', { id: rid });
+		});
+			
+		$("#InhabitantId").select2({
+			placeholder: "输入住户姓名进行搜索",
+			minimumInputLength: 1,
+			allowClear: true,
+			id: function(obj) {
+				return obj['_id'];
+			},  
+			formatResult: function (obj) {
+				return obj['Name'] + "  <small class='text-muted'>" + obj['DepartmentName'] + "</small>";
+			},
+			formatSelection: function(obj) {
+				return obj.Name + "  <small class='text-muted'>" + obj['DepartmentName'] + "</small>";
+			},
+			ajax: {
+				url: "/Apartment/Inhabitant/GetCurrentList",
+				dataType: 'json',
+				data: function (term, page) {
+					return {
+						name: term, // search term
+					};
+				},
+				results: function (data, page) { // parse the results into the format expected by Select2.
+					return {
+						results: data
+					};
+				}
+			},
+			initSelection: function (element, callback) {
+				// the input tag has a value attribute preloaded that points to a preselected movie's id
+				// this function resolves that id attribute to an object that select2 can render
+				// using its formatResult renderer - that way the movie name is shown preselected
+				var id = $(element).val();
+				if (id !== "") {
+					$.ajax("/Apartment/Inhabitant/Get", {
+						data: {
+							id: id
+						},
+						dataType: "json"
+					}).done(function (data) {
+						callback(data);
+					});
+				}
+			}
+		}).on("change", function(e) {
+			var roomList = $('#room-list');
+			var item = e.added;
+			if (item != null) {
+				$('#inhabitant-info').load('/Apartment/Inhabitant/Summary', { id: item._id });
+				$('#InhabitantName').val(item.Name);
+				roomList.empty();
+
+				$.getJSON('/Apartment/Inhabitant/GetCurrentRooms', { id: item._id }, function (response) {
+					$.each(response, function (i, item) {
+						roomList.append('<label><input type="radio" name="OldRoomId" id="RoomNum' + i +'" value="' + item.RoomId + '" data-title="' + item.Name +'"> ' + item.Name +'</label>');							
+					});
+					roomList.find(':radio').uniform();
+				});
+			} else {
+				$('#inhabitant-info').empty();
+				$('#InhabitantName').val('');
+				roomList.empty();
+			}
+		});
+
+
+		var form = $('#submit_form');
+		var error = $('.alert-danger', form);
+		var success = $('.alert-success', form);
+
+		form.validate({
+			doNotHideMessage: true, //this option enables to show the error/success messages on tab switch.
+			errorElement: 'span', //default input error message container
+			errorClass: 'help-block help-block-error', // default input error message class
+			focusInvalid: false, // do not focus the last invalid input
+			rules: {
+				InhabitantId: {
+					required: true
+				},
+				InhabitantName: {
+					required: true
+				},
+				BuildingId: {
+					required: true
+				},
+				OldRoomId: {
+					required: true
+				},
+				NewRoomId: {
+					required: true
+				}
+			},
+
+			errorPlacement: function (error, element) { // render error placement for each input type
+				error.insertAfter(element); // just perform default behavior
+			},
+
+			invalidHandler: function (event, validator) { //display error alert on form submit   
+				success.hide();
+				error.show();
+				Metronic.scrollTo(error, -200);
+			},
+
+			highlight: function (element) { // hightlight error inputs
+				$(element)
+					.closest('.form-group').removeClass('has-success').addClass('has-error'); // set error class to the control group
+			},
+
+			unhighlight: function (element) { // revert the change done by hightlight
+				$(element)
+					.closest('.form-group').removeClass('has-error'); // set error class to the control group
+			},
+
+			success: function (label) {
+				if (label.attr("for") == "gender" || label.attr("for") == "payment[]") { // for checkboxes and radio buttons, no need to show OK icon
+					label
+						.closest('.form-group').removeClass('has-error').addClass('has-success');
+					label.remove(); // remove error label here
+				} else { // display success icon for other inputs
+					label
+						.addClass('valid') // mark the current input as valid and display OK icon
+					.closest('.form-group').removeClass('has-error').addClass('has-success'); // set success class to the control group
+				}
+			},
+
+			submitHandler: function (form) {
+				success.show();
+				error.hide();
+				//add here some ajax code to submit your form or just call form.submit() if you want to submit the form without ajax
+				form.submit();
+			}
+
+		});
+
+		initWizard(wizard, form, error, success);
+
+		wizard.find('.button-previous').hide();
+		wizard.find('.button-submit').click(function() {
+			
+		}).hide();
+	}
+
+
+	return {
+		initSpecialExchange: function () {
+			handleSpecialExchange();
+        }
+	}
+}();

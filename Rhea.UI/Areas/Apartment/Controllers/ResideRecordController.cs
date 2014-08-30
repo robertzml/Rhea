@@ -189,8 +189,8 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                     Title = "上传居住记录附件",
                     Time = DateTime.Now,
                     Type = (int)LogType.ResideRecordUploadFile,
-                    Content = string.Format("上传居住记录附件， ID:{0}, 住户姓名:{1}, 部门:{2}, 房间ID:{3}, 房间名称:{4}。",
-                        record._id, record.InhabitantName, record.InhabitantDepartment, record.RoomId, record.GetApartmentRoom().Name),
+                    Content = string.Format("上传居住记录附件， ID:{0}, 住户姓名:{1}, 部门:{2}, 房间ID:{3}, 房间名称:{4}, 附件:{5}。",
+                        record._id, record.InhabitantName, record.InhabitantDepartment, record.RoomId, record.GetApartmentRoom().Name, string.Join(",", record.Files)),
                     UserId = user._id,
                     UserName = user.Name
                 };

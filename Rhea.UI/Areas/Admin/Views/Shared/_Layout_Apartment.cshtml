@@ -3,6 +3,10 @@
     bool isRoot = User.IsInRole2("Root");
 }
 
+@section styles {
+    @RenderSection("styles", required: false)
+}
+
 <!-- BEGIN SIDEBAR -->
 <div class="page-sidebar-wrapper">
     <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
@@ -87,6 +91,11 @@
                     <li>
                         <a href="@Url.Action("TransactionList", "Apartment")" id="transaction-list-menu">
                             业务列表
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("SpecialExchange", "Apartment")" id="special-exchange-menu">
+                            特殊换房
                         </a>
                     </li>
                 </ul>

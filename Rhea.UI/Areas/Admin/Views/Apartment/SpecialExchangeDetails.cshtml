@@ -1,7 +1,7 @@
-﻿@model Rhea.Model.Apartment.CheckOutTransaction
+﻿@model Rhea.Model.Apartment.SpecialExchangeTransaction
 
 @{
-    ViewBag.Title = "退房办理业务";
+    ViewBag.Title = "特殊换房业务";
     Layout = "~/Areas/Admin/Views/Shared/_Layout_Apartment.cshtml";
 }
 
@@ -32,7 +32,7 @@
         <div class="portlet box green">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-th"></i>退房办理业务信息
+                    <i class="fa fa-th"></i>特殊换房业务信息
                 </div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse">
@@ -99,18 +99,34 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        @Html.DisplayNameFor(model => model.RoomId)
+                                        @Html.DisplayNameFor(model => model.OldRoomId)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(model => model.RoomId)
+                                        @Html.DisplayFor(model => model.OldRoomId)
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        @Html.DisplayNameFor(model => model.RoomName)
+                                        @Html.DisplayNameFor(model => model.OldRoomName)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(model => model.RoomName)
+                                        @Html.DisplayFor(model => model.OldRoomName)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.NewRoomId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.NewRoomId)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.NewRoomName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.NewRoomName)
                                     </td>
                                 </tr>
                                 <tr>
@@ -176,3 +192,7 @@
         });
     </script>
 }
+
+
+
+

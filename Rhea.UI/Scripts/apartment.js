@@ -719,7 +719,7 @@ var apartment = function() {
 					},
                     RoomId: {
                         required: true
-                    },					
+                    },
 					//record
 					EnterDate: {
 						required: true
