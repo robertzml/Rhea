@@ -78,7 +78,7 @@
                                         @Html.DisplayNameFor(model => model.Time)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(model => model.Time)
+                                        @Model.Time.ToDateTimeString()
                                     </td>
                                 </tr>
                                 <tr>

@@ -121,6 +121,74 @@
         </ul>
     </li>
     <li>
+        <a> 
+            青教管理 <span class="arrow"></span>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a href="javascript:;">
+                    <i class="fa fa-users"></i>
+                    <span class="title">
+                        住户管理
+                    </span>
+                    <span class="arrow">
+                    </span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="@Url.Action("List", "Inhabitant")" id="inhabitant-list-menu">
+                            住户列表
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" id="user-create-menu">
+                            添加住户
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="fa fa-book"></i>
+                    <span class="title">
+                        居住记录管理
+                    </span>
+                    <span class="arrow ">
+                    </span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="@Url.Action("List", "ResideRecord")" id="reside-record-list-menu">
+                            居住记录列表
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="fa fa-send"></i>
+                    <span class="title">
+                        业务管理
+                    </span>
+                    <span class="arrow ">
+                    </span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="@Url.Action("TransactionList", "Apartment")" id="transaction-list-menu">
+                            业务列表
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("SpecialExchange", "Apartment")" id="special-exchange-menu">
+                            特殊换房
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>
         <a>
             高级管理 <span class="arrow"></span>
         </a>

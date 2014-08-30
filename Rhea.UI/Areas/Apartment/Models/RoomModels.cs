@@ -84,6 +84,12 @@ namespace Rhea.UI.Areas.Apartment.Models
         /// </summary>       
         [Display(Name = "部门")]
         public string InhabitantDepartment { get; set; }
+
+        /// <summary>
+        /// 居住状态
+        /// </summary>
+        [Display(Name = "居住状态")]
+        public int RecordStatus { get; set; }
     }
 
     /// <summary>

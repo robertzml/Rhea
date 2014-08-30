@@ -56,7 +56,10 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                 model.InhabitantId = record.InhabitantId;
                 model.InhabitantName = record.InhabitantName;
                 model.InhabitantDepartment = record.InhabitantDepartment;
+                model.RecordStatus = record.Status;
             }
+            else
+                model.RecordStatus = -1;
 
             return model;
         }
@@ -73,6 +76,24 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         #endregion //Function
 
         #region Action
+        /// <summary>
+        /// 房间列表
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult List()
+        {
+            List<RoomResideModel> data = new List<RoomResideModel>();
+            var rooms = this.roomBusiness.Get();
+
+            foreach (var room in rooms)
+            {
+                var item = BindRoom(room);
+                data.Add(item);
+            }
+
+            return View(data);
+        }
+
         /// <summary>
         /// 房间列表
         /// </summary>

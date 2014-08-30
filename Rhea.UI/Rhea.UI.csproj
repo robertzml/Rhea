@@ -676,6 +676,7 @@
     <Content Include="Areas\Admin\Views\Apartment\SpecialExchange.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\ApartmentBuildingList.cshtml" />
     <Content Include="Areas\Admin\Views\Apartment\SpecialExchangeDetails.cshtml" />
+    <Content Include="Areas\Apartment\Views\Room\List.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="plugins\jquery-1.11.0.min.js" />

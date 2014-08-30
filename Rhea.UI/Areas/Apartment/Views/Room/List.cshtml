@@ -1,13 +1,13 @@
-﻿@model IEnumerable<Rhea.Model.Apartment.Inhabitant>
+﻿@model IEnumerable<Rhea.UI.Areas.Apartment.Models.RoomResideModel>
 
 @{
-    ViewBag.Title = "住户列表";
-    Layout = null;
+    ViewBag.Title = "房间列表";
+    Layout = null;    
 }
 
 <!-- BEGIN PAGE HEADER-->
 <h3 class="page-title">
-    @ViewBag.Title <small>当前在住住户</small>
+    @ViewBag.Title
 </h3>
 <div class="page-bar">
     <ul class="page-breadcrumb">
@@ -17,7 +17,7 @@
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
-            <a href="#">住户管理</a>
+            <a href="#">统计汇总</a>
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
@@ -49,7 +49,7 @@
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-list"></i>住户列表
+                    <i class="fa fa-list"></i>&nbsp;房间列表
                 </div>
                 <div class="tools">
                     <a href="#" class="collapse">
@@ -62,107 +62,97 @@
             </div>
             <div class="portlet-body">
                 <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover table-advance" id="inhabitant-table">
+                    <table class="table table-striped table-bordered table-hover table-advance" id="room-table">
                         <thead>
                             <tr>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.JobNumber)
-                                </th>
                                 <th>
                                     @Html.DisplayNameFor(model => model.Name)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Gender)
+                                    @Html.DisplayNameFor(model => model.HouseType)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Type)
+                                    @Html.DisplayNameFor(model => model.Orientation)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.DepartmentName)
+                                    @Html.DisplayNameFor(model => model.UsableArea) (m<sup>2</sup>)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Duty)
+                                    @Html.DisplayNameFor(model => model.RoomResideType)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Telephone)
-                                </th>
-                                <th class="hidden-sm">
-                                    @Html.DisplayNameFor(model => model.AccumulatedFundsDate)
-                                </th>
-                                <th class="hidden-sm">
-                                    @Html.DisplayNameFor(model => model.Marriage)
-                                </th>
-                                <th class="hidden-sm">
-                                    @Html.DisplayNameFor(model => model.LiHuEnterDate)
-                                </th>
-                                <th class="hidden-sm">
-                                    @Html.DisplayNameFor(model => model.Remark)
+                                    @Html.DisplayNameFor(model => model.InhabitantName)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Status)
+                                    @Html.DisplayNameFor(model => model.InhabitantDepartment)
                                 </th>
+                                <th>居住状态</th>
                                 <th>操作</th>
                             </tr>
                         </thead>
+                        <tfoot>
+                            <tr>
+                                <th>房间名称</th>
+                                <th data-filter="true">户型</th>
+                                <th data-filter="true">朝向</th>
+                                <th data-filter="true">使用面积</th>
+                                <th data-filter="true">居住类型</th>
+                                <th>居住人姓名</th>
+                                <th data-filter="true">居住人部门</th>
+                                <th>居住状态</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                        </tfoot>
                         <tbody>
                             @foreach (var item in Model)
                             {
                                 <tr>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.JobNumber)
-                                    </td>
-                                    <td>
                                         @Html.DisplayFor(modelItem => item.Name)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Gender)
+                                        @Html.DisplayFor(modelItem => item.HouseType)
                                     </td>
                                     <td>
-                                        @{
-                                var type1 = (InhabitantType)item.Type;
-                                @type1.DisplayName()
-                                        }
+                                        @Html.DisplayFor(modelItem => item.Orientation)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.DepartmentName)
+                                        @Html.DisplayFor(modelItem => item.UsableArea)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Duty)
+                                        @item.RoomResideType.DisplayName()
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Telephone)
-                                    </td>
-                                    <td class="hidden-sm">
-                                        @item.AccumulatedFundsDate.ToDateString()
-                                    </td>
-                                    <td class="hidden-sm">
-                                        @Html.DisplayFor(modelItem => item.Marriage)
-                                    </td>
-                                    <td class="hidden-sm">
-                                        @item.LiHuEnterDate.ToDateString()
-                                    </td>
-                                    <td class="hidden-sm">
-                                        @Html.DisplayFor(modelItem => item.Remark)
+                                        @Html.DisplayFor(modelItem => item.InhabitantName)
                                     </td>
                                     <td>
-                                        @switch ((EntityStatus)item.Status)
+                                        @Html.DisplayFor(modelItem => item.InhabitantDepartment)
+                                    </td>
+                                    <td>
+                                        @switch ((EntityStatus)item.RecordStatus)
                                         {
                                             case EntityStatus.Normal:
                                             <span class="label label-success">居住中</span>
                                                 break;
-                                            case EntityStatus.InhabitantMoveOut:
-                                            <span class="label label-normal">已搬出</span>
+                                            case EntityStatus.OverTime:
+                                            <span class="label label-danger">超期</span>
                                                 break;
-                                            case EntityStatus.InhabitantExtend:
-                                            <span class="label label-warning">延期居住</span>
+                                            case EntityStatus.ExtendTime:
+                                            <span class="label label-warning">延期</span>
                                                 break;
-                                            case EntityStatus.InhabitantExpire:
-                                            <span class="label label-danger">超期居住</span>
+                                            case EntityStatus.MoveOut:
+                                            <span class="label label-default">已搬出</span>
+                                                break;
+                                            case EntityStatus.ExtendOut:
+                                            <span class="label bg-grey-cascade">已延期</span>
+                                                break;
+                                            default:
+                                            <span class="label bg-green-jungle">空闲</span>
                                                 break;
                                         }
                                     </td>
                                     <td>
-                                        <a href="/Apartment/Inhabitant/Details/@item._id" class="btn btn-info btn-sm ajaxify" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
+                                        <a href="/Apartment/Room/Details/@item.RoomId" class="btn btn-info btn-sm ajaxify" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
                                     </td>
                                 </tr>
                             }
@@ -178,6 +168,26 @@
 
 <script type="text/javascript">
     $(function () {
-        Rhea.initDatatable2($('#inhabitant-table'));
+        var oTable = Rhea.initDatatable2($('#room-table'));
+
+        $("#room-table tfoot th").each(function (i) {
+            if ($(this).attr('data-filter') == 'true') {
+
+                var select = $('<select class="form-control"><option value=""></option></select>')
+                    .appendTo($(this).empty())
+                    .on('change', function () {
+                        var val = $(this).val();
+
+                        oTable.api().column(i)
+                            .search(val ? '^' + $(this).val() + '$' : val, true, false)
+                            .draw();
+                    });
+
+                oTable.api().column(i).data().unique().sort().each(function (d, j) {
+                    select.append('<option value="' + d + '">' + d + '</option>')
+                });
+            }
+        });
+
     });
 </script>
