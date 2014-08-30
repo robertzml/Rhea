@@ -23,7 +23,7 @@ namespace Rhea.Data.Mongo.Apartment
 
         #region Constructor
         /// <summary>
-        /// MongoDB 入住办理业务记录 Repository
+        /// MongoDB 入延期办理业务记录 Repository
         /// </summary>
         public MongoExtendTransactionRepository()
         {
@@ -33,12 +33,23 @@ namespace Rhea.Data.Mongo.Apartment
 
         #region Method
         /// <summary>
-        /// 获取所有入住办理业务记录
+        /// 获取所有延期办理业务记录
         /// </summary>
         /// <returns></returns>
         public IEnumerable<ApartmentTransaction> Get()
         {
             var data = this.repository.Where(r => r.Type == (int)LogType.ApartmentExtend);
+            return data;
+        }
+
+        /// <summary>
+        /// 获取延期办理业务记录
+        /// </summary>
+        /// <param name="id">业务记录ID</param>
+        /// <returns></returns>
+        public ApartmentTransaction Get(string id)
+        {
+            var data = this.repository.GetById(id);
             return data;
         }
 

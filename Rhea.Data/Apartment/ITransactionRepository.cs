@@ -20,6 +20,13 @@ namespace Rhea.Data.Apartment
         IEnumerable<ApartmentTransaction> Get();
 
         /// <summary>
+        /// 获取业务记录
+        /// </summary>
+        /// <param name="id">业务记录ID</param>
+        /// <returns></returns>
+        ApartmentTransaction Get(string id);
+
+        /// <summary>
         /// 添加业务记录
         /// </summary>
         /// <param name="data">业务记录对象</param>

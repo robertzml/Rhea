@@ -55,9 +55,20 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         /// <returns></returns>
         public ActionResult List()
         {
-            var data = this.inhabitantBusiness.Get();
+            var data = this.inhabitantBusiness.GetByMoveOut(false);
             return View(data);
         }
+
+        /// <summary>
+        /// 已搬出住户
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ListMoveOut()
+        {
+            var data = this.inhabitantBusiness.GetByMoveOut(true);
+            return View(data);
+        }
+
 
         /// <summary>
         /// 住户信息

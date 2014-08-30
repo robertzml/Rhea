@@ -42,7 +42,7 @@ namespace Rhea.Business
         /// <returns></returns>
         public IEnumerable<Log> Get()
         {
-            return this.logRepository.Get();
+            return this.logRepository.Get().OrderByDescending(r => r.Time);
         }
 
         /// <summary>

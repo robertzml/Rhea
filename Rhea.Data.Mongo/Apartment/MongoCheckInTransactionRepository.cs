@@ -43,6 +43,17 @@ namespace Rhea.Data.Mongo.Apartment
         }
 
         /// <summary>
+        /// 获取入住办理业务记录
+        /// </summary>
+        /// <param name="id">业务记录ID</param>
+        /// <returns></returns>
+        public ApartmentTransaction Get(string id)
+        {
+            var data = this.repository.GetById(id);
+            return data;
+        }
+
+        /// <summary>
         /// 添加业务记录
         /// </summary>
         /// <param name="data">业务记录对象</param>

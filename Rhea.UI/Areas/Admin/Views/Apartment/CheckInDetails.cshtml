@@ -1,0 +1,178 @@
+﻿@model Rhea.Model.Apartment.CheckInTransaction
+
+@{
+    ViewBag.Title = "入住办理业务";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Apartment.cshtml";
+}
+
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">
+    @ViewBag.Title
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index", "Apartment")">青教管理</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">青教主页</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">@ViewBag.Title</a>
+        </li>
+    </ul>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box green">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-th"></i>入住办理业务信息
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+                    <a href="javascript:;" class="reload">
+                    </a>
+                    <a href="javascript:;" class="remove">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th style="width:20%;">属性</th>
+                                    <th>值</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model._id)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model._id)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Type)
+                                    </td>
+                                    <td>
+                                        @{
+                                            var type = (LogType)Model.Type;
+                                            @type.DisplayName();
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Time)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Time)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.UserId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.UserId)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.UserName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.UserName)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.RoomId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.RoomId)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.RoomName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.RoomName)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.InhabitantId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.InhabitantId)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.InhabitantName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.InhabitantName)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.ResideRecordId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.ResideRecordId)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Remark)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Remark)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Status)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Status)
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <hr />
+                <p>
+                    <a href="@Url.Action("TransactionList", new { controller = "Apartment" })" class="btn btn-primary" role="button"><i class="fa fa-list"></i>&nbsp;回到列表</a>
+                    <a href="@Url.Action("TransactionEdit", new { controller = "Apartment", id = Model._id })" class="btn btn-warning" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT-->
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            Rhea.topNavActive($('#apartment-nav'));
+            Rhea.leftNavActive($('#transaction-list-menu'));
+        });
+    </script>
+}

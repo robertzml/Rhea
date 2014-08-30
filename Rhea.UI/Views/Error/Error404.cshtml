@@ -1,0 +1,59 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <meta charset="utf-8" />
+    <title>房产管理系统 -  404 错误</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    @Styles.Render("~/Content2/core")
+    <link href="~/Content/error.css" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN THEME STYLES -->
+    @Styles.Render("~/Content2/core-style")
+    <!-- END THEME STYLES -->
+    <link rel="shortcut icon" href="favicon.ico" />
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="page-404-full-page">
+    <div class="row">
+        <div class="col-md-12 page-404">
+            <div class="number">
+                404
+            </div>
+            <div class="details">
+                <h3>Oops! You're lost.</h3>
+                <p>
+                    We can not find the page you're looking for.<br />
+                    <a href="index.html">
+                        Return home
+                    </a>
+                    or try the search bar below.
+                </p>
+                <form action="#">
+                    <div class="input-group input-medium">
+                        <input type="text" class="form-control" placeholder="keyword...">
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn blue"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                    <!-- /input-group -->
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+   
+</body>
+<!-- END BODY -->
+</html>

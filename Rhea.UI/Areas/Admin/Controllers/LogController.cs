@@ -43,7 +43,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult List()
         {
-            var data = this.logBusiness.Get().OrderByDescending(r => r.Time);
+            var data = this.logBusiness.Get();
             return View(data);
         }
 

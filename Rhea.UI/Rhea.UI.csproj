@@ -667,6 +667,11 @@
     <Content Include="Areas\Admin\Views\ResideRecord\List.cshtml" />
     <Content Include="Areas\Admin\Views\ResideRecord\Details.cshtml" />
     <Content Include="Areas\Admin\Views\ResideRecord\Edit.cshtml" />
+    <Content Include="Areas\Apartment\Views\Inhabitant\ListMoveOut.cshtml" />
+    <Content Include="Areas\Admin\Views\Apartment\TransactionList.cshtml" />
+    <Content Include="Areas\Admin\Views\Apartment\CheckInDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\Apartment\CheckOutDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\Apartment\ExtendDetails.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="plugins\jquery-1.11.0.min.js" />
@@ -770,6 +775,8 @@
     <Content Include="Views\Home\Menu.cshtml" />
     <Content Include="Views\Home\MobileMenu.cshtml" />
     <Content Include="Views\Error\E500.cshtml" />
+    <Content Include="Views\Error\Error404.cshtml" />
+    <Content Include="Views\Error\Error500.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

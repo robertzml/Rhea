@@ -10,47 +10,45 @@ using Rhea.Model.Apartment;
 namespace Rhea.Data.Mongo.Apartment
 {
     /// <summary>
-    /// MongoDB 退房办理业务记录 Repository
+    /// MongoDB 业务记录 Repository
     /// </summary>
-    public class MongoCheckOutTransactionRepository : ITransactionRepository
+    public class MongoTransactionRepository : ITransactionRepository
     {
         #region Field
         /// <summary>
         /// Repository对象
         /// </summary>
-        private IMongoRepository<CheckOutTransaction> repository;
+        private IMongoRepository<ApartmentTransaction> repository;
         #endregion //Field
 
         #region Constructor
         /// <summary>
-        /// MongoDB 入住办理业务记录 Repository
+        /// MongoDB 业务记录 Repository
         /// </summary>
-        public MongoCheckOutTransactionRepository()
+        public MongoTransactionRepository()
         {
-            this.repository = new MongoRepository<CheckOutTransaction>(RheaServer.EstateDatabase);
+            this.repository = new MongoRepository<ApartmentTransaction>(RheaServer.EstateDatabase);
         }
         #endregion //Constructor
 
         #region Method
         /// <summary>
-        /// 获取所有退房办理业务记录
+        /// 获取所有业务记录
         /// </summary>
         /// <returns></returns>
         public IEnumerable<ApartmentTransaction> Get()
         {
-            var data = this.repository.Where(r => r.Type == (int)LogType.ApartmentCheckOut);
-            return data;
+            return this.repository.AsEnumerable();
         }
 
         /// <summary>
-        /// 获取退房办理业务记录
+        /// 获取业务记录
         /// </summary>
         /// <param name="id">业务记录ID</param>
         /// <returns></returns>
         public ApartmentTransaction Get(string id)
         {
-            var data = this.repository.GetById(id);
-            return data;
+            return this.repository.GetById(id);
         }
 
         /// <summary>
@@ -60,18 +58,8 @@ namespace Rhea.Data.Mongo.Apartment
         /// <returns></returns>
         public ErrorCode Create(ApartmentTransaction data)
         {
-            try
-            {
-                CheckOutTransaction tran = (CheckOutTransaction)data;
-                this.repository.Add(tran);
-            }
-            catch (Exception)
-            {
-                return ErrorCode.Exception;
-            }
-
-            return ErrorCode.Success;
+            return ErrorCode.NotImplement;
         }
-        #endregion //Method
+        #endregion //Method        
     }
 }

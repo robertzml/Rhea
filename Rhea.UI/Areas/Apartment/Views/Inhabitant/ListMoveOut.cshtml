@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<Rhea.Model.Apartment.Inhabitant>
 
 @{
-    ViewBag.Title = "住户列表";
+    ViewBag.Title = "已搬出住户";
     Layout = null;
 }
 
 <!-- BEGIN PAGE HEADER-->
 <h3 class="page-title">
-    @ViewBag.Title <small>当前在住住户</small>
+    @ViewBag.Title
 </h3>
 <div class="page-bar">
     <ul class="page-breadcrumb">
@@ -98,9 +98,6 @@
                                 <th class="hidden-sm">
                                     @Html.DisplayNameFor(model => model.Remark)
                                 </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Status)
-                                </th>
                                 <th>操作</th>
                             </tr>
                         </thead>
@@ -145,23 +142,6 @@
                                         @Html.DisplayFor(modelItem => item.Remark)
                                     </td>
                                     <td>
-                                        @switch ((EntityStatus)item.Status)
-                                        {
-                                            case EntityStatus.Normal:
-                                                <span class="label label-success">居住中</span>
-                                                break;
-                                            case EntityStatus.InhabitantMoveOut:
-                                            <span class="label label-normal">已搬出</span>
-                                                break;
-                                            case EntityStatus.InhabitantExtend:
-                                            <span class="label label-warning">延期居住</span>
-                                                break;
-                                            case EntityStatus.InhabitantExpire:
-                                            <span class="label label-danger">超期居住</span>
-                                                break;
-                                        }
-                                    </td>
-                                    <td>
                                         <a href="/Apartment/Inhabitant/Details/@item._id" class="btn btn-info btn-sm ajaxify" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
                                     </td>
                                 </tr>
@@ -181,3 +161,4 @@
         Rhea.initDatatable2($('#inhabitant-table'));
     });
 </script>
+

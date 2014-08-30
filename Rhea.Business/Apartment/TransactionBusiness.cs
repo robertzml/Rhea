@@ -536,6 +536,27 @@ namespace Rhea.Business.Apartment
         }
 
         /// <summary>
+        /// 获取所有业务记录
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<ApartmentTransaction> GetTransaction()
+        {
+            ITransactionRepository repository = new MongoTransactionRepository();
+            return repository.Get().OrderByDescending(r => r.Time);
+        }
+
+        /// <summary>
+        /// 获取业务记录
+        /// </summary>
+        /// <param name="id">业务记录ID</param>
+        /// <returns></returns>
+        public ApartmentTransaction GetTransaction(string id)
+        {
+            ITransactionRepository repository = new MongoTransactionRepository();
+            return repository.Get(id);
+        }
+
+        /// <summary>
         /// 获取所有入住办理业务记录
         /// </summary>
         /// <returns></returns>
@@ -547,6 +568,18 @@ namespace Rhea.Business.Apartment
         }
 
         /// <summary>
+        /// 获取入住办理业务记录
+        /// </summary>
+        /// <param name="id">业务记录ID</param>
+        /// <returns></returns>
+        public CheckInTransaction GetCheckInTransaction(string id)
+        {
+            ITransactionRepository repository = new MongoCheckInTransactionRepository();
+            var data = (CheckInTransaction)repository.Get(id);
+            return data;
+        }
+
+        /// <summary>
         /// 获取所有退房办理业务记录
         /// </summary>
         /// <returns></returns>
@@ -554,6 +587,41 @@ namespace Rhea.Business.Apartment
         {
             ITransactionRepository repository = new MongoCheckOutTransactionRepository();
             var data = repository.Get().Cast<CheckOutTransaction>().OrderByDescending(r => r.Time);
+            return data;
+        }
+
+        /// <summary>
+        /// 获取退房办理业务记录
+        /// </summary>
+        /// <param name="id">业务记录ID</param>
+        /// <returns></returns>
+        public CheckOutTransaction GetCheckOutTransaction(string id)
+        {
+            ITransactionRepository repository = new MongoCheckOutTransactionRepository();
+            var data = (CheckOutTransaction)repository.Get(id);
+            return data;
+        }
+
+        /// <summary>
+        /// 获取所有延期办理业务记录
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<ExtendTransaction> GetExtendTransaction()
+        {
+            ITransactionRepository repository = new MongoExtendTransactionRepository();
+            var data = repository.Get().Cast<ExtendTransaction>().OrderByDescending(r => r.Time);
+            return data;
+        }
+
+        /// <summary>
+        /// 获取延期办理业务记录
+        /// </summary>
+        /// <param name="id">业务记录ID</param>
+        /// <returns></returns>
+        public ExtendTransaction GetExtendTransaction(string id)
+        {
+            ITransactionRepository repository = new MongoExtendTransactionRepository();
+            var data = (ExtendTransaction)repository.Get(id);
             return data;
         }
         #endregion //Method

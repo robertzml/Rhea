@@ -1,0 +1,69 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <meta charset="utf-8" />
+    <title>房产管理系统 -  500 错误</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    @Styles.Render("~/Content2/core")
+    <link href="/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css" />
+    <link href="/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+    <link href="/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css" rel="stylesheet" type="text/css" />
+    <link href="/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/error.css" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN THEME STYLES -->
+    @Styles.Render("~/Content2/core-style")
+    <!-- END THEME STYLES -->
+    <link rel="shortcut icon" href="favicon.ico" />
+    @Scripts.Render("~/bundles/jqueryv1")
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="page-404-full-page">
+    <div class="row">
+        <div class="col-md-12 page-404">
+            <div class="number">
+                500
+            </div>
+            <div class=" details">
+                <h3>Oops! Something went wrong.</h3>
+                <p>
+                    We are fixing it!<br />
+                    Please come back in a while.<br /><br />
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+    <!-- BEGIN CORE PLUGINS -->
+    <!--[if lt IE 9]>
+    <script src="/plugins/respond.min.js"></script>
+    <script src="/plugins/excanvas.min.js"></script>
+    <![endif]-->
+    @Scripts.Render("~/bundles2/core")
+    @Scripts.Render("~/bundles2/core-plugin")
+    <!-- END CORE PLUGINS -->
+    @Scripts.Render("~/bundles2/rhea")
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            Metronic.init();
+            Layout.init();
+        });
+    </script>
+    <!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>
+
