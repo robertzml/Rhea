@@ -249,6 +249,19 @@
             Rhea.topNavActive($('#apartment-nav'));
             Rhea.leftNavActive($('#reside-record-list-menu'));
 
+            $('#DepartmentId').select2({
+                placeholder: "Select an option",
+                allowClear: true
+            }).on("change", function (e) {
+                var item = e.added;
+                if (item != null) {
+                    $('#InhabitantDepartment').val(item.text.replace(/(^\s*)|(\s*$)/g, ""));
+                } else {
+                    $('#InhabitantDepartment').val('');
+                }
+            });
+
+
             $('#EnterDate').datepicker({
                 format: "yyyy-mm-dd",
                 weekStart: 7,

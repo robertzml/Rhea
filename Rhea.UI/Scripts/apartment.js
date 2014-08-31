@@ -859,7 +859,7 @@ var apartment = function() {
 		initSidebarLink: function() {
 			$('.page-sidebar i.ajax-link').click(function (e) {
                 var url = "/Apartment/Building/Block";
-                var id = $(this).attr('ref');
+                var id = $(this).attr('data-ref');
                 var request = { id: id };
 
                 Rhea.ajaxNavPage($(this), e, url, request);

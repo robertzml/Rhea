@@ -78,9 +78,15 @@ namespace Rhea.Model.Apartment
         Student = 4,
 
         /// <summary>
+        /// 后勤职工
+        /// </summary>
+        [Display(Name = "后勤职工")]
+        Logistics = 5,
+
+        /// <summary>
         /// 其他
         /// </summary>
         [Display(Name = "其他")]
-        Other = 5
+        Other = 6
     }
 }

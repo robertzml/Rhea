@@ -79,6 +79,13 @@ namespace Rhea.UI.Areas.Admin.Controllers
         #endregion //Action
 
         #region Json
+        /// <summary>
+        /// 获取日志数据
+        /// </summary>
+        /// <param name="draw"></param>
+        /// <param name="start"></param>
+        /// <param name="length"></param>
+        /// <returns></returns>
         public JsonResult GetData(int draw, int start, int length)
         {
             var data = this.logBusiness.Get(start, length);

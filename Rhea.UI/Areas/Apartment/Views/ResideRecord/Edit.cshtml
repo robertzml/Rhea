@@ -111,9 +111,17 @@
                                 </div>
 
                                 <div class="form-group">
+                                    @Html.LabelFor(model => model.InhabitantDepartmentId, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-6">
+                                        @Html.EditorFor(model => model.InhabitantDepartmentId, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.InhabitantDepartmentId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
                                     @Html.LabelFor(model => model.InhabitantDepartment, htmlAttributes: new { @class = "control-label col-md-3" })
                                     <div class="col-md-6">
-                                        @Html.EditorFor(model => model.InhabitantDepartment, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                        @Html.EditorFor(model => model.InhabitantDepartment, new { htmlAttributes = new { @class = "form-control" } })
                                         @Html.ValidationMessageFor(model => model.InhabitantDepartment, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -218,6 +226,17 @@
 
 <script type="text/javascript">
     $(function () {
+        $('#DepartmentId').select2({
+            placeholder: "Select an option",
+            allowClear: true
+        }).on("change", function (e) {
+            var item = e.added;
+            if (item != null) {
+                $('#InhabitantDepartment').val(item.text.replace(/(^\s*)|(\s*$)/g, ""));
+            } else {
+                $('#InhabitantDepartment').val('');
+            }
+        });
 
         $('#EnterDate').datepicker({
             format: "yyyy-mm-dd",

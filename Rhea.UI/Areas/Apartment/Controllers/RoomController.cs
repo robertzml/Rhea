@@ -225,6 +225,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
 
                 //edit
                 ApartmentRoom data = this.roomBusiness.Get(model.RoomId);
+                data.Number = model.Number;
                 data.HouseType = model.HouseType;
                 data.Orientation = model.Orientation;
                 data.HasAirCondition = model.HasAirCondition;
