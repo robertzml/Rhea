@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rhea.UI", "Rhea.UI\Rhea.UI.csproj", "{1CE0E8E7-9491-4F1D-8424-E4013586F550}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rhea.Common", "Rhea.Common\Rhea.Common.csproj", "{A89D3A8E-B3F7-41B9-B4AA-4C31AD0D6603}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rhea.ConsoleTest", "Rhea.ConsoleTest\Rhea.ConsoleTest.csproj", "{6C8D2834-D3B6-4449-A36C-7CB93133C5C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rhea.API", "Rhea.API\Rhea.API.csproj", "{4F3B661F-7113-4EDE-8E97-71846AE4C9AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{6C8D2834-D3B6-4449-A36C-7CB93133C5C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C8D2834-D3B6-4449-A36C-7CB93133C5C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C8D2834-D3B6-4449-A36C-7CB93133C5C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F3B661F-7113-4EDE-8E97-71846AE4C9AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F3B661F-7113-4EDE-8E97-71846AE4C9AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F3B661F-7113-4EDE-8E97-71846AE4C9AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F3B661F-7113-4EDE-8E97-71846AE4C9AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
