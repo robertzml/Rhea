@@ -8,7 +8,7 @@
 .help-page-table th,
 .help-page-table pre,
 .help-page-table p {
-    font-family: "Segoe UI Light", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    font-family: "Helvetica Neue", "微软雅黑", "Segoe UI Light", Frutiger, "Frutiger Linotype", "Dejavu Sans", Arial, sans-serif;
 }
 
 .help-page pre.wrapped {

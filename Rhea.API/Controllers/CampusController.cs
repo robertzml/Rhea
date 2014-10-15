@@ -1,11 +1,11 @@
-﻿using Rhea.Business.Estate;
-using Rhea.Model.Estate;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Rhea.Business.Estate;
+using Rhea.Model.Estate;
 
 namespace Rhea.API.Controllers
 {
@@ -30,11 +30,8 @@ namespace Rhea.API.Controllers
 
         #region Action
         /// <summary>
-        /// 获取校区数据
+        /// 获取所有校区数据
         /// </summary>
-        /// <returns>
-        /// 所有校区数据
-        /// </returns>
         public HttpResponseMessage Get()
         {
             var data = this.campusBusiness.Get().ToList();
@@ -52,7 +49,7 @@ namespace Rhea.API.Controllers
         public Campus Get(int id)
         {
             var data = this.campusBusiness.Get(id);
-            
+
             return data;
         }
         #endregion //Action

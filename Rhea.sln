@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rhea.Common", "Rhea.Common\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rhea.ConsoleTest", "Rhea.ConsoleTest\Rhea.ConsoleTest.csproj", "{6C8D2834-D3B6-4449-A36C-7CB93133C5C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rhea.API", "Rhea.API\Rhea.API.csproj", "{4F3B661F-7113-4EDE-8E97-71846AE4C9AF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rhea.API", "Rhea.API\Rhea.API.csproj", "{232E6E9D-F697-4921-9B61-158CB6B1F8E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,10 +53,10 @@ Global
 		{6C8D2834-D3B6-4449-A36C-7CB93133C5C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C8D2834-D3B6-4449-A36C-7CB93133C5C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C8D2834-D3B6-4449-A36C-7CB93133C5C9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4F3B661F-7113-4EDE-8E97-71846AE4C9AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4F3B661F-7113-4EDE-8E97-71846AE4C9AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4F3B661F-7113-4EDE-8E97-71846AE4C9AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4F3B661F-7113-4EDE-8E97-71846AE4C9AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{232E6E9D-F697-4921-9B61-158CB6B1F8E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{232E6E9D-F697-4921-9B61-158CB6B1F8E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{232E6E9D-F697-4921-9B61-158CB6B1F8E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{232E6E9D-F697-4921-9B61-158CB6B1F8E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
