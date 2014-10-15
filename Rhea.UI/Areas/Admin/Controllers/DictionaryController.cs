@@ -64,12 +64,6 @@ namespace Rhea.UI.Areas.Admin.Controllers
         public ActionResult Details(string name)
         {
             var data = this.dictionaryBusiness.Get(name);
-
-            if (data.Type == (int)DictionaryType.Text)
-                ViewBag.Property = this.dictionaryBusiness.GetTextProperty(name);
-            else if (data.Type == (int)DictionaryType.Pair)
-                ViewBag.Property = this.dictionaryBusiness.GetPairProperty(name);
-
             return View(data);
         }
 
@@ -94,14 +88,31 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                //model.Property = Regex.Split(Request.Form["Property"].TrimEnd(), "\r\n");               
-
                 ErrorCode result = this.dictionaryBusiness.Create(model);
                 if (result != ErrorCode.Success)
                 {
                     TempData["Message"] = "添加字典失败";
                     ModelState.AddModelError("", result.DisplayName());
                     return View(model);
+                }
+
+                string[] lines = Regex.Split(model.PropertyString, "\r\n");
+                if (model.Type == (int)DictionaryType.Text)
+                {
+                    result = this.dictionaryBusiness.UpdateTextProperty(model.Name, lines.ToList());
+                }
+                else if (model.Type == (int)DictionaryType.Pair)
+                {
+                    Dictionary<int, string> dict = new Dictionary<int, string>();
+                    foreach (string line in lines)
+                    {
+                        if (string.IsNullOrEmpty(line))
+                            continue;
+                        string[] pair = Regex.Split(line, ":");
+                        dict.Add(Convert.ToInt32(pair[0]), pair[1]);
+                    }
+
+                    result = this.dictionaryBusiness.UpdatePairProperty(model.Name, dict);
                 }
 
                 //log
@@ -140,7 +151,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
         public ActionResult Edit(string name)
         {
             var data = this.dictionaryBusiness.Get(name);
-            //ViewBag.Property = string.Join("\r\n", data.Property);
+            data.PropertyString = Regex.Replace(data.PropertyString, "<br />", "\r\n");
             return View(data);
         }
 
@@ -155,14 +166,31 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                //model.Property = Regex.Split(Request.Form["Property"].TrimEnd(), "\r\n");                
-
                 ErrorCode result = this.dictionaryBusiness.Edit(model);
                 if (result != ErrorCode.Success)
                 {
                     TempData["Message"] = "编辑字典失败";
                     ModelState.AddModelError("", result.DisplayName());
                     return View(model);
+                }
+
+                string[] lines = Regex.Split(model.PropertyString, "\r\n");
+                if (model.Type == (int)DictionaryType.Text)
+                {
+                    result = this.dictionaryBusiness.UpdateTextProperty(model.Name, lines.ToList());
+                }
+                else if (model.Type == (int)DictionaryType.Pair)
+                {
+                    Dictionary<int, string> dict = new Dictionary<int, string>();
+                    foreach (string line in lines)
+                    {
+                        if (string.IsNullOrEmpty(line))
+                            continue;
+                        string[] pair = Regex.Split(line, ":");
+                        dict.Add(Convert.ToInt32(pair[0]), pair[1]);
+                    }
+
+                    result = this.dictionaryBusiness.UpdatePairProperty(model.Name, dict);
                 }
 
                 //log

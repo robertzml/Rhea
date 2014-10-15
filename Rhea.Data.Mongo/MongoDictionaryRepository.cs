@@ -63,15 +63,18 @@ namespace Rhea.Data.Mongo
             List<string> data = new List<string>();
 
             MongoRepository repository = new MongoRepository(RheaServer.RheaDatabase, RheaCollection.Dictionary);
-            
+
             var query = Query.EQ("name", name);
             var doc = repository.Collection.FindOne(query);
 
             if (doc["type"].AsInt32 != (int)DictionaryType.Text)
                 return data;
 
+            if (!doc.Contains("property"))
+                return data;
+
             BsonArray array = doc["property"].AsBsonArray;
-            foreach(BsonString row in array)
+            foreach (BsonString row in array)
             {
                 data.Add(row.AsString);
             }
@@ -94,6 +97,9 @@ namespace Rhea.Data.Mongo
             var doc = repository.Collection.FindOne(query);
 
             if (doc["type"].AsInt32 != (int)DictionaryType.Pair)
+                return data;
+
+            if (!doc.Contains("property"))
                 return data;
 
             BsonArray array = doc["property"].AsBsonArray;
@@ -145,6 +151,78 @@ namespace Rhea.Data.Mongo
             }
 
             return ErrorCode.Success;
+        }
+
+        /// <summary>
+        /// 更新文本属性
+        /// </summary>
+        /// <param name="name">字典集名称</param>
+        /// <param name="property">属性</param>
+        /// <returns></returns>
+        public ErrorCode UpdateTextProperty(string name, List<string> property)
+        {
+            try
+            {
+                MongoRepository repository = new MongoRepository(RheaServer.RheaDatabase, RheaCollection.Dictionary);
+
+                BsonArray array = new BsonArray();
+                foreach (var item in property)
+                {
+                    array.Add(item);
+                }
+
+                var query = Query.EQ("name", name);
+                var update = Update.Set("property", array);
+
+                WriteConcernResult result = repository.Collection.Update(query, update);
+
+                if (result.Ok)
+                    return ErrorCode.Success;
+                else
+                    return ErrorCode.DatabaseWriteError;
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
+        }
+
+        /// <summary>
+        /// 更新键值属性
+        /// </summary>
+        /// <param name="name">字典集名称</param>
+        /// <param name="property">属性</param>
+        /// <returns></returns>
+        public ErrorCode UpdatePairProperty(string name, Dictionary<int, string> property)
+        {
+            try
+            {
+                MongoRepository repository = new MongoRepository(RheaServer.RheaDatabase, RheaCollection.Dictionary);
+
+                BsonArray array = new BsonArray();
+                foreach (var item in property)
+                {
+                    array.Add(new BsonDocument
+                    {
+                        { "key", item.Key },
+                        { "value", item.Value }
+                    });
+                }
+
+                var query = Query.EQ("name", name);
+                var update = Update.Set("property", array);
+
+                WriteConcernResult result = repository.Collection.Update(query, update);
+
+                if (result.Ok)
+                    return ErrorCode.Success;
+                else
+                    return ErrorCode.DatabaseWriteError;
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
         }
         #endregion //Method
     }

@@ -85,13 +85,24 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        @Html.LabelFor(model => model.Property)
+                                        @Html.LabelFor(model => model.Type)
                                     </td>
                                     <td>
-                                        <textarea id="Property" name="Property" class="form-control"></textarea>
+                                        @Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "form-control" } })
                                     </td>
                                     <td>
-                                        @Html.ValidationMessageFor(model => model.Property, "", new { @class = "text-danger" })
+                                        @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.PropertyString)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.PropertyString, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td>
+                                        @Html.ValidationMessageFor(model => model.PropertyString, "", new { @class = "text-danger" })
                                     </td>
                                 </tr>
                                 <tr>
@@ -109,7 +120,12 @@
                         </table>
 
                         <h4>说明：</h4>
-                        <p class="text-info">属性集一行一条</p>
+                        <p class="text-info">属性集一行一条。</p>
+                        <p class="text-info">
+                            键值属性请用冒号分割，例如: <br />
+                            <code>1:属性1</code> <br />
+                            <code>2:属性2</code>
+                        </p>
 
                         <hr />
                         <p>

@@ -89,7 +89,7 @@
                                         @Html.LabelFor(model => model.Type)
                                     </td>
                                     <td>
-                                        @Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                                     </td>
                                     <td>
                                         @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
@@ -97,13 +97,13 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        @Html.LabelFor(model => model.Property)
+                                        @Html.LabelFor(model => model.PropertyString)
                                     </td>
                                     <td>
-                                        <textarea id="Property" name="Property" class="form-control">@ViewBag.Property</textarea>
+                                        @Html.EditorFor(model => model.PropertyString, new { htmlAttributes = new { @class = "form-control" } })
                                     </td>
                                     <td>
-                                        @Html.ValidationMessageFor(model => model.Property, "", new { @class = "text-danger" })
+                                        @Html.ValidationMessageFor(model => model.PropertyString, "", new { @class = "text-danger" })
                                     </td>
                                 </tr>
                                 <tr>

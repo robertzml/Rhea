@@ -13,12 +13,6 @@ namespace Rhea.Model
     public enum DictionaryType
     {
         /// <summary>
-        /// 未知
-        /// </summary>
-        [Display(Name = "未知")]
-        Unknown = 0,
-
-        /// <summary>
         /// 文本类型
         /// </summary>
         [Display(Name = "文本类型")]

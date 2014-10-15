@@ -52,5 +52,21 @@ namespace Rhea.Data
         /// <param name="data">字典对象</param>
         /// <returns></returns>
         ErrorCode Edit(Dictionary data);
+
+        /// <summary>
+        /// 更新文本属性
+        /// </summary>
+        /// <param name="name">字典集名称</param>
+        /// <param name="property">属性</param>
+        /// <returns></returns>
+        ErrorCode UpdateTextProperty(string name, List<string> property);
+
+        /// <summary>
+        /// 更新键值属性
+        /// </summary>
+        /// <param name="name">字典集名称</param>
+        /// <param name="property">属性</param>
+        /// <returns></returns>
+        ErrorCode UpdatePairProperty(string name, Dictionary<int, string> property);
     }
 }

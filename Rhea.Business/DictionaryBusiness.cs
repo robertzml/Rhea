@@ -50,7 +50,20 @@ namespace Rhea.Business
         /// <returns></returns>
         public Dictionary Get(string name)
         {
-            return this.dictionaryRepository.Get(name);
+            Dictionary data = this.dictionaryRepository.Get(name);
+            if (data.Type == (int)DictionaryType.Text)
+                data.PropertyString = string.Join("<br />", GetTextProperty(name));
+            else if (data.Type == (int)DictionaryType.Pair)
+            {
+                var pairs = GetPairProperty(name);
+                data.PropertyString = "";
+                foreach (var item in pairs)
+                {
+                    data.PropertyString += item.Key.ToString() + ":" + item.Value + "<br />";
+                }
+            }
+
+            return data;
         }
 
         /// <summary>
@@ -91,6 +104,28 @@ namespace Rhea.Business
         public ErrorCode Edit(Dictionary data)
         {
             return this.dictionaryRepository.Edit(data);
+        }
+
+        /// <summary>
+        /// 更新文本属性
+        /// </summary>
+        /// <param name="name">字典集名称</param>
+        /// <param name="property">属性</param>
+        /// <returns></returns>
+        public ErrorCode UpdateTextProperty(string name, List<string> property)
+        {
+            return this.dictionaryRepository.UpdateTextProperty(name, property);
+        }
+
+        /// <summary>
+        /// 更新键值属性
+        /// </summary>
+        /// <param name="name">字典集名称</param>
+        /// <param name="property">属性</param>
+        /// <returns></returns>
+        public ErrorCode UpdatePairProperty(string name, Dictionary<int, string> property)
+        {
+            return this.dictionaryRepository.UpdatePairProperty(name, property);
         }
 
         /// <summary>

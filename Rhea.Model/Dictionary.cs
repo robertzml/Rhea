@@ -29,24 +29,19 @@ namespace Rhea.Model
         [BsonElement("title")]
         [Display(Name = "标题")]
         public string Title { get; set; }
-
-        /// <summary>
-        /// 属性集
-        /// </summary>
-        //[BsonElement("property")]
-        //[Display(Name = "属性集")]
-        //public string[] Property { get; set; }
-
+               
         /// <summary>
         /// 属性内容
         /// </summary>
         [BsonIgnore]
+        [DataType(DataType.MultilineText)]
         [Display(Name = "属性内容")]
         public string PropertyString { get; set; }
 
         /// <summary>
         /// 类型
         /// </summary>
+        [Required]
         [UIHint("DictionaryType")]
         [BsonElement("type")]
         [Display(Name = "类型")]

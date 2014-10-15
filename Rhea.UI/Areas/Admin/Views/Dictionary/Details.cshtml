@@ -70,13 +70,21 @@
                         </tr>
                         <tr>
                             <td>
-                                属性集
+                                @Html.DisplayNameFor(model => model.Type)
                             </td>
                             <td>
-                                @foreach (var item in ViewBag.Property)
-                                {
-                                    <span>@item</span><br />
+                                @{
+                                    var type = (DictionaryType)Model.Type;
+                                    @type.DisplayName()
                                 }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.PropertyString)
+                            </td>
+                            <td>
+                                @Html.Raw(Model.PropertyString)
                             </td>
                         </tr>
                         <tr>
