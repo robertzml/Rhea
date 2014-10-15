@@ -86,6 +86,17 @@
                                 </tr>
                                 <tr>
                                     <td>
+                                        @Html.LabelFor(model => model.Type)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td>
+                                        @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
                                         @Html.LabelFor(model => model.Property)
                                     </td>
                                     <td>

@@ -54,7 +54,7 @@
                                 @Html.DisplayNameFor(model => model.Title)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.IsCombined)
+                                @Html.DisplayNameFor(model => model.Type)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Remark)
@@ -73,7 +73,10 @@
                                     @Html.DisplayFor(modelItem => item.Title)
                                 </td>
                                 <td>
-                                    @item.IsCombined
+                                    @{
+                                        var type = (DictionaryType)item.Type;
+                                        @type.DisplayName()
+                                    }
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Remark)

@@ -681,6 +681,7 @@
     <Content Include="Areas\Admin\Views\Apartment\SpecialExchangeDetails.cshtml" />
     <Content Include="Areas\Apartment\Views\Room\List.cshtml" />
     <Content Include="Areas\Apartment\Views\Shared\EditorTemplates\DepartmentDropDownList.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\DictionaryType.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="plugins\jquery-1.11.0.min.js" />

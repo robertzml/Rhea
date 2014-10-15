@@ -64,6 +64,12 @@ namespace Rhea.UI.Areas.Admin.Controllers
         public ActionResult Details(string name)
         {
             var data = this.dictionaryBusiness.Get(name);
+
+            if (data.Type == (int)DictionaryType.Text)
+                ViewBag.Property = this.dictionaryBusiness.GetTextProperty(name);
+            else if (data.Type == (int)DictionaryType.Pair)
+                ViewBag.Property = this.dictionaryBusiness.GetPairProperty(name);
+
             return View(data);
         }
 
@@ -88,8 +94,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                model.Property = Regex.Split(Request.Form["Property"].TrimEnd(), "\r\n");
-                model.IsCombined = false;
+                //model.Property = Regex.Split(Request.Form["Property"].TrimEnd(), "\r\n");               
 
                 ErrorCode result = this.dictionaryBusiness.Create(model);
                 if (result != ErrorCode.Success)
@@ -135,7 +140,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
         public ActionResult Edit(string name)
         {
             var data = this.dictionaryBusiness.Get(name);
-            ViewBag.Property = string.Join("\r\n", data.Property);
+            //ViewBag.Property = string.Join("\r\n", data.Property);
             return View(data);
         }
 
@@ -150,8 +155,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                model.Property = Regex.Split(Request.Form["Property"].TrimEnd(), "\r\n");
-                model.IsCombined = false;
+                //model.Property = Regex.Split(Request.Form["Property"].TrimEnd(), "\r\n");                
 
                 ErrorCode result = this.dictionaryBusiness.Edit(model);
                 if (result != ErrorCode.Success)

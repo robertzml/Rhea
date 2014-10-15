@@ -54,6 +54,26 @@ namespace Rhea.Business
         }
 
         /// <summary>
+        /// 获取文本属性
+        /// </summary>
+        /// <param name="name">字典集名称</param>
+        /// <returns></returns>
+        public List<String> GetTextProperty(string name)
+        {
+            return this.dictionaryRepository.GetTextProperty(name);
+        }
+
+        /// <summary>
+        /// 获取键值属性
+        /// </summary>
+        /// <param name="name">字典集名称</param>
+        /// <returns></returns>
+        public Dictionary<int, string> GetPairProperty(string name)
+        {
+            return this.dictionaryRepository.GetPairProperty(name);
+        }
+
+        /// <summary>
         /// 添加字典集
         /// </summary>
         /// <param name="data">字典对象</param>
@@ -84,8 +104,8 @@ namespace Rhea.Business
             BsonDocument doc = repository.GetRoomFunctionCodes();
 
             BsonArray array = doc["property"].AsBsonArray;
-           
-            foreach(BsonDocument row in array)
+
+            foreach (BsonDocument row in array)
             {
                 RoomFunctionCode code = new RoomFunctionCode();
                 code.CodeId = row["codeId"].AsString;

@@ -26,6 +26,20 @@ namespace Rhea.Data
         Dictionary Get(string name);
 
         /// <summary>
+        /// 获取文本属性
+        /// </summary>
+        /// <param name="name">字典集名称</param>
+        /// <returns></returns>
+        List<String> GetTextProperty(string name);
+
+        /// <summary>
+        /// 获取键值属性
+        /// </summary>
+        /// <param name="name">字典集名称</param>
+        /// <returns></returns>
+        Dictionary<int, string> GetPairProperty(string name);
+
+        /// <summary>
         /// 添加字典集
         /// </summary>
         /// <param name="data">字典对象</param>

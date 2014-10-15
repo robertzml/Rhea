@@ -70,18 +70,10 @@
                         </tr>
                         <tr>
                             <td>
-                                @Html.DisplayNameFor(model => model.IsCombined)
+                                属性集
                             </td>
                             <td>
-                                @Model.IsCombined
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                @Html.DisplayNameFor(model => model.Property)
-                            </td>
-                            <td>
-                                @foreach (var item in Model.Property)
+                                @foreach (var item in ViewBag.Property)
                                 {
                                     <span>@item</span><br />
                                 }

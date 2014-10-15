@@ -66,6 +66,7 @@
     <Compile Include="Apartment\SpecialExchangeTransaction.cs" />
     <Compile Include="CollectionName.cs" />
     <Compile Include="Dictionary.cs" />
+    <Compile Include="DictionaryType.cs" />
     <Compile Include="ErrorCode.cs" />
     <Compile Include="Estate\Block.cs" />
     <Compile Include="Estate\Building.cs" />

@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using MongoDB.Driver.Builders;
 
 namespace Rhea.Data.Mongo
 {
@@ -37,7 +40,7 @@ namespace Rhea.Data.Mongo
         /// <returns>返回简单型字典集</returns>
         public IEnumerable<Dictionary> Get()
         {
-            return this.repository.Where(r => r.IsCombined == false);
+            return this.repository;
         }
 
         /// <summary>
@@ -48,6 +51,58 @@ namespace Rhea.Data.Mongo
         public Dictionary Get(string name)
         {
             return this.repository.Where(r => r.Name == name).First();
+        }
+
+        /// <summary>
+        /// 获取文本属性
+        /// </summary>
+        /// <param name="name">字典集名称</param>
+        /// <returns></returns>
+        public List<String> GetTextProperty(string name)
+        {
+            List<string> data = new List<string>();
+
+            MongoRepository repository = new MongoRepository(RheaServer.RheaDatabase, RheaCollection.Dictionary);
+            
+            var query = Query.EQ("name", name);
+            var doc = repository.Collection.FindOne(query);
+
+            if (doc["type"].AsInt32 != (int)DictionaryType.Text)
+                return data;
+
+            BsonArray array = doc["property"].AsBsonArray;
+            foreach(BsonString row in array)
+            {
+                data.Add(row.AsString);
+            }
+
+            return data;
+        }
+
+        /// <summary>
+        /// 获取键值属性
+        /// </summary>
+        /// <param name="name">字典集名称</param>
+        /// <returns></returns>
+        public Dictionary<int, string> GetPairProperty(string name)
+        {
+            Dictionary<int, string> data = new Dictionary<int, string>();
+
+            MongoRepository repository = new MongoRepository(RheaServer.RheaDatabase, RheaCollection.Dictionary);
+
+            var query = Query.EQ("name", name);
+            var doc = repository.Collection.FindOne(query);
+
+            if (doc["type"].AsInt32 != (int)DictionaryType.Pair)
+                return data;
+
+            BsonArray array = doc["property"].AsBsonArray;
+            foreach (BsonDocument row in array)
+            {
+                data.Add(row["key"].AsInt32, row["value"].AsString);
+            }
+
+            return data;
         }
 
         /// <summary>

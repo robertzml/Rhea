@@ -33,16 +33,24 @@ namespace Rhea.Model
         /// <summary>
         /// 属性集
         /// </summary>
-        [BsonElement("property")]
-        [Display(Name = "属性集")]
-        public string[] Property { get; set; }
+        //[BsonElement("property")]
+        //[Display(Name = "属性集")]
+        //public string[] Property { get; set; }
 
         /// <summary>
-        /// 是否组合
+        /// 属性内容
         /// </summary>
-        [BsonElement("isCombined")]
-        [Display(Name = "是否组合")]
-        public bool IsCombined { get; set; }
+        [BsonIgnore]
+        [Display(Name = "属性内容")]
+        public string PropertyString { get; set; }
+
+        /// <summary>
+        /// 类型
+        /// </summary>
+        [UIHint("DictionaryType")]
+        [BsonElement("type")]
+        [Display(Name = "类型")]
+        public int Type { get; set; }
 
         /// <summary>
         /// 备注
