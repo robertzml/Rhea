@@ -135,7 +135,7 @@ var Rhea = function () {
 	}
 	
 	var handleInitDatePicker = function($dom, today) {
-		if (today) {
+		if (today == true) {
 			$dom.datepicker({
 				format: "yyyy-mm-dd",
 				weekStart: 7,
@@ -324,7 +324,11 @@ var Rhea = function () {
 		return y + '-' + m + '-' + d + " " + h + ":" + min + ":" + s;
 	}
 	
-	function handleMomentDateTime(dt) {
+	var handleMomentDate = function(dt) {
+		return moment(dt).format('YYYY-MM-DD');
+	}
+	
+	var handleMomentDateTime = function(dt) {
 		return moment(dt).format('YYYY-MM-DD HH:mm:ss');
 	}
 	
@@ -373,15 +377,15 @@ var Rhea = function () {
 				handleAjaxSvg(container, url, callback);
 			}
 		},
-		
+
 		zoomSvg: function($dom, zoomType) {
 			handleZoomSvg($dom, zoomType);
 		},
 		
 		parseDate: function(date) {
-			return handleParseDate(date);
+			return handleMomentDate(date);
 		},
-		
+
 		/* moment parse asp.net datetime */
 		parseDateTime: function(dt) {
 			return handleMomentDateTime(dt);

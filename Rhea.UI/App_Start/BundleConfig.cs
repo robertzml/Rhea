@@ -95,7 +95,7 @@ namespace Rhea.UI
                 "~/scripts/layout.js",
                 "~/scripts/rhea.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles2/apartment").Include(
+            bundles.Add(new ScriptBundle("~/bundles/apartment").Include(
                 "~/plugins/select2/select2.min.js",
                 "~/plugins/select2/select2_locale_zh-CN.js",
                 "~/plugins/jstree/jstree.min.js",

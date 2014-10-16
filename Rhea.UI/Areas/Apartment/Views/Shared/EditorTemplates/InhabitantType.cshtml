@@ -2,8 +2,13 @@
 
 <select class="form-control" id="Type" name="Type">
     <option value="">-- 请选择 --</option>
-    @foreach (InhabitantType o in Enum.GetValues(typeof(InhabitantType)))
-    {
-        <option value="@Convert.ToInt32(o)" @(Model == (int)o ? "selected='selected'" : "")>@o.DisplayName()</option>
+    @{
+        DictionaryBusiness business = new DictionaryBusiness();
+        var dict = business.GetPairProperty("InhabitantType");
+
+        foreach (var item in dict)
+        {
+            <option value="@item.Key" @(Model == item.Key ? "selected='selected'" : "")>@item.Value</option>
+        }
     }
 </select>

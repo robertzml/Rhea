@@ -169,6 +169,10 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         {
             var data = this.roomBusiness.GetCurrentInhabitant(id);
 
+            DictionaryBusiness business = new DictionaryBusiness();
+            var types = business.GetPairProperty("InhabitantType");
+            ViewBag.InhabitantType = types[data.Type];
+
             return View(data);
         }
 
@@ -224,8 +228,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                 }
 
                 //edit
-                ApartmentRoom data = this.roomBusiness.Get(model.RoomId);
-                data.Number = model.Number;
+                ApartmentRoom data = this.roomBusiness.Get(model.RoomId);               
                 data.HouseType = model.HouseType;
                 data.Orientation = model.Orientation;
                 data.HasAirCondition = model.HasAirCondition;

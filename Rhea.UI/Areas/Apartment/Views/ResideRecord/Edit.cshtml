@@ -238,25 +238,8 @@
             }
         });
 
-        $('#EnterDate').datepicker({
-            format: "yyyy-mm-dd",
-            weekStart: 7,
-            language: "zh-CN",
-            autoclose: true
-        });
-
-        $('#ExpireDate').datepicker({
-            format: "yyyy-mm-dd",
-            weekStart: 7,
-            language: "zh-CN",
-            autoclose: true
-        });
-
-        $('#LeaveDate').datepicker({
-            format: "yyyy-mm-dd",
-            weekStart: 7,
-            language: "zh-CN",
-            autoclose: true
-        });
+        Rhea.initDatePicker($('#EnterDate'));
+        Rhea.initDatePicker($('#ExpireDate'));
+        Rhea.initDatePicker($('#LeaveDate'));
     });
 </script>

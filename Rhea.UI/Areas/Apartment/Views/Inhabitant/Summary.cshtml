@@ -39,10 +39,7 @@
                     住户类型
                 </td>
                 <td>
-                    @{
-                        var type1 = (InhabitantType)Model.Type;
-                        @type1.DisplayName()
-                    }
+                    @ViewBag.Type
                 </td>
             </tr>
             <tr>
@@ -61,7 +58,7 @@
                     @switch ((EntityStatus)Model.Status)
                     {
                         case EntityStatus.Normal:
-                            <span class="label label-success">居住中</span>
+                        <span class="label label-success">居住中</span>
                             break;
                         case EntityStatus.InhabitantMoveOut:
                         <span class="label label-normal">已搬出</span>

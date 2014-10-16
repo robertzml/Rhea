@@ -1,4 +1,4 @@
-var apartment = function() {
+var Apartment = function() {
 	
 	var displayConfirm = function(form) {
 		$('#tabConfirm .form-control-static', form).each(function(){
@@ -217,34 +217,11 @@ var apartment = function() {
 				$('#room-info').load('/Apartment/Room/Summary', { id: rid });
 			});
 
-			$('#AccumulatedFundsDate').datepicker({
-				format: "yyyy-mm-dd",
-				weekStart: 7,
-				language: "zh-CN",
-				autoclose: true
-			});
-
-			$('#LiHuEnterDate').datepicker({
-				format: "yyyy-mm-dd",
-				weekStart: 7,
-				language: "zh-CN",
-				autoclose: true
-			});
-
-			$('#EnterDate').datepicker({
-				format: "yyyy-mm-dd",
-				weekStart: 7,
-				language: "zh-CN",
-				autoclose: true,
-				todayHighlight: true
-			});
-
-			$('#ExpireDate').datepicker({
-				format: "yyyy-mm-dd",
-				weekStart: 7,
-				language: "zh-CN",
-				autoclose: true
-			});
+			Rhea.initDatePicker($('#AccumulatedFundsDate'));
+			Rhea.initDatePicker($('#LiHuEnterDate'));
+			Rhea.initDatePicker($('#EnterDate'), true);
+			Rhea.initDatePicker($('#ExpireDate'));
+			Rhea.initDatePicker($('#EnterDate'));
 
 			$('#MonthCount').change(function() {
 				var enter = $('#EnterDate').datepicker('getDate');
@@ -442,14 +419,8 @@ var apartment = function() {
             }
 
 			var wizard = $('#form_wizard_check_out');
-
-			$('#LeaveDate').datepicker({
-				format: "yyyy-mm-dd",
-				weekStart: 7,
-				language: "zh-CN",
-				autoclose: true,
-				todayHighlight: true
-			});
+			
+			Rhea.initDatePicker($('#LeaveDate'), true);
 
 			$("#InhabitantId").select2({
 				placeholder: "输入住户姓名进行搜索",
@@ -607,20 +578,8 @@ var apartment = function() {
 			
 			var wizard = $('#form_wizard_extend');
 			
-			$('#EnterDate').datepicker({
-				format: "yyyy-mm-dd",
-				weekStart: 7,
-				language: "zh-CN",
-				autoclose: true,
-				todayHighlight: true
-			});
-
-			$('#ExpireDate').datepicker({
-				format: "yyyy-mm-dd",
-				weekStart: 7,
-				language: "zh-CN",
-				autoclose: true
-			});
+			Rhea.initDatePicker($('#EnterDate'), true);
+			Rhea.initDatePicker($('#ExpireDate'));			
 
 			$('#MonthCount').change(function() {
 				var enter = $('#EnterDate').datepicker('getDate');

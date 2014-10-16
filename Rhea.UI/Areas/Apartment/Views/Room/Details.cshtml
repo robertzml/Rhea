@@ -234,7 +234,7 @@
 
 <script type="text/javascript">
     $(function () {
-        apartment.initRoomTree($('#room-tree'));
+        Apartment.initRoomTree($('#room-tree'));
 
         $('#room-tree').jstree('open_node', ['#tb_@Model.BuildingId', '#tf_@Model.BuildingId@Model.Floor']);
         $('#room-tree').jstree('select_node', '#tr_@Model.RoomId');

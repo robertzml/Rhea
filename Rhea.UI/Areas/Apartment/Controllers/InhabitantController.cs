@@ -1,4 +1,5 @@
-﻿using Rhea.Business.Apartment;
+﻿using Rhea.Business;
+using Rhea.Business.Apartment;
 using Rhea.Common;
 using Rhea.Model;
 using Rhea.Model.Account;
@@ -78,6 +79,11 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         public ActionResult Details(string id)
         {
             var data = this.inhabitantBusiness.Get(id);
+
+            DictionaryBusiness business = new DictionaryBusiness();
+            var types = business.GetPairProperty("InhabitantType");
+            ViewBag.Type = types[data.Type];
+
             return View(data);
         }
 
@@ -149,6 +155,11 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         public ActionResult Summary(string id)
         {
             var data = this.inhabitantBusiness.Get(id);
+
+            DictionaryBusiness business = new DictionaryBusiness();
+            var types = business.GetPairProperty("InhabitantType");
+            ViewBag.Type = types[data.Type];
+
             return View(data);
         }
         #endregion //Action

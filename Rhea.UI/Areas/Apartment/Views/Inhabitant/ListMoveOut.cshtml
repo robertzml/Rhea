@@ -3,6 +3,8 @@
 @{
     ViewBag.Title = "已搬出住户";
     Layout = null;
+    DictionaryBusiness dictionaryBusiness = new DictionaryBusiness();
+    var types = dictionaryBusiness.GetPairProperty("InhabitantType");
 }
 
 <!-- BEGIN PAGE HEADER-->
@@ -115,10 +117,7 @@
                                         @Html.DisplayFor(modelItem => item.Gender)
                                     </td>
                                     <td>
-                                        @{
-                                var type1 = (InhabitantType)item.Type;
-                                @type1.DisplayName()
-                                        }
+                                        @types[item.Type]
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.DepartmentName)
