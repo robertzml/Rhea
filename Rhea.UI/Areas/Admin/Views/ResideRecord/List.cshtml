@@ -57,6 +57,9 @@
                                 @Html.DisplayNameFor(model => model.InhabitantName)
                             </th>
                             <th>
+                                @Html.DisplayNameFor(model => model.InhabitantDepartmentId)
+                            </th>
+                            <th>
                                 @Html.DisplayNameFor(model => model.InhabitantDepartment)
                             </th>
                             <th>
@@ -92,6 +95,9 @@
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.InhabitantName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.InhabitantDepartmentId)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.InhabitantDepartment)
@@ -131,6 +137,9 @@
                                             break;
                                         case EntityStatus.ExtendOut:
                                         <span class="label bg-grey-cascade">已延期</span>
+                                            break;
+                                        case EntityStatus.ExchangeOut:
+                                        <span class="label bg-grey-silver">已换房</span>
                                             break;
                                     }
                                 </td>

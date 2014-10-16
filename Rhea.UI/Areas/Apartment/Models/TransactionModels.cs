@@ -202,6 +202,76 @@ namespace Rhea.UI.Areas.Apartment.Models
     }
 
     /// <summary>
+    /// 换房办理模型
+    /// </summary>
+    public class ExchangeModel
+    {
+        /// <summary>
+        /// 住户ID
+        /// </summary>
+        [Required(AllowEmptyStrings = false)]
+        [Display(Name = "住户ID")]
+        public string InhabitantId { get; set; }
+
+        /// <summary>
+        /// 原入住房间
+        /// </summary>
+        [Display(Name = "原房间")]
+        public int RoomId { get; set; }
+
+        /// <summary>
+        /// 新房间
+        /// </summary>
+        [Display(Name = "新房间")]
+        public int NewRoomId { get; set; }
+
+        /// <summary>
+        /// 楼宇选择
+        /// </summary>
+        [UIHint("BuildingList")]
+        [Display(Name = "楼宇选择")]
+        public int BuildingId { get; set; }
+
+        /// <summary>
+        /// 入住时间
+        /// </summary>
+        [DataType(DataType.Date)]
+        [Display(Name = "入住时间")]
+        public DateTime? EnterDate { get; set; }
+
+        /// <summary>
+        /// 到期时间
+        /// </summary>
+        [DataType(DataType.Date)]
+        [Display(Name = "到期时间")]
+        public DateTime? ExpireDate { get; set; }
+
+        /// <summary>
+        /// 月份数
+        /// </summary>
+        [Display(Name = "月份数")]
+        public int MonthCount { get; set; }
+
+        /// <summary>
+        /// 房租
+        /// </summary>
+        [Display(Name = "房租")]
+        public decimal Rent { get; set; }
+
+        /// <summary>
+        /// 备注
+        /// </summary>
+        [Display(Name = "备注")]
+        public string Remark { get; set; }
+
+        /// <summary>
+        /// 附件
+        /// </summary>
+        [Display(Name = "附件")]
+        public string RecordFile { get; set; }
+    }
+
+    /// <summary>
     /// 延期申请模型
     /// </summary>
     public class ExtendModel
@@ -214,7 +284,7 @@ namespace Rhea.UI.Areas.Apartment.Models
         public string InhabitantId { get; set; }
 
         /// <summary>
-        /// 入住时间
+        /// 入住房间
         /// </summary>
         [Display(Name = "房间ID")]
         public int RoomId { get; set; }

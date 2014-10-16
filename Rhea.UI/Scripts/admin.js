@@ -310,7 +310,7 @@ var Admin = function() {
 				"targets": 2,
 				"data": "Time",
 				"render": function (data, type, full, meta) {					
-					return rhea.parseDateTime(data);
+					return Rhea.parseDateTime(data);
 				}
 			}, {
 				"targets": 4,

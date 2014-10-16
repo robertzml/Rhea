@@ -169,9 +169,16 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         {
             var data = this.roomBusiness.GetCurrentInhabitant(id);
 
-            DictionaryBusiness business = new DictionaryBusiness();
-            var types = business.GetPairProperty("InhabitantType");
-            ViewBag.InhabitantType = types[data.Type];
+            if (data != null)
+            {
+                DictionaryBusiness business = new DictionaryBusiness();
+                var types = business.GetPairProperty("InhabitantType");
+                ViewBag.InhabitantType = types[data.Type];
+            }
+            else
+            {
+                ViewBag.InhabitantType = "";
+            }
 
             return View(data);
         }

@@ -60,6 +60,13 @@ namespace Rhea.Model
         ExtendOut = 53,
 
         /// <summary>
+        /// 居住记录类
+        /// 54:已换房
+        /// </summary>
+        [Display(Name = "已换房")]
+        ExchangeOut = 54,
+
+        /// <summary>
         /// 住户类
         /// 55:已搬出
         /// </summary>

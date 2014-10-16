@@ -127,6 +127,12 @@ namespace Rhea.Model
         InhabitantNotExist = 56,
 
         /// <summary>
+        /// 住户已超期
+        /// </summary>
+        [Display(Name = "住户已超期")]
+        InhabitantExpired = 57,
+
+        /// <summary>
         /// 居住记录不存在
         /// </summary>
         [Display(Name = "居住记录不存在")]

@@ -168,8 +168,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                 record.ExpireDate = model.ExpireDate;
                 record.TermLimit = model.TermLimit;
                 record.MonthCount = model.MonthCount;
-                record.Remark = model.Remark;
-                record.Status = (int)EntityStatus.ExtendTime;
+                record.Remark = model.Remark;                
                 record.Files = model.RecordFile.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries);
 
                 User user = PageService.GetCurrentUser(User.Identity.Name);
@@ -190,6 +189,57 @@ namespace Rhea.UI.Areas.Apartment.Controllers
 
             ViewBag.Message = "输入有误，请重新输入。";
             return View("ExtendResult");
+        }
+
+        /// <summary>
+        /// 换房办理
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Exchange()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 换房办理
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Exchange(ExchangeModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                ResideRecord record = new ResideRecord();               
+                record.ResideType = (int)ResideType.Normal;
+                record.Rent = model.Rent;
+                record.EnterDate = model.EnterDate;
+                record.ExpireDate = model.ExpireDate;
+                record.MonthCount = model.MonthCount;
+                record.Remark = model.Remark;
+                if (!string.IsNullOrEmpty(model.RecordFile))
+                    record.Files = model.RecordFile.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+
+                User user = PageService.GetCurrentUser(User.Identity.Name);
+                TransactionBusiness business = new TransactionBusiness();
+                ErrorCode result = business.Exchange(model.InhabitantId, model.RoomId, model.NewRoomId, record, user);
+
+                if (result == ErrorCode.Success)
+                {
+                    ViewBag.Message = "换房办理成功。";
+                    return View("ExchangeResult");
+                }
+                else
+                {
+                    ViewBag.Message = "换房办理失败。" + business.ErrorMessage;
+                    return View("ExchangeResult");
+                }
+            }
+
+            ViewBag.Message = "输入有误，请重新输入。";
+            return View("ExchangeResult");
         }
         #endregion //Action
     }

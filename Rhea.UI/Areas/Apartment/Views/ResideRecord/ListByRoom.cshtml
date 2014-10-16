@@ -15,7 +15,7 @@
                     <th>居住类型</th>
                     <th>入住时间</th>
                     <th>到期时间</th>
-                    <th>年限</th>
+                    <th>月份</th>
                     <th>离开时间</th>
                     <th>备注</th>
                     <th>状态</th>
@@ -48,7 +48,7 @@
                             @item.ExpireDate.ToDateString()
                         </td>
                         <td>
-                            @item.TermLimit
+                            @item.MonthCount
                         </td>
                         <td>
                             @item.LeaveDate.ToDateString()
@@ -73,6 +73,9 @@
                                     break;
                                 case EntityStatus.ExtendOut:
                                 <span class="label bg-grey-cascade">已延期</span>
+                                    break;
+                                case EntityStatus.ExchangeOut:
+                                <span class="label bg-grey-silver">已换房</span>
                                     break;
                             }
                         </td>

@@ -62,6 +62,10 @@ namespace Rhea.UI.Areas.Admin.Controllers
                     var extend = business.GetExtendTransaction(id);
                     return View("ExtendDetails", extend);
 
+                case LogType.ApartmentExchange:
+                    var exchange = business.GetExchangeTransaction(id);
+                    return View("ExchangeDetails", exchange);
+
                 case LogType.ApartmentSpecialExchange:
                     var special = business.GetSpecialExchangeTransaction(id);
                     return View("SpecialExchangeDetails", special);
