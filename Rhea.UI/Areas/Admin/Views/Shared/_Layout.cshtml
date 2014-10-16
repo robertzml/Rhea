@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
-    @Styles.Render("~/Content2/core")
+    @Styles.Render("~/Content/core")
     <link href="/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css" />
     <link href="/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
     <link href="/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css" rel="stylesheet" type="text/css" />
@@ -20,7 +20,7 @@
     <!-- END GLOBAL MANDATORY STYLES -->
     @RenderSection("styles", required: false)
     <!-- BEGIN THEME STYLES -->
-    @Styles.Render("~/Content2/core-style-admin")
+    @Styles.Render("~/Content/core-style-admin")
     <!-- END THEME STYLES -->
     <link rel="shortcut icon" href="favicon.ico" />
     @Scripts.Render("~/bundles/jqueryv1")
@@ -249,10 +249,10 @@
     <script src="/plugins/excanvas.min.js"></script>
     <![endif]-->
     <!-- IMPORTANT! Load jquery-ui-1.10.3.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
-    @Scripts.Render("~/bundles2/core")
-    @Scripts.Render("~/bundles2/core-plugin")
+    @Scripts.Render("~/bundles/core")
+    @Scripts.Render("~/bundles/core-plugin")
     <!-- END CORE PLUGINS -->
-    @Scripts.Render("~/bundles2/rhea")
+    @Scripts.Render("~/bundles/rhea")
     <script src="~/Scripts/admin.js" type="text/javascript"></script>
     <script type="text/javascript">
         jQuery(document).ready(function () {

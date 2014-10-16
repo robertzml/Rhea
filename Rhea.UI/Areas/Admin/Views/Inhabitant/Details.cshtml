@@ -91,10 +91,7 @@
                                         @Html.DisplayNameFor(model => model.Type)
                                     </td>
                                     <td>
-                                        @{
-                                            var type1 = (InhabitantType)Model.Type;
-                                            @type1.DisplayName();
-                                        }
+                                        @ViewBag.Type
                                     </td>
                                 </tr>
                                 <tr>

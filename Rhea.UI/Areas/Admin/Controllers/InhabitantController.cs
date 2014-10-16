@@ -59,6 +59,10 @@ namespace Rhea.UI.Areas.Admin.Controllers
         public ActionResult Details(string id)
         {
             var data = this.inhabitantBusiness.Get(id);
+
+            DictionaryBusiness business = new DictionaryBusiness();
+            var types = business.GetPairProperty("InhabitantType");
+            ViewBag.Type = types[data.Type];
             return View(data);
         }
 

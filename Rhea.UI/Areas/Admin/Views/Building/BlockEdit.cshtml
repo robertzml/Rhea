@@ -405,12 +405,7 @@
             Rhea.topNavActive($('#estate-nav'));
             Rhea.leftNavActive($('#building-list-menu'));
 
-            $('#BuildDate').datepicker({
-                format: "yyyy-mm-dd",
-                weekStart: 7,
-                language: "zh-CN",
-                autoclose: true
-            });
+            Rhea.initDatePicker($('#BuildDate'));
         });
     </script>
 }

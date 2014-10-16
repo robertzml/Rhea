@@ -2,7 +2,7 @@
 //    Admin script
 //
 
-var admin = function() {
+var Admin = function() {
 
 	var displayConfirm = function(form) {
 		$('#tabConfirm .form-control-static', form).each(function(){
@@ -263,10 +263,72 @@ var admin = function() {
 		}).hide();
 	}
 
+	var handleInitLogTable = function($dom) {
+	
+		var oTable = $dom.dataTable({
+			"processing": true,
+			"serverSide": true,
+			"order": [
+				[0, 'asc']
+			],
+			"lengthMenu": [
+				[10, 20, 50, -1],
+				[10, 20, 50, "All"] // change per page values here
+			],
+			// set the initial value
+			"pageLength": 20,
+			"pagingType": "bootstrap_full_number",
+			
+			"language": {
+					"lengthMenu": "  _MENU_ 记录",
+					"sLengthMenu": "每页 _MENU_ 条记录",
+					"sInfo": "显示 _START_ 至 _END_ 共有 _TOTAL_ 条记录",
+					"sInfoEmpty": "记录为空",
+					"sInfoFiltered": " - 从 _MAX_ 条记录中",
+					"sZeroRecords": "结果为空",
+					"sSearch": "搜索:",
+					"paginate": {
+						"previous":"Prev",
+						"next": "Next",
+						"last": "Last",
+						"first": "First"
+					}
+				},
+			
+			"dom": "<'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r><'table-scrollable't><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12' p>>", // horizobtal scrollable datatable
+			
+			"ajax": "/Admin/Log/GetData",
+			//"ajax": "/Services/DatatableHandler.ashx?action=log",			
+			"columns": [
+				{ "data": "Title" },
+				{ "data": "TypeName" },
+				{ "data": "Time" },
+				{ "data": "UserName" },
+				{ "data": "_id" }
+			],			
+			"columnDefs": [{
+				"targets": 2,
+				"data": "Time",
+				"render": function (data, type, full, meta) {					
+					return rhea.parseDateTime(data);
+				}
+			}, {
+				"targets": 4,
+				"data": "_id",
+				"render": function (data, type, full, meta) {
+					return '<a href="/Admin/Log/Details/'+data+'" class="btn btn-info btn-sm" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>';
+				}
+			}]
+		});		
+	}
 
 	return {
 		initSpecialExchange: function () {
 			handleSpecialExchange();
-        }
+        },
+		
+		initLogTable: function($dom) {
+			handleInitLogTable($dom);
+		},
 	}
 }();

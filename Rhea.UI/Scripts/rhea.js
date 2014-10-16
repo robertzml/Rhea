@@ -28,7 +28,6 @@ var Rhea = function () {
 		li.find('.arrow').addClass('open');
 	}
 
-
 	var handleInitDatatable = function($dom) {
 		/* Set tabletools buttons and button container */
 
@@ -97,6 +96,7 @@ var Rhea = function () {
 		
 	}
 	
+	/* without export button */
 	var handleInitDatatable2 = function($dom) {
 
 		var oTable = $dom.dataTable({
@@ -134,66 +134,25 @@ var Rhea = function () {
 		return oTable;
 	}
 	
-	var handleInitLogTable = function($dom) {
-	
-		var oTable = $dom.dataTable({
-			"processing": true,
-			"serverSide": true,
-			"order": [
-				[0, 'asc']
-			],
-			"lengthMenu": [
-				[10, 20, 50, -1],
-				[10, 20, 50, "All"] // change per page values here
-			],
-			// set the initial value
-			"pageLength": 20,
-			"pagingType": "bootstrap_full_number",
-			
-			"language": {
-					"lengthMenu": "  _MENU_ 记录",
-					"sLengthMenu": "每页 _MENU_ 条记录",
-					"sInfo": "显示 _START_ 至 _END_ 共有 _TOTAL_ 条记录",
-					"sInfoEmpty": "记录为空",
-					"sInfoFiltered": " - 从 _MAX_ 条记录中",
-					"sZeroRecords": "结果为空",
-					"sSearch": "搜索:",
-					"paginate": {
-						"previous":"Prev",
-						"next": "Next",
-						"last": "Last",
-						"first": "First"
-					}
-				},
-			
-			"dom": "<'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r><'table-scrollable't><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12' p>>", // horizobtal scrollable datatable
-			
-			"ajax": "/Admin/Log/GetData",
-			//"ajax": "/Services/DatatableHandler.ashx?action=log",			
-			"columns": [
-				{ "data": "Title" },
-				{ "data": "TypeName" },
-				{ "data": "Time" },
-				{ "data": "UserName" },
-				{ "data": "_id" }
-			],			
-			"columnDefs": [{
-				"targets": 2,
-				"data": "Time",
-				"render": function (data, type, full, meta) {
-					return handleParseDateTime(data);
-				}
-			}, {
-				"targets": 4,
-				"data": "_id",
-				"render": function (data, type, full, meta) {
-					return '<a href="/Admin/Log/Details/'+data+'" class="btn btn-info btn-sm" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>';
-				}
-			}]
-		});
-		
+	var handleInitDatePicker = function($dom, today) {
+		if (today) {
+			$dom.datepicker({
+				format: "yyyy-mm-dd",
+				weekStart: 7,
+				language: "zh-CN",
+				autoclose: true,
+				todayHighlight: true
+			});
+		} else {		
+			$dom.datepicker({
+                format: "yyyy-mm-dd",
+                weekStart: 7,
+                language: "zh-CN",
+                autoclose: true
+            });
+		}
 	}
-
+	
 	var handleAjaxLoad = function($dom, e, url, request) {
 		e.preventDefault();
 		Metronic.scrollTop();
@@ -365,6 +324,10 @@ var Rhea = function () {
 		return y + '-' + m + '-' + d + " " + h + ":" + min + ":" + s;
 	}
 	
+	function handleMomentDateTime(dt) {
+		return moment(dt).format('YYYY-MM-DD HH:mm:ss');
+	}
+	
 	return {
         //main function to initiate the module
         init: function () {
@@ -391,8 +354,8 @@ var Rhea = function () {
 			return handleInitDatatable2($dom);
 		},
 		
-		initLogTable: function($dom) {
-			handleInitLogTable($dom);
+		initDatePicker: function($dom, today) {
+			handleInitDatePicker($dom, today);
 		},
 		
 		ajaxNavPage: function($dom, e, url, request) {
@@ -417,6 +380,11 @@ var Rhea = function () {
 		
 		parseDate: function(date) {
 			return handleParseDate(date);
+		},
+		
+		/* moment parse asp.net datetime */
+		parseDateTime: function(dt) {
+			return handleMomentDateTime(dt);
 		}
 
     };

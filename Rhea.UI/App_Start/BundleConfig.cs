@@ -64,7 +64,7 @@ namespace Rhea.UI
                 "~/plugins/colorbox/jquery.colorbox-min.js"));
 
 
-            bundles.Add(new ScriptBundle("~/bundles2/core").Include(
+            bundles.Add(new ScriptBundle("~/bundles/core").Include(
                 "~/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js",
                 "~/plugins/jquery-slimscroll/jquery.slimscroll.min.js",
                 "~/Scripts/jquery.unobtrusive*",
@@ -72,11 +72,12 @@ namespace Rhea.UI
                 "~/Scripts/localization/messages_zh.js",
                 "~/Scripts/bootstrap.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles2/core-plugin").Include(
+            bundles.Add(new ScriptBundle("~/bundles/core-plugin").Include(
                 "~/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js",
                 "~/plugins/jquery-slimscroll/jquery.slimscroll.min.js",
                 "~/plugins/jquery.blockui.min.js",
                 "~/plugins/jquery.cokie.min.js",
+                "~/plugins/moment.min.js",
                 "~/plugins/uniform/jquery.uniform.min.js",
                 "~/plugins/bootstrap-switch/js/bootstrap-switch.min.js",
                 "~/plugins/datatables/media/js/jquery.dataTables.min.js",
@@ -89,7 +90,7 @@ namespace Rhea.UI
                 "~/plugins/noty/layouts/top.js",
                 "~/plugins/noty/themes/default.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles2/rhea").Include(
+            bundles.Add(new ScriptBundle("~/bundles/rhea").Include(
                 "~/scripts/metronic.js",
                 "~/scripts/layout.js",
                 "~/scripts/rhea.js"));
@@ -104,18 +105,18 @@ namespace Rhea.UI
                 "~/Scripts/apartment.js"));
 
             // For css
-            bundles.Add(new StyleBundle("~/Content2/core").Include(
+            bundles.Add(new StyleBundle("~/Content/core").Include(
                      "~/Content/font-awesome.css",
                      "~/Content/bootstrap.css"));
 
-            bundles.Add(new StyleBundle("~/Content2/core-style").Include(
+            bundles.Add(new StyleBundle("~/Content/core-style").Include(
                      "~/Content/components.css",
                      "~/Content/plugins.css",
                      "~/Content/layout.css",
                      "~/Content/themes/grey.css",
                      "~/Content/custom.css"));
 
-            bundles.Add(new StyleBundle("~/Content2/core-style-admin").Include(
+            bundles.Add(new StyleBundle("~/Content/core-style-admin").Include(
                      "~/Content/components.css",
                      "~/Content/plugins.css",
                      "~/Content/layout.css",

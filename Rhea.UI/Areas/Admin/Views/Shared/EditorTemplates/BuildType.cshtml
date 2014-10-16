@@ -5,9 +5,9 @@
     <option value="">-- 请选择 --</option>
     @{
         DictionaryBusiness business = new DictionaryBusiness();
-        var dict = business.Get("BuildType");
+        var dict = business.GetTextProperty("BuildType");
 
-        foreach (string item in dict.Property)
+        foreach (string item in dict)
         {
             <option value="@item" @(Model == item ? "selected='selected'" : "")>@item</option>
         }

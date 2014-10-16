@@ -3,6 +3,9 @@
 @{
     ViewBag.Title = "住户列表";
     Layout = "~/Areas/Admin/Views/Shared/_Layout_Apartment.cshtml";
+
+    DictionaryBusiness business = new DictionaryBusiness();
+    var types = business.GetPairProperty("InhabitantType");
 }
 
 <!-- BEGIN PAGE HEADER-->
@@ -82,10 +85,7 @@
                                     @Html.DisplayFor(modelItem => item.Gender)
                                 </td>
                                 <td>
-                                    @{
-                                    var type1 = (InhabitantType)item.Type;
-                                    @type1.DisplayName()
-                                    }
+                                    @types[item.Type]                                    
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.DepartmentName)
@@ -94,7 +94,7 @@
                                     @switch ((EntityStatus)item.Status)
                                     {
                                         case EntityStatus.Normal:
-                                            <span class="label label-success">居住中</span>
+                                        <span class="label label-success">居住中</span>
                                             break;
                                         case EntityStatus.InhabitantMoveOut:
                                         <span class="label label-normal">已搬出</span>
@@ -133,7 +133,3 @@
         });
     </script>
 }
-
-
-
-
