@@ -74,22 +74,6 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        @Html.DisplayNameFor(model => model._id)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(model => model._id)
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        @Html.DisplayNameFor(model => model.RoomId)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(model => model.RoomId)
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
                                         房间名称
                                     </td>
                                     <td>
@@ -211,7 +195,7 @@
                                         @switch ((EntityStatus)Model.Status)
                                         {
                                             case EntityStatus.Normal:
-                                                <span class="label label-success">居住中</span>
+                                            <span class="label label-success">居住中</span>
                                                 break;
                                             case EntityStatus.OverTime:
                                             <span class="label label-danger">超期</span>

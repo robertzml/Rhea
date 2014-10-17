@@ -85,6 +85,7 @@ namespace Rhea.Model.Apartment
         /// 入住时间
         /// </summary>
         [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, ConvertEmptyStringToNull = true, DataFormatString = "{0:yyyy-MM-dd}")]
         [BsonDateTimeOptions(DateOnly = true, Kind = DateTimeKind.Local)]
         [BsonElement("enterDate")]
         [Display(Name = "入住时间")]
@@ -94,6 +95,7 @@ namespace Rhea.Model.Apartment
         /// 到期时间
         /// </summary>
         [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, ConvertEmptyStringToNull = true, DataFormatString = "{0:yyyy-MM-dd}")]
         [BsonDateTimeOptions(DateOnly = true, Kind = DateTimeKind.Local)]
         [BsonElement("expireDate")]
         [Display(Name = "到期时间")]
@@ -117,6 +119,7 @@ namespace Rhea.Model.Apartment
         /// 离开时间
         /// </summary>
         [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, ConvertEmptyStringToNull = true, DataFormatString = "{0:yyyy-MM-dd}")]
         [BsonDateTimeOptions(DateOnly = true, Kind = DateTimeKind.Local)]
         [BsonElement("leaveDate")]
         [Display(Name = "离开时间")]

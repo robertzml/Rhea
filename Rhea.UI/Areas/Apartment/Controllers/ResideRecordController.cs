@@ -60,6 +60,20 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         }
 
         /// <summary>
+        /// 居住记录摘要
+        /// </summary>
+        /// <param name="inhabitantId">住户ID</param>
+        /// <param name="roomId">房间ID</param>
+        /// <returns></returns>
+        public ActionResult Summary(string inhabitantId, int roomId)
+        {
+            var records = this.recordBusiness.GetByInhabitant(inhabitantId);
+
+            var data = records.Where(r => r.RoomId == roomId).OrderByDescending(r => r.RegisterTime).FirstOrDefault();
+            return View(data);
+        }
+
+        /// <summary>
         /// 按房间显示
         /// </summary>
         /// <param name="roomId">房间ID</param>

@@ -126,6 +126,7 @@ namespace Rhea.Model.Estate
         /// 开始使用日期
         /// </summary>
         [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, ConvertEmptyStringToNull = true, DataFormatString = "{0:yyyy-MM-dd}")]
         [BsonDateTimeOptions(DateOnly = true, Kind = DateTimeKind.Local)]
         [BsonElement("startDate")]
         [Display(Name = "开始使用日期")]

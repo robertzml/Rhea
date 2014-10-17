@@ -118,6 +118,7 @@ namespace Rhea.Model.Apartment
         /// 公积金领取时间
         /// </summary>
         [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, ConvertEmptyStringToNull = true, DataFormatString = "{0:yyyy-MM-dd}")]
         [BsonDateTimeOptions(DateOnly = true, Kind = DateTimeKind.Local)]
         [BsonElement("accumulatedFundsDate")]
         [Display(Name = "公积金领取时间")]
@@ -127,6 +128,7 @@ namespace Rhea.Model.Apartment
         /// 蠡湖家园入住时间
         /// </summary>
         [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, ConvertEmptyStringToNull = true, DataFormatString = "{0:yyyy-MM-dd}")]
         [BsonDateTimeOptions(DateOnly = true, Kind = DateTimeKind.Local)]
         [BsonElement("liHuEnterDate")]
         [Display(Name = "蠡湖家园入住时间")]

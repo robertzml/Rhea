@@ -239,7 +239,8 @@ var Apartment = function() {
 
 				$.getJSON('/Apartment/Inhabitant/GetCurrentRooms', { id: item._id }, function (response) {
 					$.each(response, function (i, item) {
-						roomList.append('<label class="radio-inline"><input type="radio" name="RoomId" id="RoomNum' + i +'" value="' + item.RoomId + '" data-title="' + item.Name +'"> ' + item.Name +'</label>');
+						roomList.append('<label class="radio-inline"><input type="radio" name="RoomId" id="RoomNum' + i +'" value="' + item.RoomId + '" data-title="' + item.Name +'"> ' + 
+							item.Name +'</label>');
 					});
 					roomList.find(':radio').uniform();
 				});
@@ -250,7 +251,7 @@ var Apartment = function() {
 			}
 		});
 	}
-	
+
 	return {
 		initCheckIn: function() {
 			if (!jQuery().bootstrapWizard) {
@@ -744,6 +745,9 @@ var Apartment = function() {
 					$('#room-info').empty();
 
 				$('#room-info').load('/Apartment/Room/Summary', { id: rid });
+				
+				var oldId = $('#room-list input:radio:checked').val();				
+				$('#record-info').load('Apartment/ResideRecord/Summary', { inhabitantId: $('#InhabitantId').val(), roomId: oldId });
 			});
 			
 			var form = $('#submit_form');

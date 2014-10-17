@@ -1,0 +1,110 @@
+﻿@model Rhea.Model.Apartment.ResideRecord
+
+@{
+    Layout = null;
+}
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title">居住记录</h3>
+    </div>
+    <table class="table table-bordered" style="margin-bottom:0px;">
+        <tbody>
+            <tr>
+                <td>
+                    房间名称
+                </td>
+                <td>
+                    @Model.GetApartmentRoom().Name
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.InhabitantName)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.InhabitantName)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.InhabitantDepartment)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.InhabitantDepartment)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.ResideType)
+                </td>
+                <td>
+                    @{
+                        var type2 = (ResideType)Model.ResideType;
+                        @type2.DisplayName();
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.Rent)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Rent)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.EnterDate)
+                </td>
+                <td>
+                    @Model.EnterDate.ToDateString()
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.ExpireDate)
+                </td>
+                <td>
+                    @Model.ExpireDate.ToDateString()
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    备注
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Remark)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    状态
+                </td>
+                <td>
+                    @switch ((EntityStatus)Model.Status)
+                    {
+                        case EntityStatus.Normal:
+                        <span class="label label-success">居住中</span>
+                            break;
+                        case EntityStatus.OverTime:
+                        <span class="label label-danger">超期</span>
+                            break;
+                        case EntityStatus.ExtendTime:
+                        <span class="label label-warning">延期</span>
+                            break;
+                        case EntityStatus.MoveOut:
+                        <span class="label label-default">已搬出</span>
+                            break;
+                        case EntityStatus.ExtendOut:
+                        <span class="label bg-grey-cascade">已延期</span>
+                            break;
+                        case EntityStatus.ExchangeOut:
+                        <span class="label bg-grey-silver">已换房</span>
+                            break;
+                    }
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

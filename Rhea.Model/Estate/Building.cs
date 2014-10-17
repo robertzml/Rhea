@@ -198,6 +198,7 @@ namespace Rhea.Model.Estate
         /// 建成日期
         /// </summary>
         [BsonDateTimeOptions(DateOnly = true, Kind = DateTimeKind.Local)]
+        [DisplayFormat(ApplyFormatInEditMode = true, ConvertEmptyStringToNull = true, DataFormatString = "{0:yyyy-MM-dd}")]
         [BsonElement("buildDate")]
         [DataType(DataType.Date)]
         [Display(Name = "建成日期")]
