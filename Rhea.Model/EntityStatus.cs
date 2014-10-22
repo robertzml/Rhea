@@ -68,24 +68,31 @@ namespace Rhea.Model
 
         /// <summary>
         /// 住户类
-        /// 55:已搬出
+        /// 60:已搬出
         /// </summary>
         [Display(Name = "已搬出")]
-        InhabitantMoveOut = 55,
+        InhabitantMoveOut = 60,
 
         /// <summary>
         /// 住户类
-        /// 56:延期居住
+        /// 61:延期居住
         /// </summary>
         [Display(Name = "延期居住")]
-        InhabitantExtend = 56,
+        InhabitantExtend = 61,
 
         /// <summary>
         /// 住户类
-        /// 57:超期居住
+        /// 62:超期居住
         /// </summary>
         [Display(Name = "超期居住")]
-        InhabitantExpire = 57
+        InhabitantExpire = 62,
+
+        /// <summary>
+        /// 住户类
+        /// 63:登记未分配
+        /// </summary>
+        [Display(Name = "未分配")]
+        InhabitantUnassigned = 63
     }
  
 }

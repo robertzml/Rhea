@@ -310,12 +310,6 @@ namespace Rhea.UI.Areas.Apartment.Models
         public int MonthCount { get; set; }
 
         /// <summary>
-        /// 年限
-        /// </summary>
-        [Display(Name = "年限")]
-        public string TermLimit { get; set; }
-
-        /// <summary>
         /// 房租
         /// </summary>
         [Display(Name = "房租")]
@@ -332,5 +326,99 @@ namespace Rhea.UI.Areas.Apartment.Models
         /// </summary>
         [Display(Name = "附件")]
         public string RecordFile { get; set; }
+    }
+
+    /// <summary>
+    /// 新入职教职工登记模型
+    /// </summary>
+    public class RegisterModel
+    {
+        /// <summary>
+        /// 工号、学号或其它
+        /// </summary>
+        [Required]
+        [Display(Name = "工号")]
+        public string JobNumber { get; set; }
+
+        /// <summary>
+        /// 姓名
+        /// </summary>
+        [Required]
+        [Display(Name = "姓名")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// 性别
+        /// </summary>
+        [Required]
+        [Display(Name = "性别")]
+        public string Gender { get; set; }
+
+        /// <summary>
+        /// 所属部门
+        /// </summary>
+        [Required]
+        [UIHint("DepartmentDropDownList")]
+        [Display(Name = "所属部门")]
+        public int DepartmentId { get; set; }        
+
+        /// <summary>
+        /// 职务
+        /// </summary>
+        [Display(Name = "职务")]
+        public string Duty { get; set; }
+
+        /// <summary>
+        /// 电话
+        /// </summary>
+        [Required]
+        [Display(Name = "电话")]
+        public string Telephone { get; set; }
+
+        /// <summary>
+        /// 身份证
+        /// </summary>
+        [Display(Name = "身份证")]
+        public string IdentityCard { get; set; }
+
+        /// <summary>
+        /// 学历
+        /// </summary>
+        [Display(Name = "学历")]
+        public string Education { get; set; }
+
+        /// <summary>
+        /// 是否双职工
+        /// </summary>
+        [UIHint("Boolean2")]
+        [Display(Name = "是否双职工")]
+        public bool? IsCouple { get; set; }
+
+        /// <summary>
+        /// 婚姻状况
+        /// </summary>
+        [Display(Name = "婚姻状况")]
+        public string Marriage { get; set; }
+
+        /// <summary>
+        /// 公积金领取时间
+        /// </summary>
+        [DataType(DataType.Date)]
+        [Display(Name = "公积金领取时间")]
+        public DateTime? AccumulatedFundsDate { get; set; }
+
+        /// <summary>
+        /// 蠡湖家园入住时间
+        /// </summary>
+        [DataType(DataType.Date)]
+        [Display(Name = "蠡湖家园入住时间")]
+        public DateTime? LiHuEnterDate { get; set; }
+
+        /// <summary>
+        /// 备注
+        /// </summary>
+        [DataType(DataType.MultilineText)]
+        [Display(Name = "备注")]
+        public string Remark { get; set; }
     }
 }

@@ -1,0 +1,211 @@
+﻿@model Rhea.UI.Areas.Apartment.Models.RegisterModel
+
+@{
+    Layout = null;
+    ViewBag.Title = "新教职工登记";
+    AjaxOptions ajaxOpts = new AjaxOptions
+    {
+        UpdateTargetId = "page-content-body",
+        Url = Url.Action("Register", "Transaction"),
+        HttpMethod = "POST",
+        OnSuccess = "Rhea.showMessage('编辑成功')"
+    };
+}
+
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">
+    @ViewBag.Title
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index", new { area = "Apartment", controller = "Home" })">青教管理</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">业务办理</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">@ViewBag.Title</a>
+        </li>
+    </ul>
+    <div class="page-toolbar">
+        <div class="btn-group pull-right">
+            <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
+                Actions <i class="fa fa-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu pull-right" role="menu">
+                <li>
+                    <a href="#">Action</a>
+                </li>
+                <li class="divider">
+                </li>
+                <li>
+                    <a href="#">Separated link</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-indent"></i>&nbsp;教职工信息录入
+                </div>
+                <div class="tools hidden-xs">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+                    <a href="javascript:;" class="reload">
+                    </a>
+                    <a href="javascript:;" class="remove">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+               @using (Ajax.BeginForm("Register", new { controller = "Transaction" }, ajaxOpts, new { @class = "form-horizontal" }))
+               {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        <h4>教职工信息</h4>
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                工号 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.JobNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.JobNumber, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                姓名 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                性别 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.Gender, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                所属部门 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.DepartmentId, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Duty, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.Duty, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Duty, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                电话 <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.Telephone, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Telephone, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.IdentityCard, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.IdentityCard, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.IdentityCard, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Education, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.Education, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Education, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.IsCouple, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.IsCouple, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.IsCouple, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Marriage, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.Marriage, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Marriage, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.AccumulatedFundsDate, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.AccumulatedFundsDate, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.AccumulatedFundsDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.LiHuEnterDate, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.LiHuEnterDate, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.LiHuEnterDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Remark, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-6">
+                                <button type="submit" class="btn blue"><i class="fa fa-save"></i>&nbsp;保存</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT-->
+
+<script type="text/javascript">
+    $(function () {
+        Rhea.initDatePicker($('#AccumulatedFundsDate'));
+        Rhea.initDatePicker($('#LiHuEnterDate'));
+    });
+</script>

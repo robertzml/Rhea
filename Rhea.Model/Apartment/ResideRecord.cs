@@ -150,6 +150,14 @@ namespace Rhea.Model.Apartment
         public string ReceiptNumber { get; set; }
 
         /// <summary>
+        /// 是否新教职工入住
+        /// </summary>
+        [UIHint("Boolean2")]
+        [BsonElement("isNewStaff")]
+        [Display(Name = "新教职工入住")]
+        public bool IsNewStaff { get; set; }
+
+        /// <summary>
         /// 附件
         /// </summary>
         [BsonElement("files")]

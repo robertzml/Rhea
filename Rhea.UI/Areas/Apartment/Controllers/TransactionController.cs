@@ -165,8 +165,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                 record.ResideType = (int)ResideType.Normal;
                 record.Rent = model.Rent;
                 record.EnterDate = model.EnterDate;
-                record.ExpireDate = model.ExpireDate;
-                record.TermLimit = model.TermLimit;
+                record.ExpireDate = model.ExpireDate;               
                 record.MonthCount = model.MonthCount;
                 record.Remark = model.Remark;                
                 record.Files = model.RecordFile.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries);
@@ -240,6 +239,51 @@ namespace Rhea.UI.Areas.Apartment.Controllers
 
             ViewBag.Message = "输入有误，请重新输入。";
             return View("ExchangeResult");
+        }
+
+        /// <summary>
+        /// 住户登记
+        /// </summary>
+        /// <remarks>
+        /// 人事处登记新入职教职工
+        /// </remarks>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 住户登记
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Register(RegisterModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Inhabitant inhabitant = new Inhabitant();
+
+                inhabitant.JobNumber = model.JobNumber;
+                inhabitant.Name = model.Name;
+                inhabitant.Gender = model.Gender;
+                inhabitant.DepartmentId = model.DepartmentId;
+                inhabitant.Duty = model.Duty;
+                inhabitant.Telephone = model.Telephone;
+                inhabitant.IdentityCard = model.IdentityCard;
+                inhabitant.Education = model.Education;
+                inhabitant.IsCouple = model.IsCouple;
+                inhabitant.Marriage = model.Marriage;
+                inhabitant.AccumulatedFundsDate = model.AccumulatedFundsDate;
+                inhabitant.LiHuEnterDate = model.LiHuEnterDate;
+                inhabitant.Remark = model.Remark;
+                inhabitant.Type = 1;    //教职工
+            }
+
+            return View(model);
         }
         #endregion //Action
     }

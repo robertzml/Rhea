@@ -92,6 +92,20 @@ namespace Rhea.Business
         }
         #endregion //Record Method
 
+        #region Inhabitant Method
+        /// <summary>
+        /// 获取住户类型
+        /// </summary>
+        /// <param name="inhabitant">住户对象</param>
+        /// <returns></returns>
+        public static string GetInhabitantType(this Inhabitant inhabitant)
+        {
+            DictionaryBusiness business = new DictionaryBusiness();
+            var types = business.GetPairProperty("InhabitantType");
+            return types[inhabitant.Type];
+        }
+        #endregion //Inhabitant Method
+
 
         #region User Method
         /// <summary>

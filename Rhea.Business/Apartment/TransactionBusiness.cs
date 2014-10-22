@@ -432,6 +432,7 @@ namespace Rhea.Business.Apartment
                 record.InhabitantDepartmentId = inhabitant.DepartmentId;
                 record.InhabitantDepartment = inhabitant.DepartmentName;
                 record.RoomId = roomId;
+                record.IsNewStaff = false;
                 record.RegisterTime = now;
                 record.Status = (int)EntityStatus.ExtendTime;
                 result = recordBusiness.Create(record);
@@ -600,6 +601,7 @@ namespace Rhea.Business.Apartment
                 record.InhabitantDepartment = inhabitant.DepartmentName;
                 record.RoomId = newRoomId;
                 record.RegisterTime = now;
+                record.IsNewStaff = false;
                 record.Status = oldRecordStatus;
                 result = recordBusiness.Create(record);
                 if (result != ErrorCode.Success)

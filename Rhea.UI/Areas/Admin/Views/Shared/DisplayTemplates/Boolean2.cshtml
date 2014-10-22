@@ -1,0 +1,14 @@
+﻿@model bool?
+@{
+    if (Model != null)
+    {
+        if (Model == true)
+        {
+            @("是");
+        }
+        else
+        {
+            @("否");
+        }
+    }
+}

@@ -153,7 +153,7 @@ namespace Rhea.Model.Apartment
         /// 状态
         /// </summary>
         /// <remarks>
-        /// 0:正常居住；1:删除；55:离开；56:延期居住; 57:超期居住
+        /// 0:正常居住；1:删除；60:离开；61:延期居住; 62:超期居住; 63:未分配
         /// </remarks>
         [BsonElement("status")]
         [Display(Name = "状态")]

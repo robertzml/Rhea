@@ -186,6 +186,17 @@
                                 </tr>
                                 <tr>
                                     <td>
+                                        @Html.LabelFor(model => model.IsNewStaff)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.IsNewStaff, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td>
+                                        @Html.ValidationMessageFor(model => model.IsNewStaff, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
                                         @Html.LabelFor(model => model.RegisterTime)
                                     </td>
                                     <td>

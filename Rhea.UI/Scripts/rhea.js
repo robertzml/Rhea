@@ -143,7 +143,7 @@ var Rhea = function () {
 				autoclose: true,
 				todayHighlight: true
 			});
-		} else {		
+		} else {
 			$dom.datepicker({
                 format: "yyyy-mm-dd",
                 weekStart: 7,
