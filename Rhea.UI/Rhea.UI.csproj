@@ -624,7 +624,6 @@
     <Content Include="plugins\bootstrap-wizard\README.md" />
     <Content Include="Areas\Apartment\Views\Transaction\CheckIn.cshtml" />
     <Content Include="Areas\Apartment\Views\Shared\EditorTemplates\BuildingList.cshtml" />
-    <Content Include="Areas\Apartment\Views\Transaction\CheckInResult.cshtml" />
     <Content Include="Areas\Admin\Views\Log\List.cshtml" />
     <Content Include="Areas\Admin\Views\Log\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Building\FloorCreate.cshtml" />
@@ -644,7 +643,6 @@
     <Content Include="Areas\Apartment\Views\ResideRecord\Edit.cshtml" />
     <Content Include="Areas\Apartment\Views\Transaction\CheckOut.cshtml" />
     <Content Include="Areas\Apartment\Views\Inhabitant\Summary.cshtml" />
-    <Content Include="Areas\Apartment\Views\Transaction\CheckOutResult.cshtml" />
     <Content Include="Areas\Apartment\Views\ResideRecord\ListByInhabitant.cshtml" />
     <Content Include="Areas\Apartment\Views\ResideRecord\ListByRoom.cshtml" />
     <Content Include="Areas\Apartment\Views\Room\Tree.cshtml" />
@@ -658,7 +656,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Areas\Apartment\Views\Transaction\ExtendResult.cshtml" />
     <Content Include="Areas\Apartment\Views\ResideRecord\UploadFiles.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout_Apartment.cshtml" />
     <Content Include="Areas\Admin\Views\Apartment\Index.cshtml" />
@@ -683,11 +680,15 @@
     <Content Include="Areas\Apartment\Views\Shared\EditorTemplates\DepartmentDropDownList.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\DictionaryType.cshtml" />
     <Content Include="Areas\Apartment\Views\Transaction\Exchange.cshtml" />
-    <Content Include="Areas\Apartment\Views\Transaction\ExchangeResult.cshtml" />
     <Content Include="Areas\Admin\Views\Apartment\ExchangeDetails.cshtml" />
     <Content Include="Areas\Apartment\Views\ResideRecord\Summary.cshtml" />
     <Content Include="Areas\Apartment\Views\Transaction\Register.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\DisplayTemplates\Boolean2.cshtml" />
+    <Content Include="Areas\Apartment\Views\Transaction\TransactionResult.cshtml" />
+    <Content Include="Areas\Admin\Views\Apartment\RegisterDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Gender.cshtml" />
+    <Content Include="Areas\Apartment\Views\Shared\EditorTemplates\Gender.cshtml" />
+    <Content Include="Areas\Apartment\Views\Inhabitant\ListUnassigned.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="plugins\jquery-1.11.0.min.js" />

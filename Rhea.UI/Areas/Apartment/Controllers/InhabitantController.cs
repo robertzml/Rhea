@@ -56,7 +56,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         /// <returns></returns>
         public ActionResult List()
         {
-            var data = this.inhabitantBusiness.GetByMoveOut(false);
+            var data = this.inhabitantBusiness.GetCurrent();
             return View(data);
         }
 
@@ -70,6 +70,15 @@ namespace Rhea.UI.Areas.Apartment.Controllers
             return View(data);
         }
 
+        /// <summary>
+        /// 未分配住户
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ListUnassigned()
+        {
+            var data = this.inhabitantBusiness.GetUnassigned();
+            return View(data);
+        }
 
         /// <summary>
         /// 住户信息

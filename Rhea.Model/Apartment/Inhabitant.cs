@@ -42,6 +42,7 @@ namespace Rhea.Model.Apartment
         /// <summary>
         /// 性别
         /// </summary>
+        [UIHint("Gender")]
         [BsonElement("gender")]
         [Display(Name = "性别")]
         public string Gender { get; set; }

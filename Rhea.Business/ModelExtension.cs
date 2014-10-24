@@ -77,7 +77,7 @@ namespace Rhea.Business
             return name;
         }
         #endregion //Room Method
-
+        
         #region Record Method
         /// <summary>
         /// 获取青教房间
@@ -105,7 +105,6 @@ namespace Rhea.Business
             return types[inhabitant.Type];
         }
         #endregion //Inhabitant Method
-
 
         #region User Method
         /// <summary>

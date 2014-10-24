@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Rhea.Business;
 using Rhea.Business.Apartment;
+using Rhea.Business.Personnel;
 using Rhea.Common;
 using Rhea.Model;
 using Rhea.Model.Account;
@@ -64,7 +65,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                 inhabitant.IsCouple = model.IsCouple;
                 inhabitant.Marriage = model.Marriage;
                 inhabitant.LiHuEnterDate = model.LiHuEnterDate;
-                inhabitant.Remark = model.InhabitantRemark;                
+                inhabitant.Remark = model.InhabitantRemark;
 
                 ResideRecord record = new ResideRecord();
                 record.RoomId = model.RoomId;
@@ -85,17 +86,17 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                 if (result == ErrorCode.Success)
                 {
                     ViewBag.Message = "入住办理成功。";
-                    return View("CheckInResult");
+                    return View("TransactionResult");
                 }
                 else
                 {
                     ViewBag.Message = "入住办理失败。" + business.ErrorMessage;
-                    return View("CheckInResult");
+                    return View("TransactionResult");
                 }
             }
 
             ViewBag.Message = "输入有误，请重新输入。";
-            return View("CheckInResult");
+            return View(model);
         }
 
         /// <summary>
@@ -126,17 +127,17 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                 if (result == ErrorCode.Success)
                 {
                     ViewBag.Message = "退房办理成功。";
-                    return View("CheckOutResult");
+                    return View("TransactionResult");
                 }
                 else
                 {
                     ViewBag.Message = "退房办理失败。" + business.ErrorMessage;
-                    return View("CheckOutResult");
+                    return View("TransactionResult");
                 }
             }
 
             ViewBag.Message = "输入有误，请重新输入。";
-            return View("CheckOutResult");
+            return View(model);
         }
 
         /// <summary>
@@ -165,9 +166,9 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                 record.ResideType = (int)ResideType.Normal;
                 record.Rent = model.Rent;
                 record.EnterDate = model.EnterDate;
-                record.ExpireDate = model.ExpireDate;               
+                record.ExpireDate = model.ExpireDate;
                 record.MonthCount = model.MonthCount;
-                record.Remark = model.Remark;                
+                record.Remark = model.Remark;
                 record.Files = model.RecordFile.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries);
 
                 User user = PageService.GetCurrentUser(User.Identity.Name);
@@ -177,17 +178,17 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                 if (result == ErrorCode.Success)
                 {
                     ViewBag.Message = "延期办理成功。";
-                    return View("ExtendResult");
+                    return View("TransactionResult");
                 }
                 else
                 {
                     ViewBag.Message = "延期办理失败。" + business.ErrorMessage;
-                    return View("ExtendResult");
+                    return View("TransactionResult");
                 }
             }
 
             ViewBag.Message = "输入有误，请重新输入。";
-            return View("ExtendResult");
+            return View(model);
         }
 
         /// <summary>
@@ -211,7 +212,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         {
             if (ModelState.IsValid)
             {
-                ResideRecord record = new ResideRecord();               
+                ResideRecord record = new ResideRecord();
                 record.ResideType = (int)ResideType.Normal;
                 record.Rent = model.Rent;
                 record.EnterDate = model.EnterDate;
@@ -228,17 +229,17 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                 if (result == ErrorCode.Success)
                 {
                     ViewBag.Message = "换房办理成功。";
-                    return View("ExchangeResult");
+                    return View("TransactionResult");
                 }
                 else
                 {
                     ViewBag.Message = "换房办理失败。" + business.ErrorMessage;
-                    return View("ExchangeResult");
+                    return View("TransactionResult");
                 }
             }
 
             ViewBag.Message = "输入有误，请重新输入。";
-            return View("ExchangeResult");
+            return View(model);
         }
 
         /// <summary>
@@ -266,11 +267,11 @@ namespace Rhea.UI.Areas.Apartment.Controllers
             if (ModelState.IsValid)
             {
                 Inhabitant inhabitant = new Inhabitant();
-
                 inhabitant.JobNumber = model.JobNumber;
                 inhabitant.Name = model.Name;
                 inhabitant.Gender = model.Gender;
                 inhabitant.DepartmentId = model.DepartmentId;
+                inhabitant.DepartmentName = DepartmentBusiness.GetName(model.DepartmentId);
                 inhabitant.Duty = model.Duty;
                 inhabitant.Telephone = model.Telephone;
                 inhabitant.IdentityCard = model.IdentityCard;
@@ -281,6 +282,21 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                 inhabitant.LiHuEnterDate = model.LiHuEnterDate;
                 inhabitant.Remark = model.Remark;
                 inhabitant.Type = 1;    //教职工
+
+                User user = PageService.GetCurrentUser(User.Identity.Name);
+                TransactionBusiness business = new TransactionBusiness();
+                ErrorCode result = business.Register(inhabitant, user);
+
+                if (result == ErrorCode.Success)
+                {
+                    ViewBag.Message = "新教职工登记成功。";
+                    return View("TransactionResult");
+                }
+                else
+                {
+                    ViewBag.Message = "新教职工登记失败。" + business.ErrorMessage;
+                    return View("TransactionResult");
+                }
             }
 
             return View(model);

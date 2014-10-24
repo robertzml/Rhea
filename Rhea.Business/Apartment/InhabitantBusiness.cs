@@ -64,6 +64,19 @@ namespace Rhea.Business.Apartment
         }
 
         /// <summary>
+        /// 获取当前住户
+        /// </summary>
+        /// <returns>
+        /// 除去已搬出和未分配住户
+        /// </returns>
+        public IEnumerable<Inhabitant> GetCurrent()
+        {
+            var data = this.inhabitantRepository.Get()
+                .Where(r => r.Status != 1 && r.Status != (int)EntityStatus.InhabitantMoveOut && r.Status != (int)EntityStatus.InhabitantUnassigned);
+            return data;
+        }
+
+        /// <summary>
         /// 获取住户列表
         /// </summary>
         /// <param name="isMoveOut">是否已搬出</param>
@@ -78,6 +91,15 @@ namespace Rhea.Business.Apartment
             {
                 return this.inhabitantRepository.Get().Where(r => r.Status != 1 && r.Status != (int)EntityStatus.InhabitantMoveOut);
             }
+        }
+
+        /// <summary>
+        /// 获取未分配住户列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Inhabitant> GetUnassigned()
+        {
+            return this.inhabitantRepository.Get().Where(r => r.Status == (int)EntityStatus.InhabitantUnassigned);
         }
 
         /// <summary>

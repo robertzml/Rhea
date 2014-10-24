@@ -47,6 +47,7 @@ namespace Rhea.UI.Areas.Apartment.Models
         /// <summary>
         /// 性别
         /// </summary>
+        [UIHint("Gender")]
         [Display(Name = "性别")]
         public string Gender { get; set; }
 
@@ -351,6 +352,7 @@ namespace Rhea.UI.Areas.Apartment.Models
         /// 性别
         /// </summary>
         [Required]
+        [UIHint("Gender")]
         [Display(Name = "性别")]
         public string Gender { get; set; }
 
@@ -360,7 +362,7 @@ namespace Rhea.UI.Areas.Apartment.Models
         [Required]
         [UIHint("DepartmentDropDownList")]
         [Display(Name = "所属部门")]
-        public int DepartmentId { get; set; }        
+        public int DepartmentId { get; set; }
 
         /// <summary>
         /// 职务

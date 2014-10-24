@@ -106,5 +106,22 @@ namespace Rhea.Business.Personnel
             return result;
         }
         #endregion //Method
+
+        #region Static Method
+        /// <summary>
+        /// 获取部门名称
+        /// </summary>
+        /// <param name="id">部门ID</param>
+        /// <returns></returns>
+        public static string GetName(int id)
+        {
+            IDepartmentRepository departmentRepository = new MongoDepartmentRepository();
+            var department = departmentRepository.Get(id);
+            if (department == null)
+                return string.Empty;
+            else
+                return department.Name;
+        }
+        #endregion //Static Method
     }
 }

@@ -56,6 +56,7 @@
     <Compile Include="Apartment\MongoExchangeTransactionRepository.cs" />
     <Compile Include="Apartment\MongoExtendTransactionRepository.cs" />
     <Compile Include="Apartment\MongoInhabitantRepository.cs" />
+    <Compile Include="Apartment\MongoRegisterTransactionRepository.cs" />
     <Compile Include="Apartment\MongoResideRecordRepository.cs" />
     <Compile Include="Apartment\MongoSpecialExchangeTransaction.cs" />
     <Compile Include="Apartment\MongoTransactionRepository.cs" />

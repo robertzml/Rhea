@@ -208,6 +208,12 @@ namespace Rhea.Model
         /// 特殊换房业务办理
         /// </summary>
         [Display(Name = "特殊换房业务办理")]
-        ApartmentSpecialExchange = 164
+        ApartmentSpecialExchange = 164,
+
+        /// <summary>
+        /// 新教职工登记办理
+        /// </summary>
+        [Display(Name = "新教职工登记办理")]
+        ApartmentRegister = 165
     }
 }

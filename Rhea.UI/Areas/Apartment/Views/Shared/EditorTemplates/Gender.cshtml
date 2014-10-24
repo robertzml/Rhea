@@ -1,0 +1,14 @@
+﻿@model string
+
+<select class="form-control" id="Gender" name="Gender">
+    <option value="">-- 请选择 --</option>
+    @{
+        DictionaryBusiness business = new DictionaryBusiness();
+        var dict = business.GetTextProperty("Gender");
+
+        foreach (string item in dict)
+        {
+            <option value="@item" @(Model == item ? "selected='selected'" : "")>@item</option>
+        }
+    }
+</select>

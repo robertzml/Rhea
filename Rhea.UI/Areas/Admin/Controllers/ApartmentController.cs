@@ -69,6 +69,10 @@ namespace Rhea.UI.Areas.Admin.Controllers
                 case LogType.ApartmentSpecialExchange:
                     var special = business.GetSpecialExchangeTransaction(id);
                     return View("SpecialExchangeDetails", special);
+
+                case LogType.ApartmentRegister:
+                    var register = business.GetRegisterTransaction(id);
+                    return View("RegisterDetails", register);
             }
 
             return View();

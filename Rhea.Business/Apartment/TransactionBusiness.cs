@@ -102,9 +102,21 @@ namespace Rhea.Business.Apartment
             ITransactionRepository repository = new MongoSpecialExchangeTransaction();
             return repository.Create(data);
         }
+
+        /// <summary>
+        /// 添加新教职工登记业务记录
+        /// </summary>
+        /// <param name="data">新教职工登记业务记录对象</param>
+        /// <returns></returns>
+        private ErrorCode CreateRegisterTransaction(RegisterTransaction data)
+        {
+            ITransactionRepository repository = new MongoRegisterTransactionRepository();
+            return repository.Create(data);
+        }
         #endregion //Function
 
         #region Method
+        #region Business Method
         /// <summary>
         /// 入住办理业务流程
         /// </summary>
@@ -826,6 +838,76 @@ namespace Rhea.Business.Apartment
             return ErrorCode.Success;
         }
 
+        /// <summary>
+        /// 新入职教职工登记
+        /// </summary>
+        /// <param name="inhabitant">住户对象</param>
+        /// <param name="user">操作用户</param>
+        /// <returns></returns>
+        public ErrorCode Register(Inhabitant inhabitant, User user)
+        {
+            try
+            {
+                ErrorCode result;
+                DateTime now = DateTime.Now;
+                //添加住户                
+                InhabitantBusiness inhabitantBusiness = new InhabitantBusiness();
+                inhabitant.Status = (int)EntityStatus.InhabitantUnassigned;
+                result = inhabitantBusiness.Create(inhabitant);
+                if (result != ErrorCode.Success)
+                {
+                    this.errorMessage = "用户添加出错：" + result.DisplayName();
+                    return result;
+                }
+
+                //添加业务记录
+                RegisterTransaction transaction = new RegisterTransaction();
+                transaction.Type = (int)LogType.ApartmentRegister;
+                transaction.Time = now;
+                transaction.UserId = user._id;
+                transaction.UserName = user.Name;
+                transaction.InhabitantId = inhabitant._id;
+                transaction.InhabitantName = inhabitant.Name;
+                transaction.Remark = "";
+                transaction.Status = 0;
+                result = CreateRegisterTransaction(transaction);
+                if (result != ErrorCode.Success)
+                {
+                    this.errorMessage = "添加业务记录失败:" + result.DisplayName();
+                    return result;
+                }
+
+                //生成日志
+                LogBusiness logBusiness = new LogBusiness();
+                Log log = new Log
+                {
+                    Title = "新教职工登记",
+                    Time = now,
+                    Type = (int)LogType.ApartmentRegister,
+                    Content = string.Format("青教新教职工登记, 住户ID:{0}, 姓名:{1}, 部门:{2}, 业务ID:{3}。",
+                        inhabitant._id, inhabitant.Name, inhabitant.DepartmentName, transaction._id),
+                    UserId = user._id,
+                    UserName = user.Name
+                };
+                result = logBusiness.Create(log);
+                if (result != ErrorCode.Success)
+                {
+                    this.errorMessage = "记录日志失败:" + result.DisplayName();
+                    return result;
+                }
+
+                //更新日志
+                inhabitantBusiness.LogItem(inhabitant._id, log);
+            }
+            catch (Exception e)
+            {
+                this.errorMessage = e.Message;
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
+        #endregion //Business Method
 
         /// <summary>
         /// 更新所有居住状态
@@ -889,6 +971,7 @@ namespace Rhea.Business.Apartment
             return ErrorCode.Success;
         }
 
+        #region Transaction Method
         /// <summary>
         /// 获取所有业务记录
         /// </summary>
@@ -1024,6 +1107,30 @@ namespace Rhea.Business.Apartment
             var data = (SpecialExchangeTransaction)repository.Get(id);
             return data;
         }
+
+        /// <summary>
+        /// 获取所有新教职工登记业务记录
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<RegisterTransaction> GetRegisterTransaction()
+        {
+            ITransactionRepository repository = new MongoRegisterTransactionRepository();
+            var data = repository.Get().Cast<RegisterTransaction>().OrderByDescending(r => r.Time);
+            return data;
+        }
+
+        /// <summary>
+        /// 获取新教职工登记业务记录
+        /// </summary>
+        /// <param name="id">业务记录ID</param>
+        /// <returns></returns>
+        public RegisterTransaction GetRegisterTransaction(string id)
+        {
+            ITransactionRepository repository = new MongoRegisterTransactionRepository();
+            var data = (RegisterTransaction)repository.Get(id);
+            return data;
+        }
+        #endregion //Transaction Method
         #endregion //Method
 
         #region Property
