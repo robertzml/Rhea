@@ -983,6 +983,17 @@ namespace Rhea.Business.Apartment
         }
 
         /// <summary>
+        /// 获取指定用户办理业务记录
+        /// </summary>
+        /// <param name="user">相关用户</param>
+        /// <returns></returns>
+        public IEnumerable<ApartmentTransaction> GetTransactionByUser(User user)
+        {
+            ITransactionRepository repository = new MongoTransactionRepository();
+            return repository.Get().Where(r => r.UserId == user._id).OrderByDescending(r => r.Time);
+        }
+
+        /// <summary>
         /// 获取业务记录
         /// </summary>
         /// <param name="id">业务记录ID</param>

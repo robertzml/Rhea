@@ -690,6 +690,12 @@
     <Content Include="Areas\Apartment\Views\Shared\EditorTemplates\Gender.cshtml" />
     <Content Include="Areas\Apartment\Views\Inhabitant\ListUnassigned.cshtml" />
     <Content Include="Areas\Apartment\Views\Transaction\CheckIn2.cshtml" />
+    <Content Include="Areas\Apartment\Views\Transaction\Index.cshtml" />
+    <Content Include="Areas\Apartment\Views\Transaction\CheckInDetails.cshtml" />
+    <Content Include="Areas\Apartment\Views\Transaction\CheckOutDetails.cshtml" />
+    <Content Include="Areas\Apartment\Views\Transaction\ExchangeDetails.cshtml" />
+    <Content Include="Areas\Apartment\Views\Transaction\ExtendDetails.cshtml" />
+    <Content Include="Areas\Apartment\Views\Transaction\RegisterDetails.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="plugins\jquery-1.11.0.min.js" />

@@ -23,6 +23,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
     public class TransactionController : Controller
     {
         #region Action
+        #region Handle
         /// <summary>
         /// 入住办理
         /// </summary>
@@ -299,6 +300,67 @@ namespace Rhea.UI.Areas.Apartment.Controllers
 
             return View(model);
         }
+        #endregion //Handle
+
+        #region Statistic
+        /// <summary>
+        /// 业务统计
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Index()
+        {
+            User user = PageService.GetCurrentUser(User.Identity.Name);
+
+            TransactionBusiness business = new TransactionBusiness();
+            List<ApartmentTransaction> trans;
+            if (user.UserGroupName() == "Root" || user.UserGroupName() == "Administrator")
+            {
+                trans = business.GetTransaction().ToList();
+            }
+            else
+            {
+                trans = business.GetTransactionByUser(user).ToList();
+            }
+
+            return View(trans);
+        }
+
+        /// <summary>
+        /// 业务详细
+        /// </summary>
+        /// <param name="id">业务ID</param>
+        /// <returns></returns>
+        public ActionResult TransactionDetails(string id)
+        {
+            TransactionBusiness business = new TransactionBusiness();
+            var data = business.GetTransaction(id);
+
+            switch ((LogType)data.Type)
+            {
+                case LogType.ApartmentCheckIn:
+                    var checkIn = business.GetCheckInTransaction(id);
+                    return View("CheckInDetails", checkIn);
+
+                case LogType.ApartmentCheckOut:
+                    var checkOut = business.GetCheckOutTransaction(id);
+                    return View("CheckOutDetails", checkOut);
+
+                case LogType.ApartmentExtend:
+                    var extend = business.GetExtendTransaction(id);
+                    return View("ExtendDetails", extend);
+
+                case LogType.ApartmentExchange:
+                    var exchange = business.GetExchangeTransaction(id);
+                    return View("ExchangeDetails", exchange);                
+
+                case LogType.ApartmentRegister:
+                    var register = business.GetRegisterTransaction(id);
+                    return View("RegisterDetails", register);
+            }
+
+            return View();
+        }
+        #endregion //Statistic
         #endregion //Action
     }
 }
