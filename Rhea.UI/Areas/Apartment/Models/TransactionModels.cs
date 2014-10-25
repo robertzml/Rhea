@@ -26,10 +26,11 @@ namespace Rhea.UI.Areas.Apartment.Models
         public int RoomId { get; set; }
 
         /// <summary>
-        /// 历史住户
+        /// 未分配住户
         /// </summary>
-        [Display(Name = "历史住户")]
-        public string OldInhabitant { get; set; }
+        [Required]
+        [Display(Name = "未分配住户")]
+        public string InhabitantId { get; set; }
 
         /// <summary>
         /// 工号、学号或其它
@@ -63,8 +64,10 @@ namespace Rhea.UI.Areas.Apartment.Models
         /// <summary>
         /// 所属部门
         /// </summary>
+        [Required]
+        [UIHint("DepartmentDropDownList")]
         [Display(Name = "所属部门")]
-        public string DepartmentName { get; set; }
+        public int DepartmentId { get; set; }
 
         /// <summary>
         /// 职务
@@ -142,13 +145,7 @@ namespace Rhea.UI.Areas.Apartment.Models
         /// 月数
         /// </summary>
         [Display(Name = "月数")]
-        public int MonthCount { get; set; }
-
-        /// <summary>
-        /// 年限
-        /// </summary>
-        [Display(Name = "年限")]
-        public string TermLimit { get; set; }
+        public int MonthCount { get; set; }       
 
         /// <summary>
         /// 房租

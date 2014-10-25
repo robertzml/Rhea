@@ -157,18 +157,17 @@ namespace Rhea.Business.Apartment
                     return result;
                 }
 
-                //添加住户                
+                //检测用户
                 InhabitantBusiness inhabitantBusiness = new InhabitantBusiness();
-                if (string.IsNullOrEmpty(inhabitant._id))
+                if (inhabitant.Status != (int)EntityStatus.InhabitantUnassigned)
                 {
-                    inhabitant.Status = 0;
-                    result = inhabitantBusiness.Create(inhabitant);
+                    this.errorMessage = "检测用户失败：" + result.DisplayName();
+                    return result;
                 }
-                else
-                {
-                    inhabitant.Status = (int)GetInhabitantStatus(inhabitant._id);
-                    result = inhabitantBusiness.Update(inhabitant);
-                }
+
+                //更新住户                
+                inhabitant.Status = (int)EntityStatus.Normal;
+                result = inhabitantBusiness.Update(inhabitant);
                 if (result != ErrorCode.Success)
                 {
                     this.errorMessage = "用户添加出错：" + result.DisplayName();
@@ -180,6 +179,7 @@ namespace Rhea.Business.Apartment
                 record.InhabitantId = inhabitant._id;
                 record.InhabitantName = inhabitant.Name;
                 record.InhabitantDepartment = inhabitant.DepartmentName;
+                record.IsNewStaff = true;
                 record.RegisterTime = now;
                 result = recordBusiness.Create(record);
                 if (result != ErrorCode.Success)
@@ -215,7 +215,7 @@ namespace Rhea.Business.Apartment
                     Title = "入住业务办理",
                     Time = now,
                     Type = (int)LogType.ApartmentCheckIn,
-                    Content = string.Format("青教普通入住业务办理, 住户ID:{0}, 姓名:{1}, 部门:{2}, 入住房间ID:{3}, 房间名称:{4}, 入住时间:{5}, 到期时间:{6}, 居住类型:正常居住, 记录ID:{7}, 业务ID:{8}。",
+                    Content = string.Format("青教新教职工入住业务办理, 住户ID:{0}, 姓名:{1}, 部门:{2}, 入住房间ID:{3}, 房间名称:{4}, 入住时间:{5}, 到期时间:{6}, 居住类型:正常居住, 记录ID:{7}, 业务ID:{8}。",
                         inhabitant._id, inhabitant.Name, inhabitant.DepartmentName, room.RoomId, room.Name, record.EnterDate, record.ExpireDate, record._id, transaction._id),
                     UserId = user._id,
                     UserName = user.Name,

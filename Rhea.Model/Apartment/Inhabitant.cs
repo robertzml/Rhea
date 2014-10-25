@@ -27,6 +27,7 @@ namespace Rhea.Model.Apartment
         /// <summary>
         /// 工号、学号或其它
         /// </summary>
+        [Required]
         [BsonElement("jobNumber")]
         [Display(Name = "工号")]
         public string JobNumber { get; set; }

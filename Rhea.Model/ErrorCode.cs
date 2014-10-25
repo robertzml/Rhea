@@ -133,6 +133,12 @@ namespace Rhea.Model
         InhabitantExpired = 57,
 
         /// <summary>
+        /// 住户已分配
+        /// </summary>
+        [Display(Name = "住户已分配")]
+        InhabitantAssigned = 58,
+
+        /// <summary>
         /// 居住记录不存在
         /// </summary>
         [Display(Name = "居住记录不存在")]

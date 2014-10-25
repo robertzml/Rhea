@@ -302,73 +302,33 @@ var Apartment = function() {
 				enter.setMonth(enter.getMonth() + count);
 				$('#ExpireDate').datepicker('setDate', enter);
 			});
-
-			$("#OldInhabitant").select2({
-				placeholder: "输入住户姓名进行搜索",
-				minimumInputLength: 1,
-				allowClear: true,
-				id: function(obj) {
-					return obj['_id'];
-				},  
-				formatResult: function (obj) {
-					return obj['Name'] + "  <small class='text-muted'>" + obj['DepartmentName'] + "</small>";
-				},
-				formatSelection: function(obj) {
-					return obj.Name + "  <small class='text-muted'>" + obj['DepartmentName'] + "</small>";
-				},
-				ajax: {
-					url: "/Apartment/Inhabitant/GetList",
-					dataType: 'json',
-					data: function (term, page) {
-						return {
-							name: term, // search term
-						};
-					},
-					results: function (data, page) { // parse the results into the format expected by Select2.
-						return {
-							results: data
-						};
-					}
-				},
-				initSelection: function (element, callback) {
-					// the input tag has a value attribute preloaded that points to a preselected movie's id
-					// this function resolves that id attribute to an object that select2 can render
-					// using its formatResult renderer - that way the movie name is shown preselected
-					var id = $(element).val();
-					if (id !== "") {
-						$.ajax("/Apartment/Inhabitant/Get", {
-							data: {
-								id: id
-							},
-							dataType: "json"
-						}).done(function (data) {
-							callback(data);
-						});
-					}
-				}
-			}).on("change", function(e) {
-				var item = e.added;
-				if (item != null) {
-					$('#JobNumber').val(item.JobNumber);
-					$('#Name').val(item.Name);
-					$('#Gender').val(item.Gender);
-					$('#Type').val(item.Type);
-					$('#DepartmentName').val(item.DepartmentName);
-					$('#Duty').val(item.Duty);
-					$('#Telephone').val(item.Telephone);
-					$('#IdentityCard').val(item.IdentityCard);
-					$('#Education').val(item.Education);
-					$('#AccumulatedFundsDate').val(Rhea.parseDate(item.AccumulatedFundsDate));
-					$('#IsCouple').val(item.IsCouple.toString());
-					$('#Marriage').val(item.Marriage);
-					$('#LiHuEnterDate').val(Rhea.parseDate(item.LiHuEnterDate));
-					$('#InhabitantRemark').val(item.InhabitantRemark);
+			
+			$('#InhabitantId').change(function() {
+				var id = $(this).val();
+				if (id != null && id != "") {
+					$.getJSON('/Apartment/Inhabitant/Get', { id: $(this).val() }, function (response) {
+						var item = response;
+						$('#JobNumber').val(item.JobNumber);
+						$('#Name').val(item.Name);
+						$('#Gender').val(item.Gender);
+						$('#Type').val(item.Type);
+						$('#DepartmentId').val(item.DepartmentId);
+						$('#Duty').val(item.Duty);
+						$('#Telephone').val(item.Telephone);
+						$('#IdentityCard').val(item.IdentityCard);
+						$('#Education').val(item.Education);
+						$('#AccumulatedFundsDate').val(Rhea.parseDate(item.AccumulatedFundsDate));
+						$('#IsCouple').val(item.IsCouple.toString());
+						$('#Marriage').val(item.Marriage);
+						$('#LiHuEnterDate').val(Rhea.parseDate(item.LiHuEnterDate));
+						$('#InhabitantRemark').val(item.InhabitantRemark);
+					});
 				} else {
 					$('#JobNumber').val('');
 					$('#Name').val('');
 					$('#Gender').val('');
 					$('#Type').val('');
-					$('#DepartmentName').val('');
+					$('#DepartmentId').val('');
 					$('#Duty').val('');
 					$('#Telephone').val('');
 					$('#IdentityCard').val('');
@@ -399,6 +359,9 @@ var Apartment = function() {
                         required: true
                     },
                     //inhabitant
+					InhabitantId: {
+						required: true
+					},
                     Name: {
                         required: true
                     },

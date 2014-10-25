@@ -19,16 +19,10 @@ namespace Rhea.UI.Areas.Apartment.Controllers
     /// <summary>
     /// 业务办理控制器
     /// </summary>
-    [EnhancedAuthorize(Roles = "Root,Administrator,Apartment")]
+    [EnhancedAuthorize(Roles = "Root,Administrator,Apartment,HumanManager")]
     public class TransactionController : Controller
     {
         #region Action
-        // GET: Apartment/Transaction
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         /// <summary>
         /// 入住办理
         /// </summary>
@@ -36,6 +30,10 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         [HttpGet]
         public ActionResult CheckIn()
         {
+            InhabitantBusiness business = new InhabitantBusiness();
+            var inhabitants = business.GetUnassigned().ToList();
+            inhabitants.Insert(0, new Inhabitant { _id = "", Name = "--- 请选择 ---" });
+            ViewBag.Inhabitants = inhabitants;
             return View();
         }
 
@@ -50,13 +48,14 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         {
             if (ModelState.IsValid)
             {
-                Inhabitant inhabitant = new Inhabitant();
-                inhabitant._id = model.OldInhabitant;
+                InhabitantBusiness inhabitantBusiness = new InhabitantBusiness();
+                Inhabitant inhabitant = inhabitantBusiness.Get(model.InhabitantId);                
                 inhabitant.JobNumber = model.JobNumber;
                 inhabitant.Name = model.Name;
                 inhabitant.Gender = model.Gender;
                 inhabitant.Type = model.Type;
-                inhabitant.DepartmentName = model.DepartmentName;
+                inhabitant.DepartmentId = model.DepartmentId;
+                inhabitant.DepartmentName = DepartmentBusiness.GetName(model.DepartmentId);
                 inhabitant.Duty = model.Duty;
                 inhabitant.Telephone = model.Telephone;
                 inhabitant.IdentityCard = model.IdentityCard;
@@ -72,8 +71,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                 record.ResideType = (int)ResideType.Normal;
                 record.Rent = model.Rent;
                 record.EnterDate = model.EnterDate;
-                record.ExpireDate = model.ExpireDate;
-                record.TermLimit = model.TermLimit;
+                record.ExpireDate = model.ExpireDate;                
                 record.MonthCount = model.MonthCount;
                 record.ReceiptNumber = model.ReceiptNumber;
                 record.Remark = model.RecordRemark;

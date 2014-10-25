@@ -383,11 +383,18 @@ var Rhea = function () {
 		},
 		
 		parseDate: function(date) {
-			return handleMomentDate(date);
+			if (date != null && date != '')
+				return handleMomentDate(date);
+			else
+				return null;
 		},
 
 		/* moment parse asp.net datetime */
 		parseDateTime: function(dt) {
+			if (dt != null && dt != '')
+				return handleMomentDateTime(dt);
+			else
+				return null;
 			return handleMomentDateTime(dt);
 		}
 

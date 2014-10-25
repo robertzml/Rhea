@@ -19,7 +19,7 @@
             <a href="#"><i class="fa fa-joomla"></i> 部 门 管 理</a>
         </li>
         }
-        @if (new string[] { "Root", "Administrator", "Estate", "Apartment", "Leader" }.Contains(groupName))
+        @if (new string[] { "Root", "Administrator", "Estate", "Apartment", "Leader", "HumanManager" }.Contains(groupName))
         {
         <li>
             <a href="@Url.Action("Index", new { area = "Apartment", controller = "Home" })" id="apartment-nav"><i class="fa fa-ge"></i> 青 教 管 理</a>
