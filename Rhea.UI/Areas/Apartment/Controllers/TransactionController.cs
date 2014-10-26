@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Rhea.Business;
+﻿using Rhea.Business;
 using Rhea.Business.Apartment;
 using Rhea.Business.Personnel;
 using Rhea.Common;
@@ -13,6 +8,11 @@ using Rhea.Model.Apartment;
 using Rhea.UI.Areas.Apartment.Models;
 using Rhea.UI.Filters;
 using Rhea.UI.Services;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
 
 namespace Rhea.UI.Areas.Apartment.Controllers
 {
@@ -50,7 +50,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
             if (ModelState.IsValid)
             {
                 InhabitantBusiness inhabitantBusiness = new InhabitantBusiness();
-                Inhabitant inhabitant = inhabitantBusiness.Get(model.InhabitantId);                
+                Inhabitant inhabitant = inhabitantBusiness.Get(model.InhabitantId);
                 inhabitant.JobNumber = model.JobNumber;
                 inhabitant.Name = model.Name;
                 inhabitant.Gender = model.Gender;
@@ -72,7 +72,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                 record.ResideType = (int)ResideType.Normal;
                 record.Rent = model.Rent;
                 record.EnterDate = model.EnterDate;
-                record.ExpireDate = model.ExpireDate;                
+                record.ExpireDate = model.ExpireDate;
                 record.MonthCount = model.MonthCount;
                 record.ReceiptNumber = model.ReceiptNumber;
                 record.Remark = model.RecordRemark;
@@ -351,7 +351,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
 
                 case LogType.ApartmentExchange:
                     var exchange = business.GetExchangeTransaction(id);
-                    return View("ExchangeDetails", exchange);                
+                    return View("ExchangeDetails", exchange);
 
                 case LogType.ApartmentRegister:
                     var register = business.GetRegisterTransaction(id);

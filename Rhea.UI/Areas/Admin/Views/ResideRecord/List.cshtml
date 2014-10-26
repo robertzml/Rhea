@@ -86,6 +86,47 @@
                             <th>操作</th>
                         </tr>
                     </thead>
+                    <tfoot>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.RoomId)
+                            </th>
+                            <th>
+                                房间名称
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.InhabitantName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.InhabitantDepartmentId)
+                            </th>
+                            <th data-filter="true">
+                                @Html.DisplayNameFor(model => model.InhabitantDepartment)
+                            </th>
+                            <th data-filter="true">
+                                @Html.DisplayNameFor(model => model.ResideType)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Rent)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.EnterDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ExpireDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.LeaveDate)
+                            </th>
+                            <th>
+                                新教师
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Status)
+                            </th>
+                            <th>操作</th>
+                        </tr>
+                    </tfoot>
                     <tbody>
                         @foreach (var item in Model)
                         {
@@ -168,7 +209,7 @@
             Rhea.topNavActive($('#apartment-nav'));
             Rhea.leftNavActive($('#reside-record-list-menu'));
 
-            Rhea.initDatatable2($('#record-table'));
+            Rhea.initDatatableWithFilter($('#record-table'));
         });
     </script>
 }

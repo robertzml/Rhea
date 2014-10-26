@@ -82,26 +82,6 @@
 
 <script type="text/javascript">
     $(function () {
-        var oTable = Rhea.initDatatable2($('#room-table'));
-
-        $("#room-table tfoot th").each(function (i) {
-            if ($(this).attr('data-filter') == 'true') {
-
-                var select = $('<select class="form-control"><option value=""></option></select>')
-                    .appendTo($(this).empty())
-                    .on('change', function () {
-                        var val = $(this).val();
-
-                        oTable.api().column(i)
-                            .search(val ? '^' + $(this).val() + '$' : val, true, false)
-                            .draw();
-                    });
-
-                oTable.api().column(i).data().unique().sort().each(function (d, j) {
-                    select.append('<option value="' + d + '">' + d + '</option>')
-                });
-            }
-        });
-
+        Rhea.initDatatableWithFilter($('#room-table'));
     });
 </script>

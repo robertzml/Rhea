@@ -138,10 +138,8 @@ var Rhea = function () {
 	var handleInitDatatable3 = function($dom) {
 
 		var oTable = $dom.dataTable({
-			"order": [
-				[0, 'asc']
-			],
-
+			"order": [],
+			
 			"lengthMenu": [
 				[5, 10, 20, -1],
 				[5, 10, 20, "All"] // change per page values here
@@ -442,6 +440,22 @@ var Rhea = function () {
 
 		zoomSvg: function($dom, zoomType) {
 			handleZoomSvg($dom, zoomType);
+		},
+		
+		initFloorAction: function() {
+			$('#zoom-in').click(function (e) {
+				e.preventDefault();
+				var $dom = $('div#svg').children('svg');
+				handleZoomSvg($dom, 'zoomIn');
+				return false;
+			});
+
+			$('#zoom-out').click(function (e) {
+				e.preventDefault();
+				var $dom = $('div#svg').children('svg');
+				handleZoomSvg($dom, 'zoomOut');
+				return false;
+			});
 		},
 		
 		parseDate: function(date) {

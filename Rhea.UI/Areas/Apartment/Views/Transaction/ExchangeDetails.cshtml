@@ -55,14 +55,6 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        @Html.DisplayNameFor(model => model._id)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(model => model._id)
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
                                         @Html.DisplayNameFor(model => model.Type)
                                     </td>
                                     <td>
@@ -82,14 +74,6 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        @Html.DisplayNameFor(model => model.UserId)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(model => model.UserId)
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
                                         @Html.DisplayNameFor(model => model.UserName)
                                     </td>
                                     <td>
@@ -98,26 +82,10 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        @Html.DisplayNameFor(model => model.OldRoomId)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(model => model.OldRoomId)
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
                                         @Html.DisplayNameFor(model => model.OldRoomName)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(model => model.OldRoomName)
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        @Html.DisplayNameFor(model => model.NewRoomId)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(model => model.NewRoomId)
+                                        <a href="@Url.Action("Details", new { controller = "Room", id = Model.OldRoomId })" class="ajaxify">@Model.OldRoomName</a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -125,15 +93,7 @@
                                         @Html.DisplayNameFor(model => model.NewRoomName)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(model => model.NewRoomName)
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        @Html.DisplayNameFor(model => model.InhabitantId)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(model => model.InhabitantId)
+                                        <a href="@Url.Action("Details", new { controller = "Room", id = Model.NewRoomName })" class="ajaxify">@Model.NewRoomName</a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -141,23 +101,23 @@
                                         @Html.DisplayNameFor(model => model.InhabitantName)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(model => model.InhabitantName)
+                                        <a href="@Url.Action("Details", new { controller = "Inhabitant", id = Model.InhabitantId })" class="ajaxify">@Model.InhabitantName</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        @Html.DisplayNameFor(model => model.ResideRecordId)
+                                        新居住记录
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(model => model.ResideRecordId)
+                                        <a href="@Url.Action("Details", new { controller = "ResideRecord", id = Model.ResideRecordId })" class="ajaxify">查看新居住记录</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        @Html.DisplayNameFor(model => model.OldResideRecordId)
+                                        原居住记录
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(model => model.OldResideRecordId)
+                                        <a href="@Url.Action("Details", new { controller = "ResideRecord", id = Model.OldResideRecordId })" class="ajaxify">查看原居住记录</a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -166,14 +126,6 @@
                                     </td>
                                     <td>
                                         @Html.DisplayFor(model => model.Remark)
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        @Html.DisplayNameFor(model => model.Status)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(model => model.Status)
                                     </td>
                                 </tr>
                             </tbody>

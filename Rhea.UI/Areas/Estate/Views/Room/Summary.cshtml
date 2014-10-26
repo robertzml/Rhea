@@ -1,0 +1,62 @@
+﻿@model Rhea.Model.Estate.Room
+
+@{
+    Layout = null;
+}
+
+<div class="portlet box blue-hoki">
+    <div class="portlet-title" style="border-bottom-width:0px;">
+        <div class="caption">
+            <i class="fa fa-codepen"></i>&nbsp;@Model.Name
+        </div>
+        <div class="actions">
+            <a href="/Estate/Room/Details/@Model.RoomId" class="btn btn-default btn-sm ajaxify">
+                <i class="fa fa-plus"></i> 查看
+            </a>
+        </div>
+    </div>
+    <div class="portlet-body" style="padding:0px;">
+        <table class="table table-bordered" style="margin-bottom:0px;">
+            <tbody>
+                <tr>
+                    <td>房间编号</td>
+                    <td>
+                        @Model.Number
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        房间名称
+                    </td>
+                    <td>
+                        @Model.Name
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        部门
+                    </td>
+                    <td>
+                        @Model.DepartmentName()
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        功能
+                    </td>
+                    <td>
+                        @Model.Function.FunctionProperty
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        面积
+                    </td>
+                    <td>
+                        @Model.UsableArea m<sup>2</sup>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -83,7 +83,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         public ActionResult List()
         {
             List<RoomResideModel> data = new List<RoomResideModel>();
-            var rooms = this.roomBusiness.Get();
+            var rooms = this.roomBusiness.Get().OrderBy(r => r.Number);
 
             foreach (var room in rooms)
             {
@@ -102,7 +102,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         public ActionResult ListByBuilding(int buildingId)
         {
             List<RoomResideModel> data = new List<RoomResideModel>();
-            var rooms = this.roomBusiness.GetByBuilding(buildingId);
+            var rooms = this.roomBusiness.GetByBuilding(buildingId).OrderBy(r => r.Number);
 
             foreach (var room in rooms)
             {
@@ -235,7 +235,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                 }
 
                 //edit
-                ApartmentRoom data = this.roomBusiness.Get(model.RoomId);               
+                ApartmentRoom data = this.roomBusiness.Get(model.RoomId);
                 data.HouseType = model.HouseType;
                 data.Orientation = model.Orientation;
                 data.HasAirCondition = model.HasAirCondition;

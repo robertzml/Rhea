@@ -56,14 +56,6 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        @Html.DisplayNameFor(model => model._id)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(model => model._id)
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
                                         @Html.DisplayNameFor(model => model.Type)
                                     </td>
                                     <td>
@@ -83,14 +75,6 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        @Html.DisplayNameFor(model => model.UserId)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(model => model.UserId)
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
                                         @Html.DisplayNameFor(model => model.UserName)
                                     </td>
                                     <td>
@@ -99,26 +83,10 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        @Html.DisplayNameFor(model => model.RoomId)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(model => model.RoomId)
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
                                         @Html.DisplayNameFor(model => model.RoomName)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(model => model.RoomName)
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        @Html.DisplayNameFor(model => model.InhabitantId)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(model => model.InhabitantId)
+                                        <a href="@Url.Action("Details", new { controller = "Room", id = Model.RoomId })" class="ajaxify">@Model.RoomName</a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -126,15 +94,15 @@
                                         @Html.DisplayNameFor(model => model.InhabitantName)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(model => model.InhabitantName)
+                                        <a href="@Url.Action("Details", new { controller = "Inhabitant", id = Model.InhabitantId })" class="ajaxify">@Model.InhabitantName</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        @Html.DisplayNameFor(model => model.ResideRecordId)
+                                        居住记录
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(model => model.ResideRecordId)
+                                        <a href="@Url.Action("Details", new { controller = "ResideRecord", id = Model.ResideRecordId })" class="ajaxify">查看居住记录</a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -143,14 +111,6 @@
                                     </td>
                                     <td>
                                         @Html.DisplayFor(model => model.Remark)
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        @Html.DisplayNameFor(model => model.Status)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(model => model.Status)
                                     </td>
                                 </tr>
                             </tbody>

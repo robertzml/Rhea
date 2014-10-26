@@ -65,6 +65,26 @@
                             <th>操作</th>
                         </tr>
                     </thead>
+                    <tfoot>
+                        <tr>
+                            <th data-filter="true">
+                                @Html.DisplayNameFor(model => model.Type)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Time)
+                            </th>
+                            <th data-filter="true">
+                                @Html.DisplayNameFor(model => model.UserName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Remark)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Status)
+                            </th>
+                            <th>操作</th>
+                        </tr>
+                    </tfoot>
                     <tbody>
                         @foreach (var item in Model)
                         {
@@ -107,8 +127,7 @@
             Rhea.topNavActive($('#apartment-nav'));
             Rhea.leftNavActive($('#transaction-list-menu'));
 
-            var oTable = Rhea.initDatatable2($('#transaction-table'));
-            oTable.api().order([1, 'desc']).draw();
+            Rhea.initDatatableWithFilter($('#transaction-table'));
         });
     </script>
 }

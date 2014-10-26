@@ -696,6 +696,7 @@
     <Content Include="Areas\Apartment\Views\Transaction\ExchangeDetails.cshtml" />
     <Content Include="Areas\Apartment\Views\Transaction\ExtendDetails.cshtml" />
     <Content Include="Areas\Apartment\Views\Transaction\RegisterDetails.cshtml" />
+    <Content Include="Areas\Estate\Views\Room\Summary.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="plugins\jquery-1.11.0.min.js" />

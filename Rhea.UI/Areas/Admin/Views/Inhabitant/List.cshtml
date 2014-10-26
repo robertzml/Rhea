@@ -74,6 +74,32 @@
                             <th>操作</th>
                         </tr>
                     </thead>
+                    <tfoot>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.JobNumber)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Name)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Gender)
+                            </th>
+                            <th data-filter="true">
+                                @Html.DisplayNameFor(model => model.Type)
+                            </th>
+                            <th data-filter="true">
+                                @Html.DisplayNameFor(model => model.DepartmentName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DepartmentId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Status)
+                            </th>
+                            <th>操作</th>
+                        </tr>
+                    </tfoot>
                     <tbody>
                         @foreach (var item in Model)
                         {
@@ -138,7 +164,7 @@
             Rhea.topNavActive($('#apartment-nav'));
             Rhea.leftNavActive($('#inhabitant-list-menu'));
 
-            Rhea.initDatatable2($('#inhabitant-table'));
+            Rhea.initDatatableWithFilter($('#inhabitant-table'));
         });
     </script>
 }
