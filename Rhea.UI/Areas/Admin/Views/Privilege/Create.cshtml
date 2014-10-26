@@ -1,0 +1,142 @@
+﻿@model Rhea.Model.Account.Privilege
+
+@{
+    ViewBag.Title = "添加权限";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Advance.cshtml";
+}
+
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">
+    @ViewBag.Title
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index", "Advance")">高级管理</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">权限管理</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">@ViewBag.Title</a>
+        </li>
+    </ul>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box purple">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-plus"></i>&nbsp;添加权限
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+                    <a href="javascript:;" class="reload">
+                    </a>
+                    <a href="javascript:;" class="remove">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                @using(Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <fieldset>
+                        <legend>权限属性</legend>
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="col-md-2">属性</th>
+                                    <th class="col-md-8">值</th>
+                                    <th class="col-md-2">验证</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.Title)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td>
+                                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.Name)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td>
+                                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.Rank)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.Rank, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td>
+                                        @Html.ValidationMessageFor(model => model.Rank, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.IsWrite)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.IsWrite, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td>
+                                        @Html.ValidationMessageFor(model => model.IsWrite, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.Remark)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td>
+                                        @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <hr />
+                        <p>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;添加</button>
+                            <a href="@Url.Action("List", new { controller = "Privilege" })" class="btn btn-default" role="button"><i class="fa fa-list"></i>&nbsp;回到列表</a>
+                        </p>
+                    </fieldset>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT-->
+
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            Rhea.topNavActive($('#advance-nav'));
+            Rhea.leftNavActive($('#privilege-create-menu'));
+        });
+    </script>
+}

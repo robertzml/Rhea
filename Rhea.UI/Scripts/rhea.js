@@ -28,7 +28,44 @@ var Rhea = function () {
 		li.find('.arrow').addClass('open');
 	}
 
-	var handleInitDatatable = function($dom) {
+	/* just init the datatable */
+	var handleInitDatatable1 = function($dom) {
+
+		var oTable = $dom.dataTable({
+			"order": [],
+
+			"lengthMenu": [
+				[5, 10, 20, -1],
+				[5, 10, 20, "All"] // change per page values here
+			],
+			// set the initial value
+			"pageLength": 10,
+
+			"pagingType": "bootstrap_full_number",
+
+			"language": {
+					"lengthMenu": "  _MENU_ 记录",
+					"sLengthMenu": "每页 _MENU_ 条记录",
+					"sInfo": "显示 _START_ 至 _END_ 共有 _TOTAL_ 条记录",
+					"sInfoEmpty": "记录为空",
+					"sInfoFiltered": " - 从 _MAX_ 条记录中",
+					"sZeroRecords": "结果为空",
+					"sSearch": "搜索:",
+					"paginate": {
+						"previous":"Prev",
+						"next": "Next",
+						"last": "Last",
+						"first": "First"
+					}
+				},
+
+			"dom": "<'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r><'table-scrollable't><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12' p>>", // horizobtal scrollable datatable
+		});	
+		return oTable;
+	}
+
+	/* init with export button */
+	var handleInitDatatable2 = function($dom) {
 		/* Set tabletools buttons and button container */
 
 		$.extend(true, $.fn.DataTable.TableTools.classes, {
@@ -95,51 +132,13 @@ var Rhea = function () {
 		});	
 		
 	}
-	
-	/* without export button */
-	var handleInitDatatable2 = function($dom) {
 
-		var oTable = $dom.dataTable({
-			"order": [
-				[0, 'asc']
-			],
-
-			"lengthMenu": [
-				[5, 10, 20, -1],
-				[5, 10, 20, "All"] // change per page values here
-			],
-			// set the initial value
-			"pageLength": 10,
-
-			"pagingType": "bootstrap_full_number",
-
-			"language": {
-					"lengthMenu": "  _MENU_ 记录",
-					"sLengthMenu": "每页 _MENU_ 条记录",
-					"sInfo": "显示 _START_ 至 _END_ 共有 _TOTAL_ 条记录",
-					"sInfoEmpty": "记录为空",
-					"sInfoFiltered": " - 从 _MAX_ 条记录中",
-					"sZeroRecords": "结果为空",
-					"sSearch": "搜索:",
-					"paginate": {
-						"previous":"Prev",
-						"next": "Next",
-						"last": "Last",
-						"first": "First"
-					}
-				},
-
-			"dom": "<'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r><'table-scrollable't><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12' p>>", // horizobtal scrollable datatable
-		});	
-		return oTable;
-	}
-	
 	/* filter table, and without export button */
 	var handleInitDatatable3 = function($dom) {
 
 		var oTable = $dom.dataTable({
 			"order": [],
-			
+
 			"lengthMenu": [
 				[5, 10, 20, -1],
 				[5, 10, 20, "All"] // change per page values here
@@ -405,35 +404,39 @@ var Rhea = function () {
 		leftNavActive: function($dom) {
 			handleLeftNavActive($dom);
 		},
-		
+
 		initDatatable: function($dom) {
-			handleInitDatatable($dom);
+			return handleInitDatatable1($dom);
 		},
-		
+
 		initDatatable2: function($dom) {
-			return handleInitDatatable2($dom);
+			return handleInitDatatable1($dom);
 		},
-		
+
+		initDatatableWithExport: function($dom) {
+			handleInitDatatable2($dom);
+		},
+
 		initDatatableWithFilter: function($dom) {
 			return handleInitDatatable3($dom);
 		},
-		
+
 		initDatePicker: function($dom, today) {
 			handleInitDatePicker($dom, today);
 		},
-		
+
 		ajaxNavPage: function($dom, e, url, request) {
 			handleAjaxLoad($dom, e, url, request);
 		},
-		
+
 		ajaxLoadPage: function($dom, e, url, request) {
 			handleAjaxLoad2($dom, e, url, request);
 		},
-		
+
 		ajaxLoadSvg: function(container, url, callback) {
 			if (url == '') {
 				container.html('无平面图');
-			} else {			
+			} else {
 				handleAjaxSvg(container, url, callback);
 			}
 		},

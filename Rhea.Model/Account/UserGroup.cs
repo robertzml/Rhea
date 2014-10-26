@@ -9,11 +9,18 @@ using MongoDB.Bson.Serialization.Attributes;
 namespace Rhea.Model.Account
 {
     /// <summary>
-    /// 用户组
+    /// 用户组类
     /// </summary>
     [CollectionName("userGroup")]
     public class UserGroup : MongoEntity
     {
+        #region Constructor
+        public UserGroup()
+        {
+            this.UserGroupPrivilege = new List<UserGroupPrivilege>();
+        }
+        #endregion //Constructor
+
         #region Property
         /// <summary>
         /// 用户组ID
@@ -52,6 +59,13 @@ namespace Rhea.Model.Account
         public string Remark { get; set; }
 
         /// <summary>
+        /// 用户组权限
+        /// </summary>
+        [BsonElement("userGroupPrivilege")]
+        [Display(Name = "用户组权限")]
+        public List<UserGroupPrivilege> UserGroupPrivilege { get; set; }
+
+        /// <summary>
         /// 状态
         /// </summary>
         /// <remarks>
@@ -61,5 +75,36 @@ namespace Rhea.Model.Account
         [Display(Name = "状态")]
         public int Status { get; set; }
         #endregion //Property
+    }
+
+    /// <summary>
+    /// 用户组相关权限
+    /// </summary>
+    public class UserGroupPrivilege
+    {
+        #region Method
+        /// <summary>
+        /// ID
+        /// </summary>
+        [BsonElement("_id")]
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        [Display(Name = "ID")]
+        public string _id { get; set; }
+
+        /// <summary>
+        /// 标题
+        /// </summary>
+        [BsonElement("title")]
+        [Display(Name = "标题")]
+        public string Title { get; set; }
+
+        /// <summary>
+        /// 名称
+        /// </summary>
+        [BsonElement("name")]
+        [Display(Name = "名称")]
+        public string Name { get; set; }
+        #endregion //Method
     }
 }

@@ -72,6 +72,7 @@
     <Compile Include="Estate\MongoSubregionRepository.cs" />
     <Compile Include="MongoDictionaryRepository.cs" />
     <Compile Include="MongoLogRepository.cs" />
+    <Compile Include="Account\MongoPrivilegeRepository.cs" />
     <Compile Include="MongoRepository.cs" />
     <Compile Include="MongoRepositoryManager.cs" />
     <Compile Include="Personnel\MongoDepartmentRepository.cs" />

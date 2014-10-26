@@ -74,6 +74,7 @@
     <Compile Include="Estate\IRoomRepository.cs" />
     <Compile Include="IDictionaryRepository.cs" />
     <Compile Include="ILogRepository.cs" />
+    <Compile Include="Account\IPrivilegeRepository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="IRepositoryManager.cs" />
     <Compile Include="PersonnelCollection.cs" />

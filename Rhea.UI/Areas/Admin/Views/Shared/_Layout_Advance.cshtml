@@ -72,6 +72,33 @@
             </li>
             <li class="left-nav-first">
                 <a href="javascript:;">
+                    <i class="fa fa-shield"></i>
+                    <span class="title">
+                        权限管理
+                    </span>
+                    <span class="arrow ">
+                    </span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="@Url.Action("List", "Privilege")" id="privilege-list-menu">
+                            权限列表
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Create", "Privilege")" id="privilege-create-menu">
+                            添加权限
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Allocate", "Privilege")" id="privilege-allocate-menu">
+                            权限分配
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="left-nav-first">
+                <a href="javascript:;">
                     <i class="fa fa-book"></i>
                     <span class="title">
                         字典管理

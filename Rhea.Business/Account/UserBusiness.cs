@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Rhea.Business.Account
@@ -344,11 +345,56 @@ namespace Rhea.Business.Account
         /// 编辑用户组
         /// </summary>
         /// <param name="data">用户组对象</param>
+        /// <remarks>
+        /// 保留原权限
+        /// </remarks>
         /// <returns></returns>
         public ErrorCode UpdateUserGroup(UserGroup data)
         {
+            UserGroup group = this.userGroupRepository.Get(data.UserGroupId);
+
+            data.UserGroupPrivilege = group.UserGroupPrivilege;
             data.Status = 0;
             return this.userGroupRepository.Update(data);
+        }
+
+        /// <summary>
+        /// 编辑用户组权限
+        /// </summary>
+        /// <param name="userGroupId">用户组ID</param>
+        /// <param name="privileges">分配权限</param>
+        /// <returns></returns>
+        public ErrorCode UpdateUserGroupPrivilege(int userGroupId, string privileges)
+        {
+            try
+            {
+                UserGroup group = this.userGroupRepository.Get(userGroupId);
+                PrivilegeBusiness privilegeBusiness = new PrivilegeBusiness();
+                List<UserGroupPrivilege> userGroupPrivileges = new List<UserGroupPrivilege>();
+
+                string[] names = Regex.Split(privileges, ",");
+                foreach (var name in names)
+                {
+                    var privilege = privilegeBusiness.GetByName(name);
+                    if (privilege == null)
+                        continue;
+
+                    userGroupPrivileges.Add(new UserGroupPrivilege
+                    {
+                        _id = privilege._id,
+                        Title = privilege.Title,
+                        Name = privilege.Name
+                    });
+                }
+                group.UserGroupPrivilege = userGroupPrivileges;
+
+                ErrorCode result = userGroupRepository.Update(group);
+                return result;
+            }
+            catch (Exception)
+            {
+                return ErrorCode.Exception;
+            }
         }
         #endregion //UserGroup
         #endregion //Method

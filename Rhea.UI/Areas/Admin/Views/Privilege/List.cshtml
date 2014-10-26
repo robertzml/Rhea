@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Rhea.Model.Dictionary>
+﻿@model IEnumerable<Rhea.Model.Account.Privilege>
 
 @{
-    ViewBag.Title = "字典列表";
+    ViewBag.Title = "权限列表";
     Layout = "~/Areas/Admin/Views/Shared/_Layout_Advance.cshtml";
 }
 
@@ -17,7 +17,7 @@
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
-            <a href="#">字典管理</a>
+            <a href="#">权限管理</a>
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
@@ -32,7 +32,7 @@
         <div class="portlet box green">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-list"></i>字典列表
+                    <i class="fa fa-list"></i>&nbsp;权限列表
                 </div>
                 <div class="tools">
                     <a href="javascript:;" class="collapse">
@@ -44,22 +44,25 @@
                 </div>
             </div>
             <div class="portlet-body">
-                <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="dictionary-table">
+                <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="privilege-table">
                     <thead>
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.Name)
+                                @Html.DisplayNameFor(model => model._id)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Title)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Type)
+                                @Html.DisplayNameFor(model => model.Name)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Remark)
+                                @Html.DisplayNameFor(model => model.Rank)
                             </th>
-                            <th>操作</th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IsWrite)
+                            </th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -67,34 +70,31 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Name)
+                                    @Html.DisplayFor(modelItem => item._id)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Title)
                                 </td>
                                 <td>
-                                    @{
-                                        var type = (DictionaryType)item.Type;
-                                        @type.DisplayName()
-                                    }
+                                    @Html.DisplayFor(modelItem => item.Name)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Remark)
+                                    @Html.DisplayFor(modelItem => item.Rank)
                                 </td>
                                 <td>
-                                    <a href="@Url.Action("Details", new { controller = "Dictionary", name = item.Name })" class="btn btn-info btn-sm" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
-                                    <a href="@Url.Action("Edit", new { controller = "Dictionary", name = item.Name })" class="btn btn-warning btn-sm" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
+                                    @Html.DisplayFor(modelItem => item.IsWrite)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
                                 </td>
                             </tr>
                         }
-
                     </tbody>
                 </table>
 
                 <hr />
-                <p>
-                    <a href="@Url.Action("Create", new { controller = "Dictionary" })" class="btn btn-primary" role="button"><i class="fa fa-plus-circle"></i>&nbsp;添加字典</a>
-                </p>
             </div>
         </div>
     </div>
@@ -105,9 +105,9 @@
     <script type="text/javascript">
         $(function () {
             Rhea.topNavActive($('#advance-nav'));
-            Rhea.leftNavActive($('#dictionary-list-menu'));
+            Rhea.leftNavActive($('#privilege-list-menu'));
 
-            Rhea.initDatatable($('#dictionary-table'));
+            Rhea.initDatatable($('#privilege-table'));
         });
     </script>
 }

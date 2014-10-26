@@ -322,6 +322,15 @@ var Admin = function() {
 		});		
 	}
 
+	var handlePrivilegeCheck = function() {
+		$('#userGroupId').change(function() {
+			$('input[name=privilege]').each(function(i) {
+				$(this).attr("checked", "checked"); 
+			});
+			$.uniform.update();
+		});
+	}
+	
 	return {
 		initSpecialExchange: function () {
 			handleSpecialExchange();
@@ -330,5 +339,9 @@ var Admin = function() {
 		initLogTable: function($dom) {
 			handleInitLogTable($dom);
 		},
+		
+		initPrivilegeCheck: function() {
+			handlePrivilegeCheck();
+		}
 	}
 }();

@@ -60,6 +60,7 @@
     <Compile Include="LogBusiness.cs" />
     <Compile Include="ModelExtension.cs" />
     <Compile Include="Personnel\DepartmentBusiness.cs" />
+    <Compile Include="Account\PrivilegeBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RheaConstant.cs" />
     <Compile Include="StatisticBusiness.cs" />
