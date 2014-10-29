@@ -157,3 +157,4 @@ $RECYCLE.BIN/
 .DS_Store
 /packages
 /Rhea.UI/Attachment
+/Rhea.API/Properties/PublishProfiles

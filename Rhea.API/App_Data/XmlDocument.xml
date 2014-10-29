@@ -491,18 +491,25 @@
             建筑业务对象
             </summary>
         </member>
+        <member name="M:Rhea.API.Controllers.BuildingController.BindBuilding(Rhea.Model.Estate.Building)">
+            <summary>
+            模型映射
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
         <member name="M:Rhea.API.Controllers.BuildingController.Get">
             <summary>
-            所有建筑数据
+            获取所有建筑数据
             </summary>
-            <returns></returns>
+            <returns>所有建筑数据</returns>
         </member>
         <member name="M:Rhea.API.Controllers.BuildingController.Get(System.Int32)">
             <summary>
-            楼宇数据
+            获取建筑数据
             </summary>
             <param name="id">楼宇ID</param>
-            <returns></returns>
+            <returns>建筑数据</returns>
         </member>
         <member name="T:Rhea.API.Controllers.CampusController">
             <summary>
@@ -513,6 +520,13 @@
             <summary>
             校区业务
             </summary>
+        </member>
+        <member name="M:Rhea.API.Controllers.CampusController.BindCampus(Rhea.Model.Estate.Campus)">
+            <summary>
+            模型映射
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
         </member>
         <member name="M:Rhea.API.Controllers.CampusController.Get">
             <summary>
@@ -550,6 +564,87 @@
             </summary>
             <param name="id">房间ID</param>
             <returns></returns>
+        </member>
+        <member name="T:Rhea.API.Models.Building">
+            <summary>
+            建筑类
+            </summary>
+        </member>
+        <member name="P:Rhea.API.Models.Building.Id">
+            <summary>
+            建筑ID
+            </summary>
+        </member>
+        <member name="P:Rhea.API.Models.Building.Name">
+            <summary>
+            建筑名称
+            </summary>
+        </member>
+        <member name="P:Rhea.API.Models.Building.CampusId">
+            <summary>
+            所属校区ID
+            </summary>
+        </member>
+        <member name="P:Rhea.API.Models.Building.OrganizeType">
+            <summary>
+            建筑组织形式
+            </summary>
+            <remarks>
+            1:楼群,2:组团,3:独栋,4:分区,5:楼宇,6:操场
+            </remarks>       
+        </member>
+        <member name="P:Rhea.API.Models.Building.ParentId">
+            <summary>
+            父级建筑ID
+            </summary>
+        </member>
+        <member name="P:Rhea.API.Models.Building.HasChild">
+            <summary>
+            是否有子建筑
+            </summary>
+        </member>
+        <member name="P:Rhea.API.Models.Building.UseType">
+            <summary>
+            使用类型
+            </summary>
+            <remarks>
+            1:学院楼宇,2:教学楼宇,3:行政办公,4:宿舍楼宇,5:辅助楼宇,6:基础设施,7:室外运动场
+            </remarks>
+        </member>
+        <member name="P:Rhea.API.Models.Building.BuildArea">
+            <summary>
+            建筑面积
+            </summary>
+        </member>
+        <member name="P:Rhea.API.Models.Building.LastUpdateTime">
+            <summary>
+            最后编辑时间
+            </summary>
+        </member>
+        <member name="T:Rhea.API.Models.Campus">
+            <summary>
+            校区类
+            </summary>
+        </member>
+        <member name="P:Rhea.API.Models.Campus.Id">
+            <summary>
+            校区ID
+            </summary>
+        </member>
+        <member name="P:Rhea.API.Models.Campus.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:Rhea.API.Models.Campus.Remark">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="P:Rhea.API.Models.Campus.LastUpdateTime">
+            <summary>
+            最后编辑时间
+            </summary>
         </member>
     </members>
 </doc>
