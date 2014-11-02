@@ -16,6 +16,13 @@ namespace Rhea.Model.Account
     {
         #region Method
         /// <summary>
+        /// 排序
+        /// </summary>
+        [BsonElement("sort")]
+        [Display(Name = "排序")]
+        public int Sort { get; set; }
+
+        /// <summary>
         /// 标题
         /// </summary>
         [BsonElement("title")]

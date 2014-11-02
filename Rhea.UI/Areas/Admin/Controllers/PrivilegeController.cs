@@ -124,6 +124,59 @@ namespace Rhea.UI.Areas.Admin.Controllers
 
             return View(model);
         }
+
+        /// <summary>
+        /// 编辑权限
+        /// </summary>
+        /// <param name="id">权限ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Edit(string id)
+        {
+            var data = this.privilegeBusiness.Get(id);
+            return View(data);
+        }
+
+        /// <summary>
+        /// 编辑权限
+        /// </summary>
+        /// <param name="model">权限对象</param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Edit(Privilege model)
+        {
+            if (ModelState.IsValid)
+            {
+                ErrorCode result = this.privilegeBusiness.Update(model);
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "编辑权限成功";
+                    return RedirectToAction("List", "Privilege");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "编辑权限失败");
+                    ModelState.AddModelError("", result.DisplayName());
+                }
+            }
+
+            return View(model);
+        }
         #endregion //Action
+
+        #region Json
+        /// <summary>
+        /// 获取用户组权限
+        /// </summary>
+        /// <param name="userGroupId">用户组ID</param>
+        /// <returns></returns>
+        public JsonResult GetUserGroupPrivilege(int userGroupId)
+        {
+            UserBusiness userBusiness = new UserBusiness();
+            UserGroup group = userBusiness.GetUserGroup(userGroupId);
+            return Json(group.UserGroupPrivilege, JsonRequestBehavior.AllowGet);
+        }
+        #endregion //Json
     }
 }

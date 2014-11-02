@@ -1,0 +1,24 @@
+﻿@helper ResideRecordStatus(int status)
+{
+    switch ((Rhea.Model.EntityStatus)status)
+    {
+        case Rhea.Model.EntityStatus.Normal:
+        <span class="label label-success">居住中</span>
+            break;
+        case Rhea.Model.EntityStatus.OverTime:
+        <span class="label label-danger">超期</span>
+            break;
+        case Rhea.Model.EntityStatus.ExtendTime:
+        <span class="label label-warning">延期</span>
+            break;
+        case Rhea.Model.EntityStatus.MoveOut:
+        <span class="label label-default">已搬出</span>
+            break;
+        case Rhea.Model.EntityStatus.ExtendOut:
+        <span class="label bg-grey-cascade">已延期</span>
+            break;
+        case Rhea.Model.EntityStatus.ExchangeOut:
+        <span class="label bg-grey-silver">已换房</span>
+            break;
+    }
+}

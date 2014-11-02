@@ -41,7 +41,7 @@ namespace Rhea.Business.Account
         /// <returns></returns>
         public IEnumerable<Privilege> Get()
         {
-            return this.privilegeRepository.Get();
+            return this.privilegeRepository.Get().OrderBy(r => r.Sort);
         }
 
         /// <summary>

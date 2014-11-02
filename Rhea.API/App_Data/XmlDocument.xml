@@ -646,5 +646,85 @@
             最后编辑时间
             </summary>
         </member>
+        <member name="T:Rhea.API.Models.Room">
+            <summary>
+            房间类
+            </summary>
+        </member>
+        <member name="P:Rhea.API.Models.Room.Id">
+            <summary>
+            建筑ID
+            </summary>
+        </member>
+        <member name="P:Rhea.API.Models.Room.Name">
+            <summary>
+            房间名称
+            </summary>        
+        </member>
+        <member name="P:Rhea.API.Models.Room.Number">
+            <summary>
+            房间编号
+            </summary>        
+        </member>
+        <member name="P:Rhea.API.Models.Room.Floor">
+            <summary>
+            楼层
+            </summary>        
+        </member>
+        <member name="P:Rhea.API.Models.Room.Span">
+            <summary>
+            跨数
+            </summary>        
+        </member>
+        <member name="P:Rhea.API.Models.Room.Orientation">
+            <summary>
+            朝向
+            </summary>
+        </member>
+        <member name="P:Rhea.API.Models.Room.BuildArea">
+            <summary>
+            建筑面积
+            </summary>
+        </member>
+        <member name="P:Rhea.API.Models.Room.UsableArea">
+            <summary>
+            使用面积
+            </summary>        
+        </member>
+        <member name="P:Rhea.API.Models.Room.BuildingId">
+            <summary>
+            建筑ID
+            </summary>       
+        </member>
+        <member name="P:Rhea.API.Models.Room.DepartmentId">
+            <summary>
+            部门ID
+            </summary>       
+        </member>
+        <member name="P:Rhea.API.Models.Room.FirstCode">
+            <summary>
+            功能一级编码
+            </summary>       
+        </member>
+        <member name="P:Rhea.API.Models.Room.SecondCode">
+            <summary>
+            功能二级编码
+            </summary>       
+        </member>
+        <member name="P:Rhea.API.Models.Room.ClassifyName">
+            <summary>
+            功能一级分类名称
+            </summary>       
+        </member>
+        <member name="P:Rhea.API.Models.Room.FunctionProperty">
+            <summary>
+            功能属性
+            </summary>      
+        </member>
+        <member name="P:Rhea.API.Models.Room.LastUpdateTime">
+            <summary>
+            最后编辑时间
+            </summary>
+        </member>
     </members>
 </doc>

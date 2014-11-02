@@ -10,7 +10,8 @@ namespace Rhea.UI.Areas.Admin.Controllers
     /// <summary>
     /// 后台管理控制器
     /// </summary>
-    [EnhancedAuthorize(Rank = 900)]
+    //[EnhancedAuthorize(Rank = 900)]
+    [Privilege(Require = "AdminManage")]
     public class HomeController : Controller
     {
         #region Action

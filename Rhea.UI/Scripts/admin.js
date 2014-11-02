@@ -324,10 +324,27 @@ var Admin = function() {
 
 	var handlePrivilegeCheck = function() {
 		$('#userGroupId').change(function() {
+			var id = $(this).val();
+			console.log(id);
+			
 			$('input[name=privilege]').each(function(i) {
-				$(this).attr("checked", "checked"); 
+				$(this).attr("checked", false);				
 			});
 			$.uniform.update();
+			if (id != '0') {
+				$.getJSON('/Admin/Privilege/GetUserGroupPrivilege', { userGroupId: id }, function(response) {
+					$.each(response, function(i, item) {
+						$('input[name=privilege][value=' + item.Name + ']').attr("checked", "checked"); 
+					});
+					
+					$.uniform.update();
+				});
+			
+				/*$('input[name=privilege]').each(function(i) {
+					$(this).attr("checked", "checked"); 
+				});
+				$.uniform.update();*/
+			}
 		});
 	}
 	

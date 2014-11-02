@@ -184,6 +184,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\EnhancedAuthorizeAttribute.cs" />
+    <Compile Include="Filters\PrivilegeAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -353,11 +354,6 @@
     <Content Include="plugins\bootstrap-switch\js\bootstrap-switch.min.js" />
     <Content Include="plugins\bootstrap-wizard\jquery.bootstrap.wizard.js" />
     <Content Include="plugins\bootstrap-wizard\jquery.bootstrap.wizard.min.js" />
-    <Content Include="plugins\bootstrap\css\bootstrap.css" />
-    <Content Include="plugins\bootstrap\css\bootstrap.min.css" />
-    <Content Include="plugins\bootstrap\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="plugins\bootstrap\js\bootstrap.js" />
-    <Content Include="plugins\bootstrap\js\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\Estate\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Campus\List.cshtml" />
     <Content Include="Areas\Admin\Views\Campus\Details.cshtml" />
@@ -390,10 +386,6 @@
     <Content Include="Areas\Admin\Views\Building\SubregionEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Building\BlockEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Building\PlaygroundEdit.cshtml" />
-    <Content Include="plugins\bootstrap\css\bootstrap.css.map" />
-    <Content Include="plugins\bootstrap\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="plugins\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="plugins\bootstrap\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="plugins\colorbox\colorbox.css" />
     <Content Include="plugins\colorbox\images\border.png" />
     <Content Include="plugins\colorbox\images\controls.png" />
@@ -521,6 +513,9 @@
     <Content Include="plugins\jquery-form\jquery.form.js" />
     <Content Include="plugins\jquery-slimscroll\jquery.slimscroll.js" />
     <Content Include="plugins\jquery-slimscroll\jquery.slimscroll.min.js" />
+    <Content Include="plugins\jquery-ui\jquery-ui-1.10.3.custom.js" />
+    <Content Include="plugins\jquery-ui\jquery-ui-1.10.3.custom.min.css" />
+    <Content Include="plugins\jquery-ui\jquery-ui-1.10.3.custom.min.js" />
     <Content Include="plugins\jquery.blockui.min.js" />
     <Content Include="plugins\jquery.cokie.min.js" />
     <Content Include="plugins\jquery.scrollTo.min.js" />
@@ -703,6 +698,11 @@
     <Content Include="Areas\Admin\Views\Privilege\List.cshtml" />
     <Content Include="Areas\Admin\Views\Privilege\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Privilege\Allocate.cshtml" />
+    <Content Include="plugins\bootstrap-datepicker\less\datepicker.less" />
+    <Content Include="plugins\bootstrap-datepicker\less\datepicker3.less" />
+    <Content Include="plugins\bootstrap-datepicker\LICENSE" />
+    <Content Include="App_Code\ApartmentHelpers.cshtml" />
+    <Content Include="Areas\Admin\Views\Privilege\Edit.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="plugins\jquery-1.11.0.min.js" />

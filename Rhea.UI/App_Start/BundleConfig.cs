@@ -15,10 +15,7 @@ namespace Rhea.UI
             bundles.Add(new ScriptBundle("~/bundles/jqueryv1").Include(
                 "~/plugins/jquery-1.11.0.min.js",
                 "~/plugins/jquery-migrate-1.2.1.min.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                "~/plugins/bootstrap/js/bootstrap.min.js"));
-
+            
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.unobtrusive*",
                         "~/Scripts/jquery.validate*",
@@ -46,7 +43,7 @@ namespace Rhea.UI
                       "~/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-CN.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/fileinput").Include(
-                "~/plugins/bootstrap-fileinput/bootstrap-fileinput.js"));                          
+                "~/plugins/bootstrap-fileinput/bootstrap-fileinput.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/fileupload").Include(
                 "~/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js",
@@ -58,7 +55,7 @@ namespace Rhea.UI
                 "~/plugins/jquery-file-upload/js/jquery.fileupload-image.js",
                 "~/plugins/jquery-file-upload/js/jquery.fileupload-validate.js"));
 
-          
+
 
             bundles.Add(new ScriptBundle("~/bundles/colorbox").Include(
                 "~/plugins/colorbox/jquery.colorbox-min.js"));
@@ -122,10 +119,6 @@ namespace Rhea.UI
                      "~/Content/layout.css",
                      "~/Content/themes/default.css",
                      "~/Content/custom.css"));
-         
-
-            bundles.Add(new StyleBundle("~/Plugin/bootstrap").Include(
-                     "~/plugins/bootstrap/css/bootstrap.min.css"));         
 
             bundles.Add(new StyleBundle("~/Plugin/datatables").Include(
                 "~/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css",
@@ -135,7 +128,7 @@ namespace Rhea.UI
                      "~/plugins/jquery-ui/jquery-ui.min.css"));
 
             bundles.Add(new StyleBundle("~/Plugin/datepicker").Include(
-                    "~/plugins/bootstrap-datepicker/css/datepicker3.css"));         
+                    "~/plugins/bootstrap-datepicker/css/datepicker3.css"));
 
             bundles.Add(new StyleBundle("~/Plugin/fileinput").Include(
                 "~/plugins/bootstrap-fileinput/bootstrap-fileinput.css"));

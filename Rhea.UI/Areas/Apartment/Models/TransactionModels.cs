@@ -335,7 +335,6 @@ namespace Rhea.UI.Areas.Apartment.Models
         /// <summary>
         /// 工号、学号或其它
         /// </summary>
-        [Required]
         [Display(Name = "工号")]
         public string JobNumber { get; set; }
 
@@ -371,7 +370,6 @@ namespace Rhea.UI.Areas.Apartment.Models
         /// <summary>
         /// 电话
         /// </summary>
-        [Required]
         [Display(Name = "电话")]
         public string Telephone { get; set; }
 

@@ -51,6 +51,9 @@
                                 @Html.DisplayNameFor(model => model._id)
                             </th>
                             <th>
+                                @Html.DisplayNameFor(model => model.Sort)
+                            </th>
+                            <th>
                                 @Html.DisplayNameFor(model => model.Title)
                             </th>
                             <th>
@@ -73,6 +76,9 @@
                                     @Html.DisplayFor(modelItem => item._id)
                                 </td>
                                 <td>
+                                    @Html.DisplayFor(modelItem => item.Sort)
+                                </td>
+                                <td>
                                     @Html.DisplayFor(modelItem => item.Title)
                                 </td>
                                 <td>
@@ -85,9 +91,7 @@
                                     @Html.DisplayFor(modelItem => item.IsWrite)
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                                    <a href="@Url.Action("Edit", new { controller = "Privilege", id = item._id })" class="btn btn-warning btn-sm" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
                                 </td>
                             </tr>
                         }

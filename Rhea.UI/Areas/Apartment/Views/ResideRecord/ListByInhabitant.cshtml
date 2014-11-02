@@ -57,27 +57,7 @@
                             @item.Remark
                         </td>
                         <td>
-                            @switch ((EntityStatus)item.Status)
-                            {
-                                case EntityStatus.Normal:
-                                <span class="label label-success">居住中</span>
-                                    break;
-                                case EntityStatus.OverTime:
-                                <span class="label label-danger">超期</span>
-                                    break;
-                                case EntityStatus.ExtendTime:
-                                <span class="label label-warning">延期</span>
-                                    break;
-                                case EntityStatus.MoveOut:
-                                <span class="label label-default">已搬出</span>
-                                    break;
-                                case EntityStatus.ExtendOut:
-                                <span class="label bg-grey-cascade">已延期</span>
-                                    break;
-                                case EntityStatus.ExchangeOut:
-                                <span class="label bg-grey-silver">已换房</span>
-                                    break;
-                            }
+                            @ApartmentHelpers.ResideRecordStatus(item.Status)
                         </td>
                         <td>
                             <a href="/Apartment/ResideRecord/Details/@item._id" class="btn btn-sm btn-primary ajaxify" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
