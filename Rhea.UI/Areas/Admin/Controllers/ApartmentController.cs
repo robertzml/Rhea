@@ -54,6 +54,10 @@ namespace Rhea.UI.Areas.Admin.Controllers
                     var checkIn = business.GetCheckInTransaction(id);
                     return View("CheckInDetails", checkIn);
 
+                case LogType.ApartmentCheckIn2:
+                    var checkIn2 = business.GetCheckIn2Transaction(id);
+                    return View("CheckIn2Details", checkIn2);
+
                 case LogType.ApartmentCheckOut:
                     var checkOut = business.GetCheckOutTransaction(id);
                     return View("CheckOutDetails", checkOut);

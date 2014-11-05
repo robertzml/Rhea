@@ -1,8 +1,8 @@
-﻿@model Rhea.UI.Areas.Apartment.Models.CheckInModel
+﻿@model Rhea.UI.Areas.Apartment.Models.CheckIn2Model
 
 @{
     Layout = null;
-    ViewBag.Title = "入住办理";
+    ViewBag.Title = "其它入住办理";
 }
 
 
@@ -76,7 +76,7 @@
                                             1
                                         </span>
                                         <span class="desc">
-                                            <i class="fa fa-check"></i> 房间选择
+                                            <i class="fa fa-check"></i> 住户信息
                                         </span>
                                     </a>
                                 </li>
@@ -86,7 +86,7 @@
                                             2
                                         </span>
                                         <span class="desc">
-                                            <i class="fa fa-check"></i> 住户信息
+                                            <i class="fa fa-check"></i> 房间选择
                                         </span>
                                     </a>
                                 </li>
@@ -128,34 +128,9 @@
                                     <div class="note note-info">
                                         <h4 class="block">提示：</h4>
                                         <p>
-                                            本业务主要为一般教职工入住办理流程，其它情况请选择其它业务。若教职工以前曾有居住记录，可从历史住户中选择该教职工信息。
+                                            本业务主要为其它入住办理流程，如临时借住，挂职居住等。若教职工以前曾有居住记录，可从历史住户中选择该教职工信息。
                                         </p>
                                     </div>
-                                    <h3 class="block">请选择房间</h3>
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">
-                                            楼宇选择 <span class="required">*</span>
-                                        </label>
-                                        <div class="col-md-4">
-                                            @Html.EditorFor(model => model.BuildingId, new { htmlAttributes = new { @class = "form-control" } })
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">
-                                            房间选择 <span class="required">*</span>
-                                        </label>
-                                        <div class="col-md-4">
-                                            <select class="form-control" id="RoomId" name="RoomId">
-                                                <option value="">-- 请选择 --</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-md-4 col-md-offset-3" id="room-info">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane" id="tab2">
                                     <h3 class="block">请输入住户信息</h3>
                                     <div class="form-group">
                                         <label class="control-label col-md-3">
@@ -205,7 +180,7 @@
                                             所属部门
                                         </label>
                                         <div class="col-md-4">
-                                            @Html.EditorFor(model => model.DepartmentName, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.EditorFor(model => model.DepartmentId, new { htmlAttributes = new { @class = "form-control" } })
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -258,22 +233,6 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-md-3">
-                                            公积金领取时间
-                                        </label>
-                                        <div class="col-md-4">
-                                            @Html.EditorFor(model => model.AccumulatedFundsDate, new { htmlAttributes = new { @class = "form-control" } })
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">
-                                            蠡湖家园入住时间
-                                        </label>
-                                        <div class="col-md-4">
-                                            @Html.EditorFor(model => model.LiHuEnterDate, new { htmlAttributes = new { @class = "form-control" } })
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">
                                             备注
                                         </label>
                                         <div class="col-md-4">
@@ -281,8 +240,44 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="tab-pane" id="tab2">
+                                    <h3 class="block">请选择房间</h3>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            楼宇选择 <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            @Html.EditorFor(model => model.BuildingId, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            房间选择 <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            <select class="form-control" id="RoomId" name="RoomId">
+                                                <option value="">-- 请选择 --</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-4 col-md-offset-3" id="room-info">
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="tab-pane" id="tab3">
                                     <h3 class="block">请输入入住信息</h3>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            居住类型 <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            <select class="form-control" id="ResideType" name="ResideType">
+                                                <option value="1">正常居住</option>
+                                                <option value="2">挂职居住</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <label class="control-label col-md-3">
                                             入住时间 <span class="required">*</span>
@@ -309,14 +304,6 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-md-3">
-                                            年限
-                                        </label>
-                                        <div class="col-md-4">
-                                            @Html.EditorFor(model => model.TermLimit, new { htmlAttributes = new { @class = "form-control" } })
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">
                                             房租 <span class="required">*</span>
                                         </label>
                                         <div class="col-md-4">
@@ -339,24 +326,38 @@
                                             @Html.EditorFor(model => model.RecordRemark, new { htmlAttributes = new { @class = "form-control" } })
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            附件 <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            @Html.EditorFor(model => model.RecordFile, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <hr />
+                                            <span class="btn btn-success fileinput-button">
+                                                <i class="fa fa-upload"></i>
+                                                <span>选择文件</span>
+                                                <!-- The file input field used as target for the file upload widget -->
+                                                <input id="fileupload" type="file" name="files[]" multiple>
+                                            </span>
+                                            <br /><br />
+
+                                            <!-- The global progress bar -->
+                                            <div id="file-progress" class="progress progress-striped">
+                                                <div class="progress-bar progress-bar-success"></div>
+                                            </div>
+
+                                            <!-- The container for the uploaded files -->
+                                            <div id="files" class="files"></div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="tab-pane" id="tabConfirm">
                                     <h3 class="block">确认信息</h3>
-                                    <h4 class="form-section">房间</h4>
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">楼宇:</label>
-                                        <div class="col-md-4">
-                                            <p class="form-control-static" data-display="BuildingId">
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">房间:</label>
-                                        <div class="col-md-4">
-                                            <p class="form-control-static" data-display="RoomId">
-                                            </p>
-                                        </div>
-                                    </div>
                                     <h4 class="form-section">用户</h4>
                                     <div class="form-group">
                                         <label class="control-label col-md-3">学号&amp;工号:</label>
@@ -389,7 +390,7 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-3">所属部门:</label>
                                         <div class="col-md-4">
-                                            <p class="form-control-static" data-display="DepartmentName">
+                                            <p class="form-control-static" data-display="DepartmentId">
                                             </p>
                                         </div>
                                     </div>
@@ -436,27 +437,35 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label col-md-3">公积金领取时间:</label>
-                                        <div class="col-md-4">
-                                            <p class="form-control-static" data-display="AccumulatedFundsDate">
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">蠡湖家园入住时间:</label>
-                                        <div class="col-md-4">
-                                            <p class="form-control-static" data-display="LiHuEnterDate">
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
                                         <label class="control-label col-md-3">备注:</label>
                                         <div class="col-md-4">
                                             <p class="form-control-static" data-display="InhabitantRemark">
                                             </p>
                                         </div>
                                     </div>
+                                    <h4 class="form-section">房间</h4>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">楼宇:</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="BuildingId">
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">房间:</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="RoomId">
+                                            </p>
+                                        </div>
+                                    </div>
                                     <h4 class="form-section">入住</h4>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">居住类型:</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="ResideType">
+                                            </p>
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <label class="control-label col-md-3">入住时间:</label>
                                         <div class="col-md-4">
@@ -479,13 +488,6 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label col-md-3">年限:</label>
-                                        <div class="col-md-4">
-                                            <p class="form-control-static" data-display="TermLimit">
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
                                         <label class="control-label col-md-3">房租:</label>
                                         <div class="col-md-4">
                                             <p class="form-control-static" data-display="Rent">
@@ -503,6 +505,13 @@
                                         <label class="control-label col-md-3">备注:</label>
                                         <div class="col-md-4">
                                             <p class="form-control-static" data-display="RecordRemark">
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">附件:</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="RecordFile">
                                             </p>
                                         </div>
                                     </div>
@@ -534,6 +543,6 @@
 
 <script type="text/javascript">
     $(function () {
-        Apartment.initCheckIn();
+        Apartment.initCheckIn2();
     });
 </script>

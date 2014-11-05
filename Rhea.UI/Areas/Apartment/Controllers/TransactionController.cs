@@ -99,6 +99,76 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         }
 
         /// <summary>
+        /// 其它入住办理
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult CheckIn2()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 其它入住办理
+        /// </summary>
+        /// <param name="model">入住模型</param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult CheckIn2(CheckIn2Model model)
+        {
+            if (ModelState.IsValid)
+            {
+                Inhabitant inhabitant = new Inhabitant();
+                inhabitant._id = model.OldInhabitant;
+                inhabitant.JobNumber = model.JobNumber;
+                inhabitant.Name = model.Name;
+                inhabitant.Gender = model.Gender;
+                inhabitant.Type = model.Type;
+                inhabitant.DepartmentId = model.DepartmentId;
+                inhabitant.DepartmentName = DepartmentBusiness.GetName(model.DepartmentId);
+                inhabitant.Duty = model.Duty;
+                inhabitant.Telephone = model.Telephone;
+                inhabitant.IdentityCard = model.IdentityCard;
+                inhabitant.Education = model.Education;
+                inhabitant.IsCouple = model.IsCouple;
+                inhabitant.Marriage = model.Marriage;
+                inhabitant.Remark = model.InhabitantRemark;
+
+                ResideRecord record = new ResideRecord();
+                record.RoomId = model.RoomId;
+                record.ResideType = model.ResideType;
+                record.Rent = model.Rent;
+                record.EnterDate = model.EnterDate;
+                record.ExpireDate = model.ExpireDate;
+                record.MonthCount = model.MonthCount;
+                record.ReceiptNumber = model.ReceiptNumber;
+                record.Remark = model.RecordRemark;
+                record.IsNewStaff = false;
+                record.Status = 0;
+                record.Files = model.RecordFile.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+
+                User user = PageService.GetCurrentUser(User.Identity.Name);
+                TransactionBusiness business = new TransactionBusiness();
+                ErrorCode result = business.CheckIn2(inhabitant, record, model.RoomId, user);
+
+                if (result == ErrorCode.Success)
+                {
+                    ViewBag.Message = "其它入住办理成功。";
+                    return View("TransactionResult");
+                }
+                else
+                {
+                    ViewBag.Message = "其它入住办理失败。" + business.ErrorMessage;
+                    return View("TransactionResult");
+                }
+            }
+
+            ViewBag.Message = "输入有误，请重新输入。";
+            return View(model);
+        }
+
+        /// <summary>
         /// 退房办理
         /// </summary>
         /// <returns></returns>
@@ -276,9 +346,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                 inhabitant.IdentityCard = model.IdentityCard;
                 inhabitant.Education = model.Education;
                 inhabitant.IsCouple = model.IsCouple;
-                inhabitant.Marriage = model.Marriage;
-                inhabitant.AccumulatedFundsDate = model.AccumulatedFundsDate;
-                inhabitant.LiHuEnterDate = model.LiHuEnterDate;
+                inhabitant.Marriage = model.Marriage;                
                 inhabitant.Remark = model.Remark;
                 inhabitant.Type = 1;    //教职工
 
@@ -356,6 +424,10 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                 case LogType.ApartmentRegister:
                     var register = business.GetRegisterTransaction(id);
                     return View("RegisterDetails", register);
+
+                case LogType.ApartmentCheckIn2:
+                    var checkIn2 = business.GetCheckIn2Transaction(id);
+                    return View("CheckIn2Details", checkIn2);
             }
 
             return View();

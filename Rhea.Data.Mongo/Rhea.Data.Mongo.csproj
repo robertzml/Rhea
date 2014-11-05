@@ -51,6 +51,7 @@
     <Compile Include="Account\MongoUserGroupRepository.cs" />
     <Compile Include="Account\MongoUserRepository.cs" />
     <Compile Include="Apartment\MongoApartmentRoomRepository.cs" />
+    <Compile Include="Apartment\MongoCheckIn2TransactionRepository.cs" />
     <Compile Include="Apartment\MongoCheckInTransactionRepository.cs" />
     <Compile Include="Apartment\MongoCheckOutTransactionRepository.cs" />
     <Compile Include="Apartment\MongoExchangeTransactionRepository.cs" />

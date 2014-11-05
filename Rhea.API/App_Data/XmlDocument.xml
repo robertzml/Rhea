@@ -552,18 +552,25 @@
             房间业务对象
             </summary>
         </member>
+        <member name="M:Rhea.API.Controllers.RoomController.BindRoom(Rhea.Model.Estate.Room)">
+            <summary>
+            模型映射
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
         <member name="M:Rhea.API.Controllers.RoomController.Get">
             <summary>
-            所有房间数据
+            获取所有房间数据
             </summary>
-            <returns></returns>
+            <returns>所有房间数据</returns>
         </member>
         <member name="M:Rhea.API.Controllers.RoomController.Get(System.Int32)">
             <summary>
-            房间数据
+            获取房间数据
             </summary>
             <param name="id">房间ID</param>
-            <returns></returns>
+            <returns>房间ID</returns>
         </member>
         <member name="T:Rhea.API.Models.Building">
             <summary>
@@ -659,67 +666,62 @@
         <member name="P:Rhea.API.Models.Room.Name">
             <summary>
             房间名称
-            </summary>        
+            </summary>
         </member>
         <member name="P:Rhea.API.Models.Room.Number">
             <summary>
             房间编号
-            </summary>        
+            </summary>
         </member>
         <member name="P:Rhea.API.Models.Room.Floor">
             <summary>
             楼层
-            </summary>        
+            </summary>
         </member>
         <member name="P:Rhea.API.Models.Room.Span">
             <summary>
             跨数
-            </summary>        
+            </summary>
         </member>
         <member name="P:Rhea.API.Models.Room.Orientation">
             <summary>
             朝向
             </summary>
         </member>
-        <member name="P:Rhea.API.Models.Room.BuildArea">
-            <summary>
-            建筑面积
-            </summary>
-        </member>
         <member name="P:Rhea.API.Models.Room.UsableArea">
             <summary>
             使用面积
-            </summary>        
+            </summary>
         </member>
         <member name="P:Rhea.API.Models.Room.BuildingId">
             <summary>
             建筑ID
-            </summary>       
+            </summary>
         </member>
         <member name="P:Rhea.API.Models.Room.DepartmentId">
             <summary>
             部门ID
-            </summary>       
+            </summary>
         </member>
         <member name="P:Rhea.API.Models.Room.FirstCode">
             <summary>
             功能一级编码
-            </summary>       
+            </summary>
         </member>
         <member name="P:Rhea.API.Models.Room.SecondCode">
             <summary>
             功能二级编码
-            </summary>       
+            </summary>
         </member>
         <member name="P:Rhea.API.Models.Room.ClassifyName">
             <summary>
             功能一级分类名称
-            </summary>       
+            </summary>
         </member>
         <member name="P:Rhea.API.Models.Room.FunctionProperty">
             <summary>
             功能属性
-            </summary>      
+            </summary>
         </member>
         <member name="P:Rhea.API.Models.Room.LastUpdateTime">
             <summary>

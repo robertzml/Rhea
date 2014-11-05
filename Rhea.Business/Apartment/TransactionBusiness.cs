@@ -60,6 +60,17 @@ namespace Rhea.Business.Apartment
         }
 
         /// <summary>
+        /// 添加其它入住办理业务记录
+        /// </summary>
+        /// <param name="data">其它入住办理业务记录对象</param>
+        /// <returns></returns>
+        private ErrorCode CreateCheckIn2Transaction(CheckIn2Transaction data)
+        {
+            ITransactionRepository repository = new MongoCheckIn2TransactionRepository();
+            return repository.Create(data);
+        }
+
+        /// <summary>
         /// 添加退房办理业务记录
         /// </summary>
         /// <param name="data">退房办理业务记录对象</param>
@@ -178,6 +189,7 @@ namespace Rhea.Business.Apartment
                 ResideRecordBusiness recordBusiness = new ResideRecordBusiness();
                 record.InhabitantId = inhabitant._id;
                 record.InhabitantName = inhabitant.Name;
+                record.InhabitantDepartmentId = inhabitant.DepartmentId;
                 record.InhabitantDepartment = inhabitant.DepartmentName;
                 record.IsNewStaff = true;
                 record.RegisterTime = now;
@@ -217,6 +229,136 @@ namespace Rhea.Business.Apartment
                     Type = (int)LogType.ApartmentCheckIn,
                     Content = string.Format("青教新教职工入住业务办理, 住户ID:{0}, 姓名:{1}, 部门:{2}, 入住房间ID:{3}, 房间名称:{4}, 入住时间:{5}, 到期时间:{6}, 居住类型:正常居住, 记录ID:{7}, 业务ID:{8}。",
                         inhabitant._id, inhabitant.Name, inhabitant.DepartmentName, room.RoomId, room.Name, record.EnterDate, record.ExpireDate, record._id, transaction._id),
+                    UserId = user._id,
+                    UserName = user.Name,
+                    Tag = record._id
+                };
+                result = logBusiness.Create(log);
+                if (result != ErrorCode.Success)
+                {
+                    this.errorMessage = "记录日志失败:" + result.DisplayName();
+                    return result;
+                }
+
+                //更新日志
+                inhabitantBusiness.LogItem(inhabitant._id, log);
+                recordBusiness.LogItem(record._id, log);
+                roomBusiness.LogItem(room._id, log);
+            }
+            catch (Exception e)
+            {
+                this.errorMessage = e.Message;
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
+
+        /// <summary>
+        /// 其它入住办理流程
+        /// </summary>
+        /// <param name="inhabitant"></param>
+        /// <param name="record"></param>
+        /// <param name="roomId"></param>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public ErrorCode CheckIn2(Inhabitant inhabitant, ResideRecord record, int roomId, User user)
+        {
+            try
+            {
+                ErrorCode result;
+                DateTime now = DateTime.Now;
+
+                //检查房间状态
+                ApartmentRoomBusiness roomBusiness = new ApartmentRoomBusiness();
+                var room = roomBusiness.Get(roomId);
+                if (room == null)
+                    return ErrorCode.ObjectNotFound;
+                if (room.ResideType != (int)ResideType.Available)
+                    return ErrorCode.RoomNotAvailable;
+
+                //备份房间
+                result = roomBusiness.Backup(room._id);
+                if (result != ErrorCode.Success)
+                {
+                    this.errorMessage = "备份房间失败: " + result.DisplayName();
+                    return result;
+                }
+
+                //更新房间状态
+                room.ResideType = (int)record.ResideType;
+                result = roomBusiness.Update(room);
+                if (result != ErrorCode.Success)
+                {
+                    this.errorMessage = "房间状态更新出错：" + result.DisplayName();
+                    return result;
+                }
+
+                //添加住户                
+                InhabitantBusiness inhabitantBusiness = new InhabitantBusiness();
+                if (string.IsNullOrEmpty(inhabitant._id))
+                {
+                    inhabitant.Status = 0;
+                    result = inhabitantBusiness.Create(inhabitant);
+                }
+                else
+                {
+                    inhabitant.Status = (int)GetInhabitantStatus(inhabitant._id);
+                    Inhabitant inh = inhabitantBusiness.Get(inhabitant._id);
+                    inhabitant.LiHuEnterDate = inh.LiHuEnterDate;   //保留原蠡湖家园和公积金时间
+                    inhabitant.AccumulatedFundsDate = inh.AccumulatedFundsDate;
+                    result = inhabitantBusiness.Update(inhabitant);
+                }
+                if (result != ErrorCode.Success)
+                {
+                    this.errorMessage = "用户添加出错：" + result.DisplayName();
+                    return result;
+                }
+
+                //添加居住记录
+                ResideRecordBusiness recordBusiness = new ResideRecordBusiness();
+                record.InhabitantId = inhabitant._id;
+                record.InhabitantName = inhabitant.Name;
+                record.InhabitantDepartmentId = inhabitant.DepartmentId;
+                record.InhabitantDepartment = inhabitant.DepartmentName;
+                record.RegisterTime = now;
+                result = recordBusiness.Create(record);
+                if (result != ErrorCode.Success)
+                {
+                    this.errorMessage = "居住记录添加出错：" + result.DisplayName();
+                    return result;
+                }
+
+                //添加业务记录
+                CheckIn2Transaction transaction = new CheckIn2Transaction();
+                transaction.Type = (int)LogType.ApartmentCheckIn2;
+                transaction.Time = now;
+                transaction.UserId = user._id;
+                transaction.UserName = user.Name;
+                transaction.RoomId = room.RoomId;
+                transaction.RoomName = room.Name;
+                transaction.InhabitantId = inhabitant._id;
+                transaction.InhabitantName = inhabitant.Name;
+                transaction.ResideRecordId = record._id;
+                transaction.ResideType = record.ResideType;
+                transaction.Remark = "";
+                transaction.Status = 0;
+                result = CreateCheckIn2Transaction(transaction);
+                if (result != ErrorCode.Success)
+                {
+                    this.errorMessage = "添加业务记录失败:" + result.DisplayName();
+                    return result;
+                }
+
+                //生成日志
+                LogBusiness logBusiness = new LogBusiness();
+                Log log = new Log
+                {
+                    Title = "其它入住业务办理",
+                    Time = now,
+                    Type = (int)LogType.ApartmentCheckIn2,
+                    Content = string.Format("青教其它入住业务办理, 住户ID:{0}, 姓名:{1}, 部门:{2}, 入住房间ID:{3}, 房间名称:{4}, 入住时间:{5}, 到期时间:{6}, 居住类型:{7}, 记录ID:{8}, 业务ID:{9}。",
+                        inhabitant._id, inhabitant.Name, inhabitant.DepartmentName, room.RoomId, room.Name, record.EnterDate, record.ExpireDate, record.ResideType, record._id, transaction._id),
                     UserId = user._id,
                     UserName = user.Name,
                     Tag = record._id
@@ -1024,6 +1166,29 @@ namespace Rhea.Business.Apartment
         {
             ITransactionRepository repository = new MongoCheckInTransactionRepository();
             var data = (CheckInTransaction)repository.Get(id);
+            return data;
+        }
+
+        /// <summary>
+        /// 获取所有其它入住办理业务记录
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<CheckIn2Transaction> GetCheckIn2Transaction()
+        {
+            ITransactionRepository repository = new MongoCheckIn2TransactionRepository();
+            var data = repository.Get().Cast<CheckIn2Transaction>().OrderByDescending(r => r.Time);
+            return data;
+        }
+
+        /// <summary>
+        /// 获取其它入住办理业务记录
+        /// </summary>
+        /// <param name="id">业务记录ID</param>
+        /// <returns></returns>
+        public CheckIn2Transaction GetCheckIn2Transaction(string id)
+        {
+            ITransactionRepository repository = new MongoCheckIn2TransactionRepository();
+            var data = (CheckIn2Transaction)repository.Get(id);
             return data;
         }
 

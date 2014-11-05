@@ -214,6 +214,12 @@ namespace Rhea.Model
         /// 新教职工登记办理
         /// </summary>
         [Display(Name = "新教职工登记办理")]
-        ApartmentRegister = 165
+        ApartmentRegister = 165,
+
+        /// <summary>
+        /// 其它入住业务办理
+        /// </summary>
+        [Display(Name = "其它入住业务办理")]
+        ApartmentCheckIn2 = 166
     }
 }

@@ -16,8 +16,8 @@ namespace Rhea.UI.Areas.Apartment.Controllers
 {
     /// <summary>
     /// 青教公寓主页控制器
-    /// </summary>
-    [EnhancedAuthorize(Roles = "Root,Administrator,Apartment,Leader,HumanManager")]
+    /// </summary>    
+    [Privilege(Require = "ApartmentManage")]
     public class HomeController : Controller
     {
         #region Field

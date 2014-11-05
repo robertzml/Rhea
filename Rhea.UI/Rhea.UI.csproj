@@ -703,6 +703,8 @@
     <Content Include="plugins\bootstrap-datepicker\LICENSE" />
     <Content Include="App_Code\ApartmentHelpers.cshtml" />
     <Content Include="Areas\Admin\Views\Privilege\Edit.cshtml" />
+    <Content Include="Areas\Apartment\Views\Transaction\CheckIn2Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Apartment\CheckIn2Details.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="plugins\jquery-1.11.0.min.js" />
