@@ -33,6 +33,21 @@ namespace Rhea.Model.Apartment
         public DateTime Time { get; set; }
 
         /// <summary>
+        /// 居住人ID
+        /// </summary>
+        [BsonRepresentation(BsonType.ObjectId)]
+        [BsonElement("inhabitantId")]
+        [Display(Name = "居住人ID")]
+        public string InhabitantId { get; set; }
+
+        /// <summary>
+        /// 住户姓名
+        /// </summary>
+        [BsonElement("inhabitantName")]
+        [Display(Name = "住户姓名")]
+        public string InhabitantName { get; set; }
+
+        /// <summary>
         /// 操作用户ID
         /// </summary>
         [BsonRepresentation(BsonType.ObjectId)]

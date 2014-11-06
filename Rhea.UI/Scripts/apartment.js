@@ -601,9 +601,6 @@ var Apartment = function() {
 					},
 					Rent: {
 						required: true
-					},
-					RecordFile: {
-						required: true
 					}
                 },
 

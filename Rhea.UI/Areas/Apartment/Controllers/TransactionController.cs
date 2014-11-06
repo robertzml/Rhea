@@ -19,7 +19,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
     /// <summary>
     /// 业务办理控制器
     /// </summary>
-    [EnhancedAuthorize(Roles = "Root,Administrator,Apartment,HumanManager")]
+    [Privilege(Require = "ApartmentTransaction")]
     public class TransactionController : Controller
     {
         #region Action
@@ -28,6 +28,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         /// 入住办理
         /// </summary>
         /// <returns></returns>
+        [Privilege(Require = "ApartmentTransactionCheckIn")]
         [HttpGet]
         public ActionResult CheckIn()
         {
@@ -43,6 +44,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         /// </summary>
         /// <param name="model">入住模型</param>
         /// <returns></returns>
+        [Privilege(Require = "ApartmentTransactionCheckIn")]
         [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult CheckIn(CheckInModel model)
@@ -102,6 +104,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         /// 其它入住办理
         /// </summary>
         /// <returns></returns>
+        [Privilege(Require = "ApartmentTransactionCheckIn2")]
         [HttpGet]
         public ActionResult CheckIn2()
         {
@@ -113,6 +116,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         /// </summary>
         /// <param name="model">入住模型</param>
         /// <returns></returns>
+        [Privilege(Require = "ApartmentTransactionCheckIn2")]
         [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult CheckIn2(CheckIn2Model model)
@@ -346,7 +350,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                 inhabitant.IdentityCard = model.IdentityCard;
                 inhabitant.Education = model.Education;
                 inhabitant.IsCouple = model.IsCouple;
-                inhabitant.Marriage = model.Marriage;                
+                inhabitant.Marriage = model.Marriage;
                 inhabitant.Remark = model.Remark;
                 inhabitant.Type = 1;    //教职工
 

@@ -181,7 +181,11 @@ var Rhea = function () {
                     });
 
                 oTable.api().column(i).data().unique().sort().each(function (d, j) {
-                    select.append('<option value="' + d + '">' + d + '</option>')
+                    if ($(d).html()) {
+						select.append('<option value="' + $(d).html() + '">' + $(d).html() + '</option>')
+					} else {
+						select.append('<option value="' + d + '">' + d + '</option>')
+					}
                 });
             }
         });

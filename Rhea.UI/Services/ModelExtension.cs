@@ -5,6 +5,7 @@ using System.Security.Principal;
 using System.Web;
 using System.Web.Security;
 using Rhea.Business.Account;
+using Rhea.Model.Account;
 
 namespace Rhea.UI.Services
 {
@@ -75,6 +76,33 @@ namespace Rhea.UI.Services
             }
             else
                 return "";
+        }
+
+        /// <summary>
+        /// 得到用户组名称
+        /// </summary>
+        /// <param name="user">登录用户</param>
+        /// <returns></returns>
+        public static bool HasPrivilege(this IPrincipal user, string require)
+        {
+            if (user != null && user.Identity.IsAuthenticated)
+            {
+                int rootId = 100001;
+
+                UserBusiness userBusiness = new UserBusiness();
+                User u = userBusiness.GetByUserName(user.Identity.Name);
+                UserGroup group = userBusiness.GetUserGroup(u.UserGroupId);
+
+                if (group.UserGroupId == rootId)
+                    return true;
+
+                if (group.UserGroupPrivilege.Any(r => r.Name == require))
+                    return true;
+                else
+                    return false;
+            }
+            else
+                return false;
         }
     }
 }

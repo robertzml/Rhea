@@ -43,50 +43,56 @@
                     </span>
                 </a>
             </li>
-            <li class="left-nav-first">
-                <a href="javascript:;">
-                    <i class="fa fa-bank"></i>
-                    <span class="title">
-                        青教公寓
-                    </span>
-                    <span class="arrow">
-                    </span>
-                </a>
-                @Html.Action("BuildingMenu", "Home")
-            </li>            
-            <li class="left-nav-first">
-                <a href="javascript:;">
-                    <i class="fa fa-users"></i>
-                    <span class="title">
-                        住户管理
-                    </span>
-                    <span class="arrow ">
-                    </span>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a class="ajaxify" href="/Apartment/Inhabitant/Index">
-                            住户概况
-                        </a>
-                    </li>
-                    <li>
-                        <a class="ajaxify" href="/Apartment/Inhabitant/List">
-                            住户列表
-                        </a>
-                    </li>
-                    <li>
-                        <a class="ajaxify" href="/Apartment/Inhabitant/ListUnassigned">
-                            未分配住户
-                        </a>
-                    </li>
-                    <li>
-                        <a class="ajaxify" href="/Apartment/Inhabitant/ListMoveOut">
-                            已搬出住户
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            @if (new string[] { "Root", "Administrator", "Estate", "Apartment", "HumanManager" }.Contains(role))
+            @if (User.HasPrivilege("ApartmentBuilding"))
+            {
+                <li class="left-nav-first">
+                    <a href="javascript:;">
+                        <i class="fa fa-bank"></i>
+                        <span class="title">
+                            青教公寓
+                        </span>
+                        <span class="arrow">
+                        </span>
+                    </a>
+                    @Html.Action("BuildingMenu", "Home")
+                </li>
+            }
+            @if (User.HasPrivilege("ApartmentInhabitant"))
+            {
+                <li class="left-nav-first">
+                    <a href="javascript:;">
+                        <i class="fa fa-users"></i>
+                        <span class="title">
+                            住户管理
+                        </span>
+                        <span class="arrow ">
+                        </span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a class="ajaxify" href="/Apartment/Inhabitant/Index">
+                                住户概况
+                            </a>
+                        </li>
+                        <li>
+                            <a class="ajaxify" href="/Apartment/Inhabitant/List">
+                                住户列表
+                            </a>
+                        </li>
+                        <li>
+                            <a class="ajaxify" href="/Apartment/Inhabitant/ListUnassigned">
+                                未分配住户
+                            </a>
+                        </li>
+                        <li>
+                            <a class="ajaxify" href="/Apartment/Inhabitant/ListMoveOut">
+                                已搬出住户
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            }
+            @if (User.HasPrivilege("ApartmentTransaction"))
             {
                 <li class="left-nav-first">
                     <a href="javascript:;">
@@ -103,11 +109,14 @@
                                 新教职工登记
                             </a>
                         </li>
-                        <li>
-                            <a class="ajaxify" href="/Apartment/Transaction/CheckIn">
-                                入住办理
-                            </a>
-                        </li>
+                        @if (User.HasPrivilege("ApartmentTransactionCheckIn"))
+                        {
+                            <li>
+                                <a class="ajaxify" href="/Apartment/Transaction/CheckIn">
+                                    入住办理
+                                </a>
+                            </li>
+                        }
                         <li>
                             <a class="ajaxify" href="/Apartment/Transaction/CheckOut">
                                 退房办理
