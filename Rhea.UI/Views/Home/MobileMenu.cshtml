@@ -31,7 +31,7 @@
             主页 <span class="arrow"></span>
         </a>
     </li>
-    @if (new string[] { "Root", "Administrator", "Estate", "Leader" }.Contains(groupName))
+    @if (User.HasPrivilege("EstateManage"))    
     {
     <li>
         <a href="#">
@@ -49,6 +49,9 @@
             @Html.Action("BuildingMenu", new { area = "Estate", controller = "Home" })
         </ul>
     </li>
+    }
+    @if (User.HasPrivilege("DepartmentManage"))
+    {
     <li>
         <a>
             部门管理 <span class="arrow"></span>
@@ -74,7 +77,7 @@
         </ul>
     </li>
     }
-    @if (new string[] { "Root", "Administrator", "Estate", "Apartment", "Leader" }.Contains(groupName))
+    @if (User.HasPrivilege("ApartmentManage"))
     { 
     <li class="last">
         <a>

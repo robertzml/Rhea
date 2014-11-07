@@ -73,6 +73,19 @@ namespace Rhea.Business.Estate
         }
 
         /// <summary>
+        /// 获取一级建筑
+        /// </summary>
+        /// <remarks>
+        /// 类型为1:楼群, 2:组团, 3:独栋, 6:操场 的建筑
+        /// </remarks>
+        /// <returns></returns>
+        public IEnumerable<Building> GetTopBuildings()
+        {
+            var data = this.buildingRepository.Get().Where(r => r.OrganizeType != (int)BuildingOrganizeType.Subregion && r.OrganizeType != (int)BuildingOrganizeType.Block);
+            return data;
+        }
+
+        /// <summary>
         /// 获取所有父级建筑
         /// </summary>
         /// <remarks>

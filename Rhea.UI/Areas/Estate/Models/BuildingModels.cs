@@ -108,6 +108,17 @@ namespace Rhea.UI.Areas.Estate.Models
     }
 
     /// <summary>
+    /// 操场首页模型
+    /// </summary>
+    public class PlaygroundIndexModel
+    {
+        /// <summary>
+        /// 独栋对象
+        /// </summary>
+        public Playground Playground { get; set; }
+    }
+
+    /// <summary>
     /// 建筑入驻部门模型
     /// </summary>
     public class BuildingDepartmentModel

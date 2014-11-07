@@ -13,7 +13,7 @@ namespace Rhea.UI
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryv1").Include(
-                "~/plugins/jquery-1.11.0.min.js",
+                "~/Scripts/jquery-1.11.0.min.js",
                 "~/plugins/jquery-migrate-1.2.1.min.js"));
             
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(

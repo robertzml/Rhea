@@ -1,23 +1,28 @@
-﻿
+﻿@model IEnumerable<Rhea.Model.Estate.Building>
+
 @{
-    ViewBag.Title = "房产管理";
-    Layout = "~/Areas/Estate/Views/Shared/_Layout.cshtml";
-    IEnumerable<Building> buildings = ViewBag.Buildings;
+    ViewBag.Title = "建筑列表";
+    Layout = null;
 }
+
 
 <!-- BEGIN PAGE HEADER-->
 <h3 class="page-title">
-    @ViewBag.Title <small></small>
+    @ViewBag.Title
 </h3>
 <div class="page-bar">
     <ul class="page-breadcrumb">
         <li>
             <i class="fa fa-home"></i>
-            <a href="@Url.Action("Index", new { area = "Estate", controller= "Home" })">房产管理</a>
+            <a href="@Url.Action("Index", new { area = "Estate", controller = "Home" })">房产管理</a>
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
-            <a href="#">房产主页</a>
+            <a href="#">建筑管理</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">@ViewBag.Title</a>
         </li>
     </ul>
     <div class="page-toolbar">
@@ -55,51 +60,34 @@
                     <thead>
                         <tr>
                             <th>
-                                建筑编号
+                                @Html.DisplayNameFor(model => model.BuildingId)
                             </th>
                             <th>
-                                建筑名称
+                                @Html.DisplayNameFor(model => model.Name)
                             </th>
                             <th>
-                                组织类型
+                                @Html.DisplayNameFor(model => model.CampusId)
                             </th>
                             <th>
-                                使用类型
+                                @Html.DisplayNameFor(model => model.OrganizeType)
                             </th>
                             <th>
-                                建筑面积 (m<sup>2</sup>)
+                                @Html.DisplayNameFor(model => model.UseType)
                             </th>
                             <th>
-                                排序
+                                @Html.DisplayNameFor(model => model.BuildArea)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.UsableArea)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Sort)
                             </th>
                             <th>操作</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>
-                                建筑编号
-                            </th>
-                            <th>
-                                建筑名称
-                            </th>
-                            <th data-filter="true">
-                                组织类型
-                            </th>
-                            <th data-filter="true">
-                                使用类型
-                            </th>
-                            <th>
-                                建筑面积 (m<sup>2</sup>)
-                            </th>
-                            <th>
-                                排序
-                            </th>
-                            <th>操作</th>
-                        </tr>
-                    </tfoot>
                     <tbody>
-                        @foreach (var item in buildings)
+                        @foreach (var item in Model)
                         {
                             <tr>
                                 <td>
@@ -109,25 +97,33 @@
                                     @Html.DisplayFor(modelItem => item.Name)
                                 </td>
                                 <td>
+                                    @item.CampusName()
+                                </td>
+                                <td>
                                     @{
-                                        var type1 = (BuildingOrganizeType)item.OrganizeType;
-                                        @type1.DisplayName();
+                            var type1 = (BuildingOrganizeType)item.OrganizeType;
+                            @type1.DisplayName();
                                     }
                                 </td>
                                 <td>
                                     @{
-                                        var type2 = (BuildingUseType)item.UseType;
-                                        @type2.DisplayName();
+                            var type2 = (BuildingUseType)item.UseType;
+                            @type2.DisplayName();
                                     }
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.BuildArea)
                                 </td>
                                 <td>
+                                    @Html.DisplayFor(modelItem => item.UsableArea)
+                                </td>
+                                <td>
                                     @Html.DisplayFor(modelItem => item.Sort)
                                 </td>
                                 <td>
-                                    <a href="@Url.Action("Index", new { controller = "Building", id = item.BuildingId })" class="btn btn-info btn-sm ajaxify" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
+                                    <a href="@Url.Action("Details", new { controller = "Building", id = item.BuildingId })" class="btn btn-info btn-sm" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
+                                    <a href="@Url.Action("Edit", new { controller = "Building", id = item.BuildingId })" class="btn btn-warning btn-sm" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
+                                    <a href="@Url.Action("ListByBuilding", new { controller = "Room", buildingId = item.BuildingId })" class="btn btn-success btn-sm" role="button"><i class="fa fa-outdent"></i>&nbsp;房间</a>
                                 </td>
                             </tr>
                         }
@@ -138,12 +134,11 @@
     </div>
 </div>
 <!-- END PAGE CONTENT-->
-
 @section scripts {
     <script type="text/javascript">
         $(function () {
-            Rhea.topNavActive($('#estate-nav'));
-            Rhea.leftNavActive($('#estate-home-menu'));
+            Rhea.leftNavActive($('#building-list-menu'));
+
             Rhea.initDatatableWithFilter($('#building-table'));
         });
     </script>

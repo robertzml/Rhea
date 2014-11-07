@@ -12,7 +12,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
     /// <summary>
     /// 房产管理主控制器
     /// </summary>
-    [EnhancedAuthorize(Roles = "Root,Administrator,Estate,Leader")]
+    [Privilege(Require = "EstateManage")]
     public class HomeController : Controller
     {
         #region Action
@@ -22,6 +22,11 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
+            BuildingBusiness business = new BuildingBusiness();
+            var buildings = business.GetTopBuildings().OrderBy(r => r.Sort);
+
+            ViewBag.Buildings = buildings;
+
             return View();
         }
 

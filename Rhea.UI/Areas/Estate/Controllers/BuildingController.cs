@@ -19,6 +19,23 @@ namespace Rhea.UI.Areas.Estate.Controllers
     [EnhancedAuthorize(Roles = "Root,Administrator,Estate,Leader")]
     public class BuildingController : Controller
     {
+        #region Field
+        /// <summary>
+        /// 建筑业务对象
+        /// </summary>
+        private BuildingBusiness buildingBusiness;
+        #endregion //Field
+
+        #region Constructor
+        /// <summary>
+        /// 建筑控制器
+        /// </summary>
+        public BuildingController()
+        {
+            this.buildingBusiness = new BuildingBusiness();
+        }
+        #endregion //Constructor
+
         #region Function
         /// <summary>
         /// 初始化楼群显示模型
@@ -131,6 +148,24 @@ namespace Rhea.UI.Areas.Estate.Controllers
         }
 
         /// <summary>
+        /// 初始化操场显示模型
+        /// </summary>
+        /// <param name="id">操场ID</param>
+        /// <returns></returns>
+        private PlaygroundIndexModel InitPlayground(int id)
+        {
+            BuildingBusiness business = new BuildingBusiness();
+
+            PlaygroundIndexModel data = new PlaygroundIndexModel();
+            data.Playground = business.GetPlayground(id);
+
+            if (!string.IsNullOrEmpty(data.Playground.ImageUrl))
+                data.Playground.ImageUrl = RheaConstant.ImagesRoot + data.Playground.ImageUrl;
+
+            return data;
+        }
+
+        /// <summary>
         /// 获取建筑入驻部门
         /// </summary>
         /// <param name="buildingId">建筑ID</param>
@@ -193,8 +228,22 @@ namespace Rhea.UI.Areas.Estate.Controllers
                 case BuildingOrganizeType.Cottage:
                     var data5 = InitCottage(id);
                     return View("CottageIndex", data5);
+
+                case BuildingOrganizeType.Playground:
+                    var data6 = InitPlayground(id);
+                    return View("PlaygroundIndex", data6);
             }
             return View(building);
+        }
+
+        /// <summary>
+        /// 一级建筑列表
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult List()
+        {
+            var data = this.buildingBusiness.GetParentBuildings();
+            return View(data);
         }
 
         /// <summary>
@@ -205,8 +254,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         [ChildActionOnly]
         public ActionResult BuildingGroupDetails(int id)
         {
-            BuildingBusiness business = new BuildingBusiness();
-            var data = business.GetBuildingGroup(id);
+            var data = this.buildingBusiness.GetBuildingGroup(id);
             return View(data);
         }
 
@@ -218,8 +266,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         [ChildActionOnly]
         public ActionResult SubregionDetails(int id)
         {
-            BuildingBusiness business = new BuildingBusiness();
-            var data = business.GetSubregion(id);
+            var data = this.buildingBusiness.GetSubregion(id);
             return View(data);
         }
 
@@ -231,8 +278,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         [ChildActionOnly]
         public ActionResult ClusterDetails(int id)
         {
-            BuildingBusiness business = new BuildingBusiness();
-            var data = business.GetCluster(id);
+            var data = this.buildingBusiness.GetCluster(id);
             return View(data);
         }
 
@@ -244,8 +290,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         [ChildActionOnly]
         public ActionResult BlockDetails(int id)
         {
-            BuildingBusiness business = new BuildingBusiness();
-            var data = business.GetBlock(id);
+            var data = this.buildingBusiness.GetBlock(id);
             return View(data);
         }
 
@@ -257,8 +302,19 @@ namespace Rhea.UI.Areas.Estate.Controllers
         [ChildActionOnly]
         public ActionResult CottageDetails(int id)
         {
-            BuildingBusiness business = new BuildingBusiness();
-            var data = business.GetCottage(id);
+            var data = this.buildingBusiness.GetCottage(id);
+            return View(data);
+        }
+
+        /// <summary>
+        /// 操场详细信息
+        /// </summary>
+        /// <param name="id">操场ID</param>
+        /// <returns></returns>
+        [ChildActionOnly]
+        public ActionResult PlaygroundDetails(int id)
+        {
+            var data = this.buildingBusiness.GetPlayground(id);
             return View(data);
         }
 
@@ -271,12 +327,11 @@ namespace Rhea.UI.Areas.Estate.Controllers
         {
             BuildingClassifyAreaModel data = new BuildingClassifyAreaModel();
 
-            BuildingBusiness buildingBusiness = new BuildingBusiness();
             StatisticBusiness statisticBusiness = new StatisticBusiness();
             DictionaryBusiness dictionaryBusiness = new DictionaryBusiness();
             RoomBusiness roomBusiness = new RoomBusiness();
 
-            var building = buildingBusiness.Get(id);
+            var building = this.buildingBusiness.Get(id);
             var rooms = roomBusiness.GetByBuilding(id);
 
             data.BuildingId = id;
