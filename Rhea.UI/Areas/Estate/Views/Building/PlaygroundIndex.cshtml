@@ -46,7 +46,162 @@
 <!-- BEGIN PAGE CONTENT-->
 <div class="row profile">
     <div class="col-md-12">
+        <!--BEGIN TABS-->
+        <div class="tabbable tabbable-custom tabbable-full-width">
+            <ul class="nav nav-tabs" id="main-tab">
+                <li class="active">
+                    <a href="#tab_1_1" data-toggle="tab">
+                        摘要
+                    </a>
+                </li>
+                <li>
+                    <a href="#tab_1_2" data-toggle="tab">
+                        信息
+                    </a>
+                </li>
+                <li>
+                    <a href="#tab_1_4" data-toggle="tab">
+                        房间
+                    </a>
+                </li>
+                <li>
+                    <a href="#tab_1_5" data-toggle="tab">
+                        统计
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab_1_1">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">操场全景</h3>
+                                </div>
+                                <div class="panel-body no-padding">
+                                    <img src="@Model.Playground.ImageUrl" class="img-responsive" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 profile-info">
+                            <h1>@Model.Playground.Name</h1>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.
+                            </p>
+                            <p>
+                            </p>
+                            <ul class="list-inline">
+                                <li>
+                                    <i class="fa fa-map-marker"></i> Spain
+                                </li>
+                                <li>
+                                    <i class="fa fa-calendar"></i> 18 Jan 1982
+                                </li>
+                                <li>
+                                    <i class="fa fa-briefcase"></i> Design
+                                </li>
+                                <li>
+                                    <i class="fa fa-star"></i> Top Seller
+                                </li>
+                                <li>
+                                    <i class="fa fa-heart"></i> BASE Jumping
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="portlet profile-summary">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        概况
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            <span class="sale-info">
+                                                名称
+                                            </span>
+                                            <span class="sale-num">
+                                                @Model.Playground.Name
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="sale-info">
+                                                建筑面积
+                                            </span>
+                                            <span class="sale-num">
+                                                @Model.Playground.BuildArea m<sup>2</sup>
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="sale-info">
+                                                计划面积
+                                            </span>
+                                            <span class="sale-num">
+                                                @Model.Playground.PlanningArea
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="sale-info">
+                                                建成日期
+                                            </span>
+                                            <span class="sale-num">
+                                                @Model.Playground.BuildDate.ToDateString()
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="tab_1_2">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <ul class="ver-inline-menu tabbable margin-bottom-10">
+                                <li class="active">
+                                    <a data-toggle="tab" href="#tab_1_2_1">
+                                        <i class="fa fa-info"></i> 操场信息
+                                    </a>
+                                    <span class="after">
+                                    </span>
+                                </li>
+                                <li>
+                                    <a data-toggle="tab" href="#tab_1_2_3">
+                                        <i class="fa fa-image"></i> 图片集
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="tab-content">
+                                <div id="tab_1_2_1" class="tab-pane active">
+                                    <div class="portlet">
+                                        <div class="portlet-title">
+                                            <div class="caption">
+                                                <i class="fa fa-info-circle"></i> 详细信息
+                                            </div>
+                                        </div>
+                                        <div class="portlet-body">
+                                            @Html.Action("PlaygroundDetails", new { id = Model.Playground.BuildingId })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab_1_2_3">
 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="tab_1_4">
 
+                </div>
+                <div class="tab-pane" id="tab_1_5">
+
+                </div>
+            </div>
+        </div>
+        <!--END TABS-->
     </div>
 </div>

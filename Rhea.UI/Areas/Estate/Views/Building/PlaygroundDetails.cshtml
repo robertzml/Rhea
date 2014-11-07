@@ -1,4 +1,4 @@
-﻿@model Rhea.Model.Estate.Subregion
+﻿@model Rhea.Model.Estate.Playground
 
 @{
     Layout = null;
@@ -78,22 +78,6 @@
                 </tr>
                 <tr>
                     <td>
-                        @Html.DisplayNameFor(model => model.AboveGroundFloor)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => model.AboveGroundFloor)
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        @Html.DisplayNameFor(model => model.UnderGroundFloor)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => model.UnderGroundFloor)
-                    </td>
-                </tr>
-                <tr>
-                    <td>
                         @Html.DisplayNameFor(model => model.BuildArea)
                     </td>
                     <td>
@@ -106,6 +90,14 @@
                     </td>
                     <td>
                         @Html.DisplayFor(model => model.UsableArea)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.PlanningArea)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.PlanningArea)
                     </td>
                 </tr>
                 <tr>
@@ -135,7 +127,6 @@
             </tbody>
         </table>
     </div>
-
     <div class="col-xs-12 col-lg-6">
         <table class="table table-bordered table-striped table-hover">
             <thead>
@@ -231,14 +222,6 @@
                     </td>
                     <td>
                         @Html.DisplayFor(model => model.ManageType)
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        @Html.DisplayNameFor(model => model.Sort)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => model.Sort)
                     </td>
                 </tr>
                 <tr>

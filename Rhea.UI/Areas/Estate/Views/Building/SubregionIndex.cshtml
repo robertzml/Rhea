@@ -80,39 +80,20 @@
                 <div class="tab-pane active" id="tab_1_1">
                     <div class="row">
                         <div class="col-md-3">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">分区全景</h3>
-                                </div>
-                                <div class="panel-body no-padding">
-                                    <img src="@Model.Subregion.ImageUrl" class="img-responsive" alt="" />
-                                </div>
+                            <div class="list-group">
+                                @foreach (var item in Model.Subregion.Floors)
+                                {
+                                    <a href="#" class="list-group-item list-group-item-success sub-floor-ajax-link" ref="@item.FloorId">
+                                        <i class="fa fa-road"></i> @item.Name
+                                    </a>
+                                }
+                                <a href="/Estate/Building/Index/@Model.Parent.BuildingId" class="list-group-item list-group-item-info ajaxify">
+                                    <i class="fa fa-reply"></i> 回到楼群
+                                </a>
                             </div>
                         </div>
                         <div class="col-md-6 profile-info">
-                            <h1>@Model.Subregion.Name</h1>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.
-                            </p>
-                            <p>
-                            </p>
-                            <ul class="list-inline">
-                                <li>
-                                    <i class="fa fa-map-marker"></i> Spain
-                                </li>
-                                <li>
-                                    <i class="fa fa-calendar"></i> 18 Jan 1982
-                                </li>
-                                <li>
-                                    <i class="fa fa-briefcase"></i> Design
-                                </li>
-                                <li>
-                                    <i class="fa fa-star"></i> Top Seller
-                                </li>
-                                <li>
-                                    <i class="fa fa-heart"></i> BASE Jumping
-                                </li>
-                            </ul>
+                            
                         </div>
                         <div class="col-md-3">
                             <div class="portlet profile-summary">
@@ -154,17 +135,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-3">
-                            <div class="list-group">
-                                @foreach (var item in Model.Subregion.Floors)
-                                {
-                                    <a href="#" class="list-group-item list-group-item-success sub-floor-ajax-link" ref="@item.FloorId">
-                                        <i class="fa fa-road"></i> @item.Name
-                                    </a>
-                                }
-                                <a href="/Estate/Building/Index/@Model.Parent.BuildingId" class="list-group-item list-group-item-info ajaxify">
-                                    <i class="fa fa-reply"></i> 回到楼群
-                                </a>
-                            </div>
+                            
                         </div>
                         <div class="col-md-9">
 
@@ -288,16 +259,6 @@
                                     </a>
                                     <span class="after">
                                     </span>
-                                </li>
-                                <li>
-                                    <a data-toggle="tab" href="#tab_1_4_2">
-                                        <i class="fa fa-group"></i> Membership
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-toggle="tab" href="#tab_1_4_3">
-                                        <i class="fa fa-leaf"></i> Terms Of Service
-                                    </a>
                                 </li>
                             </ul>
                         </div>

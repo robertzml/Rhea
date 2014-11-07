@@ -150,7 +150,8 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                 record.Remark = model.RecordRemark;
                 record.IsNewStaff = false;
                 record.Status = 0;
-                record.Files = model.RecordFile.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+                if (!string.IsNullOrEmpty(model.RecordFile))
+                    record.Files = model.RecordFile.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries);
 
                 User user = PageService.GetCurrentUser(User.Identity.Name);
                 TransactionBusiness business = new TransactionBusiness();

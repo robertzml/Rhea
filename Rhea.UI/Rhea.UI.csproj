@@ -706,6 +706,7 @@
     <Content Include="Areas\Admin\Views\Apartment\CheckIn2Details.cshtml" />
     <Content Include="Areas\Estate\Views\Building\List.cshtml" />
     <Content Include="Areas\Estate\Views\Building\PlaygroundIndex.cshtml" />
+    <Content Include="Areas\Estate\Views\Building\PlaygroundDetails.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <Content Include="plugins\jquery-migrate-1.2.1.min.js" />
     <Content Include="plugins\jquery-ui\images\animated-overlay.gif" />
