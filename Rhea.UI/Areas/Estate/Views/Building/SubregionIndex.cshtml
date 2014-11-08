@@ -80,20 +80,34 @@
                 <div class="tab-pane active" id="tab_1_1">
                     <div class="row">
                         <div class="col-md-3">
-                            <div class="list-group">
-                                @foreach (var item in Model.Subregion.Floors)
-                                {
-                                    <a href="#" class="list-group-item list-group-item-success sub-floor-ajax-link" ref="@item.FloorId">
-                                        <i class="fa fa-road"></i> @item.Name
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">分区全景</h3>
+                                </div>
+                                <div class="panel-body no-padding">
+                                    <a class="colorbox-pic" id="building-group-pic" title="@Model.Subregion.Name" href="@Model.Subregion.ImageUrl">
+                                        <img src="@Model.Subregion.ImageUrl" alt="分区全景" class="img-responsive" />
                                     </a>
-                                }
-                                <a href="/Estate/Building/Index/@Model.Parent.BuildingId" class="list-group-item list-group-item-info ajaxify">
-                                    <i class="fa fa-reply"></i> 回到楼群
-                                </a>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6 profile-info">
-                            
+                        <div class="col-md-3">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">分区地图</h3>
+                                </div>
+                                <div class="panel-body no-padding">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">分区导航</h3>
+                                </div>
+                                <div class="panel-body no-padding">
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-3">
                             <div class="portlet profile-summary">
@@ -135,10 +149,86 @@
                     </div>
                     <div class="row">
                         <div class="col-md-3">
-                            
+                            <div class="list-group">
+                                @foreach (var item in Model.Subregion.Floors)
+                                {
+                                    <a href="#" class="list-group-item list-group-item-success sub-floor-ajax-link" data-ref="@item.FloorId">
+                                        <i class="fa fa-road"></i> @item.Name
+                                    </a>
+                                }
+                                <a href="/Estate/Building/Index/@Model.Parent.BuildingId" class="list-group-item list-group-item-info ajaxify">
+                                    <i class="fa fa-reply"></i> 回到楼群
+                                </a>
+                            </div>
                         </div>
                         <div class="col-md-9">
-
+                            <div class="tabbable tabbable-custom">
+                                <ul class="nav nav-tabs">
+                                    <li class="active">
+                                        <a href="#tab_1_11" data-toggle="tab">
+                                            分区入驻部门
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#tab_1_22" data-toggle="tab">
+                                            其它
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="tab_1_11">
+                                        <div class="portlet-body">
+                                            <table class="table table-striped table-bordered table-advance table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            部门名称
+                                                        </th>
+                                                        <th>
+                                                            房间数量
+                                                        </th>
+                                                        <th>
+                                                            使用面积 (m<sup>2</sup>)
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var item in Model.EnterDepartment)
+                                                    {
+                                                        <tr>
+                                                            <td>
+                                                                @item.DepartmentName
+                                                            </td>
+                                                            <td>
+                                                                @item.RoomCount
+                                                            </td>
+                                                            <td>
+                                                                @item.TotalUsableArea
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <td>合计</td>
+                                                        <td>@Model.EnterDepartment.Sum(r => r.RoomCount)</td>
+                                                        <td>@Model.EnterDepartment.Sum(r => r.TotalUsableArea)</td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <!--tab-pane-->
+                                    <div class="tab-pane" id="tab_1_22">
+                                        <div class="tab-pane active" id="tab_1_1_1">
+                                            <div class="scroller" data-height="200px" data-always-visible="1" data-rail-visible1="1">
+                                                <ul class="feeds"></ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--tab-pane-->
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -301,13 +391,14 @@
         $('a.sub-floor-ajax-link').click(function () {
             $('#main-tab a[href="#tab_floor"]').tab('show')
 
-            var id = $(this).attr('ref');
+            var id = $(this).attr('data-ref');
             $('ul#floor-svg-menu a[href="#f_' + id + '"]').click();
         });
 
         $('a.floor-ajax-link').click(function (e) {
 
             var url = $(this).attr('data-url');
+            $('#select-room-info').empty();
 
             Rhea.ajaxLoadSvg($('div#svg'), url, function (svg) {
                 $("svg g[id^='g']").toggle(

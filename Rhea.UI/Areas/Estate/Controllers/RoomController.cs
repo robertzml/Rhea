@@ -31,9 +31,15 @@ namespace Rhea.UI.Areas.Estate.Controllers
         #endregion //Constructor
 
         #region Action
-        public ActionResult Index()
+        /// <summary>
+        /// 房间信息页
+        /// </summary>
+        /// <param name="id">房间ID</param>
+        /// <returns></returns>
+        public ActionResult Index(int id)
         {
-            return View();
+            var data = this.roomBusiness.Get(id);
+            return View(data);
         }
 
         /// <summary>
@@ -42,7 +48,7 @@ namespace Rhea.UI.Areas.Estate.Controllers
         /// <param name="buildingId">所属建筑ID</param>
         /// <returns></returns>
         public ActionResult ListByBuilding(int buildingId)
-        {            
+        {
             var data = this.roomBusiness.GetByBuilding(buildingId);
 
             return View(data);

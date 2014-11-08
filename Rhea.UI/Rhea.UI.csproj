@@ -224,7 +224,6 @@
     <Content Include="Content\themes\default.css" />
     <Content Include="Content\themes\grey.css" />
     <Content Include="Content\themes\light.css" />
-    <Content Include="Content\themes\light2.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -707,6 +706,7 @@
     <Content Include="Areas\Estate\Views\Building\List.cshtml" />
     <Content Include="Areas\Estate\Views\Building\PlaygroundIndex.cshtml" />
     <Content Include="Areas\Estate\Views\Building\PlaygroundDetails.cshtml" />
+    <Content Include="Areas\Estate\Views\Room\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <Content Include="plugins\jquery-migrate-1.2.1.min.js" />
     <Content Include="plugins\jquery-ui\images\animated-overlay.gif" />
@@ -782,7 +782,6 @@
     <Content Include="Scripts\login-soft.js" />
     <Content Include="Scripts\metronic.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\quick-sidebar.js" />
     <Content Include="Scripts\rhea.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">

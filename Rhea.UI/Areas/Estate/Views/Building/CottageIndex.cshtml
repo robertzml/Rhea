@@ -88,30 +88,23 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 profile-info">
-                            <h1>@Model.Cottage.Name</h1>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.
-                            </p>
-                            <p>
-                            </p>
-                            <ul class="list-inline">
-                                <li>
-                                    <i class="fa fa-map-marker"></i> Spain
-                                </li>
-                                <li>
-                                    <i class="fa fa-calendar"></i> 18 Jan 1982
-                                </li>
-                                <li>
-                                    <i class="fa fa-briefcase"></i> Design
-                                </li>
-                                <li>
-                                    <i class="fa fa-star"></i> Top Seller
-                                </li>
-                                <li>
-                                    <i class="fa fa-heart"></i> BASE Jumping
-                                </li>
-                            </ul>
+                        <div class="col-md-3">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">独栋地图</h3>
+                                </div>
+                                <div class="panel-body no-padding">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">独栋导航</h3>
+                                </div>
+                                <div class="panel-body no-padding">
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-3">
                             <div class="portlet profile-summary">
@@ -172,7 +165,7 @@
                             <div class="list-group">
                                 @foreach(var item in Model.Cottage.Floors)
                                 { 
-                                <a href="#" class="list-group-item list-group-item-info sub-floor-ajax-link" ref="@item.FloorId">
+                                <a href="#" class="list-group-item list-group-item-info sub-floor-ajax-link" data-ref="@item.FloorId">
                                     <i class="fa fa-road"></i> @item.Name
                                 </a>
                                 }
@@ -188,7 +181,7 @@
                                     </li>
                                     <li>
                                         <a href="#tab_1_22" data-toggle="tab">
-                                            Feeds
+                                            其它
                                         </a>
                                     </li>
                                 </ul>
@@ -207,8 +200,6 @@
                                                         <th>
                                                             使用面积 (m<sup>2</sup>)
                                                         </th>
-                                                        <th>
-                                                        </th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -224,11 +215,6 @@
                                                             <td>
                                                                 @item.TotalUsableArea
                                                             </td>
-                                                            <td>
-                                                                <a class="btn default btn-xs green-stripe" href="#">
-                                                                    View
-                                                                </a>
-                                                            </td>
                                                         </tr>
                                                     }
                                                 </tbody>
@@ -237,7 +223,6 @@
                                                         <td>合计</td>
                                                         <td>@Model.EnterDepartment.Sum(r => r.RoomCount)</td>
                                                         <td>@Model.EnterDepartment.Sum(r => r.TotalUsableArea)</td>
-                                                        <td>&nbsp;</td>
                                                     </tr>
                                                 </tfoot>
                                             </table>
@@ -343,6 +328,9 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="row" id="select-room-info">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -378,15 +366,34 @@
         $('a.sub-floor-ajax-link').click(function() {
             $('#main-tab a[href="#tab_floor"]').tab('show')
 
-            var id = $(this).attr('ref');
+            var id = $(this).attr('data-ref');
             $('ul#floor-svg-menu a[href="#f_' + id + '"]').click();
         });
 
         $('a.floor-ajax-link').click(function (e) {
            
             var url = $(this).attr('data-url');
+            $('#select-room-info').empty();
 
-            Rhea.ajaxLoadSvg($('div#svg'), url);
+            Rhea.ajaxLoadSvg($('div#svg'), url, function (svg) {
+                $("svg g[id^='g']").toggle(
+                    function () {
+                        var id = $(this).attr('id').toString().substring(1);
+                        $(this).children('[ref=bound]').attr('class', 'fil1');
+
+                        var tdoc = $('<div id="s' + id + '" class="col-md-4"></div>');
+                        $(tdoc).load('/Estate/Room/Summary', { id: id });
+                        $('#select-room-info').append(tdoc);
+                    },
+                    function () {
+                        var id = $(this).attr('id').toString().substring(1);
+                        $(this).children('[ref=bound]').attr('class', 'fil0');
+
+                        var tdoc = $('div#s' + id);
+                        tdoc.remove();
+                    }
+                );
+            });
         });
 
         $('#zoom-in').click(function (e) {
