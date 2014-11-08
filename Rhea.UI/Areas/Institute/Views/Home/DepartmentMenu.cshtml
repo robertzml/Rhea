@@ -1,0 +1,174 @@
+﻿@model IEnumerable<Rhea.Model.Personnel.Department>
+
+@{
+    Layout = null;
+}
+
+<li class="left-nav-first">
+    <a href="javascript:;">
+        <i class="fa fa-graduation-cap"></i>
+        <span class="title">
+            教学院系
+        </span>
+        <span class="arrow ">
+        </span>
+        <span class="badge badge-primary" style="margin-right:10px;">@Model.Where(r => r.Type == 1).Count()</span>
+    </a>
+    <ul class="sub-menu">
+        @foreach (var department in Model.Where(r => r.Type == 1))
+        {
+            <li>
+                <a class="ajaxify" href="/Institute/Department/Index/@department.DepartmentId">
+                    <i class="fa fa-windows"></i> @department.Name
+                </a>
+            </li>
+        }
+    </ul>
+</li>
+<li class="left-nav-first">
+    <a href="javascript:;">
+        <i class="fa fa-flask"></i>
+        <span class="title">
+            科研机构
+        </span>
+        <span class="arrow ">
+        </span>
+        <span class="badge badge-primary" style="margin-right:10px;">@Model.Where(r => r.Type == 2).Count()</span>
+    </a>
+    <ul class="sub-menu">
+        @foreach (var department in Model.Where(r => r.Type == 2))
+        {
+            <li>
+                <a class="ajaxify" href="/Institute/Department/Index/@department.DepartmentId">
+                    <i class="fa fa-windows"></i> @department.Name
+                </a>
+            </li>
+        }
+    </ul>
+</li>
+<li class="left-nav-first">
+    <a href="javascript:;">
+        <i class="fa fa-life-saver"></i>
+        <span class="title">
+            公共服务
+        </span>
+        <span class="arrow ">
+        </span>
+        <span class="badge badge-primary" style="margin-right:10px;">@Model.Where(r => r.Type == 3).Count()</span>
+    </a>
+    <ul class="sub-menu">
+        @foreach (var department in Model.Where(r => r.Type == 3))
+        {
+            <li>
+                <a class="ajaxify" href="/Institute/Department/Index/@department.DepartmentId">
+                    <i class="fa fa-windows"></i> @department.Name
+                </a>
+            </li>
+        }
+    </ul>
+</li>
+<li class="left-nav-first">
+    <a href="javascript:;">
+        <i class="fa fa-microphone"></i>
+        <span class="title">
+            党务部门
+        </span>
+        <span class="arrow ">
+        </span>
+        <span class="badge badge-primary" style="margin-right:10px;">@Model.Where(r => r.Type == 4).Count()</span>
+    </a>
+    <ul class="sub-menu">
+        @foreach (var department in Model.Where(r => r.Type == 4))
+        {
+            <li>
+                <a class="ajaxify" href="/Institute/Department/Index/@department.DepartmentId">
+                    <i class="fa fa-windows"></i> @department.Name
+                </a>
+            </li>
+        }
+    </ul>
+</li>
+<li class="left-nav-first">
+    <a href="javascript:;">
+        <i class="fa fa-fax"></i>
+        <span class="title">
+            行政机构
+        </span>
+        <span class="arrow ">
+        </span>
+        <span class="badge badge-primary" style="margin-right:10px;">@Model.Where(r => r.Type == 5).Count()</span>
+    </a>
+    <ul class="sub-menu">
+        @foreach (var department in Model.Where(r => r.Type == 5))
+        {
+            <li>
+                <a class="ajaxify" href="/Institute/Department/Index/@department.DepartmentId">
+                    <i class="fa fa-windows"></i> @department.Name
+                </a>
+            </li>
+        }
+    </ul>
+</li>
+<li class="left-nav-first">
+    <a href="javascript:;">
+        <i class="fa fa-briefcase"></i>
+        <span class="title">
+            附(直)属单位
+        </span>
+        <span class="arrow ">
+        </span>
+        <span class="badge badge-primary" style="margin-right:10px;">@Model.Where(r => r.Type == 6).Count()</span>
+    </a>
+    <ul class="sub-menu">
+        @foreach (var department in Model.Where(r => r.Type == 6))
+        {
+            <li>
+                <a class="ajaxify" href="/Institute/Department/Index/@department.DepartmentId">
+                    <i class="fa fa-windows"></i> @department.Name
+                </a>
+            </li>
+        }
+    </ul>
+</li>
+<li class="left-nav-first">
+    <a href="javascript:;">
+        <i class="fa fa-users"></i>
+        <span class="title">
+            后勤部门
+        </span>
+        <span class="arrow ">
+        </span>
+        <span class="badge badge-primary" style="margin-right:10px;">@Model.Where(r => r.Type == 7).Count()</span>
+    </a>
+    <ul class="sub-menu">
+        @foreach (var department in Model.Where(r => r.Type == 7))
+        {
+            <li>
+                <a class="ajaxify" href="/Institute/Department/Index/@department.DepartmentId">
+                    <i class="fa fa-windows"></i> @department.Name
+                </a>
+            </li>
+        }
+    </ul>
+</li>
+<li class="left-nav-first">
+    <a href="javascript:;">
+        <i class="fa fa-sun-o"></i>
+        <span class="title">
+            其它
+        </span>
+        <span class="arrow ">
+        </span>
+        <span class="badge badge-primary" style="margin-right:10px;">@Model.Where(r => r.Type == 9).Count()</span>
+    </a>
+    <ul class="sub-menu">
+        @foreach (var department in Model.Where(r => r.Type == 9))
+        {
+            <li>
+                <a class="ajaxify" href="/Institute/Department/Index/@department.DepartmentId">
+                    <i class="fa fa-windows"></i> @department.Name
+                </a>
+            </li>
+        }
+    </ul>
+</li>

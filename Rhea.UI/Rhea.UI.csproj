@@ -180,6 +180,9 @@
     <Compile Include="Areas\Estate\Controllers\RoomController.cs" />
     <Compile Include="Areas\Estate\EstateAreaRegistration.cs" />
     <Compile Include="Areas\Estate\Models\BuildingModels.cs" />
+    <Compile Include="Areas\Institute\Controllers\DepartmentController.cs" />
+    <Compile Include="Areas\Institute\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Institute\InstituteAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -219,8 +222,6 @@
     <Content Include="Content\login-soft.css" />
     <Content Include="Content\plugins.css" />
     <Content Include="Content\profile.css" />
-    <Content Include="Content\themes\blue.css" />
-    <Content Include="Content\themes\darkblue.css" />
     <Content Include="Content\themes\default.css" />
     <Content Include="Content\themes\grey.css" />
     <Content Include="Content\themes\light.css" />
@@ -228,7 +229,6 @@
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
@@ -298,43 +298,6 @@
     <Content Include="img\sidebar_toggler_icon_grey.png" />
     <Content Include="img\sidebar_toggler_icon_light.png" />
     <Content Include="img\sidebar_toggler_icon_light2.png" />
-    <Content Include="img\social\aboutme.png" />
-    <Content Include="img\social\amazon.png" />
-    <Content Include="img\social\behance.png" />
-    <Content Include="img\social\blogger.png" />
-    <Content Include="img\social\deviantart.png" />
-    <Content Include="img\social\dribbble.png" />
-    <Content Include="img\social\dropbox.png" />
-    <Content Include="img\social\evernote.png" />
-    <Content Include="img\social\facebook.png" />
-    <Content Include="img\social\flickr.png" />
-    <Content Include="img\social\forrst.png" />
-    <Content Include="img\social\foursquare.png" />
-    <Content Include="img\social\github.png" />
-    <Content Include="img\social\googleplus.png" />
-    <Content Include="img\social\gravatar.png" />
-    <Content Include="img\social\instagram.png" />
-    <Content Include="img\social\jolicloud.png" />
-    <Content Include="img\social\klout.png" />
-    <Content Include="img\social\last-fm.png" />
-    <Content Include="img\social\linkedin.png" />
-    <Content Include="img\social\myspace.png" />
-    <Content Include="img\social\picasa.png" />
-    <Content Include="img\social\pintrest.png" />
-    <Content Include="img\social\quora.png" />
-    <Content Include="img\social\reddit.png" />
-    <Content Include="img\social\rss.png" />
-    <Content Include="img\social\skype.png" />
-    <Content Include="img\social\spotify.png" />
-    <Content Include="img\social\stumbleupon.png" />
-    <Content Include="img\social\tumblr.png" />
-    <Content Include="img\social\twitter.png" />
-    <Content Include="img\social\vimeo.png" />
-    <Content Include="img\social\vk.png" />
-    <Content Include="img\social\wordpress.png" />
-    <Content Include="img\social\xing.png" />
-    <Content Include="img\social\yahoo.png" />
-    <Content Include="img\social\youtube.png" />
     <Content Include="img\syncfusion-icons-white.png" />
     <Content Include="img\syncfusion-icons.png" />
     <Content Include="plugins\backstretch\jquery.backstretch.js" />
@@ -707,6 +670,11 @@
     <Content Include="Areas\Estate\Views\Building\PlaygroundIndex.cshtml" />
     <Content Include="Areas\Estate\Views\Building\PlaygroundDetails.cshtml" />
     <Content Include="Areas\Estate\Views\Room\Index.cshtml" />
+    <Content Include="Areas\Institute\Views\web.config" />
+    <Content Include="Areas\Institute\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Institute\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Institute\Views\Home\DepartmentMenu.cshtml" />
+    <Content Include="Areas\Institute\Views\Department\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <Content Include="plugins\jquery-migrate-1.2.1.min.js" />
     <Content Include="plugins\jquery-ui\images\animated-overlay.gif" />
@@ -814,6 +782,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Institute\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

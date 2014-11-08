@@ -16,10 +16,10 @@
             <a href="@Url.Action("Index", new { area = "Estate", controller = "Home" })" id="estate-nav" class="classic-menu-dropdown"><i class="fa fa-building"></i> 房 产 管 理</a>
         </li>
         }
-        @if (User.HasPrivilege("DepartmentManage"))
+        @if (User.HasPrivilege("InstituteManage"))
         {
         <li>
-            <a href="#"><i class="fa fa-joomla"></i> 部 门 管 理</a>
+            <a href="@Url.Action("Index", new { area = "Institute", controller = "Home" })" id="institute-nav" class="classic-menu-dropdown"><i class="fa fa-joomla"></i> 部 门 管 理</a>
         </li>
         }        
         @if (User.HasPrivilege("ApartmentManage"))
