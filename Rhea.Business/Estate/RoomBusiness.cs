@@ -76,6 +76,16 @@ namespace Rhea.Business.Estate
         }
 
         /// <summary>
+        /// 根据部门获取房间
+        /// </summary>
+        /// <param name="departmentId">部门ID</param>
+        /// <returns></returns>
+        public IEnumerable<Room> GetByDepartment(int departmentId)
+        {
+            return this.roomRepository.GetByDepartment(departmentId).Where(r => r.Status != 1);
+        }
+
+        /// <summary>
         /// 获取房间
         /// </summary>
         /// <param name="id">房间ID</param>

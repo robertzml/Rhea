@@ -34,6 +34,13 @@ namespace Rhea.Data.Estate
         IEnumerable<Room> GetByBuildings(int[] buildingsId);
 
         /// <summary>
+        /// 根据部门获取房间
+        /// </summary>
+        /// <param name="departmentId">所属部门ID</param>
+        /// <returns></returns>
+        IEnumerable<Room> GetByDepartment(int departmentId);
+
+        /// <summary>
         /// 获取房间
         /// </summary>
         /// <param name="id">房间ID</param>

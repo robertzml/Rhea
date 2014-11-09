@@ -73,6 +73,16 @@ namespace Rhea.Data.Mongo.Estate
         }
 
         /// <summary>
+        /// 根据部门获取房间
+        /// </summary>
+        /// <param name="departmentId">所属部门ID</param>
+        /// <returns></returns>
+        public IEnumerable<Room> GetByDepartment(int departmentId)
+        {
+            return this.repository.Where(r => r.DepartmentId == departmentId);
+        }
+
+        /// <summary>
         /// 获取房间
         /// </summary>
         /// <param name="id">房间ID</param>

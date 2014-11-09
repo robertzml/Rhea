@@ -179,10 +179,14 @@
     <Compile Include="Areas\Estate\Controllers\HomeController.cs" />
     <Compile Include="Areas\Estate\Controllers\RoomController.cs" />
     <Compile Include="Areas\Estate\EstateAreaRegistration.cs" />
+    <Compile Include="Areas\Estate\Models\BuildingDepartmentModel.cs" />
     <Compile Include="Areas\Estate\Models\BuildingModels.cs" />
     <Compile Include="Areas\Institute\Controllers\DepartmentController.cs" />
     <Compile Include="Areas\Institute\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Institute\Controllers\RoomController.cs" />
     <Compile Include="Areas\Institute\InstituteAreaRegistration.cs" />
+    <Compile Include="Areas\Institute\Models\DepartmentBuildingModel.cs" />
+    <Compile Include="Areas\Institute\Models\DepartmentIndexModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -675,6 +679,9 @@
     <Content Include="Areas\Institute\Views\Home\Index.cshtml" />
     <Content Include="Areas\Institute\Views\Home\DepartmentMenu.cshtml" />
     <Content Include="Areas\Institute\Views\Department\Index.cshtml" />
+    <Content Include="Areas\Institute\Views\Room\ListByDepartment.cshtml" />
+    <Content Include="Areas\Institute\Views\Room\Index.cshtml" />
+    <Content Include="Areas\Institute\Views\Shared\DisplayTemplates\Boolean.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <Content Include="plugins\jquery-migrate-1.2.1.min.js" />
     <Content Include="plugins\jquery-ui\images\animated-overlay.gif" />
@@ -782,7 +789,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Institute\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

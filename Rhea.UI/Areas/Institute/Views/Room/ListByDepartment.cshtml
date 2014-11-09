@@ -1,0 +1,101 @@
+﻿@model IEnumerable<Rhea.Model.Estate.Room>
+
+@{
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped table-bordered table-hover table-advance" id="room-table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Number)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Floor)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UsableArea) (m<sup>2</sup>)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BuildingId)
+                    </th>
+                    <th>
+                        分类
+                    </th>
+                    <th>
+                        功能
+                    </th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Number)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th data-filter="true">
+                        @Html.DisplayNameFor(model => model.Floor)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UsableArea) (m<sup>2</sup>)
+                    </th>
+                    <th data-filter="true">
+                        @Html.DisplayNameFor(model => model.BuildingId)
+                    </th>
+                    <th data-filter="true">
+                        分类
+                    </th>
+                    <th>
+                        功能
+                    </th>
+                    <th>操作</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Number)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Floor)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UsableArea)
+                        </td>
+                        <td>
+                            @item.BuildingName()
+                        </td>
+                        <td>
+                            @item.Function.ClassifyName
+                        </td>
+                        <td>
+                            @item.Function.FunctionProperty
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Index", new { controller = "Room", id = item.RoomId })" class="btn btn-info btn-sm ajaxify" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        Rhea.initDatatableWithFilter($('#room-table'));
+    });
+</script>

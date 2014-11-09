@@ -1,8 +1,8 @@
-﻿@model Rhea.Model.Personnel.Department
+﻿@model Rhea.UI.Areas.Institute.Models.DepartmentIndexModel
 
 @{
     Layout = null;
-    ViewBag.Title = Model.Name;
+    ViewBag.Title = Model.Department.Name;
 }
 
 <!-- BEGIN PAGE HEADER-->
@@ -44,23 +44,23 @@
 </div>
 <!-- END PAGE HEADER-->
 <!-- BEGIN PAGE CONTENT-->
-<div class="row">
+<div class="row profile">
     <div class="col-md-12">
         <!--BEGIN TABS-->
         <div class="tabbable tabbable-custom tabbable-full-width">
             <ul class="nav nav-tabs">
                 <li class="active">
-                    <a href="#tab_1_1" data-toggle="tab">
+                    <a href="#tab_summary" data-toggle="tab">
                         摘要
                     </a>
                 </li>
                 <li>
-                    <a href="#tab_1_2" data-toggle="tab">
+                    <a href="#tab_info" data-toggle="tab">
                         信息
                     </a>
                 </li>
                 <li>
-                    <a href="#tab_1_3" data-toggle="tab">
+                    <a href="#tab_room" data-toggle="tab">
                         房间
                     </a>
                 </li>
@@ -71,8 +71,172 @@
                 </li>
             </ul>
             <div class="tab-content">
-                <div class="tab-pane active" id="tab_1_1">
+                <div class="tab-pane active" id="tab_summary">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">部门全景</h3>
+                                </div>
+                                <div class="panel-body no-padding">
+                                    <a class="colorbox-pic" id="department-pic" title="@Model.Department.Name" href="@Model.Department.ImageUrl">
+                                        <img src="@Model.Department.ImageUrl" alt="部门全景" class="img-responsive" />
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">部门标志</h3>
+                                </div>
+                                <div class="panel-body no-padding">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">部门导航</h3>
+                                </div>
+                                <div class="panel-body no-padding">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="portlet profile-summary">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        概况
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            <span class="sale-info">
+                                                名称
+                                            </span>
+                                            <span class="sale-num">
+                                                @Model.Department.Name
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="sale-info">
+                                                简称
+                                            </span>
+                                            <span class="sale-num">
+                                                @Model.Department.ShortName
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="sale-info">
+                                                类型
+                                            </span>
+                                            <span class="sale-num">
+                                                @{
+                                                    var type = (DepartmentType)Model.Department.Type;
+                                                @type.DisplayName();
+                                                }
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="tabbable tabbable-custom">
+                                <ul class="nav nav-tabs">
+                                    <li class="active">
+                                        <a href="#tab_1_11" data-toggle="tab">
+                                            部门所在建筑
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#tab_1_22" data-toggle="tab">
+                                            其它
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="tab_1_11">
+                                        <div class="portlet-body">
+                                            <table class="table table-striped table-bordered table-advance table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            建筑名称
+                                                        </th>
+                                                        <th>
+                                                            房间数量
+                                                        </th>
+                                                        <th>
+                                                            使用面积 (m<sup>2</sup>)
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var item in Model.EnterBuilding)
+                                                    {
+                                                    <tr>
+                                                        <td>
+                                                            @item.BuildingName
+                                                            </td>
+                                                            <td>
+                                                                @item.RoomCount
+                                                            </td>
+                                                            <td>
+                                                                @item.TotalUsableArea
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <td>合计</td>
+                                                        <td>@Model.EnterBuilding.Sum(r => r.RoomCount)</td>
+                                                        <td>@Model.EnterBuilding.Sum(r => r.TotalUsableArea)</td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <!--tab-pane-->
+                                    <div class="tab-pane" id="tab_1_22">
+                                        <div class="tab-pane active" id="tab_1_1_1">
+                                            <div class="scroller" data-height="200px" data-always-visible="1" data-rail-visible1="1">
+                                                <ul class="feeds"></ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--tab-pane-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="tab_info">
 
+                </div>
+                <div class="tab-pane" id="tab_room">
+                    <div class="portlet box blue">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-gift"></i>房间列表
+                            </div>
+                            <div class="tools">
+                                <a href="#" class="collapse">
+                                </a>
+                                <a href="#" data-load="true" data-url="/Institute/Room/ListByDepartment?departmentId=@Model.Department.DepartmentId" class="reload">
+                                </a>
+                                <a href="#" class="remove">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="portlet-body portlet-empty">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -80,3 +244,11 @@
     </div>
 </div>
 <!-- END PAGE CONTENT-->
+
+<script type="text/javascript">
+    $(function () {
+
+        $('.portlet .portlet-title a.reload[data-load="true"]').click();
+
+    });
+</script>

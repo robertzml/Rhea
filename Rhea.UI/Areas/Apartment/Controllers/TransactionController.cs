@@ -382,18 +382,8 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-            User user = PageService.GetCurrentUser(User.Identity.Name);
-
             TransactionBusiness business = new TransactionBusiness();
-            List<ApartmentTransaction> trans;
-            if (user.UserGroupName() == "Root" || user.UserGroupName() == "Administrator")
-            {
-                trans = business.GetTransaction().ToList();
-            }
-            else
-            {
-                trans = business.GetTransactionByUser(user).ToList();
-            }
+            List<ApartmentTransaction> trans = business.GetTransaction().ToList();
 
             return View(trans);
         }
