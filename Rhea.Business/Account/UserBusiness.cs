@@ -206,6 +206,20 @@ namespace Rhea.Business.Account
         }
 
         /// <summary>
+        /// 关联部门
+        /// </summary>
+        /// <param name="id">用户ID</param>
+        /// <param name="departmentId">部门ID</param>
+        /// <returns></returns>
+        public ErrorCode AssociateDepartment(string id, int departmentId)
+        {
+            var user = this.userRepository.Get(id);
+            user.DepartmentId = departmentId;
+
+            return this.userRepository.Update(user);
+        }
+
+        /// <summary>
         /// 修改密码
         /// </summary>
         /// <param name="data">用户对象</param>

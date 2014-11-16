@@ -77,7 +77,7 @@ namespace Rhea.Business
             return name;
         }
         #endregion //Room Method
-        
+
         #region Record Method
         /// <summary>
         /// 获取青教房间
@@ -129,6 +129,23 @@ namespace Rhea.Business
             IUserGroupRepository repository = new MongoUserGroupRepository();
             string title = repository.Get(user.UserGroupId).Title;
             return title;
+        }
+
+        /// <summary>
+        /// 用户关联部门名称
+        /// </summary>
+        /// <param name="user">用户对象</param>
+        /// <returns></returns>
+        public static string DepartmentName(this User user)
+        {
+            if (user.DepartmentId == 0)
+                return "";
+            else
+            {
+                IDepartmentRepository repository = new MongoDepartmentRepository();
+                string name = repository.Get(user.DepartmentId).Name;
+                return name;
+            }
         }
         #endregion //User Method
         #endregion //Method

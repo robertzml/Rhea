@@ -2,8 +2,11 @@
 
 @{
     Layout = null;
+    
 }
 
+@if (User.HasPrivilege("InstituteDepartmentMenu"))
+{
 <li class="left-nav-first">
     <a href="javascript:;">
         <i class="fa fa-graduation-cap"></i>
@@ -172,3 +175,15 @@
         }
     </ul>
 </li>
+}
+@if (ViewBag.UserType == "Department")
+{
+    <li class="left-nav-first">
+        <a href="@Url.Action("Index", new { controller = "Department", id = ViewBag.DepartmentId })" class="ajaxify">
+            <i class="fa fa-graduation-cap"></i>
+            <span class="title">
+                @ViewBag.DepartmentName
+            </span>
+        </a>
+    </li>
+}

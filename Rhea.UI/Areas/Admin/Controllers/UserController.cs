@@ -166,6 +166,52 @@ namespace Rhea.UI.Areas.Admin.Controllers
         }
 
         /// <summary>
+        /// 关联部门
+        /// </summary>
+        /// <param name="id">用户ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult AssociateDepartment(string id)
+        {
+            var data = this.userBusiness.Get(id);
+            if (data.UserGroupName() != "Department")
+            {
+                return RedirectToAction("Details", new { id = id });
+            }
+
+            return View(data);
+        }
+
+        /// <summary>
+        /// 关联部门
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult AssociateDepartment(User model)
+        {
+            if (ModelState.IsValid)
+            {
+                ErrorCode result = this.userBusiness.AssociateDepartment(model._id, model.DepartmentId);
+
+                if (result == ErrorCode.Success)
+                {
+                    TempData["Message"] = "关联部门成功";
+                    return RedirectToAction("Details", "User", new { id = model._id });
+                }
+                else
+                {
+                    ModelState.AddModelError("", "关联部门失败");
+                    ModelState.AddModelError("", result.DisplayName());
+                }
+            }
+
+            return View(model);
+        }
+
+
+        /// <summary>
         /// 启用用户
         /// </summary>
         /// <param name="id">用户ID</param>

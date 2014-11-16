@@ -120,10 +120,18 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        @Html.DisplayNameFor(model => model.DepartmentId)
+                                        关联部门ID
                                     </td>
                                     <td>
                                         @Html.DisplayFor(model => model.DepartmentId)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        关联部门
+                                    </td>
+                                    <td>
+                                        @Model.DepartmentName()
                                     </td>
                                 </tr>
                                 <tr>
@@ -173,6 +181,10 @@
                     else if (Model.Status == (int)EntityStatus.UserDisable)
                     {
                         <a href="@Url.Action("Enable", new { controller = "User", id = Model._id })" class="btn btn-danger" role="button"><i class="fa fa-check-circle-o"></i>&nbsp;启用</a>
+                    }
+                    @if (Model.UserGroupName() == "Department")
+                    {
+                        <a href="@Url.Action("AssociateDepartment", new { controller = "User", id = Model._id })" class="btn btn-info" role="button"><i class="fa fa-magnet"></i>&nbsp;关联部门</a>
                     }
                 </p>
             </div>

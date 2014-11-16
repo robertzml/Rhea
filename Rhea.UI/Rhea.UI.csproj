@@ -682,6 +682,7 @@
     <Content Include="Areas\Institute\Views\Room\ListByDepartment.cshtml" />
     <Content Include="Areas\Institute\Views\Room\Index.cshtml" />
     <Content Include="Areas\Institute\Views\Shared\DisplayTemplates\Boolean.cshtml" />
+    <Content Include="Areas\Admin\Views\User\AssociateDepartment.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <Content Include="plugins\jquery-migrate-1.2.1.min.js" />
     <Content Include="plugins\jquery-ui\images\animated-overlay.gif" />
