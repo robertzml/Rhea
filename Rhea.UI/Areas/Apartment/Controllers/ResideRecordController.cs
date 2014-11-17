@@ -12,6 +12,7 @@ using Rhea.Model.Account;
 using Rhea.Model.Apartment;
 using Rhea.UI.Filters;
 using Rhea.UI.Services;
+using Rhea.UI.Areas.Apartment.Models;
 
 namespace Rhea.UI.Areas.Apartment.Controllers
 {
@@ -122,6 +123,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
             {
                 ResideRecord old = this.recordBusiness.Get(model._id);
                 model.Files = old.Files;
+                model.RentRecords = old.RentRecords;
                 model.InhabitantDepartmentId = Convert.ToInt32(Request.Form["DepartmentId"]);
 
                 ErrorCode result = this.recordBusiness.Update(model);
@@ -189,7 +191,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                 ResideRecord record = this.recordBusiness.Get(model._id);
                 record.Files = files.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries);
 
-                ErrorCode result = this.recordBusiness.Update(record);
+                ErrorCode result = this.recordBusiness.Edit(record);
                 if (result != ErrorCode.Success)
                 {
                     ModelState.AddModelError("", "保存居住记录失败");
@@ -219,6 +221,42 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                 }
 
                 return RedirectToAction("Details", new { id = record._id });
+            }
+
+            return View(model);
+        }
+
+        /// <summary>
+        /// 变更房租
+        /// </summary>
+        /// <param name="id">居住记录ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult ChangeRent(string id)
+        {
+            ChangeRentModel data = new ChangeRentModel();
+            var record = this.recordBusiness.Get(id);
+
+            data.RecordId = record._id;
+            data.InhabitantName = record.InhabitantName;
+            data.LastRent = record.Rent;
+            data.StartDate = DateTime.Now;
+
+            return View(data);
+        }
+
+        /// <summary>
+        /// 变更房租
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult ChangeRent(ChangeRentModel model)
+        {
+            if (ModelState.IsValid)
+            {
+
             }
 
             return View(model);

@@ -21,6 +21,7 @@ namespace Rhea.Model.Apartment
         public ResideRecord()
         {
             this.Log = new Log();
+            this.RentRecords = new List<RentRecord>();
         }
         #endregion //Constructor
 
@@ -165,6 +166,13 @@ namespace Rhea.Model.Apartment
         public string[] Files { get; set; }
 
         /// <summary>
+        /// 房租变动记录
+        /// </summary>
+        [BsonElement("rentRecords")]
+        [Display(Name = "房租变动记录")]
+        public List<RentRecord> RentRecords { get; set; }
+
+        /// <summary>
         /// 状态
         /// </summary>
         /// <remarks>
@@ -181,5 +189,42 @@ namespace Rhea.Model.Apartment
         [Display(Name = "日志属性")]
         public Log Log { get; set; }
         #endregion //Property
+    }
+
+    /// <summary>
+    /// 房租变动记录
+    /// </summary>
+    public class RentRecord
+    {
+        /// <summary>
+        /// 当前房租
+        /// </summary>
+        [BsonElement("currentRent")]
+        [Display(Name = "当前房租")]
+        public decimal CurrentRent { get; set; }
+
+        /// <summary>
+        /// 上次房租
+        /// </summary>
+        [BsonElement("lastRent")]
+        [Display(Name = "上次房租")]
+        public decimal LastRent { get; set; }
+
+        /// <summary>
+        /// 开始日期
+        /// </summary>
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, ConvertEmptyStringToNull = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        [BsonDateTimeOptions(DateOnly = true, Kind = DateTimeKind.Local)]
+        [BsonElement("startDate")]
+        [Display(Name = "开始日期")]
+        public DateTime StartDate { get; set; }
+
+        /// <summary>
+        /// 备注
+        /// </summary>
+        [BsonElement("remark")]
+        [Display(Name = "备注")]
+        public string Remark { get; set; }
     }
 }

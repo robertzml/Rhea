@@ -152,7 +152,19 @@ namespace Rhea.Business.Apartment
         /// </summary>
         /// <param name="data">居住记录对象</param>
         /// <returns></returns>
+        /// <remarks>对象整体更新，新建对象覆盖。</remarks>
         public ErrorCode Update(ResideRecord data)
+        {
+            return this.recordRepository.Update(data);
+        }
+
+        /// <summary>
+        /// 编辑居住记录
+        /// </summary>
+        /// <param name="data">居住记录对象</param>
+        /// <returns></returns>
+        /// <remarks>对象部分更新，仅编辑对象自身部分属性。</remarks>
+        public ErrorCode Edit(ResideRecord data)
         {
             return this.recordRepository.Update(data);
         }

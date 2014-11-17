@@ -447,7 +447,7 @@ namespace Rhea.Business.Apartment
                 record.LeaveDate = leaveDate;
                 record.Remark += remark;
                 record.Status = (int)EntityStatus.MoveOut;
-                result = recordBusiness.Update(record);
+                result = recordBusiness.Edit(record);
                 if (result != ErrorCode.Success)
                 {
                     this.errorMessage = "居住记录更新出错：" + result.DisplayName();
@@ -562,7 +562,7 @@ namespace Rhea.Business.Apartment
                 //更新原居住记录
                 lastRecord.LeaveDate = record.EnterDate;
                 lastRecord.Status = (int)EntityStatus.ExtendOut;
-                result = recordBusiness.Update(lastRecord);
+                result = recordBusiness.Edit(lastRecord);
                 if (result != ErrorCode.Success)
                 {
                     this.errorMessage = "居住记录更新出错：" + result.DisplayName();
@@ -741,7 +741,7 @@ namespace Rhea.Business.Apartment
                 int oldRecordStatus = lastRecord.Status;
                 lastRecord.LeaveDate = record.EnterDate;
                 lastRecord.Status = (int)EntityStatus.ExchangeOut;
-                result = recordBusiness.Update(lastRecord);
+                result = recordBusiness.Edit(lastRecord);
                 if (result != ErrorCode.Success)
                 {
                     this.errorMessage = "居住记录更新出错：" + result.DisplayName();
@@ -916,7 +916,7 @@ namespace Rhea.Business.Apartment
 
                 //修改居住记录
                 record.RoomId = room.RoomId;
-                result = recordBusiness.Update(record);
+                result = recordBusiness.Edit(record);
                 if (result != ErrorCode.Success)
                 {
                     this.errorMessage = "修改居住记录出错：" + result.DisplayName();
@@ -1082,7 +1082,7 @@ namespace Rhea.Business.Apartment
 
                     //更新居住记录
                     record.Status = (int)EntityStatus.OverTime;
-                    result = recordBusiness.Update(record);
+                    result = recordBusiness.Edit(record);
                     if (result != ErrorCode.Success)
                     {
                         this.errorMessage = result.DisplayName();

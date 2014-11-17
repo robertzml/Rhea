@@ -173,6 +173,7 @@
     <Compile Include="Areas\Apartment\Controllers\RoomController.cs" />
     <Compile Include="Areas\Apartment\Controllers\TransactionController.cs" />
     <Compile Include="Areas\Apartment\Models\BuildingModels.cs" />
+    <Compile Include="Areas\Apartment\Models\ChangeRentModel.cs" />
     <Compile Include="Areas\Apartment\Models\RoomModels.cs" />
     <Compile Include="Areas\Apartment\Models\TransactionModels.cs" />
     <Compile Include="Areas\Estate\Controllers\BuildingController.cs" />
@@ -683,6 +684,7 @@
     <Content Include="Areas\Institute\Views\Room\Index.cshtml" />
     <Content Include="Areas\Institute\Views\Shared\DisplayTemplates\Boolean.cshtml" />
     <Content Include="Areas\Admin\Views\User\AssociateDepartment.cshtml" />
+    <Content Include="Areas\Apartment\Views\ResideRecord\ChangeRent.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <Content Include="plugins\jquery-migrate-1.2.1.min.js" />
     <Content Include="plugins\jquery-ui\images\animated-overlay.gif" />

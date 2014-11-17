@@ -241,6 +241,10 @@
                     {
                         <a href="/Apartment/ResideRecord/Edit/@Model._id" class="btn btn-warning ajaxify" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
                         <a href="/Apartment/ResideRecord/UploadFiles/@Model._id" class="btn purple ajaxify" role="button"><i class="fa fa-upload"></i>&nbsp;上传附件</a>
+                        if (Model.Status == (int)EntityStatus.Normal || Model.Status == (int)EntityStatus.ExtendTime || Model.Status == (int)EntityStatus.OverTime)
+                        {
+                            <a href="/Apartment/ResideRecord/ChangeRent/@Model._id" class="btn yellow-casablanca ajaxify" role="button"><i class="fa fa-rmb"></i>&nbsp;变更房租</a>
+                        }
                     }
                 </p>
             </div>
