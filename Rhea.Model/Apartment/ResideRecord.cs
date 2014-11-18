@@ -21,7 +21,7 @@ namespace Rhea.Model.Apartment
         public ResideRecord()
         {
             this.Log = new Log();
-            this.RentRecords = new List<RentRecord>();
+            this.RentHistory = new List<RentHistory>();
         }
         #endregion //Constructor
 
@@ -166,11 +166,11 @@ namespace Rhea.Model.Apartment
         public string[] Files { get; set; }
 
         /// <summary>
-        /// 房租变动记录
+        /// 房租变动历史
         /// </summary>
-        [BsonElement("rentRecords")]
-        [Display(Name = "房租变动记录")]
-        public List<RentRecord> RentRecords { get; set; }
+        [BsonElement("rentHistory")]
+        [Display(Name = "房租变动历史")]
+        public List<RentHistory> RentHistory { get; set; }
 
         /// <summary>
         /// 状态
@@ -192,23 +192,16 @@ namespace Rhea.Model.Apartment
     }
 
     /// <summary>
-    /// 房租变动记录
+    /// 房租变动历史
     /// </summary>
-    public class RentRecord
+    public class RentHistory
     {
         /// <summary>
-        /// 当前房租
+        /// 房租
         /// </summary>
-        [BsonElement("currentRent")]
-        [Display(Name = "当前房租")]
-        public decimal CurrentRent { get; set; }
-
-        /// <summary>
-        /// 上次房租
-        /// </summary>
-        [BsonElement("lastRent")]
-        [Display(Name = "上次房租")]
-        public decimal LastRent { get; set; }
+        [BsonElement("rent")]
+        [Display(Name = "房租")]
+        public decimal Rent { get; set; }
 
         /// <summary>
         /// 开始日期
@@ -219,6 +212,16 @@ namespace Rhea.Model.Apartment
         [BsonElement("startDate")]
         [Display(Name = "开始日期")]
         public DateTime StartDate { get; set; }
+
+        /// <summary>
+        /// 结束日期
+        /// </summary>
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, ConvertEmptyStringToNull = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        [BsonDateTimeOptions(DateOnly = true, Kind = DateTimeKind.Local)]
+        [BsonElement("endDate")]
+        [Display(Name = "结束日期")]
+        public DateTime EndDate { get; set; }
 
         /// <summary>
         /// 备注

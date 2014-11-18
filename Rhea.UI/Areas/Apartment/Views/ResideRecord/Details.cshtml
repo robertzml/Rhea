@@ -230,6 +230,33 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>房租历史</h3>
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>房租</th>
+                                    <th>开始日期</th>
+                                    <th>结束日期</th>
+                                    <th>备注</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach(var item in Model.RentHistory)
+                                {
+                                    <tr>
+                                        <td>@item.Rent</td>
+                                        <td>@item.StartDate.ToDateString()</td>
+                                        <td>@item.EndDate.ToDateString()</td>
+                                        <td>@item.Remark</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
                 <hr />
                 <p>
                     <a href="/Apartment/Room/Details/@Model.RoomId" class="btn btn-primary ajaxify" role="button"><i class="fa fa-align-left"></i>&nbsp;回到房间</a>

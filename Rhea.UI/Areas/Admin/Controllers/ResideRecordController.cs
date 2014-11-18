@@ -94,7 +94,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
             {
                 ResideRecord old = this.recordBusiness.Get(model._id);
                 model.Files = old.Files;
-                model.RentRecords = old.RentRecords;
+                model.RentHistory = old.RentHistory;
                 model.InhabitantDepartmentId = Convert.ToInt32(Request.Form["DepartmentId"]);
 
                 ErrorCode result = this.recordBusiness.Update(model);

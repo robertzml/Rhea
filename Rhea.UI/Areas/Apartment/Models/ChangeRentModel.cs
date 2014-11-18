@@ -17,10 +17,28 @@ namespace Rhea.UI.Areas.Apartment.Models
         public string RecordId { get; set; }
 
         /// <summary>
+        /// 住户ID
+        /// </summary>
+        [Display(Name = "住户ID")]
+        public string InhabitantId { get; set; }
+
+        /// <summary>
         /// 住户姓名
         /// </summary>
         [Display(Name = "住户姓名")]
         public string InhabitantName { get; set; }
+
+        /// <summary>
+        /// 房间ID
+        /// </summary>
+        [Display(Name = "房间ID")]
+        public int RoomId { get; set; }
+
+        /// <summary>
+        /// 房间名称
+        /// </summary>
+        [Display(Name = "房间名称")]
+        public string RoomName { get; set; }
 
         /// <summary>
         /// 当前房租

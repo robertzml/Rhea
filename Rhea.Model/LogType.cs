@@ -181,6 +181,12 @@ namespace Rhea.Model
         ResideRecordUploadFile = 157,
 
         /// <summary>
+        /// 变更房租
+        /// </summary>
+        [Display(Name = "变更房租")]
+        ChangeRent = 158,
+
+        /// <summary>
         /// 入住业务办理
         /// </summary>
         [Display(Name = "入住业务办理")]

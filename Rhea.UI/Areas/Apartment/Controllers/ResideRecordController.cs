@@ -123,7 +123,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
             {
                 ResideRecord old = this.recordBusiness.Get(model._id);
                 model.Files = old.Files;
-                model.RentRecords = old.RentRecords;
+                model.RentHistory = old.RentHistory;
                 model.InhabitantDepartmentId = Convert.ToInt32(Request.Form["DepartmentId"]);
 
                 ErrorCode result = this.recordBusiness.Update(model);
@@ -235,12 +235,17 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         public ActionResult ChangeRent(string id)
         {
             ChangeRentModel data = new ChangeRentModel();
+            ApartmentRoomBusiness roomBusiness = new ApartmentRoomBusiness();            
+
             var record = this.recordBusiness.Get(id);
 
             data.RecordId = record._id;
+            data.RoomId = record.RoomId;
+            data.RoomName = roomBusiness.Get(record.RoomId).Name;
+            data.InhabitantId = record.InhabitantId;
             data.InhabitantName = record.InhabitantName;
             data.LastRent = record.Rent;
-            data.StartDate = DateTime.Now;
+            data.StartDate = DateTime.Now;            
 
             return View(data);
         }
@@ -256,7 +261,55 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         {
             if (ModelState.IsValid)
             {
+                var record = this.recordBusiness.Get(model.RecordId);
 
+                DateTime lastStart;
+                if (record.RentHistory.Count == 0)
+                    lastStart = Convert.ToDateTime(record.EnterDate);
+                else
+                    lastStart = record.RentHistory.Last().EndDate;
+
+                RentHistory rentHistory = new RentHistory
+                {
+                    Rent = model.LastRent,
+                    StartDate = lastStart,
+                    EndDate = model.StartDate,
+                    Remark = model.Remark
+                };
+
+                record.RentHistory.Add(rentHistory);
+                record.Rent = model.CurrentRent;
+
+                ErrorCode result = this.recordBusiness.Edit(record);
+                if (result != ErrorCode.Success)
+                {
+                    ModelState.AddModelError("", "变更房租失败");
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
+                }
+
+                //log
+                User user = PageService.GetCurrentUser(User.Identity.Name);
+                Log log = new Log
+                {
+                    Title = "变更房租",
+                    Time = DateTime.Now,
+                    Type = (int)LogType.ChangeRent,
+                    Content = string.Format("变更房租， 居住记录ID:{0}, 住户ID:{1}, 住户姓名:{1}, 房间ID:{2}, 房间名称:{3}, 原房租:{4}, 新房租:{5}，开始日期:{6}。",
+                        record._id, model.InhabitantId, model.InhabitantName, model.RoomId, model.RoomName, model.LastRent, model.CurrentRent, model.StartDate),
+                    UserId = user._id,
+                    UserName = user.Name
+                };
+
+                result = this.recordBusiness.Log(record._id, log);
+                if (result != ErrorCode.Success)
+                {
+                    ModelState.AddModelError("", "记录日志失败");
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View(model);
+                }
+
+                return RedirectToAction("Details", new { id = record._id });
             }
 
             return View(model);
