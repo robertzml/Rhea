@@ -93,7 +93,7 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.InhabitantName)
                             </th>
-                            <th data-filter="true">
+                            <th>
                                 @Html.DisplayNameFor(model => model.UserName)
                             </th>
                             <th>
@@ -118,9 +118,7 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.InhabitantName)
                                 </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.UserName)
-                                </td>
+                                <td>@Html.DisplayFor(modelItem => item.UserName)</td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Remark)
                                 </td>
@@ -141,6 +139,7 @@
 
 <script type="text/javascript">
     $(function () {
-        Rhea.initDatatableWithFilter($('#transaction-table'));
+        var oTable = Rhea.initDatatableWithFilter($('#transaction-table'));
+        //oTable.api().columns(3).search('^朱家聪\(代办\)$', true, false).draw();
     });
 </script>

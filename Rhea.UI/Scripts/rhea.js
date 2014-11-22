@@ -70,10 +70,10 @@ var Rhea = function () {
 						.appendTo($(this).empty())
 						.on('change', function () {
 							var val = $(this).val();
-
-							oTable.api().column(i)
-								.search(val ? '^' + $(this).val() + '$' : val, true, false)
-								.draw();
+							
+							oTable.api().column(i).search(val ? $(this).val() : val).draw();
+								//.search(val ? '^' + $(this).val() + '$' : val, true, false)
+								//.draw();
 						});
 
 					oTable.api().column(i).data().unique().sort().each(function (d, j) {
