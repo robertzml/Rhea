@@ -93,7 +93,7 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.InhabitantName)
                             </th>
-                            <th>
+                            <th data-filter="true">
                                 @Html.DisplayNameFor(model => model.UserName)
                             </th>
                             <th>
@@ -139,7 +139,6 @@
 
 <script type="text/javascript">
     $(function () {
-        var oTable = Rhea.initDatatableWithFilter($('#transaction-table'));
-        //oTable.api().columns(3).search('^朱家聪\(代办\)$', true, false).draw();
+        var oTable = Rhea.initDatatableWithFilter2($('#transaction-table'));
     });
 </script>
