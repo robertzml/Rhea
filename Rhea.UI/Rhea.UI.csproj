@@ -191,6 +191,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Filters\EnhancedAuthorizeAttribute.cs" />
     <Compile Include="Filters\PrivilegeAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -792,6 +793,10 @@
     <Content Include="Views\Error\Error404.cshtml" />
     <Content Include="Views\Error\Error500.cshtml" />
     <Content Include="Services\DatatableHandler.ashx" />
+    <Content Include="Views\Task\Index.cshtml" />
+    <Content Include="Views\Task\Create.cshtml" />
+    <Content Include="Views\Task\List.cshtml" />
+    <Content Include="Views\Task\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -79,6 +79,7 @@
     <Compile Include="IRepositoryManager.cs" />
     <Compile Include="PersonnelCollection.cs" />
     <Compile Include="Personnel\IDepartmentRepository.cs" />
+    <Compile Include="Plugin\ITaskRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RheaCollection.cs" />
     <Compile Include="RheaServer.cs" />

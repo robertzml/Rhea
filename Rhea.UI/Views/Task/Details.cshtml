@@ -1,0 +1,100 @@
+﻿@model Rhea.Model.Plugin.Task
+
+@{
+    Layout = null;
+    ViewBag.Title = "任务信息";
+}
+
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">
+    @ViewBag.Title
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index", "Account")">用户管理</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">@ViewBag.Title</a>
+        </li>
+    </ul>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box green">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-indent"></i>&nbsp;@Model.Title
+                </div>
+                <div class="tools">
+                    <a href="#" class="collapse">
+                    </a>
+                    <a href="#" class="reload">
+                    </a>
+                    <a href="#" class="remove">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-bordered table-striped table-hover">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Title)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Title)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Content)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Content)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.CreateTime)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.CreateTime)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.RemindTime)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.RemindTime)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Status)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Status)
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <hr />
+                        <p>
+                            <a href="/Task/List" class="btn btn-primary ajaxify" role="button"><i class="fa fa-list"></i>&nbsp;回到列表</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT-->

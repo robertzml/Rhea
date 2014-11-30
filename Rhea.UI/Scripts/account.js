@@ -1,4 +1,4 @@
-var FormWizard = function () {
+var Account = function () {
 
 	// basic validation
     var handleValidationChangePassword = function() {

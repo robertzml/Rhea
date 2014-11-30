@@ -19,7 +19,7 @@
     <ul class="page-breadcrumb">
         <li>
             <i class="fa fa-home"></i>
-            <a href="@Url.Action("Index", "Advance")">账户管理</a>
+            <a href="@Url.Action("Index", "Account")">用户管理</a>
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
@@ -291,7 +291,7 @@
     <script type="text/javascript">
         $(function () {
             Rhea.leftNavActive($('#account-index-menu'));
-            FormWizard.init();
+            Account.init();
 
             $('#avatar-form').ajaxForm({
                 target: '#result-content2',

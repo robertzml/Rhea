@@ -57,7 +57,7 @@
                 </a>
             </li>
             <li class="left-nav-first">
-                <a href="@Url.Action("Index", "Account")" id="account-task-menu">
+                <a href="@Url.Action("Index", "Task")" id="account-task-menu">
                     <i class="fa fa-tasks"></i>
                     <span class="title">
                         任务
@@ -81,7 +81,9 @@
 <!-- BEGIN CONTENT -->
 <div class="page-content-wrapper">
     <div class="page-content">
-        @RenderBody()
+        <div class="page-content-body" id="page-content-body">
+            @RenderBody()
+        </div>
     </div>
 </div>
 <!-- END CONTENT -->

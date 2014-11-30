@@ -1,0 +1,107 @@
+﻿@model Rhea.Model.Plugin.Task
+
+@{
+    Layout = null;
+    ViewBag.Title = "创建任务";
+    AjaxOptions ajaxOpts = new AjaxOptions
+    {
+        UpdateTargetId = "page-content-body",
+        Url = Url.Action("Create", "Task"),
+        HttpMethod = "POST",
+        OnSuccess = "Rhea.showMessage('添加成功')"
+    };
+}
+
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">
+    @ViewBag.Title
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index", "Account")">用户管理</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">任务信息</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">@ViewBag.Title</a>
+        </li>
+    </ul>
+</div>
+<!-- END PAGE HEADER-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box purple">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-indent"></i>&nbsp;任务信息
+                </div>
+                <div class="tools">
+                    <a href="#" class="collapse">
+                    </a>
+                    <a href="#" class="reload">
+                    </a>
+                    <a href="#" class="remove">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-md-12 form">
+                        @using (Ajax.BeginForm("Create", new { controller = "Task" }, ajaxOpts, new { @class = "form-horizontal" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            
+                            <div class="form-body">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-6">
+                                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-6">
+                                        @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.RemindTime, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-6">
+                                        @Html.EditorFor(model => model.RemindTime, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.RemindTime, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-actions">
+                                    <div class="row">
+                                        <div class="col-md-offset-3 col-md-9">
+                                            <button type="submit" class="btn blue"><i class="fa fa-save"></i>&nbsp;保存</button>
+                                            <a href="/Task/List" class="btn btn-default ajaxify" role="button"><i class="fa fa-chevron-left"></i>&nbsp;取消</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+              
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        Rhea.initDatePicker($('#RemindTime'));
+    });
+</script>

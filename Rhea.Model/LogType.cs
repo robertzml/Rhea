@@ -226,6 +226,12 @@ namespace Rhea.Model
         /// 其它入住业务办理
         /// </summary>
         [Display(Name = "其它入住业务办理")]
-        ApartmentCheckIn2 = 166
+        ApartmentCheckIn2 = 166,
+
+        /// <summary>
+        /// 添加任务
+        /// </summary>
+        [Display(Name = "添加任务")]
+        TaskCreate = 201
     }
 }
