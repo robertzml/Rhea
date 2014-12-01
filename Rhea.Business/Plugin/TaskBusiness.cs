@@ -61,6 +61,31 @@ namespace Rhea.Business.Plugin
         {
             return this.taskRepository.Create(data);
         }
+
+        /// <summary>
+        /// 获取未完成任务
+        /// </summary>
+        /// <param name="userId">用户ID</param>
+        /// <returns></returns>
+        public IEnumerable<Task> GetOpen(string userId)
+        {
+            var data = this.taskRepository.GetByUser(userId).Where(r => r.Status == 0).OrderBy(r => r.RemindTime);
+            return data;
+        }
+
+        /// <summary>
+        /// 关闭任务
+        /// </summary>
+        /// <param name="id">任务ID</param>
+        /// <returns></returns>
+        public ErrorCode Close(string id)
+        {
+            var data = this.taskRepository.Get(id);
+            data.CloseTime = DateTime.Now;
+            data.Status = (int)EntityStatus.Closed;
+
+            return this.taskRepository.Update(data);
+        }
         #endregion //Method
     }
 }

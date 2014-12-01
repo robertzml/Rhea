@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Rhea.Model.Plugin.Task>
+
+@{
+    Layout = null;
+    int count = Model.Count();
+}
+
+<!-- BEGIN TASK DROPDOWN -->
+<li class="dropdown dropdown-extended dropdown-tasks" id="header_task_bar">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+        <i class="fa fa-warning"></i>
+        <span class="badge badge-default">
+            @count
+        </span>
+    </a>
+    <ul class="dropdown-menu">
+        <li>
+            <p>
+                共有 @count 项未完成任务
+            </p>
+        </li>
+        <li>
+            <ul class="dropdown-menu-list scroller" style="height: 250px;">
+                @foreach (var item in Model)
+                {
+                    <li>
+                        <a href="#">
+                            <span class="label label-sm label-icon label-warning">
+                                <i class="fa fa-bell-o"></i>
+                            </span>
+                            @item.Title 
+                            <span class="time">
+                                @item.RemindTime.ToDateString()
+                            </span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </li>
+        <li class="external">
+            <a href="@Url.Action("Index", new { area = "", controller = "Task" })">
+                查看任务列表 <i class="m-icon-swapright"></i>
+            </a>
+        </li>
+    </ul>
+</li>
+<!-- END TASK DROPDOWN -->

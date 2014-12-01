@@ -1,0 +1,12 @@
+﻿@helper TaskStatus(int status)
+{
+    switch ((Rhea.Model.EntityStatus)status)
+    {
+        case Rhea.Model.EntityStatus.Normal:
+        <span class="label bg-yellow-gold">未完成</span>
+            break;
+        case Rhea.Model.EntityStatus.Closed:
+        <span class="label bg-grey-gallery">已完成</span>
+            break;
+    }
+}

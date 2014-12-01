@@ -137,51 +137,7 @@
                         </ul>
                     </li>
                     <!-- END INBOX DROPDOWN -->
-                    <!-- BEGIN TODO DROPDOWN -->
-                    <li class="dropdown dropdown-extended dropdown-tasks" id="header_task_bar">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                            <i class="fa fa-tasks"></i>
-                            <span class="badge badge-default">
-                                3
-                            </span>
-                        </a>
-                        <ul class="dropdown-menu extended tasks">
-                            <li>
-                                <p>
-                                    You have 12 pending tasks
-                                </p>
-                            </li>
-                            <li>
-                                <ul class="dropdown-menu-list scroller" style="height: 250px;">
-                                    <li>
-                                        <a href="#">
-                                            <span class="task">
-                                                <span class="desc">
-                                                    New release v1.2
-                                                </span>
-                                                <span class="percent">
-                                                    30%
-                                                </span>
-                                            </span>
-                                            <span class="progress">
-                                                <span style="width: 40%;" class="progress-bar progress-bar-success" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="sr-only">
-                                                        40% Complete
-                                                    </span>
-                                                </span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="external">
-                                <a href="#">
-                                    See all tasks <i class="m-icon-swapright"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- END TODO DROPDOWN -->
+                    @Html.Action("TaskMenu", new { area = "", controller = "Home" })
                     <!-- BEGIN USER LOGIN DROPDOWN -->
                     @Html.Partial("_LoginPartial")
                     <!-- END USER LOGIN DROPDOWN -->

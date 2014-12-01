@@ -126,6 +126,26 @@ namespace Rhea.UI.Controllers
 
             return View(model);
         }
+
+        /// <summary>
+        /// 关闭任务
+        /// </summary>
+        /// <param name="id">任务ID</param>
+        /// <returns></returns>
+        public ActionResult Close(string id)
+        {
+            var result = this.taskBusiness.Close(id);
+            if (result == ErrorCode.Success)
+            {
+                TempData["Message"] = "任务已关闭";
+            }
+            else
+            {
+                TempData["Message"] = "任务关闭失败";
+            }
+
+            return RedirectToAction("Index");
+        }
         #endregion //Action
     }
 }

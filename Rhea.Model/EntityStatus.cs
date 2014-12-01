@@ -25,6 +25,12 @@ namespace Rhea.Model
         Deleted = 1,
 
         /// <summary>
+        /// 2:已关闭
+        /// </summary>
+        [Display(Name = "已关闭")]
+        Closed = 2,
+
+        /// <summary>
         /// 用户类
         /// 11:已禁用
         /// </summary>

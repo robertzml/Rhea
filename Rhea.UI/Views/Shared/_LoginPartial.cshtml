@@ -19,22 +19,20 @@
                 </a>
             </li>
             <li>
-                <a href="page_calendar.html">
+                <a href="#">
                     <i class="fa fa-calendar"></i> 日 历
                 </a>
             </li>
             <li>
-                <a href="inbox.html">
+                <a href="#">
                     <i class="fa fa-inbox"></i> 收 件 箱 <span class="badge badge-danger">
                         3
                     </span>
                 </a>
             </li>
             <li>
-                <a href="#">
-                    <i class="fa fa-tasks"></i> 任 务 <span class="badge badge-success">
-                        7
-                    </span>
+                <a href="@Url.Action("Index", new { area = "", controller = "Task" })">
+                    <i class="fa fa-tasks"></i> 任 务
                 </a>
             </li>
             @if (User.GetRank() >= 900)

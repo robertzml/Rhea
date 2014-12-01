@@ -41,6 +41,15 @@ namespace Rhea.Model.Plugin
         public DateTime CreateTime { get; set; }
 
         /// <summary>
+        /// 关闭时间
+        /// </summary>
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
+        [BsonElement("closeTime")]
+        [DataType(DataType.DateTime)]
+        [Display(Name = "关闭时间")]
+        public DateTime CloseTime { get; set; }
+
+        /// <summary>
         /// 创建用户
         /// </summary>
         [BsonRepresentation(BsonType.ObjectId)]
@@ -57,7 +66,7 @@ namespace Rhea.Model.Plugin
         [BsonElement("remindTime")]
         [Display(Name = "提醒时间")]
         public DateTime RemindTime { get; set; }
-
+       
         /// <summary>
         /// 状态
         /// </summary>

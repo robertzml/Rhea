@@ -689,6 +689,7 @@
     <Content Include="Areas\Institute\Views\Shared\DisplayTemplates\Boolean.cshtml" />
     <Content Include="Areas\Admin\Views\User\AssociateDepartment.cshtml" />
     <Content Include="Areas\Apartment\Views\ResideRecord\ChangeRent.cshtml" />
+    <Content Include="App_Code\TaskHelpers.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <Content Include="plugins\jquery-migrate-1.2.1.min.js" />
     <Content Include="plugins\jquery-ui\images\animated-overlay.gif" />
@@ -797,6 +798,7 @@
     <Content Include="Views\Task\Create.cshtml" />
     <Content Include="Views\Task\List.cshtml" />
     <Content Include="Views\Task\Details.cshtml" />
+    <Content Include="Views\Home\TaskMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

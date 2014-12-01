@@ -70,6 +70,14 @@
                                 </tr>
                                 <tr>
                                     <td>
+                                        @Html.DisplayNameFor(model => model.CloseTime)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.CloseTime)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
                                         @Html.DisplayNameFor(model => model.RemindTime)
                                     </td>
                                     <td>
@@ -81,7 +89,7 @@
                                         @Html.DisplayNameFor(model => model.Status)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(model => model.Status)
+                                        @TaskHelpers.TaskStatus(Model.Status)
                                     </td>
                                 </tr>
                             </tbody>
@@ -90,6 +98,7 @@
                         <hr />
                         <p>
                             <a href="/Task/List" class="btn btn-primary ajaxify" role="button"><i class="fa fa-list"></i>&nbsp;回到列表</a>
+                            <a href="/Task/Close/@Model._id" class="btn btn-primary red-thunderbird" role="button"><i class="fa fa-stop"></i>&nbsp;关闭任务</a>
                         </p>
                     </div>
                 </div>

@@ -63,7 +63,7 @@
                             <th>
                                 提醒时间
                             </th>
-                            <th>
+                            <th data-filter="true">
                                 状态
                             </th>
                             <th>操作</th>
@@ -83,7 +83,7 @@
                                     @Html.DisplayFor(modelItem => item.RemindTime)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Status)
+                                    @TaskHelpers.TaskStatus(item.Status)
                                 </td>
                                 <td>
                                     <a href="@Url.Action("Details", new { controller = "Task", id = item._id })" class="btn btn-info btn-sm ajaxify" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
