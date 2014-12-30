@@ -86,6 +86,9 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.InhabitantDepartment)
                                 </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Rent)
+                                </th>
                                 <th>居住状态</th>
                                 <th>操作</th>
                             </tr>
@@ -99,6 +102,7 @@
                                 <th data-filter="true">居住类型</th>
                                 <th>居住人姓名</th>
                                 <th data-filter="true">居住人部门</th>
+                                <th data-filter ="true">房租</th>
                                 <th data-filter="true">居住状态</th>
                                 <th>&nbsp;</th>
                             </tr>
@@ -127,6 +131,9 @@
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.InhabitantDepartment)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Rent)
                                     </td>
                                     <td>
                                         @switch ((EntityStatus)item.RecordStatus)
@@ -168,6 +175,7 @@
 
 <script type="text/javascript">
     $(function () {
-        Rhea.initDatatableWithFilter($('#room-table'));
+        //Rhea.initDatatableWithFilter($('#room-table'));
+        Rhea.initDatatableWithExport2($('#room-table'), true);
     });
 </script>

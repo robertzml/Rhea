@@ -56,6 +56,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                 model.InhabitantId = record.InhabitantId;
                 model.InhabitantName = record.InhabitantName;
                 model.InhabitantDepartment = record.InhabitantDepartment;
+                model.Rent = record.Rent;
                 model.RecordStatus = record.Status;
             }
             else

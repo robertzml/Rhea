@@ -86,6 +86,12 @@ namespace Rhea.UI.Areas.Apartment.Models
         public string InhabitantDepartment { get; set; }
 
         /// <summary>
+        /// 房租
+        /// </summary>
+        [Display(Name = "房租")]
+        public decimal Rent { get; set; }
+
+        /// <summary>
         /// 居住状态
         /// </summary>
         [Display(Name = "居住状态")]
