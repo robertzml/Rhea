@@ -3,6 +3,13 @@
 @{
     Layout = null;
     ViewBag.Title = "任务信息";
+    AjaxOptions ajaxOpts = new AjaxOptions
+    {
+        UpdateTargetId = "page-content-body",
+        Url = Url.Action("Delete", "Task"),
+        HttpMethod = "POST",
+        OnSuccess = "Rhea.showMessage('任务删除成功')"
+    };
 }
 
 <!-- BEGIN PAGE HEADER-->
@@ -25,7 +32,7 @@
 <!-- BEGIN PAGE CONTENT-->
 <div class="row">
     <div class="col-md-12">
-        <div class="portlet box green">
+        <div class="portlet box red">
             <div class="portlet-title">
                 <div class="caption">
                     <i class="fa fa-indent"></i>&nbsp;@Model.Title
@@ -42,6 +49,7 @@
             <div class="portlet-body">
                 <div class="row">
                     <div class="col-md-12">
+                        <h3>是否确认删除该记录?</h3>
                         <table class="table table-bordered table-striped table-hover">
                             <tbody>
                                 <tr>
@@ -95,12 +103,16 @@
                             </tbody>
                         </table>
 
-                        <hr />
-                        <p>
-                            <a href="/Task/List" class="btn btn-primary ajaxify" role="button"><i class="fa fa-list"></i>&nbsp;回到列表</a>
-                            <a href="/Task/Close/@Model._id" class="btn btn-primary red-thunderbird" role="button"><i class="fa fa-stop"></i>&nbsp;关闭任务</a>
-                            <a href="/Task/Delete/@Model._id" class="btn btn-primary red ajaxify" role="button"><i class="fa fa-minus"></i>&nbsp;删除任务</a>
-                        </p>
+                        @using (Ajax.BeginForm("Delete", new { controller = "Task" }, ajaxOpts, new { @class = "form-horizontal" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(model => model._id)
+                            
+                            <div class="form-actions no-color">
+                                <input type="submit" value="删除" class="btn btn-danger" /> |
+                                <a href="/Task/List" class="btn btn-primary ajaxify" role="button"><i class="fa fa-list"></i>&nbsp;回到列表</a>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
@@ -108,3 +120,4 @@
     </div>
 </div>
 <!-- END PAGE CONTENT-->
+

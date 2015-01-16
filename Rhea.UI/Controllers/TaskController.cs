@@ -146,6 +146,64 @@ namespace Rhea.UI.Controllers
 
             return RedirectToAction("Index");
         }
+
+        /// <summary>
+        /// 删除任务
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Delete(string id)
+        {
+            var data = this.taskBusiness.Get(id);
+            return View(data);
+        }
+
+        /// <summary>
+        /// 删除任务
+        /// </summary>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirm()
+        {
+            string id = Request.Form["_id"];
+            Task task = this.taskBusiness.Get(id);
+            string title = task.Title;
+
+            ErrorCode result = this.taskBusiness.Delete(id);
+
+            if (result == ErrorCode.Success)
+            {
+                User user = PageService.GetCurrentUser(User.Identity.Name);
+
+                //log
+                Log log = new Log
+                {
+                    Title = "删除任务",
+                    Time = DateTime.Now,
+                    Type = (int)LogType.TaskDelete,
+                    Content = string.Format("删除任务, 标题:{0}。", title),
+                    UserId = user._id,
+                    UserName = user.Name
+                };
+                LogBusiness logBusiness = new LogBusiness();
+                result = logBusiness.Create(log);
+                if (result != ErrorCode.Success)
+                {
+                    ModelState.AddModelError("", "记录日志失败");
+                    ModelState.AddModelError("", result.DisplayName());
+                    return View("Delete", id);
+                }
+
+                return RedirectToAction("List");
+            }
+            else
+            {
+                TempData["Message"] = "任务删除失败";
+                return View("Delete", id);
+            }
+        }
         #endregion //Action
     }
 }

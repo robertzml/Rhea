@@ -232,6 +232,12 @@ namespace Rhea.Model
         /// 添加任务
         /// </summary>
         [Display(Name = "添加任务")]
-        TaskCreate = 201
+        TaskCreate = 201,
+
+        /// <summary>
+        /// 删除任务
+        /// </summary>
+        [Display(Name = "删除任务")]
+        TaskDelete = 202
     }
 }

@@ -86,6 +86,16 @@ namespace Rhea.Business.Plugin
 
             return this.taskRepository.Update(data);
         }
+
+        /// <summary>
+        /// 删除任务
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ErrorCode Delete(string id)
+        {
+            return this.taskRepository.Delete(id);
+        }
         #endregion //Method
     }
 }

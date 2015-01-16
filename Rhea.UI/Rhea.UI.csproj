@@ -799,6 +799,7 @@
     <Content Include="Views\Task\List.cshtml" />
     <Content Include="Views\Task\Details.cshtml" />
     <Content Include="Views\Home\TaskMenu.cshtml" />
+    <Content Include="Views\Task\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
