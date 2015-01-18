@@ -163,6 +163,12 @@ namespace Rhea.Model
         UserLoginFailed = 101,
 
         /// <summary>
+        /// 删除居住记录
+        /// </summary>
+        [Display(Name = "删除居住记录")]
+        ResideRecordDelete = 149,
+
+        /// <summary>
         /// 编辑青教住户
         /// </summary>
         [Display(Name = "编辑青教住户")]

@@ -118,6 +118,25 @@ namespace Rhea.Data.Mongo.Apartment
 
             return ErrorCode.Success;
         }
+
+        /// <summary>
+        /// 删除居住记录
+        /// </summary>
+        /// <param name="_id">居住记录ID</param>
+        /// <returns></returns>
+        public ErrorCode Delete(string _id)
+        {
+            try
+            {
+                this.repository.Delete(_id);
+            }
+            catch(Exception)
+            {
+                return ErrorCode.Exception;
+            }
+
+            return ErrorCode.Success;
+        }
         #endregion //Method
     }
 }

@@ -170,6 +170,19 @@ namespace Rhea.Business.Apartment
         }
 
         /// <summary>
+        /// 删除居住记录
+        /// </summary>
+        /// <param name="id">居住记录ID</param>
+        /// <returns></returns>
+        public ErrorCode Delete(string id)
+        {
+            var data = this.recordRepository.Get(id);
+            data.Status = (int)EntityStatus.Deleted;
+
+            return this.recordRepository.Update(data);
+        }
+
+        /// <summary>
         /// 记录日志
         /// </summary>
         /// <param name="_id">居住记录系统ID</param>

@@ -1,7 +1,7 @@
 ﻿@model Rhea.Model.Apartment.ResideRecord
 
 @{
-    ViewBag.Title = "居住记录详细";
+    ViewBag.Title = "删除居住记录";
     Layout = "~/Areas/Admin/Views/Shared/_Layout_Apartment.cshtml";
 }
 
@@ -46,6 +46,7 @@
             <div class="portlet-body">
                 <div class="row">
                     <div class="col-md-12">
+                        <h3>是否确认删除该记录?</h3>
                         <table class="table table-bordered table-striped table-hover">
                             <thead>
                                 <tr>
@@ -265,11 +266,16 @@
                 </div>
 
                 <hr />
-                <p>
-                    <a href="@Url.Action("List", new { controller = "ResideRecord" })" class="btn btn-primary" role="button"><i class="fa fa-list"></i>&nbsp;回到列表</a>
-                    <a href="@Url.Action("Edit", new { controller = "ResideRecord", id = Model._id })" class="btn btn-warning" role="button"><i class="fa fa-edit"></i>&nbsp;编辑</a>
-                    <a href="@Url.Action("Delete", new { controller = "ResideRecord", id = Model._id })" class="btn btn-danger" role="button"><i class="fa fa-minus"></i>&nbsp;删除</a>
-                </p>
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model._id)
+                    
+                    <div class="form-actions no-color">
+                        <input type="submit" value="删除" class="btn btn-danger" /> |
+                        <a href="@Url.Action("List", new { controller = "ResideRecord" })" class="btn btn-primary" role="button"><i class="fa fa-list"></i>&nbsp;回到列表</a>
+                    </div>
+                }
             </div>
         </div>
     </div>

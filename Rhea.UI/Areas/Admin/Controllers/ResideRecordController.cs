@@ -132,6 +132,64 @@ namespace Rhea.UI.Areas.Admin.Controllers
 
             return View(model);
         }
+
+        /// <summary>
+        /// 删除居住记录
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Delete(string id)
+        {
+            var data = this.recordBusiness.Get(id);
+            return View(data);
+        }
+        
+        /// <summary>
+        /// 删除居住记录
+        /// </summary>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirm()
+        {
+            var id = Request.Form["_id"];
+
+            ResideRecord record = this.recordBusiness.Get(id);
+
+            ErrorCode result = this.recordBusiness.Delete(id);
+            if (result != ErrorCode.Success)
+            {
+                TempData["Message"] = "删除居住记录失败";
+                ModelState.AddModelError("", result.DisplayName());
+                return RedirectToAction("Delete", new { id = id });
+            }
+
+            //log
+            User user = PageService.GetCurrentUser(User.Identity.Name);
+            Log log = new Log
+            {
+                Title = "后台删除居住记录",
+                Time = DateTime.Now,
+                Type = (int)LogType.ResideRecordDelete,
+                Content = string.Format("删除居住记录， ID:{0}, 住户姓名:{1}, 部门:{2}, 房间ID:{3}, 房间名称:{4}。",
+                    id, record.InhabitantName, record.InhabitantDepartment, record.RoomId, record.GetApartmentRoom().Name),
+                UserId = user._id,
+                UserName = user.Name
+            };
+
+            result = this.recordBusiness.Log(record._id, log);
+            if (result != ErrorCode.Success)
+            {
+                TempData["Message"] = "记录日志失败";
+                ModelState.AddModelError("", result.DisplayName());
+                return RedirectToAction("Delete", new { id = id });
+            }
+
+            TempData["Message"] = "删除居住记录成功";
+            return RedirectToAction("List");
+
+        }
         #endregion //Action
     }
 }

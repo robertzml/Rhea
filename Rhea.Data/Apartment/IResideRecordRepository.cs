@@ -60,5 +60,12 @@ namespace Rhea.Data.Apartment
         /// <param name="data">居住记录对象</param>
         /// <returns></returns>
         ErrorCode Update(ResideRecord data);
+
+        /// <summary>
+        /// 删除居住记录
+        /// </summary>
+        /// <param name="_id">居住记录ID</param>
+        /// <returns></returns>
+        ErrorCode Delete(string _id);
     }
 }
