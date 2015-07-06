@@ -32,7 +32,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
             data.Block = buildingBusiness.GetBlock(id);
 
             ApartmentRoomBusiness roomBusiness = new ApartmentRoomBusiness();
-            data.Rooms = roomBusiness.GetByBuilding(id).ToList();
+            data.Rooms = roomBusiness.GetByBuilding(id).OrderBy(r => r.Number).ToList();
 
             data.TotalArea = Math.Round(data.Rooms.Sum(r => r.UsableArea), RheaConstant.AreaDecimalDigits);
 

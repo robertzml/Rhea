@@ -1,0 +1,36 @@
+/* apartment css */
+table#reside-display-table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+table#reside-display-table td {
+	width: 80px;
+	height: 40px;
+	border: 1px solid #ddd;
+	text-align: center;
+}
+
+table#reside-display-table td.bg0 {
+	background-color: #57fc05;
+}
+
+table#reside-display-table td.bg1 {
+	background-color: #0bfdbc;
+}
+
+table#reside-display-table td.bg2 {
+	background-color: #0b88fd;
+}
+
+table#reside-display-table td.bg3 {
+	background-color: #a00bfd;
+}
+
+table#reside-display-table td.bg4 {
+	background-color: #fb0cdb;
+}
+
+table#reside-display-table td.bg5 {
+	background-color: #b1c893;
+}

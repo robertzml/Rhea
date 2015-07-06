@@ -123,7 +123,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         public ActionResult ListByFloor(int buildingId, int floor)
         {
             List<RoomResideModel> data = new List<RoomResideModel>();
-            var rooms = this.roomBusiness.GetByBuilding(buildingId).Where(r => r.Floor == floor);
+            var rooms = this.roomBusiness.GetByBuilding(buildingId).Where(r => r.Floor == floor).OrderBy(r => r.Number);
 
             foreach (var room in rooms)
             {
