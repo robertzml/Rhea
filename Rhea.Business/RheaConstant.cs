@@ -51,6 +51,11 @@ namespace Rhea.Business
         /// 青教公寓建筑ID
         /// </summary>
         public static readonly int ApartmentBuildingId = 200037;
+
+        /// <summary>
+        /// 青教户型
+        /// </summary>
+        public static readonly string[] ApartmentHouseTypes = { "两室一厅", "大一室一厅", "一室一厅", "大单间", "单间" };
         #endregion //Field
     }
 }

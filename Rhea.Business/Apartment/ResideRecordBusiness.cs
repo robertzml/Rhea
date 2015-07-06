@@ -117,7 +117,7 @@ namespace Rhea.Business.Apartment
                     continue;
 
                 DateTime expireDate = record.ExpireDate.Value;
-                if (expireDate.AddDays(day) <= now)
+                if (expireDate <= now.AddDays(day))
                 {
                     data.Add(record);
                 }

@@ -6,6 +6,7 @@ using Rhea.Model;
 using Rhea.Model.Apartment;
 using Rhea.Model.Estate;
 using Rhea.UI.Filters;
+using Rhea.UI.Areas.Apartment.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +43,34 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         {
             BuildingBusiness business = new BuildingBusiness();
             var data = business.GetChildBlocks(RheaConstant.ApartmentBuildingId);
+            return View(data);
+        }
+
+        /// <summary>
+        /// 基本数据
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult BaseInfo()
+        {
+            BaseInfoModel data = new BaseInfoModel();           
+
+            ApartmentRoomBusiness roomBusiness = new ApartmentRoomBusiness();
+            var rooms = roomBusiness.Get();
+
+            data.RoomCount = rooms.Count();
+            data.TwoBedroomsCount = rooms.Count(r => r.HouseType == RheaConstant.ApartmentHouseTypes[0]);
+            data.BigOneBedroomsCount = rooms.Count(r => r.HouseType == RheaConstant.ApartmentHouseTypes[1]);
+            data.OneBedroomsCount = rooms.Count(r => r.HouseType == RheaConstant.ApartmentHouseTypes[2]);
+            data.BigSimpleRoomCount = rooms.Count(r => r.HouseType == RheaConstant.ApartmentHouseTypes[3]);
+            data.SimpleRoomCount = rooms.Count(r => r.HouseType == RheaConstant.ApartmentHouseTypes[4]);
+
+            data.EmptyRoomCount = rooms.Count(r => r.ResideType == 0);
+            data.EmptyTwoBedroomsCount = rooms.Count(r => r.HouseType == RheaConstant.ApartmentHouseTypes[0] && r.ResideType == 0);
+            data.EmptyBigOneBedroomsCount = rooms.Count(r => r.HouseType == RheaConstant.ApartmentHouseTypes[1] && r.ResideType == 0);
+            data.EmptyOneBedroomsCount = rooms.Count(r => r.HouseType == RheaConstant.ApartmentHouseTypes[2] && r.ResideType == 0);
+            data.EmptyBigSimpleRoomCount = rooms.Count(r => r.HouseType == RheaConstant.ApartmentHouseTypes[3] && r.ResideType == 0);
+            data.EmptySimpleRoomCount = rooms.Count(r => r.HouseType == RheaConstant.ApartmentHouseTypes[4] && r.ResideType == 0);
+
             return View(data);
         }
 

@@ -41,52 +41,22 @@
 <!-- BEGIN PAGE CONTENT-->
 <div class="row">
     <div class="col-md-12">
-        
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-6 col-xs-12">
-        <div class="portlet box green-turquoise">
+        <div class="portlet">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-share"></i>&nbsp;最新入住办理
+                    <i class="fa fa-info-circle"></i>&nbsp;基本数据
                 </div>
                 <div class="tools">
-                    <a href="#" class="collapse">
+                    <a href="javascript:;" class="collapse">
                     </a>
-                    <a href="#" class="reload">
+                    <a href="javascript:;" class="reload">
                     </a>
-                    <a href="#" class="remove">
+                    <a href="javascript:;" class="remove">
                     </a>
                 </div>
             </div>
             <div class="portlet-body">
-                <div class="scroller" style="height: 150px;" data-always-visible="1" data-rail-visible="0">
-                    @Html.Action("LastCheckIn", new { controller = "Home", count = 15 })
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6 col-xs-12">
-        <div class="portlet box grey-cascade">
-            <div class="portlet-title">
-                <div class="caption">
-                    <i class="fa fa-reply"></i>&nbsp;最新退房办理
-                </div>
-                <div class="tools">
-                    <a href="#" class="collapse">
-                    </a>
-                    <a href="#" class="reload">
-                    </a>
-                    <a href="#" class="remove">
-                    </a>
-                </div>
-            </div>
-            <div class="portlet-body">
-                <div class="scroller" style="height: 150px;" data-always-visible="1" data-rail-visible="0">
-                    @Html.Action("LastCheckOut", new { controller = "Home", count = 15 })
-                </div>
+                 @Html.Action("BaseInfo", new { controller = "Home" })
             </div>
         </div>
     </div>
@@ -94,50 +64,83 @@
 
 <div class="row">
     <div class="col-md-6 col-xs-12">
-        <div class="portlet box blue-steel">
+        <div class="portlet box blue tabbable">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-bell-o"></i>&nbsp;15天内到期房间
-                </div>
-                <div class="tools">
-                    <a href="#" class="collapse">
-                    </a>
-                    <a href="#" class="reload">
-                    </a>
-                    <a href="#" class="remove">
-                    </a>
+                    <i class="fa fa-child"></i>&nbsp;最新业务办理
                 </div>
             </div>
             <div class="portlet-body">
-                <div class="scroller" style="height: 200px;" data-always-visible="1" data-rail-visible="0">
-                    @Html.Action("ExpireInDays", new { controller = "Home", day = 15 })
+                <div class="tabbable portlet-tabs">
+                    <ul class="nav nav-tabs">
+                        <li>
+                            <a href="#business_tab_2" data-toggle="tab">
+                                退房业务
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="#business_tab_1" data-toggle="tab">
+                                入住业务
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="business_tab_1">
+                            <div class="scroller" style="height: 200px;" data-always-visible="1" data-rail-visible="0">
+                                @Html.Action("LastCheckIn", new { controller = "Home", count = 15 })
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="business_tab_2">
+                            <div class="scroller" style="height: 200px;" data-always-visible="1" data-rail-visible="0">
+                                @Html.Action("LastCheckOut", new { controller = "Home", count = 15 })
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="col-md-6 col-xs-12">
-        <div class="portlet box red-sunglo">
+        <div class="portlet box red-sunglo tabbable">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-bullhorn"></i>&nbsp;超期居住房间
-                </div>
-                <div class="tools">
-                    <a href="#" class="collapse">
-                    </a>
-                    <a href="#" class="reload">
-                    </a>
-                    <a href="#" class="remove">
-                    </a>
+                    <i class="fa fa-child"></i>&nbsp;超期到期房间
                 </div>
             </div>
             <div class="portlet-body">
-                <div class="scroller" style="height: 200px;" data-always-visible="1" data-rail-visible="0">
-                    @Html.Action("ExpireRecords", new { controller = "Home" })
+                <div class="tabbable portlet-tabs">
+                    <ul class="nav nav-tabs">
+                        <li>
+                            <a href="#expire_tab_2" data-toggle="tab">
+                                30天内到期
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="#expire_tab_1" data-toggle="tab">
+                                超期居住
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="expire_tab_1">
+                            <div class="scroller" style="height: 200px;" data-always-visible="1" data-rail-visible="0">
+                                @Html.Action("ExpireRecords", new { controller = "Home" })
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="expire_tab_2">
+                            <div class="scroller" style="height: 200px;" data-always-visible="1" data-rail-visible="0">
+                                @Html.Action("ExpireInDays", new { controller = "Home", day = 30 })
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
 
 @if (new string[] { "Root", "Administrator", "Estate", "Apartment" }.Contains(role))
 {

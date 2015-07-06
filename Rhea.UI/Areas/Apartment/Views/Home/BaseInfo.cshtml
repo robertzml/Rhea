@@ -1,0 +1,111 @@
+﻿@model Rhea.UI.Areas.Apartment.Models.BaseInfoModel
+
+@{
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="row static-info">
+            <div class="col-md-5 name">
+                房间数量:
+            </div>
+            <div class="col-md-7 value">
+                @Model.RoomCount
+            </div>
+        </div>
+        <div class="row static-info">
+            <div class="col-md-5 name">
+                两室一厅数量
+            </div>
+            <div class="col-md-7 value">
+                @Model.TwoBedroomsCount
+            </div>
+        </div>
+        <div class="row static-info">
+            <div class="col-md-5 name">
+                大一室一厅数量
+            </div>
+            <div class="col-md-7 value">
+                @Model.BigOneBedroomsCount
+            </div>
+        </div>
+        <div class="row static-info">
+            <div class="col-md-5 name">
+                一室一厅数量
+            </div>
+            <div class="col-md-7 value">
+                @Model.OneBedroomsCount
+            </div>
+        </div>
+        <div class="row static-info">
+            <div class="col-md-5 name">
+                大单间数量
+            </div>
+            <div class="col-md-7 value">
+                @Model.BigSimpleRoomCount
+            </div>
+        </div>
+        <div class="row static-info">
+            <div class="col-md-5 name">
+                单间数量
+            </div>
+            <div class="col-md-7 value">
+                @Model.SimpleRoomCount
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="row static-info">
+            <div class="col-md-5 name">
+                空房间数量
+            </div>
+            <div class="col-md-7 value">
+                @Model.EmptyRoomCount
+            </div>
+        </div>
+        <div class="row static-info">
+            <div class="col-md-5 name">
+                空两室一厅数量
+            </div>
+            <div class="col-md-7 value">
+                @Model.EmptyTwoBedroomsCount
+            </div>
+        </div>
+        <div class="row static-info">
+            <div class="col-md-5 name">
+                空大一室一厅数量
+            </div>
+            <div class="col-md-7 value">
+                @Model.EmptyBigOneBedroomsCount
+            </div>
+        </div>
+        <div class="row static-info">
+            <div class="col-md-5 name">
+                空一室一厅数量
+            </div>
+            <div class="col-md-7 value">
+                @Model.EmptyOneBedroomsCount
+            </div>
+        </div>
+        <div class="row static-info">
+            <div class="col-md-5 name">
+                空大单间数量
+            </div>
+            <div class="col-md-7 value">
+                @Model.EmptyBigSimpleRoomCount
+            </div>
+        </div>
+        <div class="row static-info">
+            <div class="col-md-5 name">
+                空单间数量
+            </div>
+            <div class="col-md-7 value">
+                @Model.EmptySimpleRoomCount
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+
+    </div>
+</div>
