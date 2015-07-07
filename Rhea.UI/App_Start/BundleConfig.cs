@@ -73,7 +73,7 @@ namespace Rhea.UI
                 "~/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js",
                 "~/plugins/jquery-slimscroll/jquery.slimscroll.min.js",
                 "~/plugins/jquery.blockui.min.js",
-                "~/plugins/jquery.cokie.min.js",
+                "~/plugins/jquery.cookie.js",
                 "~/plugins/moment.min.js",
                 "~/plugins/uniform/jquery.uniform.min.js",
                 "~/plugins/bootstrap-switch/js/bootstrap-switch.min.js",

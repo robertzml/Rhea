@@ -105,7 +105,7 @@
         <div class="portlet box red-sunglo tabbable">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-child"></i>&nbsp;超期到期房间
+                    <i class="fa fa-bell-o"></i>&nbsp;超期到期房间
                 </div>
             </div>
             <div class="portlet-body">
@@ -177,6 +177,9 @@
             Rhea.leftNavActive($('#apartment-home-menu'));
 
             Apartment.initDashboardAction();
+
+            $.cookie('current_page', '');
+            $.cookie('last_page', '');
         });
     </script>
 }

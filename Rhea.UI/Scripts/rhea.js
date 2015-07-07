@@ -254,7 +254,9 @@ var Rhea = function () {
 			"pageLength": 10,
 
 			"pagingType": "bootstrap_full_number",
-
+			
+			"stateSave": true,
+			
 			"language": {
 					"lengthMenu": "  _MENU_ 记录",
 					"sLengthMenu": "每页 _MENU_ 条记录",

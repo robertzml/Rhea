@@ -151,7 +151,12 @@ var Layout = function () {
                     if (the.parents('li.open').size() === 0) {
                         $('.page-sidebar-menu > li.open > a').click();
                     }
-
+				
+					if ($.cookie) {
+						$.cookie('last_page', $.cookie('current_page'));
+						$.cookie('current_page', url);
+					}
+					
                     Metronic.stopPageLoading();
                     pageContentBody.html(res);
                     Layout.fixContentHeight(); // fix content height
@@ -185,6 +190,12 @@ var Layout = function () {
                 url: url,
                 dataType: "html",
                 success: function (res) {
+					
+					if ($.cookie) {
+						$.cookie('last_page', $.cookie('current_page'));
+						$.cookie('current_page', url);
+					}
+					
                     Metronic.stopPageLoading();
                     pageContentBody.html(res);
                     Layout.fixContentHeight(); // fix content height
@@ -197,6 +208,54 @@ var Layout = function () {
             });
         });
     }
+	
+	var handleActionMenu = function() {
+		//back to last page
+		jQuery('.page-content').on('click', '.backstep', function (e) {
+			e.preventDefault();
+			if (!$.cookie)
+				return;			
+			
+			if (!$.cookie('last_page') || $.cookie('last_page') == '')
+				return;
+			
+            Metronic.scrollTop();
+
+			var lastPage = $.cookie('last_page');
+            //var url = $(this).attr("href");
+            var pageContent = $('.page-content');
+            var pageContentBody = $('.page-content .page-content-body');
+
+            Metronic.startPageLoading();
+
+            if (Metronic.getViewPort().width < 992 && $('.page-sidebar').hasClass("in")) { // close the menu on mobile view while laoding a page 
+                $('.page-header .responsive-toggler').click();
+            }
+
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: lastPage,
+                dataType: "html",
+                success: function (res) {
+					
+					if ($.cookie) {
+						$.cookie('last_page', $.cookie('current_page'));
+						$.cookie('current_page', lastPage);
+					}
+					
+                    Metronic.stopPageLoading();
+                    pageContentBody.html(res);
+                    Layout.fixContentHeight(); // fix content height
+                    Metronic.initAjax(); // initialize core stuff
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+					pageContentBody.load('/Error/E500');
+                    Metronic.stopPageLoading();
+                }
+            });
+		});
+	}
 
     // Helper function to calculate sidebar height for fixed sidebar layout.
     var _calculateFixedSidebarViewportHeight = function () {
@@ -445,6 +504,7 @@ var Layout = function () {
             handleFixedSidebar(); // handles fixed sidebar menu
             handleSidebarMenu(); // handles main menu
             handleHorizontalMenu(); // handles horizontal menu
+			handleActionMenu();
             handleSidebarToggler(); // handles sidebar hide/show
             handle100HeightContent(); // handles 100% height elements(block, portlet, etc)            
             handleGoTop(); //handles scroll to top functionality in the footer
