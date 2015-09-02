@@ -19,7 +19,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
     /// <summary>
     /// 入住记录控制器
     /// </summary>
-    [EnhancedAuthorize(Roles = "Root,Administrator,Apartment,Leader")]
+    [Privilege(Require = "ApartmentResideRecord")]
     public class ResideRecordController : Controller
     {
         #region Field

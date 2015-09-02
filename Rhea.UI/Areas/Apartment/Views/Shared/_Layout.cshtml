@@ -158,11 +158,14 @@
                             房间列表
                         </a>
                     </li>
+                    @if (User.HasPrivilege("ApartmentTransaction"))
+                    { 
                     <li>
                         <a class="ajaxify" href="/Apartment/Transaction/Index">
                             业务统计
                         </a>
                     </li>
+                    }
                 </ul>
             </li>
             }
