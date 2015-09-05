@@ -47,6 +47,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
             model.Floor = room.Floor;
             model.UsableArea = room.UsableArea;
             model.HouseType = room.HouseType;
+            model.Orientation = room.Orientation;
             model.BuildingName = room.BuildingName();
             model.RoomResideType = (ResideType)room.ResideType;
 
@@ -56,6 +57,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                 model.InhabitantId = record.InhabitantId;
                 model.InhabitantName = record.InhabitantName;
                 model.InhabitantDepartment = record.InhabitantDepartment;
+                model.EnterDate = record.EnterDate;
                 model.Rent = record.Rent;
                 model.RecordStatus = record.Status;
             }

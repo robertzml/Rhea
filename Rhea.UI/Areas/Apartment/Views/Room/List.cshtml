@@ -72,13 +72,10 @@
                                     @Html.DisplayNameFor(model => model.HouseType)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Orientation)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.UsableArea) (m<sup>2</sup>)
-                                </th>
-                                <th>
                                     @Html.DisplayNameFor(model => model.RoomResideType)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.EnterDate)
                                 </th>
                                 <th>
                                     @Html.DisplayNameFor(model => model.InhabitantName)
@@ -97,9 +94,8 @@
                             <tr>
                                 <th>房间名称</th>
                                 <th data-filter="true">户型</th>
-                                <th data-filter="true">朝向</th>
-                                <th data-filter="true">使用面积</th>
                                 <th data-filter="true">居住类型</th>
+                                <th>入住时间</th>
                                 <th>居住人姓名</th>
                                 <th data-filter="true">居住人部门</th>
                                 <th data-filter ="true">房租</th>
@@ -115,16 +111,13 @@
                                         @Html.DisplayFor(modelItem => item.Name)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.HouseType)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Orientation)
-                                    </td>
-                                    <td>
                                         @Html.DisplayFor(modelItem => item.UsableArea)
                                     </td>
                                     <td>
                                         @item.RoomResideType.DisplayName()
+                                    </td>
+                                    <td>
+                                        @item.EnterDate.ToDateString()
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.InhabitantName)

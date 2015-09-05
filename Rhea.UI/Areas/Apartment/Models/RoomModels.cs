@@ -15,31 +15,31 @@ namespace Rhea.UI.Areas.Apartment.Models
     {
         /// <summary>
         /// 房间ID
-        /// </summary>        
+        /// </summary>
         [Display(Name = "房间ID")]
         public int RoomId { get; set; }
 
         /// <summary>
         /// 房间名称
-        /// </summary>      
+        /// </summary>
         [Display(Name = "房间名称")]
         public string Name { get; set; }
 
         /// <summary>
         /// 房间编号
-        /// </summary>      
+        /// </summary>
         [Display(Name = "房间编号")]
         public string Number { get; set; }
 
         /// <summary>
         /// 楼层
-        /// </summary>      
+        /// </summary>
         [Display(Name = "楼层")]
         public int Floor { get; set; }
 
         /// <summary>
         /// 使用面积
-        /// </summary>      
+        /// </summary>
         [Display(Name = "使用面积")]
         public double UsableArea { get; set; }
 
@@ -68,22 +68,35 @@ namespace Rhea.UI.Areas.Apartment.Models
         public ResideType RoomResideType { get; set; }
 
         /// <summary>
+        /// 入住时间
+        /// </summary>
+        [Display(Name = "入住时间")]
+        public DateTime? EnterDate { get; set; }
+
+        /// <summary>
         /// 居住人ID
-        /// </summary>      
+        /// </summary>
         [Display(Name = "居住人ID")]
         public string InhabitantId { get; set; }
 
         /// <summary>
         /// 居住人姓名
-        /// </summary>        
+        /// </summary>
         [Display(Name = "居住人姓名")]
         public string InhabitantName { get; set; }
 
         /// <summary>
         /// 部门
-        /// </summary>       
+        /// </summary>
         [Display(Name = "部门")]
         public string InhabitantDepartment { get; set; }
+
+        /// <summary>
+        /// 居住人类型
+        /// </summary>
+        [Display(Name = "居住人类型")]
+
+        public string InhabitantType { get; set; }
 
         /// <summary>
         /// 房租
