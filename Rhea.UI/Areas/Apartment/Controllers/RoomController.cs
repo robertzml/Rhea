@@ -51,6 +51,10 @@ namespace Rhea.UI.Areas.Apartment.Controllers
             model.BuildingName = room.BuildingName();
             model.RoomResideType = (ResideType)room.ResideType;
 
+            InhabitantBusiness inhabitantBusiness = new InhabitantBusiness();
+            DictionaryBusiness business = new DictionaryBusiness();
+            var types = business.GetPairProperty("InhabitantType");
+
             ResideRecord record = this.roomBusiness.GetCurrentRecord(room.RoomId);
             if (record != null)
             {
@@ -60,6 +64,13 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                 model.EnterDate = record.EnterDate;
                 model.Rent = record.Rent;
                 model.RecordStatus = record.Status;
+
+                if (!string.IsNullOrEmpty(record.InhabitantId))
+                {
+                    var inhabitant = inhabitantBusiness.Get(record.InhabitantId);
+                    model.InhabitantNumber = inhabitant.JobNumber;
+                    model.InhabitantType = types[inhabitant.Type];
+                }
             }
             else
                 model.RecordStatus = -1;

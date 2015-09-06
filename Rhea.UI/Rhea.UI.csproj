@@ -712,6 +712,7 @@
     <Content Include="plugins\bootstrap-select\README.md" />
     <Content Include="plugins\bootstrap-modal\LICENSE" />
     <Content Include="plugins\bootstrap-modal\README.md" />
+    <Content Include="Areas\Apartment\Views\Home\LastExchange.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <Content Include="plugins\jquery-migrate-1.2.1.min.js" />
     <Content Include="plugins\jquery-ui\images\animated-overlay.gif" />

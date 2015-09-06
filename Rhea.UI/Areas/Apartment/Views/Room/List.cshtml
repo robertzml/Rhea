@@ -78,6 +78,12 @@
                                     @Html.DisplayNameFor(model => model.EnterDate)
                                 </th>
                                 <th>
+                                    @Html.DisplayNameFor(model => model.InhabitantType)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.InhabitantNumber)
+                                </th>
+                                <th>
                                     @Html.DisplayNameFor(model => model.InhabitantName)
                                 </th>
                                 <th>
@@ -96,6 +102,8 @@
                                 <th data-filter="true">户型</th>
                                 <th data-filter="true">居住类型</th>
                                 <th>入住时间</th>
+                                <th data-filter="true">居住人类型</th>
+                                <th>居住人工号</th>
                                 <th>居住人姓名</th>
                                 <th data-filter="true">居住人部门</th>
                                 <th data-filter ="true">房租</th>
@@ -111,13 +119,19 @@
                                         @Html.DisplayFor(modelItem => item.Name)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.UsableArea)
+                                        @Html.DisplayFor(modelItem => item.HouseType)
                                     </td>
                                     <td>
                                         @item.RoomResideType.DisplayName()
                                     </td>
                                     <td>
                                         @item.EnterDate.ToDateString()
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.InhabitantType)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.InhabitantNumber)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.InhabitantName)

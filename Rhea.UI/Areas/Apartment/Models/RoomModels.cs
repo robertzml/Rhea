@@ -92,6 +92,12 @@ namespace Rhea.UI.Areas.Apartment.Models
         public string InhabitantDepartment { get; set; }
 
         /// <summary>
+        /// 居住人工号
+        /// </summary>
+        [Display(Name = "居住人工号")]
+        public string InhabitantNumber { get; set; }
+
+        /// <summary>
         /// 居住人类型
         /// </summary>
         [Display(Name = "居住人类型")]

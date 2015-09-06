@@ -122,6 +122,18 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         }
 
         /// <summary>
+        /// 最新换房办理
+        /// </summary>
+        /// <param name="count">数量</param>
+        /// <returns></returns>
+        public ActionResult LastExchange(int count)
+        {
+            TransactionBusiness business = new TransactionBusiness();
+            var data = business.GetExchangeTransaction().Take(count);
+            return View(data);
+        }
+
+        /// <summary>
         /// 检测更新居住记录和住户状态
         /// </summary>
         /// <returns></returns>

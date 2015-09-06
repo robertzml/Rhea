@@ -74,6 +74,11 @@
                 <div class="tabbable portlet-tabs">
                     <ul class="nav nav-tabs">
                         <li>
+                            <a href="#business_tab_3" data-toggle="tab">
+                                换房业务
+                            </a>
+                        </li>
+                        <li>
                             <a href="#business_tab_2" data-toggle="tab">
                                 退房业务
                             </a>
@@ -93,6 +98,11 @@
                         <div class="tab-pane" id="business_tab_2">
                             <div class="scroller" style="height: 200px;" data-always-visible="1" data-rail-visible="0">
                                 @Html.Action("LastCheckOut", new { controller = "Home", count = 15 })
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="business_tab_3">
+                            <div class="scroller" style="height: 200px;" data-always-visible="1" data-rail-visible="0">
+                                @Html.Action("LastExchange", new { controller = "Home", count = 15 })
                             </div>
                         </div>
                     </div>
