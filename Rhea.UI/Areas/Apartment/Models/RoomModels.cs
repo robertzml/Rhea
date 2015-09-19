@@ -74,6 +74,18 @@ namespace Rhea.UI.Areas.Apartment.Models
         public DateTime? EnterDate { get; set; }
 
         /// <summary>
+        /// 到期时间
+        /// </summary>
+        [Display(Name = "到期时间")]
+        public DateTime? ExpireDate { get; set; }
+
+        /// <summary>
+        /// 月数
+        /// </summary>
+        [Display(Name = "月数")]
+        public int MonthCount { get; set; }
+
+        /// <summary>
         /// 居住人ID
         /// </summary>
         [Display(Name = "居住人ID")]
@@ -101,8 +113,14 @@ namespace Rhea.UI.Areas.Apartment.Models
         /// 居住人类型
         /// </summary>
         [Display(Name = "居住人类型")]
-
         public string InhabitantType { get; set; }
+
+        /// <summary>
+        /// 学历
+        /// </summary>
+        [Display(Name = "学历")]
+        public string Education { get; set; }
+
 
         /// <summary>
         /// 房租
@@ -115,6 +133,12 @@ namespace Rhea.UI.Areas.Apartment.Models
         /// </summary>
         [Display(Name = "居住状态")]
         public int RecordStatus { get; set; }
+
+        /// <summary>
+        /// 居住记录备注
+        /// </summary>
+        [Display(Name = "备注")]
+        public string Remark { get; set; }
     }
 
     /// <summary>

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Rhea.UI.Areas.Apartment.Models.RoomResideModel>
 
 @{
-    ViewBag.Title = "房间列表";
+    ViewBag.Title = "房间列表2";
     Layout = null;
 }
 
@@ -81,6 +81,9 @@
                                     @Html.DisplayNameFor(model => model.ExpireDate)
                                 </th>
                                 <th>
+                                    @Html.DisplayNameFor(model => model.MonthCount)
+                                </th>
+                                <th>
                                     @Html.DisplayNameFor(model => model.InhabitantType)
                                 </th>
                                 <th>
@@ -99,6 +102,7 @@
                                     @Html.DisplayNameFor(model => model.Rent)
                                 </th>
                                 <th>居住状态</th>
+                                <th>备注</th>
                                 <th>操作</th>
                             </tr>
                         </thead>
@@ -109,13 +113,15 @@
                                 <th data-filter="true">居住类型</th>
                                 <th>入住时间</th>
                                 <th>到期时间</th>
+                                <th>月数</th>
                                 <th data-filter="true">居住人类型</th>
                                 <th>居住人工号</th>
                                 <th>居住人姓名</th>
                                 <th data-filter="true">居住人部门</th>
                                 <th>学历</th>
-                                <th data-filter ="true">房租</th>
+                                <th data-filter="true">房租</th>
                                 <th data-filter="true">居住状态</th>
+                                <th>备注</th>
                                 <th>&nbsp;</th>
                             </tr>
                         </tfoot>
@@ -139,6 +145,9 @@
                                         @item.ExpireDate.ToDateString()
                                     </td>
                                     <td>
+                                        @Html.DisplayFor(modelItem => item.MonthCount)
+                                    </td>
+                                    <td>
                                         @Html.DisplayFor(modelItem => item.InhabitantType)
                                     </td>
                                     <td>
@@ -160,7 +169,7 @@
                                         @switch ((EntityStatus)item.RecordStatus)
                                         {
                                             case EntityStatus.Normal:
-                                            <span class="label label-success">居住中</span>
+                                                <span class="label label-success">居住中</span>
                                                 break;
                                             case EntityStatus.OverTime:
                                             <span class="label label-danger">超期</span>
@@ -180,6 +189,9 @@
                                         }
                                     </td>
                                     <td>
+                                        @Html.DisplayFor(modelItem => item.Remark)
+                                    </td>
+                                    <td>
                                         <a href="/Apartment/Room/Details/@item.RoomId" class="btn btn-info btn-sm ajaxify" role="button"><i class="fa fa-check-circle"></i>&nbsp;查看</a>
                                     </td>
                                 </tr>
@@ -196,7 +208,6 @@
 
 <script type="text/javascript">
     $(function () {
-        //Rhea.initDatatableWithFilter($('#room-table'));
         Rhea.initDatatableWithExport2($('#room-table'), true);
     });
 </script>

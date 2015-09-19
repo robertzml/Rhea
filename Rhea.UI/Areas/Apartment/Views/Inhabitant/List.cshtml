@@ -81,19 +81,16 @@
                                     @Html.DisplayNameFor(model => model.Type)
                                 </th>
                                 <th>
+                                    @Html.DisplayNameFor(model => model.Education)
+                                </th>
+                                <th>
                                     @Html.DisplayNameFor(model => model.DepartmentName)
                                 </th>
                                 <th>
                                     @Html.DisplayNameFor(model => model.Telephone)
                                 </th>
                                 <th class="hidden-sm">
-                                    @Html.DisplayNameFor(model => model.AccumulatedFundsDate)
-                                </th>
-                                <th class="hidden-sm">
                                     @Html.DisplayNameFor(model => model.Marriage)
-                                </th>
-                                <th class="hidden-sm">
-                                    @Html.DisplayNameFor(model => model.LiHuEnterDate)
                                 </th>
                                 <th class="hidden-sm">
                                     @Html.DisplayNameFor(model => model.Remark)
@@ -118,6 +115,9 @@
                                 <th data-filter="true">
                                     @Html.DisplayNameFor(model => model.Type)
                                 </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Education)
+                                </th>
                                 <th data-filter="true">
                                     @Html.DisplayNameFor(model => model.DepartmentName)
                                 </th>
@@ -125,13 +125,7 @@
                                     @Html.DisplayNameFor(model => model.Telephone)
                                 </th>
                                 <th class="hidden-sm">
-                                    @Html.DisplayNameFor(model => model.AccumulatedFundsDate)
-                                </th>
-                                <th class="hidden-sm">
                                     @Html.DisplayNameFor(model => model.Marriage)
-                                </th>
-                                <th class="hidden-sm">
-                                    @Html.DisplayNameFor(model => model.LiHuEnterDate)
                                 </th>
                                 <th class="hidden-sm">
                                     @Html.DisplayNameFor(model => model.Remark)
@@ -159,19 +153,16 @@
                                         @types[item.Type]
                                     </td>
                                     <td>
+                                        @Html.DisplayFor(modelItem => item.Education)
+                                    </td>
+                                    <td>
                                         @Html.DisplayFor(modelItem => item.DepartmentName)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Telephone)
                                     </td>
                                     <td class="hidden-sm">
-                                        @item.AccumulatedFundsDate.ToDateString()
-                                    </td>
-                                    <td class="hidden-sm">
                                         @Html.DisplayFor(modelItem => item.Marriage)
-                                    </td>
-                                    <td class="hidden-sm">
-                                        @item.LiHuEnterDate.ToDateString()
                                     </td>
                                     <td class="hidden-sm">
                                         @Html.DisplayFor(modelItem => item.Remark)

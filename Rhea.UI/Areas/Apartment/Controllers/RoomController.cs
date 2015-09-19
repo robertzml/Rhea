@@ -62,14 +62,18 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                 model.InhabitantName = record.InhabitantName;
                 model.InhabitantDepartment = record.InhabitantDepartment;
                 model.EnterDate = record.EnterDate;
+                model.ExpireDate = record.ExpireDate;
+                model.MonthCount = record.MonthCount;
                 model.Rent = record.Rent;
                 model.RecordStatus = record.Status;
+                model.Remark = record.Remark;
 
                 if (!string.IsNullOrEmpty(record.InhabitantId))
                 {
                     var inhabitant = inhabitantBusiness.Get(record.InhabitantId);
                     model.InhabitantNumber = inhabitant.JobNumber;
                     model.InhabitantType = types[inhabitant.Type];
+                    model.Education = inhabitant.Education;
                 }
             }
             else
@@ -95,6 +99,24 @@ namespace Rhea.UI.Areas.Apartment.Controllers
         /// </summary>
         /// <returns></returns>
         public ActionResult List()
+        {
+            List<RoomResideModel> data = new List<RoomResideModel>();
+            var rooms = this.roomBusiness.Get().OrderBy(r => r.Number);
+
+            foreach (var room in rooms)
+            {
+                var item = BindRoom(room);
+                data.Add(item);
+            }
+
+            return View(data);
+        }
+
+        /// <summary>
+        /// 房间列表2
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult List2()
         {
             List<RoomResideModel> data = new List<RoomResideModel>();
             var rooms = this.roomBusiness.Get().OrderBy(r => r.Number);
