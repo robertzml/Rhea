@@ -57,6 +57,15 @@
                                 @Html.DisplayNameFor(model => model.UsableArea)
                             </th>
                             <th>
+                                分类编码
+                            </th>
+                            <th>
+                                一级分类
+                            </th>
+                            <th>
+                                二级分类
+                            </th>
+                            <th>
                                 @Html.DisplayNameFor(model => model.BuildingId)
                             </th>
                             <th>
@@ -86,6 +95,15 @@
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.UsableArea)
+                                </td>
+                                <td>
+                                    @item.Function.CodeId
+                                </td>
+                                <td>
+                                    @item.Function.ClassifyName
+                                </td>
+                                <td>
+                                    @item.Function.FunctionProperty
                                 </td>
                                 <td>
                                     @item.BuildingName()

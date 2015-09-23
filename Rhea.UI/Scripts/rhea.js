@@ -475,6 +475,21 @@ var Rhea = function () {
 		$dom.attr('height', height);
 	}
 	
+	function myPrint(obj) {
+		//打开一个新窗口newWindow
+		var newWindow = window.open("打印窗口", "_blank");
+		//要打印的div的内容
+		var docStr = obj.innerHTML;
+		//打印内容写入newWindow文档
+		newWindow.document.write(docStr);
+		//关闭文档
+		newWindow.document.close();
+		//调用打印机
+		//newWindow.print();
+		//关闭newWindow页面
+		//newWindow.close();
+	}
+	
 	function handleParseDate(date) {
 		if (date == null || date == '')
 			return null;
@@ -602,6 +617,18 @@ var Rhea = function () {
 				e.preventDefault();
 				var $dom = $('div#svg').children('svg');
 				handleZoomSvg($dom, 'zoomOut');
+				return false;
+			});
+			
+			$('#svg-print').click(function () {
+				var dom = $('div#svg');
+				$("svg g[id^='g']").children('[ref=bound][class=fil0]').attr('class', 'fil10');
+				$("svg g[id^='g']").children('[ref=bound][class=fil1]').attr('class', 'fil4');
+
+				myPrint(dom[0]);
+
+				$("svg g[id^='g']").children('[ref=bound][class=fil4]').attr('class', 'fil1');
+				$("svg g[id^='g']").children('[ref=bound][class=fil10]').attr('class', 'fil0');
 				return false;
 			});
 		},

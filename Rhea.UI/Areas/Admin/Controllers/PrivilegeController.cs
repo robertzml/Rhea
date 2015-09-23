@@ -76,7 +76,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
             if (result == ErrorCode.Success)
             {
                 TempData["Message"] = "编辑权限成功";
-                return RedirectToAction("List", "Privilege");
+                return RedirectToAction("Allocate", "Privilege");
             }
             else
             {

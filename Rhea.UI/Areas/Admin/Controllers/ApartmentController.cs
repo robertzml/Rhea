@@ -17,7 +17,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
     /// <summary>
     /// 青教管理控制器
     /// </summary>
-    [EnhancedAuthorize(Rank = 900)]
+    [Privilege(Require = "ApartmentAdmin")]
     public class ApartmentController : Controller
     {
         #region Action

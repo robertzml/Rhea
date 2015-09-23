@@ -74,6 +74,8 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                     model.InhabitantNumber = inhabitant.JobNumber;
                     model.InhabitantType = types[inhabitant.Type];
                     model.Education = inhabitant.Education;
+                    model.Duty = inhabitant.Duty;
+                    model.Marriage = inhabitant.Marriage;
                 }
             }
             else

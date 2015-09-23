@@ -121,6 +121,17 @@ namespace Rhea.UI.Areas.Apartment.Models
         [Display(Name = "学历")]
         public string Education { get; set; }
 
+        /// <summary>
+        /// 职务
+        /// </summary>
+        [Display(Name = "职务")]
+        public string Duty { get; set; }
+
+        /// <summary>
+        /// 婚姻状况
+        /// </summary>
+        [Display(Name = "婚姻状况")]
+        public string Marriage { get; set; }
 
         /// <summary>
         /// 房租

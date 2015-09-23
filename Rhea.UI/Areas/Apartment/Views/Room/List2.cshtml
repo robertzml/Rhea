@@ -51,14 +51,6 @@
                 <div class="caption">
                     <i class="fa fa-list"></i>&nbsp;房间列表
                 </div>
-                <div class="tools">
-                    <a href="#" class="collapse">
-                    </a>
-                    <a href="#" class="reload">
-                    </a>
-                    <a href="#" class="remove">
-                    </a>
-                </div>
             </div>
             <div class="portlet-body">
                 <div class="table-responsive">
@@ -99,6 +91,12 @@
                                     @Html.DisplayNameFor(model => model.Education)
                                 </th>
                                 <th>
+                                    @Html.DisplayNameFor(model => model.Duty)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Marriage)
+                                </th>
+                                <th>
                                     @Html.DisplayNameFor(model => model.Rent)
                                 </th>
                                 <th>居住状态</th>
@@ -120,6 +118,8 @@
                                 <th data-filter="true">居住人部门</th>
                                 <th>学历</th>
                                 <th data-filter="true">房租</th>
+                                <th data-filter="true">职务</th>
+                                <th data-filter="true">婚姻状况</th>
                                 <th data-filter="true">居住状态</th>
                                 <th>备注</th>
                                 <th>&nbsp;</th>
@@ -161,6 +161,12 @@
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Education)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Duty)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Marriage)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Rent)

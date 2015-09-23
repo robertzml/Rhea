@@ -10,7 +10,7 @@ namespace Rhea.UI.Areas.Admin.Controllers
     /// <summary>
     /// 高级管理控制器
     /// </summary>
-    [EnhancedAuthorize(Rank = 900)]
+    [Privilege(Require = "AdvanceAdmin")]
     public class AdvanceController : Controller
     {
         #region Action

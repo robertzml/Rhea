@@ -320,6 +320,9 @@
                                         <a href="#" id="zoom-out" class="btn btn-default btn-sm">
                                             <i class="fa fa-search-minus"></i> 缩小
                                         </a>
+                                        <a href="#" id="svg-print" class="btn btn-default btn-sm">
+                                            <i class="fa fa-print"></i> 打印
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="portlet-body">
@@ -396,19 +399,7 @@
             });
         });
 
-        $('#zoom-in').click(function (e) {
-            e.preventDefault();
-            var $dom = $('div#svg').children('svg');
-            Rhea.zoomSvg($dom, 'zoomIn');
-            return false;
-        });
-
-        $('#zoom-out').click(function (e) {
-            e.preventDefault();
-            var $dom = $('div#svg').children('svg');
-            Rhea.zoomSvg($dom, 'zoomOut');
-            return false;
-        });
+        Rhea.initFloorAction();
 
         $('.portlet .portlet-title a.reload[data-load="true"]').click();
         $('ul#floor-svg-menu li:first-child a').click();
