@@ -141,6 +141,26 @@
                     </ul>
                 </li>
             }
+            @if (User.HasPrivilege("ApartmentFinance"))
+            {
+                <li class="left-nav-first">
+                    <a href="javascript:;">
+                        <i class="fa fa-rmb"></i>
+                        <span class="title">
+                            收费管理
+                        </span>
+                        <span class="arrow ">
+                        </span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a class="ajaxify" href="/Apartment/Finance/Rent">
+                                房租计算
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            }
             @if (User.HasPrivilege("ApartmentBuilding"))
             { 
             <li class="left-nav-first last">
