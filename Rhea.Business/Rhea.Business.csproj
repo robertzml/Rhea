@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Account\UserBusiness.cs" />
     <Compile Include="Apartment\ApartmentRoomBusiness.cs" />
+    <Compile Include="Apartment\FinanceBusiness.cs" />
     <Compile Include="Apartment\InhabitantBusiness.cs" />
     <Compile Include="Apartment\ResideRecordBusiness.cs" />
     <Compile Include="Apartment\TransactionBusiness.cs" />

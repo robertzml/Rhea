@@ -1,4 +1,5 @@
 ﻿using Rhea.Data.Account;
+using Rhea.Data.Apartment;
 using Rhea.Data.Estate;
 using Rhea.Data.Mongo.Account;
 using Rhea.Data.Mongo.Apartment;
@@ -89,6 +90,23 @@ namespace Rhea.Business
             IRoomRepository roomRepository = new MongoApartmentRoomRepository();
             var room = (ApartmentRoom)roomRepository.Get(record.RoomId);
             return room;
+        }
+
+        /// <summary>
+        /// 获取住户
+        /// </summary>
+        /// <param name="record">居住记录</param>
+        /// <returns></returns>
+        public static Inhabitant GetInhabitant(this ResideRecord record)
+        {
+            IInhabitantRepository inhabitantRepository = new MongoInhabitantRepository();
+            if (string.IsNullOrEmpty(record.InhabitantId))
+                return null;
+            else
+            {
+                var inhabitant = inhabitantRepository.Get(record.InhabitantId);
+                return inhabitant;
+            }
         }
         #endregion //Record Method
 

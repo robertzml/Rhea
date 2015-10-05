@@ -24,7 +24,14 @@ namespace Rhea.Data.Apartment
         /// </summary>
         /// <param name="_id">系统ID</param>
         /// <returns></returns>
-        ResideRecord Get(string _id);       
+        ResideRecord Get(string _id);
+
+        /// <summary>
+        /// 根据居住类型获取居住记录
+        /// </summary>
+        /// <param name="type">居住类型</param>
+        /// <returns></returns>
+        IEnumerable<ResideRecord> GetByResideType(int type);
 
         /// <summary>
         /// 获取多个房间的居住记录

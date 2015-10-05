@@ -5,8 +5,8 @@
     Layout = null;
     AjaxOptions ajaxOpts = new AjaxOptions
     {
-        UpdateTargetId = "page-content-body",
-        Url = Url.Action("Edit", "Finance"),
+        UpdateTargetId = "rent-process",
+        Url = Url.Action("RentProcess", "Finance"),
         HttpMethod = "POST",
         OnSuccess = "Rhea.showMessage('提交成功')"
     };
@@ -56,7 +56,7 @@
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-list"></i>时间选择
+                    <i class="fa fa-clock-o"></i>时间选择
                 </div>
                 <div class="tools">
                     <a href="#" class="collapse">
@@ -70,36 +70,38 @@
             <div class="portlet-body">
                 <div class="row">
                     <div class="col-md-12 form">
-                        @using (Ajax.BeginForm("Edit", new { controller = "Finance" }, ajaxOpts, new { @class = "form-horizontal" }))
+                        @using (Ajax.BeginForm("RentProcess", new { controller = "Finance" }, ajaxOpts, new { @class = "form-horizontal" }))
                         {
                             @Html.AntiForgeryToken()
 
-                            <div class="form-body">
-                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @Html.ValidationMessageFor(model => model.Start, "", new { @class = "text-danger" })
+                                    @Html.ValidationMessageFor(model => model.End, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
 
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            @Html.LabelFor(model => model.Month, htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="col-md-10">
-                                                <div class="input-group input-medium date date-picker" data-date="10/2012" data-date-format="yyyy-mm" data-date-viewmode="years" data-date-minviewmode="months">
-                                                    <input type="text" class="form-control" readonly="readonly" />
-                                                    <span class="input-group-btn">
-                                                        <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
-                                                    </span>
-                                                </div>
-                                               
-                                                @Html.ValidationMessageFor(model => model.Month, "", new { @class = "text-danger" })
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">日期选择</label>
+                                        <div class="col-md-10">
+                                            <div class="input-group input-large date-picker input-daterange" data-date-format="yyyy-mm-dd">
+                                                <input type="text" class="form-control" data-val="true" data-val-required="请选择开始日期" name="Start" id="Start">
+                                                <span class="input-group-addon">
+                                                    至
+                                                </span>
+                                                <input type="text" class="form-control" data-val="true" data-val-required="请结束开始日期" name="End" id="End">
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="col-md-offset-4 col-md-2">
-                                        <button type="submit" class="btn blue"><i class="fa fa-check"></i>&nbsp;提交</button>
-                                    </div>
-                                    
                                 </div>
-                                
+
+                                <div class="col-md-offset-4 col-md-2">
+                                    <button type="submit" class="btn blue"><i class="fa fa-check"></i>&nbsp;提交</button>
+                                </div>
+
                             </div>
                         }
                     </div>
@@ -108,12 +110,16 @@
         </div>
     </div>
 </div>
+
+<div id="rent-process">
+
+</div>
 <!-- END PAGE CONTENT-->
 
 <script type="text/javascript">
     $(function () {
         $('.date-picker').datepicker({
-            orientation: "left",
+            language: "zh-CN",
             autoclose: true
         });
     });

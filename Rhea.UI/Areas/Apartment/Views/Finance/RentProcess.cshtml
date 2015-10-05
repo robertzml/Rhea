@@ -1,0 +1,150 @@
+﻿@model IEnumerable<Rhea.UI.Areas.Apartment.Models.RentProcessModel>
+
+@{
+    Layout = null;
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.Error))
+{
+    <p>@ViewBag.Error</p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet box green">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-list"></i>&nbsp;房租列表
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-hover table-advance" id="rent-table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.InhabitantNumber)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.InhabitantName)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.InhabitantDepartment)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.InhabitantType)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.RoomNumber)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.EnterDate)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.LeaveDate)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.PreviousRent)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.CurrentRent)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Status)
+                                    </th>
+                                    <th>
+                                        操作
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.InhabitantNumber)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.InhabitantName)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.InhabitantDepartment)
+                                    </th>
+                                    <th data-filter="true">
+                                        @Html.DisplayNameFor(model => model.InhabitantType)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.RoomNumber)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.EnterDate)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.LeaveDate)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.PreviousRent)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.CurrentRent)
+                                    </th>
+                                    <th data-filter="true">
+                                        @Html.DisplayNameFor(model => model.Status)
+                                    </th>
+                                    <th>
+                                        操作
+                                    </th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.InhabitantNumber)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.InhabitantName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.InhabitantDepartment)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.InhabitantType)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.RoomNumber)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.EnterDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.LeaveDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.PreviousRent)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CurrentRent)
+                                        </td>
+                                        <td>
+                                            @ApartmentHelpers.ResideRecordStatus(item.Status)
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Details", "Details", new { id = item.ResideRecordId })
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+    $(function () {
+        Rhea.initDatatableWithFilter($('#rent-table'));
+    });
+</script>

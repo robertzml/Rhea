@@ -65,6 +65,16 @@ namespace Rhea.Business.Apartment
         }
 
         /// <summary>
+        /// 根据居住类型获取居住记录
+        /// </summary>
+        /// <param name="type">居住类型</param>
+        /// <returns></returns>
+        public IEnumerable<ResideRecord> GetByResideType(ResideType type)
+        {
+            return this.recordRepository.GetByResideType((int)type).Where(r => r.Status != 1);
+        }
+
+        /// <summary>
         /// 根据楼宇获取居住记录
         /// </summary>
         /// <param name="buildingId">楼宇ID</param>
@@ -111,7 +121,7 @@ namespace Rhea.Business.Apartment
             DateTime now = DateTime.Now;
             var records = this.recordRepository.Get().Where(r => r.Status == (int)EntityStatus.Normal || r.Status == (int)EntityStatus.ExtendTime);
 
-            foreach(var record in records)
+            foreach (var record in records)
             {
                 if (record.ExpireDate == null)
                     continue;

@@ -52,6 +52,16 @@ namespace Rhea.Data.Mongo.Apartment
         }
 
         /// <summary>
+        /// 根据居住类型获取居住记录
+        /// </summary>
+        /// <param name="type">居住类型</param>
+        /// <returns></returns>
+        public IEnumerable<ResideRecord> GetByResideType(int type)
+        {
+            return this.repository.Where(r => r.ResideType == type);
+        }
+
+        /// <summary>
         /// 获取多个房间的居住记录
         /// </summary>
         /// <param name="roomsId">房间ID数组</param>

@@ -295,7 +295,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                     Title = "变更房租",
                     Time = DateTime.Now,
                     Type = (int)LogType.ChangeRent,
-                    Content = string.Format("变更房租， 居住记录ID:{0}, 住户ID:{1}, 住户姓名:{1}, 房间ID:{2}, 房间名称:{3}, 原房租:{4}, 新房租:{5}，开始日期:{6}。",
+                    Content = string.Format("变更房租， 居住记录ID:{0}, 住户ID:{1}, 住户姓名:{2}, 房间ID:{3}, 房间名称:{4}, 原房租:{5}, 新房租:{6}，开始日期:{7}。",
                         record._id, model.InhabitantId, model.InhabitantName, model.RoomId, model.RoomName, model.LastRent, model.CurrentRent, model.StartDate),
                     UserId = user._id,
                     UserName = user.Name

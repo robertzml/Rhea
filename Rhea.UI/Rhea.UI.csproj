@@ -717,6 +717,7 @@
     <Content Include="Areas\Apartment\Views\Home\LastExchange.cshtml" />
     <Content Include="Areas\Apartment\Views\Room\List2.cshtml" />
     <Content Include="Areas\Apartment\Views\Finance\Rent.cshtml" />
+    <Content Include="Areas\Apartment\Views\Finance\RentProcess.cshtml" />
     <None Include="Properties\PublishProfiles\Rhea-v2.pubxml" />
     <Content Include="plugins\jquery-migrate-1.2.1.min.js" />
     <Content Include="plugins\jquery-ui\images\animated-overlay.gif" />
