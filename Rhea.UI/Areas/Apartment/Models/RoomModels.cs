@@ -140,6 +140,12 @@ namespace Rhea.UI.Areas.Apartment.Models
         public decimal Rent { get; set; }
 
         /// <summary>
+        /// 蠡湖家园入住时间
+        /// </summary>
+        [Display(Name = "蠡湖家园入住时间")]
+        public DateTime? LiHuEnterDate { get; set; }
+
+        /// <summary>
         /// 居住状态
         /// </summary>
         [Display(Name = "居住状态")]

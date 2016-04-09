@@ -65,6 +65,7 @@
     <Compile Include="Apartment\ExtendTransaction.cs" />
     <Compile Include="Apartment\Inhabitant.cs" />
     <Compile Include="Apartment\RegisterTransaction.cs" />
+    <Compile Include="Apartment\RentRecord.cs" />
     <Compile Include="Apartment\ResideRecord.cs" />
     <Compile Include="Apartment\SpecialExchangeTransaction.cs" />
     <Compile Include="CollectionName.cs" />
