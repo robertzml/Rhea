@@ -98,6 +98,12 @@ namespace Rhea.UI.Areas.Apartment.Models
         public string InhabitantName { get; set; }
 
         /// <summary>
+        /// 性别
+        /// </summary>
+        [Display(Name = "性别")]
+        public string Gender { get; set; }
+
+        /// <summary>
         /// 部门
         /// </summary>
         [Display(Name = "部门")]
@@ -114,6 +120,12 @@ namespace Rhea.UI.Areas.Apartment.Models
         /// </summary>
         [Display(Name = "居住人类型")]
         public string InhabitantType { get; set; }
+
+        /// <summary>
+        /// 身份证
+        /// </summary>
+        [Display(Name = "身份证")]
+        public string IdentityCard { get; set; }
 
         /// <summary>
         /// 学历

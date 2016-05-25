@@ -85,7 +85,13 @@
                                     @Html.DisplayNameFor(model => model.InhabitantName)
                                 </th>
                                 <th>
+                                    @Html.DisplayNameFor(model => model.Gender)
+                                </th>
+                                <th>
                                     @Html.DisplayNameFor(model => model.InhabitantDepartment)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IdentityCard)
                                 </th>
                                 <th>
                                     @Html.DisplayNameFor(model => model.Education)
@@ -118,7 +124,9 @@
                                 <th data-filter="true">居住人类型</th>
                                 <th>居住人工号</th>
                                 <th>居住人姓名</th>
+                                <th>性别</th>
                                 <th data-filter="true">居住人部门</th>
+                                <th>身份证</th>
                                 <th>学历</th>
                                 <th data-filter="true">房租</th>
                                 <th data-filter="true">职务</th>
@@ -161,7 +169,13 @@
                                         @Html.DisplayFor(modelItem => item.InhabitantName)
                                     </td>
                                     <td>
+                                        @Html.DisplayFor(modelItem => item.Gender)
+                                    </td>
+                                    <td>
                                         @Html.DisplayFor(modelItem => item.InhabitantDepartment)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IdentityCard)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Education)

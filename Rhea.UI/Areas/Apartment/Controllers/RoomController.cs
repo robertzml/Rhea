@@ -73,6 +73,8 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                     var inhabitant = inhabitantBusiness.Get(record.InhabitantId);
                     model.InhabitantNumber = inhabitant.JobNumber;
                     model.InhabitantType = types[inhabitant.Type];
+                    model.Gender = inhabitant.Gender;
+                    model.IdentityCard = inhabitant.IdentityCard;
                     model.Education = inhabitant.Education;
                     model.Duty = inhabitant.Duty;
                     model.Marriage = inhabitant.Marriage;
