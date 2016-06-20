@@ -83,14 +83,10 @@
                 </tr>
                 <tr>
                     <td>
-                        @Html.DisplayNameFor(model => model.Marriage)
+                        @Html.DisplayNameFor(model => model.MateName)
                     </td>
                     <td colspan="2">
-                        @Html.DisplayFor(model => model.Marriage)
-                        @if (Model.IsCouple == true)
-                        {
-                            <span>(双职工)</span>
-                        }
+                       @Html.DisplayFor(model => model.MateName)
                     </td>
                 </tr>
                 <tr>

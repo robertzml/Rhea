@@ -185,6 +185,17 @@
                                 </tr>
                                 <tr>
                                     <td>
+                                        @Html.LabelFor(model => model.MateName)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => model.MateName, new { htmlAttributes = new { @class = "form-control" } })
+                                    </td>
+                                    <td>
+                                        @Html.ValidationMessageFor(model => model.MateName, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
                                         @Html.LabelFor(model => model.Marriage)
                                     </td>
                                     <td>

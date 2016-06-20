@@ -110,6 +110,13 @@ namespace Rhea.Model.Apartment
         public bool? IsCouple { get; set; }
 
         /// <summary>
+        /// 配偶姓名
+        /// </summary>
+        [BsonElement("mateName")]
+        [Display(Name = "配偶姓名")]
+        public string MateName { get; set; }
+
+        /// <summary>
         /// 婚姻状况
         /// </summary>
         [BsonElement("marriage")]
