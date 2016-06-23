@@ -78,6 +78,7 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                     model.Education = inhabitant.Education;
                     model.Duty = inhabitant.Duty;
                     model.Marriage = inhabitant.Marriage;
+                    model.MateName = inhabitant.MateName;
                     model.LiHuEnterDate = inhabitant.LiHuEnterDate;
                 }
             }

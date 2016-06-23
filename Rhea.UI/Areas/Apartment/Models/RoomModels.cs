@@ -146,6 +146,12 @@ namespace Rhea.UI.Areas.Apartment.Models
         public string Marriage { get; set; }
 
         /// <summary>
+        /// 配偶姓名
+        /// </summary>
+        [Display(Name = "配偶姓名")]
+        public string MateName { get; set; }
+
+        /// <summary>
         /// 房租
         /// </summary>
         [Display(Name = "房租")]
