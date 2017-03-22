@@ -76,7 +76,9 @@ namespace Rhea.UI.Areas.Apartment.Controllers
                     model.Gender = inhabitant.Gender;
                     model.IdentityCard = inhabitant.IdentityCard;
                     model.Education = inhabitant.Education;
+                    model.Telephone = inhabitant.Telephone;
                     model.Duty = inhabitant.Duty;
+                    model.IsCouple = inhabitant.IsCouple;
                     model.Marriage = inhabitant.Marriage;
                     model.MateName = inhabitant.MateName;
                     model.LiHuEnterDate = inhabitant.LiHuEnterDate;

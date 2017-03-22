@@ -100,10 +100,16 @@
                                     @Html.DisplayNameFor(model => model.Duty)
                                 </th>
                                 <th>
+                                    @Html.DisplayNameFor(model => model.Telephone)
+                                </th>
+                                <th>
                                     @Html.DisplayNameFor(model => model.Marriage)
                                 </th>
                                 <th>
                                     @Html.DisplayNameFor(model => model.MateName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IsCouple)
                                 </th>
                                 <th>
                                     @Html.DisplayNameFor(model => model.Rent)
@@ -132,8 +138,10 @@
                                 <th>身份证</th>
                                 <th>学历</th>
                                 <th data-filter="true">职务</th>
+                                <th>电话</th>
                                 <th data-filter="true">婚姻状况</th>
                                 <th>配偶姓名</th>
+                                <th>是否双职工</th>
                                 <th data-filter="true">房租</th>
                                 <th>蠡湖家园入住时间</th>
                                 <th data-filter="true">居住状态</th>
@@ -188,10 +196,16 @@
                                         @Html.DisplayFor(modelItem => item.Duty)
                                     </td>
                                     <td>
+                                        @Html.DisplayFor(modelItem => item.Telephone)
+                                    </td>
+                                    <td>
                                         @Html.DisplayFor(modelItem => item.Marriage)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.MateName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IsCouple)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Rent)

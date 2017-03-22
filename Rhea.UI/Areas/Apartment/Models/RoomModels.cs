@@ -140,6 +140,12 @@ namespace Rhea.UI.Areas.Apartment.Models
         public string Duty { get; set; }
 
         /// <summary>
+        /// 电话
+        /// </summary>
+        [Display(Name = "电话")]
+        public string Telephone { get; set; }
+
+        /// <summary>
         /// 婚姻状况
         /// </summary>
         [Display(Name = "婚姻状况")]
@@ -150,6 +156,12 @@ namespace Rhea.UI.Areas.Apartment.Models
         /// </summary>
         [Display(Name = "配偶姓名")]
         public string MateName { get; set; }
+
+        /// <summary>
+        /// 是否双职工
+        /// </summary>
+        [Display(Name = "是否双职工")]
+        public bool? IsCouple { get; set; }
 
         /// <summary>
         /// 房租
